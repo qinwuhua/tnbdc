@@ -8,8 +8,8 @@ spring:
     name: zsxz-lkpd
   datasource:
     url: jdbc:oracle:thin:@211.101.37.237:1521:orcl
-    username: zsxz
-    password: zsxz
+    username: ktglyh
+    password: ktglyh
     driver-class-name: oracle.jdbc.driver.OracleDriver
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
@@ -32,3 +32,12 @@ mybatis:
   mapper-locations: classpath:/xml/*.xml
   type-aliases-package: com.hdsx.lkpd.etity
   config-location: classpath:mybatis-config.xml
+
+#pagehelper分页插件配置
+pagehelper:
+  helper-dialect: oracle
+  reasonable: true
+  support-methods-arguments: true
+  offset-as-page-num: true
+  row-bounds-with-count: true
+  params: count=countSql
