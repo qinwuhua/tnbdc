@@ -1,5 +1,6 @@
 package com.hdsx.lkpd.mapper;
 
+import com.hdsx.lkpd.entity.Lkdcfb;
 import com.hdsx.lkpd.entity.Qmldb;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -11,4 +12,14 @@ import java.util.Map;
 public interface LkpdDrMapper {
 
     List<Qmldb> getLksjdrBylx(Map<String,String> param);
+
+    List<Lkdcfb> getLksjdrfb(String dcid);
+
+    double getSci(Qmldb qm);
+
+    double getBci(Qmldb qm);
+
+    double getTci(Qmldb qm);
+
+    double getPci(Qmldb qm);
 }

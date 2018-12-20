@@ -29,4 +29,51 @@
         order by q.lxname,q.szhh
 
     </select>
+
+    <!-- 路况调查中查询各种调查类型的数量 -->
+    <select id="getLksjdrfb" parameterType="String" resultType="com.hdsx.lkpd.entity.Lkdcfb">
+		select * from jcpd_lkdcfb
+		where dcid=#{dcid}
+		order by lxid
+	</select>
+
+    <!-- 查询pci -->
+    <select id="getPci" parameterType="com.hdsx.lkpd.entity.Qmldb" resultType="Double">
+		select round(nvl(100-#{a0}*power(100*sum(qz*ljsj*dwkf)/(#{cd}*#{lmkd}),#{a1}),100),2) as pci from
+		(select nvl(l.ljsj,0) ljsj,lx.qz,lx.dwkf,lx.lxname from jcpd_lkdcfb l
+		left join jcpd_lkdclxb lx
+		on l.lxid=lx.lxid
+		where dcid=(select dcid from jcpd_lkdczb where ldid=#{ldid} and bbid=#{dcbbid} and lxid=#{lxid}))
+	</select>
+    <!-- 查询sci -->
+    <select id="getSci" parameterType="com.hdsx.lkpd.entity.Qmldb" resultType="Double">
+		select nvl(sum(qz*fn_checknum(100-total)),100) as sci from
+		(select lxName,sum(ljsj*dwkf) as total,avg(qz) as qz from
+		(select nvl(l.ljsj,0) ljsj,lx.dwkf,lx.qz,lx.lxname from jcpd_lkdcfb l
+		left join jcpd_lkdclxb lx
+		on l.lxid=lx.lxid
+		where dcid=(select dcid from jcpd_lkdczb where ldid=#{ldid} and bbid=#{dcbbid} and lxid='02'))
+		group by lxName)
+	</select>
+    <!-- 查询bci -->
+    <select id="getBci" parameterType="com.hdsx.lkpd.entity.Qmldb" resultType="Double">
+		select fn_checknum(100-nvl(max(total),0)) as bci from
+		(select lxName,sum(ljsj*dwkf) as total from
+		(select nvl(l.ljsj,0) ljsj,lx.dwkf,lx.lxname from jcpd_lkdcfb l
+		left join jcpd_lkdclxb lx
+		on l.lxid=lx.lxid
+		where dcid=(select dcid from jcpd_lkdczb where ldid=#{ldid} and bbid=#{dcbbid} and lxid='03'))
+		group by lxName)
+	</select>
+    <!-- 查询tci -->
+    <select id="getTci" parameterType="com.hdsx.lkpd.entity.Qmldb" resultType="Double">
+		select round(nvl(sum(qz*fn_checknum(100-total)),100),2) as tci from
+		(select lxName,sum(ljsj*dwkf) as total,avg(qz) as qz from
+		(select nvl(l.ljsj,0) ljsj,lx.dwkf,lx.qz,lx.lxname from jcpd_lkdcfb l
+		left join jcpd_lkdclxb lx
+		on l.lxid=lx.lxid
+		where dcid=(select dcid from jcpd_lkdczb where ldid=#{ldid} and bbid=#{dcbbid} and lxid='04'))
+		group by lxName)
+	</select>
+
 </mapper>

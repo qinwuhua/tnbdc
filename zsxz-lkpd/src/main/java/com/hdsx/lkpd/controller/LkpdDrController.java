@@ -36,19 +36,73 @@ public class LkpdDrController {
      * @param ldcode 路段编码
      * @param xcfx  行车方向
      * @param bbid  版本id
-     * @param lmlx  路面类型
      * @return  msg
      */
     @RequestMapping(value = "getPciForLksjdr", method = RequestMethod.GET, produces = "application/json")
     @ApiOperation(value = "获取检测数据导入-PCI")
     public Msg getPciForLksjdr(@RequestParam("ldcode") String ldcode,
                                @RequestParam("xcfx") String xcfx,
-                               @RequestParam("bbid") String bbid,
-                               @RequestParam("lmlx") String lmlx){
+                               @RequestParam("bbid") String bbid){
         Map<String,String> param=new HashMap<String,String>();
-        param.put("ldcode",ldcode);param.put("xcfx",xcfx);param.put("bbid",bbid);param.put("lmlx",lmlx);
-        //这个是设置成PCI的类型
-        param.put("lxid","01");
+        param.put("ldcode",ldcode);param.put("xcfx",xcfx);param.put("bbid",bbid);param.put("lmlx","1");
+        param.put("lxid","01");//这个是设置成PCI的类型
+        List<Qmldb> list = lkpdDrService.getLksjdrBylx(param);
+
+        return ResultUtil.success(list);
+    }
+    /**
+     *
+     * @param ldcode 路段编码
+     * @param xcfx  行车方向
+     * @param bbid  版本id
+     * @return  msg
+     */
+    @RequestMapping(value = "getSciForLksjdr", method = RequestMethod.GET, produces = "application/json")
+    @ApiOperation(value = "获取检测数据导入-SCI")
+    public Msg getSciForLksjdr(@RequestParam("ldcode") String ldcode,
+                               @RequestParam("xcfx") String xcfx,
+                               @RequestParam("bbid") String bbid){
+        Map<String,String> param=new HashMap<String,String>();
+        param.put("ldcode",ldcode);param.put("xcfx",xcfx);param.put("bbid",bbid);param.put("lmlx","1");
+        param.put("lxid","02");//这个是设置成SCI的类型
+        List<Qmldb> list = lkpdDrService.getLksjdrBylx(param);
+
+        return ResultUtil.success(list);
+    }
+    /**
+     *
+     * @param ldcode 路段编码
+     * @param xcfx  行车方向
+     * @param bbid  版本id
+     * @return  msg
+     */
+    @RequestMapping(value = "getBciForLksjdr", method = RequestMethod.GET, produces = "application/json")
+    @ApiOperation(value = "获取检测数据导入-BCI")
+    public Msg getBciForLksjdr(@RequestParam("ldcode") String ldcode,
+                               @RequestParam("xcfx") String xcfx,
+                               @RequestParam("bbid") String bbid){
+        Map<String,String> param=new HashMap<String,String>();
+        param.put("ldcode",ldcode);param.put("xcfx",xcfx);param.put("bbid",bbid);param.put("lmlx","1");
+        param.put("lxid","03");//这个是设置成BCI的类型
+        List<Qmldb> list = lkpdDrService.getLksjdrBylx(param);
+
+        return ResultUtil.success(list);
+    }
+    /**
+     *
+     * @param ldcode 路段编码
+     * @param xcfx  行车方向
+     * @param bbid  版本id
+     * @return  msg
+     */
+    @RequestMapping(value = "getTciForLksjdr", method = RequestMethod.GET, produces = "application/json")
+    @ApiOperation(value = "获取检测数据导入-TCI")
+    public Msg getTciForLksjdr(@RequestParam("ldcode") String ldcode,
+                               @RequestParam("xcfx") String xcfx,
+                               @RequestParam("bbid") String bbid){
+        Map<String,String> param=new HashMap<String,String>();
+        param.put("ldcode",ldcode);param.put("xcfx",xcfx);param.put("bbid",bbid);param.put("lmlx","1");
+        param.put("lxid","04");//这个是设置成TCI的类型
         List<Qmldb> list = lkpdDrService.getLksjdrBylx(param);
 
         return ResultUtil.success(list);

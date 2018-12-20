@@ -1,5 +1,6 @@
 package com.hdsx.lkpd.service.impl;
 
+import com.hdsx.lkpd.entity.Lkdcfb;
 import com.hdsx.lkpd.entity.Qmldb;
 import com.hdsx.lkpd.mapper.LkpdDrMapper;
 import com.hdsx.lkpd.service.LkpdDrService;
@@ -18,27 +19,27 @@ public class LkpdDrServiceImpl implements LkpdDrService {
     @Override
     public List<Qmldb> getLksjdrBylx(Map<String,String> param) {
         List<Qmldb> list = lkpdDrMapper.getLksjdrBylx(param);
-        /*for(Qmldb qm:list){
+        for(Qmldb qm:list){
             qm.setDcbbid(Integer.parseInt(param.get("bbid")));
-            qm.setLxid(qmldb.getLxid());
+            qm.setLxid(param.get("lxid"));
             //统计各项病害的数量
             if(qm.getDcid() == null){
                 qm.setDcid("");
             }
-            List<Lkdcfb> lkdcfb = qmldbMapper.getLkdcfb(qm.getDcid());
+            List<Lkdcfb> lkdcfb = lkpdDrMapper.getLksjdrfb(qm.getDcid());
             if(lkdcfb != null && lkdcfb.size() != 0){
                 qm.setLkdcfb(lkdcfb);
             }
             //求pci，tci，bci，tci
-            switch(qmldb.getLxid()){
+            switch(param.get("lxid")){
                 case "02"://路基
-                    qm.setSci(qmldbMapper.getSci(qm));
+                    qm.setSci(lkpdDrMapper.getSci(qm));
                     break;
                 case "03":
-                    qm.setBci(qmldbMapper.getBci(qm));
+                    qm.setBci(lkpdDrMapper.getBci(qm));
                     break;
                 case "04":
-                    qm.setTci(qmldbMapper.getTci(qm));
+                    qm.setTci(lkpdDrMapper.getTci(qm));
                     break;
                 default :
                     switch(qm.getLmlx()){
@@ -55,10 +56,10 @@ public class LkpdDrServiceImpl implements LkpdDrService {
                             qm.setA1(0.487);
                             break;
                     }
-                    qm.setPci(qmldbMapper.getPci(qm));
+                    qm.setPci(lkpdDrMapper.getPci(qm));
                     break;
             }
-        }*/
+        }
 
         return list;
     }
