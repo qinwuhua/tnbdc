@@ -1,5 +1,6 @@
 package com.hdsx.lkpd.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import com.hdsx.lkpd.entity.Lkdcfb;
 import com.hdsx.lkpd.entity.Qmldb;
 import com.hdsx.lkpd.mapper.LkpdDrMapper;
@@ -17,7 +18,8 @@ public class LkpdDrServiceImpl implements LkpdDrService {
     private LkpdDrMapper lkpdDrMapper;
 
     @Override
-    public List<Qmldb> getLksjdrBylx(Map<String,String> param) {
+    public List<Qmldb> getLksjdrBylx(Map<String,String> param, int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
         List<Qmldb> list = lkpdDrMapper.getLksjdrBylx(param);
         for(Qmldb qm:list){
             qm.setDcbbid(Integer.parseInt(param.get("bbid")));

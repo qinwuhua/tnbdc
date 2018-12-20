@@ -7,5 +7,5 @@ import java.util.Map;
 
 public interface LkpdDrService {
 
-    List<Qmldb> getLksjdrBylx(Map<String,String> param);
+    List<Qmldb> getLksjdrBylx(Map<String,String> param, int pageNum, int pageSize);
 }

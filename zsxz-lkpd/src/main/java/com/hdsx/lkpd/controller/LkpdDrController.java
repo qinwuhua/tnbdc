@@ -42,11 +42,13 @@ public class LkpdDrController {
     @ApiOperation(value = "获取检测数据导入-PCI")
     public Msg getPciForLksjdr(@RequestParam("ldcode") String ldcode,
                                @RequestParam("xcfx") String xcfx,
-                               @RequestParam("bbid") String bbid){
+                               @RequestParam("bbid") String bbid,
+                               @RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
+                               @RequestParam(value = "pageSize", defaultValue = "10") int pageSize){
         Map<String,String> param=new HashMap<String,String>();
         param.put("ldcode",ldcode);param.put("xcfx",xcfx);param.put("bbid",bbid);param.put("lmlx","1");
-        param.put("lxid","01");//这个是设置成PCI的类型
-        List<Qmldb> list = lkpdDrService.getLksjdrBylx(param);
+        param.put("lxid","0101");//这个是设置成PCI的类型
+        List<Qmldb> list = lkpdDrService.getLksjdrBylx(param, pageNum, pageSize);
 
         return ResultUtil.success(list);
     }
@@ -61,11 +63,13 @@ public class LkpdDrController {
     @ApiOperation(value = "获取检测数据导入-SCI")
     public Msg getSciForLksjdr(@RequestParam("ldcode") String ldcode,
                                @RequestParam("xcfx") String xcfx,
-                               @RequestParam("bbid") String bbid){
+                               @RequestParam("bbid") String bbid,
+                               @RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
+                                @RequestParam(value = "pageSize", defaultValue = "10") int pageSize){
         Map<String,String> param=new HashMap<String,String>();
         param.put("ldcode",ldcode);param.put("xcfx",xcfx);param.put("bbid",bbid);param.put("lmlx","1");
         param.put("lxid","02");//这个是设置成SCI的类型
-        List<Qmldb> list = lkpdDrService.getLksjdrBylx(param);
+        List<Qmldb> list = lkpdDrService.getLksjdrBylx(param,pageNum,pageSize);
 
         return ResultUtil.success(list);
     }
@@ -80,11 +84,13 @@ public class LkpdDrController {
     @ApiOperation(value = "获取检测数据导入-BCI")
     public Msg getBciForLksjdr(@RequestParam("ldcode") String ldcode,
                                @RequestParam("xcfx") String xcfx,
-                               @RequestParam("bbid") String bbid){
+                               @RequestParam("bbid") String bbid,
+                               @RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
+                                @RequestParam(value = "pageSize", defaultValue = "10") int pageSize){
         Map<String,String> param=new HashMap<String,String>();
         param.put("ldcode",ldcode);param.put("xcfx",xcfx);param.put("bbid",bbid);param.put("lmlx","1");
         param.put("lxid","03");//这个是设置成BCI的类型
-        List<Qmldb> list = lkpdDrService.getLksjdrBylx(param);
+        List<Qmldb> list = lkpdDrService.getLksjdrBylx(param,pageNum,pageSize);
 
         return ResultUtil.success(list);
     }
@@ -99,11 +105,13 @@ public class LkpdDrController {
     @ApiOperation(value = "获取检测数据导入-TCI")
     public Msg getTciForLksjdr(@RequestParam("ldcode") String ldcode,
                                @RequestParam("xcfx") String xcfx,
-                               @RequestParam("bbid") String bbid){
+                               @RequestParam("bbid") String bbid,
+                               @RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
+                               @RequestParam(value = "pageSize", defaultValue = "10") int pageSize){
         Map<String,String> param=new HashMap<String,String>();
         param.put("ldcode",ldcode);param.put("xcfx",xcfx);param.put("bbid",bbid);param.put("lmlx","1");
         param.put("lxid","04");//这个是设置成TCI的类型
-        List<Qmldb> list = lkpdDrService.getLksjdrBylx(param);
+        List<Qmldb> list = lkpdDrService.getLksjdrBylx(param,pageNum,pageSize);
 
         return ResultUtil.success(list);
     }
