@@ -7,6 +7,8 @@ import com.hdsx.lkpd.service.LkpdDrService;
 import com.hdsx.lkpd.service.QmldbService;
 import com.hdsx.lkpd.utils.ResultUtil;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,14 +26,15 @@ public class LkpdDrController {
     private LkpdDrService lkpdDrService;
 
 
-    /**
-     *
-     * @param ldcode 路段编码
-     * @param xcfx  行车方向
-     * @param bbid  版本id
-     * @return  msg
-     */
+
     @RequestMapping(value = "getPciForLksjdr", method = RequestMethod.GET, produces = "application/json")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "ldcode", value = "路段编码", required = true),
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "xcfx", value = "行车方向", required = true),
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "bbid", value = "版本id", required = true),
+            @ApiImplicitParam(paramType="query", dataType = "int", name = "pageNum", value = "页码", required = true),
+            @ApiImplicitParam(paramType="query", dataType = "int", name = "pageSize", value = "每页条数", required = true)
+    })
     @ApiOperation(value = "获取检测数据导入-PCI")
     public Msg getPciForLksjdr(@RequestParam("ldcode") String ldcode,
                                @RequestParam("xcfx") String xcfx,
@@ -45,15 +48,16 @@ public class LkpdDrController {
 
         return ResultUtil.success(list);
     }
-    /**
-     *
-     * @param ldcode 路段编码
-     * @param xcfx  行车方向
-     * @param bbid  版本id
-     * @return  msg
-     */
+
     @RequestMapping(value = "getSciForLksjdr", method = RequestMethod.GET, produces = "application/json")
     @ApiOperation(value = "获取检测数据导入-SCI")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "ldcode", value = "路段编码", required = true),
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "xcfx", value = "行车方向", required = true),
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "bbid", value = "版本id", required = true),
+            @ApiImplicitParam(paramType="query", dataType = "int", name = "pageNum", value = "页码", required = true),
+            @ApiImplicitParam(paramType="query", dataType = "int", name = "pageSize", value = "每页条数", required = true)
+    })
     public Msg getSciForLksjdr(@RequestParam("ldcode") String ldcode,
                                @RequestParam("xcfx") String xcfx,
                                @RequestParam("bbid") String bbid,
@@ -66,15 +70,16 @@ public class LkpdDrController {
 
         return ResultUtil.success(list);
     }
-    /**
-     *
-     * @param ldcode 路段编码
-     * @param xcfx  行车方向
-     * @param bbid  版本id
-     * @return  msg
-     */
+
     @RequestMapping(value = "getBciForLksjdr", method = RequestMethod.GET, produces = "application/json")
     @ApiOperation(value = "获取检测数据导入-BCI")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "ldcode", value = "路段编码", required = true),
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "xcfx", value = "行车方向", required = true),
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "bbid", value = "版本id", required = true),
+            @ApiImplicitParam(paramType="query", dataType = "int", name = "pageNum", value = "页码", required = true),
+            @ApiImplicitParam(paramType="query", dataType = "int", name = "pageSize", value = "每页条数", required = true)
+    })
     public Msg getBciForLksjdr(@RequestParam("ldcode") String ldcode,
                                @RequestParam("xcfx") String xcfx,
                                @RequestParam("bbid") String bbid,
@@ -87,15 +92,16 @@ public class LkpdDrController {
 
         return ResultUtil.success(list);
     }
-    /**
-     *
-     * @param ldcode 路段编码
-     * @param xcfx  行车方向
-     * @param bbid  版本id
-     * @return  msg
-     */
+
     @RequestMapping(value = "getTciForLksjdr", method = RequestMethod.GET, produces = "application/json")
     @ApiOperation(value = "获取检测数据导入-TCI")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "ldcode", value = "路段编码", required = true),
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "xcfx", value = "行车方向", required = true),
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "bbid", value = "版本id", required = true),
+            @ApiImplicitParam(paramType="query", dataType = "int", name = "pageNum", value = "页码", required = true),
+            @ApiImplicitParam(paramType="query", dataType = "int", name = "pageSize", value = "每页条数", required = true)
+    })
     public Msg getTciForLksjdr(@RequestParam("ldcode") String ldcode,
                                @RequestParam("xcfx") String xcfx,
                                @RequestParam("bbid") String bbid,
@@ -109,15 +115,16 @@ public class LkpdDrController {
         return ResultUtil.success(list);
     }
 
-    /**
-     *
-     * @param lxcode 路线编码
-     * @param xcfx  行车方向
-     * @param bbid  版本id
-     * @return  msg
-     */
+
     @RequestMapping(value = "getRqiForLksjdr", method = RequestMethod.GET, produces = "application/json")
     @ApiOperation(value = "获取检测数据导入-RQI")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "lxcode", value = "路线编码", required = true),
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "xcfx", value = "行车方向", required = true),
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "bbid", value = "版本id", required = true),
+            @ApiImplicitParam(paramType="query", dataType = "int", name = "pageNum", value = "页码", required = true),
+            @ApiImplicitParam(paramType="query", dataType = "int", name = "pageSize", value = "每页条数", required = true)
+    })
     public Msg getRqiForLksjdr(@RequestParam("lxcode") String lxcode,
                                @RequestParam("xcfx") String xcfx,
                                @RequestParam("bbid") String bbid,
@@ -131,15 +138,16 @@ public class LkpdDrController {
         return ResultUtil.success(list);
     }
 
-    /**
-     *
-     * @param lxcode 路线编码
-     * @param xcfx  行车方向
-     * @param bbid  版本id
-     * @return  msg
-     */
+
     @RequestMapping(value = "getRdiForLksjdr", method = RequestMethod.GET, produces = "application/json")
     @ApiOperation(value = "获取检测数据导入-RDI")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "lxcode", value = "路线编码", required = true),
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "xcfx", value = "行车方向", required = true),
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "bbid", value = "版本id", required = true),
+            @ApiImplicitParam(paramType="query", dataType = "int", name = "pageNum", value = "页码", required = true),
+            @ApiImplicitParam(paramType="query", dataType = "int", name = "pageSize", value = "每页条数", required = true)
+    })
     public Msg getRdiForLksjdr(@RequestParam("lxcode") String lxcode,
                                @RequestParam("xcfx") String xcfx,
                                @RequestParam("bbid") String bbid,
@@ -153,15 +161,16 @@ public class LkpdDrController {
         return ResultUtil.success(list);
     }
 
-    /**
-     *
-     * @param lxcode 路线编码
-     * @param xcfx  行车方向
-     * @param bbid  版本id
-     * @return  msg
-     */
+
     @RequestMapping(value = "getSriForLksjdr", method = RequestMethod.GET, produces = "application/json")
     @ApiOperation(value = "获取检测数据导入-SRI")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "lxcode", value = "路线编码", required = true),
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "xcfx", value = "行车方向", required = true),
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "bbid", value = "版本id", required = true),
+            @ApiImplicitParam(paramType="query", dataType = "int", name = "pageNum", value = "页码", required = true),
+            @ApiImplicitParam(paramType="query", dataType = "int", name = "pageSize", value = "每页条数", required = true)
+    })
     public Msg getSriForLksjdr(@RequestParam("lxcode") String lxcode,
                                @RequestParam("xcfx") String xcfx,
                                @RequestParam("bbid") String bbid,
@@ -175,15 +184,16 @@ public class LkpdDrController {
         return ResultUtil.success(list);
     }
 
-    /**
-     *
-     * @param lxcode 路线编码
-     * @param xcfx  行车方向
-     * @param bbid  版本id
-     * @return  msg
-     */
+
     @RequestMapping(value = "getPssiForLksjdr", method = RequestMethod.GET, produces = "application/json")
     @ApiOperation(value = "获取检测数据导入-PSSI")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "lxcode", value = "路线编码", required = true),
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "xcfx", value = "行车方向", required = true),
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "bbid", value = "版本id", required = true),
+            @ApiImplicitParam(paramType="query", dataType = "int", name = "pageNum", value = "页码", required = true),
+            @ApiImplicitParam(paramType="query", dataType = "int", name = "pageSize", value = "每页条数", required = true)
+    })
     public Msg getPssiForLksjdr(@RequestParam("lxcode") String lxcode,
                                @RequestParam("xcfx") String xcfx,
                                @RequestParam("bbid") String bbid,
