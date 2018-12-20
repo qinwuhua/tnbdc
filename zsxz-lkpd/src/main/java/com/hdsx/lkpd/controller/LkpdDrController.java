@@ -19,6 +19,7 @@ import java.util.Map;
 
 
 @RestController
+@RequestMapping("lkpd/dr")
 @Api(value = "路况数据导入控制器")
 public class LkpdDrController {
 
