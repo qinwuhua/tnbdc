@@ -8,8 +8,8 @@ spring:
     name: zsxz-lkpd
   datasource:
     url: jdbc:oracle:thin:@211.101.37.237:1521:orcl
-    username: ktglyh
-    password: ktglyh
+    username: zsxz
+    password: zsxz
     driver-class-name: oracle.jdbc.driver.OracleDriver
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
