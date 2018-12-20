@@ -11,7 +11,7 @@ import java.util.Map;
 @Mapper
 public interface LkpdDrMapper {
 
-    List<Qmldb> getLksjdrBylx(Map<String,String> param);
+    List<Qmldb> getLksjdrByDclx(Map<String,String> param);
 
     List<Lkdcfb> getLksjdrfb(String dcid);
 
@@ -22,4 +22,6 @@ public interface LkpdDrMapper {
     double getTci(Qmldb qm);
 
     double getPci(Qmldb qm);
+
+    List<Qmldb> getLksjdrByJclx(Map<String, String> param);
 }

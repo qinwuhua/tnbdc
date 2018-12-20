@@ -18,9 +18,9 @@ public class LkpdDrServiceImpl implements LkpdDrService {
     private LkpdDrMapper lkpdDrMapper;
 
     @Override
-    public List<Qmldb> getLksjdrBylx(Map<String,String> param, int pageNum, int pageSize) {
+    public List<Qmldb> getLksjdrByDclx(Map<String,String> param, int pageNum, int pageSize) {
         PageHelper.startPage(pageNum, pageSize);
-        List<Qmldb> list = lkpdDrMapper.getLksjdrBylx(param);
+        List<Qmldb> list = lkpdDrMapper.getLksjdrByDclx(param);
         for(Qmldb qm:list){
             qm.setDcbbid(Integer.parseInt(param.get("bbid")));
             qm.setLxid(param.get("lxid"));
@@ -63,6 +63,13 @@ public class LkpdDrServiceImpl implements LkpdDrService {
             }
         }
 
+        return list;
+    }
+
+    @Override
+    public List<Qmldb> getLksjdrByJclx(Map<String, String> param, int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<Qmldb> list = lkpdDrMapper.getLksjdrByJclx(param);
         return list;
     }
 }

@@ -5,7 +5,7 @@
 <mapper namespace="com.hdsx.lkpd.mapper.LkpdDrMapper">
 
     <!-- 查询所有pci录入数据 -->
-    <select id="getLksjdrBylx" resultType="com.hdsx.lkpd.entity.Qmldb" parameterType="hashmap">
+    <select id="getLksjdrByDclx" resultType="com.hdsx.lkpd.entity.Qmldb" parameterType="hashmap">
         select q.*,l.* from
           (
             select qm.*,'K'||qm.szhh||'-K'||qm.ezhh as ldName,mj.value as fxName,l.lxname from jcpd_qmldb qm
@@ -30,6 +30,22 @@
 
     </select>
 
+    <!-- 通过检测类型查询路况导入数据 -->
+    <select id="getLksjdrByJclx" parameterType="hashmap" resultType="com.hdsx.lkpd.entity.Lmjcb">
+        SELECT QM.LXCODE,'K'||QM.SZHH||'-K'||QM.EZHH AS QMNAME,MJ.VALUE AS FXNAME,
+        L.JCID,L.BBID,L.LDID,L.JCLX,NVL(JCD1,-1) JCD1,NVL(JCD2,-1) JCD2,NVL(JCD3,-1) JCD3,NVL(JCD4,-1) JCD4,NVL(JCD5,-1) JCD5,
+        NVL(JCD6,-1) JCD6,NVL(JCD7,-1) JCD7,NVL(JCD8,-1) JCD8,NVL(JCD9,-1) JCD9,NVL(JCD10,-1) JCD10,NVL(ZHI,-1) ZHI,NVL(PJZ,-1) PJZ
+        FROM JCPD_QMLDB QM
+        LEFT JOIN HTGL_MJLX MJ
+        ON QM.FX=MJ.KEY
+        JOIN (SELECT * FROM JCPD_LMJCB WHERE JCLX=#{jclx} AND BBID=#{bbid}) L
+        ON QM.LDID=L.LDID
+        WHERE QM.LXCODE=#{lxcode} AND QM.BBID=(SELECT QMBBID FROM JCPD_BBKZB WHERE BBID=#{bbid})
+        AND QM.FX=#{xcfx}
+        ORDER BY QM.SZHH
+
+    </select>
+
     <!-- 路况调查中查询各种调查类型的数量 -->
     <select id="getLksjdrfb" parameterType="String" resultType="com.hdsx.lkpd.entity.Lkdcfb">
 		select * from jcpd_lkdcfb
@@ -47,7 +63,7 @@
 	</select>
     <!-- 查询sci -->
     <select id="getSci" parameterType="com.hdsx.lkpd.entity.Qmldb" resultType="Double">
-		select nvl(sum(qz*fn_checknum(100-total)),100) as sci from
+		select nvl(sum(qz*(case when(100-total)>0 then (100-total) else 0 end)),100) as sci from
 		(select lxName,sum(ljsj*dwkf) as total,avg(qz) as qz from
 		(select nvl(l.ljsj,0) ljsj,lx.dwkf,lx.qz,lx.lxname from jcpd_lkdcfb l
 		left join jcpd_lkdclxb lx
@@ -57,7 +73,7 @@
 	</select>
     <!-- 查询bci -->
     <select id="getBci" parameterType="com.hdsx.lkpd.entity.Qmldb" resultType="Double">
-		select fn_checknum(100-nvl(max(total),0)) as bci from
+		select (case when (100-nvl(max(total),0))>0 then (100-nvl(max(total),0)) else 0 end) as bci from
 		(select lxName,sum(ljsj*dwkf) as total from
 		(select nvl(l.ljsj,0) ljsj,lx.dwkf,lx.lxname from jcpd_lkdcfb l
 		left join jcpd_lkdclxb lx
@@ -67,7 +83,7 @@
 	</select>
     <!-- 查询tci -->
     <select id="getTci" parameterType="com.hdsx.lkpd.entity.Qmldb" resultType="Double">
-		select round(nvl(sum(qz*fn_checknum(100-total)),100),2) as tci from
+		select round(nvl(sum(qz*(case when (100-total)>0 then (100-total) elsr 0 end)),100),2) as tci from
 		(select lxName,sum(ljsj*dwkf) as total,avg(qz) as qz from
 		(select nvl(l.ljsj,0) ljsj,lx.dwkf,lx.qz,lx.lxname from jcpd_lkdcfb l
 		left join jcpd_lkdclxb lx
