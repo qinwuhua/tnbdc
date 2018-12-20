@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hdsx.lkpd.mapper.LkpdDrMapper">
+
+    <!-- 查询所有pci录入数据 -->
+    <select id="getLksjdrBylx" resultType="com.hdsx.lkpd.entity.Qmldb" parameterType="hashmap">
+        select q.*,l.* from
+          (
+            select qm.*,'K'||qm.szhh||'-K'||qm.ezhh as ldName,mj.value as fxName,l.lxname from jcpd_qmldb qm
+            left join htgl_ldb ld
+            on ld.lxcode=qm.lxcode and qm.szhh>=ld.szhh and ld.ezhh>qm.szhh
+            left join htgl_lxb l
+            on qm.lxcode=l.lxcode
+            left join htgl_mjlx mj
+            on qm.fx=mj.key
+            where qm.fx=#{xcfx} and qm.bbid=(select qmbbid from jcpd_bbkzb where bbid=#{bbid})
+
+        <if test="ldcode != null and ldcode != ''">
+            and ld.ldcode=#{ldcode}
+        </if>
+        <if test="lmlx != null and lmlx != ''">
+            and qm.lmlx=#{lmlx}
+        </if>
+        )q left join
+        (select dcid,lxid,ldid as qmldid,bbid as dcbbid,dcsj,dcry from jcpd_lkdczb where bbid=#{bbid} and lxid=#{lxid} )l
+        on q.ldid=l.qmldid
+        order by q.lxname,q.szhh
+
+    </select>
+</mapper>
