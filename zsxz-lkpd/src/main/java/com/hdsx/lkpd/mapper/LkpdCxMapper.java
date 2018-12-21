@@ -24,4 +24,13 @@ public interface LkpdCxMapper {
     List<Pdfa> getFaForLksjcx(Map<String, String> param);
 
     int editFaForLksjcx(Pdfa pdfa);
+
+    int delFaForLksjcx(List<Long> djbhs);
+
+    int dropMxb(Map<String, String> param);
+
+
+    List<Qmldb> getLmjc(Map<String, String> param);
+
+    int addMxb(Qmldb qm);
 }

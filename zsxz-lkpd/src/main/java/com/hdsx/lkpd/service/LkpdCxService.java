@@ -21,4 +21,8 @@ public interface LkpdCxService {
     List<Pdfa> getFaForLksjcx(Map<String, String> param, int pageNum, int pageSize);
 
     int editFaForLksjcx(Pdfa pdfa);
+
+    int delFaForLksjcx(List<Long> djbhs);
+
+    boolean createMxbDataForLksjcx(Map<String, String> param);
 }

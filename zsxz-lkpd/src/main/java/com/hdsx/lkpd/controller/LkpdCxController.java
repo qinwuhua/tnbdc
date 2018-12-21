@@ -135,11 +135,12 @@ public class LkpdCxController {
 
     }
 
-    /*@RequestMapping(value = "delFaForLksjcx", method = RequestMethod.POST, produces = "application/json")
-    @ApiOperation(value = "删除路况评定方案数据")
-    public Msg delFaForLksjcx(@RequestBody Pdfa pdfa){
+    @RequestMapping(value = "delFaForLksjcx", method = RequestMethod.POST, produces = "application/json")
+    @ApiOperation(value = "删除路况评定方案数据(通过单据编号数组)")
+    public Msg delFaForLksjcx(@RequestBody List<Long> djbhs){
         try {
-            int flag=lkpdCxService.delFaForLksjcx(pdfa);
+            System.out.println(djbhs);
+            int flag=lkpdCxService.delFaForLksjcx(djbhs);
             if(flag>0)
                 return ResultUtil.success("保存成功");
             else
@@ -150,7 +151,32 @@ public class LkpdCxController {
             return ResultUtil.error("保存失败，接口异常");
         }
 
-    }*/
+    }
 
+
+    @RequestMapping(value = "createMxbDataForLksjcx", method = RequestMethod.POST, produces = "application/json")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "famc", value = "方案名称", required = false),
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "sjsjsx", value = "数据时间上限", required = false),
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "sjsjxx", value = "数据时间下限", required = false),
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "pdsj", value = "评定时间", required = false)
+    })
+    @ApiOperation(value = "生成明细表数据")
+    public Msg createMxbDataForLksjcx(@RequestParam(value = "famc",required = false) String famc,
+                              @RequestParam(value = "sjsjsx",required = false) String sjsjsx,
+                              @RequestParam(value = "sjsjxx",required = false) String sjsjxx,
+                              @RequestParam(value = "pdsj",required = false) String pdsj){
+        Map<String,String> param=new HashMap<String,String>();
+        param.put("famc",famc);param.put("sjsjsx",sjsjsx);param.put("sjsjxx",sjsjxx);param.put("pdsj",pdsj);
+        try {
+            boolean bl=lkpdCxService.createMxbDataForLksjcx(param);
+
+            return ResultUtil.success("生成数据成功");
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResultUtil.error("生成数据失败，接口异常");
+        }
+
+    }
 
 }
