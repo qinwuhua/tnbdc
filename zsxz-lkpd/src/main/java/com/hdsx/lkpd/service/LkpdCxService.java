@@ -9,4 +9,5 @@ public interface LkpdCxService {
 
     List<Qmldb> getMxbForLksjcx(Map<String, String> param, int pageNum, int pageSize);
 
+    List<Map<String, String>> getHzbForLksjcx(Map<String, String> param, int pageNum, int pageSize);
 }

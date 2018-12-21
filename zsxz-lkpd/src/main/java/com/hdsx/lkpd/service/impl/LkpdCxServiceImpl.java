@@ -24,4 +24,11 @@ public class LkpdCxServiceImpl implements LkpdCxService {
         List<Qmldb> list = lkpdCxMapper.getMxbForLksjcx(param);
         return list;
     }
+
+    @Override
+    public List<Map<String, String>> getHzbForLksjcx(Map<String, String> param, int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<Map<String,String>> list = lkpdCxMapper.getHzbForLksjcx(param);
+        return list;
+    }
 }

@@ -21,6 +21,39 @@
 
     </select>
 
+	<!-- 查询汇总表数据数据 -->
+	<select id="getHzbForLksjcx" resultType="hashmap" parameterType="hashmap">
+		select pdfa,lxcode,szhh,ezhh,xcfx,pddj,cd,
+		(case when mqi1>=70 then mqi1 end) mqi1,(case when mqi1>=55 and mqi1&lt;70 then mqi1 end) mqi2,(case when mqi1&lt;55 then mqi1 end) mqi3,
+		(case when pqi1>=70 then pqi1 end) pqi1,(case when pqi1>=55 and pqi1&lt;70 then pqi1 end) pqi2,(case when pqi1&lt;55 then pqi1 end) pqi3,
+		(case when sci1>=70 then sci1 end) sci1,(case when sci1>=55 and sci1&lt;70 then sci1 end) sci2,(case when sci1&lt;55 then sci1 end) sci3,
+		(case when tci1>=70 then tci1 end) tci1,(case when tci1>=55 and tci1&lt;70 then tci1 end) tci2,(case when tci1&lt;55 then tci1 end) tci3,
+		(case when bci1>=70 then bci1 end) bci1,(case when bci1>=55 and bci1&lt;70 then bci1 end) bci2,(case when bci1&lt;55 then bci1 end) bci3,
+		'' pdsj
+		from
+		(
+		SELECT BBMC PDFA,LXCODE,TT.SZHH SZHH,TT.EZHH EZHH,(SELECT MJ.VALUE FROM HTGL_MJLX MJ WHERE MJ.KEY=TT.FX) XCFX,'' pddj,TT.CD CD,
+		SUM(TT.MQI*TT.CD)/SUM(TT.CD) MQI1,SUM(TT.PQI*TT.CD)/SUM(TT.CD) PQI1,SUM(TT.SCI*TT.CD)/SUM(TT.CD) SCI1,SUM(TT.BCI*TT.CD)/SUM(TT.CD) BCI1,SUM(TT.TCI*TT.CD)/SUM(TT.CD) TCI1
+		FROM
+		(SELECT QM.LXCODE,QM.LDID LDCODE,QM.SZHH SZHH,QM.EZHH EZHH,BB.BBID BBID,BB.BBMC,TO_NUMBER(MX.MQI) MQI,
+		TO_NUMBER(MX.PQI) PQI,TO_NUMBER(MX.SCI) SCI,TO_NUMBER(MX.BCI) BCI,TO_NUMBER(MX.TCI) TCI,QM.CD/1000 CD,QM.FX FX
+		FROM JCPD_BBKZB  BB
+		LEFT JOIN JCPD_LKPDMXB MX ON BB.BBID=MX.BBID
+		LEFT JOIN JCPD_QMLDB QM ON QM.LDID=MX.LDID
+		where 1=1
+		<if test="lxcode != null or lxcode != ''">
+			and qm.lxcode=#{lxcode}
+		</if>
+		<if test="lmlx != null or lmlx != ''">
+			and qm.lmlx=#{lmlx}
+		</if>
+
+		)TT
+		GROUP BY TT.SZHH,TT.EZHH,CD,FX,LXCODE,BBMC
+		)
+		order by szhh,xcfx
+
+	</select>
 
 
 </mapper>

@@ -13,4 +13,5 @@ public interface LkpdCxMapper {
 
     List<Qmldb> getMxbForLksjcx(Map<String, String> param);
 
+    List<Map<String, String>> getHzbForLksjcx(Map<String, String> param);
 }
