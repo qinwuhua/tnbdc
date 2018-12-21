@@ -17,4 +17,55 @@
         SELECT * FROM djsj-htxx-lyjcmx
     </select>
 
+    <insert id="addFiles" parameterType="hashmap">
+        INSERT INTO files(id,files_id, files_name, files_depict, files_path, files_date, files_status, remarks, files_dx, files_yname, files_type, files_mjlx)
+        VALUES (#{id},#{files_id},#{files_name},#{files_depict},#{files_path},to_char(sysdate,'YYYY-MM-DD HH24:MI:SS'),#{files_status} ,#{remarks}, #{files_dx},#{files_yname},#{files_type},#{files_mjlx})
+    </insert>
+
+    <insert id="addLyjc" parameterType="com.hdsx.rcyh.entity.Lyjc">
+        INSERT INTO SGDWLYJCB(PMMTLYJCB_ID,PMMTLYJCB_HTBH,PMMTLYJCB_JCRQ,PMMTLYJCB_HTMC,PMMTLYJCB_SGDW,PMMTLYJCB_JCR,PMMTLYJCB_GLDW,PMMTLYJCB_HTJE,PMMTLYJCB_FJHJ,PMMTLYJCB_BZ)
+        VALUES (#{id},#{htbh},#{jcrq},#{htmc},#{sgdw},#{jcr} ,#{gldw}, #{htjr,jdbcType=NUMERIC},#{fjhj,jdbcType=NUMERIC},#{bz})
+    </insert>
+
+    <insert id="addLyjcmxb" parameterType="com.hdsx.rcyh.entity.Lyjcmxb">
+      INSERT INTO SGDWLYJCBMX(PMMTLYJCBMX_ID, PMMTLYJCBMX_MID, PMMTLYJCBMX_JCNR, PMMTLYJCBMX_FJ, PMMTLYJCBMX_MEMO)
+      VALUES (#{id},#{mid},#{jcnr},#{fj},#{memo})
+    </insert>
+    
+    <select id="getFilesDataById" resultType="hashmap">
+        SELECT * FROM files WHERE files_id = #{id}
+    </select>
+
+    <delete id="deleteFilesDataById">
+        DELETE FROM files WHERE files_id = #{id}
+    </delete>
+
+    <delete id="deleteLyjcmxbById">
+        DELETE FROM sgdwlyjcbmx WHERE pmmtlyjcbmx_mid = #{id}
+    </delete>
+
+    <delete id="deleteLyjcById">
+        DELETE FROM sgdwlyjcb WHERE pmmtlyjcb_id = #{id}
+    </delete>
+
+    <select id="getLyjcbmxById" resultType="hashmap">
+        SELECT * FROM sgdwlyjcbmx WHERE pmmtlyjcbmx_mid = #{id}
+    </select>
+
+    <update id="updateLyjc">
+        UPDATE SGDWLYJCB
+        <set>
+            <if test="htbh != null"> PMMTLYJCB_HTBH = #{htbh}, </if>
+            <if test="jcrq != null"> PMMTLYJCB_JCRQ = #{jcrq}, </if>
+            <if test="htmc != null"> PMMTLYJCB_HTMC = #{htmc}, </if>
+            <if test="sgdw != null"> PMMTLYJCB_SGDW = #{sgdw}, </if>
+            <if test="jcr != null"> PMMTLYJCB_JCR = #{jcr}, </if>
+            <if test="gldw != null"> PMMTLYJCB_GLDW = #{gldw}, </if>
+            <if test="htjr != null"> PMMTLYJCB_HTJE = #{htjr}, </if>
+            <if test="fjhj != null"> PMMTLYJCB_FJHJ = #{fjhj}, </if>
+            <if test="bz != null"> PMMTLYJCB_BZ = #{bz} </if>
+        </set>
+        WHERE PMMTLYJCB_ID = #{id}
+    </update>
+
 </mapper>

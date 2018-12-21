@@ -8,6 +8,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
@@ -56,6 +57,36 @@ public class LyjcController{
             return ResultUtil.success(lyjcService.addLyjc(lyjc));
         }catch (Exception e){
             return ResultUtil.error("添加履约检查信息失败！");
+        }
+    }
+
+    @PostMapping("deleteLyjc")
+    @ApiOperation(value = "删除履约检查信息")
+    public Msg DeleteLyjc(@RequestParam("id") String id){
+        try {
+            return ResultUtil.success(lyjcService.deleteLyjc(id));
+        }catch (Exception e){
+            return ResultUtil.error("删除履约检查信息失败！");
+        }
+    }
+
+    @PostMapping("updateLyjc")
+    @ApiOperation(value = "更新履约检查信息")
+    public Msg UpdateLyjc(Lyjc lyjc){
+        try {
+            return ResultUtil.success(lyjcService.updateLyjc(lyjc));
+        }catch (Exception e){
+            return ResultUtil.error("更新履约检查信息失败！");
+        }
+    }
+
+    @GetMapping("getLyjcbmxById")
+    @ApiOperation(value = "根据id查询履约检查表信息")
+    public Msg getLyjcbmxById(@RequestParam("id") String id){
+        try {
+            return ResultUtil.success(lyjcService.getLyjcbmxById(id));
+        }catch (Exception e){
+            return ResultUtil.error("查询失败！");
         }
     }
 

@@ -7,11 +7,17 @@ import java.util.List;
 
 public interface LyjcService {
 
-    List<HashMap<String,Object>> getLyjcAll();
+    List<HashMap<String, Object>> getLyjcAll();
 
     List<HashMap<String, Object>> getDjsjHtxx();
 
     List<HashMap<String, Object>> getDjsjLyjcmx();
 
-    boolean addLyjc(Lyjc lyjc);
+    List<HashMap<String, String>> addLyjc(Lyjc lyjc);
+
+    boolean deleteLyjc(String id);
+
+    List<HashMap<String, String>> updateLyjc(Lyjc lyjc);
+
+    List<HashMap<String, Object>> getLyjcbmxById(String id);
 }

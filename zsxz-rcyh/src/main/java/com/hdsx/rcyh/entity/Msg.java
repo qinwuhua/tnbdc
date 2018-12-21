@@ -1,8 +1,15 @@
 package com.hdsx.rcyh.entity;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
+
 /**
  * 返回数据结构实体
  */
+@Data
+@Accessors(chain = true)
+@NoArgsConstructor
 public class Msg<T> {
 
     /*错误码*/
@@ -13,28 +20,4 @@ public class Msg<T> {
 
     /*具体内容*/
     private T data;
-
-    public Integer getCode() {
-        return code;
-    }
-
-    public void setCode(Integer code) {
-        this.code = code;
-    }
-
-    public String getMsg() {
-        return msg;
-    }
-
-    public void setMsg(String msg) {
-        this.msg = msg;
-    }
-
-    public T getData() {
-        return data;
-    }
-
-    public void setData(T data) {
-        this.data = data;
-    }
 }
