@@ -48,6 +48,19 @@
             <version>2.6.1</version>
         </dependency>
 
+        <!-- pagehelper分页插件 -->
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper-spring-boot-starter</artifactId>
+            <version>1.1.1</version>
+        </dependency>
+
+        <!-- 生成get-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.16.20</version>
+        </dependency>
         <!--druid数据库连接池-->
         <dependency>
             <groupId>com.alibaba</groupId>

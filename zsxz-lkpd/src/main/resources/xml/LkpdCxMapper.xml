@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hdsx.lkpd.mapper.LkpdCxMapper">
+
+    <!-- 查询明细表数据数据 -->
+    <select id="getMxbForLksjcx" resultType="com.hdsx.lkpd.entity.Qmldb" parameterType="hashmap">
+        select t.*,q.lxcode,q.szhh,q.ezhh,q.cd,mj.value as fxName from jcpd_lkpdmxb t
+				join jcpd_qmldb q
+				on t.ldid=q.ldid
+				left join htgl_mjlx mj
+				on q.fx=mj.key
+				where t.bbid=#{bbid}
+				<if test="lxcode != null or lxcode != ''">
+                    and q.lxcode=#{lxcode}
+                </if>
+				and q.lmlx=#{lmlx}
+                and q.fx = #{xcfx}
+				order by q.szhh,q.fx
+
+    </select>
+
+
+
+</mapper>
