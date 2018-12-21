@@ -80,6 +80,7 @@ public class Qmldb implements Serializable {
         private double fy;			//泛油
         private double xb;			//修补
 
+        private String pdsj;		//评定时间
 
         private List<Qmldb> mxbList = new ArrayList<Qmldb>();
 
