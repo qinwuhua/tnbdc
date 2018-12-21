@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hdsx.rcyh.mapper.LyjcMapper">
+
+    <select id="getLyjcAll" resultType="hashmap">
+        SELECT * FROM sgdwlyjcb
+    </select>
+
+    <select id="getDjsjHtxx" resultType="hashmap">
+        SELECT * FROM djsj-htxx
+    </select>
+
+    <select id="getDjsjLyjcmx" resultType="hashmap">
+        SELECT * FROM djsj-htxx-lyjcmx
+    </select>
+
+</mapper>
