@@ -155,7 +155,13 @@
 	<delete id="dropMxb" parameterType="hashmap">
 		DELETE FROM JCPD_LKPDMXB
 		WHERE BBID=#{bbid}
-		AND LDID IN (SELECT LDID FROM JCPD_QMLDB WHERE LXCODE=#{lxcode}
+		AND LDID IN (SELECT LDID FROM JCPD_QMLDB QM WHERE LXCODE=#{lxcode}
+		<if test="szhh != null and szhh != ''">
+		and qm.ezhh>${szhh}
+		</if>
+		<if test="ezhh != null and ezhh != ''">
+			and qm.szhh&lt;${ezhh}
+		</if>
 	  	AND BBID=(SELECT QMBBID FROM JCPD_BBKZB WHERE BBID=#{bbid}) )
 	</delete>
 
@@ -173,6 +179,12 @@
 		left join (select * from jcpd_lmjcb where bbid=#{bbid} and jclx='0404')lm4
 		on qm.ldid=lm4.ldid
 		where qm.lxcode=#{lxcode}
+		<if test="szhh != null and szhh != ''">
+			and qm.ezhh>${szhh}
+		</if>
+		<if test="ezhh != null and ezhh != ''">
+			and qm.szhh&lt;${ezhh}
+		</if>
 		and qm.bbid=(select qmbbid from jcpd_bbkzb where bbid=#{bbid})
 	</select>
 
