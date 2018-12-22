@@ -7,10 +7,7 @@ import com.hdsx.rcyh.service.LyjcService;
 import com.hdsx.rcyh.utils.ResultUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -32,26 +29,6 @@ public class LyjcController{
         }
     }
 
-    @GetMapping("getDjsjHtxx")
-    @ApiOperation(value = "查询对接数据合同信息")
-    public Msg getDjsjHtxx(){
-        try {
-            return ResultUtil.success(lyjcService.getDjsjHtxx());
-        }catch (Exception e){
-            return ResultUtil.error("查询失败！");
-        }
-    }
-
-    @GetMapping("getDjsjLyjcmx")
-    @ApiOperation(value = "查询对接数据履约检查信息")
-    public Msg getDjsjLyjcmx(){
-        try {
-            return ResultUtil.success(lyjcService.getDjsjLyjcmx());
-        }catch (Exception e){
-            return ResultUtil.error("查询失败！");
-        }
-    }
-
     @PostMapping("addLyjc")
     @ApiOperation(value = "添加履约检查信息")
     public Msg addLyjc(Lyjc lyjc){
@@ -62,7 +39,7 @@ public class LyjcController{
         }
     }
 
-    @PostMapping("deleteLyjc")
+    @DeleteMapping("deleteLyjc")
     @ApiOperation(value = "删除履约检查信息")
     public Msg deleteLyjc(@RequestParam("id") String id){
         try {
@@ -72,7 +49,7 @@ public class LyjcController{
         }
     }
 
-    @PostMapping("updateLyjc")
+    @PutMapping("updateLyjc")
     @ApiOperation(value = "更新履约检查信息")
     public Msg updateLyjc(Lyjc lyjc){
         try {
@@ -104,7 +81,7 @@ public class LyjcController{
     }
 
     @PostMapping("addJczb")
-    @ApiOperation(value = "添加履约检查信息")
+    @ApiOperation(value = "添加进场准备检查信息")
     public Msg addLyjc(Jczb jczb){
         try {
             return ResultUtil.success(lyjcService.addJczb(jczb));
@@ -113,7 +90,7 @@ public class LyjcController{
         }
     }
 
-    @PostMapping("deleteJczb")
+    @DeleteMapping("deleteJczb")
     @ApiOperation(value = "删除履约检查信息")
     public Msg deleteJczb(@RequestParam("id") String id){
         try {
@@ -123,8 +100,8 @@ public class LyjcController{
         }
     }
 
-    @PostMapping("updateJczb")
-    @ApiOperation(value = "更新履约检查信息")
+    @PutMapping("updateJczb")
+    @ApiOperation(value = "更新进场准备信息")
     public Msg updateJczb(Jczb jczb){
         try {
             return ResultUtil.success(lyjcService.updateJczb(jczb));
@@ -134,7 +111,7 @@ public class LyjcController{
     }
 
     @GetMapping("getJczbmxById")
-    @ApiOperation(value = "根据id查询履约检查表信息")
+    @ApiOperation(value = "根据id查询进场准备表信息")
     public Msg getJczbmxById(@RequestParam("id") String id){
         try {
             return ResultUtil.success(lyjcService.getJczbmxById(id));
@@ -152,7 +129,4 @@ public class LyjcController{
             return ResultUtil.error("查询失败！");
         }
     }
-
-
-
 }

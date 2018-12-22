@@ -15,10 +15,6 @@ public interface LyjcMapper {
 
     List<HashMap<String, Object>> getLyjcAll();
 
-    List<HashMap<String, Object>> getDjsjHtxx();
-
-    List<HashMap<String, Object>> getDjsjLyjcmx();
-
     boolean addFiles(Map<String, String> fileMap);
 
     boolean addLyjc(Lyjc lyjc);

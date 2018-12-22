@@ -10,10 +10,6 @@ public interface LyjcService {
 
     List<HashMap<String, Object>> getLyjcAll(int pageNum, int pageSize);
 
-    List<HashMap<String, Object>> getDjsjHtxx();
-
-    List<HashMap<String, Object>> getDjsjLyjcmx();
-
     List<HashMap<String, String>> addLyjc(Lyjc lyjc);
 
     boolean deleteLyjc(String id);

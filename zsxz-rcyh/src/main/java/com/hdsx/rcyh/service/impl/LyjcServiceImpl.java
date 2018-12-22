@@ -39,16 +39,6 @@ public class LyjcServiceImpl implements LyjcService {
     }
 
     @Override
-    public List<HashMap<String, Object>> getDjsjHtxx() {
-        return lyjcMapper.getDjsjHtxx();
-    }
-
-    @Override
-    public List<HashMap<String, Object>> getDjsjLyjcmx() {
-        return lyjcMapper.getDjsjLyjcmx();
-    }
-
-    @Override
     public List<HashMap<String, String>> addLyjc(Lyjc lyjc) {
         String uuid = UUID.randomUUID().toString().replaceAll("-","");
         List<HashMap<String, String>> fileList = new ArrayList<>();
