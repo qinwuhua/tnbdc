@@ -165,13 +165,18 @@ public class LkpdCxController {
     @RequestMapping(value = "createMxbDataForLksjcx", method = RequestMethod.POST, produces = "application/json")
     @ApiImplicitParams({
             @ApiImplicitParam(paramType="query", dataType = "String", name = "lxcode", value = "路线编码", required = false),
-            @ApiImplicitParam(paramType="query", dataType = "String", name = "bbid", value = "版本id", required = false)
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "bbid", value = "版本id", required = false),
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "szhh", value = "起点桩号", required = true),
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "ezhh", value = "止点桩号", required = true)
     })
     @ApiOperation(value = "生成明细表数据")
     public Msg createMxbDataForLksjcx(@RequestParam(value = "lxcode",required = true) String lxcode,
-                              @RequestParam(value = "bbid",required = true) String bbid){
+                                      @RequestParam(value = "bbid",required = true) String bbid,
+                                      @RequestParam("szhh") String szhh,
+                                      @RequestParam("ezhh") String ezhh
+                                      ){
         Map<String,String> param=new HashMap<String,String>();
-        param.put("lxcode",lxcode);param.put("bbid",bbid);
+        param.put("lxcode",lxcode);param.put("bbid",bbid);param.put("szhh",szhh);param.put("ezhh",ezhh);
         try {
             boolean bl=lkpdCxService.createMxbDataForLksjcx(param);
 
