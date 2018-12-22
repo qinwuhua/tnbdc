@@ -16,6 +16,12 @@
 				<if test="lxcode != null and lxcode != ''">
                     and q.lxcode=#{lxcode}
                 </if>
+				<if test="szhh != null and szhh != ''">
+					and q.ezhh>${szhh}
+				</if>
+				<if test="ezhh != null and ezhh != ''">
+					and q.szhh&lt;${ezhh}
+				</if>
 				and q.lmlx=#{lmlx}
                 and q.fx = #{xcfx}
 				order by q.szhh,q.fx
@@ -45,6 +51,12 @@
 		where 1=1
 		<if test="lxcode != null and lxcode != ''">
 			and qm.lxcode=#{lxcode}
+		</if>
+		<if test="szhh != null and szhh != ''">
+			and qm.ezhh>${szhh}
+		</if>
+		<if test="ezhh != null and ezhh != ''">
+			and qm.szhh&lt;${ezhh}
 		</if>
 		<if test="lmlx != null and lmlx != ''">
 			and qm.lmlx=#{lmlx}

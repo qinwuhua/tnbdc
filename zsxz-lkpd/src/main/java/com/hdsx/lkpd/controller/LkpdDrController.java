@@ -33,6 +33,8 @@ public class LkpdDrController {
             @ApiImplicitParam(paramType="query", dataType = "String", name = "ldcode", value = "路段编码", required = true),
             @ApiImplicitParam(paramType="query", dataType = "String", name = "xcfx", value = "行车方向", required = true),
             @ApiImplicitParam(paramType="query", dataType = "String", name = "bbid", value = "版本id", required = true),
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "szhh", value = "起点桩号", required = true),
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "ezhh", value = "止点桩号", required = true),
             @ApiImplicitParam(paramType="query", dataType = "int", name = "pageNum", value = "页码", required = true),
             @ApiImplicitParam(paramType="query", dataType = "int", name = "pageSize", value = "每页条数", required = true)
     })
@@ -40,10 +42,12 @@ public class LkpdDrController {
     public Msg getPciForLksjdr(@RequestParam("ldcode") String ldcode,
                                @RequestParam("xcfx") String xcfx,
                                @RequestParam("bbid") String bbid,
+                               @RequestParam("szhh") String szhh,
+                               @RequestParam("ezhh") String ezhh,
                                @RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
                                @RequestParam(value = "pageSize", defaultValue = "10") int pageSize){
         Map<String,String> param=new HashMap<String,String>();
-        param.put("ldcode",ldcode);param.put("xcfx",xcfx);param.put("bbid",bbid);param.put("lmlx","1");
+        param.put("ldcode",ldcode);param.put("xcfx",xcfx);param.put("bbid",bbid);param.put("lmlx","1");param.put("szhh",szhh);param.put("ezhh",ezhh);
         param.put("lxid","0101");//这个是设置成PCI的类型
         List<Qmldb> list = lkpdDrService.getLksjdrByDclx(param, pageNum, pageSize);
 
@@ -56,16 +60,20 @@ public class LkpdDrController {
             @ApiImplicitParam(paramType="query", dataType = "String", name = "ldcode", value = "路段编码", required = true),
             @ApiImplicitParam(paramType="query", dataType = "String", name = "xcfx", value = "行车方向", required = true),
             @ApiImplicitParam(paramType="query", dataType = "String", name = "bbid", value = "版本id", required = true),
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "szhh", value = "起点桩号", required = true),
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "ezhh", value = "止点桩号", required = true),
             @ApiImplicitParam(paramType="query", dataType = "int", name = "pageNum", value = "页码", required = true),
             @ApiImplicitParam(paramType="query", dataType = "int", name = "pageSize", value = "每页条数", required = true)
     })
     public Msg getSciForLksjdr(@RequestParam("ldcode") String ldcode,
                                @RequestParam("xcfx") String xcfx,
                                @RequestParam("bbid") String bbid,
+                               @RequestParam("szhh") String szhh,
+                               @RequestParam("ezhh") String ezhh,
                                @RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
                                 @RequestParam(value = "pageSize", defaultValue = "10") int pageSize){
         Map<String,String> param=new HashMap<String,String>();
-        param.put("ldcode",ldcode);param.put("xcfx",xcfx);param.put("bbid",bbid);param.put("lmlx","1");
+        param.put("ldcode",ldcode);param.put("xcfx",xcfx);param.put("bbid",bbid);param.put("lmlx","1");param.put("szhh",szhh);param.put("ezhh",ezhh);
         param.put("lxid","02");//这个是设置成SCI的类型
         List<Qmldb> list = lkpdDrService.getLksjdrByDclx(param,pageNum,pageSize);
 
@@ -78,16 +86,20 @@ public class LkpdDrController {
             @ApiImplicitParam(paramType="query", dataType = "String", name = "ldcode", value = "路段编码", required = true),
             @ApiImplicitParam(paramType="query", dataType = "String", name = "xcfx", value = "行车方向", required = true),
             @ApiImplicitParam(paramType="query", dataType = "String", name = "bbid", value = "版本id", required = true),
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "szhh", value = "起点桩号", required = true),
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "ezhh", value = "止点桩号", required = true),
             @ApiImplicitParam(paramType="query", dataType = "int", name = "pageNum", value = "页码", required = true),
             @ApiImplicitParam(paramType="query", dataType = "int", name = "pageSize", value = "每页条数", required = true)
     })
     public Msg getBciForLksjdr(@RequestParam("ldcode") String ldcode,
                                @RequestParam("xcfx") String xcfx,
                                @RequestParam("bbid") String bbid,
+                               @RequestParam("szhh") String szhh,
+                               @RequestParam("ezhh") String ezhh,
                                @RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
                                 @RequestParam(value = "pageSize", defaultValue = "10") int pageSize){
         Map<String,String> param=new HashMap<String,String>();
-        param.put("ldcode",ldcode);param.put("xcfx",xcfx);param.put("bbid",bbid);param.put("lmlx","1");
+        param.put("ldcode",ldcode);param.put("xcfx",xcfx);param.put("bbid",bbid);param.put("lmlx","1");param.put("szhh",szhh);param.put("ezhh",ezhh);
         param.put("lxid","03");//这个是设置成BCI的类型
         List<Qmldb> list = lkpdDrService.getLksjdrByDclx(param,pageNum,pageSize);
 
@@ -100,16 +112,20 @@ public class LkpdDrController {
             @ApiImplicitParam(paramType="query", dataType = "String", name = "ldcode", value = "路段编码", required = true),
             @ApiImplicitParam(paramType="query", dataType = "String", name = "xcfx", value = "行车方向", required = true),
             @ApiImplicitParam(paramType="query", dataType = "String", name = "bbid", value = "版本id", required = true),
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "szhh", value = "起点桩号", required = true),
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "ezhh", value = "止点桩号", required = true),
             @ApiImplicitParam(paramType="query", dataType = "int", name = "pageNum", value = "页码", required = true),
             @ApiImplicitParam(paramType="query", dataType = "int", name = "pageSize", value = "每页条数", required = true)
     })
     public Msg getTciForLksjdr(@RequestParam("ldcode") String ldcode,
                                @RequestParam("xcfx") String xcfx,
                                @RequestParam("bbid") String bbid,
+                               @RequestParam("szhh") String szhh,
+                               @RequestParam("ezhh") String ezhh,
                                @RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
                                @RequestParam(value = "pageSize", defaultValue = "10") int pageSize){
         Map<String,String> param=new HashMap<String,String>();
-        param.put("ldcode",ldcode);param.put("xcfx",xcfx);param.put("bbid",bbid);param.put("lmlx","1");
+        param.put("ldcode",ldcode);param.put("xcfx",xcfx);param.put("bbid",bbid);param.put("lmlx","1");param.put("szhh",szhh);param.put("ezhh",ezhh);
         param.put("lxid","04");//这个是设置成TCI的类型
         List<Qmldb> list = lkpdDrService.getLksjdrByDclx(param,pageNum,pageSize);
 
@@ -123,18 +139,22 @@ public class LkpdDrController {
             @ApiImplicitParam(paramType="query", dataType = "String", name = "lxcode", value = "路线编码", required = true),
             @ApiImplicitParam(paramType="query", dataType = "String", name = "xcfx", value = "行车方向", required = true),
             @ApiImplicitParam(paramType="query", dataType = "String", name = "bbid", value = "版本id", required = true),
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "szhh", value = "起点桩号", required = true),
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "ezhh", value = "止点桩号", required = true),
             @ApiImplicitParam(paramType="query", dataType = "int", name = "pageNum", value = "页码", required = true),
             @ApiImplicitParam(paramType="query", dataType = "int", name = "pageSize", value = "每页条数", required = true)
     })
     public Msg getRqiForLksjdr(@RequestParam("lxcode") String lxcode,
                                @RequestParam("xcfx") String xcfx,
                                @RequestParam("bbid") String bbid,
+                               @RequestParam("szhh") String szhh,
+                               @RequestParam("ezhh") String ezhh,
                                @RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
                                @RequestParam(value = "pageSize", defaultValue = "10") int pageSize){
         Map<String,String> param=new HashMap<String,String>();
-        param.put("lxcode",lxcode);param.put("xcfx",xcfx);param.put("bbid",bbid);param.put("lmlx","1");
+        param.put("lxcode",lxcode);param.put("xcfx",xcfx);param.put("bbid",bbid);param.put("lmlx","1");param.put("szhh",szhh);param.put("ezhh",ezhh);
         param.put("jclx","0401");//这个是设置成RQI的检测类型
-        List<Qmldb> list = lkpdDrService.getLksjdrByJclx(param,pageNum,pageSize);
+        List<Map<String, String>> list = lkpdDrService.getLksjdrByJclx(param,pageNum,pageSize);
 
         return ResultUtil.success(list);
     }
@@ -146,18 +166,22 @@ public class LkpdDrController {
             @ApiImplicitParam(paramType="query", dataType = "String", name = "lxcode", value = "路线编码", required = true),
             @ApiImplicitParam(paramType="query", dataType = "String", name = "xcfx", value = "行车方向", required = true),
             @ApiImplicitParam(paramType="query", dataType = "String", name = "bbid", value = "版本id", required = true),
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "szhh", value = "起点桩号", required = true),
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "ezhh", value = "止点桩号", required = true),
             @ApiImplicitParam(paramType="query", dataType = "int", name = "pageNum", value = "页码", required = true),
             @ApiImplicitParam(paramType="query", dataType = "int", name = "pageSize", value = "每页条数", required = true)
     })
     public Msg getRdiForLksjdr(@RequestParam("lxcode") String lxcode,
                                @RequestParam("xcfx") String xcfx,
                                @RequestParam("bbid") String bbid,
+                               @RequestParam("szhh") String szhh,
+                               @RequestParam("ezhh") String ezhh,
                                @RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
                                @RequestParam(value = "pageSize", defaultValue = "10") int pageSize){
         Map<String,String> param=new HashMap<String,String>();
-        param.put("lxcode",lxcode);param.put("xcfx",xcfx);param.put("bbid",bbid);param.put("lmlx","1");
+        param.put("lxcode",lxcode);param.put("xcfx",xcfx);param.put("bbid",bbid);param.put("lmlx","1");param.put("szhh",szhh);param.put("ezhh",ezhh);
         param.put("jclx","0402");//这个是设置成RDI的检测类型
-        List<Qmldb> list = lkpdDrService.getLksjdrByJclx(param,pageNum,pageSize);
+        List<Map<String, String>> list = lkpdDrService.getLksjdrByJclx(param,pageNum,pageSize);
 
         return ResultUtil.success(list);
     }
@@ -169,18 +193,22 @@ public class LkpdDrController {
             @ApiImplicitParam(paramType="query", dataType = "String", name = "lxcode", value = "路线编码", required = true),
             @ApiImplicitParam(paramType="query", dataType = "String", name = "xcfx", value = "行车方向", required = true),
             @ApiImplicitParam(paramType="query", dataType = "String", name = "bbid", value = "版本id", required = true),
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "szhh", value = "起点桩号", required = true),
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "ezhh", value = "止点桩号", required = true),
             @ApiImplicitParam(paramType="query", dataType = "int", name = "pageNum", value = "页码", required = true),
             @ApiImplicitParam(paramType="query", dataType = "int", name = "pageSize", value = "每页条数", required = true)
     })
     public Msg getSriForLksjdr(@RequestParam("lxcode") String lxcode,
                                @RequestParam("xcfx") String xcfx,
                                @RequestParam("bbid") String bbid,
+                               @RequestParam("szhh") String szhh,
+                               @RequestParam("ezhh") String ezhh,
                                @RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
                                @RequestParam(value = "pageSize", defaultValue = "10") int pageSize){
         Map<String,String> param=new HashMap<String,String>();
-        param.put("lxcode",lxcode);param.put("xcfx",xcfx);param.put("bbid",bbid);param.put("lmlx","1");
+        param.put("lxcode",lxcode);param.put("xcfx",xcfx);param.put("bbid",bbid);param.put("lmlx","1");param.put("szhh",szhh);param.put("ezhh",ezhh);
         param.put("jclx","0403");//这个是设置成SRI的检测类型
-        List<Qmldb> list = lkpdDrService.getLksjdrByJclx(param,pageNum,pageSize);
+        List<Map<String, String>> list = lkpdDrService.getLksjdrByJclx(param,pageNum,pageSize);
 
         return ResultUtil.success(list);
     }
@@ -192,18 +220,22 @@ public class LkpdDrController {
             @ApiImplicitParam(paramType="query", dataType = "String", name = "lxcode", value = "路线编码", required = true),
             @ApiImplicitParam(paramType="query", dataType = "String", name = "xcfx", value = "行车方向", required = true),
             @ApiImplicitParam(paramType="query", dataType = "String", name = "bbid", value = "版本id", required = true),
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "szhh", value = "起点桩号", required = true),
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "ezhh", value = "止点桩号", required = true),
             @ApiImplicitParam(paramType="query", dataType = "int", name = "pageNum", value = "页码", required = true),
             @ApiImplicitParam(paramType="query", dataType = "int", name = "pageSize", value = "每页条数", required = true)
     })
     public Msg getPssiForLksjdr(@RequestParam("lxcode") String lxcode,
                                @RequestParam("xcfx") String xcfx,
                                @RequestParam("bbid") String bbid,
+                                @RequestParam("szhh") String szhh,
+                                @RequestParam("ezhh") String ezhh,
                                @RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
                                @RequestParam(value = "pageSize", defaultValue = "10") int pageSize){
         Map<String,String> param=new HashMap<String,String>();
-        param.put("lxcode",lxcode);param.put("xcfx",xcfx);param.put("bbid",bbid);param.put("lmlx","1");
+        param.put("lxcode",lxcode);param.put("xcfx",xcfx);param.put("bbid",bbid);param.put("lmlx","1");param.put("szhh",szhh);param.put("ezhh",ezhh);
         param.put("jclx","0404");//这个是设置成PSSI的检测类型
-        List<Qmldb> list = lkpdDrService.getLksjdrByJclx(param,pageNum,pageSize);
+        List<Map<String, String>> list = lkpdDrService.getLksjdrByJclx(param,pageNum,pageSize);
 
         return ResultUtil.success(list);
     }

@@ -67,9 +67,9 @@ public class LkpdDrServiceImpl implements LkpdDrService {
     }
 
     @Override
-    public List<Qmldb> getLksjdrByJclx(Map<String, String> param, int pageNum, int pageSize) {
+    public List<Map<String, String>> getLksjdrByJclx(Map<String, String> param, int pageNum, int pageSize) {
         PageHelper.startPage(pageNum, pageSize);
-        List<Qmldb> list = lkpdDrMapper.getLksjdrByJclx(param);
+        List<Map<String, String>> list = lkpdDrMapper.getLksjdrByJclx(param);
         return list;
     }
 }
