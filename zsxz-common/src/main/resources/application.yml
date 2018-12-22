@@ -1,11 +1,13 @@
+# 公共接口模块
+
 # 多口设置
 server:
-  port: 8003
+  port: 8001
 
 # 数据库设置
 spring:
   application:
-    name: zsxz-rcyh
+    name: zsxz-common
   datasource:
     url: jdbc:oracle:thin:@211.101.37.237:1521:orcl
     username: zsxz
@@ -30,9 +32,14 @@ spring:
 
 mybatis:
   mapper-locations: classpath:/xml/*.xml
-  type-aliases-package: com.hdsx.rcyh.etity
+  type-aliases-package: com.hdsx.common.etity
   config-location: classpath:mybatis-config.xml
 
-file:
-  fileSavePath: D:/apache-tomcat-9.0.2/webapps/upload/lyjc/
-  fileUrl: http://127.0.0.1:8081/upload/lyjc/
+#pagehelper分页插件配置
+pagehelper:
+  helper-dialect: oracle
+  reasonable: true
+  support-methods-arguments: true
+  offset-as-page-num: true
+  row-bounds-with-count: true
+  params: count=countSql

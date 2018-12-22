@@ -10,6 +10,7 @@
     <packaging>pom</packaging>
 
     <modules>
+        <module>zsxz-common</module>
         <module>zsxz-lkpd</module>
         <module>zsxz-rcyh</module>
     </modules>

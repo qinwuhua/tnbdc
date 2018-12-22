@@ -1,6 +1,6 @@
 # 多口设置
 server:
-  port: 8001
+  port: 8002
 
 # 数据库设置
 spring:
