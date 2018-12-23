@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hdsx.common.mapper.FileMapper">
+
+    <insert id="addFiles" parameterType="hashmap">
+        INSERT INTO files(id,files_id, files_name, files_depict, files_path, files_date, files_status, remarks, files_dx, files_yname, files_type, files_mjlx)
+        VALUES (#{id,jdbcType=VARCHAR},#{files_id,jdbcType=VARCHAR},#{files_name,jdbcType=VARCHAR},#{files_depict,jdbcType=VARCHAR},#{files_path,jdbcType=VARCHAR},to_char(sysdate,'YYYY-MM-DD HH24:MI:SS'),#{files_status,jdbcType=VARCHAR} ,#{remarks,jdbcType=VARCHAR}, #{files_dx,jdbcType=VARCHAR},#{files_yname,jdbcType=VARCHAR},#{files_type,jdbcType=VARCHAR},#{files_mjlx,jdbcType=VARCHAR})
+    </insert>
+
+    <select id="getFilesDataById" parameterType="String" resultType="hashmap">
+        SELECT * FROM files WHERE files_id = #{id}
+    </select>
+
+    <delete id="deleteFilesDataById">
+        DELETE FROM files WHERE files_id = #{id}
+    </delete>
+
+</mapper>

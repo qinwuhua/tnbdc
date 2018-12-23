@@ -32,7 +32,3 @@ mybatis:
   mapper-locations: classpath:/xml/*.xml
   type-aliases-package: com.hdsx.rcyh.etity
   config-location: classpath:mybatis-config.xml
-
-file:
-  fileSavePath: D:/apache-tomcat-9.0.2/webapps/upload/lyjc/
-  fileUrl: http://127.0.0.1:8081/upload/lyjc/

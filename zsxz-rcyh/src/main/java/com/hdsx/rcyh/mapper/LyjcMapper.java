@@ -8,22 +8,15 @@ import org.apache.ibatis.annotations.Mapper;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Mapper
 public interface LyjcMapper {
 
     List<HashMap<String, Object>> getLyjcAll();
 
-    boolean addFiles(Map<String, String> fileMap);
-
     boolean addLyjc(Lyjc lyjc);
 
     boolean addLyjcmxb(Lyjcmxb lyjcmxb);
-
-    List<HashMap<String, String>> getFilesDataById(String id);
-
-    boolean deleteFilesDataById(String id);
 
     boolean deleteLyjcmxbById(String id);
 
@@ -32,6 +25,8 @@ public interface LyjcMapper {
     List<HashMap<String, Object>> getLyjcbmxById(String id);
 
     boolean updateLyjc(Lyjc lyjc);
+
+    boolean updateLyjcmxb(Lyjcmxb lyjcmxb);
 
     List<HashMap<String, Object>> getJczbAll();
 
@@ -46,4 +41,6 @@ public interface LyjcMapper {
     List<HashMap<String, Object>> getJczbmxById(String id);
 
     boolean updateJczb(Jczb jczb);
+
+    boolean updateJczbmxb(Jczbmxb jczbmxb);
 }

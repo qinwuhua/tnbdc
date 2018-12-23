@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 @Data
 @Accessors(chain = true)
@@ -15,6 +16,6 @@ public class Jczbmxb implements Serializable {
     private String id;
     private String mid;
     private String jcnr;
-    private String fj;
+    private BigDecimal fj;
     private String memo;
 }

@@ -43,3 +43,7 @@ pagehelper:
   offset-as-page-num: true
   row-bounds-with-count: true
   params: count=countSql
+
+#上传文件相关信息
+file:
+  fileSavePath: D:/apache-tomcat-9.0.2/webapps/uploadFiles/

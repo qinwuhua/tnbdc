@@ -3,7 +3,6 @@ package com.hdsx.rcyh.entity;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -38,6 +37,5 @@ public class Jczb implements Serializable {
     private String htmc;
     private BigDecimal wyfj;
     private String jcr;
-    private List<MultipartFile> multipartFiles;
     private List<Jczbmxb> jczbmxb;
 }
