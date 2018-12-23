@@ -6,4 +6,12 @@
     <select id="getMjxx" parameterType="string" resultType="hashmap">
       select meijubm "mjbm",meijumc "mjmc" from enumerate where meijulxbm=#{0}
     </select>
+
+    <select id="getBbxx" resultType="hashmap">
+        select
+          bbid "bbid", bbmc "bbmc", to_char(bbsj, 'yyyy-mm-dd') "bbsj", bblx "bblx", zjczr "zjczr", qmbbid "qmbbid", sjsjsx "sjsjsx", sjsjxx "sjsjxx", tbr "tbr",tbsj "tbsj", tbdw "tbdw", tbbm "tbbm",remark "remark"
+        from
+          JCPD_BBKZB
+
+    </select>
 </mapper>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hdsx.rcyh.mapper.RcqsMapper">
+
+    <!-- 查询日常清扫任务列表数据 -->
+	<select id="getRcqsrwList" parameterType="hashmap" resultType="com.hdsx.rcyh.entity.Rcqs">
+		SELECT
+		T.RCQS_GIS GIS,to_char(T.RCQS_KSRQ,'yyyy/mm/dd') KSRQ,T.RCQS_DDRQ DDRQ,to_char(T.RCQS_JSRQ,'yyyy/mm/dd') JSRQ,T.RCQS_QSRY QSRY,T.RCQS_QSRYID QSRYID,T.RCQS_QSXX QSXX,T.RCQS_YXZT YXZT,T.RCQS_ID ID,T.RCQS_DWMC DWMC,T.RCQS_DWBH DWBH,T.RCQS_DWID DWID,T.RCQS_BMMC BMMC,T.RCQS_BMBH BMBH,T.RCQS_BHID BHID,T.RCQS_TBR TBR,T.RCQS_TBRID TBRID,T.RCQS_TBRQ TBRQ,T.RCQS_SPZT SPZT,T.RCQS_FILE FILEID,T.RCQS_WFID WFID,T.RCQS_NOTE NOTE,T.RCQS_LXCODE LXCODE,E.MEIJUMC XCFX
+		FROM RCQS T
+		LEFT JOIN ENUMERATE E ON T.RCQS_XCFX=E.MEIJUBM
+		WHERE 1=1
+		<if test="lxcode != null and lxcode != ''">
+			and t.rcqs_lxcode=#{lxcode}
+		</if>
+		<if test="xcfx != null and xcfx != ''">
+			and t.rcqs_xcfx=#{xcfx}
+		</if>
+		<if test="ksrq != null and ksrq != ''">
+			and to_date(to_char(t.rcqs_jsrq,'yyyy/mm/dd'),'yyyy/mm/dd')>to_date(#{ksrq},'yyyy/mm/dd')
+		</if>
+		<if test="jsrq != null and jsrq != ''">
+			and to_date(to_char(t.rcqs_ksrq,'yyyy/mm/dd'),'yyyy/mm/dd')&lt;to_date(#{jsrq},'yyyy/mm/dd')
+		</if>
+		ORDER BY TO_DATE(KSRQ,'yyyy/mm/dd') DESC
+	</select>
+
+</mapper>

@@ -9,4 +9,6 @@ import java.util.List;
 public interface MjlxMapper {
 
     List<HashMap<String, Object>>  getMjxx(String mjlxbm);
+
+    List<HashMap<String, Object>> getBbxx();
 }
