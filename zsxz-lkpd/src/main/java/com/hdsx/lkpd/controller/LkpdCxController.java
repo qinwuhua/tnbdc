@@ -1,6 +1,7 @@
 package com.hdsx.lkpd.controller;
 
 
+import com.github.pagehelper.PageInfo;
 import com.hdsx.lkpd.entity.Msg;
 import com.hdsx.lkpd.entity.Pdfa;
 import com.hdsx.lkpd.entity.Qmldb;
@@ -45,7 +46,7 @@ public class LkpdCxController {
         param.put("lxcode",lxcode);param.put("xcfx",xcfx);param.put("bbid",bbid);param.put("lmlx","1");param.put("szhh",szhh);param.put("ezhh",ezhh);
         List<Qmldb> list = lkpdCxService.getMxbForLksjcx(param, pageNum, pageSize);
 
-        return ResultUtil.success(list);
+        return ResultUtil.success(new PageInfo<>(list));
     }
 
 
@@ -71,7 +72,7 @@ public class LkpdCxController {
         param.put("lxcode",lxcode);param.put("xcfx",xcfx);param.put("bbid",bbid);param.put("lmlx","1");param.put("szhh",szhh);param.put("ezhh",ezhh);
         List<Map<String,String>> list = lkpdCxService.getHzbForLksjcx(param, pageNum, pageSize);
 
-        return ResultUtil.success(list);
+        return ResultUtil.success(new PageInfo<>(list));
     }
 
     @RequestMapping(value = "getDjbhForLksjcx", method = RequestMethod.GET, produces = "application/json")
@@ -123,7 +124,7 @@ public class LkpdCxController {
         Map<String,String> param=new HashMap<String,String>();
         param.put("famc",famc);param.put("sjsjsx",sjsjsx);param.put("sjsjxx",sjsjxx);
         List<Pdfa> list = lkpdCxService.getFaForLksjcx(param, pageNum, pageSize);
-        return ResultUtil.success(list);
+        return ResultUtil.success(new PageInfo<>(list));
     }
 
     @RequestMapping(value = "editFaForLksjcx", method = RequestMethod.PUT, produces = "application/json")

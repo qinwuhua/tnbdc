@@ -1,6 +1,7 @@
 package com.hdsx.lkpd.controller;
 
 
+import com.github.pagehelper.PageInfo;
 import com.hdsx.lkpd.entity.Msg;
 import com.hdsx.lkpd.entity.Qmldb;
 import com.hdsx.lkpd.service.LkpdDrService;
@@ -51,7 +52,7 @@ public class LkpdDrController {
         param.put("lxid","0101");//这个是设置成PCI的类型
         List<Qmldb> list = lkpdDrService.getLksjdrByDclx(param, pageNum, pageSize);
 
-        return ResultUtil.success(list);
+        return ResultUtil.success(new PageInfo<>(list));
     }
 
     @RequestMapping(value = "getSciForLksjdr", method = RequestMethod.GET, produces = "application/json")
@@ -77,7 +78,7 @@ public class LkpdDrController {
         param.put("lxid","02");//这个是设置成SCI的类型
         List<Qmldb> list = lkpdDrService.getLksjdrByDclx(param,pageNum,pageSize);
 
-        return ResultUtil.success(list);
+        return ResultUtil.success(new PageInfo<>(list));
     }
 
     @RequestMapping(value = "getBciForLksjdr", method = RequestMethod.GET, produces = "application/json")
@@ -103,7 +104,7 @@ public class LkpdDrController {
         param.put("lxid","03");//这个是设置成BCI的类型
         List<Qmldb> list = lkpdDrService.getLksjdrByDclx(param,pageNum,pageSize);
 
-        return ResultUtil.success(list);
+        return ResultUtil.success(new PageInfo<>(list));
     }
 
     @RequestMapping(value = "getTciForLksjdr", method = RequestMethod.GET, produces = "application/json")
@@ -129,7 +130,7 @@ public class LkpdDrController {
         param.put("lxid","04");//这个是设置成TCI的类型
         List<Qmldb> list = lkpdDrService.getLksjdrByDclx(param,pageNum,pageSize);
 
-        return ResultUtil.success(list);
+        return ResultUtil.success(new PageInfo<>(list));
     }
 
 
@@ -156,7 +157,7 @@ public class LkpdDrController {
         param.put("jclx","0401");//这个是设置成RQI的检测类型
         List<Map<String, String>> list = lkpdDrService.getLksjdrByJclx(param,pageNum,pageSize);
 
-        return ResultUtil.success(list);
+        return ResultUtil.success(new PageInfo<>(list));
     }
 
 
@@ -183,7 +184,7 @@ public class LkpdDrController {
         param.put("jclx","0402");//这个是设置成RDI的检测类型
         List<Map<String, String>> list = lkpdDrService.getLksjdrByJclx(param,pageNum,pageSize);
 
-        return ResultUtil.success(list);
+        return ResultUtil.success(new PageInfo<>(list));
     }
 
 
@@ -210,7 +211,7 @@ public class LkpdDrController {
         param.put("jclx","0403");//这个是设置成SRI的检测类型
         List<Map<String, String>> list = lkpdDrService.getLksjdrByJclx(param,pageNum,pageSize);
 
-        return ResultUtil.success(list);
+        return ResultUtil.success(new PageInfo<>(list));
     }
 
 
@@ -237,7 +238,7 @@ public class LkpdDrController {
         param.put("jclx","0404");//这个是设置成PSSI的检测类型
         List<Map<String, String>> list = lkpdDrService.getLksjdrByJclx(param,pageNum,pageSize);
 
-        return ResultUtil.success(list);
+        return ResultUtil.success(new PageInfo<>(list));
     }
 
 }
