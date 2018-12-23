@@ -18,4 +18,9 @@ public class MjlxServiceImpl implements MjlxService {
     public List<HashMap<String, Object>> getMjxx(String mjlxbm) {
         return mjlxMapper.getMjxx(mjlxbm);
     }
+
+    @Override
+    public List<HashMap<String, Object>> getBbxx() {
+        return mjlxMapper.getBbxx();
+    }
 }

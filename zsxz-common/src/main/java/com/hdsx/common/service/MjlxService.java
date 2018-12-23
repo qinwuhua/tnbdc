@@ -11,4 +11,10 @@ public interface MjlxService {
      * @return
      */
     List<HashMap<String, Object>> getMjxx(String mjlxbm);
+
+    /**
+     * 获取所有项目信息
+     * @return
+     */
+    List<HashMap<String, Object>> getBbxx();
 }

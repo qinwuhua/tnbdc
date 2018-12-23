@@ -29,4 +29,14 @@ public class MjlxController {
             return ResultUtil.error("枚举信息获取失败");
         }
     }
+
+    @GetMapping("getBbxx")
+    @ApiOperation(value = "获取版本信息")
+    public Msg getBbxx() {
+        try {
+            return ResultUtil.success(mjlxService.getBbxx());
+        }catch (Exception e) {
+            return ResultUtil.error("获取方案信息出错");
+        }
+    }
 }

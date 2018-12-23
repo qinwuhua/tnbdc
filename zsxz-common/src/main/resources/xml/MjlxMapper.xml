@@ -6,4 +6,8 @@
     <select id="getMjxx" parameterType="string" resultType="hashmap">
       select meijubm "mjbm",meijumc "mjmc" from enumerate where meijulxbm=#{0}
     </select>
+
+    <select id="getBbxx" resultType="hashmap">
+        select * as "*" from JCPD_BBKZB
+    </select>
 </mapper>
