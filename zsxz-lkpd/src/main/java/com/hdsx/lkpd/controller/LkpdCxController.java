@@ -11,6 +11,7 @@ import io.swagger.annotations.*;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -145,19 +146,24 @@ public class LkpdCxController {
     }
 
     @RequestMapping(value = "delFaForLksjcx", method = RequestMethod.DELETE, produces = "application/json")
-    @ApiOperation(value = "删除路况评定方案数据(通过单据编号数组)")
-    public Msg delFaForLksjcx(@RequestBody List<Long> djbhs){
+    @ApiOperation(value = "删除路况评定方案数据(通过单据编号字符串，逗号隔开)")
+    public Msg delFaForLksjcx(@RequestParam(value = "djbhs") String djbhs){
         try {
             System.out.println(djbhs);
-            int flag=lkpdCxService.delFaForLksjcx(djbhs);
+            List<Long> l = new ArrayList<Long>();
+            String[] djbh=djbhs.split(",");
+            for (int i=0;i<djbh.length;i++){
+                l.add(Long.parseLong(djbh[i]));
+            }
+            int flag=lkpdCxService.delFaForLksjcx(l);
             if(flag>0)
-                return ResultUtil.success("保存成功");
+                return ResultUtil.success("删除成功");
             else
-                return ResultUtil.error("保存失败");
+                return ResultUtil.error("删除失败，没有该编号的数据");
 
         }catch (Exception e){
             e.printStackTrace();
-            return ResultUtil.error("保存失败，接口异常");
+            return ResultUtil.error("删除失败，接口异常");
         }
 
     }
