@@ -1,5 +1,6 @@
 package com.hdsx.rcyh.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.hdsx.rcyh.entity.Jczb;
 import com.hdsx.rcyh.entity.Lyjc;
 import com.hdsx.rcyh.entity.Msg;
@@ -29,10 +30,11 @@ public class LyjcController{
     public Msg getLyjcAll(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
                           @RequestParam(value = "pageSize", defaultValue = "10") int pageSize){
         try {
-            return ResultUtil.success(lyjcService.getLyjcAll(pageNum,pageSize));
+            return ResultUtil.success(new PageInfo<>(lyjcService.getLyjcAll(pageNum,pageSize)));
         }catch (Exception e){
             return ResultUtil.error("查询失败！");
         }
+
     }
 
     @PostMapping("addLyjc")
@@ -100,7 +102,7 @@ public class LyjcController{
     public Msg getJczbAll(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
                           @RequestParam(value = "pageSize", defaultValue = "10") int pageSize){
         try {
-            return ResultUtil.success(lyjcService.getJczbAll(pageNum,pageSize));
+            return ResultUtil.success(new PageInfo<>(lyjcService.getJczbAll(pageNum,pageSize)));
         }catch (Exception e){
             return ResultUtil.error("查询失败！");
         }

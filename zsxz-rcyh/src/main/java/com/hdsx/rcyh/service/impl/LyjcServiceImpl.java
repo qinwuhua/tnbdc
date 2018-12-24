@@ -17,7 +17,7 @@ import java.util.List;
 public class LyjcServiceImpl implements LyjcService {
 
     @Resource
-    LyjcMapper lyjcMapper;
+    private LyjcMapper lyjcMapper;
 
     @Override
     public List<HashMap<String, Object>> getLyjcAll(int pageNum, int pageSize) {
