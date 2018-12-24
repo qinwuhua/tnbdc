@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hdsx.common.mapper.LxldMapper">
+    <select id="getLd" resultType="hashmap" parameterType="string">
+        select ldcode "ldcode",ldname "ldname",lxcode "lxcode",szhh "szhh",ezhh "ezhh",bmCode "bmCode"
+        from htgl_ldb
+        where bmcode=#{bmCode}
+    </select>
+</mapper>

@@ -9,5 +9,5 @@ public interface LkpdDrService {
 
     List<Qmldb> getLksjdrByDclx(Map<String,String> param, int pageNum, int pageSize);
 
-    List<Qmldb> getLksjdrByJclx(Map<String, String> param, int pageNum, int pageSize);
+    List<Map<String, String>> getLksjdrByJclx(Map<String, String> param, int pageNum, int pageSize);
 }

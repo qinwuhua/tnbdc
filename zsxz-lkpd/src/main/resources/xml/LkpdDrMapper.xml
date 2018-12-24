@@ -15,11 +15,19 @@
             on qm.lxcode=l.lxcode
             left join htgl_mjlx mj
             on qm.fx=mj.key
-            where qm.fx=#{xcfx} and qm.bbid=(select qmbbid from jcpd_bbkzb where bbid=#{bbid})
+            where qm.fx=#{xcfx}
+            and qm.bbid=(select qmbbid from jcpd_bbkzb where bbid=#{bbid})
 
         <if test="ldcode != null and ldcode != ''">
             and ld.ldcode=#{ldcode}
         </if>
+        <if test="szhh != null and szhh != ''">
+            and qm.ezhh>${szhh}
+        </if>
+        <if test="ezhh != null and ezhh != ''">
+            and qm.szhh&lt;${ezhh}
+        </if>
+
         <if test="lmlx != null and lmlx != ''">
             and qm.lmlx=#{lmlx}
         </if>
@@ -31,16 +39,23 @@
     </select>
 
     <!-- 通过检测类型查询路况导入数据 -->
-    <select id="getLksjdrByJclx" parameterType="hashmap" resultType="com.hdsx.lkpd.entity.Lmjcb">
-        SELECT QM.LXCODE,'K'||QM.SZHH||'-K'||QM.EZHH AS QMNAME,MJ.VALUE AS FXNAME,
-        L.JCID,L.BBID,L.LDID,L.JCLX,NVL(JCD1,-1) JCD1,NVL(JCD2,-1) JCD2,NVL(JCD3,-1) JCD3,NVL(JCD4,-1) JCD4,NVL(JCD5,-1) JCD5,
+    <select id="getLksjdrByJclx" parameterType="hashmap" resultType="hashmap">
+        SELECT QM.LXCODE,QM.SZHH,QM.EZHH,'K'||QM.SZHH||'-K'||QM.EZHH AS QMNAME,MJ.VALUE AS FXNAME,
+        L.JCSB,L.JCRQ,L.JLRY,L.JCID,L.BBID,L.LDID,L.JCLX,NVL(JCD1,-1) JCD1,NVL(JCD2,-1) JCD2,NVL(JCD3,-1) JCD3,NVL(JCD4,-1) JCD4,NVL(JCD5,-1) JCD5,
         NVL(JCD6,-1) JCD6,NVL(JCD7,-1) JCD7,NVL(JCD8,-1) JCD8,NVL(JCD9,-1) JCD9,NVL(JCD10,-1) JCD10,NVL(ZHI,-1) ZHI,NVL(PJZ,-1) PJZ
         FROM JCPD_QMLDB QM
         LEFT JOIN HTGL_MJLX MJ
         ON QM.FX=MJ.KEY
         JOIN (SELECT * FROM JCPD_LMJCB WHERE JCLX=#{jclx} AND BBID=#{bbid}) L
         ON QM.LDID=L.LDID
-        WHERE QM.LXCODE=#{lxcode} AND QM.BBID=(SELECT QMBBID FROM JCPD_BBKZB WHERE BBID=#{bbid})
+        WHERE QM.LXCODE=#{lxcode}
+        <if test="szhh != null and szhh != ''">
+            and qm.ezhh>${szhh}
+        </if>
+        <if test="ezhh != null and ezhh != ''">
+            and qm.szhh&lt;${ezhh}
+        </if>
+        AND QM.BBID=(SELECT QMBBID FROM JCPD_BBKZB WHERE BBID=#{bbid})
         AND QM.FX=#{xcfx}
         ORDER BY QM.SZHH
 
@@ -83,7 +98,7 @@
 	</select>
     <!-- 查询tci -->
     <select id="getTci" parameterType="com.hdsx.lkpd.entity.Qmldb" resultType="Double">
-		select round(nvl(sum(qz*(case when (100-total)>0 then (100-total) elsr 0 end)),100),2) as tci from
+		select round(nvl(sum(qz*(case when (100-total)>0 then (100-total) else 0 end)),100),2) as tci from
 		(select lxName,sum(ljsj*dwkf) as total,avg(qz) as qz from
 		(select nvl(l.ljsj,0) ljsj,lx.dwkf,lx.qz,lx.lxname from jcpd_lkdcfb l
 		left join jcpd_lkdclxb lx

@@ -1,15 +1,15 @@
 package com.hdsx.rcyh.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.hdsx.rcyh.entity.Jczb;
+import com.hdsx.rcyh.entity.Jczbmxb;
 import com.hdsx.rcyh.entity.Lyjc;
+import com.hdsx.rcyh.entity.Lyjcmxb;
 import com.hdsx.rcyh.mapper.LyjcMapper;
 import com.hdsx.rcyh.service.LyjcService;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
-import java.io.File;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 
@@ -17,62 +17,103 @@ import java.util.List;
 public class LyjcServiceImpl implements LyjcService {
 
     @Resource
-    LyjcMapper lyjcMapper;
-
-    @Value("${file.fileSavePath}")
-    private String fileSavePath;
-
-    @Value("${file.fileUrl}")
-    private String fileUrl;
+    private LyjcMapper lyjcMapper;
 
     @Override
-    public List<HashMap<String, Object>> getLyjcAll() {
-        return lyjcMapper.getLyjcAll();
-    }
-
-    @Override
-    public List<HashMap<String, Object>> getDjsjHtxx() {
-        return lyjcMapper.getDjsjHtxx();
-    }
-
-    @Override
-    public List<HashMap<String, Object>> getDjsjLyjcmx() {
-        return lyjcMapper.getDjsjLyjcmx();
+    public List<HashMap<String, Object>> getLyjcAll(int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<HashMap<String, Object>> list = lyjcMapper.getLyjcAll();
+        return list;
     }
 
     @Override
     public boolean addLyjc(Lyjc lyjc) {
-        if (lyjc.getMultipartFiles() != null && lyjc.getMultipartFiles().size() > 0){
-            File fileFold = new File(fileSavePath);
-            if (!fileFold.exists()){
-                fileFold.mkdirs();
+        if (lyjc.getLyjcmxb() != null && lyjc.getLyjcmxb().size() > 0){
+            for (Lyjcmxb lyjcmxb : lyjc.getLyjcmxb()){
+                String id = "LYJC_" + System.currentTimeMillis();
+                lyjcmxb.setId(id);
+                lyjcmxb.setMid(lyjc.getId());
+                lyjcMapper.addLyjcmxb(lyjcmxb);
             }
-            for (int i = 0; i < lyjc.getMultipartFiles().size(); i++){
-                MultipartFile file = lyjc.getMultipartFiles().get(i);
-                saveFile(file);
-                //TODO 把保存的信息存入到FILES表中
-                /*lyjcMapper.addFiles();*/
+        }
+        return lyjcMapper.addLyjc(lyjc);
+    }
+
+    @Override
+    public boolean deleteLyjc(String id) {
+        if (lyjcMapper.deleteLyjcmxbById(id)){
+            if (lyjcMapper.deleteLyjcById(id)){
+                    return true;
             }
-            //TODO 文件保存后就把信息添加到SGDWLYLCB
-            /*lyjcMapper.addLyjc(lyjc);*/
-            System.out.println("把信息添加到SGDWLYLCB");
-        }else {
-            return false;
         }
         return false;
     }
 
-    private boolean saveFile(MultipartFile file) {
-        if (!file.isEmpty()) {
-            String fileName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
-            File filePath = new File(fileSavePath + fileName);
-            try {
-                file.transferTo(filePath);
+    @Override
+    public boolean updateLyjc(Lyjc lyjc) {
+        if (lyjc.getLyjcmxb()!=null && lyjc.getLyjcmxb().size() > 0){
+            for (Lyjcmxb lyjcmxb : lyjc.getLyjcmxb()){
+                String id = "LYJC_" + System.currentTimeMillis();
+                lyjcmxb.setId(id);
+                lyjcmxb.setMid(lyjc.getId());
+                lyjcMapper.updateLyjcmxb(lyjcmxb);
+            }
+        }
+        return lyjcMapper.updateLyjc(lyjc);
+    }
+
+    @Override
+    public List<HashMap<String, Object>> getLyjcbmxById(String id) {
+        return lyjcMapper.getLyjcbmxById(id);
+    }
+
+    @Override
+    public List<HashMap<String, Object>> getJczbAll(int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<HashMap<String, Object>> list = lyjcMapper.getJczbAll();
+        return list;
+    }
+
+    @Override
+    public boolean addJczb(Jczb jczb) {
+        if (jczb.getJczbmxb() != null && jczb.getJczbmxb().size() > 0){
+            for (Jczbmxb jczbmxb : jczb.getJczbmxb()){
+                String id = "JCZB_" + System.currentTimeMillis();
+                jczbmxb.setId(id);
+                jczbmxb.setMid(jczb.getId());
+                lyjcMapper.addJczbmxb(jczbmxb);
+            }
+        }
+        return lyjcMapper.addJczb(jczb);
+    }
+
+
+    @Override
+    public boolean deleteJczb(String id) {
+        if (lyjcMapper.deleteJczbmxbById(id)){
+            if (lyjcMapper.deleteJczbById(id)){
                 return true;
-            } catch (IOException e) {
-                e.printStackTrace();
             }
         }
         return false;
     }
+
+    @Override
+    public boolean updateJczb(Jczb jczb) {
+        if (jczb.getJczbmxb()!=null && jczb.getJczbmxb().size() > 0){
+            for (Jczbmxb jczbmxb : jczb.getJczbmxb()){
+                String id = "JCZB_" + System.currentTimeMillis();
+                jczbmxb.setId(id);
+                jczbmxb.setMid(jczb.getId());
+                lyjcMapper.updateJczbmxb(jczbmxb);
+            }
+        }
+        return lyjcMapper.updateJczb(jczb);
+    }
+
+    @Override
+    public List<HashMap<String, Object>> getJczbmxById(String id) {
+        return lyjcMapper.getJczbmxById(id);
+    }
+
 }

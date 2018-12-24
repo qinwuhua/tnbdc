@@ -6,16 +6,22 @@
 
     <!-- 查询明细表数据数据 -->
     <select id="getMxbForLksjcx" resultType="com.hdsx.lkpd.entity.Qmldb" parameterType="hashmap">
-        select t.*,q.lxcode,q.szhh,q.ezhh,q.cd,mj.value as fxName,to_char(bb.bbsj,'yyyy-mm-dd') pdsj from jcpd_lkpdmxb t
+        select t.*,q.lxcode,q.szhh,q.ezhh,q.cd,mj.value as fxName from jcpd_lkpdmxb t
 				join jcpd_qmldb q
 				on t.ldid=q.ldid
 				left join htgl_mjlx mj
 				on q.fx=mj.key
 				left join JCPD_BBKZB bb on t.bbid=bb.bbid
 				where t.bbid=#{bbid}
-				<if test="lxcode != null or lxcode != ''">
+				<if test="lxcode != null and lxcode != ''">
                     and q.lxcode=#{lxcode}
                 </if>
+				<if test="szhh != null and szhh != ''">
+					and q.ezhh>${szhh}
+				</if>
+				<if test="ezhh != null and ezhh != ''">
+					and q.szhh&lt;${ezhh}
+				</if>
 				and q.lmlx=#{lmlx}
                 and q.fx = #{xcfx}
 				order by q.szhh,q.fx
@@ -38,16 +44,25 @@
 		FROM
 		(SELECT QM.LXCODE,QM.LDID LDCODE,QM.SZHH SZHH,QM.EZHH EZHH,BB.BBID BBID,BB.BBMC,TO_NUMBER(MX.MQI) MQI,
 		TO_NUMBER(MX.PQI) PQI,TO_NUMBER(MX.SCI) SCI,TO_NUMBER(MX.BCI) BCI,TO_NUMBER(MX.TCI) TCI,QM.CD/1000 CD,QM.FX FX,
-		to_char(bb.bbsj,'yyyy-mm-dd') pdsj
+		mx.pdsj pdsj
 		FROM JCPD_BBKZB  BB
 		LEFT JOIN JCPD_LKPDMXB MX ON BB.BBID=MX.BBID
 		LEFT JOIN JCPD_QMLDB QM ON QM.LDID=MX.LDID
 		where 1=1
-		<if test="lxcode != null or lxcode != ''">
+		<if test="lxcode != null and lxcode != ''">
 			and qm.lxcode=#{lxcode}
 		</if>
-		<if test="lmlx != null or lmlx != ''">
+		<if test="szhh != null and szhh != ''">
+			and qm.ezhh>${szhh}
+		</if>
+		<if test="ezhh != null and ezhh != ''">
+			and qm.szhh&lt;${ezhh}
+		</if>
+		<if test="lmlx != null and lmlx != ''">
 			and qm.lmlx=#{lmlx}
+		</if>
+		<if test="bbid != null and bbid != ''">
+			and bb.bbid=#{bbid}
 		</if>
 
 		)TT
@@ -56,6 +71,130 @@
 		order by szhh,xcfx
 
 	</select>
+	<!-- 获取单据编号 -->
+	<select id="getDjbhForLksjcx" resultType="hashmap">
+		select decode(max(bbid),null,10001,max(bbid)+1) djbh from JCPD_BBKZB
+	</select>
+	<!--  通过单据编号查询是否有方案数据  -->
+	<select id="getIsFaDataByDjbh" resultType="integer" parameterType="integer">
+		select count(*) from JCPD_BBKZB where bbid=#{value}
+	</select>
+	<!--  添加方案  -->
 
+	<insert id="addFaForLksjcx" parameterType="com.hdsx.lkpd.entity.Pdfa">
+		insert into JCPD_BBKZB
+		<trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="djbh != null" >bbid,</if>
+			<if test="djbh != null" >qmbbid,</if>
+			<if test="famc != null" >bbmc,</if>
+			<if test="sjsjxx != null" >sjsjxx,</if>
+			<if test="sjsjsx != null" >sjsjsx,</if>
+			<if test="tbdw != null" >tbdw,</if>
+			<if test="tbbm != null" >tbbm,</if>
+			<if test="tbsj != null" >tbsj,</if>
+			<if test="tbr != null" >tbr,</if>
+			<if test="remark != null" >remark,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides="," >
+			<if test="djbh != null" >#{djbh},</if>
+			<if test="djbh != null" >#{djbh},</if>
+			<if test="famc != null" >#{famc},</if>
+			<if test="sjsjxx != null" >#{sjsjxx},</if>
+			<if test="sjsjsx != null" >#{sjsjsx},</if>
+			<if test="tbdw != null" >#{tbdw},</if>
+			<if test="tbbm != null" >#{tbbm},</if>
+			<if test="tbsj != null" >#{tbsj},</if>
+			<if test="tbr != null" >#{tbr},</if>
+			<if test="remark != null" >#{remark},</if>
+		</trim>
+	</insert>
+
+	<!--  查询方案数据列表 -->
+	<select id="getFaForLksjcx" resultType="com.hdsx.lkpd.entity.Pdfa" parameterType="hashmap">
+		select BBID djbh, BBMC famc,SJSJSX, SJSJXX, TBR, TBSJ, TBDW, TBBM, REMARK
+		from JCPD_BBKZB fa
+		where 1=1
+		<if test="famc != null and famc != ''">
+			and fa.bbmc like '%'||#{famc}||'%'
+		</if>
+		<!--  这里这个时间先这样写，后面会改，应该是大于小于的关系  -->
+		<if test="sjsjxx != null and sjsjxx != ''">
+			and fa.sjsjxx=#{sjsjxx}
+		</if>
+		<if test="sjsjsx != null and sjsjsx != ''">
+			and fa.sjsjsx=#{sjsjsx}
+		</if>
+
+		order by djbh
+
+	</select>
+
+	<!--  编辑方案数据  -->
+	<update id="editFaForLksjcx" parameterType="com.hdsx.lkpd.entity.Pdfa" >
+		update JCPD_BBKZB
+		<set>
+			<if test="famc != null" >bbmc=#{famc},</if>
+			<if test="sjsjxx != null" >sjsjxx=#{sjsjxx},</if>
+			<if test="sjsjsx != null" >sjsjsx=#{sjsjsx},</if>
+			<if test="tbdw != null" >tbdw=#{tbdw},</if>
+			<if test="tbbm != null" >tbbm=#{tbbm},</if>
+			<if test="tbsj != null" >tbsj=#{tbsj},</if>
+			<if test="tbr != null" >tbr=#{tbr},</if>
+			<if test="remark != null" >remark=#{remark},</if>
+		</set>
+		where 1=1 and bbid=#{djbh}
+	</update>
+
+	<!--  删除评定方案  -->
+	<delete id="delFaForLksjcx" parameterType="java.util.List" >
+		delete from JCPD_BBKZB
+		where bbid in
+		<foreach collection="list" item="id"  open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+	<!-- 清空某个版本某个路段上的评定明细数据 -->
+	<delete id="dropMxb" parameterType="hashmap">
+		DELETE FROM JCPD_LKPDMXB
+		WHERE BBID=#{bbid}
+		AND LDID IN (SELECT LDID FROM JCPD_QMLDB QM WHERE LXCODE=#{lxcode}
+		<if test="szhh != null and szhh != ''">
+		and qm.ezhh>${szhh}
+		</if>
+		<if test="ezhh != null and ezhh != ''">
+			and qm.szhh&lt;${ezhh}
+		</if>
+	  	AND BBID=(SELECT QMBBID FROM JCPD_BBKZB WHERE BBID=#{bbid}) )
+	</delete>
+
+	<!-- 获取路面四项指标 -->
+	<select id="getLmjc" parameterType="hashmap" resultType="com.hdsx.lkpd.entity.Qmldb">
+		select qm.*,nvl(lm1.zhi,100) as rqi,lm1.pjz as iri,nvl(lm2.zhi,100) as rdi,
+		nvl(lm3.zhi,100) as sri,nvl(lm4.zhi,100) as pssi
+		from jcpd_qmldb qm
+		left join (select * from jcpd_lmjcb where bbid=#{bbid} and jclx='0401')lm1
+		on qm.ldid=lm1.ldid
+		left join (select * from jcpd_lmjcb where bbid=#{bbid} and jclx='0402')lm2
+		on qm.ldid=lm2.ldid
+		left join (select * from jcpd_lmjcb where bbid=#{bbid} and jclx='0403')lm3
+		on qm.ldid=lm3.ldid
+		left join (select * from jcpd_lmjcb where bbid=#{bbid} and jclx='0404')lm4
+		on qm.ldid=lm4.ldid
+		where qm.lxcode=#{lxcode}
+		<if test="szhh != null and szhh != ''">
+			and qm.ezhh>${szhh}
+		</if>
+		<if test="ezhh != null and ezhh != ''">
+			and qm.szhh&lt;${ezhh}
+		</if>
+		and qm.bbid=(select qmbbid from jcpd_bbkzb where bbid=#{bbid})
+	</select>
+
+	<!-- 明细表中插入数据 -->
+	<insert id="addMxb" parameterType="com.hdsx.lkpd.entity.Qmldb">
+		INSERT INTO JCPD_LKPDMXB(LDID,BBID,MQI,PQI,PCI,RQI,PSSI,RDI,SRI,SCI,BCI,TCI,IRI,pdsj)
+		VALUES(#{ldid},#{pdbbid},#{mqi},#{pqi},#{pci},#{rqi},#{pssi},#{rdi},#{sri},#{sci},#{bci},#{tci},#{iri},#{pdsj})
+	</insert>
 
 </mapper>

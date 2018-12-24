@@ -23,5 +23,5 @@ public interface LkpdDrMapper {
 
     double getPci(Qmldb qm);
 
-    List<Qmldb> getLksjdrByJclx(Map<String, String> param);
+    List<Map<String, String>> getLksjdrByJclx(Map<String, String> param);
 }
