@@ -1,5 +1,6 @@
 package com.hdsx.rcyh.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import com.hdsx.rcyh.entity.Xccspz;
 import com.hdsx.rcyh.mapper.XccspzMapper;
 import com.hdsx.rcyh.service.XccspzService;
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
 import java.util.List;
 
 @Service
@@ -19,8 +21,18 @@ public class XccspzServiceImpl implements XccspzService {
 
     @Override
     public int delete(String xccsId) {
+        System.out.println("11111111"+xccspzMapper.delete(xccsId));
         return xccspzMapper.delete(xccsId);
     }
+
+
+    @Override
+    public List<HashMap<String, Object>> getXccspzAll(int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<HashMap<String, Object>> list = xccspzMapper.getXccspzAll();
+        return list;
+    }
+
 
     @Override
     public int deletes(String[] xccsId) {
@@ -46,4 +58,5 @@ public class XccspzServiceImpl implements XccspzService {
     public int update(Xccspz xccspz) {
         return xccspzMapper.update(xccspz);
     }
+
 }

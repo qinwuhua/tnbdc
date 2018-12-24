@@ -1,7 +1,5 @@
-# 多口设置
 server:
-  port: 8003
-
+  port: 8002
 # 数据库设置
 spring:
   application:
@@ -32,3 +30,12 @@ mybatis:
   mapper-locations: classpath:/xml/*.xml
   type-aliases-package: com.hdsx.rcyh.etity
   config-location: classpath:mybatis-config.xml
+
+#pagehelper分页插件配置
+pagehelper:
+  helper-dialect: oracle
+  reasonable: true
+  support-methods-arguments: true
+  offset-as-page-num: true
+  row-bounds-with-count: true
+  params: count=countSql

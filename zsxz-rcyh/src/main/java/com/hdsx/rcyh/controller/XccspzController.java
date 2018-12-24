@@ -1,10 +1,13 @@
 package com.hdsx.rcyh.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.hdsx.rcyh.entity.Msg;
 import com.hdsx.rcyh.entity.Xccspz;
 import com.hdsx.rcyh.service.XccspzService;
+import com.hdsx.rcyh.utils.ResultUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,7 +15,8 @@ import javax.annotation.Resource;
 import java.util.List;
 
 @RestController
-@Api(tags = {"养护管理-巡查次数配置"})
+@Api(value = "养护管理-巡查次数配置")
+@RequestMapping("/xccspz")
 public class XccspzController {
     @Resource
     private XccspzService xccspzService;
@@ -25,18 +29,33 @@ public class XccspzController {
         if (!"".equals(xccsId)) {
             List<Xccspz> xccspzs = xccspzService.QueryOne(xccsId);
             if (xccspzs.size() > 0) {
-                Msg<Integer> integerMsg = new Msg<>();
+                Msg<Integer> integerMsg = new Msg<Integer>();
                 integerMsg.setCode(200);
                 integerMsg.setMsg("查询成功");
                 integerMsg.setData(1);
                 return integerMsg;
             }
         }
-        Msg<Integer> integerMsg = new Msg<>();
+        Msg<Integer> integerMsg = new Msg<Integer>();
         integerMsg.setCode(400);
         integerMsg.setMsg("查询失败");
         integerMsg.setData(0);
         return integerMsg;
+    }
+    @GetMapping("getXccspzAll")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType="query", dataType = "int", name = "pageNum", value = "页码", required = true),
+            @ApiImplicitParam(paramType="query", dataType = "int", name = "pageSize", value = "每页条数", required = true)
+    })
+    @ApiOperation(value = "查询巡查次数配置表所有信息")
+    public Msg getXccspzAll(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
+                          @RequestParam(value = "pageSize", defaultValue = "10") int pageSize){
+        try {
+            return ResultUtil.success(new PageInfo<>(xccspzService.getXccspzAll(pageNum,pageSize)));
+        }catch (Exception e){
+            return ResultUtil.error("查询失败！");
+        }
+
     }
 
     @ApiOperation(value = "添加一条信息", httpMethod = "POST")
@@ -45,13 +64,13 @@ public class XccspzController {
     public Msg<Integer> insert(@RequestBody Xccspz xccspz) {
         if (xccspz != null && !"".equals(xccspz)) {
             int insert = xccspzService.insert(xccspz);
-            Msg<Integer> integerMsg = new Msg<>();
+            Msg<Integer> integerMsg = new Msg<Integer>();
             integerMsg.setCode(200);
             integerMsg.setMsg("添加成功");
             integerMsg.setData(insert);
             return integerMsg;
         } else {
-            Msg<Integer> integerMsg = new Msg<>();
+            Msg<Integer> integerMsg = new Msg<Integer>();
             integerMsg.setCode(400);
             integerMsg.setMsg("添加失败");
             integerMsg.setData(0);
@@ -60,19 +79,22 @@ public class XccspzController {
     }
 
     @ApiOperation(  value = "删除一条信息")
-    @ApiImplicitParam(name = "id",value = "主键",dataType = "string",paramType = "path")
-    @RequestMapping(name = "delete/{id}",method= RequestMethod.DELETE)
-    public Msg<Integer> deletes(@PathVariable("id") String xccsId) {
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "xccsId", value = "主键ID", required = true)
+    })
+    @RequestMapping(value = "delete",method= RequestMethod.DELETE)
+    public Msg<Integer> delete(@RequestParam("xccsId") String xccsId) {
 
         if (!"".equals(xccsId)) {
             int delete = xccspzService.delete(xccsId);
-            Msg<Integer> integerMsg = new Msg<>();
+            Msg<Integer> integerMsg = new Msg<Integer>();
             integerMsg.setCode(200);
             integerMsg.setMsg("删除成功");
             integerMsg.setData(delete);
+            System.out.println("1111111111"+delete);
             return integerMsg;
         } else {
-            Msg<Integer> integerMsg = new Msg<>();
+            Msg<Integer> integerMsg = new Msg<Integer>();
             integerMsg.setCode(400);
             integerMsg.setMsg("删除失败");
             integerMsg.setData(0);
@@ -80,20 +102,18 @@ public class XccspzController {
         }
 
     }
-
-    @ApiOperation(  value = "删除(批量)")
-    @ApiImplicitParam(name = "id",value = "主键",dataType = "string",paramType = "path")
-    @RequestMapping(name = "delete/{id}",method= RequestMethod.DELETE)
+    @ApiOperation("删除(批量)")
+    @RequestMapping(value = "deletes",method= RequestMethod.DELETE)
     public Msg<Integer> deletes(@PathVariable("id") String[] xccsId) {
         if (xccsId.length > 0) {
             int deletes = xccspzService.deletes(xccsId);
-            Msg<Integer> integerMsg = new Msg<>();
+            Msg<Integer> integerMsg = new Msg<Integer>();
             integerMsg.setCode(200);
             integerMsg.setMsg("删除成功");
             integerMsg.setData(deletes);
             return integerMsg;
         } else {
-            Msg<Integer> integerMsg = new Msg<>();
+            Msg<Integer> integerMsg = new Msg<Integer>();
             integerMsg.setCode(400);
             integerMsg.setMsg("删除失败");
             integerMsg.setData(0);
@@ -107,13 +127,13 @@ public class XccspzController {
     public Msg<Integer> update(@ModelAttribute Xccspz xccspz) {
         if (xccspz != null && !"".equals(xccspz)) {
             int update = xccspzService.update(xccspz);
-            Msg<Integer> integerMsg = new Msg<>();
+            Msg<Integer> integerMsg = new Msg<Integer>();
             integerMsg.setCode(200);
             integerMsg.setMsg("更新成功");
             integerMsg.setData(update);
             return integerMsg;
         } else {
-            Msg<Integer> integerMsg = new Msg<>();
+            Msg<Integer> integerMsg = new Msg<Integer>();
             integerMsg.setCode(400);
             integerMsg.setMsg("更新失败");
             integerMsg.setData(0);

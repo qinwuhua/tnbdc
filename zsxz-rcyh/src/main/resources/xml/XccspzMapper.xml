@@ -1,22 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hdsx.rcyh.mapper.XccspzMapper">
-  <resultMap id="BaseResultMap" type="com.hdsx.rcyh.entity.Xccspz">
-    <id column="XCCS_ID" jdbcType="VARCHAR" property="xccsId" />
-    <result column="XCCS_DWMC" jdbcType="VARCHAR" property="xccsDwmc" />
-    <result column="XCCS_DWBH" jdbcType="VARCHAR" property="xccsDwbh" />
-    <result column="XCCS_DWID" jdbcType="VARCHAR" property="xccsDwid" />
-    <result column="XCCS_XCLX" jdbcType="VARCHAR" property="xccsXclx" />
-    <result column="XCCS_RCS" jdbcType="DECIMAL" property="xccsRcs" />
-    <result column="XCCS_YCS" jdbcType="DECIMAL" property="xccsYcs" />
-    <result column="XCCS_NCS" jdbcType="DECIMAL" property="xccsNcs" />
-    <result column="XCCS_NOTE" jdbcType="VARCHAR" property="xccsNote" />
-  </resultMap>
+  <!--<resultMap id="BaseResultMap" type="com.hdsx.rcyh.entity.Xccspz">-->
+    <!--<id column="XCCS_ID" jdbcType="VARCHAR" property="xccsId" />-->
+    <!--<result column="XCCS_DWMC" jdbcType="VARCHAR" property="xccsDwmc" />-->
+    <!--<result column="XCCS_DWBH" jdbcType="VARCHAR" property="xccsDwbh" />-->
+    <!--<result column="XCCS_DWID" jdbcType="VARCHAR" property="xccsDwid" />-->
+    <!--<result column="XCCS_XCLX" jdbcType="VARCHAR" property="xccsXclx" />-->
+    <!--<result column="XCCS_RCS" jdbcType="DECIMAL" property="xccsRcs" />-->
+    <!--<result column="XCCS_YCS" jdbcType="DECIMAL" property="xccsYcs" />-->
+    <!--<result column="XCCS_NCS" jdbcType="DECIMAL" property="xccsNcs" />-->
+    <!--<result column="XCCS_NOTE" jdbcType="VARCHAR" property="xccsNote" />-->
+  <!--</resultMap>-->
   <delete id="delete" parameterType="java.lang.String">
     delete from XCCSPZ
     where XCCS_ID = #{xccsId,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="com.example.demo.entity.Xccspz">
+
+  <delete id="deletes" parameterType="java.lang.String">
+    delete from XCCSPZ
+    where XCCS_ID = #{xccsId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.hdsx.rcyh.entity.Xccspz">
     insert into XCCSPZ (XCCS_ID, XCCS_DWMC, XCCS_DWBH, 
       XCCS_DWID, XCCS_XCLX, XCCS_RCS, 
       XCCS_YCS, XCCS_NCS, XCCS_NOTE
@@ -26,7 +31,7 @@
       #{xccsYcs,jdbcType=DECIMAL}, #{xccsNcs,jdbcType=DECIMAL}, #{xccsNote,jdbcType=VARCHAR}
       )
   </insert>
-  <update id="update" parameterType="com.example.demo.entity.Xccspz">
+  <update id="update" parameterType="com.hdsx.rcyh.entity.Xccspz">
     update XCCSPZ
     set XCCS_DWMC = #{xccsDwmc,jdbcType=VARCHAR},
       XCCS_DWBH = #{xccsDwbh,jdbcType=VARCHAR},
@@ -38,10 +43,13 @@
       XCCS_NOTE = #{xccsNote,jdbcType=VARCHAR}
     where XCCS_ID = #{xccsId,jdbcType=VARCHAR}
   </update>
-  <select id="QueryOne" parameterType="java.lang.String" resultMap="BaseResultMap">
+  <select id="QueryOne" parameterType="java.lang.String" resultType="com.hdsx.rcyh.entity.Xccspz">
     select XCCS_ID, XCCS_DWMC, XCCS_DWBH, XCCS_DWID, XCCS_XCLX, XCCS_RCS, XCCS_YCS, XCCS_NCS, 
     XCCS_NOTE
     from XCCSPZ
     where XCCS_ID = #{xccsId,jdbcType=VARCHAR}
   </select>
+    <select id="getXccspzAll" resultType="java.util.HashMap">
+      SELECT  * from XCCSPZ
+    </select>
 </mapper>
