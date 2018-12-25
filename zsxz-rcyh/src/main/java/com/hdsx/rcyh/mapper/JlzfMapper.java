@@ -1,8 +1,6 @@
 package com.hdsx.rcyh.mapper;
 
-import com.hdsx.rcyh.entity.Jlzf;
-import com.hdsx.rcyh.entity.Zmb;
-import com.hdsx.rcyh.entity.Zmzb;
+import com.hdsx.rcyh.entity.*;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -51,4 +49,30 @@ public interface JlzfMapper {
     int delGcjldFbForJlzf(List<String> l);
 
     int delGcjldForJlzf(List<String> l);
+
+    List<Zmzb> getGcjldHzList(Map<String, String> param);
+
+    int addJrgspFbForJlzf(Jlzf_jrgsp jrgsp);
+
+    int addJrgspForJlzf(Jlzf_jrgsp jrgsp);
+
+    int deleJrgspByDjbh(String jrgsp_djbh);
+
+    int editJrgspForJlzf(Jlzf_jrgsp jrgsp);
+
+    int delJrgspFbForJlzf(List<String> l);
+
+    int delJrgspForJlzf(List<String> l);
+
+    List<Jlzf_jrgsp> getJgrspList(Map<String, String> param);
+
+    Jlzf_jrgsp getJgrspInfoByDjbh(Map<String, String> param);
+
+    int spJgrspForJlzf(Map<String,Object> l);
+
+    List<Jlzf_zqcwzf> getHtCwInfoByBm(Map<String, String> param);
+
+    int addZqcwzfFbForJlzf(Jlzf_zqcwzf zqcwzf);
+
+    int addZqcwzfForJlzf(Jlzf_zqcwzf zqcwzf);
 }

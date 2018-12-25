@@ -1,9 +1,7 @@
 package com.hdsx.rcyh.service.impl;
 
 import com.github.pagehelper.PageHelper;
-import com.hdsx.rcyh.entity.Jlzf;
-import com.hdsx.rcyh.entity.Zmb;
-import com.hdsx.rcyh.entity.Zmzb;
+import com.hdsx.rcyh.entity.*;
 import com.hdsx.rcyh.mapper.JlzfMapper;
 import com.hdsx.rcyh.service.JlzfService;
 import org.springframework.stereotype.Service;
@@ -137,5 +135,68 @@ public class JlzfServiceImpl implements JlzfService {
         return jlzfMapper.delGcjldForJlzf(l);
     }
 
+    @Override
+    public List<Zmzb> getGcjldHzList(Map<String, String> param, int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<Zmzb> list = jlzfMapper.getGcjldHzList(param);
+        for (Zmzb z:list){
+            //通过子目号和单据编号查询
+            Map<String,String> param1= new HashMap<String,String>();
+            param1.put("djbh",z.getJldbh());param1.put("zmh",z.getZmh());
+            List<Zmb> zms=jlzfMapper.getZmbsByDjbh(param1);
+            z.setZmbs(zms);
+        }
+        return list;
+    }
+
+    @Override
+    public int addJrgspForJlzf(Jlzf_jrgsp jrgsp) {
+        jlzfMapper.addJrgspFbForJlzf(jrgsp);
+        return jlzfMapper.addJrgspForJlzf(jrgsp);
+    }
+
+    @Override
+    public int editJrgspForJlzf(Jlzf_jrgsp jrgsp) {
+        //根据单据编号删除子表
+        jlzfMapper.deleJrgspByDjbh(jrgsp.getJrgsp_djbh());
+        //插入子表
+        jlzfMapper.addJrgspFbForJlzf(jrgsp);
+        //修改主表
+        return jlzfMapper.editJrgspForJlzf(jrgsp);
+    }
+
+    @Override
+    public int delJgrspForJlzf(List<String> l) {
+        jlzfMapper.delJrgspFbForJlzf(l);
+        return jlzfMapper.delJrgspForJlzf(l);
+    }
+
+    @Override
+    public List<Jlzf_jrgsp> getJgrspList(Map<String, String> param, int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<Jlzf_jrgsp> list = jlzfMapper.getJgrspList(param);
+        return  list;
+    }
+
+    @Override
+    public Jlzf_jrgsp getJgrspInfoByDjbh(Map<String, String> param) {
+        return jlzfMapper.getJgrspInfoByDjbh(param);
+    }
+
+    @Override
+    public int spJgrspForJlzf(Map<String,Object> l) {
+        return jlzfMapper.spJgrspForJlzf(l);
+    }
+
+    @Override
+    public List<Jlzf_zqcwzf> getHtCwInfoByBm(Map<String, String> param) {
+        return jlzfMapper.getHtCwInfoByBm(param);
+    }
+
+    @Override
+    public int addZqcwzfForJlzf(Jlzf_zqcwzf zqcwzf) {
+        jlzfMapper.addZqcwzfFbForJlzf(zqcwzf);
+        return jlzfMapper.addZqcwzfForJlzf(zqcwzf);
+    }
 
 }
