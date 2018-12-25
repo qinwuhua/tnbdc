@@ -5,15 +5,15 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
 @Data
 @Accessors(chain = true)
 @NoArgsConstructor
-public class Jczb implements Serializable {
-    private static final long serialVersionUID = -6575182104354129775L;
+public class Sgjhwc implements Serializable {
+
+    private static final long serialVersionUID = -6964170631756466643L;
 
     private String id;
     private String dwmc;
@@ -26,16 +26,22 @@ public class Jczb implements Serializable {
     private String tbrid;
     private Date tbrq;
     private String spzt;
+    private String file;
     private String wfid;
-    private String htbh;
-    private Date jcrq;
-    private String sgdw;
-    private String xmmc;
-    private String gldw;
-    private BigDecimal htje;
+    private String note;
+    private String djbh;
+    private Date yf;
+    private String yhdwmc;
+    private String yhdwid;
+    private String yhdwbh;
+    private String xmfl;
+    private String xmflid;
     private String bz;
     private String htmc;
-    private BigDecimal wyfj;
-    private String jcr;
-    private List<Jczbmxb> jczbmxb;
+    private String tbdw;
+    private String tbbm;
+    private String gldw;
+    private String htid;
+    private String htbh;
+    private List<Sgjhwcmx> sgjhwcmx;
 }

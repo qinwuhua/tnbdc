@@ -8,23 +8,23 @@ import java.util.List;
 
 public interface LyjcService {
 
-    List<HashMap<String, Object>> getLyjcAll(int pageNum, int pageSize);
+    List<Lyjc> getLyjcAll(HashMap<String,String> paramMap ,int pageNum, int pageSize);
 
-    boolean addLyjc(Lyjc lyjc);
+    int addLyjc(Lyjc lyjc);
 
-    boolean deleteLyjc(String id);
+    int deleteLyjc(String id);
 
-    boolean updateLyjc(Lyjc lyjc);
+    int updateLyjc(Lyjc lyjc);
 
     List<HashMap<String, Object>> getLyjcbmxById(String id);
 
-    List<HashMap<String, Object>> getJczbAll(int pageNum, int pageSize);
+    List<Jczb> getJczbAll(HashMap<String,String> paramMap ,int pageNum, int pageSize);
 
-    boolean addJczb(Jczb jczb);
+    int addJczb(Jczb jczb);
 
-    boolean deleteJczb(String id);
+    int deleteJczb(String id);
 
-    boolean updateJczb(Jczb jczb);
+    int updateJczb(Jczb jczb);
 
     List<HashMap<String, Object>> getJczbmxById(String id);
 

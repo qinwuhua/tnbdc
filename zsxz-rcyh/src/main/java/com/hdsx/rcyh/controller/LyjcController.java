@@ -13,6 +13,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
 
 @RestController
 @Api(value = "日常养护-履约检查")
@@ -23,16 +24,29 @@ public class LyjcController{
 
     @GetMapping("getLyjcAll")
     @ApiImplicitParams({
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "id", value = "表单主键ID"),
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "htmc", value = "项目名称"),
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "spzt", value = "状态"),
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "ksrq", value = "开始日期"),
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "jsrq", value = "结束日期"),
             @ApiImplicitParam(paramType="query", dataType = "int", name = "pageNum", value = "页码", required = true),
             @ApiImplicitParam(paramType="query", dataType = "int", name = "pageSize", value = "每页条数", required = true)
     })
     @ApiOperation(value = "查询施工单位履约检查表所有信息")
-    public Msg getLyjcAll(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
+    public Msg getLyjcAll(@RequestParam(value = "id", required = false)String id,
+                          @RequestParam(value = "htmc",required = false)String htmc,
+                          @RequestParam(value = "spzt",required = false)String spzt,
+                          @RequestParam(value = "ksrq",required = false)String ksrq,
+                          @RequestParam(value = "jsrq",required = false) String jsrq,
+                          @RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
                           @RequestParam(value = "pageSize", defaultValue = "10") int pageSize){
         try {
-            return ResultUtil.success(new PageInfo<>(lyjcService.getLyjcAll(pageNum,pageSize)));
+            HashMap<String,String> paramMap = new HashMap<>();
+            paramMap.put("id",id);paramMap.put("htmc",htmc);paramMap.put("spzt",spzt);paramMap.put("ksrq",ksrq);paramMap.put("jsrq",jsrq);
+            return ResultUtil.success(new PageInfo<>(lyjcService.getLyjcAll(paramMap,pageNum,pageSize)));
         }catch (Exception e){
-            return ResultUtil.error("查询失败！");
+            e.printStackTrace();
+            return ResultUtil.error("接口异常！");
         }
 
     }
@@ -41,13 +55,14 @@ public class LyjcController{
     @ApiOperation(value = "添加履约检查信息")
     public Msg addLyjc(@RequestBody Lyjc lyjc){
         try {
-            if (lyjcService.addLyjc(lyjc)){
+            if (lyjcService.addLyjc(lyjc)>0){
                 return ResultUtil.success("添加信息成功！");
             }else {
                 return ResultUtil.error("添加信息失败！");
             }
         }catch (Exception e){
-            return ResultUtil.error("添加信息失败！");
+            e.printStackTrace();
+            return ResultUtil.error("接口异常！");
         }
     }
 
@@ -58,13 +73,14 @@ public class LyjcController{
     @ApiOperation(value = "删除履约检查信息")
     public Msg deleteLyjc(@RequestParam("id") String id){
         try {
-            if (lyjcService.deleteLyjc(id)){
+            if (lyjcService.deleteLyjc(id)>0){
                 return ResultUtil.success("删除信息成功！");
             }else {
                 return ResultUtil.error("删除信息失败！");
             }
         }catch (Exception e){
-            return ResultUtil.error("删除信息失败！");
+            e.printStackTrace();
+            return ResultUtil.error("接口异常！");
         }
     }
 
@@ -72,13 +88,14 @@ public class LyjcController{
     @ApiOperation(value = "更新履约检查信息")
     public Msg updateLyjc(@RequestBody Lyjc lyjc){
         try {
-            if (lyjcService.updateLyjc(lyjc)){
+            if (lyjcService.updateLyjc(lyjc)>0){
                 return ResultUtil.success("更新信息成功！");
             }else {
                 return ResultUtil.error("更新信息失败！");
             }
         }catch (Exception e){
-            return ResultUtil.error("更新信息失败！");
+            e.printStackTrace();
+            return ResultUtil.error("接口异常！");
         }
     }
 
@@ -89,22 +106,36 @@ public class LyjcController{
         try {
             return ResultUtil.success(lyjcService.getLyjcbmxById(id));
         }catch (Exception e){
-            return ResultUtil.error("查询失败！");
+            e.printStackTrace();
+            return ResultUtil.error("接口异常！");
         }
     }
 
     @GetMapping("getJczbAll")
     @ApiImplicitParams({
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "id", value = "表单主键ID"),
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "htmc", value = "项目名称"),
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "spzt", value = "状态"),
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "ksrq", value = "开始日期"),
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "jsrq", value = "结束日期"),
             @ApiImplicitParam(paramType="query", dataType = "int", name = "pageNum", value = "页码", required = true),
             @ApiImplicitParam(paramType="query", dataType = "int", name = "pageSize", value = "每页条数", required = true)
     })
     @ApiOperation(value = "查询进场准备情况检查表所有信息")
-    public Msg getJczbAll(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
+    public Msg getJczbAll(@RequestParam(value = "id", required = false)String id,
+                          @RequestParam(value = "htmc",required = false)String htmc,
+                          @RequestParam(value = "spzt",required = false)String spzt,
+                          @RequestParam(value = "ksrq",required = false)String ksrq,
+                          @RequestParam(value = "jsrq",required = false) String jsrq,
+                          @RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
                           @RequestParam(value = "pageSize", defaultValue = "10") int pageSize){
         try {
-            return ResultUtil.success(new PageInfo<>(lyjcService.getJczbAll(pageNum,pageSize)));
+            HashMap<String,String> paramMap = new HashMap<>();
+            paramMap.put("id",id);paramMap.put("htmc",htmc);paramMap.put("spzt",spzt);paramMap.put("ksrq",ksrq);paramMap.put("jsrq",jsrq);
+            return ResultUtil.success(new PageInfo<>(lyjcService.getJczbAll(paramMap, pageNum, pageSize)));
         }catch (Exception e){
-            return ResultUtil.error("查询失败！");
+            e.printStackTrace();
+            return ResultUtil.error("接口异常！！");
         }
     }
 
@@ -112,13 +143,14 @@ public class LyjcController{
     @ApiOperation(value = "添加进场准备检查信息")
     public Msg addLyjc(@RequestBody Jczb jczb){
         try {
-            if (lyjcService.addJczb(jczb)){
+            if (lyjcService.addJczb(jczb)>0){
                 return ResultUtil.success("添加信息成功！");
             }else {
                 return ResultUtil.error("添加信息失败！");
             }
         }catch (Exception e){
-            return ResultUtil.error("添加信息失败！");
+            e.printStackTrace();
+            return ResultUtil.error("接口异常！！");
         }
     }
 
@@ -129,13 +161,14 @@ public class LyjcController{
     @ApiOperation(value = "删除履约检查信息")
     public Msg deleteJczb(@RequestParam("id") String id){
         try {
-            if (lyjcService.deleteJczb(id)){
+            if (lyjcService.deleteJczb(id)>0){
                 return ResultUtil.success("添加信息成功！");
             }else {
                 return ResultUtil.error("添加信息失败！");
             }
         }catch (Exception e){
-            return ResultUtil.error("添加信息失败！");
+            e.printStackTrace();
+            return ResultUtil.error("接口异常！！");
         }
     }
 
@@ -143,13 +176,14 @@ public class LyjcController{
     @ApiOperation(value = "更新进场准备信息")
     public Msg updateJczb(@RequestBody Jczb jczb){
         try {
-            if (lyjcService.updateJczb(jczb)){
+            if (lyjcService.updateJczb(jczb)>0){
                 return ResultUtil.success("添加信息成功！");
             }else {
                 return ResultUtil.error("添加信息失败！");
             }
         }catch (Exception e){
-            return ResultUtil.error("添加信息失败！");
+            e.printStackTrace();
+            return ResultUtil.error("接口异常！！");
         }
     }
 
@@ -160,7 +194,8 @@ public class LyjcController{
         try {
             return ResultUtil.success(lyjcService.getJczbmxById(id));
         }catch (Exception e){
-            return ResultUtil.error("查询失败！");
+            e.printStackTrace();
+            return ResultUtil.error("接口异常！！");
         }
     }
 

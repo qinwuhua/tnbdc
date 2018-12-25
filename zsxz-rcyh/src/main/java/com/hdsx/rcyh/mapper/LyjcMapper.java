@@ -12,35 +12,35 @@ import java.util.List;
 @Mapper
 public interface LyjcMapper {
 
-    List<HashMap<String, Object>> getLyjcAll();
+    List<Lyjc> getLyjcAll(HashMap<String, String> paramMap);
 
-    boolean addLyjc(Lyjc lyjc);
+    int addLyjc(Lyjc lyjc);
 
-    boolean addLyjcmxb(Lyjcmxb lyjcmxb);
+    int addLyjcmxb(List<Lyjcmxb> lyjcmxbs);
 
-    boolean deleteLyjcmxbById(String id);
+    int deleteLyjcmxbById(String id);
 
-    boolean deleteLyjcById(String id);
+    int deleteLyjcById(String id);
 
     List<HashMap<String, Object>> getLyjcbmxById(String id);
 
-    boolean updateLyjc(Lyjc lyjc);
+    int updateLyjc(Lyjc lyjc);
 
-    boolean updateLyjcmxb(Lyjcmxb lyjcmxb);
+    int updateLyjcmxb(Lyjcmxb lyjcmxb);
 
-    List<HashMap<String, Object>> getJczbAll();
+    List<Jczb> getJczbAll(HashMap<String, String> paramMap);
 
-    boolean addJczb(Jczb jczb);
+    int addJczb(Jczb jczb);
 
-    boolean addJczbmxb(Jczbmxb jczbmxb);
+    int addJczbmxb(List<Jczbmxb> jczbmxbs);
 
-    boolean deleteJczbmxbById(String id);
+    int deleteJczbmxbById(String id);
 
-    boolean deleteJczbById(String id);
+    int deleteJczbById(String id);
 
     List<HashMap<String, Object>> getJczbmxById(String id);
 
-    boolean updateJczb(Jczb jczb);
+    int updateJczb(Jczb jczb);
 
-    boolean updateJczbmxb(Jczbmxb jczbmxb);
+    int updateJczbmxb(Jczbmxb jczbmxb);
 }

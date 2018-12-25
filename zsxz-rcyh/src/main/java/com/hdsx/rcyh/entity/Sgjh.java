@@ -6,32 +6,40 @@ import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @Accessors(chain = true)
 @NoArgsConstructor
-public class Ydsgjh implements Serializable {
+public class Sgjh implements Serializable {
     private static final long serialVersionUID = -867023259393848114L;
     private String id;
     private String dwmc;
     private String dwbh;
-    private String dwId;
+    private String dwid;
     private String bmmc;
     private String bmbh;
-    private String bmId;
+    private String bmid;
     private String tbr;
-    private String tbrId;
+    private String tbrid;
     private Date tbrq;
     private String spzt;
     private String file;
-    private String wfId;
+    private String wfid;
     private String note;
     private String djbh;
-    private String yf;
+    private Date yf;
     private String yhdwmc;
-    private String yhdwId;
+    private String yhdwid;
     private String yhdwbh;
     private String xmfl;
-    private String xmflId;
-
+    private String xmflid;
+    private String bz;
+    private String htmc;
+    private String tbdw;
+    private String tbbm;
+    private String gldw;
+    private String htid;
+    private String htbh;
+    private List<Sgjhsbmx> sgjhsbmx;
 }
