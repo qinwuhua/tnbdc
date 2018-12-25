@@ -1,5 +1,6 @@
 package com.hdsx.common.service.Impl;
 
+import com.hdsx.common.entity.Htxx;
 import com.hdsx.common.mapper.HtxxMapper;
 import com.hdsx.common.service.HtxxService;
 import org.springframework.stereotype.Service;
@@ -33,5 +34,10 @@ public class HtxxServiceImpl implements HtxxService {
     @Override
     public List<HashMap<String, Object>> getHtxxYhAll() {
         return htxxMapper.getHtxxYhAll();
+    }
+
+    @Override
+    public List<Htxx> getHtxxRelatedAll(HashMap<String,String> paramMap) {
+        return htxxMapper.getHtxxRelateAll(paramMap);
     }
 }

@@ -18,4 +18,5 @@ public class Jczbmxb implements Serializable {
     private String jcnr;
     private BigDecimal fj;
     private String memo;
+    private String bh;
 }

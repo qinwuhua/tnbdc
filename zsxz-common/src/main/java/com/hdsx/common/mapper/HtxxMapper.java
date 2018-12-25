@@ -1,5 +1,6 @@
 package com.hdsx.common.mapper;
 
+import com.hdsx.common.entity.Htxx;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.HashMap;
@@ -16,4 +17,5 @@ public interface HtxxMapper {
 
     List<HashMap<String, Object>> getHtxxYhAll();
 
+    List<Htxx> getHtxxRelateAll(HashMap<String, String> paramMap);
 }
