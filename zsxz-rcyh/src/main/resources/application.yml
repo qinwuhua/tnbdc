@@ -1,5 +1,5 @@
 server:
-  port: 8002
+  port: 8003
 # 数据库设置
 spring:
   application:
@@ -14,7 +14,7 @@ spring:
       filters: stat,logging
       initial-size: 8
       min-idle: 3
-      max-active: 10
+      max-active: 100
       query-timeout: 6000
       transaction-query-timeout: 6000
       remove-abandoned-timeout: 1800

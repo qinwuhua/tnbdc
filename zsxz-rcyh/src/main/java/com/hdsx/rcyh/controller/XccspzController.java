@@ -79,11 +79,8 @@ public class XccspzController {
     }
 
     @ApiOperation(  value = "删除一条信息")
-    @ApiImplicitParams({
-            @ApiImplicitParam(paramType="query", dataType = "String", name = "xccsId", value = "主键ID", required = true)
-    })
-    @RequestMapping(value = "delete",method= RequestMethod.DELETE)
-    public Msg<Integer> delete(@RequestParam("xccsId") String xccsId) {
+    @DeleteMapping("delete")
+    public Msg<Integer> delete(@RequestParam(value = "xccsId") String xccsId) {
 
         if (!"".equals(xccsId)) {
             int delete = xccspzService.delete(xccsId);

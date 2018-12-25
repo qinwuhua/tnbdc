@@ -25,6 +25,7 @@ public class Qmldb implements Serializable {
         private int cd;				//长度
         private double lmkd;		//路面宽度
         private int bbid;			//版本编号
+        private String bbname;      //版本名称
         private int lmlx;			//路面类型（1沥青路面，2水泥路面，3砂石路面）
         private int isgs;		//是否是高速或一级公路
         private String fx;			//方向（0301上行，0302下行，0303全幅）

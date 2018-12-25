@@ -12,7 +12,6 @@ import java.util.HashMap;
 import java.util.List;
 
 @Service
-@Transactional
 public class XccspzServiceImpl implements XccspzService {
 
     @Resource
