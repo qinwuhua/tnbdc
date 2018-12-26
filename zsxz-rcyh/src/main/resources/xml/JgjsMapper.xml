@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hdsx.rcyh.mapper.JgjsMapper">
+
+    <resultMap type="com.hdsx.rcyh.entity.Jgjs" id="jgjs">
+        <result column="pmmtjgjss_id" property="pmmtjgjss_id"/>
+        <result column="pmmtjgjss_dwmc" property="pmmtjgjss_dwmc"/>
+        <result column="pmmtjgjss_dwbh" property="pmmtjgjss_dwbh"/>
+        <result column="pmmtjgjss_dwid" property="pmmtjgjss_dwid"/>
+        <result column="pmmtjgjss_bmmc" property="pmmtjgjss_bmmc"/>
+        <result column="pmmtjgjss_bmbh" property="pmmtjgjss_bmbh"/>
+        <result column="pmmtjgjss_bmid" property="pmmtjgjss_bmid"/>
+        <result column="pmmtjgjss_tbr" property="pmmtjgjss_tbr"/>
+        <result column="pmmtjgjss_spzt" property="pmmtjgjss_spzt"/>
+        <result column="pmmtjgjss_djbh" property="pmmtjgjss_djbh"/>
+        <result column="pmmtjgjss_bzrq" property="pmmtjgjss_bzrq"/>
+        <result column="pmmtjgjss_gcmc" property="pmmtjgjss_gcmc"/>
+        <result column="pmmtjgjss_htbh" property="pmmtjgjss_htbh"/>
+        <result column="pmmtjgjss_cbdw" property="pmmtjgjss_cbdw"/>
+        <result column="pmmtjgjss_gldw" property="pmmtjgjss_gldw"/>
+        <result column="pmmtjgjss_jldw" property="pmmtjgjss_jldw"/>
+        <result column="pmmtjgjss_htje" property="pmmtjgjss_htje"/>
+        <result column="pmmtjgjss_bz" property="pmmtjgjss_bz"/>
+        <result column="pmmtjgjss_gzjhtje" property="pmmtjgjss_gzjhtje"/>
+        <result column="pmmtjgjss_gzjjlje" property="pmmtjgjss_gzjjlje"/>
+        <result column="pmmtjgjss_gzjjsje" property="pmmtjgjss_gzjjsje"/>
+        <result column="pmmtjgjss_htzdje" property="pmmtjgjss_htzdje"/>
+        <result column="pmmtjgjss_jlzdje" property="pmmtjgjss_jlzdje"/>
+        <result column="pmmtjgjss_jgjszdje" property="pmmtjgjss_jgjszdje"/>
+        <result column="pmmtjgjss_spfy" property="pmmtjgjss_spfy"/>
+        <result column="pmmtjgjss_fj" property="pmmtjgjss_fj"/>
+        <result column="pmmtjgjss_zlbzj" property="pmmtjgjss_zlbzj"/>
+        <result column="pmmtjgjss_ljzfgck" property="pmmtjgjss_ljzfgck"/>
+        <result column="pmmtjgjss_yzfkk" property="pmmtjgjss_yzfkk"/>
+        <result column="pmmtjgjss_yzfkkdx" property="pmmtjgjss_yzfkkdx"/>
+        <result column="pmmtjgjss_jssbh" property="pmmtjgjss_jssbh"/>
+
+        <collection property="zmbs" ofType="com.hdsx.rcyh.entity.Jgjsmx" column="jldbh">
+            <result column="pmmtjgjssmx_id" property="pmmtjgjssmx_id"/>
+            <result column="pmmtjgjssmx_mid" property="pmmtjgjssmx_mid"/>
+            <result column="pmmtjgjssmx_zmbh" property="pmmtjgjssmx_zmbh"/>
+            <result column="pmmtjgjssmx_zmmc" property="pmmtjgjssmx_zmmc"/>
+            <result column="pmmtjgjssmx_dw" property="pmmtjgjssmx_dw"/>
+            <result column="pmmtjgjssmx_htdj" property="pmmtjgjssmx_htdj"/>
+            <result column="pmmtjgjssmx_yhts" property="pmmtjgjssmx_yhts"/>
+            <result column="pmmtjgjssmx_yhtje" property="pmmtjgjssmx_yhtje"/>
+            <result column="pmmtjgjssmx_sjjlsl" property="pmmtjgjssmx_sjjlsl"/>
+            <result column="pmmtjgjssmx_sjjlje" property="pmmtjgjssmx_sjjlje"/>
+            <result column="pmmtjgjssmx_jgjssl" property="pmmtjgjssmx_jgjssl"/>
+            <result column="pmmtjgjssmx_jgjsje" property="pmmtjgjssmx_jgjsje"/>
+            <result column="pmmtjgjssmx_ysjbsl" property="pmmtjgjssmx_ysjbsl"/>
+            <result column="pmmtjgjssmx_ysjbje" property="pmmtjgjssmx_ysjbje"/>
+            <result column="pmmtjgjssmx_zmid" property="pmmtjgjssmx_zmid"/>
+            <result column="pmmtjgjssmx_htbh" property="pmmtjgjssmx_htbh"/>
+            <result column="pmmtjgjssmx_remark" property="pmmtjgjssmx_remark"/>
+            <result column="pmmtjgjssmx_jssbh" property="pmmtjgjssmx_jssbh"/>
+
+        </collection>
+
+    </resultMap>
+
+    <select id="getHtCwInfoByBm" parameterType="hashmap" resultMap="jgjs">
+        select gj.htgjxx_cgxmmc pmmtjgjss_gcmc,ht.htxx_htbh pmmtjgjss_htbh,xm.yhhtxx_cbdw pmmtjgjss_cbdw,xm.yhhtxx_jldw pmmtjgjss_jldw,xm.yhhtxx_gldw pmmtjgjss_gldw,gj.htgjxx_htje pmmtjgjss_htje,
+        jl.jlhtje pmmtjgjss_gzjhtje,jl.jlje pmmtjgjss_gzjjlje,jl.jlje pmmtjgjss_gzjjsje,
+        jl.jlhtje pmmtjgjss_htzdje,jl.jlje pmmtjgjss_jlzdje,jl.jlje pmmtjgjss_jgjszdje,
+        jl.fj pmmtjgjss_fj,sp.pmmtgcspsqs_spje pmmtjgjss_spfy,gj.htgjxx_htje*gj.htgjxx_zlbzjbl/100 pmmtjgjss_zlbzj,
+        zf.zfje pmmtjgjss_ljzfgck,jl.jlje pmmtjgjss_yzfkk,money_to_chinese(to_char(round(jl.jlje,2))) pmmtjgjss_yzfkkdx,
+        zmzb.*,to_char(sysdate,'yyyy/mm/dd') PMMTJGJSS_BZRQ
+        from djsj_htxx ht left join djsj_htxx_htgjxx gj on ht.htxx_htbh=gj.HTGJXX_HTBH
+        left join djsj_htxx_yhxmxx xm on ht.htxx_htbh=xm.yhhtxx_htbh
+        left join (select sum(nvl(gcjlmx_htdj,0)*nvl(gcjlmx_htsl,0)) jlhtje,sum(nvl(gcjlmx_htdj,0)*nvl(gcjlmx_wcsl,0)) jlje,sum(nvl(gcjlmx_kkje,0)) fj,gcjlmx_htbh from gcjldmx group by gcjlmx_htbh) jl on ht.htxx_htbh=jl.gcjlmx_htbh
+        left join (select zqzfmx_htbh,sum(nvl(zqzfmx_bqwcje,0)) zfje from zqcwzfzs_jlmx group by zqzfmx_htbh) zf on ht.htxx_htbh=zf.zqzfmx_htbh
+        left join (select pmmtgcspsqs_htbh,sum(nvl(pmmtgcspsqs_spje,0)) pmmtgcspsqs_spje from gcspsqs group by pmmtgcspsqs_htbh) sp on ht.htxx_htbh=sp.pmmtgcspsqs_htbh
+        left join  (
+        select zm.zmht_zmh pmmtjgjssmx_zmbh,zm.zmht_id pmmtjgjssmx_zmid,zm.zmht_htbh pmmtjgjssmx_htbh,zm.zmht_zmmc pmmtjgjssmx_zmmc,zm.zmht_jldw pmmtjgjssmx_dw,zm.zmht_dj pmmtjgjssmx_htdj,
+        NVL(zm.zmht_sl,0) pmmtjgjssmx_yhts,nvl(zm.zmht_sl,0)* nvl(zm.zmht_dj,0) pmmtjgjssmx_yhtje,
+        NVL(gc.gcjlmx_wcsl,0) pmmtjgjssmx_sjjlsl,nvl(gc.gcjlmx_wcsl,0)* nvl(zm.zmht_dj,0) pmmtjgjssmx_sjjlje,
+        NVL(zq.zqzfmx_bqwcsl,0) pmmtjgjssmx_jgjssl,nvl(zq.zqzfmx_bqwcsl,0)* nvl(zm.zmht_dj,0) pmmtjgjssmx_jgjsje,
+        nvl(zq.zqzfmx_bqwcsl,0)-nvl(gc.gcjlmx_wcsl,0) pmmtjgjssmx_ysjbsl,nvl(zq.zqzfmx_bqwcsl,0)* nvl(zm.zmht_dj,0)-nvl(gc.gcjlmx_wcsl,0)* nvl(zm.zmht_dj,0) pmmtjgjssmx_ysjbje, '' PMMTJGJSSMX_remark
+        from zm_ht zm left join  gcjldmx gc on zm.zmht_id=gc.gcjlmx_zmid left join zqcwzfzs_jlmx zq on zm.zmht_id=zq.zqzfmx_zmid
+        ) zmzb on ht.htxx_htbh=zmzb.pmmtjgjssmx_htbh
+        where 1=1
+        <if test="htbh != null and htbh != ''">
+            and ht.htxx_htbh=#{htbh}
+        </if>
+        order by pmmtjgjss_htbh,pmmtjgjssmx_zmbh
+    </select>
+
+    <!--  添加交工结算书 -->
+    <insert id="addJgjssFbForJgjs" parameterType="com.hdsx.rcyh.entity.Jgjs">
+        begin
+        <foreach collection="zmbs" item="item" index="index" separator=";">
+            insert into JGJSSMX(PMMTJGJSSMX_ID, PMMTJGJSSMX_MID, PMMTJGJSSMX_ZMBH, PMMTJGJSSMX_ZMMC, PMMTJGJSSMX_DW, PMMTJGJSSMX_HTDJ, PMMTJGJSSMX_YHTS, PMMTJGJSSMX_YHTJE, PMMTJGJSSMX_SJJLSL, PMMTJGJSSMX_SJJLJE, PMMTJGJSSMX_JGJSSL, PMMTJGJSSMX_JGJSJE, PMMTJGJSSMX_YSJBSL, PMMTJGJSSMX_YSJBJE, PMMTJGJSSMX_ZMID, PMMTJGJSSMX_HTBH, PMMTJGJSSMX_REMARK,PMMTJGJSSMX_JSSBH )  values
+            (sys_guid(),trim(#{pmmtjgjss_jssbh}),trim(#{item.pmmtjgjssmx_zmbh}),trim(#{item.pmmtjgjssmx_zmmc}),trim(#{item.pmmtjgjssmx_dw}),trim(#{item.pmmtjgjssmx_htdj}),trim(#{item.pmmtjgjssmx_yhts}),trim(#{item.pmmtjgjssmx_yhtje}),trim(#{item.pmmtjgjssmx_sjjlsl}),trim(#{item.pmmtjgjssmx_sjjlje}),trim(#{item.pmmtjgjssmx_jgjssl}),trim(#{item.pmmtjgjssmx_jgjsje}),trim(#{item.pmmtjgjssmx_ysjbsl}),trim(#{item.pmmtjgjssmx_ysjbje}),trim(#{item.pmmtjgjssmx_zmid}),trim(#{item.pmmtjgjssmx_htbh}),trim(#{item.pmmtjgjssmx_remark}),trim(#{pmmtjgjss_jssbh}))
+        </foreach>
+        ;end;
+    </insert>
+
+    <insert id="addJgjssForJgjs" parameterType="com.hdsx.rcyh.entity.Jgjs">
+        insert into JGJSS
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="pmmtjgjss_id != null" >pmmtjgjss_id,</if>
+            <if test="pmmtjgjss_dwmc != null" >pmmtjgjss_dwmc,</if>
+            <if test="pmmtjgjss_dwbh != null" >pmmtjgjss_dwbh,</if>
+            <if test="pmmtjgjss_dwid != null" >pmmtjgjss_dwid,</if>
+            <if test="pmmtjgjss_bmmc != null" >pmmtjgjss_bmmc,</if>
+            <if test="pmmtjgjss_bmbh != null" >pmmtjgjss_bmbh,</if>
+            <if test="pmmtjgjss_bmid != null" >pmmtjgjss_bmid,</if>
+            <if test="pmmtjgjss_tbr != null" >pmmtjgjss_tbr,</if>
+            <if test="pmmtjgjss_spzt != null" >pmmtjgjss_spzt,</if>
+            <if test="pmmtjgjss_djbh != null" >pmmtjgjss_djbh,</if>
+            <if test="pmmtjgjss_bzrq != null" >pmmtjgjss_bzrq,</if>
+            <if test="pmmtjgjss_gcmc != null" >pmmtjgjss_gcmc,</if>
+            <if test="pmmtjgjss_htbh != null" >pmmtjgjss_htbh,</if>
+            <if test="pmmtjgjss_cbdw != null" >pmmtjgjss_cbdw,</if>
+            <if test="pmmtjgjss_gldw != null" >pmmtjgjss_gldw,</if>
+            <if test="pmmtjgjss_jldw != null" >pmmtjgjss_jldw,</if>
+            <if test="pmmtjgjss_htje != null" >pmmtjgjss_htje,</if>
+            <if test="pmmtjgjss_bz != null" >pmmtjgjss_bz,</if>
+            <if test="pmmtjgjss_gzjhtje != null" >pmmtjgjss_gzjhtje,</if>
+            <if test="pmmtjgjss_gzjjlje != null" >pmmtjgjss_gzjjlje,</if>
+            <if test="pmmtjgjss_gzjjsje != null" >pmmtjgjss_gzjjsje,</if>
+            <if test="pmmtjgjss_htzdje != null" >pmmtjgjss_htzdje,</if>
+            <if test="pmmtjgjss_jlzdje != null" >pmmtjgjss_jlzdje,</if>
+            <if test="pmmtjgjss_jgjszdje != null" >pmmtjgjss_jgjszdje,</if>
+            <if test="pmmtjgjss_spfy != null" >pmmtjgjss_spfy,</if>
+            <if test="pmmtjgjss_fj != null" >pmmtjgjss_fj,</if>
+            <if test="pmmtjgjss_zlbzj != null" >pmmtjgjss_zlbzj,</if>
+            <if test="pmmtjgjss_ljzfgck != null" >pmmtjgjss_ljzfgck,</if>
+            <if test="pmmtjgjss_yzfkk != null" >pmmtjgjss_yzfkk,</if>
+            <if test="pmmtjgjss_yzfkkdx != null" >pmmtjgjss_yzfkkdx,</if>
+            <if test="pmmtjgjss_jssbh != null" >pmmtjgjss_jssbh,</if>
+
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="pmmtjgjss_id != null" >#{pmmtjgjss_id},</if>
+            <if test="pmmtjgjss_dwmc != null" >#{pmmtjgjss_dwmc},</if>
+            <if test="pmmtjgjss_dwbh != null" >#{pmmtjgjss_dwbh},</if>
+            <if test="pmmtjgjss_dwid != null" >#{pmmtjgjss_dwid},</if>
+            <if test="pmmtjgjss_bmmc != null" >#{pmmtjgjss_bmmc},</if>
+            <if test="pmmtjgjss_bmbh != null" >#{pmmtjgjss_bmbh},</if>
+            <if test="pmmtjgjss_bmid != null" >#{pmmtjgjss_bmid},</if>
+            <if test="pmmtjgjss_tbr != null" >#{pmmtjgjss_tbr},</if>
+            <if test="pmmtjgjss_spzt != null" >#{pmmtjgjss_spzt},</if>
+            <if test="pmmtjgjss_djbh != null" >#{pmmtjgjss_djbh},</if>
+            <if test="pmmtjgjss_bzrq != null" >to_date(#{pmmtjgjss_bzrq},'yyyy/mm/dd'),</if>
+            <if test="pmmtjgjss_gcmc != null" >#{pmmtjgjss_gcmc},</if>
+            <if test="pmmtjgjss_htbh != null" >#{pmmtjgjss_htbh},</if>
+            <if test="pmmtjgjss_cbdw != null" >#{pmmtjgjss_cbdw},</if>
+            <if test="pmmtjgjss_gldw != null" >#{pmmtjgjss_gldw},</if>
+            <if test="pmmtjgjss_jldw != null" >#{pmmtjgjss_jldw},</if>
+            <if test="pmmtjgjss_htje != null" >#{pmmtjgjss_htje},</if>
+            <if test="pmmtjgjss_bz != null" >#{pmmtjgjss_bz},</if>
+            <if test="pmmtjgjss_gzjhtje != null" >#{pmmtjgjss_gzjhtje},</if>
+            <if test="pmmtjgjss_gzjjlje != null" >#{pmmtjgjss_gzjjlje},</if>
+            <if test="pmmtjgjss_gzjjsje != null" >#{pmmtjgjss_gzjjsje},</if>
+            <if test="pmmtjgjss_htzdje != null" >#{pmmtjgjss_htzdje},</if>
+            <if test="pmmtjgjss_jlzdje != null" >#{pmmtjgjss_jlzdje},</if>
+            <if test="pmmtjgjss_jgjszdje != null" >#{pmmtjgjss_jgjszdje},</if>
+            <if test="pmmtjgjss_spfy != null" >#{pmmtjgjss_spfy},</if>
+            <if test="pmmtjgjss_fj != null" >#{pmmtjgjss_fj},</if>
+            <if test="pmmtjgjss_zlbzj != null" >#{pmmtjgjss_zlbzj},</if>
+            <if test="pmmtjgjss_ljzfgck != null" >#{pmmtjgjss_ljzfgck},</if>
+            <if test="pmmtjgjss_yzfkk != null" >#{pmmtjgjss_yzfkk},</if>
+            <if test="pmmtjgjss_yzfkkdx != null" >#{pmmtjgjss_yzfkkdx},</if>
+            <if test="pmmtjgjss_jssbh != null" >#{pmmtjgjss_jssbh},</if>
+
+        </trim>
+    </insert>
+
+    <!--  通过单据编号删除计日工审批  -->
+    <delete id="deleJgjssByDjbh" parameterType="string">
+        delete from JGJSSMX where PMMTJGJSSMX_JSSBH=#{value}
+    </delete>
+    <!--  编辑计日工审批 -->
+    <update id="editJgjssForJgjs" parameterType="com.hdsx.rcyh.entity.Jgjs" >
+        update JGJSS
+        <set>
+            <if test="pmmtjgjss_id != null" >pmmtjgjss_id=#{pmmtjgjss_id},</if>
+            <if test="pmmtjgjss_dwmc != null" >pmmtjgjss_dwmc=#{pmmtjgjss_dwmc},</if>
+            <if test="pmmtjgjss_dwbh != null" >pmmtjgjss_dwbh=#{pmmtjgjss_dwbh},</if>
+            <if test="pmmtjgjss_dwid != null" >pmmtjgjss_dwid=#{pmmtjgjss_dwid},</if>
+            <if test="pmmtjgjss_bmmc != null" >pmmtjgjss_bmmc=#{pmmtjgjss_bmmc},</if>
+            <if test="pmmtjgjss_bmbh != null" >pmmtjgjss_bmbh=#{pmmtjgjss_bmbh},</if>
+            <if test="pmmtjgjss_bmid != null" >pmmtjgjss_bmid=#{pmmtjgjss_bmid},</if>
+            <if test="pmmtjgjss_tbr != null" >pmmtjgjss_tbr=#{pmmtjgjss_tbr},</if>
+            <if test="pmmtjgjss_spzt != null" >pmmtjgjss_spzt=#{pmmtjgjss_spzt},</if>
+            <if test="pmmtjgjss_djbh != null" >pmmtjgjss_djbh=#{pmmtjgjss_djbh},</if>
+            <if test="pmmtjgjss_bzrq != null" >pmmtjgjss_bzrq=to_date(#{pmmtjgjss_bzrq},'yyyy/mm/dd'),</if>
+            <if test="pmmtjgjss_gcmc != null" >pmmtjgjss_gcmc=#{pmmtjgjss_gcmc},</if>
+            <if test="pmmtjgjss_htbh != null" >pmmtjgjss_htbh=#{pmmtjgjss_htbh},</if>
+            <if test="pmmtjgjss_cbdw != null" >pmmtjgjss_cbdw=#{pmmtjgjss_cbdw},</if>
+            <if test="pmmtjgjss_gldw != null" >pmmtjgjss_gldw=#{pmmtjgjss_gldw},</if>
+            <if test="pmmtjgjss_jldw != null" >pmmtjgjss_jldw=#{pmmtjgjss_jldw},</if>
+            <if test="pmmtjgjss_htje != null" >pmmtjgjss_htje=#{pmmtjgjss_htje},</if>
+            <if test="pmmtjgjss_bz != null" >pmmtjgjss_bz=#{pmmtjgjss_bz},</if>
+            <if test="pmmtjgjss_gzjhtje != null" >pmmtjgjss_gzjhtje=#{pmmtjgjss_gzjhtje},</if>
+            <if test="pmmtjgjss_gzjjlje != null" >pmmtjgjss_gzjjlje=#{pmmtjgjss_gzjjlje},</if>
+            <if test="pmmtjgjss_gzjjsje != null" >pmmtjgjss_gzjjsje=#{pmmtjgjss_gzjjsje},</if>
+            <if test="pmmtjgjss_htzdje != null" >pmmtjgjss_htzdje=#{pmmtjgjss_htzdje},</if>
+            <if test="pmmtjgjss_jlzdje != null" >pmmtjgjss_jlzdje=#{pmmtjgjss_jlzdje},</if>
+            <if test="pmmtjgjss_jgjszdje != null" >pmmtjgjss_jgjszdje=#{pmmtjgjss_jgjszdje},</if>
+            <if test="pmmtjgjss_spfy != null" >pmmtjgjss_spfy=#{pmmtjgjss_spfy},</if>
+            <if test="pmmtjgjss_fj != null" >pmmtjgjss_fj=#{pmmtjgjss_fj},</if>
+            <if test="pmmtjgjss_zlbzj != null" >pmmtjgjss_zlbzj=#{pmmtjgjss_zlbzj},</if>
+            <if test="pmmtjgjss_ljzfgck != null" >pmmtjgjss_ljzfgck=#{pmmtjgjss_ljzfgck},</if>
+            <if test="pmmtjgjss_yzfkk != null" >pmmtjgjss_yzfkk=#{pmmtjgjss_yzfkk},</if>
+            <if test="pmmtjgjss_yzfkkdx != null" >pmmtjgjss_yzfkkdx=#{pmmtjgjss_yzfkkdx},</if>
+            <if test="pmmtjgjss_jssbh != null" >pmmtjgjss_jssbh=#{pmmtjgjss_jssbh},</if>
+        </set>
+        where 1=1 and pmmtjgjss_jssbh=#{pmmtjgjss_jssbh}
+    </update>
+
+    <!-- 删除交工结算书  -->
+    <delete id="delJgjssFbForJgjs" parameterType="java.util.List" >
+        delete from JGJSSMX
+        where PMMTJGJSSMX_JSSBH in
+        <foreach collection="list" item="id"  open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    <delete id="delJgjssForJgjs" parameterType="java.util.List" >
+        delete from JGJSS
+        where pmmtjgjss_jssbh in
+        <foreach collection="list" item="id"  open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+
+    <!-- 查询计日工审批列表数据 -->
+    <select id="getJgjssList" parameterType="hashmap" resultMap="jgjs">
+
+        select zb.pmmtjgjss_id, zb.pmmtjgjss_dwmc, zb.pmmtjgjss_dwbh, zb.pmmtjgjss_dwid, zb.pmmtjgjss_bmmc, zb.pmmtjgjss_bmbh, zb.pmmtjgjss_bmid, zb.pmmtjgjss_tbr, zb.pmmtjgjss_spzt, zb.pmmtjgjss_file, zb.pmmtjgjss_djbh, to_char(zb.pmmtjgjss_bzrq,'yyyy/mm/dd') pmmtjgjss_bzrq, zb.pmmtjgjss_gcmc, zb.pmmtjgjss_htbh, zb.pmmtjgjss_cbdw, zb.pmmtjgjss_gldw, zb.pmmtjgjss_jldw, zb.pmmtjgjss_htje, zb.pmmtjgjss_bz, zb.pmmtjgjss_gzjhtje, zb.pmmtjgjss_gzjjlje, zb.pmmtjgjss_gzjjsje, zb.pmmtjgjss_htzdje, zb.pmmtjgjss_jlzdje, zb.pmmtjgjss_jgjszdje, zb.pmmtjgjss_spfy, zb.pmmtjgjss_fj, zb.pmmtjgjss_zlbzj, zb.pmmtjgjss_ljzfgck, zb.pmmtjgjss_yzfkk, zb.pmmtjgjss_yzfkkdx, zb.pmmtjgjss_jssbh，
+        fb.*
+        from
+        JGJSS zb left join JGJSSMX fb on zb.pmmtjgjss_jssbh=fb.PMMTJGJSSMX_JSSBH
+
+        where 1=1
+        <if test="htbh != null and htbh != ''">
+            and zb.pmmtjgjss_htbh=#{htbh}
+        </if>
+        <if test="ksrq != null and ksrq != ''">
+            and to_date(to_char(zb.pmmtjgjss_bzrq,'yyyy/mm/dd'),'yyyy/mm/dd')>=to_date(#{ksrq},'yyyy/mm/dd')
+        </if>
+        <if test="jsrq != null and jsrq != ''">
+            and to_date(to_char(zb.pmmtjgjss_bzrq,'yyyy/mm/dd'),'yyyy/mm/dd')&lt;=to_date(#{jsrq},'yyyy/mm/dd')
+        </if>
+    </select>
+
+    <select id="getJgjssInfoByDjbh" parameterType="hashmap" resultMap="jgjs">
+
+        select zb.pmmtjgjss_id, zb.pmmtjgjss_dwmc, zb.pmmtjgjss_dwbh, zb.pmmtjgjss_dwid, zb.pmmtjgjss_bmmc, zb.pmmtjgjss_bmbh, zb.pmmtjgjss_bmid, zb.pmmtjgjss_tbr, zb.pmmtjgjss_spzt, zb.pmmtjgjss_file, zb.pmmtjgjss_djbh, to_char(zb.pmmtjgjss_bzrq,'yyyy/mm/dd') pmmtjgjss_bzrq, zb.pmmtjgjss_gcmc, zb.pmmtjgjss_htbh, zb.pmmtjgjss_cbdw, zb.pmmtjgjss_gldw, zb.pmmtjgjss_jldw, zb.pmmtjgjss_htje, zb.pmmtjgjss_bz, zb.pmmtjgjss_gzjhtje, zb.pmmtjgjss_gzjjlje, zb.pmmtjgjss_gzjjsje, zb.pmmtjgjss_htzdje, zb.pmmtjgjss_jlzdje, zb.pmmtjgjss_jgjszdje, zb.pmmtjgjss_spfy, zb.pmmtjgjss_fj, zb.pmmtjgjss_zlbzj, zb.pmmtjgjss_ljzfgck, zb.pmmtjgjss_yzfkk, zb.pmmtjgjss_yzfkkdx, zb.pmmtjgjss_jssbh，
+        fb.*
+        from
+        JGJSS zb left join JGJSSMX fb on zb.pmmtjgjss_jssbh=fb.PMMTJGJSSMX_JSSBH
+        where 1=1 and zb.pmmtjgjss_jssbh=#{djbh}
+
+    </select>
+</mapper>

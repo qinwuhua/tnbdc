@@ -25,12 +25,22 @@
         <result column="pmmtgcspsqs_gldw" property="pmmtgcspsqs_gldw"/>
         <result column="pmmtgcspsqs_cbdw" property="pmmtgcspsqs_cbdw"/>
 
-        <collection property="zmzbs" ofType="com.hdsx.rcyh.entity.Zmzb" column="jldbh">
-            <result column="jldbh" property="jldbh"/><!-- 这里的column对应的是下面查询的别名，而不是表字段名 -->
-            <result column="zmh" property="zmh"/><!-- property对应JavaBean中的属性名 -->
-            <result column="zmmc" property="zmmc"/><!-- property对应JavaBean中的属性名 -->
-            <result column="dw" property="dw"/>
-            <result column="sl" property="sl"/>
+        <collection property="zmbs" ofType="com.hdsx.rcyh.entity.Zmb" column="jldbh">
+            <result column="gcjlmx_id" property="gcjlmx_id"/>
+            <result column="gcjl_id" property="gcjl_id"/>
+            <result column="gcjlmx_mid" property="gcjlmx_mid"/>
+            <result column="gcjlmx_zmh" property="gcjlmx_zmh"/>
+            <result column="gcjlmx_zmmc" property="gcjlmx_zmmc"/>
+            <result column="gcjlmx_jldw" property="gcjlmx_jldw"/>
+            <result column="gcjlmx_htsl" property="gcjlmx_htsl"/>
+            <result column="gcjlmx_htdj" property="gcjlmx_htdj"/>
+            <result column="gcjlmx_kkje" property="gcjlmx_kkje"/>
+            <result column="gcjlmx_htje" property="gcjlmx_htje"/>
+            <result column="gcjlmx_zje" property="gcjlmx_zje"/>
+            <result column="gcjlmx_djbh" property="gcjlmx_djbh"/>
+            <result column="gcjlmx_zmid" property="gcjlmx_zmid"/>
+            <result column="gcjlmx_htbh" property="gcjlmx_htbh"/>
+            <result column="gcjlmx_wcsl" property="gcjlmx_wcsl"/>
 
         </collection>
 
@@ -128,6 +138,8 @@
             <result column="zqzfmx_sqwcje" property="zqzfmx_sqwcje"/>
             <result column="zqzfmx_bqsl" property="zqzfmx_bqsl"/>
             <result column="zqzfmx_bqje" property="zqzfmx_bqje"/>
+            <result column="zqzfmx_zmid" property="zqzfmx_zmid"/>
+            <result column="zqzfmx_htbh" property="zqzfmx_htbh"/>
         </collection>
 
     </resultMap>
@@ -271,14 +283,11 @@
     </insert>
 
     <insert id="addGcjldFbForJlzf" parameterType="com.hdsx.rcyh.entity.Jlzf">
-
         begin
-        <foreach collection="zmzbs" item="item1" index="index" separator="">
-            <foreach collection="item1.zmbs" item="item" index="index" separator=";">
-                insert into GCJLDMX(GCJL_ID, GCJLMX_DJBH,GCJLMX_ZMID, GCJLMX_ZMH, GCJLMX_ZMMC, GCJLMX_HTSL, GCJLMX_DW, GCJLMX_HTDJ, GCJLMX_KKJE, GCJLMX_HTJE, GCJLMX_ZJE )  values
-                (sys_guid(),trim(#{gcjl_djbh}),trim(#{item.gcjlmx_zmid}),trim(#{item.gcjlmx_zmh}),trim(#{item.gcjlmx_zmmc}),trim(#{item.gcjlmx_htsl}),trim(#{item.gcjlmx_dw}),trim(#{item.gcjlmx_htdj}),trim(#{item.gcjlmx_kkje}),trim(#{item.gcjlmx_htje}),trim(#{item.gcjlmx_htje})-trim(#{item.gcjlmx_kkje}))
+            <foreach collection="zmbs" item="item" index="index" separator=";">
+                insert into GCJLDMX(GCJL_ID, GCJLMX_DJBH,GCJLMX_ZMID, GCJLMX_ZMH, GCJLMX_ZMMC, GCJLMX_HTSL, GCJLMX_JlDW, GCJLMX_HTDJ, GCJLMX_KKJE, GCJLMX_HTJE, GCJLMX_ZJE,GCJLMX_HTBH,GCJLMX_WCSL)  values
+                (sys_guid(),trim(#{gcjl_djbh}),trim(#{item.gcjlmx_zmid}),trim(#{item.gcjlmx_zmh}),trim(#{item.gcjlmx_zmmc}),trim(#{item.gcjlmx_htsl}),trim(#{item.gcjlmx_dw}),trim(#{item.gcjlmx_htdj}),trim(#{item.gcjlmx_kkje}),trim(#{item.gcjlmx_htje}),trim(#{item.gcjlmx_htje})-trim(#{item.gcjlmx_kkje}),trim(#{item.gcjlmx_htbh}),trim(#{item.gcjlmx_wcsl}))
             </foreach>
-        </foreach>
         ;end;
     </insert>
 
@@ -334,10 +343,9 @@
     </update>
     <!--  通过单据编号查询工程计量单信息  -->
     <select id="getGcjldInfoByDjbh" resultMap="jlzfmaps" parameterType="hashmap">
-         select g.gcjl_dwmc, g.gcjl_dwbh, g.gcjl_dwid, g.gcjl_bmmc, g.gcjl_bmbh, g.gcjl_bmid, g.gcjl_tbr, g.gcjl_tbrid, to_char(gcjl_tbrq,'yyyy/mm/dd') gcjl_tbrq, gcjl_spzt, gcjl_file, gcjl_wfid, gcjl_note, gcjl_djbh, gcjl_code, gcjl_xmmc, gcjl_xmid, gcjl_xmbh, gcjl_htmc, gcjl_htid, gcjl_htbh, gcjl_cjdwmc, gcjl_cjdwbh, gcjl_cjdwid, gcjl_rq, gcjl_bw, gcjl_th, gcjl_zjdbh, gcjl_jtsm, gcjl_flag, gcjl_sfybgc, gcjl_ybgcdh, gcjl_gcmc, to_char(gcjl_sqrq,'yyyy/mm/dd') gcjl_sqrq, gcjl_yd, gcjl_cbdw, gcjl_qdzh, gcjl_zdzh, gcjl_sl,
-        mxzb.* from GCJLD g
-        left join (select gcjlmx_djbh jldbh,gcjlmx_zmh zmh,max(gcjlmx_zmmc) zmmc,max(gcjlmx_dw) dw,sum(nvl(gcjlmx_htsl,0)) sl from GCJLDMX t group by t.gcjlmx_djbh,t.gcjlmx_zmh
-        ) mxzb on g.gcjl_djbh=mxzb.jldbh
+        select g.gcjl_dwmc, g.gcjl_dwbh, g.gcjl_dwid, g.gcjl_bmmc, g.gcjl_bmbh, g.gcjl_bmid, g.gcjl_tbr, g.gcjl_tbrid, to_char(gcjl_tbrq,'yyyy/mm/dd') gcjl_tbrq, gcjl_spzt, gcjl_file, gcjl_wfid, gcjl_note, gcjl_djbh, gcjl_code, gcjl_xmmc, gcjl_xmid, gcjl_xmbh, gcjl_htmc, gcjl_htid, gcjl_htbh, gcjl_cjdwmc, gcjl_cjdwbh, gcjl_cjdwid, gcjl_rq, gcjl_bw, gcjl_th, gcjl_zjdbh, gcjl_jtsm, gcjl_flag, gcjl_sfybgc, gcjl_ybgcdh, gcjl_gcmc, to_char(gcjl_sqrq,'yyyy/mm/dd') gcjl_sqrq, gcjl_yd, gcjl_cbdw, gcjl_qdzh, gcjl_zdzh, gcjl_sl,
+        mx.* from GCJLD g
+        left join GCJLDMX mx on g.gcjl_djbh=mx.gcjlmx_djbh
         where g.gcjl_djbh=#{djbh}
     </select>
 
@@ -352,10 +360,8 @@
     <select id="getGcjldList" parameterType="hashmap" resultMap="jlzfmaps">
 
         select g.gcjl_dwmc, g.gcjl_dwbh, g.gcjl_dwid, g.gcjl_bmmc, g.gcjl_bmbh, g.gcjl_bmid, g.gcjl_tbr, g.gcjl_tbrid, to_char(gcjl_tbrq,'yyyy/mm/dd') gcjl_tbrq, gcjl_spzt, gcjl_file, gcjl_wfid, gcjl_note, gcjl_djbh, gcjl_code, gcjl_xmmc, gcjl_xmid, gcjl_xmbh, gcjl_htmc, gcjl_htid, gcjl_htbh, gcjl_cjdwmc, gcjl_cjdwbh, gcjl_cjdwid, gcjl_rq, gcjl_bw, gcjl_th, gcjl_zjdbh, gcjl_jtsm, gcjl_flag, gcjl_sfybgc, gcjl_ybgcdh, gcjl_gcmc, to_char(gcjl_sqrq,'yyyy/mm/dd') gcjl_sqrq, gcjl_yd, gcjl_cbdw, gcjl_qdzh, gcjl_zdzh, gcjl_sl,
-        mxzb.* from GCJLD g
-        left join (select gcjlmx_djbh jldbh,gcjlmx_zmh zmh,max(gcjlmx_zmmc) zmmc,max(gcjlmx_dw) dw,sum(nvl(gcjlmx_htsl,0)) sl from GCJLDMX t group by t.gcjlmx_djbh,t.gcjlmx_zmh
-        ) mxzb on g.gcjl_djbh=mxzb.jldbh
-
+        mx.* from GCJLD g
+        left join GCJLDMX mx on g.gcjl_djbh=mx.gcjlmx_djbh
         where 1=1
         <if test="gcjl_htbh != null and gcjl_htbh != ''">
             and g.gcjl_htbh=#{gcjl_htbh}
@@ -373,7 +379,7 @@
 
         select g.gcjl_dwmc, g.gcjl_dwbh, g.gcjl_dwid, g.gcjl_bmmc, g.gcjl_bmbh, g.gcjl_bmid, g.gcjl_tbr, g.gcjl_tbrid, to_char(gcjl_tbrq,'yyyy/mm/dd') gcjl_tbrq, gcjl_spzt, gcjl_file, gcjl_wfid, gcjl_note, gcjl_djbh, gcjl_code, gcjl_xmmc, gcjl_xmid, gcjl_xmbh, gcjl_htmc, gcjl_htid, gcjl_htbh, gcjl_cjdwmc, gcjl_cjdwbh, gcjl_cjdwid, gcjl_rq, gcjl_bw, gcjl_th, gcjl_zjdbh, gcjl_jtsm, gcjl_flag, gcjl_sfybgc, gcjl_ybgcdh, gcjl_gcmc, to_char(gcjl_sqrq,'yyyy/mm/dd') gcjl_sqrq, gcjl_yd, gcjl_cbdw, gcjl_qdzh, gcjl_zdzh, gcjl_sl,
         mxzb.* from GCJLD g
-        left join (select gcjlmx_djbh jldbh,gcjlmx_zmh zmh,max(gcjlmx_zmmc) zmmc,max(gcjlmx_dw) dw,sum(nvl(gcjlmx_htsl,0)) sl from GCJLDMX t group by t.gcjlmx_djbh,t.gcjlmx_zmh
+        left join (select gcjlmx_djbh jldbh,gcjlmx_zmh zmh,max(gcjlmx_zmmc) zmmc,max(gcjlmx_dw) dw,sum(nvl(gcjlmx_wcsl,0)) sl from GCJLDMX t group by t.gcjlmx_djbh,t.gcjlmx_zmh
         ) mxzb on g.gcjl_djbh=mxzb.jldbh
 
         where 1=1
@@ -391,11 +397,11 @@
     <!--  通过部门查询合同信息  -->
     <select id="getHtXxInfoByBm" parameterType="hashmap" resultMap="jlzfmaps">
         select ht.htxx_htbh gcjl_htbh,ht.HTXX_ID gcjl_htid,ht.HTXX_HTMC gcjl_htmc,xm.yhhtxx_qszh gcjl_qdzh,xm.yhhtxx_zzzh gcjl_zdzh,gj.HTGJXX_cgxmmc gcjl_gcmc,xm.yhhtxx_gldw pmmtgcspsqs_gldw,xm.yhhtxx_cbdw pmmtgcspsqs_cbdw,
-        zm.*
+        zm.zmht_zmh GCJLMX_ZMH,zm.zmht_zmmc GCJLMX_ZMMC,zm.zmht_jldw GCJLMX_JLDW,zm.zmht_sl GCJLMX_HTSL,zm.zmht_dj GCJLMX_HTDJ,zm.zmht_je GCJLMX_HTJE,0 GCJLMX_KKJE,zm.zmht_je GCJLMX_ZJE,zm.zmht_id GCJLMX_ZMID,zm.zmht_htbh GCJLMX_HTBH,0 GCJLMX_WCSL
         from djsj_htxx ht left join djsj_htxx_htgjxx gj on ht.htxx_htbh=gj.HTGJXX_htbh left join djsj_htxx_yhxmxx xm on ht.htxx_htbh=xm.yhhtxx_htbh
-        left join ( select zm.zmht_zmh zmh,max(zm.zmht_zmmc) zmmc,max(zm.zmht_jldw) jldw,sum(zm.zmht_sl) sl,zmht_htbh htbh  from ZM_HT zm where 1=1 and zm.zmht_id not in(select GCJLMX_ZMID from GCJLDMX) group by zm.zmht_htbh,zm.zmht_zmh ) zm on ht.htxx_htbh=zm.htbh
+        left join zm_ht zm on ht.htxx_htbh=zm.zmht_htbh
         where 1=1
-
+        order by gcjl_htbh,GCJLMX_ZMH
     </select>
 
     <select id="getHtZmXxInfoByBm" resultType="com.hdsx.rcyh.entity.Zmb" parameterType="hashmap">
@@ -576,10 +582,11 @@
     <select id="getHtCwInfoByBm" parameterType="hashmap" resultMap="zqcwzf">
         select ht.htxx_htbh ZQCWZF_HTBH,ht.HTXX_ID ZQCWZF_HTID,ht.HTXX_HTMC ZQCWZF_HTMC,gj.HTGJXX_cgxmmc ZQCWZF_GCMC,xm.yhhtxx_gldw ZQCWZF_GLDW,xm.yhhtxx_cbdw ZQCWZF_CBDW,xm.yhhtxx_jldw ZQCWZF_JLDW,
         zm.zmht_zmh ZQZFMX_ZMBH,zm.zmht_zmmc ZQZFMX_ZMMC,zm.zmht_jldw ZQZFMX_JLDW,zm.zmht_sl ZQZFMX_HTSL,zm.zmht_dj ZQZFMX_HTDJ,zm.zmht_je ZQZFMX_HTJE,
-        '0%'ZQZFMX_LJWC,0 ZQZFMX_BQWCSL,0 ZQZFMX_BQWCJE,0 ZQZFMX_SQWCSL,0 ZQZFMX_SQWCJE,0 ZQZFMX_BQSL,0 ZQZFMX_BQJE
+        '0%'ZQZFMX_LJWC,0 ZQZFMX_BQWCSL,0 ZQZFMX_BQWCJE,0 ZQZFMX_SQWCSL,0 ZQZFMX_SQWCJE,0 ZQZFMX_BQSL,0 ZQZFMX_BQJE,zm.zmht_id zqzfmx_zmid,zm.zmht_htbh zqzfmx_htbh
         from djsj_htxx ht left join djsj_htxx_htgjxx gj on ht.htxx_htbh=gj.HTGJXX_HTBH left join djsj_htxx_yhxmxx xm on ht.htxx_htbh=xm.yhhtxx_htbh
         left join zm_ht zm on ht.htxx_htbh=zm.zmht_htbh
         where 1=1
+        order by ZQCWZF_HTBH,ZQZFMX_ZMBH
     </select>
 
     <!--  添加工程计量单  -->
@@ -652,10 +659,10 @@
     <insert id="addZqcwzfFbForJlzf" parameterType="com.hdsx.rcyh.entity.Jlzf_zqcwzf">
         begin
         <foreach collection="zqcwzfmx" item="item" index="index" separator=";">
-            insert into ZQCWZFZS_JLMX(ZQZFMX_ID, ZQZFMX_MID, ZQZFMX_ZMBH, ZQZFMX_ZMMC, ZQZFMX_JLDW,  ZQZFMX_HTSL, ZQZFMX_HTDJ, ZQZFMX_HTJE, ZQZFMX_LJWC, ZQZFMX_BQWCSL, ZQZFMX_BQWCJE, ZQZFMX_SQWCSL, ZQZFMX_SQWCJE, ZQZFMX_BQSL, ZQZFMX_BQJE, ZQZFMX_ZFQH )  values
+            insert into ZQCWZFZS_JLMX(ZQZFMX_ID, ZQZFMX_MID, ZQZFMX_ZMBH, ZQZFMX_ZMMC, ZQZFMX_JLDW,  ZQZFMX_HTSL, ZQZFMX_HTDJ, ZQZFMX_HTJE, ZQZFMX_LJWC, ZQZFMX_BQWCSL, ZQZFMX_BQWCJE, ZQZFMX_SQWCSL, ZQZFMX_SQWCJE, ZQZFMX_BQSL, ZQZFMX_BQJE, ZQZFMX_ZFQH,ZQZFMX_ZMID,ZQZFMX_HTBH )  values
             (sys_guid(),trim(#{zqcwzf_zfqh}),trim(#{item.zqzfmx_zmbh}),trim(#{item.zqzfmx_zmmc}),trim(#{item.zqzfmx_jldw}),trim(#{item.zqzfmx_htsl}),trim(#{item.zqzfmx_htdj}),trim(#{item.zqzfmx_jldwid})*trim(#{item.zqzfmx_htsl}),
             trim(#{item.zqzfmx_ljwc}),nvl(trim(#{item.zqzfmx_sqwcsl}),0)+nvl(trim(#{item.zqzfmx_bqsl}),0),nvl(trim(#{item.zqzfmx_sqwcje}),0)+nvl(trim(#{item.zqzfmx_bqje}),0),
-            trim(#{item.zqzfmx_sqwcsl}),trim(#{item.zqzfmx_sqwcje}),trim(#{item.zqzfmx_bqsl}),trim(#{item.zqzfmx_bqje}),trim(#{zqcwzf_zfqh}))
+            trim(#{item.zqzfmx_sqwcsl}),trim(#{item.zqzfmx_sqwcje}),trim(#{item.zqzfmx_bqsl}),trim(#{item.zqzfmx_bqje}),trim(#{zqcwzf_zfqh}),trim(#{item.zqzfmx_zmid}),trim(#{item.zqzfmx_htbh}))
         </foreach>
         ;end;
     </insert>

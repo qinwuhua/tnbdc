@@ -82,18 +82,7 @@ public class JlzfServiceImpl implements JlzfService {
     public Jlzf getGcjldInfoByDjbh(Map<String, String> param) {
         //查询主表
         Jlzf jlzf=jlzfMapper.getGcjldInfoByDjbh(param);
-        for (Zmzb z:jlzf.getZmzbs()){
-            //通过子目号和单据编号查询
-            Map<String,String> param1= new HashMap<String,String>();
-            param1.put("djbh",z.getJldbh());param1.put("zmh",z.getZmh());
-            List<Zmb> zms=jlzfMapper.getZmbsByDjbh(param1);
-            z.setZmbs(zms);
-        }
-        /*//查询子目总表
-        List<Zmzb> zmz=jlzfMapper.getZmzbsByDjbh(param);
-        //查询子目表
-        List<Zmb> zm = jlzfMapper.getZmbsByDjbh(param);
-        jlzf.setZmbs(zm);jlzf.setZmzbs(zmz);*/
+
         return jlzf;
     }
 
@@ -101,31 +90,13 @@ public class JlzfServiceImpl implements JlzfService {
     public List<Jlzf> getGcjldList(Map<String, String> param, int pageNum, int pageSize) {
         PageHelper.startPage(pageNum, pageSize);
         List<Jlzf> list = jlzfMapper.getGcjldList(param);
-        for(Jlzf j: list){
-            for (Zmzb z:j.getZmzbs()){
-                //通过子目号和单据编号查询
-                Map<String,String> param1= new HashMap<String,String>();
-                param1.put("djbh",z.getJldbh());param1.put("zmh",z.getZmh());
-                List<Zmb> zms=jlzfMapper.getZmbsByDjbh(param1);
-                z.setZmbs(zms);
-            }
-        }
-
         return list;
     }
 
     @Override
     public List<Jlzf> getHtXxInfoByBm(Map<String, String> param) {
         List<Jlzf> list = jlzfMapper.getHtXxInfoByBm(param);
-        for(Jlzf j: list){
-            for (Zmzb z:j.getZmzbs()){
-                //通过子目号和单据编号查询
-                Map<String,String> param1= new HashMap<String,String>();
-                param1.put("htbh",j.getGcjl_htbh());param1.put("zmh",z.getZmh());
-                List<Zmb> zms=jlzfMapper.getHtZmXxInfoByBm(param1);
-                z.setZmbs(zms);
-            }
-        }
+
         return list;
     }
 

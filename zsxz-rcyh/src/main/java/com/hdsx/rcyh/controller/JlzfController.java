@@ -82,7 +82,7 @@ public class JlzfController {
 
 
     @RequestMapping(value = "getSpsqsInfoByDjbh", method = RequestMethod.GET, produces = "application/json")
-    @ApiOperation(value = "通过生清单编号查询计量支付-索赔申请书数据")
+    @ApiOperation(value = "通过申请单编号查询计量支付-索赔申请书数据")
     @ApiImplicitParam(paramType="query", dataType = "String", name = "pmmtgcspsqs_djbh", value = "申请单编号", required = true)
     public Msg getSpsqsInfoByDjbh(@RequestParam(value = "pmmtgcspsqs_djbh",required = true) String pmmtgcspsqs_djbh){
         try {
@@ -134,7 +134,7 @@ public class JlzfController {
     }
 
     @RequestMapping(value = "getHtXxInfoByBm", method = RequestMethod.GET, produces = "application/json")
-    @ApiOperation(value = "获取合同详细信息(包括子目)")
+    @ApiOperation(value = "获取合同详细信息(工程计量单模块使用)")
 //    @ApiImplicitParam(paramType="query", dataType = "String", name = "pmmtgcspsqs_djbh", value = "申请单编号", required = true)
     public Msg getHtXxInfoByBm(/*@RequestParam(value = "bmbm",required = false) String bmbm*/){
         try {
