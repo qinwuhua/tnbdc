@@ -513,7 +513,7 @@
         where 1=1 and jrgsp_djbh=#{jrgsp_djbh}
     </update>
 
-    <!-- 删除工程计量单  -->
+    <!-- 删除计日工审批  -->
     <delete id="delJrgspFbForJlzf" parameterType="java.util.List" >
         delete from JRGTBSP_JLMX
         where JRGMX_DJBH in
@@ -529,7 +529,7 @@
         </foreach>
     </delete>
 
-    <!-- 查询工程计量单列表汇总数据 -->
+    <!-- 查询计日工审批列表数据 -->
     <select id="getJgrspList" parameterType="hashmap" resultMap="jrgsp">
 
         select zb.JRGSP_HTBH,zb.JRGSP_ID,zb.JRGSP_DWMC,zb.jRGSP_DWBH,zb.jRGSP_DWID,zb.jRGSP_BMMC,zb.jRGSP_BMBH,zb.jRGSP_BMID,zb.jRGSP_TBR,zb.jRGSP_TBRID,to_char(zb.jRGSP_TBRQ,'yyyy/mm/dd') jRGSP_TBRQ,zb.jRGSP_SPZT,zb.jRGSP_FILE,zb.jRGSP_WFID,zb.jRGSP_NOTE,zb.jRGSP_DJBH,zb.jRGSP_XMMC,zb.jRGSP_XMBH,zb.jRGSP_XMID,zb.jRGSP_CBDWMC,zb.jRGSP_CBDWID,zb.jRGSP_CBDWBH,tz.zje jRGSP_HJJE,zb.jRGSP_GCMC,
@@ -659,5 +659,143 @@
         </foreach>
         ;end;
     </insert>
+
+    <!--  通过单据编号删除计日工审批  -->
+    <delete id="deleZqcwzfByDjbh" parameterType="string">
+        delete from ZQCWZFZS_JLMX where ZQZFMX_ZFQH=#{value}
+    </delete>
+    <!--  编辑计日工审批 -->
+    <update id="editZqcwzfForJlzf" parameterType="com.hdsx.rcyh.entity.Jlzf_zqcwzf" >
+        update ZQCWZFZS
+        <set>
+            <if test="zqcwzf_gcmc != null" >zqcwzf_gcmc=#{zqcwzf_gcmc},</if>
+            <if test="zqcwzf_cbdw != null" >zqcwzf_cbdw=#{zqcwzf_cbdw},</if>
+            <if test="zqcwzf_id != null" >zqcwzf_id=#{zqcwzf_id},</if>
+            <if test="zqcwzf_dwmc != null" >zqcwzf_dwmc=#{zqcwzf_dwmc},</if>
+            <if test="zqcwzf_dwbh != null" >zqcwzf_dwbh=#{zqcwzf_dwbh},</if>
+            <if test="zqcwzf_dwid != null" >zqcwzf_dwid=#{zqcwzf_dwid},</if>
+            <if test="zqcwzf_bmmc != null" >zqcwzf_bmmc=#{zqcwzf_bmmc},</if>
+            <if test="zqcwzf_bmbh != null" >zqcwzf_bmbh=#{zqcwzf_bmbh},</if>
+            <if test="zqcwzf_bmid != null" >zqcwzf_bmid=#{zqcwzf_bmid},</if>
+            <if test="zqcwzf_tbr != null" >zqcwzf_tbr=#{zqcwzf_tbr},</if>
+            <if test="zqcwzf_tbrid != null" >zqcwzf_tbrid=#{zqcwzf_tbrid},</if>
+            <if test="zqcwzf_tbrq != null" >zqcwzf_tbrq=to_date(#{zqcwzf_tbrq},'yyyy/mm/dd'),</if>
+            <if test="zqcwzf_wfid != null" >zqcwzf_wfid=#{zqcwzf_wfid},</if>
+            <if test="zqcwzf_note != null" >zqcwzf_note=#{zqcwzf_note},</if>
+            <if test="zqcwzf_djbh != null" >zqcwzf_djbh=#{zqcwzf_djbh},</if>
+            <if test="zqcwzf_zfqh != null" >zqcwzf_zfqh=#{zqcwzf_zfqh},</if>
+            <if test="zqcwzf_xmmc != null" >zqcwzf_xmmc=#{zqcwzf_xmmc},</if>
+            <if test="zqcwzf_xmid != null" >zqcwzf_xmid=#{zqcwzf_xmid},</if>
+            <if test="zqcwzf_xmbh != null" >zqcwzf_xmbh=#{zqcwzf_xmbh},</if>
+            <if test="zqcwzf_htmc != null" >zqcwzf_htmc=#{zqcwzf_htmc},</if>
+            <if test="zqcwzf_htid != null" >zqcwzf_htid=#{zqcwzf_htid},</if>
+            <if test="zqcwzf_htbh != null" >zqcwzf_htbh=#{zqcwzf_htbh},</if>
+            <if test="zqcwzf_cjdwmc != null" >zqcwzf_cjdwmc=#{zqcwzf_cjdwmc},</if>
+            <if test="zqcwzf_cjdwid != null" >zqcwzf_cjdwid=#{zqcwzf_cjdwid},</if>
+            <if test="zqcwzf_cjdwbh != null" >zqcwzf_cjdwbh=#{zqcwzf_cjdwbh},</if>
+            <if test="zqcwzf_jzrq != null" >zqcwzf_jzrq=to_date(#{zqcwzf_tbrq},'yyyy/mm/dd'),</if>
+            <if test="zqcwzf_flag != null" >zqcwzf_flag=#{zqcwzf_flag},</if>
+            <if test="zqcwzf_gldw != null" >zqcwzf_gldw=#{zqcwzf_gldw},</if>
+            <if test="zqcwzf_jldw != null" >zqcwzf_jldw=#{zqcwzf_jldw},</if>
+        </set>
+        where 1=1 and zqcwzf_zfqh=#{zqcwzf_zfqh}
+    </update>
+
+    <!-- 删除中期财务支付  -->
+    <delete id="delZqcwzfFbForJlzf" parameterType="java.util.List" >
+        delete from ZQCWZFZS_JLMX
+        where ZQZFMX_ZFQH in
+        <foreach collection="list" item="id"  open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    <delete id="delZqcwzfForJlzf" parameterType="java.util.List" >
+        delete from ZQCWZFZS
+        where zqcwzf_zfqh in
+        <foreach collection="list" item="id"  open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <!-- 查询中(终)期财务支付证书列表数据 -->
+    <select id="getZqcwzfList" parameterType="hashmap" resultMap="zqcwzf">
+
+        select
+        zb.ZQCWZF_ID, zb.ZQCWZF_DWMC, zb.ZQCWZF_DWBH, zb.ZQCWZF_DWID, zb.ZQCWZF_BMMC, zb.ZQCWZF_BMBH, zb.ZQCWZF_BMID, zb.ZQCWZF_TBR, zb.ZQCWZF_TBRID, to_char(zb.ZQCWZF_TBRQ,'yyyy/mm/dd') ZQCWZF_TBRQ, zb.ZQCWZF_SPZT, zb.ZQCWZF_FILLE, zb.ZQCWZF_WFID, zb.ZQCWZF_NOTE, zb.ZQCWZF_DJBH, zb.ZQCWZF_ZFQH, zb.ZQCWZF_XMMC, zb.ZQCWZF_XMID, zb.ZQCWZF_XMBH, zb.ZQCWZF_HTMC, zb.ZQCWZF_HTID, zb.ZQCWZF_HTBH, zb.ZQCWZF_CJDWMC, zb.ZQCWZF_CJDWID, zb.ZQCWZF_CJDWBH, to_char(zb.ZQCWZF_JZRQ,'yyyy/mm/dd')  ZQCWZF_JZRQ, zb.ZQCWZF_FLAG, zb.ZQCWZF_GLDW, zb.ZQCWZF_JLDW, zb.ZQCWZF_GCMC, zb.ZQCWZF_CBDW,
+        fb.ZQZFMX_ID, fb.ZQZFMX_MID, fb.ZQZFMX_ZMBH, fb.ZQZFMX_ZMMC, fb.ZQZFMX_JLDW, fb.ZQZFMX_JLDWID, fb.ZQZFMX_HTSL, fb.ZQZFMX_HTDJ, fb.ZQZFMX_HTJE, fb.ZQZFMX_LJWC, fb.ZQZFMX_BQWCSL, fb.ZQZFMX_BQWCJE, fb.ZQZFMX_SQWCSL, fb.ZQZFMX_SQWCJE, fb.ZQZFMX_BQSL, fb.ZQZFMX_BQJE, fb.ZQZFMX_ZFQH
+        from ZQCWZFZS zb left join ZQCWZFZS_JLMX fb on zb.ZQCWZF_zfqh=fb.ZQZFMX_zfqh
+        where 1=1
+        <if test="htbh != null and htbh != ''">
+            and zb.ZQCWZF_HTBH=#{htbh}
+        </if>
+        <if test="ksrq != null and ksrq != ''">
+            and to_date(to_char(zb.ZQCWZF_TBRQ,'yyyy/mm/dd'),'yyyy/mm/dd')>=to_date(#{ksrq},'yyyy/mm/dd')
+        </if>
+        <if test="jsrq != null and jsrq != ''">
+            and to_date(to_char(zb.ZQCWZF_TBRQ,'yyyy/mm/dd'),'yyyy/mm/dd')&lt;=to_date(#{jsrq},'yyyy/mm/dd')
+        </if>
+        order by ZQCWZF_zfqh,ZQZFMX_ZMBH
+    </select>
+
+    <!-- 通过支付期号查询中(终)期财务支付证书数据 -->
+    <select id="getZqcwzfInfoByZfqh" parameterType="hashmap" resultMap="zqcwzf">
+        select
+        zb.ZQCWZF_ID, zb.ZQCWZF_DWMC, zb.ZQCWZF_DWBH, zb.ZQCWZF_DWID, zb.ZQCWZF_BMMC, zb.ZQCWZF_BMBH, zb.ZQCWZF_BMID, zb.ZQCWZF_TBR, zb.ZQCWZF_TBRID, to_char(zb.ZQCWZF_TBRQ,'yyyy/mm/dd') ZQCWZF_TBRQ, zb.ZQCWZF_SPZT, zb.ZQCWZF_FILLE, zb.ZQCWZF_WFID, zb.ZQCWZF_NOTE, zb.ZQCWZF_DJBH, zb.ZQCWZF_ZFQH, zb.ZQCWZF_XMMC, zb.ZQCWZF_XMID, zb.ZQCWZF_XMBH, zb.ZQCWZF_HTMC, zb.ZQCWZF_HTID, zb.ZQCWZF_HTBH, zb.ZQCWZF_CJDWMC, zb.ZQCWZF_CJDWID, zb.ZQCWZF_CJDWBH, to_char(zb.ZQCWZF_JZRQ,'yyyy/mm/dd')  ZQCWZF_JZRQ, zb.ZQCWZF_FLAG, zb.ZQCWZF_GLDW, zb.ZQCWZF_JLDW, zb.ZQCWZF_GCMC, zb.ZQCWZF_CBDW, fb.ZQZFMX_ID, fb.ZQZFMX_MID, fb.ZQZFMX_ZMBH, fb.ZQZFMX_ZMMC, fb.ZQZFMX_JLDW, fb.ZQZFMX_JLDWID, fb.ZQZFMX_HTSL, fb.ZQZFMX_HTDJ, fb.ZQZFMX_HTJE, fb.ZQZFMX_LJWC, fb.ZQZFMX_BQWCSL, fb.ZQZFMX_BQWCJE, fb.ZQZFMX_SQWCSL, fb.ZQZFMX_SQWCJE, fb.ZQZFMX_BQSL, fb.ZQZFMX_BQJE, fb.ZQZFMX_ZFQH
+        from ZQCWZFZS zb left join ZQCWZFZS_JLMX fb on zb.ZQCWZF_zfqh=fb.ZQZFMX_zfqh
+        where 1=1
+        and ZQCWZF_zfqh=#{zfqh}
+    </select>
+
+    <!-- 查询中(终)期财务支付证书列表数据 -->
+    <select id="getZqcwzfReport" parameterType="hashmap" resultType="com.hdsx.rcyh.entity.Jlzf_zqcwzfmx">
+        select
+        fb.ZQZFMX_ID, fb.ZQZFMX_MID, fb.ZQZFMX_ZMBH, fb.ZQZFMX_ZMMC, fb.ZQZFMX_JLDW, fb.ZQZFMX_JLDWID, fb.ZQZFMX_HTSL, fb.ZQZFMX_HTDJ, fb.ZQZFMX_HTJE, fb.ZQZFMX_LJWC, fb.ZQZFMX_BQWCSL, fb.ZQZFMX_BQWCJE, fb.ZQZFMX_SQWCSL, fb.ZQZFMX_SQWCJE, fb.ZQZFMX_BQSL, fb.ZQZFMX_BQJE, fb.ZQZFMX_ZFQH
+        from ZQCWZFZS zb left join ZQCWZFZS_JLMX fb on zb.ZQCWZF_zfqh=fb.ZQZFMX_zfqh
+        where 1=1
+        <if test="htbh != null and htbh != ''">
+            and zb.ZQCWZF_HTBH=#{htbh}
+        </if>
+        <if test="ksrq != null and ksrq != ''">
+            and to_date(to_char(zb.ZQCWZF_TBRQ,'yyyy/mm/dd'),'yyyy/mm/dd')>=to_date(#{ksrq},'yyyy/mm/dd')
+        </if>
+        <if test="jsrq != null and jsrq != ''">
+            and to_date(to_char(zb.ZQCWZF_TBRQ,'yyyy/mm/dd'),'yyyy/mm/dd')&lt;=to_date(#{jsrq},'yyyy/mm/dd')
+        </if>
+        order by ZQZFMX_zfqh,ZQZFMX_ZMBH
+    </select>
+
+    <select id="getZqcwzfHzbReport" parameterType="hashmap" resultType="hashmap">
+        select
+        fb.ZQZFMX_ZMBH zmbh, fb.ZQZFMX_ZMMC zmmc, fb.ZQZFMX_JLDW jldw, fb.ZQZFMX_HTDJ dj, fb.ZQZFMX_HTSL sl, fb.ZQZFMX_HTJE, fb.ZQZFMX_ZFQH
+        from ZQCWZFZS zb left join ZQCWZFZS_JLMX fb on zb.ZQCWZF_zfqh=fb.ZQZFMX_zfqh
+        where 1=1
+        <if test="htbh != null and htbh != ''">
+            and zb.ZQCWZF_HTBH=#{htbh}
+        </if>
+        <if test="ksrq != null and ksrq != ''">
+            and to_date(to_char(zb.ZQCWZF_TBRQ,'yyyy/mm/dd'),'yyyy/mm/dd')>=to_date(#{ksrq},'yyyy/mm/dd')
+        </if>
+        <if test="jsrq != null and jsrq != ''">
+            and to_date(to_char(zb.ZQCWZF_TBRQ,'yyyy/mm/dd'),'yyyy/mm/dd')&lt;=to_date(#{jsrq},'yyyy/mm/dd')
+        </if>
+
+        union all
+
+        select
+        '' zmbh, '合计' zmmc, max(fb.ZQZFMX_JLDW) jldw, sum(nvl(fb.ZQZFMX_HTDJ,0)) dj, sum(nvl(fb.ZQZFMX_HTSL,0)) sl, sum(nvl(fb.ZQZFMX_HTJE,0)) je, null ZQZFMX_ZFQH
+        from ZQCWZFZS zb left join ZQCWZFZS_JLMX fb on zb.ZQCWZF_zfqh=fb.ZQZFMX_zfqh
+        where 1=1
+        <if test="htbh != null and htbh != ''">
+            and zb.ZQCWZF_HTBH=#{htbh}
+        </if>
+        <if test="ksrq != null and ksrq != ''">
+            and to_date(to_char(zb.ZQCWZF_TBRQ,'yyyy/mm/dd'),'yyyy/mm/dd')>=to_date(#{ksrq},'yyyy/mm/dd')
+        </if>
+        <if test="jsrq != null and jsrq != ''">
+            and to_date(to_char(zb.ZQCWZF_TBRQ,'yyyy/mm/dd'),'yyyy/mm/dd')&lt;=to_date(#{jsrq},'yyyy/mm/dd')
+        </if>
+
+        order by ZQZFMX_zfqh,zmbh
+    </select>
 
 </mapper>

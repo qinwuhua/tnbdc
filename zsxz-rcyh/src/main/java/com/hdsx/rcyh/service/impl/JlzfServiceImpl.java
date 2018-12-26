@@ -199,4 +199,43 @@ public class JlzfServiceImpl implements JlzfService {
         return jlzfMapper.addZqcwzfForJlzf(zqcwzf);
     }
 
+    @Override
+    public int editZqcwzfForJlzf(Jlzf_zqcwzf jrgsp) {
+        //根据单据编号删除子表
+        jlzfMapper.deleZqcwzfByDjbh(jrgsp.getZqcwzf_zfqh());
+        //插入子表
+        jlzfMapper.addZqcwzfFbForJlzf(jrgsp);
+        //修改主表
+        return jlzfMapper.editZqcwzfForJlzf(jrgsp);
+    }
+
+    @Override
+    public int delZqcwzfForJlzf(List<String> l) {
+        jlzfMapper.delZqcwzfFbForJlzf(l);
+        return jlzfMapper.delZqcwzfForJlzf(l);
+    }
+
+    @Override
+    public List<Jlzf_zqcwzf> getZqcwzfList(Map<String, String> param, int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<Jlzf_zqcwzf> list = jlzfMapper.getZqcwzfList(param);
+        return  list;
+    }
+
+    @Override
+    public Jlzf_zqcwzf getZqcwzfInfoByZfqh(Map<String, String> param) {
+        return jlzfMapper.getZqcwzfInfoByZfqh(param);
+    }
+
+    @Override
+    public List<Jlzf_zqcwzfmx> getZqcwzfReport(Map<String, String> param) {
+        return jlzfMapper.getZqcwzfReport(param);
+    }
+
+    @Override
+    public List<Map<String, String>> getZqcwzfHzbReport(Map<String, String> param) {
+        return jlzfMapper.getZqcwzfHzbReport(param);
+    }
+
+
 }

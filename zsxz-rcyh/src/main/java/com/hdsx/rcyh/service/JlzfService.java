@@ -1,10 +1,7 @@
 package com.hdsx.rcyh.service;
 
 
-import com.hdsx.rcyh.entity.Jlzf;
-import com.hdsx.rcyh.entity.Jlzf_jrgsp;
-import com.hdsx.rcyh.entity.Jlzf_zqcwzf;
-import com.hdsx.rcyh.entity.Zmzb;
+import com.hdsx.rcyh.entity.*;
 
 import java.util.List;
 import java.util.Map;
@@ -56,4 +53,16 @@ public interface JlzfService {
     List<Jlzf_zqcwzf> getHtCwInfoByBm(Map<String, String> param);
 
     int addZqcwzfForJlzf(Jlzf_zqcwzf zqcwzf);
+
+    int editZqcwzfForJlzf(Jlzf_zqcwzf jrgsp);
+
+    int delZqcwzfForJlzf(List<String> l);
+
+    List<Jlzf_zqcwzf> getZqcwzfList(Map<String, String> param, int pageNum, int pageSize);
+
+    Jlzf_zqcwzf getZqcwzfInfoByZfqh(Map<String, String> param);
+
+    List<Jlzf_zqcwzfmx> getZqcwzfReport(Map<String, String> param);
+
+    List<Map<String, String>> getZqcwzfHzbReport(Map<String, String> param);
 }

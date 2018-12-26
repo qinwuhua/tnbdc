@@ -404,7 +404,7 @@ public class JlzfController {
 
 //以下是中期证书接口
     @RequestMapping(value = "addZqcwzfForJlzf", method = RequestMethod.POST, produces = "application/json")
-    @ApiOperation(value = "添加计量支付-计日工审批数据")
+    @ApiOperation(value = "添加计量支付-中(终)期财务支付证书数据")
     public Msg addZqcwzfForJlzf(@RequestBody Jlzf_zqcwzf zqcwzf){
         try {
             int flag=jlzfService.addZqcwzfForJlzf(zqcwzf);
@@ -419,6 +419,121 @@ public class JlzfController {
 
     }
 
+
+    @RequestMapping(value = "editZqcwzfForJlzf", method = RequestMethod.PUT, produces = "application/json")
+    @ApiOperation(value = "编辑计量支付-中(终)期财务支付证书数据")
+    public Msg editZqcwzfForJlzf(@RequestBody Jlzf_zqcwzf jrgsp){
+        try {
+            int flag=jlzfService.editZqcwzfForJlzf(jrgsp);
+            if(flag>0)
+                return ResultUtil.success("保存成功");
+            else
+                return ResultUtil.error("保存失败");
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResultUtil.error("保存失败，接口异常");
+        }
+
+    }
+
+    @RequestMapping(value = "delZqcwzfForJlzf", method = RequestMethod.DELETE, produces = "application/json")
+    @ApiOperation(value = "删除计量支付-中(终)期财务支付证书数据")
+    @ApiImplicitParam(paramType="query", dataType = "String", name = "zfqhs", value = "支付期号(以“,”隔开)", required = true)
+    public Msg delZqcwzfForJlzf(@RequestParam(value = "zfqhs",required = true) String zfqhs){
+        try {
+            String[] zfqh=zfqhs.split(",");
+            List<String> l = new ArrayList<String>();
+            for (int i=0;i<zfqh.length;i++){
+                l.add(zfqh[i]);
+            }
+            int flag=jlzfService.delZqcwzfForJlzf(l);
+            if(flag>0)
+                return ResultUtil.success("删除成功");
+            else
+                return ResultUtil.error("删除失败");
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResultUtil.error("删除失败，接口异常");
+        }
+
+    }
+
+    @RequestMapping(value = "getZqcwzfList", method = RequestMethod.GET, produces = "application/json")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "htbh", value = "合同编号", required = false),
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "ksrq", value = "申请开始日期(yyyy/mm/dd)", required = false),
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "jsrq", value = "申请结束日期(yyyy/mm/dd)", required = false),
+            @ApiImplicitParam(paramType="query", dataType = "int", name = "pageNum", value = "页码", required = true),
+            @ApiImplicitParam(paramType="query", dataType = "int", name = "pageSize", value = "每页条数", required = true)
+    })
+    @ApiOperation(value = "查询计量支付-中(终)期财务支付证书列表数据")
+    public Msg getZqcwzfList(@RequestParam(value = "htbh",required = false) String htbh,
+                            @RequestParam(value = "ksrq",required = false) String ksrq,
+                            @RequestParam(value = "jsrq",required = false) String jsrq,
+                            @RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
+                            @RequestParam(value = "pageSize", defaultValue = "10") int pageSize) {
+        Map<String, String> param = new HashMap<String, String>();
+        param.put("htbh", htbh);
+        param.put("ksrq", ksrq);
+        param.put("jsrq", jsrq);
+        List<Jlzf_zqcwzf> list = jlzfService.getZqcwzfList(param, pageNum, pageSize);
+        return ResultUtil.success(new PageInfo<Jlzf_zqcwzf>(list));
+    }
+
+    @RequestMapping(value = "getZqcwzfInfoByZfqh", method = RequestMethod.GET, produces = "application/json")
+    @ApiOperation(value = "通过支付期号获取计量支付-中(终)期财务支付证书详细信息")
+    @ApiImplicitParam(paramType="query", dataType = "String", name = "zfqh", value = "支付期号", required = true)
+    public Msg getZqcwzfInfoByZfqh(@RequestParam(value = "zfqh",required = true) String zfqh){
+        try {
+            Map<String, String> param = new HashMap<String, String>();
+            param.put("zfqh", zfqh);
+            Jlzf_zqcwzf map=jlzfService.getZqcwzfInfoByZfqh(param);
+            return ResultUtil.success(map);
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResultUtil.error("查询失败，接口异常");
+        }
+
+    }
+
+//清单期中（终）支付报表
+
+    @RequestMapping(value = "getZqcwzfReport", method = RequestMethod.GET, produces = "application/json")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "htbh", value = "合同编号", required = false),
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "ksrq", value = "申请开始日期(yyyy/mm/dd)", required = false),
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "jsrq", value = "申请结束日期(yyyy/mm/dd)", required = false)
+    })
+    @ApiOperation(value = "查询计量支付-清单期中（终）支付报表")
+    public Msg getZqcwzfReport(@RequestParam(value = "htbh",required = false) String htbh,
+                             @RequestParam(value = "ksrq",required = false) String ksrq,
+                             @RequestParam(value = "jsrq",required = false) String jsrq) {
+        Map<String, String> param = new HashMap<String, String>();
+        param.put("htbh", htbh);
+        param.put("ksrq", ksrq);
+        param.put("jsrq", jsrq);
+        List<Jlzf_zqcwzfmx> list = jlzfService.getZqcwzfReport(param);
+        return ResultUtil.success(list);
+    }
+
+    //计量支付汇总表
+    @RequestMapping(value = "getZqcwzfHzbReport", method = RequestMethod.GET, produces = "application/json")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "htbh", value = "合同编号", required = false),
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "ksrq", value = "申请开始日期(yyyy/mm/dd)", required = false),
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "jsrq", value = "申请结束日期(yyyy/mm/dd)", required = false)
+    })
+    @ApiOperation(value = "查询计量支付-计量支付汇总表")
+    public Msg getZqcwzfHzbReport(@RequestParam(value = "htbh",required = false) String htbh,
+                               @RequestParam(value = "ksrq",required = false) String ksrq,
+                               @RequestParam(value = "jsrq",required = false) String jsrq) {
+        Map<String, String> param = new HashMap<String, String>();
+        param.put("htbh", htbh);
+        param.put("ksrq", ksrq);
+        param.put("jsrq", jsrq);
+        List<Map<String,String>> list = jlzfService.getZqcwzfHzbReport(param);
+        return ResultUtil.success(list);
+    }
 
 
 }

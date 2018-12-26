@@ -75,4 +75,20 @@ public interface JlzfMapper {
     int addZqcwzfFbForJlzf(Jlzf_zqcwzf zqcwzf);
 
     int addZqcwzfForJlzf(Jlzf_zqcwzf zqcwzf);
+
+    int deleZqcwzfByDjbh(String zqcwzf_zfqh);
+
+    int editZqcwzfForJlzf(Jlzf_zqcwzf jrgsp);
+
+    int delZqcwzfFbForJlzf(List<String> l);
+
+    int delZqcwzfForJlzf(List<String> l);
+
+    List<Jlzf_zqcwzf> getZqcwzfList(Map<String, String> param);
+
+    Jlzf_zqcwzf getZqcwzfInfoByZfqh(Map<String, String> param);
+
+    List<Jlzf_zqcwzfmx> getZqcwzfReport(Map<String, String> param);
+
+    List<Map<String, String>> getZqcwzfHzbReport(Map<String, String> param);
 }
