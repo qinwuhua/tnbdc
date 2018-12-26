@@ -119,11 +119,11 @@ public class JlzfController {
 
     @RequestMapping(value = "getHtInfo", method = RequestMethod.GET, produces = "application/json")
     @ApiOperation(value = "获取合同信息")
-//    @ApiImplicitParam(paramType="query", dataType = "String", name = "pmmtgcspsqs_djbh", value = "申请单编号", required = true)
-    public Msg getHtInfoByBm(/*@RequestParam(value = "bmbm",required = false) String bmbm*/){
+    @ApiImplicitParam(paramType="query", dataType = "String", name = "htbh", value = "合同编号", required = false)
+    public Msg getHtInfoByBm(@RequestParam(value = "htbh",required = false) String htbh){
         try {
             Map<String, String> param = new HashMap<String, String>();
-            param.put("bmbm", "");
+            param.put("htbh", htbh);
             List<Map<String,String>> map=jlzfService.getHtInfoByBm(param);
             return ResultUtil.success(map);
         }catch (Exception e){
@@ -135,11 +135,11 @@ public class JlzfController {
 
     @RequestMapping(value = "getHtXxInfoByBm", method = RequestMethod.GET, produces = "application/json")
     @ApiOperation(value = "获取合同详细信息(工程计量单模块使用)")
-//    @ApiImplicitParam(paramType="query", dataType = "String", name = "pmmtgcspsqs_djbh", value = "申请单编号", required = true)
-    public Msg getHtXxInfoByBm(/*@RequestParam(value = "bmbm",required = false) String bmbm*/){
+    @ApiImplicitParam(paramType="query", dataType = "String", name = "htbh", value = "合同编号", required = false)
+    public Msg getHtXxInfoByBm(@RequestParam(value = "htbh",required = false) String htbh){
         try {
             Map<String, String> param = new HashMap<String, String>();
-            param.put("bmbm", "");
+            param.put("htbh", htbh);
             List<Jlzf> map=jlzfService.getHtXxInfoByBm(param);
             return ResultUtil.success(map);
         }catch (Exception e){
@@ -151,11 +151,11 @@ public class JlzfController {
 
     @RequestMapping(value = "getHtCwInfoByBm", method = RequestMethod.GET, produces = "application/json")
     @ApiOperation(value = "获取合同详细信息(中期财务证书)")
-//    @ApiImplicitParam(paramType="query", dataType = "String", name = "pmmtgcspsqs_djbh", value = "申请单编号", required = true)
-    public Msg getHtCwInfoByBm(/*@RequestParam(value = "bmbm",required = false) String bmbm*/){
+    @ApiImplicitParam(paramType="query", dataType = "String", name = "htbh", value = "合同编号", required = false)
+    public Msg getHtCwInfoByBm(@RequestParam(value = "htbh",required = false) String htbh){
         try {
             Map<String, String> param = new HashMap<String, String>();
-            param.put("bmbm", "");
+            param.put("htbh", htbh);
             List<Jlzf_zqcwzf> map=jlzfService.getHtCwInfoByBm(param);
             return ResultUtil.success(map);
         }catch (Exception e){

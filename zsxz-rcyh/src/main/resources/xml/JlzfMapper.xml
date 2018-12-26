@@ -228,7 +228,10 @@
         select ht.htxx_htbh htbh,ht.HTXX_ID htid,ht.HTXX_HTMC htmc,xm.yhhtxx_qszh qdzh,xm.yhhtxx_zzzh zdzh,gj.HTGJXX_cgxmmc gcmc,xm.yhhtxx_gldw gldw,xm.yhhtxx_cbdw cbdw
         from djsj_htxx ht left join djsj_htxx_htgjxx gj on ht.htxx_htbh=gj.HTGJXX_htbh left join djsj_htxx_yhxmxx xm on ht.htxx_htbh=xm.yhhtxx_htbh
         where 1=1
-
+        <if test="htbh != null and htbh != ''">
+            and ht.htxx_htbh=#{htbh}
+        </if>
+        order by htbh
     </select>
 
     <!--  通过合同编号查询子目汇总信息  -->
@@ -401,6 +404,9 @@
         from djsj_htxx ht left join djsj_htxx_htgjxx gj on ht.htxx_htbh=gj.HTGJXX_htbh left join djsj_htxx_yhxmxx xm on ht.htxx_htbh=xm.yhhtxx_htbh
         left join zm_ht zm on ht.htxx_htbh=zm.zmht_htbh
         where 1=1
+        <if test="htbh != null and htbh != ''">
+            and ht.htxx_htbh=#{htbh}
+        </if>
         order by gcjl_htbh,GCJLMX_ZMH
     </select>
 
@@ -586,6 +592,9 @@
         from djsj_htxx ht left join djsj_htxx_htgjxx gj on ht.htxx_htbh=gj.HTGJXX_HTBH left join djsj_htxx_yhxmxx xm on ht.htxx_htbh=xm.yhhtxx_htbh
         left join zm_ht zm on ht.htxx_htbh=zm.zmht_htbh
         where 1=1
+        <if test="htbh != null and htbh != ''">
+            and ht.htxx_htbh=#{htbh}
+        </if>
         order by ZQCWZF_HTBH,ZQZFMX_ZMBH
     </select>
 
