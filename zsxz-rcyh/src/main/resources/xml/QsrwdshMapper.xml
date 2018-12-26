@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hdsx.rcyh.mapper.QsrwdMapper">
+
+    <insert id="insert" parameterType="com.hdsx.rcyh.entity.Qsrwd">
+
+    </insert>
+
+
+    <delete id="delete" parameterType="java.lang.String">
+
+    </delete>
+
+    <select id="getQsrwdList" parameterType="hashmap" resultType="com.hdsx.rcyh.entity.Qsrwd">
+
+    </select>
+    <update id="update" parameterType="com.hdsx.rcyh.entity.Qsrwd">
+
+    </update>
+
+</mapper>

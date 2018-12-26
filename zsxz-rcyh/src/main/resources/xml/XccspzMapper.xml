@@ -33,7 +33,8 @@
   </insert>
   <update id="update" parameterType="com.hdsx.rcyh.entity.Xccspz">
     update XCCSPZ
-    set XCCS_DWMC = #{xccsDwmc,jdbcType=VARCHAR},
+    set
+      XCCS_DWMC = #{xccsDwmc,jdbcType=VARCHAR},
       XCCS_DWBH = #{xccsDwbh,jdbcType=VARCHAR},
       XCCS_DWID = #{xccsDwid,jdbcType=VARCHAR},
       XCCS_XCLX = #{xccsXclx,jdbcType=VARCHAR},
@@ -50,6 +51,6 @@
     where XCCS_ID = #{xccsId,jdbcType=VARCHAR}
   </select>
     <select id="getXccspzAll" resultType="java.util.HashMap">
-      SELECT  * from XCCSPZ
+      SELECT  XCCS_DWMC as xccsDwmc ,XCCS_DWBH as xccsDwbh,XCCS_DWID as xccsDwid,XCCS_XCLX as xccsXclx,XCCS_RCS as xccsRcs ,XCCS_YCS as xccsYcs ,XCCS_NCS as xccsNcs,XCCS_NOTE as xccsNote from XCCSPZ
     </select>
 </mapper>

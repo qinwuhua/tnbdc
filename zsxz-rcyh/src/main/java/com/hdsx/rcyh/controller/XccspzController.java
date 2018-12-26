@@ -79,9 +79,7 @@ public class XccspzController {
     }
 
     @ApiOperation(  value = "删除一条信息")
-    @ApiImplicitParams({
-            @ApiImplicitParam(paramType="query", dataType = "String", name = "xccsId", value = "主键ID", required = true)
-    })
+    @ApiImplicitParam(name = "xccsId",value = "主键",dataType = "string",paramType = "path")
     @RequestMapping(value = "delete",method= RequestMethod.DELETE)
     public Msg<Integer> delete(@RequestParam("xccsId") String xccsId) {
 
