@@ -26,6 +26,8 @@ public class YhycServiceImpl implements YhycService {
 
     @Override
     public int addGcyssqd(Gcyssqd gcyssqd) {
+        String djbh = "GCYS_" + System.currentTimeMillis();
+        gcyssqd.setDjbh(djbh);
         return yhycMapper.addGcyssqd(gcyssqd);
     }
 

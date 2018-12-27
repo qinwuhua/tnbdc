@@ -41,6 +41,7 @@ public class SgjhServiceImpl implements SgjhService {
                     sgjhMapper.updateSgjhmx(sgjhsbmx);
                 }else {
                     List<Sgjhsbmx> sgjhsbmxList = new ArrayList<>();
+                    sgjhsbmx.setMid(sgjh.getId());
                     sgjhsbmxList.add(sgjhsbmx);
                     sgjhMapper.addSgjhmx(sgjhsbmxList);
                 }
@@ -84,6 +85,7 @@ public class SgjhServiceImpl implements SgjhService {
                     sgjhMapper.updateWcSgjhmx(sgjhwcmx);
                 }else {
                     List<Sgjhwcmx> sgjhwcmxList = new ArrayList<>();
+                    sgjhwcmx.setMid(sgjhwc.getId());
                     sgjhwcmxList.add(sgjhwcmx);
                     sgjhMapper.addWcsgjhmx(sgjhwcmxList);
                 }

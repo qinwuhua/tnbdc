@@ -21,7 +21,7 @@ public class Sgjhwcmx implements Serializable {
     private String zdzh;
     private BigDecimal yjgcl;
     private BigDecimal wcgcl;
-    private String jhkgrq;
+    private String jhksrq;
     private String jhjsrq;
     private String sjksrq;
     private String sjjsrq;
