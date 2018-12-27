@@ -71,8 +71,12 @@
         to_char(sysdate,'yyyy/mm/dd') PMMTJGJSS_BZRQ
         from djsj_htxx ht left join djsj_htxx_htgjxx gj on ht.htxx_htbh=gj.HTGJXX_HTBH
         left join djsj_htxx_yhxmxx xm on ht.htxx_htbh=xm.yhhtxx_htbh
-        left join (select sum(nvl(gcjlmx_htdj,0)*nvl(gcjlmx_htsl,0)) jlhtje,sum(nvl(gcjlmx_htdj,0)*nvl(gcjlmx_wcsl,0)) jlje,sum(nvl(gcjlmx_kkje,0)) fj,gcjlmx_htbh from gcjldmx group by gcjlmx_htbh) jl on ht.htxx_htbh=jl.gcjlmx_htbh
-        left join (select zqzfmx_htbh,sum(nvl(zqzfmx_bqje,0)) zfje from zqcwzfzs_jlmx group by zqzfmx_htbh) zf on ht.htxx_htbh=zf.zqzfmx_htbh
+        left join (select sum(nvl(gcjlmx_htdj,0)*nvl(gcjlmx_htsl,0)) jlhtje,sum(nvl(gcjlmx_htdj,0)*nvl(gcjlmx_wcsl,0)) jlje,sum(nvl(gcjlmx_kkje,0)) fj,gcjlmx_htbh from gcjldmx
+        <if test="zmid != null and zmid !=''"> where 1=1 and gcjlmx_zmid in (${zmid}) </if>
+        group by gcjlmx_htbh) jl on ht.htxx_htbh=jl.gcjlmx_htbh
+        left join (select zqzfmx_htbh,sum(nvl(zqzfmx_bqje,0)) zfje from zqcwzfzs_jlmx
+        <if test="zmid != null and zmid !=''"> where 1=1 and zqzfmx_zmid in (${zmid}) </if>
+        group by zqzfmx_htbh) zf on ht.htxx_htbh=zf.zqzfmx_htbh
         left join (select pmmtgcspsqs_htbh,sum(nvl(pmmtgcspsqs_spje,0)) pmmtgcspsqs_spje from gcspsqs group by pmmtgcspsqs_htbh) sp on ht.htxx_htbh=sp.pmmtgcspsqs_htbh
         left join  (
         select zm.zmht_zmh pmmtjgjssmx_zmbh,zm.zmht_id pmmtjgjssmx_zmid,zm.zmht_htbh pmmtjgjssmx_htbh,zm.zmht_zmmc pmmtjgjssmx_zmmc,zm.zmht_jldw pmmtjgjssmx_dw,zm.zmht_dj pmmtjgjssmx_htdj,
@@ -80,8 +84,9 @@
         NVL(gc.gcjlmx_wcsl,0) pmmtjgjssmx_sjjlsl,nvl(gc.gcjlmx_wcsl,0)* nvl(zm.zmht_dj,0) pmmtjgjssmx_sjjlje,
         NVL(zq.zqzfmx_bqsl,0) pmmtjgjssmx_jgjssl,nvl(zq.zqzfmx_bqsl,0)* nvl(zm.zmht_dj,0) pmmtjgjssmx_jgjsje,
         nvl(zq.zqzfmx_bqsl,0)-nvl(gc.gcjlmx_wcsl,0) pmmtjgjssmx_ysjbsl,nvl(zq.zqzfmx_bqsl,0)* nvl(zm.zmht_dj,0)-nvl(gc.gcjlmx_wcsl,0)* nvl(zm.zmht_dj,0) pmmtjgjssmx_ysjbje, '' PMMTJGJSSMX_remark
-        from zm_ht zm left join  (select sum(nvl(t1.gcjlmx_wcsl,0)) gcjlmx_wcsl,gcjlmx_zmid  from gcjldmx t1 group by t1.gcjlmx_zmid) gc on zm.zmht_id=gc.gcjlmx_zmid
-        left join (select t2.zqzfmx_zmid,sum(nvl(t2.zqzfmx_bqsl,0)) zqzfmx_bqsl,sum(nvl(t2.zqzfmx_bqje,0)) zqzfmx_bqje  from zqcwzfzs_jlmx t2 group by t2.zqzfmx_zmid) zq on zm.zmht_id=zq.zqzfmx_zmid
+        from zm_ht zm left join  (select sum(nvl(t1.gcjlmx_wcsl,0)) gcjlmx_wcsl,gcjlmx_zmid  from gcjldmx t1 <if test="zmid != null and zmid !=''"> where 1=1 and gcjlmx_zmid in (${zmid}) </if> group by t1.gcjlmx_zmid) gc on zm.zmht_id=gc.gcjlmx_zmid
+        left join (select t2.zqzfmx_zmid,sum(nvl(t2.zqzfmx_bqsl,0)) zqzfmx_bqsl,sum(nvl(t2.zqzfmx_bqje,0)) zqzfmx_bqje  from zqcwzfzs_jlmx t2 <if test="zmid != null and zmid !=''"> where 1=1 and zqzfmx_zmid in (${zmid}) </if> group by t2.zqzfmx_zmid) zq on zm.zmht_id=zq.zqzfmx_zmid
+        <if test="zmid != null and zmid !=''"> where 1=1 and zm.zmht_id in (${zmid}) </if>
         ) zmzb on ht.htxx_htbh=zmzb.pmmtjgjssmx_htbh
         where 1=1
 
@@ -232,7 +237,10 @@
         </foreach>
     </delete>
 
-
+    <delete id="delJgjsMxById" parameterType="hashmap" >
+        delete from JGJSSMX
+        where pmmtjgjssmx_id = #{value}
+    </delete>
     <!-- 查询计日工审批列表数据 -->
     <select id="getJgjssList" parameterType="hashmap" resultMap="jgjs">
 

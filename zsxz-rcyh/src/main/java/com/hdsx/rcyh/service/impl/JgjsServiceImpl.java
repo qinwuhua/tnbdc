@@ -58,4 +58,9 @@ public class JgjsServiceImpl implements JgjsService {
         List<Jgjs> list = jgjsMapper.getJgjssList(param);
         return  list;
     }
+
+    @Override
+    public int delJgjsMxById(String pmmtjgjssmx_id) {
+        return jgjsMapper.delJgjsMxById(pmmtjgjssmx_id);
+    }
 }
