@@ -18,7 +18,7 @@ public class Qsrwd implements Serializable {
     private String qsrwddjbh;
     private String qsrwdxxly;
     private String qsrwdsjlx;
-    private Date qsrwdsjsj;
+    private String qsrwdsjsj;
     private String qsrwdsjdd;
     private String qsrwdsjld;
     private String qsrwdfx;
@@ -28,7 +28,7 @@ public class Qsrwd implements Serializable {
     private String qsrwdlmjbsy;
     private String qsrwdsjsm;
     private String qsrwdstbr;
-    private Date qsrwdtbsj;
+    private String qsrwdtbsj;
     private String qsrwdtbdw;
     private String qsrwdtbbm;
     private String qsrwdbz;

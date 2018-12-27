@@ -10,8 +10,6 @@ import java.util.Map;
 public interface QsrwdMapper {
     int insert(Qsrwd qsrwd);
 
-
-
     int update(Qsrwd qsrwd);
 
     List<Qsrwd> getQsrwdList(Map<String, String> param);

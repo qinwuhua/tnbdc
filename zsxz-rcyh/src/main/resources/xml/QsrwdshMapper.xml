@@ -9,11 +9,11 @@
       QSRWD_BZ,QSRWD_SHZT
       )
       values (#{qsrwdid,jdbcType=VARCHAR}, #{qsrwddjbh,jdbcType=VARCHAR}, #{qsrwdxxly,jdbcType=VARCHAR},
-      #{qsrwdsjlx,jdbcType=VARCHAR}, #{qsrwdsjsj,jdbcType=TIMESTAMP}, #{qsrwdsjdd,jdbcType=VARCHAR},
+      #{qsrwdsjlx,jdbcType=VARCHAR}, to_date(#{qsrwdsjsj},'yyyy/mm/dd'), #{qsrwdsjdd,jdbcType=VARCHAR},
       #{qsrwdsjld,jdbcType=VARCHAR}, #{qsrwdfx,jdbcType=VARCHAR}, #{qsrwdzh,jdbcType=VARCHAR}, #{qsrwdlxr,jdbcType=VARCHAR},
       #{qsrwdlxdh,jdbcType=VARCHAR}, #{qsrwdlmjbsy,jdbcType=VARCHAR},
       #{qsrwdsjsm,jdbcType=VARCHAR}, #{qsrwdstbr,jdbcType=VARCHAR}
-      , #{qsrwdtbsj,jdbcType=TIMESTAMP}
+      , to_date(#{qsrwdtbsj},'yyyy/mm/dd')
       , #{qsrwdtbdw,jdbcType=VARCHAR}
       , #{qsrwdtbbm,jdbcType=VARCHAR}
       , #{qsrwdbz,jdbcType=VARCHAR}
@@ -46,8 +46,8 @@
         T.QSRWD_TBBM qsrwdtbbm,
         T.QSRWD_BZ qsrwdbz,
         T.QSRWD_SHZT qsrwdshzt,
-        T.QSRWD_SJSJ qsrwdsjsj,
-        T.QSRWD_TBSJ qsrwdtbsj
+        to_date(T.QSRWD_SJSJ ,'yyyy/mm/dd') qsrwdsjsj,
+        to_date(T.QSRWD_TBSJ ,'yyyy/mm/dd') qsrwdtbsj
         FROM XXRW_QSRWD T
         <if test="qsrwdsjlx != null and qsrwdsjlx != ''">
             and T.qsrwdsjlx=#{qsrwdsjlx}
@@ -64,13 +64,13 @@
         ORDER BY qsrwdsjsj DESC
     </select>
     <update id="update" parameterType="com.hdsx.rcyh.entity.Qsrwd">
- update XCCSPZ
+ update XXRW_QSRWD
     set
       QSRWD_ID = #{qsrwdid,jdbcType=VARCHAR},
       QSRWD_DJBH = #{qsrwddjbh,jdbcType=VARCHAR},
       QSRWD_XXLY = #{qsrwdxxly,jdbcType=VARCHAR},
       QSRWD_SJLX = #{qsrwdsjlx,jdbcType=VARCHAR},
-      QSRWD_SJSJ = #{qsrwdsjsj,jdbcType=TIMESTAMP},
+      QSRWD_SJSJ = to_date(#{qsrwdsjsj},'yyyy/mm/dd'),
       QSRWD_SJDD = #{qsrwdsjdd,jdbcType=VARCHAR},
       QSRWD_SJLD = #{qsrwdsjld,jdbcType=VARCHAR},
       QSRWD_FX = #{qsrwdfx,jdbcType=VARCHAR},
@@ -80,7 +80,7 @@
       QSRWD_LXJBSY = #{qsrwdlmjbsy,jdbcType=VARCHAR},
       QSRWD_SJSM = #{qsrwdsjsm,jdbcType=VARCHAR},
       QSRWD_TBR = #{qsrwdstbr,jdbcType=VARCHAR},
-      QSRWD_TBSJ = #{qsrwdtbsj,jdbcType=TIMESTAMP},
+      QSRWD_TBSJ = to_date(#{qsrwdtbsj},'yyyy/mm/dd'),
       QSRWD_TBDW = #{qsrwdtbdw,jdbcType=VARCHAR},
       QSRWD_TBBM = #{qsrwdtbbm,jdbcType=VARCHAR},
       QSRWD_BZ = #{qsrwdbz,jdbcType=VARCHAR},

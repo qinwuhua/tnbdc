@@ -33,7 +33,7 @@ public class YhrwdshContrller {
         }
     }
 
-    @ApiOperation(value = "查询养护单位", httpMethod = "GET")
+    @ApiOperation(value = "查询管理单位", httpMethod = "GET")
     @RequestMapping(value = "/querygldw/", method = {RequestMethod.GET})
     public Msg querygldw() {
         try {

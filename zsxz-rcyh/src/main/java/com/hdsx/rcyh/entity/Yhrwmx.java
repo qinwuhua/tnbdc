@@ -25,5 +25,5 @@ public class Yhrwmx implements Serializable {
     private String yhrwdgcllx;
     private String yhrwdzh;
     private String yhrwdbhsm;
-    private Date yhrwdsj;
+    private String yhrwdsj;
 }
