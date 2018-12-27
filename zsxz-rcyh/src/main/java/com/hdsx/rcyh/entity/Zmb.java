@@ -16,6 +16,6 @@ import java.util.List;
 public class Zmb implements Serializable{
 
     private static final long serialVersionUID = 3834262618582486202L;
-    private String gcjlmx_id, gcjl_id, gcjlmx_mid, gcjlmx_zmh, gcjlmx_zmmc, gcjlmx_jldw, gcjlmx_jldwid, gcjlmx_htsl, gcjlmx_jlsl, gcjlmx_htdj, gcjlmx_jlje, gcjlmx_kkje, gcjlmx_zje, gcjlmx_htje, gcjlmx_djbh, gcjlmx_dw, gcjlmx_zmid;
+    private String gcjlmx_id, gcjl_id, gcjlmx_mid, gcjlmx_zmh, gcjlmx_zmmc, gcjlmx_jldw, gcjlmx_jldwid, gcjlmx_htsl, gcjlmx_jlsl, gcjlmx_htdj, gcjlmx_jlje, gcjlmx_kkje, gcjlmx_zje, gcjlmx_htje, gcjlmx_djbh, gcjlmx_zmid,gcjlmx_htbh,gcjlmx_wcsl;
 
 }

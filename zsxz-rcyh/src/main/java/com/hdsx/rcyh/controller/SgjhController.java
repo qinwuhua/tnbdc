@@ -17,7 +17,7 @@ import java.util.HashMap;
 
 @RestController
 @RequestMapping("sgjh")
-@Api(value = "日常养护工程-月度实施计划")
+@Api(value = "日常养护工程-月度实施计划",description = "月度实施计划控制器")
 public class SgjhController {
 
     @Resource
@@ -83,9 +83,10 @@ public class SgjhController {
 
     @DeleteMapping("deleteSgjh")
     @ApiOperation("删除月度施工计划信息")
-    public Msg deleteSgjh(@RequestParam("id")String id){
+    @ApiImplicitParam(paramType="query", dataType = "array", name = "ids", value = "主键ID", allowMultiple = true, required = true)
+    public Msg deleteSgjh(@RequestParam("ids")String[] ids){
         try {
-            if (sgjhService.deleteSgjh(id) > 0){
+            if (sgjhService.deleteSgjh(ids) > 0){
                 return ResultUtil.success("删除成功！");
             }else {
                 return ResultUtil.error("删除失败！");
@@ -164,9 +165,10 @@ public class SgjhController {
 
     @DeleteMapping("deleteWcSgjh")
     @ApiOperation("删除月度施工计划信息")
-    public Msg deleteWcSgjh(@RequestParam("id")String id){
+    @ApiImplicitParam(paramType="query", dataType = "array", name = "ids", value = "主键ID", allowMultiple = true, required = true)
+    public Msg deleteWcSgjh(@RequestParam("ids")String[] ids){
         try {
-            if (sgjhService.deleteWcSgjh(id) > 0){
+            if (sgjhService.deleteWcSgjh(ids) > 0){
                 return ResultUtil.success("删除成功！");
             }else {
                 return ResultUtil.error("删除失败！");
@@ -183,8 +185,40 @@ public class SgjhController {
         try {
             return ResultUtil.success(sgjhService.getWcSgjhmxById(id));
         }catch (Exception e){
-            return ResultUtil.error("查询失败！");
+            e.printStackTrace();
+            return ResultUtil.error("接口异常！");
         }
     }
 
+    @DeleteMapping("deleteSgjhmxByIds")
+    @ApiOperation("删除月度施工计划明细表信息")
+    @ApiImplicitParam(paramType="query", dataType = "array", name = "ids", value = "主键ID", allowMultiple = true, required = true)
+    public Msg deleteSgjhmxByIds(@RequestParam("ids")String[] ids){
+        try {
+            if (sgjhService.deleteSgjhmxByIds(ids)>0){
+                return ResultUtil.success("删除成功！");
+            }else {
+                return ResultUtil.error("删除失败！");
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResultUtil.error("接口异常！");
+        }
+    }
+
+    @DeleteMapping("deleteWcSgjhmxByIds")
+    @ApiOperation("删除月度施工完工明细表信息")
+    @ApiImplicitParam(paramType="query", dataType = "array", name = "ids", value = "主键ID", allowMultiple = true, required = true)
+    public Msg deleteWcSgjhmxByIds(@RequestParam("ids")String[] ids){
+        try {
+            if (sgjhService.deleteWcSgjhmxByIds(ids)>0){
+                return ResultUtil.success("删除成功！");
+            }else {
+                return ResultUtil.error("删除失败！");
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResultUtil.error("接口异常！");
+        }
+    }
 }

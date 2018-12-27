@@ -22,11 +22,11 @@ public interface SgjhMapper {
 
     int updateSgjhmx(Sgjhsbmx sgjhsbmx);
 
-    int deleteSgjh(String id);
+    int deleteSgjh(String[] ids);
 
-    List<HashMap<String,Object>> getSgjhmxById(String mid);
+    List<Sgjhsbmx> getSgjhmxById(String mid);
 
-    int deleteSgjhmx(String id);
+    int deleteSgjhmx(String[] ids);
 
     List<HashMap<String,Object>> getWcSgjhAll(HashMap<String,String> paramMap);
 
@@ -38,10 +38,14 @@ public interface SgjhMapper {
 
     int updateWcSgjhmx(Sgjhwcmx sgjhwcmx);
 
-    int deleteWcSgjh(String id);
+    int deleteWcSgjh(String[] ids);
 
-    int deleteWcSgjhmx(String id);
+    int deleteWcSgjhmx(String[] ids);
 
-    List<HashMap<String,Object>> getWcSgjhmxById(String id);
+    List<Sgjhwcmx> getWcSgjhmxById(String id);
+
+    int deleteSgjhmxByIds(String[] ids);
+
+    int deleteWcSgjhmxByIds(String[] ids);
 
 }

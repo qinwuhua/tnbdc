@@ -5,9 +5,14 @@
 
 <mapper namespace="com.hdsx.common.mapper.FileMapper">
 
-    <insert id="addFiles" parameterType="hashmap">
+    <insert id="addFileDataToFiles" parameterType="java.util.List">
         INSERT INTO files(id,files_id, files_name, files_depict, files_path, files_date, files_status, remarks, files_dx, files_yname, files_type, files_mjlx)
-        VALUES (#{id,jdbcType=VARCHAR},#{files_id,jdbcType=VARCHAR},#{files_name,jdbcType=VARCHAR},#{files_depict,jdbcType=VARCHAR},#{files_path,jdbcType=VARCHAR},to_char(sysdate,'YYYY-MM-DD HH24:MI:SS'),#{files_status,jdbcType=VARCHAR} ,#{remarks,jdbcType=VARCHAR}, #{files_dx,jdbcType=VARCHAR},#{files_yname,jdbcType=VARCHAR},#{files_type,jdbcType=VARCHAR},#{files_mjlx,jdbcType=VARCHAR})
+        <foreach collection="list" item="item" index="index" open="(" close=")" separator="union">
+            SELECT #{item.id,jdbcType=VARCHAR},#{item.file_id,jdbcType=VARCHAR},#{item.file_name,jdbcType=VARCHAR},
+              #{item.file_depict,jdbcType=VARCHAR},#{item.file_path,jdbcType=VARCHAR},to_char(sysdate,'YYYY-MM-DD HH24:MI:SS'),
+              #{item.file_status,jdbcType=VARCHAR},#{item.file_remarks,jdbcType=VARCHAR}, #{item.file_dx,jdbcType=VARCHAR},#{item.file_yname,jdbcType=VARCHAR},
+              #{item.file_type,jdbcType=VARCHAR},#{item.file_mjlx,jdbcType=VARCHAR} FROM DUAL
+        </foreach>
     </insert>
 
     <select id="getFilesDataById" parameterType="String" resultType="hashmap">

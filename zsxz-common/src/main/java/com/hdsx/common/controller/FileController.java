@@ -1,13 +1,18 @@
 package com.hdsx.common.controller;
 
+import com.hdsx.common.entity.FileData;
 import com.hdsx.common.entity.Msg;
 import com.hdsx.common.service.FileService;
 import com.hdsx.common.utils.ResultUtil;
-import io.swagger.annotations.*;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
+import java.util.List;
 
 @RestController
 @Api(value = "文件信息")
@@ -17,25 +22,24 @@ public class FileController {
     @Resource
     private FileService fileService;
 
-    @PostMapping("uploadFiles")
+    @PostMapping(value = "uploadFile")
     @ApiOperation(value = "文件上传信息")
-    @ApiImplicitParams({
-            @ApiImplicitParam(paramType="query", dataType = "String", name = "id", value = "表单主键ID", required = true),
-            @ApiImplicitParam(paramType="formData", dataType = "MultipartFile", name = "multipartFiles", value = "附件", allowMultiple = true, required = true),
-            @ApiImplicitParam(paramType="query", dataType = "String", name = "type", value = "文件类型", required = true)
-    })
-    public Msg uploadFiles(@RequestParam("id") String id,
-                           @RequestParam("multipartFiles") MultipartFile[] multipartFiles,
-                           @RequestParam("type") String type) {
+    public Msg uploadFiles(@RequestParam("multipartFile") MultipartFile multipartFile) {
         try {
-            return ResultUtil.success(fileService.uploadFiles(id, multipartFiles, type));
+            HashMap<String, Object> fileMap = fileService.uploadFiles(multipartFile);
+            if (fileMap != null){
+                return ResultUtil.success(fileMap);
+            }else {
+                return ResultUtil.error("文件上传失败！");
+            }
         } catch (Exception e) {
-            return ResultUtil.error("文件上传失败！");
+            e.printStackTrace();
+            return ResultUtil.error("接口错误！");
         }
     }
 
     @PostMapping("getFilesDataById")
-    @ApiOperation(value = "根据外键ID查找文件")
+    @ApiOperation(value = "根据表单ID查找文件")
     @ApiImplicitParam(paramType="query", dataType = "String", name = "id", value = "表单主键ID", required = true)
     public Msg getFilesDataById(@RequestParam("id") String id){
         try {
@@ -46,30 +50,48 @@ public class FileController {
     }
 
     @DeleteMapping("deleteFilesById")
-    @ApiOperation("根据外键ID删除文件")
+    @ApiOperation("根据表单ID删除文件")
     @ApiImplicitParam(paramType="query", dataType = "String", name = "id", value = "表单主键ID", required = true)
     public Msg deleteFilesById(@RequestParam("id")String id){
-        if (fileService.deleteFilesById(id)){
-            return ResultUtil.success("文件删除成功！");
-        }else {
-            return ResultUtil.error("文件删除失败！");
+        try {
+            if (fileService.deleteFilesById(id)>0){
+                return ResultUtil.success("文件删除成功！");
+            }else {
+                return ResultUtil.error("文件删除失败！");
+            }
+        }catch (Exception e){
+            return ResultUtil.error("接口出错！");
         }
     }
 
-    @PutMapping("updateFilesById")
-    @ApiOperation("根据根据外键ID更新文件")
-    @ApiImplicitParams({
-            @ApiImplicitParam(paramType="query", dataType = "String", name = "id", value = "表单主键ID", required = true),
-            @ApiImplicitParam(paramType="formData", dataType = "MultipartFile", name = "multipartFiles", value = "附件", allowMultiple = true, required = true),
-            @ApiImplicitParam(paramType="query", dataType = "String", name = "type", value = "文件类型", required = true)
-    })
-    public Msg updateFiles(@RequestParam("id")String id,
-                              @RequestParam("multipartFiles") MultipartFile[] multipartFiles,
-                              @RequestParam("type") String type){
+
+    @PostMapping("addFileDataToFiles")
+    @ApiOperation("保存文件信息")
+    @ApiImplicitParam(paramType="query", dataType = "array", name = "fileDataList", value = "文件信息", allowMultiple = true, required = true)
+    public Msg addFileDataToFiles(@RequestParam("fileDataList") List<FileData> fileDataList){
         try {
-            return ResultUtil.success(fileService.updateFiles(id, multipartFiles, type));
-        } catch (Exception e) {
-            return ResultUtil.error("文件更新失败！");
+            if (fileService.addFileDataToFiles(fileDataList) > 0){
+                return ResultUtil.success("文件添加成功！");
+            }else {
+                return ResultUtil.error("文件添加失败!");
+            }
+        }catch (Exception e){
+            return ResultUtil.error("接口出错！");
+        }
+    }
+
+    @PostMapping("updateFileDataToFiles")
+    @ApiOperation("编辑文件信息")
+    @ApiImplicitParam(paramType="query", dataType = "array", name = "fileDataList", value = "文件信息", allowMultiple = true, required = true)
+    public Msg updateFileDataToFiles(@RequestParam("fileDataList") List<FileData> fileDataList){
+        try {
+            if (fileService.updateFileDataToFiles(fileDataList) > 0){
+                return ResultUtil.success("文件更新成功！");
+            }else {
+                return ResultUtil.error("文件更新失败!");
+            }
+        }catch (Exception e){
+            return ResultUtil.error("接口出错！");
         }
     }
 }
