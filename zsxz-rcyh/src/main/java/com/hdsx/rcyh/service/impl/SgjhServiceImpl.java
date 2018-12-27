@@ -1,15 +1,13 @@
 package com.hdsx.rcyh.service.impl;
 
 import com.github.pagehelper.PageHelper;
-import com.hdsx.rcyh.entity.Sgjh;
-import com.hdsx.rcyh.entity.Sgjhsbmx;
-import com.hdsx.rcyh.entity.Sgjhwc;
-import com.hdsx.rcyh.entity.Sgjhwcmx;
+import com.hdsx.rcyh.entity.*;
 import com.hdsx.rcyh.mapper.SgjhMapper;
 import com.hdsx.rcyh.service.SgjhService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -38,8 +36,14 @@ public class SgjhServiceImpl implements SgjhService {
     public int upateSgjh(Sgjh sgjh) {
         if (sgjh.getSgjhsbmx() != null && sgjh.getSgjhsbmx().size() > 0){
             for (Sgjhsbmx sgjhsbmx : sgjh.getSgjhsbmx()){
-                sgjhsbmx.setMid(sgjh.getId());
-                sgjhMapper.updateSgjhmx(sgjhsbmx);
+                if (sgjhsbmx.getId() != null && sgjhsbmx.getId().length() > 0){
+                    sgjhsbmx.setMid(sgjh.getId());
+                    sgjhMapper.updateSgjhmx(sgjhsbmx);
+                }else {
+                    List<Sgjhsbmx> sgjhsbmxList = new ArrayList<>();
+                    sgjhsbmxList.add(sgjhsbmx);
+                    sgjhMapper.addSgjhmx(sgjhsbmxList);
+                }
             }
         }
         return sgjhMapper.updateSgjh(sgjh);
@@ -75,8 +79,14 @@ public class SgjhServiceImpl implements SgjhService {
     public int upateWcsgjh(Sgjhwc sgjhwc) {
         if (sgjhwc.getSgjhwcmx() != null && sgjhwc.getSgjhwcmx().size() > 0){
             for (Sgjhwcmx sgjhwcmx : sgjhwc.getSgjhwcmx()){
-                sgjhwcmx.setMid(sgjhwc.getId());
-                sgjhMapper.updateWcSgjhmx(sgjhwcmx);
+                if (sgjhwcmx.getId() != null && sgjhwcmx.getId().length() > 0){
+                    sgjhwcmx.setMid(sgjhwc.getId());
+                    sgjhMapper.updateWcSgjhmx(sgjhwcmx);
+                }else {
+                    List<Sgjhwcmx> sgjhwcmxList = new ArrayList<>();
+                    sgjhwcmxList.add(sgjhwcmx);
+                    sgjhMapper.addWcsgjhmx(sgjhwcmxList);
+                }
             }
         }
         return sgjhMapper.upateWcsgjh(sgjhwc);

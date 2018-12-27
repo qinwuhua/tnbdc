@@ -18,11 +18,11 @@ public interface LyjcMapper {
 
     int addLyjcmxb(List<Lyjcmxb> lyjcmxbs);
 
-    int deleteLyjcmxbById(String[] ids);
+    int deleteLyjcmxbByMid(String[] ids);
 
     int deleteLyjcById(String[] ids);
 
-    List<Lyjcmxb> getLyjcbmxById(String id);
+    List<Lyjcmxb> getLyjcbmxByMid(String id);
 
     int updateLyjc(Lyjc lyjc);
 
@@ -34,9 +34,9 @@ public interface LyjcMapper {
 
     int addJczbmxb(List<Jczbmxb> jczbmxbs);
 
-    int deleteJczbmxbById(String[] ids);
+    int deleteJczbmxbByMid(String[] ids);
 
-    int deleteJczbById(String[] ids);
+    int deleteJczbByIds(String[] ids);
 
     List<Jczbmxb> getJczbmxById(String id);
 
@@ -44,7 +44,7 @@ public interface LyjcMapper {
 
     int updateJczbmxb(Jczbmxb jczbmxb);
 
-    int deleteLyjcmxbByids(String[] ids);
+    int deleteLyjcmxbByIds(String[] ids);
 
     int deleteJczbmxByIds(String[] ids);
 }

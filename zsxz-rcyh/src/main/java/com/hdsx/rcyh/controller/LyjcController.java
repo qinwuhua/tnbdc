@@ -84,8 +84,6 @@ public class LyjcController{
     }
 
 
-
-
     @PutMapping("updateLyjc")
     @ApiOperation(value = "更新履约检查信息")
     public Msg updateLyjc(@RequestBody Lyjc lyjc){
@@ -101,12 +99,12 @@ public class LyjcController{
         }
     }
 
-    @GetMapping("getLyjcbmxById")
+    @GetMapping("getLyjcbmxByMid")
     @ApiImplicitParam(paramType="query", dataType = "String", name = "id", value = "主键ID", required = true)
     @ApiOperation(value = "根据id查询履约检查表信息")
-    public Msg getLyjcbmxById(@RequestParam("id") String id){
+    public Msg getLyjcbmxByMid(@RequestParam("id") String id){
         try {
-            return ResultUtil.success(lyjcService.getLyjcbmxById(id));
+            return ResultUtil.success(lyjcService.getLyjcbmxByMid(id));
         }catch (Exception e){
             e.printStackTrace();
             return ResultUtil.error("接口异常！");
@@ -159,7 +157,7 @@ public class LyjcController{
     @DeleteMapping("deleteJczb")
     @ApiImplicitParam(paramType="query", dataType = "array", name = "ids", value = "主键ID", allowMultiple = true, required = true)
     @ApiOperation(value = "删除履约检查信息")
-    public Msg deleteJczb(@RequestParam("id") String[] ids){
+    public Msg deleteJczb(@RequestParam("ids") String[] ids){
         try {
             if (lyjcService.deleteJczb(ids)>0){
                 return ResultUtil.success("添加信息成功！");
@@ -204,7 +202,7 @@ public class LyjcController{
     @ApiImplicitParam(paramType="query", dataType = "array", name = "ids", value = "主键ID", allowMultiple = true, required = true)
     public Msg deleteLyjcmxb(@RequestParam("ids")String[] ids){
         try {
-            if (lyjcService.deleteLyjcmxbByids(ids) > 0){
+            if (lyjcService.deleteLyjcmxbByIds(ids) > 0){
                 return ResultUtil.success("删除成功！");
             }else {
                 return ResultUtil.error("删除失败！");

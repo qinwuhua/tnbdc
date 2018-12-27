@@ -18,7 +18,7 @@ public interface LyjcService {
 
     int updateLyjc(Lyjc lyjc);
 
-    List<Lyjcmxb> getLyjcbmxById(String id);
+    List<Lyjcmxb> getLyjcbmxByMid(String id);
 
     List<Jczb> getJczbAll(HashMap<String,String> paramMap ,int pageNum, int pageSize);
 
@@ -30,7 +30,7 @@ public interface LyjcService {
 
     List<Jczbmxb> getJczbmxById(String id);
 
-    int deleteLyjcmxbByids(String[] ids);
+    int deleteLyjcmxbByIds(String[] ids);
 
     int deleteJczbmxByIds(String[] ids);
 }
