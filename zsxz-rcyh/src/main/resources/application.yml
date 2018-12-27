@@ -5,8 +5,11 @@ spring:
   application:
     name: zsxz-rcyh
   datasource:
-    url: jdbc:oracle:thin:@211.101.37.237:1521:orcl
-    username: zsxz
+    #url: jdbc:oracle:thin:@211.101.37.237:1521:orcl
+    #username: zsxz
+    #password: zsxz
+    url: jdbc:oracle:thin:@192.168.10.230:1521:orcl
+    username: c##zsxz
     password: zsxz
     driver-class-name: oracle.jdbc.driver.OracleDriver
     type: com.alibaba.druid.pool.DruidDataSource

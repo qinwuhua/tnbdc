@@ -28,11 +28,20 @@ public class JgjsController {
     private JgjsService jgjsService;
     @RequestMapping(value = "getHtJgInfoByBm", method = RequestMethod.GET, produces = "application/json")
     @ApiOperation(value = "获取合同详细信息(交工结算)")
-    @ApiImplicitParam(paramType="query", dataType = "String", name = "htbh", value = "合同编号", required = false)
-    public Msg getHtCwInfoByBm(@RequestParam(value = "htbh",required = false) String htbh){
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "htbh", value = "合同编号", required = false),
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "zmids", value = "子目id（以逗号隔开）", required = false)
+    })
+
+    public Msg getHtCwInfoByBm(@RequestParam(value = "htbh",required = false) String htbh,
+                               @RequestParam(value = "zmids",required = false) String zmids){
         try {
             Map<String, String> param = new HashMap<String, String>();
             param.put("htbh", htbh);
+            if(zmids !=null && !"".equals(zmids)){
+                zmids="'"+zmids.replaceAll(",","','")+"'";
+            }
+            param.put("zmid", zmids);
             List<Jgjs> map=jgjsService.getHtCwInfoByBm(param);
             return ResultUtil.success(map);
         }catch (Exception e){
@@ -86,6 +95,24 @@ public class JgjsController {
                 l.add(pmmtgcspsqs_djbh[i]);
             }
             int flag=jgjsService.delJgjssForJgjs(l);
+            if(flag>0)
+                return ResultUtil.success("删除成功");
+            else
+                return ResultUtil.error("删除失败");
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResultUtil.error("删除失败，接口异常");
+        }
+
+    }
+
+    @RequestMapping(value = "delJgjsMxById", method = RequestMethod.DELETE, produces = "application/json")
+    @ApiOperation(value = "通过明细id删除交工结算书明细数据")
+    @ApiImplicitParam(paramType="query", dataType = "String", name = "pmmtjgjssmx_id", value = "明细id(以“,”隔开)", required = true)
+    public Msg delJgjsMxById(@RequestParam(value = "pmmtjgjssmx_id",required = true) String pmmtjgjssmx_id){
+        try {
+
+            int flag=jgjsService.delJgjsMxById(pmmtjgjssmx_id);
             if(flag>0)
                 return ResultUtil.success("删除成功");
             else

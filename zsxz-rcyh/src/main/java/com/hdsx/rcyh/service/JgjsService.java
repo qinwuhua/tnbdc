@@ -20,4 +20,6 @@ public interface JgjsService {
     Jgjs getJgjssInfoByDjbh(String pmmtjgjss_jssbh);
 
     List<Jgjs> getJgjssList(Map<String, String> param, int pageNum, int pageSize);
+
+    int delJgjsMxById(String pmmtjgjssmx_id);
 }

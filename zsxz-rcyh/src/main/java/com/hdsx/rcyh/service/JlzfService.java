@@ -65,4 +65,10 @@ public interface JlzfService {
     List<Jlzf_zqcwzfmx> getZqcwzfReport(Map<String, String> param);
 
     List<Map<String, String>> getZqcwzfHzbReport(Map<String, String> param);
+
+    int delJgrspMxById(String jrgmx_id);
+
+    int delGcjldMxById(String gcjlmx_id);
+
+    int delZqcwzfMxById(String zqzfmx_id);
 }

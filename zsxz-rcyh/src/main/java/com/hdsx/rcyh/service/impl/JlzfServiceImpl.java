@@ -208,5 +208,20 @@ public class JlzfServiceImpl implements JlzfService {
         return jlzfMapper.getZqcwzfHzbReport(param);
     }
 
+    @Override
+    public int delJgrspMxById(String jrgmx_id) {
+        return jlzfMapper.delJgrspMxById(jrgmx_id);
+    }
+
+    @Override
+    public int delGcjldMxById(String gcjlmx_id) {
+        return jlzfMapper.delGcjldMxById(gcjlmx_id);
+    }
+
+    @Override
+    public int delZqcwzfMxById(String zqzfmx_id) {
+        return jlzfMapper.delZqcwzfMxById(zqzfmx_id);
+    }
+
 
 }
