@@ -18,11 +18,12 @@ public class Yhrwmx implements Serializable {
     private String yhrwdsjbh;
     private String yhrwdxcdw;
     private String yhrwdcd;
+    private String yhrwdxcfx;
     private String yhrwddwgc;
     private String yhrwdbhlx;
     private String yhrwdbhsl;
     private String yhrwdgcllx;
     private String yhrwdzh;
     private String yhrwdbhsm;
-    private Date getYhrwdsjbh;
+    private Date yhrwdsj;
 }

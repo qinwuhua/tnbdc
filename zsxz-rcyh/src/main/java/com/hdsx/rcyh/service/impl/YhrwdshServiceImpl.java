@@ -2,6 +2,7 @@ package com.hdsx.rcyh.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.hdsx.rcyh.entity.Yhrwd;
+import com.hdsx.rcyh.entity.Yhrwmx;
 import com.hdsx.rcyh.mapper.YhrwdshMapper;
 import com.hdsx.rcyh.service.YhrwdshService;
 import org.springframework.stereotype.Service;
@@ -34,8 +35,6 @@ public class YhrwdshServiceImpl implements YhrwdshService {
         String l1 = l + "";
         String ss = a +l1 ;
         yhrwd.setYhrwddjbh(ss);
-        yhrwd.setYhrwdrwdshzt("未处理");
-        yhrwd.setYhrwdyszt("未处理");
         return yhrwdshMapper.insert(yhrwd);
     }
 
@@ -43,6 +42,7 @@ public class YhrwdshServiceImpl implements YhrwdshService {
     public int delete(String yhrwddjbh) {
         return yhrwdshMapper.delete(yhrwddjbh);
     }
+
 
     @Override
     public int update(Yhrwd yhrwd) {
@@ -55,4 +55,27 @@ public class YhrwdshServiceImpl implements YhrwdshService {
             List<Yhrwd> list = yhrwdshMapper.getYhrwdshList(param);
             return list;
     }
+
+    @Override
+    public int updatezt(Yhrwd yhrwd) {
+
+        return yhrwdshMapper.updatezt(yhrwd);
+
+    }
+
+    @Override
+    public int deletezb(String yhrwdid) {
+        return yhrwdshMapper.deletezb(yhrwdid);
+    }
+
+    @Override
+    public int insertzb(Yhrwmx yhrwmx) {
+        return yhrwdshMapper.insertzb(yhrwmx);
+    }
+
+    @Override
+    public int updatezb(Yhrwmx yhrwmx) {
+        return yhrwdshMapper.updatezb(yhrwmx);
+    }
+
 }

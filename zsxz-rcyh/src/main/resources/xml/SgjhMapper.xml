@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hdsx.rcyh.mapper.SgjhMapper">
+    <!-- 定义数据库字段与实体对象的映射关系 -->
+    <resultMap id="sgjhBean" type="com.hdsx.rcyh.entity.Sgjh">
+        <id column="YDJH_ID" property="id"/>
+        <result column="YDJH_DWMC" property="dwmc"/>
+        <result column="YDJH_DWBH" property="dwbh"/>
+        <result column="YDJH_DWID" property="dwid"/>
+        <result column="YDJH_BMMC" property="bmmc"/>
+        <result column="YDJH_BMBH" property="bmbh"/>
+        <result column="YDJH_BMID" property="bmid"/>
+        <result column="YDJH_TBR" property="tbr"/>
+        <result column="YDJH_TBRID" property="tbrid"/>
+        <result column="YDJH_TBRQ" property="tbrq"/>
+        <result column="YDJH_SPZT" property="spzt"/>
+        <result column="YDJH_FILE" property="file"/>
+        <result column="YDJH_WFID" property="wfid"/>
+        <result column="YDJH_NOTE" property="note"/>
+        <result column="YDJH_DJBH" property="djbh"/>
+        <result column="YDJH_YF" property="yf"/>
+        <result column="YDJH_YHDWMC" property="yhdwmc"/>
+        <result column="YDJH_YHDWID" property="yhdwid"/>
+        <result column="YDJH_YHDWBH" property="yhdwbh"/>
+        <result column="YDJH_XMFL" property="xmfl"/>
+        <result column="YDJH_XMFLID" property="xmflid"/>
+        <result column="YDJH_BZ" property="bz"/>
+        <result column="YDJH_HTMC" property="htmc"/>
+        <result column="YDJH_TBDW" property="tbdw"/>
+        <result column="YDJH_TBBM" property="tbbm"/>
+        <result column="YDJH_GLDW" property="gldw"/>
+        <result column="YDJH_HTID" property="htid"/>
+        <result column="YDJH_HTBH" property="htbh"/>
+        <!-- 一对多的关系 -->
+        <!-- property: 指的是集合属性的值, ofType：指的是集合中元素的类型 -->
+        <collection property="sgjhsbmx" ofType="com.hdsx.rcyh.entity.Sgjhsbmx">
+            <id column="YHJHMX2_ID" property="id"/>
+            <result column="YHJHMX2_MID" property="mid"/>
+            <result column="YHJHMX2_XMNR" property="xmnr"/>
+            <result column="YHJHMX2_QDZH" property="qdzh"/>
+            <result column="YHJHMX2_ZDZH" property="zdzh"/>
+            <result column="YHJHMX2_YJGCL" property="yjgcl"/>
+            <result column="YHJHMX2_JHKSRQ" property="jhksrq"/>
+            <result column="YHJHMX2_JHJSRQ" property="jhjsrq"/>
+            <result column="YHJHMX2_BZ" property="bz"/>
+        </collection>
+    </resultMap>
+
+    <resultMap id="wcsgjhBean" type="com.hdsx.rcyh.entity.Sgjhwc">
+        <id column="YDWC_ID" property="id"/>
+        <result column="YDWC_DWMC" property="dwmc"/>
+        <result column="YDWC_DWBH" property="dwbh"/>
+        <result column="YDWC_DWID" property="dwid"/>
+        <result column="YDWC_BMMC" property="bmmc"/>
+        <result column="YDWC_BMBH" property="bmbh"/>
+        <result column="YDWC_BMID" property="bmid"/>
+        <result column="YDWC_TBR" property="tbr"/>
+        <result column="YDWC_TBRID" property="tbrid"/>
+        <result column="YDWC_TBRQ" property="tbrq"/>
+        <result column="YDWC_SPZT" property="spzt"/>
+        <result column="YDWC_FILE" property="file"/>
+        <result column="YDWC_WFID" property="wfid"/>
+        <result column="YDWC_NOTE" property="note"/>
+        <result column="YDWC_DJBH" property="djbh"/>
+        <result column="YDWC_YF" property="yf"/>
+        <result column="YDWC_YHDWMC" property="yhdwmc"/>
+        <result column="YDWC_YHDWID" property="yhdwid"/>
+        <result column="YDWC_YHDWBH" property="yhdwbh"/>
+        <result column="YDWC_XMFL" property="xmfl"/>
+        <result column="YDWC_XMFLID" property="xmflid"/>
+        <result column="YDWC_BZ" property="bz"/>
+        <result column="YDWC_HTMC" property="htmc"/>
+        <result column="YDWC_TBDW" property="tbdw"/>
+        <result column="YDWC_TBBM" property="tbbm"/>
+        <result column="YDWC_GLDW" property="gldw"/>
+        <result column="YDWC_HTID" property="htid"/>
+        <result column="YDWC_HTBH" property="htbh"/>
+        <!-- 一对多的关系 -->
+        <!-- property: 指的是集合属性的值, ofType：指的是集合中元素的类型 -->
+        <collection property="sgjhwcmx" ofType="com.hdsx.rcyh.entity.Sgjhwcmx">
+            <id column="YHJHWCMX2_ID" property="id"/>
+            <result column="YHJHWCMX2_MID" property="mid"/>
+            <result column="YHJHWCMX2_XMNR" property="xmnr"/>
+            <result column="YHJHWCMX2_QDZH" property="qdzh"/>
+            <result column="YHJHWCMX2_ZDZH" property="zdzh"/>
+            <result column="YHJHWCMX2_YJGCL" property="yjgcl"/>
+            <result column="YHJHWCMX2_WCGCL" property="wcgcl"/>
+            <result column="YHJHWCMX2_JHKSRQ" property="jhkgrq"/>
+            <result column="YHJHWCMX2_JHJSRQ" property="jhjsrq"/>
+            <result column="YHJHWCMX2_SJKSRQ" property="sjksrq"/>
+            <result column="YHJHWCMX2_SJJSRQ" property="sjjsrq"/>
+            <result column="YHJHWCMX2_BZ" property="bz"/>
+        </collection>
+    </resultMap>
+
+    <select id="getSgjhAll" parameterType="hashmap" resultMap="sgjhBean">
+        SELECT jh.*,mx.*
+        FROM YDSGJH jh
+        LEFT JOIN YDSGJHSBMX mx ON mx.YHJHMX2_MID = jh.YDJH_ID
+        <where>
+            <trim suffixOverrides=",">
+                <if test="id != null and id != ''"> AND YDJH_ID LIKE '%'||trim(#{id})||'%',</if>
+                <if test="htmc != null and htmc != ''"> AND YDJH_HTMC LIKE '%'||trim(#{htmc})||'%',</if>
+                <if test="spzt != null and spzt != ''"> AND YDJH_SPZT LIKE '%'||trim(#{spzt})||'%',</if>
+                <if test="ksrq != null and ksrq != ''"> AND to_date(to_char(YDJH_TBRQ,'yyyy/mm/dd'),'yyyy/mm/dd')>to_date(#{ksrq},'yyyy/mm/dd'),</if>
+                <if test="jsrq != null and jsrq != ''"> AND to_date(to_char(YDJH_TBRQ,'yyyy/mm/dd'),'yyyy/mm/dd')&lt;to_date(#{jsrq},'yyyy/mm/dd'),</if>
+            </trim>
+        </where>
+    </select>
+
+    <insert id="addSgjh" parameterType="com.hdsx.rcyh.entity.Sgjh">
+        INSERT INTO YDSGJH(YDJH_ID,YDJH_DJBH,YDJH_YF,YDJH_HTID,YDJH_HTBH,YDJH_HTMC,YDJH_YHDWID,
+                           YDJH_YHDWMC,YDJH_YHDWBH,YDJH_TBRID,YDJH_TBR,YDJH_TBRQ,YDJH_TBDW,
+                           YDJH_TBBM,YDJH_GLDW,YDJH_BZ)
+        VALUES (#{id,jdbcType=VARCHAR},#{djbh,jdbcType=VARCHAR},#{yf,jdbcType=TIMESTAMP},
+                #{htid,jdbcType=VARCHAR},#{htbh,jdbcType=VARCHAR},#{htmc,jdbcType=VARCHAR},
+                #{yhdwid,jdbcType=VARCHAR},#{yhdwmc,jdbcType=VARCHAR},#{yhdwbh,jdbcType=VARCHAR},
+                #{tbrid,jdbcType=VARCHAR},#{tbr,jdbcType=VARCHAR},#{tbrq,jdbcType=TIMESTAMP},
+                #{tbdw,jdbcType=VARCHAR},#{tbbm,jdbcType=VARCHAR},#{gldw,jdbcType=VARCHAR},#{bz,jdbcType=VARCHAR})
+    </insert>
+
+    <insert id="addSgjhmx" parameterType="java.util.List">
+        INSERT INTO YDSGJHSBMX(YHJHMX2_ID,YHJHMX2_MID,YHJHMX2_XMNR,YHJHMX2_QDZH,YHJHMX2_ZDZH,YHJHMX2_YJGCL,
+                               YHJHMX2_JHKSRQ,YHJHMX2_JHJSRQ,YHJHMX2_BZ)
+        <foreach collection="list" item="item" index="index" open="(" close=")" separator="union">
+            SELECT sys_guid(),
+                   #{item.id,jdbcType=VARCHAR},
+                   #{item.mid,jdbcType=VARCHAR},
+                   #{item.xmnr,jdbcType=VARCHAR},
+                   #{item.qdzh,jdbcType=VARCHAR},
+                   #{item.zdzh,jdbcType=VARCHAR},
+                   #{item.yjgcl,jdbcType=NUMERIC},
+                   #{item.jhksrq,jdbcType=TIMESTAMP},
+                   #{item.jhjsrq,jdbcType=TIMESTAMP},
+                   #{item.bz,jdbcType=VARCHAR}
+            FROM DUAL
+        </foreach>
+
+    </insert>
+
+    <update id="updateSgjh" parameterType="com.hdsx.rcyh.entity.Sgjh">
+        UPDATE YDSGJH
+        <set>
+            <if test="djbh != null"> YDJH_DJBH = #{djbh}, </if>
+            <if test="yf != null"> YDJH_YF = #{yf}, </if>
+            <if test="htid != null"> YHJH_HTID = #{htid}, </if>
+            <if test="htbh != null"> YDJH_HTBH = #{htbh}, </if>
+            <if test="htmc != null"> YDJH_HTMC = #{htmc}, </if>
+            <if test="yhdwid != null"> YDJH_YHDWID = #{yhdwid}, </if>
+            <if test="yhdwmc != null"> YDJH_YHDWMC = #{yhdwmc}, </if>
+            <if test="yhdwbh != null"> YDJH_YHDWBH = #{yhdwbh}, </if>
+            <if test="tbrid != null"> YDJH_TBRID = #{tbrid}, </if>
+            <if test="tbr != null"> YDJH_TBR = #{tbr}, </if>
+            <if test="tbrq != null"> YDJH_TBRQ = #{tbrq}, </if>
+            <if test="spzt != null"> YDJH_SPZT = #{spzt}, </if>
+            <if test="tbdw != null"> YDJH_TBDW = #{tbdw}, </if>
+            <if test="tbbm != null"> YDJH_TBBM = #{tbbm}, </if>
+            <if test="gldw != null"> YDJH_GLDW = #{gldw}, </if>
+            <if test="bz != null"> YDJH_BZ = #{bz}, </if>
+        </set>
+        WHERE YDJH_ID = #{id}
+    </update>
+
+    <update id="updateSgjhmx" parameterType="com.hdsx.rcyh.entity.Sgjhsbmx">
+        UPDATE YDSGJHSBMX
+        <set>
+            <if test="xmnr != null"> YHJHMX2_XMNR = #{xmnr}, </if>
+            <if test="qdzh != null"> YHJHMX2_QDZH = #{qdzh}, </if>
+            <if test="zdzh != null"> YHJHMX2_ZDZH = #{zdzh}, </if>
+            <if test="yhgcl != null"> YHJHMX2_YJGCL = #{yhgcl}, </if>
+            <if test="jhksrq != null"> YHJHMX2_JHKSRQ = #{jhksrq}, </if>
+            <if test="jhjsrq != null"> YHJHMX2_JHJSRQ = #{jhjsrq}, </if>
+            <if test="bz != null"> YHJHMX2_BZ = #{bz}, </if>
+        </set>
+        WHERE YHJHMX2_MID = #{mid}
+    </update>
+
+    <select id="getSgjhmxById" parameterType="String" resultType="hashmap">
+        SELECT YHJHMX2_ID id,YHJHMX2_MID mid,YHJHMX2_XMNR xmnr,YHJHMX2_QDZH qdzh,YHJHMX2_ZDZH zdzh,
+            YHJHMX2_YJGCL yjgcl, YHJHMX2_JHKSRQ jhksrq, YHJHMX2_JHJSRQ jhjsrq, YHJHMX2_BZ bz
+        FROM YDSGJHSBMX WHERE YHJHMX2_MID = #{id}
+    </select>
+
+    <delete id="deleteSgjh" parameterType="String">
+        DELETE FROM YDSGJH WHERE YDJH_ID = #{id}
+    </delete>
+
+    <delete id="deleteSgjhmx" parameterType="String">
+        DELETE FROM YDSGJHSBMX WHERE YHJHMX2_MID = #{id}
+    </delete>
+
+    <select id="getWcSgjhAll" parameterType="hashmap" resultMap="wcsgjhBean">
+        SELECT jh.*, mx.*
+        FROM YDSGWC jh
+        LEFT JOIN YDSGWCMX mx ON mx.YHJHWCMX2_MID = jh.YDWC_ID
+        <where>
+            <trim suffixOverrides=",">
+                <if test="id != null and id != ''"> AND YDWC_ID LIKE '%'||trim(#{id})||'%',</if>
+                <if test="htmc != null and htmc != ''"> AND YDWC_HTMC LIKE '%'||trim(#{htmc})||'%',</if>
+                <if test="spzt != null and spzt != ''"> AND YDWC_SPZT LIKE '%'||trim(#{spzt})||'%',</if>
+                <if test="ksrq != null and ksrq != ''"> AND to_date(to_char(YDWC_TBRQ,'yyyy/mm/dd'),'yyyy/mm/dd')>to_date(#{ksrq},'yyyy/mm/dd'),</if>
+                <if test="jsrq != null and jsrq != ''"> AND to_date(to_char(YDWC_TBRQ,'yyyy/mm/dd'),'yyyy/mm/dd')&lt;to_date(#{jsrq},'yyyy/mm/dd'),</if>
+            </trim>
+        </where>
+    </select>
+
+    <insert id="addWcSgjh" parameterType="com.hdsx.rcyh.entity.Sgjhwc">
+        INSERT INTO YDSGWC(YDWC_ID,YDWC_DJBH,YDWC_YF,YDWC_HTID,YDWC_HTBH,YDWC_HTMC,YDWC_YHDWID,
+                           YDWC_YHDWMC,YDWC_YHDWBH,YDWC_TBRID,YDWC_TBR,YDWC_TBRQ,YDWC_TBDW,
+                           YDWC_TBBM,YDWC_GLDW,YDWC_BZ)
+        VALUES (#{id,jdbcType=VARCHAR},#{djbh,jdbcType=VARCHAR},#{yf,jdbcType=TIMESTAMP},
+                #{htid,jdbcType=VARCHAR},#{htbh,jdbcType=VARCHAR},#{htmc,jdbcType=VARCHAR},
+                #{yhdwid,jdbcType=VARCHAR},#{yhdwmc,jdbcType=VARCHAR},#{yhdwbh,jdbcType=VARCHAR},
+                #{tbrid,jdbcType=VARCHAR},#{tbr,jdbcType=VARCHAR},#{tbrq,jdbcType=TIMESTAMP},
+                #{tbdw,jdbcType=VARCHAR},#{tbbm,jdbcType=VARCHAR},#{gldw,jdbcType=VARCHAR},#{bz,jdbcType=VARCHAR})
+    </insert>
+
+    <insert id="addWcsgjhmx" parameterType="java.util.List">
+        INSERT INTO YDSGWCMX(YHJHWCMX2_ID,YHJHWCMX2_MID,YHJHWCMX2_XMNR,YHJHWCMX2_QDZH,YHJHWCMX2_ZDZH,YHJHWCMX2_YJGCL,YHJHWCMX2_WCGCL,
+                             YHJHWCMX2_JHKSRQ,YHJHWCMX2_JHJSRQ,YHJHWCMX2_SJKSRQ,YHJHWCMX2_SJJSRQ,YHJHWCMX2_BZ)
+        <foreach collection="list" item="item" index="index" open="(" close=")" separator="union">
+            SELECT sys_guid,#{item.id,jdbcType=VARCHAR},#{item.mid,jdbcType=VARCHAR},#{item.xmnr,jdbcType=VARCHAR},
+            #{item.qdzh,jdbcType=VARCHAR},#{item.zdzh,jdbcType=VARCHAR},#{item.yjgcl,jdbcType=NUMERIC},#{item.wcgcl,jdbcType=NUMERIC},
+            #{item.jhksrq,jdbcType=TIMESTAMP},#{item.jhjsrq,jdbcType=TIMESTAMP},#{item.sjkgrq,jdbcType=TIMESTAMP},#{item.sjjsrq,jdbcType=TIMESTAMP},#{item.bz,jdbcType=VARCHAR}
+            FROM DUAL
+        </foreach>
+    </insert>
+
+    <update id="upateWcsgjh" parameterType="com.hdsx.rcyh.entity.Sgjhwc">
+        UPDATE YDSGWC
+        <set>
+            <if test="djbh != null"> YDWC_DJBH = #{djbh}, </if>
+            <if test="yf != null"> YDWC_YF = #{yf}, </if>
+            <if test="htid != null"> YHJH_HTID = #{htid}, </if>
+            <if test="htbh != null"> YDWC_HTBH = #{htbh}, </if>
+            <if test="htmc != null"> YDWC_HTMC = #{htmc}, </if>
+            <if test="yhdwid != null"> YDWC_YHDWID = #{yhdwid}, </if>
+            <if test="yhdwmc != null"> YDWC_YHDWMC = #{yhdwmc}, </if>
+            <if test="yhdwbh != null"> YDWC_YHDWBH = #{yhdwbh}, </if>
+            <if test="tbrid != null"> YDWC_TBRID = #{tbrid}, </if>
+            <if test="tbr != null"> YDWC_TBR = #{tbr}, </if>
+            <if test="tbrq != null"> YDWC_TBRQ = #{tbrq}, </if>
+            <if test="spzt != null"> YDWC_SPZT = #{spzt}, </if>
+            <if test="tbdw != null"> YDWC_TBDW = #{tbdw}, </if>
+            <if test="tbbm != null"> YDWC_TBBM = #{tbbm}, </if>
+            <if test="gldw != null"> YDWC_GLDW = #{gldw}, </if>
+            <if test="bz != null"> YDWC_BZ = #{bz}, </if>
+        </set>
+        WHERE YDWC_ID = #{id}
+    </update>
+
+    <update id="updateWcSgjhmx" parameterType="com.hdsx.rcyh.entity.Sgjhwcmx">
+        UPDATE YDSGWCMX
+        <set>
+            <if test="xmnr != null"> YHJHWCMX2_XMNR = #{xmnr}, </if>
+            <if test="qdzh != null"> YHJHWCMX2_QDZH = #{qdzh}, </if>
+            <if test="zdzh != null"> YHJHWCMX2_ZDZH = #{zdzh}, </if>
+            <if test="yjgcl != null"> YHJHWCMX2_YJGCL = #{yjgcl}, </if>
+            <if test="sjgcl != null"> YHJHWCMX2_SJGCL = #{sjgcl}, </if>
+            <if test="jhksrq != null"> YHJHWCMX2_JHKSRQ = #{jhksrq}, </if>
+            <if test="jhjsrq != null"> YHJHWCMX2_JHJSRQ = #{jhjsrq}, </if>
+            <if test="sjksrq != null"> YHJHWCMX2_SJKSRQ = #{sjksrq}, </if>
+            <if test="sjjsrq != null"> YHJHWCMX2_SJJSRQ = #{sjjsrq}, </if>
+            <if test="bz != null"> YHJHWCMX2_BZ = #{bz}, </if>
+        </set>
+        WHERE YHJHWCMX2_MID = #{mid}
+    </update>
+
+    <select id="getWcSgjhmxById" parameterType="String" resultType="hashmap">
+        SELECT YHJHWCMX2_ID id,YHJHWCMX2_MID mid,YHJHWCMX2_XMNR xmnr,YHJHWCMX2_QDZH qdzh,YHJHWCMX2_ZDZH zdzh,
+            YHJHWCMX2_YJGCL yjgcl, YHJHWCMX2_WCGCL wcgcl, YHJHWCMX2_JHKSRQ jhksrq, YHJHWCMX2_JHJSRQ jhjsrq,
+            YHJHWCMX2_SJKSRQ sjksrq, YHJHWCMX2_SJJSRQ sjjsrq, YHJHWCMX2_BZ bz
+        FROM YDSGWCMX WHERE YHJHWCMX2_MID = #{id}
+    </select>
+    
+    <delete id="deleteWcSgjhmx">
+        DELETE FROM YDSGWCMX WHERE YHJHWCMX2_MID = #{id}
+    </delete>
+
+    <delete id="deleteWcSgjh">
+        DELETE FROM YDSGWC WHERE YDWC_ID = #{id}
+    </delete>
+
+</mapper>

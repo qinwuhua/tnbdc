@@ -10,9 +10,11 @@ import java.util.Map;
 public interface QsrwdMapper {
     int insert(Qsrwd qsrwd);
 
-    int delete(String qsrwdid);
+
 
     int update(Qsrwd qsrwd);
 
     List<Qsrwd> getQsrwdList(Map<String, String> param);
+
+    int delete(String qsrwdid);
 }

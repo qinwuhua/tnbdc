@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
+import java.util.Date;
 
 @Data
 @Accessors(chain = true)
@@ -17,7 +18,7 @@ public class Qsrwd implements Serializable {
     private String qsrwddjbh;
     private String qsrwdxxly;
     private String qsrwdsjlx;
-    private String qsrwdsjsj;
+    private Date qsrwdsjsj;
     private String qsrwdsjdd;
     private String qsrwdsjld;
     private String qsrwdfx;
@@ -27,7 +28,7 @@ public class Qsrwd implements Serializable {
     private String qsrwdlmjbsy;
     private String qsrwdsjsm;
     private String qsrwdstbr;
-    private String qsrwdtbsj;
+    private Date qsrwdtbsj;
     private String qsrwdtbdw;
     private String qsrwdtbbm;
     private String qsrwdbz;

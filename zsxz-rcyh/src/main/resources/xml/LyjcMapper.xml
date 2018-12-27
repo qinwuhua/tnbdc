@@ -4,18 +4,114 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.hdsx.rcyh.mapper.LyjcMapper">
+    <!-- 定义数据库字段与实体对象的映射关系 -->
+    <resultMap id="lyjcBean" type="com.hdsx.rcyh.entity.Lyjc">
+        <id column="PMMTLYJCB_ID" property="id"/>
+        <result column="PMMTLYJCB_DWMC" property="dwmc"/>
+        <result column="PMMTLYJCB_DWBH" property="dwbh"/>
+        <result column="PMMTLYJCB_DWID" property="dwid"/>
+        <result column="PMMTLYJCB_BMMC" property="bmmc"/>
+        <result column="PMMTLYJCB_BMBH" property="bmbh"/>
+        <result column="PMMTLYJCB_BMID" property="bmid"/>
+        <result column="PMMTLYJCB_TBR" property="tbr"/>
+        <result column="PMMTLYJCB_TBRID" property="tbrid"/>
+        <result column="PMMTLYJCB_TBRQ" property="tbrq"/>
+        <result column="PMMTLYJCB_SPZT" property="spzt"/>
+        <result column="PMMTLYJCB_WFID" property="wfid"/>
+        <result column="PMMTLYJCB_HTBH" property="htbh"/>
+        <result column="PMMTLYJCB_JCRQ" property="jcrq"/>
+        <result column="PMMTLYJCB_SGDW" property="sgdw"/>
+        <result column="PMMTLYJCB_FJHJ" property="fjhj"/>
+        <result column="PMMTLYJCB_GLDW" property="gldw"/>
+        <result column="PMMTLYJCB_JCR" property="jcr"/>
+        <result column="PMMTLYJCB_HTJE" property="htje"/>
+        <result column="PMMTLYJCB_BZ" property="bz"/>
+        <result column="PMMTLYJCB_HTMC" property="htmc"/>
+        <!-- 一对多的关系 -->
+        <!-- property: 指的是集合属性的值, ofType：指的是集合中元素的类型 -->
+        <collection property="lyjcmxb" ofType="com.hdsx.rcyh.entity.Lyjcmxb">
+            <id column="PMMTLYJCBMX_ID" property="id"/>
+            <result column="PMMTLYJCBMX_MID" property="mid"/>
+            <result column="PMMTLYJCBMX_JCNR" property="jcnr"/>
+            <result column="PMMTLYJCBMX_FJ" property="fj"/>
+            <result column="PMMTLYJCBMX_MEMO" property="memo"/>
+            <result column="PMMTLYJCBMX_BH" property="bh"/>
+        </collection>
+    </resultMap>
 
-    <select id="getLyjcAll" resultType="hashmap">
-        SELECT * FROM sgdwlyjcb
+    <resultMap id="jczbBean" type="com.hdsx.rcyh.entity.Jczb">
+        <id column="PMMTJCZBQKJCB_ID" property="id"/>
+        <result column="PMMTJCZBQKJCB_DWMC" property="dwmc"/>
+        <result column="PMMTJCZBQKJCB_DWBH" property="dwbh"/>
+        <result column="PMMTJCZBQKJCB_DWID" property="dwid"/>
+        <result column="PMMTJCZBQKJCB_BMMC" property="bmmc"/>
+        <result column="PMMTJCZBQKJCB_BMBH" property="bmbh"/>
+        <result column="PMMTJCZBQKJCB_BMID" property="bmid"/>
+        <result column="PMMTJCZBQKJCB_TBR" property="tbr"/>
+        <result column="PMMTJCZBQKJCB_TBRID" property="tbrid"/>
+        <result column="PMMTJCZBQKJCB_TBRQ" property="tbrq"/>
+        <result column="PMMTJCZBQKJCB_SPZT" property="spzt"/>
+        <result column="PMMTJCZBQKJCB_WFID" property="wfid"/>
+        <result column="PMMTJCZBQKJCB_HTBH" property="htbh"/>
+        <result column="PMMTJCZBQKJCB_JCRQ" property="jcrq"/>
+        <result column="PMMTJCZBQKJCB_SGDW" property="sgdw"/>
+        <result column="PMMTJCZBQKJCB_XMMC" property="xmmc"/>
+        <result column="PMMTJCZBQKJCB_GLDW" property="gldw"/>
+        <result column="PMMTJCZBQKJCB_HTJE" property="htje"/>
+        <result column="PMMTJCZBQKJCB_WYFJ" property="wyfj"/>
+        <result column="PMMTJCZBQKJCB_HTMC" property="htmc"/>
+        <result column="PMMTJCZBQKJCB_BZ" property="bz"/>
+        <result column="PMMTJCZBQKJCB_JCR" property="jcr"/>
+        <!-- 一对多的关系 -->
+        <!-- property: 指的是集合属性的值, ofType：指的是集合中元素的类型 -->
+        <collection property="jczbmxb" ofType="com.hdsx.rcyh.entity.Jczbmxb">
+            <id column="PMMTJCZBQKJCBMX_ID" property="id"/>
+            <result column="PMMTJCZBQKJCBMX_MID" property="mid"/>
+            <result column="PMMTJCZBQKJCBMX_JCNR" property="jcnr"/>
+            <result column="PMMTJCZBQKJCBMX_FJ" property="fj"/>
+            <result column="PMMTJCZBQKJCBMX_MEMO" property="memo"/>
+            <result column="PMMTJCZBQKJCBMX_BH" property="bh"/>
+        </collection>
+    </resultMap>
+
+    <select id="getLyjcAll" parameterType="hashmap" resultMap="lyjcBean">
+        SELECT jh.*, mx.*
+        FROM sgdwlyjcb jh
+        LEFT JOIN SGDWLYJCBMX mx ON mx.PMMTLYJCBMX_MID = PMMTLYJCB_ID
+        <where>
+            <trim suffixOverrides=",">
+                <if test="id != null and id != ''"> AND PMMTLYJCB_ID LIKE '%'||trim(#{id})||'%',</if>
+                <if test="htmc != null and htmc != ''"> AND PMMTLYJCB_HTMC LIKE '%'||trim(#{htmc})||'%',</if>
+                <if test="spzt != null and spzt != ''"> AND PMMTLYJCB_SPZT LIKE '%'||trim(#{spzt})||'%',</if>
+                <if test="ksrq != null and ksrq != ''"> AND to_date(to_char(PMMTLYJCB_TBRQ,'yyyy/mm/dd'),'yyyy/mm/dd')>to_date(#{ksrq},'yyyy/mm/dd'),</if>
+                <if test="jsrq != null and jsrq != ''"> AND to_date(to_char(PMMTLYJCB_TBRQ,'yyyy/mm/dd'),'yyyy/mm/dd')&lt;to_date(#{jsrq},'yyyy/mm/dd'),</if>
+           </trim>
+        </where>
     </select>
 
     <insert id="addLyjc" parameterType="com.hdsx.rcyh.entity.Lyjc">
-        INSERT INTO SGDWLYJCB(PMMTLYJCB_ID,PMMTLYJCB_HTBH,PMMTLYJCB_JCRQ,PMMTLYJCB_HTMC,PMMTLYJCB_SGDW,PMMTLYJCB_JCR,PMMTLYJCB_GLDW,PMMTLYJCB_HTJE,PMMTLYJCB_FJHJ,PMMTLYJCB_BZ)
-        VALUES (#{id,jdbcType=VARCHAR},#{htbh,jdbcType=VARCHAR},#{jcrq,jdbcType=TIMESTAMP},#{htmc,jdbcType=VARCHAR},#{sgdw,jdbcType=VARCHAR},#{jcr,jdbcType=VARCHAR} ,#{gldw,jdbcType=VARCHAR}, #{htjr,jdbcType=NUMERIC},#{fjhj,jdbcType=NUMERIC},#{bz,jdbcType=VARCHAR})
+        INSERT INTO SGDWLYJCB(PMMTLYJCB_ID,PMMTLYJCB_HTBH,PMMTLYJCB_JCRQ,PMMTLYJCB_HTMC,
+                              PMMTLYJCB_SGDW,PMMTLYJCB_JCR,PMMTLYJCB_GLDW,PMMTLYJCB_HTJE,
+                              PMMTLYJCB_FJHJ,PMMTLYJCB_BZ)
+        VALUES (#{id,jdbcType=VARCHAR},#{htbh,jdbcType=VARCHAR},#{jcrq,jdbcType=TIMESTAMP},
+                #{htmc,jdbcType=VARCHAR},#{sgdw,jdbcType=VARCHAR},#{jcr,jdbcType=VARCHAR} ,
+                #{gldw,jdbcType=VARCHAR}, #{htjr,jdbcType=NUMERIC},#{fjhj,jdbcType=NUMERIC},
+                #{bz,jdbcType=VARCHAR})
     </insert>
 
-    <insert id="addLyjcmxb" parameterType="com.hdsx.rcyh.entity.Lyjcmxb">
-      INSERT INTO SGDWLYJCBMX(PMMTLYJCBMX_ID, PMMTLYJCBMX_MID, PMMTLYJCBMX_JCNR, PMMTLYJCBMX_FJ, PMMTLYJCBMX_MEMO)
+    <insert id="addLyjcmxb" parameterType="java.util.List">
+      INSERT INTO SGDWLYJCBMX(PMMTLYJCBMX_ID, PMMTLYJCBMX_MID, PMMTLYJCBMX_JCNR, PMMTLYJCBMX_FJ, PMMTLYJCBMX_MEMO,PMMTLYJCBMX_BH)
+      <foreach collection="list" item="item" index="index" open="(" close=")" separator="union">
+          SELECT sys_guid,
+                 #{item.id,jdbcType=VARCHAR},
+                 #{item.mid,jdbcType=VARCHAR},
+                 #{item.jcnr,jdbcType=VARCHAR},
+                 #{item.fj,jdbcType=NUMERIC},
+                 #{item.memo,jdbcType=VARCHAR},
+                 #{item.bh,jdbcType=VARCHAR}
+          FROM DUAL
+      </foreach>
+
       VALUES (#{id,jdbcType=VARCHAR},#{mid,jdbcType=VARCHAR},#{jcnr,jdbcType=VARCHAR},#{fj,jdbcType=NUMERIC},#{memo,jdbcType=VARCHAR})
     </insert>
 
@@ -42,6 +138,7 @@
             <if test="gldw != null"> PMMTLYJCB_GLDW = #{gldw}, </if>
             <if test="htjr != null"> PMMTLYJCB_HTJE = #{htjr}, </if>
             <if test="fjhj != null"> PMMTLYJCB_FJHJ = #{fjhj}, </if>
+            <if test="spzt != null"> PMMTLYJCB_SPZT = #{spzt}, </if>
             <if test="bz != null"> PMMTLYJCB_BZ = #{bz} </if>
         </set>
         WHERE PMMTLYJCB_ID = #{id}
@@ -50,16 +147,27 @@
     <update id="updateLyjcmxb" parameterType="com.hdsx.rcyh.entity.Lyjcmxb">
         UPDATE SGDWLYJCBMX
         <set>
-            <if test="id != null"> PMMTLYJCBMX_ID = #{id}, </if>
-            <if test="mid != null"> PMMTLYJCBMX_MID = #{mid}, </if>
             <if test="jcnr != null"> PMMTLYJCBMX_JCNR = #{jcnr}, </if>
             <if test="fj != null"> PMMTLYJCBMX_FJ = #{fj}, </if>
             <if test="memo != null"> PMMTLYJCBMX_MEMO = #{memo}, </if>
+            <if test="bh != null"> PMMTLYJCBMX_BH = #{bh}, </if>
         </set>
+        WHERE PMMTLYJCBMX_MID = #{mid}
     </update>
 
-    <select id="getJczbAll" resultType="hashmap">
-        SELECT * FROM JCZBQKJCB;
+    <select id="getJczbAll" parameterType="hashmap" resultMap="jczbBean">
+        SELECT *
+        FROM JCZBQKJCB jh
+        LEFT JOIN JCZBQKJCBMX mx on mx.PMMTJCZBQKJCBMX_MID = jh.PMMTJCZBQKJCB_ID
+        <where>
+            <trim suffixOverrides=",">
+                <if test="id != null and id != ''"> AND PMMTJCZBQKJCB_ID LIKE '%'||trim(#{id})||'%',</if>
+                <if test="htmc != null and htmc != ''"> AND PMMTJCZBQKJCB_HTMC LIKE '%'||trim(#{htmc})||'%',</if>
+                <if test="spzt != null and spzt != ''"> AND PMMTJCZBQKJCB_SPZT LIKE '%'||trim(#{spzt})||'%',</if>
+                <if test="ksrq != null and ksrq != ''"> AND to_date(to_char(PMMTJCZBQKJCB_TBRQ,'yyyy/mm/dd'),'yyyy/mm/dd')>to_date(#{ksrq},'yyyy/mm/dd'),</if>
+                <if test="jsrq != null and jsrq != ''"> AND to_date(to_char(PMMTJCZBQKJCB_TBRQ,'yyyy/mm/dd'),'yyyy/mm/dd')&lt;to_date(#{jsrq},'yyyy/mm/dd'),</if>
+            </trim>
+        </where>
     </select>
 
     <insert id="addJczb" parameterType="com.hdsx.rcyh.entity.Jczb">
@@ -67,9 +175,17 @@
         VALUES (#{id,jdbcType=VARCHAR},#{htbh,jdbcType=VARCHAR},#{jcrq,jdbcType=TIMESTAMP},#{htmc,jdbcType=VARCHAR},#{sgdw,jdbcType=VARCHAR},#{jcr,jdbcType=VARCHAR} ,#{gldw,jdbcType=VARCHAR}, #{htjr,jdbcType=NUMERIC},#{wyfj,jdbcType=NUMERIC},#{bz,jdbcType=VARCHAR})
     </insert>
 
-    <insert id="addJczbmxb" parameterType="com.hdsx.rcyh.entity.Jczbmxb">
-      INSERT INTO JCZBQKJCBMX(PMMTJCZBQKJCBMX_ID, PMMTJCZBQKJCBMX_MID, PMMTJCZBQKJCBMX_JCNR, PMMTJCZBQKJCBMX_FJ, PMMTJCZBQKJCBMX_MEMO)
-      VALUES (#{id,jdbcType=VARCHAR},#{mid,jdbcType=VARCHAR},#{jcnr,jdbcType=VARCHAR},#{fj,jdbcType=NUMERIC},#{memo,jdbcType=VARCHAR})
+    <insert id="addJczbmxb" parameterType="java.util.List">
+      INSERT INTO JCZBQKJCBMX(PMMTJCZBQKJCBMX_ID, PMMTJCZBQKJCBMX_MID, PMMTJCZBQKJCBMX_JCNR, PMMTJCZBQKJCBMX_FJ, PMMTJCZBQKJCBMX_MEMO, PMMTJCZBQKJCBMX_BH)
+      <foreach collection="list" item="item" index="index" open="(" close=")" separator="union">
+          SELECT sys_guid(),
+                 #{item.mid,jdbcType=VARCHAR},
+                 #{item.jcnr,jdbcType=VARCHAR},
+                 #{item.fj,jdbcType=NUMERIC},
+                 #{item.memo,jdbcType=VARCHAR},
+                 #{item.bh,jdbcType=VARCHAR}
+          FROM DUAL
+      </foreach>
     </insert>
 
     <delete id="deleteJczbmxbById" parameterType="String">
@@ -91,6 +207,7 @@
             <if test="gldw != null"> PMMTJCZBQKJCB_GLDW = #{gldw}, </if>
             <if test="htjr != null"> PMMTJCZBQKJCB_HTJE = #{htjr}, </if>
             <if test="wyfj != null"> PMMTJCZBQKJCB_WYFJ = #{wyfj}, </if>
+            <if test="spzt != null"> PMMTJCZBQKJCB_SPZT = #{spzt}, </if>
             <if test="bz != null"> PMMTJCZBQKJCB_BZ = #{bz} </if>
         </set>
         WHERE PMMTJCZBQKJCB_ID = #{id}
@@ -99,12 +216,12 @@
     <update id="updateJczbmxb" parameterType="com.hdsx.rcyh.entity.Jczbmxb">
         UPDATE JCZBQKJCBMX
         <set>
-            <if test="id != null"> PMMTLYJCBMX_ID = #{id}, </if>
-            <if test="mid != null"> PMMTLYJCBMX_MID = #{mid}, </if>
             <if test="jcnr != null"> PMMTLYJCBMX_JCNR = #{jcnr}, </if>
             <if test="fj != null"> PMMTLYJCBMX_FJ = #{fj}, </if>
             <if test="memo != null"> PMMTLYJCBMX_MEMO = #{memo}, </if>
+            <if test="bh != null"> PMMTLYJCBMX_BH = #{bh}, </if>
         </set>
+        WHERE PMMTLYJCBMX_MID = #{mid}
     </update>
 
     <select id="getJczbmxById" resultType="hashmap">

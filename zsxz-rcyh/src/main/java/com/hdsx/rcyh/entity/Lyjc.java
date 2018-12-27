@@ -6,7 +6,6 @@ import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -21,22 +20,23 @@ public class Lyjc implements Serializable{
 
     private String id;
     private String dwmc;
+    private String dwbh;
     private String dwid;
     private String bmmc;
     private String bmbh;
     private String bmid;
     private String tbr;
     private String tbrid;
-    private Date tbrq;
+    private String tbrq;
     private String spzt;
     private String wfid;
     private String htbh;
-    private Date jcrq;
+    private String jcrq;
     private String sgdw;
     private BigDecimal fjhj;
     private String gldw;
     private String jcr;
-    private BigDecimal htjr;
+    private BigDecimal htje;
     private String bz;
     private String htmc;
     private List<Lyjcmxb> lyjcmxb;

@@ -12,15 +12,15 @@
     <!--<result column="XCCS_NCS" jdbcType="DECIMAL" property="xccsNcs" />-->
     <!--<result column="XCCS_NOTE" jdbcType="VARCHAR" property="xccsNote" />-->
   <!--</resultMap>-->
-  <delete id="delete" parameterType="java.lang.String">
+  <delete id="delete" parameterType="String">
     delete from XCCSPZ
     where XCCS_ID = #{xccsId,jdbcType=VARCHAR}
   </delete>
 
-  <delete id="deletes" parameterType="java.lang.String">
-    delete from XCCSPZ
-    where XCCS_ID = #{xccsId,jdbcType=VARCHAR}
-  </delete>
+  <!--<delete id="deletes" parameterType="java.lang.String">-->
+    <!--delete from XCCSPZ-->
+    <!--where XCCS_ID = #{xccsId,jdbcType=VARCHAR}-->
+  <!--</delete>-->
   <insert id="insert" parameterType="com.hdsx.rcyh.entity.Xccspz">
     insert into XCCSPZ (XCCS_ID, XCCS_DWMC, XCCS_DWBH, 
       XCCS_DWID, XCCS_XCLX, XCCS_RCS, 
@@ -51,6 +51,7 @@
     where XCCS_ID = #{xccsId,jdbcType=VARCHAR}
   </select>
     <select id="getXccspzAll" resultType="java.util.HashMap">
-      SELECT  XCCS_DWMC as xccsDwmc ,XCCS_DWBH as xccsDwbh,XCCS_DWID as xccsDwid,XCCS_XCLX as xccsXclx,XCCS_RCS as xccsRcs ,XCCS_YCS as xccsYcs ,XCCS_NCS as xccsNcs,XCCS_NOTE as xccsNote from XCCSPZ
+      SELECT  XCCS_ID "xccsId", XCCS_DWMC  "xccsDwmc" ,XCCS_DWBH  "xccsDwbh",XCCS_DWID  "xccsDwid",XCCS_XCLX  "xccsXclx",XCCS_RCS  "xccsRcs" ,XCCS_YCS  "xccsYcs" ,XCCS_NCS  "xccsNcs",XCCS_NOTE  "xccsNote" from XCCSPZ
+
     </select>
 </mapper>

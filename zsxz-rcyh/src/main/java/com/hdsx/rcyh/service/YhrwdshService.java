@@ -1,6 +1,7 @@
 package com.hdsx.rcyh.service;
 
 import com.hdsx.rcyh.entity.Yhrwd;
+import com.hdsx.rcyh.entity.Yhrwmx;
 
 import java.util.List;
 import java.util.Map;
@@ -17,4 +18,13 @@ public interface YhrwdshService {
     int update(Yhrwd yhrwd);
 
     List<Yhrwd> getYhrwdshList(Map<String, String> param, int pageNum, int pageSize);
+
+    int updatezt(Yhrwd yhrwd);
+
+
+    int deletezb(String yhrwdid);
+
+    int insertzb(Yhrwmx yhrwmx);
+
+    int updatezb(Yhrwmx yhrwmx);
 }

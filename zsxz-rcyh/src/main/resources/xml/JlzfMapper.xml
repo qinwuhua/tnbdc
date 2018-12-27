@@ -1,0 +1,663 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hdsx.rcyh.mapper.JlzfMapper">
+
+    <resultMap type="com.hdsx.rcyh.entity.Jlzf" id="jlzfmaps">
+        <result column="gcjl_djbh" property="gcjl_djbh"/>
+        <result column="gcjl_gcmc" property="gcjl_gcmc"/>
+        <result column="gcjl_sqrq" property="gcjl_sqrq"/>
+        <result column="gcjl_yd" property="gcjl_yd"/>
+        <result column="gcjl_htmc" property="gcjl_htmc"/>
+        <result column="gcjl_htid" property="gcjl_htid"/>
+        <result column="gcjl_htbh" property="gcjl_htbh"/>
+        <result column="gcjl_cbdw" property="gcjl_cbdw"/>
+        <result column="gcjl_qdzh" property="gcjl_qdzh"/>
+        <result column="gcjl_zdzh" property="gcjl_zdzh"/>
+        <result column="gcjl_bw" property="gcjl_bw"/>
+        <result column="gcjl_th" property="gcjl_th"/>
+        <result column="gcjl_zjdbh" property="gcjl_zjdbh"/>
+        <result column="gcjl_jtsm" property="gcjl_jtsm"/>
+        <result column="gcjl_tbr" property="gcjl_tbr"/>
+        <result column="gcjl_tbrid" property="gcjl_tbrid"/>
+        <result column="gcjl_tbrq" property="gcjl_tbrq"/>
+        <result column="pmmtgcspsqs_gldw" property="pmmtgcspsqs_gldw"/>
+        <result column="pmmtgcspsqs_cbdw" property="pmmtgcspsqs_cbdw"/>
+
+        <collection property="zmzbs" ofType="com.hdsx.rcyh.entity.Zmzb" column="jldbh">
+            <result column="jldbh" property="jldbh"/><!-- 这里的column对应的是下面查询的别名，而不是表字段名 -->
+            <result column="zmh" property="zmh"/><!-- property对应JavaBean中的属性名 -->
+            <result column="zmmc" property="zmmc"/><!-- property对应JavaBean中的属性名 -->
+            <result column="dw" property="dw"/>
+            <result column="sl" property="sl"/>
+
+        </collection>
+
+    </resultMap>
+
+
+
+    <resultMap type="com.hdsx.rcyh.entity.Jlzf_jrgsp" id="jrgsp">
+        <result column="jrgsp_id" property="jrgsp_id"/>
+        <result column="jrgsp_htbh" property="jrgsp_htbh"/>
+        <result column="jrgsp_dwmc" property="jrgsp_dwmc"/>
+        <result column="jrgsp_dwbh" property="jrgsp_dwbh"/>
+        <result column="jrgsp_dwid" property="jrgsp_dwid"/>
+        <result column="jrgsp_bmmc" property="jrgsp_bmmc"/>
+        <result column="jrgsp_bmbh" property="jrgsp_bmbh"/>
+        <result column="jrgsp_bmid" property="jrgsp_bmid"/>
+        <result column="jrgsp_tbrid" property="jrgsp_tbr"/>
+        <result column="jrgsp_tbrid" property="jrgsp_tbrid"/>
+        <result column="jrgsp_tbrq" property="jrgsp_tbrq"/>
+        <result column="jrgsp_spzt" property="jrgsp_spzt"/>
+        <result column="jrgsp_wfid" property="jrgsp_wfid"/>
+        <result column="jrgsp_note" property="jrgsp_note"/>
+        <result column="jrgsp_djbh" property="jrgsp_djbh"/>
+        <result column="jrgsp_xmmc" property="jrgsp_xmmc"/>
+        <result column="jrgsp_xmbh" property="jrgsp_xmbh"/>
+        <result column="jrgsp_xmid" property="jrgsp_xmid"/>
+        <result column="jrgsp_cbdwmc" property="jrgsp_cbdwmc"/>
+        <result column="jrgsp_cbdwid" property="jrgsp_cbdwid"/>
+        <result column="jrgsp_cbdwbh" property="jrgsp_cbdwbh"/>
+        <result column="jrgsp_hjje" property="jrgsp_hjje"/>
+        <result column="jrgsp_gcmc" property="jrgsp_gcmc"/>
+        <collection property="jlzf_jrgspmx" ofType="com.hdsx.rcyh.entity.Jlzf_jrgspmx" column="jlzf_jrgspmx">
+            <result column="jrgmx_id" property="jrgmx_id"/>
+            <result column="jrgmx_mid" property="jrgmx_mid"/>
+            <result column="jrgmx_xmh" property="jrgmx_xmh"/>
+            <result column="jrgmx_xmmc" property="jrgmx_xmmc"/>
+            <result column="jrgmx_jldw" property="jrgmx_jldw"/>
+            <result column="jrgmx_sl" property="jrgmx_sl"/>
+            <result column="jrgmx_dj" property="jrgmx_dj"/>
+            <result column="jrgmx_je" property="jrgmx_je"/>
+            <result column="jrgmx_yt" property="jrgmx_yt"/>
+            <result column="jrgmx_rq" property="jrgmx_rq"/>
+            <result column="jrgmx_djbh" property="jrgmx_djbh"/>
+        </collection>
+
+    </resultMap>
+
+
+    <resultMap type="com.hdsx.rcyh.entity.Jlzf_zqcwzf" id="zqcwzf">
+        <result column="zqcwzf_id" property="zqcwzf_id"/>
+        <result column="zqcwzf_dwmc" property="zqcwzf_dwmc"/>
+        <result column="zqcwzf_dwbh" property="zqcwzf_dwbh"/>
+        <result column="zqcwzf_dwid" property="zqcwzf_dwid"/>
+        <result column="zqcwzf_bmmc" property="zqcwzf_bmmc"/>
+        <result column="zqcwzf_bmbh" property="zqcwzf_bmbh"/>
+        <result column="zqcwzf_bmid" property="zqcwzf_bmid"/>
+        <result column="zqcwzf_tbr" property="zqcwzf_tbr"/>
+        <result column="zqcwzf_tbrid" property="zqcwzf_tbrid"/>
+        <result column="zqcwzf_tbrq" property="zqcwzf_tbrq"/>
+        <result column="zqcwzf_spzt" property="zqcwzf_spzt"/>
+        <result column="zqcwzf_wfid" property="zqcwzf_wfid"/>
+        <result column="zqcwzf_note" property="zqcwzf_note"/>
+        <result column="zqcwzf_zfqh" property="zqcwzf_zfqh"/>
+        <result column="jrgsp_djbh" property="zqcwzf_djbh"/>
+        <result column="zqcwzf_xmmc" property="zqcwzf_xmmc"/>
+        <result column="zqcwzf_xmid" property="zqcwzf_xmid"/>
+        <result column="zqcwzf_xmbh" property="zqcwzf_xmbh"/>
+        <result column="zqcwzf_htmc" property="zqcwzf_htmc"/>
+        <result column="zqcwzf_htid" property="zqcwzf_htid"/>
+        <result column="zqcwzf_htbh" property="zqcwzf_htbh"/>
+        <result column="zqcwzf_cjdwmc" property="zqcwzf_cjdwmc"/>
+        <result column="zqcwzf_cjdwid" property="zqcwzf_cjdwid"/>
+        <result column="zqcwzf_cjdwbh" property="zqcwzf_cjdwbh"/>
+        <result column="zqcwzf_jzrq" property="zqcwzf_jzrq"/>
+        <result column="zqcwzf_flag" property="zqcwzf_flag"/>
+        <result column="zqcwzf_gldw" property="zqcwzf_gldw"/>
+        <result column="zqcwzf_jldw" property="zqcwzf_jldw"/>
+        <result column="zqcwzf_gcmc" property="zqcwzf_gcmc"/>
+        <result column="zqcwzf_cbdw" property="zqcwzf_cbdw"/>
+
+        <collection property="zqcwzfmx" ofType="com.hdsx.rcyh.entity.Jlzf_zqcwzfmx" column="zqcwzfmx">
+            <result column="zqzfmx_id" property="zqzfmx_id"/>
+            <result column="zqzfmx_mid" property="zqzfmx_mid"/>
+            <result column="zqzfmx_zmbh" property="zqzfmx_zmbh"/>
+            <result column="zqzfmx_zmmc" property="zqzfmx_zmmc"/>
+            <result column="zqzfmx_jldw" property="zqzfmx_jldw"/>
+            <result column="zqzfmx_jldwid" property="zqzfmx_jldwid"/>
+            <result column="zqzfmx_htsl" property="zqzfmx_htsl"/>
+            <result column="zqzfmx_htdj" property="zqzfmx_htdj"/>
+            <result column="zqzfmx_htje" property="zqzfmx_htje"/>
+            <result column="zqzfmx_ljwc" property="zqzfmx_ljwc"/>
+            <result column="zqzfmx_bqwcsl" property="zqzfmx_bqwcsl"/>
+            <result column="zqzfmx_bqwcje" property="zqzfmx_bqwcje"/>
+            <result column="zqzfmx_sqwcsl" property="zqzfmx_sqwcsl"/>
+            <result column="zqzfmx_sqwcje" property="zqzfmx_sqwcje"/>
+            <result column="zqzfmx_bqsl" property="zqzfmx_bqsl"/>
+            <result column="zqzfmx_bqje" property="zqzfmx_bqje"/>
+        </collection>
+
+    </resultMap>
+
+    <!-- 查询索赔申请单列表数据 -->
+    <select id="getSpsqdList" parameterType="hashmap" resultType="com.hdsx.rcyh.entity.Jlzf">
+        select g.PMMTGCSPSQS_ID,g.PMMTGCSPSQS_DWMC,g.PMMTGCSPSQS_DWBH,g.PMMTGCSPSQS_DWID,g.PMMTGCSPSQS_BMMC,g.PMMTGCSPSQS_BMBH,g.PMMTGCSPSQS_BMID,g.PMMTGCSPSQS_TBR,to_char(g.PMMTGCSPSQS_TBRQ,'yyyy/mm/dd') PMMTGCSPSQS_TBRQ,g.PMMTGCSPSQS_SPZT,g.PMMTGCSPSQS_FILE,g.PMMTGCSPSQS_DJBH,g.PMMTGCSPSQS_CJRQ,g.PMMTGCSPSQS_GCMC,g.PMMTGCSPSQS_HTBH,g.PMMTGCSPSQS_SQJE,g.PMMTGCSPSQS_SPSJ,g.PMMTGCSPSQS_SCYJS,g.PMMTGCSPSQS_SPYJS,g.PMMTGCSPSQS_SPJE,g.PMMTGCSPSQS_CJDW,g.PMMTGCSPSQS_GLDW,to_char(g.PMMTGCSPSQS_SQRQ,'yyyy/mm/dd') PMMTGCSPSQS_SQRQ,g.PMMTGCSPSQS_CBDW,g.PMMTGCSPSQS_SPSJJS
+        from GCSPSQS g where 1=1
+        <if test="pmmtgcspsqs_htbh != null and pmmtgcspsqs_htbh != ''">
+            and g.pmmtgcspsqs_htbh=#{pmmtgcspsqs_htbh}
+        </if>
+        <if test="ksrq != null and ksrq != ''">
+            and to_date(to_char(g.pmmtgcspsqs_sqrq,'yyyy/mm/dd'),'yyyy/mm/dd')>=to_date(#{ksrq},'yyyy/mm/dd')
+        </if>
+        <if test="jsrq != null and jsrq != ''">
+            and to_date(to_char(g.pmmtgcspsqs_sqrq,'yyyy/mm/dd'),'yyyy/mm/dd')&lt;=to_date(#{jsrq},'yyyy/mm/dd')
+        </if>
+    </select>
+
+	<!--  添加索赔申请书  -->
+	<insert id="addSpsqsForJlzf" parameterType="com.hdsx.rcyh.entity.Jlzf">
+		insert into GCSPSQS
+		<trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="pmmtgcspsqs_djbh != null" >pmmtgcspsqs_djbh,</if>
+			<if test="pmmtgcspsqs_gcmc != null" >pmmtgcspsqs_gcmc,</if>
+			<if test="pmmtgcspsqs_sqrq != null" >pmmtgcspsqs_sqrq,</if>
+			<if test="pmmtgcspsqs_htbh != null" >pmmtgcspsqs_htbh,</if>
+			<if test="pmmtgcspsqs_gldw != null" >pmmtgcspsqs_gldw,</if>
+			<if test="pmmtgcspsqs_cbdw != null" >pmmtgcspsqs_cbdw,</if>
+			<if test="pmmtgcspsqs_spsjjs != null" >pmmtgcspsqs_spsjjs,</if>
+			<if test="pmmtgcspsqs_sqje != null" >pmmtgcspsqs_sqje,</if>
+			<if test="pmmtgcspsqs_spje != null" >pmmtgcspsqs_spje,</if>
+			<if test="pmmtgcspsqs_tbr != null" >pmmtgcspsqs_tbr,</if>
+            <if test="pmmtgcspsqs_tbrq != null" >pmmtgcspsqs_tbrq,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides="," >
+			<if test="pmmtgcspsqs_djbh != null" >#{pmmtgcspsqs_djbh},</if>
+			<if test="pmmtgcspsqs_gcmc != null" >#{pmmtgcspsqs_gcmc},</if>
+			<if test="pmmtgcspsqs_sqrq != null" >to_date(#{pmmtgcspsqs_sqrq},'yyyy/mm/dd'),</if>
+			<if test="pmmtgcspsqs_htbh != null" >#{pmmtgcspsqs_htbh},</if>
+			<if test="pmmtgcspsqs_gldw != null" >#{pmmtgcspsqs_gldw},</if>
+			<if test="pmmtgcspsqs_cbdw != null" >#{pmmtgcspsqs_cbdw},</if>
+			<if test="pmmtgcspsqs_spsjjs != null" >#{pmmtgcspsqs_spsjjs},</if>
+			<if test="pmmtgcspsqs_sqje != null" >#{pmmtgcspsqs_sqje},</if>
+			<if test="pmmtgcspsqs_spje != null" >#{pmmtgcspsqs_spje},</if>
+			<if test="pmmtgcspsqs_tbr != null" >#{pmmtgcspsqs_tbr},</if>
+            <if test="pmmtgcspsqs_tbrq != null" >to_date(#{pmmtgcspsqs_tbrq},'yyyy/mm/dd'),</if>
+		</trim>
+	</insert>
+
+    <!--  编辑索赔申请书  -->
+    <update id="editSpsqsForJlzf" parameterType="com.hdsx.rcyh.entity.Jlzf" >
+        update GCSPSQS
+        <set>
+            <if test="pmmtgcspsqs_gcmc != null" >pmmtgcspsqs_gcmc=#{pmmtgcspsqs_gcmc},</if>
+            <if test="pmmtgcspsqs_sqrq != null" >pmmtgcspsqs_sqrq=to_date(#{pmmtgcspsqs_sqrq},'yyyy/mm/dd'),</if>
+            <if test="pmmtgcspsqs_htbh != null" >pmmtgcspsqs_htbh=#{pmmtgcspsqs_htbh},</if>
+            <if test="pmmtgcspsqs_gldw != null" >pmmtgcspsqs_gldw=#{pmmtgcspsqs_gldw},</if>
+            <if test="pmmtgcspsqs_cbdw != null" >pmmtgcspsqs_cbdw=#{pmmtgcspsqs_cbdw},</if>
+            <if test="pmmtgcspsqs_spsjjs != null" >pmmtgcspsqs_spsjjs=#{pmmtgcspsqs_spsjjs},</if>
+            <if test="pmmtgcspsqs_sqje != null" >pmmtgcspsqs_sqje=#{pmmtgcspsqs_sqje},</if>
+            <if test="pmmtgcspsqs_spje != null" >pmmtgcspsqs_spje=#{pmmtgcspsqs_spje},</if>
+            <if test="pmmtgcspsqs_tbr != null" >pmmtgcspsqs_tbr=#{pmmtgcspsqs_tbr},</if>
+            <if test="pmmtgcspsqs_tbrq != null" >pmmtgcspsqs_tbrq=to_date(#{pmmtgcspsqs_tbrq},'yyyy/mm/dd'),</if>
+        </set>
+        where 1=1 and pmmtgcspsqs_djbh=#{pmmtgcspsqs_djbh}
+    </update>
+
+    <!--  删除索赔申请书  -->
+    <delete id="delSpsqsForJlzf" parameterType="java.util.List" >
+        delete from GCSPSQS
+        where pmmtgcspsqs_djbh in
+        <foreach collection="list" item="id"  open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <!--  通过单据编号查询索赔申请书  -->
+    <select id="getSpsqsInfoByDjbh" parameterType="string" resultType="com.hdsx.rcyh.entity.Jlzf">
+        select g.PMMTGCSPSQS_ID,g.PMMTGCSPSQS_DWMC,g.PMMTGCSPSQS_DWBH,g.PMMTGCSPSQS_DWID,g.PMMTGCSPSQS_BMMC,g.PMMTGCSPSQS_BMBH,g.PMMTGCSPSQS_BMID,g.PMMTGCSPSQS_TBR,to_char(g.PMMTGCSPSQS_TBRQ,'yyyy/mm/dd') PMMTGCSPSQS_TBRQ,g.PMMTGCSPSQS_SPZT,g.PMMTGCSPSQS_FILE,g.PMMTGCSPSQS_DJBH,g.PMMTGCSPSQS_CJRQ,g.PMMTGCSPSQS_GCMC,g.PMMTGCSPSQS_HTBH,g.PMMTGCSPSQS_SQJE,g.PMMTGCSPSQS_SPSJ,g.PMMTGCSPSQS_SCYJS,g.PMMTGCSPSQS_SPYJS,g.PMMTGCSPSQS_SPJE,g.PMMTGCSPSQS_CJDW,g.PMMTGCSPSQS_GLDW,to_char(g.PMMTGCSPSQS_SQRQ,'yyyy/mm/dd') PMMTGCSPSQS_SQRQ,g.PMMTGCSPSQS_CBDW,g.PMMTGCSPSQS_SPSJJS
+        from GCSPSQS g where pmmtgcspsqs_djbh=#{value}
+    </select>
+
+    <!--  通过部门查询合同信息  -->
+    <select id="getHtInfoByBm" parameterType="hashmap" resultType="hashmap">
+        select ht.htxx_htbh htbh,ht.HTXX_ID htid,ht.HTXX_HTMC htmc,xm.yhhtxx_qszh qdzh,xm.yhhtxx_zzzh zdzh,gj.HTGJXX_cgxmmc gcmc,xm.yhhtxx_gldw gldw,xm.yhhtxx_cbdw cbdw
+        from djsj_htxx ht left join djsj_htxx_htgjxx gj on ht.htxx_htbh=gj.HTGJXX_htbh left join djsj_htxx_yhxmxx xm on ht.htxx_htbh=xm.yhhtxx_htbh
+        where 1=1
+
+    </select>
+
+    <!--  通过合同编号查询子目汇总信息  -->
+    <select id="getHtZmHzInfoByHtbh" parameterType="hashmap" resultType="hashmap">
+        select zm.zmht_zmh zmh,max(zm.zmht_zmmc) zmmc,max(zm.zmht_jldw) jldw,sum(zm.zmht_sl) sl,zmht_htbh htbh  from ZM_HT zm
+        where 1=1 and zm.zmht_htbh=#{htbh}
+        group by zm.zmht_htbh,zm.zmht_zmh
+        order by zmh
+    </select>
+
+    <!--  添加工程计量单  -->
+    <insert id="addGcjldForJlzf" parameterType="com.hdsx.rcyh.entity.Jlzf">
+        insert into GCJLD
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="gcjl_djbh != null" >gcjl_djbh,</if>
+            <if test="gcjl_gcmc != null" >gcjl_gcmc,</if>
+            <if test="gcjl_sqrq != null" >gcjl_sqrq,</if>
+            <if test="gcjl_yd != null" >gcjl_yd,</if>
+            <if test="gcjl_htmc != null" >gcjl_htmc,</if>
+            <if test="gcjl_htid != null" >gcjl_htid,</if>
+            <if test="gcjl_htbh != null" >gcjl_htbh,</if>
+            <if test="gcjl_cbdw != null" >gcjl_cbdw,</if>
+            <if test="gcjl_qdzh != null" >gcjl_qdzh,</if>
+            <if test="gcjl_zdzh != null" >gcjl_zdzh,</if>
+            <if test="gcjl_bw != null" >gcjl_bw,</if>
+            <if test="gcjl_th != null" >gcjl_th,</if>
+            <if test="gcjl_zjdbh != null" >gcjl_zjdbh,</if>
+            <if test="gcjl_jtsm != null" >gcjl_jtsm,</if>
+            <if test="gcjl_tbr != null" >gcjl_tbr,</if>
+            <if test="gcjl_tbrid != null" >gcjl_tbrid,</if>
+            <if test="gcjl_tbrq != null" >gcjl_tbrq,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="gcjl_djbh != null" >#{gcjl_djbh},</if>
+            <if test="gcjl_gcmc != null" >#{gcjl_gcmc},</if>
+            <if test="gcjl_sqrq != null" >to_date(#{gcjl_sqrq},'yyyy/mm/dd'),</if>
+            <if test="gcjl_yd != null" >#{gcjl_yd},</if>
+            <if test="gcjl_htmc != null" >#{gcjl_htmc},</if>
+            <if test="gcjl_htid != null" >#{gcjl_htid},</if>
+            <if test="gcjl_htbh != null" >#{gcjl_htbh},</if>
+            <if test="gcjl_cbdw != null" >#{gcjl_cbdw},</if>
+            <if test="gcjl_qdzh != null" >#{gcjl_qdzh},</if>
+            <if test="gcjl_zdzh != null" >#{gcjl_zdzh},</if>
+            <if test="gcjl_bw != null" >#{gcjl_bw},</if>
+            <if test="gcjl_th != null" >#{gcjl_th},</if>
+            <if test="gcjl_zjdbh != null" >#{gcjl_zjdbh},</if>
+            <if test="gcjl_jtsm != null" >#{gcjl_jtsm},</if>
+            <if test="gcjl_tbr != null" >#{gcjl_tbr},</if>
+            <if test="gcjl_tbrid != null" >#{gcjl_tbrid},</if>
+            <if test="gcjl_tbrq != null" >to_date(#{gcjl_tbrq},'yyyy/mm/dd'),</if>
+        </trim>
+    </insert>
+
+    <insert id="addGcjldFbForJlzf" parameterType="com.hdsx.rcyh.entity.Jlzf">
+
+        begin
+        <foreach collection="zmzbs" item="item1" index="index" separator="">
+            <foreach collection="item1.zmbs" item="item" index="index" separator=";">
+                insert into GCJLDMX(GCJL_ID, GCJLMX_DJBH,GCJLMX_ZMID, GCJLMX_ZMH, GCJLMX_ZMMC, GCJLMX_HTSL, GCJLMX_DW, GCJLMX_HTDJ, GCJLMX_KKJE, GCJLMX_HTJE, GCJLMX_ZJE )  values
+                (sys_guid(),trim(#{gcjl_djbh}),trim(#{item.gcjlmx_zmid}),trim(#{item.gcjlmx_zmh}),trim(#{item.gcjlmx_zmmc}),trim(#{item.gcjlmx_htsl}),trim(#{item.gcjlmx_dw}),trim(#{item.gcjlmx_htdj}),trim(#{item.gcjlmx_kkje}),trim(#{item.gcjlmx_htje}),trim(#{item.gcjlmx_htje})-trim(#{item.gcjlmx_kkje}))
+            </foreach>
+        </foreach>
+        ;end;
+    </insert>
+
+    <!--  通过合同编号查询子目明细信息  -->
+    <select id="getHtZmMxInfoByHtbh" parameterType="hashmap" resultType="hashmap">
+        select zmht_id zmid,zmht_ZMH zmh,zmht_zmmc zmmc,zmht_sl sl,zmht_jldw dw,zmht_dj dj,0 kkje,zmht_je je,zmht_je zje  from ZM_HT zm
+        where 1=1 and zm.zmht_htbh=#{htbh}
+         and zm.zmht_id not in(select GCJLMX_ZMID from GCJLDMX)
+         <if test="djbh != null and djbh !=''">
+             union all
+             select GCJLMX_ZMID, GCJLMX_ZMH, GCJLMX_ZMMC, GCJLMX_HTSL, GCJLMX_DW, GCJLMX_HTDJ, GCJLMX_KKJE, GCJLMX_HTJE, GCJLMX_ZJE from GCJLDMX
+             where GCJLMX_DJBH=#{djbh}
+         </if>
+
+        order by zmh
+    </select>
+
+    <!--  通过单据编号查询子目信息  -->
+    <select id="getZmbsByDjbh" resultType="com.hdsx.rcyh.entity.Zmb" parameterType="hashmap">
+        select * from GCJLDMX where GCJLMX_DJBH=#{djbh}
+        <if test="zmh!=null">
+            and gcjlmx_zmh=#{zmh}
+        </if>
+    </select>
+
+    <!--  通过单据编号删除子目信息  -->
+    <delete id="delZmbByDjbh" parameterType="string">
+        delete from GCJLDMX where GCJLMX_DJBH=#{value}
+    </delete>
+
+    <!--  编辑工程计量单  -->
+    <update id="editGcjldForJlzf" parameterType="com.hdsx.rcyh.entity.Jlzf" >
+        update GCJLD
+        <set>
+            <if test="gcjl_gcmc != null" >gcjl_gcmc=#{gcjl_gcmc},</if>
+            <if test="gcjl_sqrq != null" >gcjl_sqrq=to_date(#{gcjl_sqrq},'yyyy/mm/dd'),</if>
+            <if test="gcjl_yd != null" >gcjl_yd=#{gcjl_yd},</if>
+            <if test="gcjl_htmc != null" >gcjl_htmc=#{gcjl_htmc},</if>
+            <if test="gcjl_htid != null" >gcjl_htid=#{gcjl_htid},</if>
+            <if test="gcjl_htbh != null" >gcjl_htbh=#{gcjl_htbh},</if>
+            <if test="gcjl_cbdw != null" >gcjl_cbdw=#{gcjl_cbdw},</if>
+            <if test="gcjl_qdzh != null" >gcjl_qdzh=#{gcjl_qdzh},</if>
+            <if test="gcjl_zdzh != null" >gcjl_zdzh=#{gcjl_zdzh},</if>
+            <if test="gcjl_bw != null" >gcjl_bw=#{gcjl_bw},</if>
+            <if test="gcjl_th != null" >gcjl_th=#{gcjl_th},</if>
+            <if test="gcjl_zjdbh != null" >gcjl_zjdbh=#{gcjl_zjdbh},</if>
+            <if test="gcjl_jtsm != null" >gcjl_jtsm=#{gcjl_jtsm},</if>
+            <if test="gcjl_tbr != null" >gcjl_tbr=#{gcjl_tbr},</if>
+            <if test="gcjl_tbrid != null" >gcjl_tbrid=#{gcjl_tbrid},</if>
+            <if test="gcjl_tbrq != null" >gcjl_tbrq=to_date(#{gcjl_tbrq},'yyyy/mm/dd'),</if>
+        </set>
+        where 1=1 and gcjl_djbh=#{gcjl_djbh}
+    </update>
+    <!--  通过单据编号查询工程计量单信息  -->
+    <select id="getGcjldInfoByDjbh" resultMap="jlzfmaps" parameterType="hashmap">
+         select g.gcjl_dwmc, g.gcjl_dwbh, g.gcjl_dwid, g.gcjl_bmmc, g.gcjl_bmbh, g.gcjl_bmid, g.gcjl_tbr, g.gcjl_tbrid, to_char(gcjl_tbrq,'yyyy/mm/dd') gcjl_tbrq, gcjl_spzt, gcjl_file, gcjl_wfid, gcjl_note, gcjl_djbh, gcjl_code, gcjl_xmmc, gcjl_xmid, gcjl_xmbh, gcjl_htmc, gcjl_htid, gcjl_htbh, gcjl_cjdwmc, gcjl_cjdwbh, gcjl_cjdwid, gcjl_rq, gcjl_bw, gcjl_th, gcjl_zjdbh, gcjl_jtsm, gcjl_flag, gcjl_sfybgc, gcjl_ybgcdh, gcjl_gcmc, to_char(gcjl_sqrq,'yyyy/mm/dd') gcjl_sqrq, gcjl_yd, gcjl_cbdw, gcjl_qdzh, gcjl_zdzh, gcjl_sl,
+        mxzb.* from GCJLD g
+        left join (select gcjlmx_djbh jldbh,gcjlmx_zmh zmh,max(gcjlmx_zmmc) zmmc,max(gcjlmx_dw) dw,sum(nvl(gcjlmx_htsl,0)) sl from GCJLDMX t group by t.gcjlmx_djbh,t.gcjlmx_zmh
+        ) mxzb on g.gcjl_djbh=mxzb.jldbh
+        where g.gcjl_djbh=#{djbh}
+    </select>
+
+    <!--  通过单据编号查询子目总表信息  -->
+    <select id="getZmzbsByDjbh" resultType="com.hdsx.rcyh.entity.Zmzb" parameterType="hashmap">
+        select gcjlmx_djbh jldbh,gcjlmx_zmh zmh,max(gcjlmx_zmmc) zmmc,max(gcjlmx_dw) dw,sum(nvl(gcjlmx_htsl,0)) sl from GCJLDMX t
+        where gcjlmx_djbh=#{djbh}
+        group by t.gcjlmx_djbh,t.gcjlmx_zmh
+    </select>
+
+    <!-- 查询工程计量单列表数据 -->
+    <select id="getGcjldList" parameterType="hashmap" resultMap="jlzfmaps">
+
+        select g.gcjl_dwmc, g.gcjl_dwbh, g.gcjl_dwid, g.gcjl_bmmc, g.gcjl_bmbh, g.gcjl_bmid, g.gcjl_tbr, g.gcjl_tbrid, to_char(gcjl_tbrq,'yyyy/mm/dd') gcjl_tbrq, gcjl_spzt, gcjl_file, gcjl_wfid, gcjl_note, gcjl_djbh, gcjl_code, gcjl_xmmc, gcjl_xmid, gcjl_xmbh, gcjl_htmc, gcjl_htid, gcjl_htbh, gcjl_cjdwmc, gcjl_cjdwbh, gcjl_cjdwid, gcjl_rq, gcjl_bw, gcjl_th, gcjl_zjdbh, gcjl_jtsm, gcjl_flag, gcjl_sfybgc, gcjl_ybgcdh, gcjl_gcmc, to_char(gcjl_sqrq,'yyyy/mm/dd') gcjl_sqrq, gcjl_yd, gcjl_cbdw, gcjl_qdzh, gcjl_zdzh, gcjl_sl,
+        mxzb.* from GCJLD g
+        left join (select gcjlmx_djbh jldbh,gcjlmx_zmh zmh,max(gcjlmx_zmmc) zmmc,max(gcjlmx_dw) dw,sum(nvl(gcjlmx_htsl,0)) sl from GCJLDMX t group by t.gcjlmx_djbh,t.gcjlmx_zmh
+        ) mxzb on g.gcjl_djbh=mxzb.jldbh
+
+        where 1=1
+        <if test="gcjl_htbh != null and gcjl_htbh != ''">
+            and g.gcjl_htbh=#{gcjl_htbh}
+        </if>
+        <if test="ksrq != null and ksrq != ''">
+            and to_date(to_char(g.gcjl_sqrq,'yyyy/mm/dd'),'yyyy/mm/dd')>=to_date(#{ksrq},'yyyy/mm/dd')
+        </if>
+        <if test="jsrq != null and jsrq != ''">
+            and to_date(to_char(g.gcjl_sqrq,'yyyy/mm/dd'),'yyyy/mm/dd')&lt;=to_date(#{jsrq},'yyyy/mm/dd')
+        </if>
+    </select>
+
+    <!-- 查询工程计量单列表汇总数据 -->
+    <select id="getGcjldHzList" parameterType="hashmap" resultType="com.hdsx.rcyh.entity.Zmzb">
+
+        select g.gcjl_dwmc, g.gcjl_dwbh, g.gcjl_dwid, g.gcjl_bmmc, g.gcjl_bmbh, g.gcjl_bmid, g.gcjl_tbr, g.gcjl_tbrid, to_char(gcjl_tbrq,'yyyy/mm/dd') gcjl_tbrq, gcjl_spzt, gcjl_file, gcjl_wfid, gcjl_note, gcjl_djbh, gcjl_code, gcjl_xmmc, gcjl_xmid, gcjl_xmbh, gcjl_htmc, gcjl_htid, gcjl_htbh, gcjl_cjdwmc, gcjl_cjdwbh, gcjl_cjdwid, gcjl_rq, gcjl_bw, gcjl_th, gcjl_zjdbh, gcjl_jtsm, gcjl_flag, gcjl_sfybgc, gcjl_ybgcdh, gcjl_gcmc, to_char(gcjl_sqrq,'yyyy/mm/dd') gcjl_sqrq, gcjl_yd, gcjl_cbdw, gcjl_qdzh, gcjl_zdzh, gcjl_sl,
+        mxzb.* from GCJLD g
+        left join (select gcjlmx_djbh jldbh,gcjlmx_zmh zmh,max(gcjlmx_zmmc) zmmc,max(gcjlmx_dw) dw,sum(nvl(gcjlmx_htsl,0)) sl from GCJLDMX t group by t.gcjlmx_djbh,t.gcjlmx_zmh
+        ) mxzb on g.gcjl_djbh=mxzb.jldbh
+
+        where 1=1
+        <if test="gcjl_htbh != null and gcjl_htbh != ''">
+            and g.gcjl_htbh=#{gcjl_htbh}
+        </if>
+        <if test="ksrq != null and ksrq != ''">
+            and to_date(to_char(g.gcjl_sqrq,'yyyy/mm/dd'),'yyyy/mm/dd')>=to_date(#{ksrq},'yyyy/mm/dd')
+        </if>
+        <if test="jsrq != null and jsrq != ''">
+            and to_date(to_char(g.gcjl_sqrq,'yyyy/mm/dd'),'yyyy/mm/dd')&lt;=to_date(#{jsrq},'yyyy/mm/dd')
+        </if>
+    </select>
+
+    <!--  通过部门查询合同信息  -->
+    <select id="getHtXxInfoByBm" parameterType="hashmap" resultMap="jlzfmaps">
+        select ht.htxx_htbh gcjl_htbh,ht.HTXX_ID gcjl_htid,ht.HTXX_HTMC gcjl_htmc,xm.yhhtxx_qszh gcjl_qdzh,xm.yhhtxx_zzzh gcjl_zdzh,gj.HTGJXX_cgxmmc gcjl_gcmc,xm.yhhtxx_gldw pmmtgcspsqs_gldw,xm.yhhtxx_cbdw pmmtgcspsqs_cbdw,
+        zm.*
+        from djsj_htxx ht left join djsj_htxx_htgjxx gj on ht.htxx_htbh=gj.HTGJXX_htbh left join djsj_htxx_yhxmxx xm on ht.htxx_htbh=xm.yhhtxx_htbh
+        left join ( select zm.zmht_zmh zmh,max(zm.zmht_zmmc) zmmc,max(zm.zmht_jldw) jldw,sum(zm.zmht_sl) sl,zmht_htbh htbh  from ZM_HT zm where 1=1 and zm.zmht_id not in(select GCJLMX_ZMID from GCJLDMX) group by zm.zmht_htbh,zm.zmht_zmh ) zm on ht.htxx_htbh=zm.htbh
+        where 1=1
+
+    </select>
+
+    <select id="getHtZmXxInfoByBm" resultType="com.hdsx.rcyh.entity.Zmb" parameterType="hashmap">
+        select ZMHT_ID gcjlmx_zmid, ZMHT_HTBH, ZMHT_HTMC, ZMHT_ZMH gcjlmx_zmh, ZMHT_ZMMC gcjlmx_zmmc, ZMHT_JLDW gcjlmx_dw, ZMHT_SL gcjlmx_htsl, ZMHT_DJ gcjlmx_htdj, ZMHT_JE gcjlmx_htje ,ZMHT_JE gcjlmx_zje from ZM_HT
+        where ZMHT_HTBH=#{htbh} and ZMHT_ZMH=#{zmh} and zmht_id not in(select GCJLMX_ZMID from GCJLDMX)
+    </select>
+
+    <!-- 删除工程计量单  -->
+    <delete id="delGcjldFbForJlzf" parameterType="java.util.List" >
+        delete from GCJLDMX
+        where gcjldmx_djbh in
+        <foreach collection="list" item="id"  open="(" separator="," close=")">
+            #{id}
+        </foreach>
+
+    </delete>
+    <delete id="delGcjldForJlzf" parameterType="java.util.List" >
+        delete from GCJLD
+        where gcjl_htbh in
+        <foreach collection="list" item="id"  open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <!--  添加计日工  -->
+    <insert id="addJrgspFbForJlzf" parameterType="com.hdsx.rcyh.entity.Jlzf_jrgsp">
+        begin
+            <foreach collection="jlzf_jrgspmx" item="item" index="index" separator=";">
+                insert into JRGTBSP_JLMX(JRGMX_ID, JRGMX_MID, JRGMX_XMH, JRGMX_XMMC, JRGMX_JLDW, JRGMX_SL, JRGMX_DJ, JRGMX_JE, JRGMX_YT, JRGMX_RQ, JRGMX_DJBH )  values
+                (sys_guid(),trim(#{jrgsp_djbh}),trim(#{item.jrgmx_xmh}),trim(#{item.jrgmx_xmmc}),trim(#{item.jrgmx_jldw}),trim(#{item.jrgmx_sl}),trim(#{item.jrgmx_dj}),trim(#{item.jrgmx_sl})*trim(#{item.jrgmx_dj}),trim(#{item.jrgmx_yt}),to_date(trim(#{item.jrgmx_rq}),'yyyy/mm/dd'),trim(#{jrgsp_djbh}))
+            </foreach>
+        ;end;
+    </insert>
+
+    <insert id="addJrgspForJlzf" parameterType="com.hdsx.rcyh.entity.Jlzf">
+        insert into JRGTBSP
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="jrgsp_dwmc != null" >jrgsp_dwmc,</if>
+            <if test="jrgsp_htbh != null" >jrgsp_htbh,</if>
+            <if test="jrgsp_dwbh != null" >jrgsp_dwbh,</if>
+            <if test="jrgsp_dwid != null" >jrgsp_dwid,</if>
+            <if test="jrgsp_bmmc != null" >jrgsp_bmmc,</if>
+            <if test="jrgsp_bmbh != null" >jrgsp_bmbh,</if>
+            <if test="jrgsp_bmid != null" >jrgsp_bmid,</if>
+            <if test="jrgsp_tbr != null" >jrgsp_tbr,</if>
+            <if test="jrgsp_tbrid != null" >jrgsp_tbrid,</if>
+            <if test="jrgsp_tbrq != null" >jrgsp_tbrq,</if>
+            <if test="jrgsp_spzt != null" >jrgsp_spzt,</if>
+            <if test="jrgsp_wfid != null" >jrgsp_wfid,</if>
+            <if test="jrgsp_note != null" >jrgsp_note,</if>
+            <if test="jrgsp_djbh != null" >jrgsp_djbh,</if>
+            <if test="jrgsp_xmmc != null" >jrgsp_xmmc,</if>
+            <if test="jrgsp_xmbh != null" >jrgsp_xmbh,</if>
+            <if test="jrgsp_xmid != null" >jrgsp_xmid,</if>
+            <if test="jrgsp_cbdwmc != null" >jrgsp_cbdwmc,</if>
+            <if test="jrgsp_cbdwbh != null" >jrgsp_cbdwbh,</if>
+            <if test="jrgsp_hjje != null" >jrgsp_hjje,</if>
+            <if test="jrgsp_gcmc != null" >jrgsp_gcmc,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="jrgsp_dwmc != null" >#{jrgsp_dwmc},</if>
+            <if test="jrgsp_htbh != null" >#{jrgsp_htbh},</if>
+            <if test="jrgsp_dwbh != null" >#{jrgsp_dwbh},</if>
+            <if test="jrgsp_dwid != null" >#{jrgsp_dwid},</if>
+            <if test="jrgsp_bmmc != null" >#{jrgsp_bmmc},</if>
+            <if test="jrgsp_bmbh != null" >#{jrgsp_bmbh},</if>
+            <if test="jrgsp_bmid != null" >#{jrgsp_bmid},</if>
+            <if test="jrgsp_tbr != null" >#{jrgsp_tbr},</if>
+            <if test="jrgsp_tbrid != null" >#{jrgsp_tbrid},</if>
+            <if test="jrgsp_tbrq != null" >to_date(#{jrgsp_tbrq},'yyyy/mm/dd'),</if>
+            <if test="jrgsp_spzt != null" >#{jrgsp_spzt},</if>
+            <if test="jrgsp_wfid != null" >#{jrgsp_wfid},</if>
+            <if test="jrgsp_note != null" >#{jrgsp_note},</if>
+            <if test="jrgsp_djbh != null" >#{jrgsp_djbh},</if>
+            <if test="jrgsp_xmmc != null" >#{jrgsp_xmmc},</if>
+            <if test="jrgsp_xmbh != null" >#{jrgsp_xmbh},</if>
+            <if test="jrgsp_xmid != null" >#{jrgsp_xmid},</if>
+            <if test="jrgsp_cbdwmc != null" >#{jrgsp_cbdwmc},</if>
+            <if test="jrgsp_cbdwbh != null" >#{jrgsp_cbdwbh},</if>
+            <if test="jrgsp_hjje != null" >#{jrgsp_hjje},</if>
+            <if test="jrgsp_gcmc != null" >#{jrgsp_gcmc},</if>
+        </trim>
+    </insert>
+
+    <!--  通过单据编号删除计日工审批  -->
+    <delete id="deleJrgspByDjbh" parameterType="string">
+        delete from JRGTBSP_JLMX where JRGMX_DJBH=#{value}
+    </delete>
+    <!--  编辑计日工审批 -->
+    <update id="editJrgspForJlzf" parameterType="com.hdsx.rcyh.entity.Jlzf_jrgsp" >
+        update JRGTBSP
+        <set>
+            <if test="jrgsp_htbh != null" >jrgsp_htbh=#{jrgsp_htbh},</if>
+            <if test="jrgsp_dwmc != null" >jrgsp_dwmc=#{jrgsp_dwmc},</if>
+            <if test="jrgsp_dwbh != null" >jrgsp_dwbh=#{jrgsp_dwbh},</if>
+            <if test="jrgsp_dwid != null" >jrgsp_dwid=#{jrgsp_dwid},</if>
+            <if test="jrgsp_bmmc != null" >jrgsp_bmmc=#{jrgsp_bmmc},</if>
+            <if test="jrgsp_bmbh != null" >jrgsp_bmbh=#{jrgsp_bmbh},</if>
+            <if test="jrgsp_bmid != null" >jrgsp_bmid=#{jrgsp_bmid},</if>
+            <if test="jrgsp_tbr != null" >jrgsp_tbr=#{jrgsp_tbr},</if>
+            <if test="jrgsp_tbrid != null" >jrgsp_tbrid=#{jrgsp_tbrid},</if>
+            <if test="jrgsp_tbrq != null" >jrgsp_tbrq=to_date(#{jrgsp_tbrq},'yyyy/mm/dd'),,</if>
+            <if test="jrgsp_spzt != null" >jrgsp_spzt=#{jrgsp_spzt},</if>
+            <if test="jrgsp_wfid != null" >jrgsp_wfid=#{jrgsp_wfid},</if>
+            <if test="jrgsp_note != null" >jrgsp_note=#{jrgsp_note},</if>
+            <if test="jrgsp_djbh != null" >jrgsp_djbh=#{jrgsp_djbh},</if>
+            <if test="jrgsp_xmmc != null" >jrgsp_xmmc=#{jrgsp_xmmc},</if>
+            <if test="jrgsp_xmbh != null" >jrgsp_xmbh=#{jrgsp_xmbh},</if>
+            <if test="jrgsp_xmid != null" >jrgsp_xmid=#{jrgsp_xmid},</if>
+            <if test="jrgsp_cbdwmc != null" >jrgsp_cbdwmc=#{jrgsp_cbdwmc},</if>
+            <if test="jrgsp_cbdwbh != null" >jrgsp_cbdwbh=#{jrgsp_cbdwbh},</if>
+            <if test="jrgsp_hjje != null" >jrgsp_hjje=#{jrgsp_hjje},</if>
+            <if test="jrgsp_gcmc != null" >jrgsp_gcmc=#{jrgsp_gcmc},</if>
+        </set>
+        where 1=1 and jrgsp_djbh=#{jrgsp_djbh}
+    </update>
+
+    <!-- 删除工程计量单  -->
+    <delete id="delJrgspFbForJlzf" parameterType="java.util.List" >
+        delete from JRGTBSP_JLMX
+        where JRGMX_DJBH in
+        <foreach collection="list" item="id"  open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    <delete id="delJrgspForJlzf" parameterType="java.util.List" >
+        delete from JRGTBSP
+        where jrgsp_djbh in
+        <foreach collection="list" item="id"  open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <!-- 查询工程计量单列表汇总数据 -->
+    <select id="getJgrspList" parameterType="hashmap" resultMap="jrgsp">
+
+        select zb.JRGSP_HTBH,zb.JRGSP_ID,zb.JRGSP_DWMC,zb.jRGSP_DWBH,zb.jRGSP_DWID,zb.jRGSP_BMMC,zb.jRGSP_BMBH,zb.jRGSP_BMID,zb.jRGSP_TBR,zb.jRGSP_TBRID,to_char(zb.jRGSP_TBRQ,'yyyy/mm/dd') jRGSP_TBRQ,zb.jRGSP_SPZT,zb.jRGSP_FILE,zb.jRGSP_WFID,zb.jRGSP_NOTE,zb.jRGSP_DJBH,zb.jRGSP_XMMC,zb.jRGSP_XMBH,zb.jRGSP_XMID,zb.jRGSP_CBDWMC,zb.jRGSP_CBDWID,zb.jRGSP_CBDWBH,tz.zje jRGSP_HJJE,zb.jRGSP_GCMC,
+        fb.JRGMX_ID, fb.JRGMX_MID, fb.JRGMX_XMH, fb.JRGMX_XMMC, fb.JRGMX_JLDW, fb.JRGMX_SL, fb.JRGMX_DJ, fb.JRGMX_JE, fb.JRGMX_YT, to_char(fb.JRGMX_RQ,'yyyy/mm/dd') JRGMX_RQ, fb.JRGMX_DJBH
+        from
+        JRGTBSP zb left join Jrgtbsp_Jlmx fb on zb.jrgsp_djbh=fb.jrgmx_djbh
+        left join (
+        select jrgmx_djbh,sum(t.jrgmx_je) zje
+        from Jrgtbsp_Jlmx t group by jrgmx_djbh) tz on zb.jrgsp_djbh=tz.jrgmx_djbh
+        where 1=1
+        <if test="htbh != null and htbh != ''">
+            and zb.JRGSP_HTBH=#{htbh}
+        </if>
+        <if test="ksrq != null and ksrq != ''">
+            and to_date(to_char(zb.jRGSP_TBRQ,'yyyy/mm/dd'),'yyyy/mm/dd')>=to_date(#{ksrq},'yyyy/mm/dd')
+        </if>
+        <if test="jsrq != null and jsrq != ''">
+            and to_date(to_char(zb.jRGSP_TBRQ,'yyyy/mm/dd'),'yyyy/mm/dd')&lt;=to_date(#{jsrq},'yyyy/mm/dd')
+        </if>
+    </select>
+
+    <select id="getJgrspInfoByDjbh" parameterType="hashmap" resultMap="jrgsp">
+
+        select zb.JRGSP_HTBH,zb.JRGSP_ID,zb.JRGSP_DWMC,zb.jRGSP_DWBH,zb.jRGSP_DWID,zb.jRGSP_BMMC,zb.jRGSP_BMBH,zb.jRGSP_BMID,zb.jRGSP_TBR,zb.jRGSP_TBRID,to_char(zb.jRGSP_TBRQ,'yyyy/mm/dd') jRGSP_TBRQ,zb.jRGSP_SPZT,zb.jRGSP_FILE,zb.jRGSP_WFID,zb.jRGSP_NOTE,zb.jRGSP_DJBH,zb.jRGSP_XMMC,zb.jRGSP_XMBH,zb.jRGSP_XMID,zb.jRGSP_CBDWMC,zb.jRGSP_CBDWID,zb.jRGSP_CBDWBH,tz.zje jRGSP_HJJE,zb.jRGSP_GCMC,
+        fb.JRGMX_ID, fb.JRGMX_MID, fb.JRGMX_XMH, fb.JRGMX_XMMC, fb.JRGMX_JLDW, fb.JRGMX_SL, fb.JRGMX_DJ, fb.JRGMX_JE, fb.JRGMX_YT, to_char(fb.JRGMX_RQ,'yyyy/mm/dd') JRGMX_RQ, fb.JRGMX_DJBH
+        from
+        JRGTBSP zb left join Jrgtbsp_Jlmx fb on zb.jrgsp_djbh=fb.jrgmx_djbh
+        left join (
+        select jrgmx_djbh,sum(t.jrgmx_je) zje
+        from Jrgtbsp_Jlmx t group by jrgmx_djbh) tz on zb.jrgsp_djbh=tz.jrgmx_djbh
+        where 1=1 and zb.jrgsp_djbh=#{djbh}
+
+    </select>
+
+    <update id="spJgrspForJlzf" parameterType="hashmap">
+        update JRGTBSP set jRGSP_SPZT=#{spzt}
+        where jrgsp_djbh in
+        <foreach collection="djbhs" item="id"  open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </update>
+
+    <!--  通过部门查询合同信息(中期证书)  -->
+    <select id="getHtCwInfoByBm" parameterType="hashmap" resultMap="zqcwzf">
+        select ht.htxx_htbh ZQCWZF_HTBH,ht.HTXX_ID ZQCWZF_HTID,ht.HTXX_HTMC ZQCWZF_HTMC,gj.HTGJXX_cgxmmc ZQCWZF_GCMC,xm.yhhtxx_gldw ZQCWZF_GLDW,xm.yhhtxx_cbdw ZQCWZF_CBDW,xm.yhhtxx_jldw ZQCWZF_JLDW,
+        zm.zmht_zmh ZQZFMX_ZMBH,zm.zmht_zmmc ZQZFMX_ZMMC,zm.zmht_jldw ZQZFMX_JLDW,zm.zmht_sl ZQZFMX_HTSL,zm.zmht_dj ZQZFMX_HTDJ,zm.zmht_je ZQZFMX_HTJE,
+        '0%'ZQZFMX_LJWC,0 ZQZFMX_BQWCSL,0 ZQZFMX_BQWCJE,0 ZQZFMX_SQWCSL,0 ZQZFMX_SQWCJE,0 ZQZFMX_BQSL,0 ZQZFMX_BQJE
+        from djsj_htxx ht left join djsj_htxx_htgjxx gj on ht.htxx_htbh=gj.HTGJXX_HTBH left join djsj_htxx_yhxmxx xm on ht.htxx_htbh=xm.yhhtxx_htbh
+        left join zm_ht zm on ht.htxx_htbh=zm.zmht_htbh
+        where 1=1
+    </select>
+
+    <!--  添加工程计量单  -->
+    <insert id="addZqcwzfForJlzf" parameterType="com.hdsx.rcyh.entity.Jlzf_zqcwzf">
+        insert into ZQCWZFZS
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="zqcwzf_gcmc != null" >zqcwzf_gcmc,</if>
+            <if test="zqcwzf_cbdw != null" >zqcwzf_cbdw,</if>
+            <if test="zqcwzf_id != null" >zqcwzf_id,</if>
+            <if test="zqcwzf_dwmc != null" >zqcwzf_dwmc,</if>
+            <if test="zqcwzf_dwbh != null" >zqcwzf_dwbh,</if>
+            <if test="zqcwzf_dwid != null" >zqcwzf_dwid,</if>
+            <if test="zqcwzf_bmmc != null" >zqcwzf_bmmc,</if>
+            <if test="zqcwzf_bmbh != null" >zqcwzf_bmbh,</if>
+            <if test="zqcwzf_bmid != null" >zqcwzf_bmid,</if>
+            <if test="zqcwzf_tbr != null" >zqcwzf_tbr,</if>
+            <if test="zqcwzf_tbrid != null" >zqcwzf_tbrid,</if>
+            <if test="zqcwzf_tbrq != null" >zqcwzf_tbrq,</if>
+            <if test="zqcwzf_wfid != null" >zqcwzf_wfid,</if>
+            <if test="zqcwzf_note != null" >zqcwzf_note,</if>
+            <if test="zqcwzf_djbh != null" >zqcwzf_djbh,</if>
+            <if test="zqcwzf_zfqh != null" >zqcwzf_zfqh,</if>
+            <if test="zqcwzf_xmmc != null" >zqcwzf_xmmc,</if>
+            <if test="zqcwzf_xmid != null" >zqcwzf_xmid,</if>
+            <if test="zqcwzf_xmbh != null" >zqcwzf_xmbh,</if>
+            <if test="zqcwzf_htmc != null" >zqcwzf_htmc,</if>
+            <if test="zqcwzf_htid != null" >zqcwzf_htid,</if>
+            <if test="zqcwzf_htbh != null" >zqcwzf_htbh,</if>
+            <if test="zqcwzf_cjdwmc != null" >zqcwzf_cjdwmc,</if>
+            <if test="zqcwzf_cjdwid != null" >zqcwzf_cjdwid,</if>
+            <if test="zqcwzf_cjdwbh != null" >zqcwzf_cjdwbh,</if>
+            <if test="zqcwzf_jzrq != null" >zqcwzf_jzrq,</if>
+            <if test="zqcwzf_flag != null" >zqcwzf_flag,</if>
+            <if test="zqcwzf_gldw != null" >zqcwzf_gldw,</if>
+            <if test="zqcwzf_jldw != null" >zqcwzf_jldw,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="zqcwzf_gcmc != null" >#{zqcwzf_gcmc},</if>
+            <if test="zqcwzf_cbdw != null" >#{zqcwzf_cbdw},</if>
+            <if test="zqcwzf_id != null" >#{zqcwzf_id},</if>
+            <if test="zqcwzf_dwmc != null" >#{zqcwzf_dwmc},</if>
+            <if test="zqcwzf_dwbh != null" >#{zqcwzf_dwbh},</if>
+            <if test="zqcwzf_dwid != null" >#{zqcwzf_dwid},</if>
+            <if test="zqcwzf_bmmc != null" >#{zqcwzf_bmmc},</if>
+            <if test="zqcwzf_bmbh != null" >#{zqcwzf_bmbh},</if>
+            <if test="zqcwzf_bmid != null" >#{zqcwzf_bmid},</if>
+            <if test="zqcwzf_tbr != null" >#{zqcwzf_tbr},</if>
+            <if test="zqcwzf_tbrid != null" >#{zqcwzf_tbrid},</if>
+            <if test="zqcwzf_tbrq != null" >to_date(#{zqcwzf_tbrq},'yyyy/mm/dd'),</if>
+            <if test="zqcwzf_wfid != null" >#{zqcwzf_wfid},</if>
+            <if test="zqcwzf_note != null" >#{zqcwzf_note},</if>
+            <if test="zqcwzf_djbh != null" >#{zqcwzf_djbh},</if>
+            <if test="zqcwzf_zfqh != null" >#{zqcwzf_zfqh},</if>
+            <if test="zqcwzf_xmmc != null" >#{zqcwzf_xmmc},</if>
+            <if test="zqcwzf_xmid != null" >#{zqcwzf_xmid},</if>
+            <if test="zqcwzf_xmbh != null" >#{zqcwzf_xmbh},</if>
+            <if test="zqcwzf_htmc != null" >#{zqcwzf_htmc},</if>
+            <if test="zqcwzf_htid != null" >#{zqcwzf_htid},</if>
+            <if test="zqcwzf_htbh != null" >#{zqcwzf_htbh},</if>
+            <if test="zqcwzf_cjdwmc != null" >#{zqcwzf_cjdwmc},</if>
+            <if test="zqcwzf_cjdwid != null" >#{zqcwzf_cjdwid},</if>
+            <if test="zqcwzf_cjdwbh != null" >#{zqcwzf_cjdwbh},</if>
+            <if test="zqcwzf_jzrq != null" >to_date(#{zqcwzf_tbrq},'yyyy/mm/dd'),</if>
+            <if test="zqcwzf_flag != null" >#{zqcwzf_flag},</if>
+            <if test="zqcwzf_gldw != null" >#{zqcwzf_gldw},</if>
+            <if test="zqcwzf_jldw != null" >#{zqcwzf_jldw},</if>
+        </trim>
+    </insert>
+    <!--  添加计日工  -->
+    <insert id="addZqcwzfFbForJlzf" parameterType="com.hdsx.rcyh.entity.Jlzf_zqcwzf">
+        begin
+        <foreach collection="zqcwzfmx" item="item" index="index" separator=";">
+            insert into ZQCWZFZS_JLMX(ZQZFMX_ID, ZQZFMX_MID, ZQZFMX_ZMBH, ZQZFMX_ZMMC, ZQZFMX_JLDW,  ZQZFMX_HTSL, ZQZFMX_HTDJ, ZQZFMX_HTJE, ZQZFMX_LJWC, ZQZFMX_BQWCSL, ZQZFMX_BQWCJE, ZQZFMX_SQWCSL, ZQZFMX_SQWCJE, ZQZFMX_BQSL, ZQZFMX_BQJE, ZQZFMX_ZFQH )  values
+            (sys_guid(),trim(#{zqcwzf_zfqh}),trim(#{item.zqzfmx_zmbh}),trim(#{item.zqzfmx_zmmc}),trim(#{item.zqzfmx_jldw}),trim(#{item.zqzfmx_htsl}),trim(#{item.zqzfmx_htdj}),trim(#{item.zqzfmx_jldwid})*trim(#{item.zqzfmx_htsl}),
+            trim(#{item.zqzfmx_ljwc}),nvl(trim(#{item.zqzfmx_sqwcsl}),0)+nvl(trim(#{item.zqzfmx_bqsl}),0),nvl(trim(#{item.zqzfmx_sqwcje}),0)+nvl(trim(#{item.zqzfmx_bqje}),0),
+            trim(#{item.zqzfmx_sqwcsl}),trim(#{item.zqzfmx_sqwcje}),trim(#{item.zqzfmx_bqsl}),trim(#{item.zqzfmx_bqje}),trim(#{zqcwzf_zfqh}))
+        </foreach>
+        ;end;
+    </insert>
+
+</mapper>

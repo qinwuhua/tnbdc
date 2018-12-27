@@ -2,6 +2,7 @@ package com.hdsx.rcyh.mapper;
 
 import com.hdsx.rcyh.entity.Lhyh;
 import com.hdsx.rcyh.entity.Yhrwd;
+import com.hdsx.rcyh.entity.Yhrwmx;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -21,4 +22,11 @@ public interface YhrwdshMapper {
 
     int update(Yhrwd yhrwd);
 
+    int updatezt(Yhrwd yhrwd);
+
+    int insertzb(Yhrwmx yhrwmx);
+
+    int updatezb(Yhrwmx yhrwmx);
+
+    int deletezb(String yhrwdid);
 }

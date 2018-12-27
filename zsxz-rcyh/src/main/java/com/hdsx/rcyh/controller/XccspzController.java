@@ -25,7 +25,6 @@ public class XccspzController {
     @RequestMapping(value = "/queryOne/{id}", method = {RequestMethod.GET})
     @ResponseBody
     public Msg<Integer> QueryOne(@PathVariable("id") String xccsId) {
-
         if (!"".equals(xccsId)) {
             List<Xccspz> xccspzs = xccspzService.QueryOne(xccsId);
             if (xccspzs.size() > 0) {
@@ -61,46 +60,33 @@ public class XccspzController {
     @ApiOperation(value = "添加一条信息", httpMethod = "POST")
     @RequestMapping(value = "insert", method = RequestMethod.POST)
     @ResponseBody
-    public Msg<Integer> insert(@RequestBody Xccspz xccspz) {
-        if (xccspz != null && !"".equals(xccspz)) {
-            int insert = xccspzService.insert(xccspz);
-            Msg<Integer> integerMsg = new Msg<Integer>();
-            integerMsg.setCode(200);
-            integerMsg.setMsg("添加成功");
-            integerMsg.setData(insert);
-            return integerMsg;
-        } else {
-            Msg<Integer> integerMsg = new Msg<Integer>();
-            integerMsg.setCode(400);
-            integerMsg.setMsg("添加失败");
-            integerMsg.setData(0);
-            return integerMsg;
+    public Msg insert(@RequestBody Xccspz xccspz) {
+        try {
+            if (xccspzService.insert(xccspz)>0){
+                return ResultUtil.success("添加信息成功！");
+            }else {
+                return ResultUtil.error("添加信息失败！");
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResultUtil.error("接口异常！！");
         }
     }
 
     @ApiOperation(  value = "删除一条信息")
-    @ApiImplicitParam(name = "xccsId",value = "主键",dataType = "string",paramType = "path")
+    @ApiImplicitParam(paramType="query", dataType = "String", name = "xccsId", value = "主键ID", required = true)
     @RequestMapping(value = "delete",method= RequestMethod.DELETE)
-    public Msg<Integer> delete(@RequestParam("xccsId") String xccsId) {
-
-        if (!"".equals(xccsId)) {
-            int delete = xccspzService.delete(xccsId);
-            Msg<Integer> integerMsg = new Msg<Integer>();
-            integerMsg.setCode(200);
-            integerMsg.setMsg("删除成功");
-            integerMsg.setData(delete);
-            System.out.println("1111111111"+delete);
-            return integerMsg;
-        } else {
-            Msg<Integer> integerMsg = new Msg<Integer>();
-            integerMsg.setCode(400);
-            integerMsg.setMsg("删除失败");
-            integerMsg.setData(0);
-            return integerMsg;
+    public Msg delete(@RequestParam("xccsId") String xccsId) {
+        try {
+             return ResultUtil.success(xccspzService.delete(xccsId));
+            }
+        catch (Exception e){
+            e.printStackTrace();
+            return ResultUtil.error("删除失败！");
         }
 
     }
-    @ApiOperation("删除(批量)")
+/*    @ApiOperation("删除(批量)")
     @RequestMapping(value = "deletes",method= RequestMethod.DELETE)
     public Msg<Integer> deletes(@PathVariable("id") String[] xccsId) {
         if (xccsId.length > 0) {
@@ -117,12 +103,12 @@ public class XccspzController {
             integerMsg.setData(0);
             return integerMsg;
         }
-    }
+    }*/
 
     @ApiOperation(value = "修改", httpMethod = "POST")
     @ApiImplicitParam(name = "id", value = "id", paramType = "path", dataType = "string", required = true)
     @RequestMapping(value = "/update", method = {RequestMethod.POST})
-    public Msg<Integer> update(@ModelAttribute Xccspz xccspz) {
+    public Msg<Integer> update(@RequestBody Xccspz xccspz) {
         if (xccspz != null && !"".equals(xccspz)) {
             int update = xccspzService.update(xccspz);
             Msg<Integer> integerMsg = new Msg<Integer>();

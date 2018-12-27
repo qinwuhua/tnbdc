@@ -80,6 +80,8 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
+        <!--打包的jar包名字-->
+        <finalName>zsxz-common</finalName>
     </build>
 
 </project>

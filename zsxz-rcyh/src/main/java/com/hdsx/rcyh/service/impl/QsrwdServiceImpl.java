@@ -28,10 +28,7 @@ public class QsrwdServiceImpl implements QsrwdService {
         return qsrwdMapper.insert(qsrwd);
     }
 
-    @Override
-    public int delete(String qsrwdid) {
-        return qsrwdMapper.delete(qsrwdid);
-    }
+
 
     @Override
     public int update(Qsrwd qsrwd) {
@@ -43,5 +40,10 @@ public class QsrwdServiceImpl implements QsrwdService {
         PageHelper.startPage(pageNum, pageSize);
         List<Qsrwd> list = qsrwdMapper.getQsrwdList(param);
         return list;
+    }
+
+    @Override
+    public int delete(String qsrwdid) {
+        return qsrwdMapper.delete(qsrwdid);
     }
 }

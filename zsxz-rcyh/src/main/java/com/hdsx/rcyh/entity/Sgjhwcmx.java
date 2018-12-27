@@ -6,20 +6,24 @@ import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Date;
 
 @Data
 @Accessors(chain = true)
 @NoArgsConstructor
-public class Ydsgjhsbmx implements Serializable {
-    private static final long serialVersionUID = -872388034305483382L;
+public class Sgjhwcmx implements Serializable {
+
+    private static final long serialVersionUID = 7447671500142419910L;
+
     private String id;
     private String mid;
     private String xmnr;
     private String qdzh;
     private String zdzh;
     private BigDecimal yjgcl;
-    private Date jhksrq;
-    private Date jhjsrq;
+    private BigDecimal wcgcl;
+    private String jhkgrq;
+    private String jhjsrq;
+    private String sjksrq;
+    private String sjjsrq;
     private String bz;
 }
