@@ -97,7 +97,7 @@
 		</trim>
 		<trim prefix="values (" suffix=")" suffixOverrides="," >
 			<if test="djbh != null" >#{djbh},</if>
-			<if test="djbh != null" >#{djbh},</if>
+			<if test="djbh != null" >10220,</if>
 			<if test="famc != null" >#{famc},</if>
 			<if test="sjsjxx != null" >#{sjsjxx},</if>
 			<if test="sjsjsx != null" >#{sjsjsx},</if>

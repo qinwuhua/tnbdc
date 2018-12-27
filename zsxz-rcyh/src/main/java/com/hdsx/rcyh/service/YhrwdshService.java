@@ -19,8 +19,9 @@ public interface YhrwdshService {
 
     List<Yhrwd> getYhrwdshList(Map<String, String> param, int pageNum, int pageSize);
 
-    int updatezt(Yhrwd yhrwd);
+    int updateshzt(String yhrwddjbh, String yhrwdrwdshzt);
 
+    int updateyszt(String yhrwddjbh, String yhrwdyszt);
 
     int deletezb(String yhrwdid);
 

@@ -14,7 +14,7 @@ public class Yhrwmx implements Serializable {
 
     private static final long serialVersionUID = 8172831216082472719L;
     private String yhrwdid;
-    private String yhrwddjbh;
+    private String yhrwdmxdjbh;
     private String yhrwdsjbh;
     private String yhrwdxcdw;
     private String yhrwdcd;
