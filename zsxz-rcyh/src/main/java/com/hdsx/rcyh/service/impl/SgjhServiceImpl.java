@@ -46,18 +46,13 @@ public class SgjhServiceImpl implements SgjhService {
     }
 
     @Override
-    public int deleteSgjh(String id){
-       List<HashMap<String, Object>> list = sgjhMapper.getSgjhmxById(id);
-       if (list != null && list.size() > 0){
-            if (sgjhMapper.deleteSgjhmx(id) > 0){
-                return sgjhMapper.deleteSgjh(id);
-            }
-       }
-       return 0;
+    public int deleteSgjh(String[] ids){
+        sgjhMapper.deleteSgjhmx(ids);
+        return sgjhMapper.deleteSgjh(ids);
     }
 
     @Override
-    public List<HashMap<String, Object>> getSgjhmxById(String id){
+    public List<Sgjhsbmx> getSgjhmxById(String id){
         return sgjhMapper.getSgjhmxById(id);
     }
 
@@ -88,19 +83,24 @@ public class SgjhServiceImpl implements SgjhService {
     }
 
     @Override
-    public int deleteWcSgjh(String id) {
-        List<HashMap<String, Object>> list = sgjhMapper.getWcSgjhmxById(id);
-        if (list != null && list.size() > 0){
-            if (sgjhMapper.deleteWcSgjhmx(id) > 0){
-                return sgjhMapper.deleteWcSgjh(id);
-            }
-        }
-        return 0;
+    public int deleteWcSgjh(String[] ids) {
+        sgjhMapper.deleteWcSgjhmx(ids);
+        return sgjhMapper.deleteWcSgjh(ids);
     }
 
     @Override
-    public List<HashMap<String, Object>> getWcSgjhmxById(String id) {
+    public List<Sgjhwcmx> getWcSgjhmxById(String id) {
         return sgjhMapper.getWcSgjhmxById(id);
+    }
+
+    @Override
+    public int deleteWcSgjhmxByIds(String[] ids) {
+        return sgjhMapper.deleteWcSgjhmxByIds(ids);
+    }
+
+    @Override
+    public int deleteSgjhmxByIds(String[] ids) {
+        return sgjhMapper.deleteSgjhmxByIds(ids);
     }
 
 }

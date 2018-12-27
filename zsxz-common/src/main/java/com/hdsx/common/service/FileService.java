@@ -1,5 +1,6 @@
 package com.hdsx.common.service;
 
+import com.hdsx.common.entity.FileData;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.HashMap;
@@ -7,11 +8,13 @@ import java.util.List;
 
 public interface FileService {
 
-    List<HashMap<String, Object>> uploadFiles(String id, MultipartFile[] multipartFiles, String type);
+    HashMap<String, Object> uploadFiles(MultipartFile multipartFile);
 
     List<HashMap<String, Object>> getFilesDataById(String id);
 
-    boolean deleteFilesById(String id);
+    int deleteFilesById(String id);
 
-    List<HashMap<String, Object>> updateFiles(String id, MultipartFile[] multipartFiles, String type);
+    int addFileDataToFiles(List<FileData> fileDataList);
+
+    int updateFileDataToFiles(List<FileData> fileDataList);
 }

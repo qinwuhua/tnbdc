@@ -1,7 +1,9 @@
 package com.hdsx.rcyh.service;
 
 import com.hdsx.rcyh.entity.Sgjh;
+import com.hdsx.rcyh.entity.Sgjhsbmx;
 import com.hdsx.rcyh.entity.Sgjhwc;
+import com.hdsx.rcyh.entity.Sgjhwcmx;
 
 import java.util.HashMap;
 import java.util.List;
@@ -14,9 +16,9 @@ public interface SgjhService {
 
     int upateSgjh(Sgjh sgjh);
 
-    int deleteSgjh(String id);
+    int deleteSgjh(String[] ids);
 
-    List<HashMap<String, Object>> getSgjhmxById(String id);
+    List<Sgjhsbmx> getSgjhmxById(String id);
 
     List<HashMap<String, Object>> getWcSgjhAll(HashMap<String,String>paramMap, int pageNum, int pageSize);
 
@@ -24,8 +26,12 @@ public interface SgjhService {
 
     int upateWcsgjh(Sgjhwc sgjhwc);
 
-    int deleteWcSgjh(String id);
+    int deleteWcSgjh(String[] ids);
 
-    List<HashMap<String, Object>> getWcSgjhmxById(String id);
+    List<Sgjhwcmx> getWcSgjhmxById(String id);
+
+    int deleteWcSgjhmxByIds(String[] ids);
+
+    int deleteSgjhmxByIds(String[] ids);
 
 }

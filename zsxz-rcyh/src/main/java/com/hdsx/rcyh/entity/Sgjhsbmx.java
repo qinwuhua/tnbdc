@@ -6,7 +6,6 @@ import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Date;
 
 @Data
 @Accessors(chain = true)
@@ -19,7 +18,7 @@ public class Sgjhsbmx implements Serializable {
     private String qdzh;
     private String zdzh;
     private BigDecimal yjgcl;
-    private Date jhksrq;
-    private Date jhjsrq;
+    private String jhksrq;
+    private String jhjsrq;
     private String bz;
 }

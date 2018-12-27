@@ -5,7 +5,6 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 
 @Data
@@ -22,13 +21,13 @@ public class Sgjh implements Serializable {
     private String bmid;
     private String tbr;
     private String tbrid;
-    private Date tbrq;
+    private String tbrq;
     private String spzt;
     private String file;
     private String wfid;
     private String note;
     private String djbh;
-    private Date yf;
+    private String yf;
     private String yhdwmc;
     private String yhdwid;
     private String yhdwbh;

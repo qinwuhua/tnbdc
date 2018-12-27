@@ -18,11 +18,11 @@ public interface LyjcMapper {
 
     int addLyjcmxb(List<Lyjcmxb> lyjcmxbs);
 
-    int deleteLyjcmxbById(String id);
+    int deleteLyjcmxbById(String[] ids);
 
-    int deleteLyjcById(String id);
+    int deleteLyjcById(String[] ids);
 
-    List<HashMap<String, Object>> getLyjcbmxById(String id);
+    List<Lyjcmxb> getLyjcbmxById(String id);
 
     int updateLyjc(Lyjc lyjc);
 
@@ -34,13 +34,17 @@ public interface LyjcMapper {
 
     int addJczbmxb(List<Jczbmxb> jczbmxbs);
 
-    int deleteJczbmxbById(String id);
+    int deleteJczbmxbById(String[] ids);
 
-    int deleteJczbById(String id);
+    int deleteJczbById(String[] ids);
 
-    List<HashMap<String, Object>> getJczbmxById(String id);
+    List<Jczbmxb> getJczbmxById(String id);
 
     int updateJczb(Jczb jczb);
 
     int updateJczbmxb(Jczbmxb jczbmxb);
+
+    int deleteLyjcmxbByids(String[] ids);
+
+    int deleteJczbmxByIds(String[] ids);
 }
