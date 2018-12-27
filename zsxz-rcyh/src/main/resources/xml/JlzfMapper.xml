@@ -174,6 +174,8 @@
 			<if test="pmmtgcspsqs_spje != null" >pmmtgcspsqs_spje,</if>
 			<if test="pmmtgcspsqs_tbr != null" >pmmtgcspsqs_tbr,</if>
             <if test="pmmtgcspsqs_tbrq != null" >pmmtgcspsqs_tbrq,</if>
+            <if test="pmmtgcspsqs_bmmc != null" >pmmtgcspsqs_bmmc,</if>
+            <if test="pmmtgcspsqs_dwmc != null" >pmmtgcspsqs_dwmc,</if>
 		</trim>
 		<trim prefix="values (" suffix=")" suffixOverrides="," >
 			<if test="pmmtgcspsqs_djbh != null" >#{pmmtgcspsqs_djbh},</if>
@@ -187,6 +189,8 @@
 			<if test="pmmtgcspsqs_spje != null" >#{pmmtgcspsqs_spje},</if>
 			<if test="pmmtgcspsqs_tbr != null" >#{pmmtgcspsqs_tbr},</if>
             <if test="pmmtgcspsqs_tbrq != null" >to_date(#{pmmtgcspsqs_tbrq},'yyyy/mm/dd'),</if>
+            <if test="pmmtgcspsqs_bmmc != null" >#{pmmtgcspsqs_bmmc},</if>
+            <if test="pmmtgcspsqs_dwmc != null" >#{pmmtgcspsqs_dwmc},</if>
 		</trim>
 	</insert>
 
@@ -204,6 +208,8 @@
             <if test="pmmtgcspsqs_spje != null" >pmmtgcspsqs_spje=#{pmmtgcspsqs_spje},</if>
             <if test="pmmtgcspsqs_tbr != null" >pmmtgcspsqs_tbr=#{pmmtgcspsqs_tbr},</if>
             <if test="pmmtgcspsqs_tbrq != null" >pmmtgcspsqs_tbrq=to_date(#{pmmtgcspsqs_tbrq},'yyyy/mm/dd'),</if>
+            <if test="pmmtgcspsqs_bmmc != null" >pmmtgcspsqs_bmmc=#{pmmtgcspsqs_bmmc},</if>
+            <if test="pmmtgcspsqs_dwmc != null" >pmmtgcspsqs_dwmc=#{pmmtgcspsqs_dwmc},</if>
         </set>
         where 1=1 and pmmtgcspsqs_djbh=#{pmmtgcspsqs_djbh}
     </update>
