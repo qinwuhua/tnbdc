@@ -9,8 +9,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 @Service
 @Transactional
@@ -30,23 +32,45 @@ public class YhrwdshServiceImpl implements YhrwdshService {
 
     @Override
     public int insert(Yhrwd yhrwd) {
-        String a = "djbh";
-        long l = System.currentTimeMillis();
-        String l1 = l + "";
-        String ss = a +l1 ;
-        yhrwd.setYhrwddjbh(ss);
-        return yhrwdshMapper.insert(yhrwd);
+        //添加主表
+
+        //添加子表
+        //1.添加主表单据编号给子表
+        if (yhrwd.getYhrwmxes().size()>0) {
+            for(Yhrwmx yhrwmx: yhrwd.getYhrwmxes()) {
+                yhrwmx.setYhrwdmxdjbh(yhrwd.getYhrwddjbh());
+                //增加子表
+                yhrwdshMapper.insertzb(yhrwmx);
+            }
+        }
+        int a = yhrwdshMapper.insert(yhrwd);
+        return a;
     }
 
     @Override
     public int delete(String yhrwddjbh) {
-        return yhrwdshMapper.delete(yhrwddjbh);
+        //删除子表
+        yhrwdshMapper.deletezb(yhrwddjbh);
+        //删除主表
+        int a = yhrwdshMapper.delete(yhrwddjbh);
+        return a;
     }
 
 
     @Override
     public int update(Yhrwd yhrwd) {
-        return yhrwdshMapper.update(yhrwd);
+        //删除主表的djbh一样的子表
+        yhrwdshMapper.deletezb(yhrwd.getYhrwddjbh());
+        //添加子表
+        if (yhrwd.getYhrwmxes().size()>0) {
+            for (Yhrwmx yhrwmx: yhrwd.getYhrwmxes()) {
+                yhrwmx.setYhrwdmxdjbh(yhrwd.getYhrwddjbh());
+                yhrwdshMapper.insertzb(yhrwmx);
+            }
+        }
+        //djbh更新主表
+        int a = yhrwdshMapper.update(yhrwd);
+        return a;
     }
 
     @Override
@@ -57,9 +81,20 @@ public class YhrwdshServiceImpl implements YhrwdshService {
     }
 
     @Override
-    public int updatezt(Yhrwd yhrwd) {
+    public int updateshzt(String yhrwddjbh, String yhrwdshzt) {
+        HashMap<String, Object> param = new HashMap<>();
+        param.put("yhrwddjbh", yhrwddjbh);
+        param.put("yhrwdshzt", yhrwdshzt);
+        return yhrwdshMapper.updateshzt(param);
 
-        return yhrwdshMapper.updatezt(yhrwd);
+    }
+
+    @Override
+    public int updateyszt(String yhrwddjbh, String yhrwdyszt) {
+        HashMap<String, Object> param = new HashMap<>();
+        param.put("yhrwddjbh", yhrwddjbh);
+        param.put("yhrwdyszt", yhrwdyszt);
+        return yhrwdshMapper.updateyszt(param);
 
     }
 

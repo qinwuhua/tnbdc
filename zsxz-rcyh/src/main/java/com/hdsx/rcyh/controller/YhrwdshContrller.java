@@ -49,9 +49,9 @@ public class YhrwdshContrller {
     @ResponseBody
     public Msg insert(@RequestBody Yhrwd yhrwd) {
         try {
-            System.out.println("1111111" + yhrwdshService.insert(yhrwd));
             return ResultUtil.success(yhrwdshService.insert(yhrwd));
         } catch (Exception e) {
+            e.printStackTrace();
             return ResultUtil.error("添加失败！");
         }
     }
@@ -60,9 +60,9 @@ public class YhrwdshContrller {
     @ResponseBody
     public Msg insertzb(@RequestBody Yhrwmx yhrwmx) {
         try {
-            System.out.println("1111111" + yhrwdshService.insertzb(yhrwmx));
             return ResultUtil.success(yhrwdshService.insertzb(yhrwmx));
         } catch (Exception e) {
+            e.printStackTrace();
             return ResultUtil.error("添加失败！");
         }
     }
@@ -84,7 +84,6 @@ public class YhrwdshContrller {
     @RequestMapping(value = "deletezb", method = RequestMethod.DELETE)
     public Msg<Integer> deletezb(@RequestParam("yhrwdid") String yhrwdid) {
         try {
-            System.out.println("1111111" + yhrwdshService.deletezb(yhrwdid));
             return ResultUtil.success(yhrwdshService.deletezb(yhrwdid));
         } catch (Exception e) {
             return ResultUtil.error("删除失败！");
@@ -139,11 +138,24 @@ public class YhrwdshContrller {
 
 
 
-    @ApiOperation(value = "修改状态", httpMethod = "POST")
-    @RequestMapping(value = "/updatezt", method = {RequestMethod.POST})
-    public Msg updatezt(@RequestBody Yhrwd yhrwd) {
+    @ApiOperation(value = "修改审核状态", httpMethod = "POST")
+    @RequestMapping(value = "/updateshzt", method = {RequestMethod.POST})
+    public Msg updateshzt(@RequestParam(value = "yhrwddjbh")String yhrwddjbh,
+                        @RequestParam(value = "yhrwdshzt")String yhrwdshzt) {
         try {
-            return ResultUtil.success(yhrwdshService.updatezt(yhrwd));
+            return ResultUtil.success(yhrwdshService.updateshzt(yhrwddjbh, yhrwdshzt));
+        } catch (Exception e) {
+            return ResultUtil.error("修改失败！");
+        }
+
+    }
+
+    @ApiOperation(value = "修改验收状态", httpMethod = "POST")
+    @RequestMapping(value = "/updateyszt", method = {RequestMethod.POST})
+    public Msg updateyszt(@RequestParam(value = "yhrwddjbh")String yhrwddjbh,
+                        @RequestParam(value = "yhrwdyszt")String yhrwdyszt) {
+        try {
+            return ResultUtil.success(yhrwdshService.updateyszt(yhrwddjbh, yhrwdyszt));
         } catch (Exception e) {
             return ResultUtil.error("修改失败！");
         }

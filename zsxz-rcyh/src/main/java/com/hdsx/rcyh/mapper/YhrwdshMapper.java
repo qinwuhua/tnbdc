@@ -1,10 +1,10 @@
 package com.hdsx.rcyh.mapper;
 
-import com.hdsx.rcyh.entity.Lhyh;
 import com.hdsx.rcyh.entity.Yhrwd;
 import com.hdsx.rcyh.entity.Yhrwmx;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -22,7 +22,9 @@ public interface YhrwdshMapper {
 
     int update(Yhrwd yhrwd);
 
-    int updatezt(Yhrwd yhrwd);
+    int updateshzt(HashMap<String, Object> param);
+
+    int updateyszt(HashMap<String, Object> param);
 
     int insertzb(Yhrwmx yhrwmx);
 
