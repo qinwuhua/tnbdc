@@ -10,6 +10,7 @@ import com.hdsx.rcyh.service.LyjcService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -36,7 +37,7 @@ public class LyjcServiceImpl implements LyjcService {
 
     @Override
     public int deleteLyjc(String[] ids) {
-        lyjcMapper.deleteLyjcmxbById(ids);
+        lyjcMapper.deleteLyjcmxbByMid(ids);
         return lyjcMapper.deleteLyjcById(ids);
     }
 
@@ -44,16 +45,23 @@ public class LyjcServiceImpl implements LyjcService {
     public int updateLyjc(Lyjc lyjc) {
         if (lyjc.getLyjcmxb()!=null && lyjc.getLyjcmxb().size() > 0){
             for (Lyjcmxb lyjcmxb : lyjc.getLyjcmxb()){
-                lyjcmxb.setMid(lyjc.getId());
-                lyjcMapper.updateLyjcmxb(lyjcmxb);
+                //先查询明细表中是否有记录有就更新没有就删除
+                if (lyjcmxb.getId() != null && lyjcmxb.getId().length() > 0){
+                    lyjcmxb.setMid(lyjc.getId());
+                    lyjcMapper.updateLyjcmxb(lyjcmxb);
+                }else {
+                    List<Lyjcmxb> lyjcmxbList = new ArrayList<>();
+                    lyjcmxbList.add(lyjcmxb);
+                    lyjcMapper.addLyjcmxb(lyjcmxbList);
+                }
             }
         }
         return lyjcMapper.updateLyjc(lyjc);
     }
 
     @Override
-    public List<Lyjcmxb> getLyjcbmxById(String id) {
-        return lyjcMapper.getLyjcbmxById(id);
+    public List<Lyjcmxb> getLyjcbmxByMid(String id) {
+        return lyjcMapper.getLyjcbmxByMid(id);
     }
 
     @Override
@@ -74,16 +82,22 @@ public class LyjcServiceImpl implements LyjcService {
 
     @Override
     public int deleteJczb(String[] ids) {
-        lyjcMapper.deleteJczbmxbById(ids);
-        return lyjcMapper.deleteJczbById(ids);
+        lyjcMapper.deleteJczbmxbByMid(ids);
+        return lyjcMapper.deleteJczbByIds(ids);
     }
 
     @Override
     public int updateJczb(Jczb jczb) {
         if (jczb.getJczbmxb()!=null && jczb.getJczbmxb().size() > 0){
             for (Jczbmxb jczbmxb : jczb.getJczbmxb()){
-                jczbmxb.setMid(jczb.getId());
-                lyjcMapper.updateJczbmxb(jczbmxb);
+                if (jczbmxb.getId() != null && jczbmxb.getId().length() > 0){
+                    jczbmxb.setMid(jczb.getId());
+                    lyjcMapper.updateJczbmxb(jczbmxb);
+                }else {
+                    List<Jczbmxb> jczbmxbList = new ArrayList<>();
+                    jczbmxbList.add(jczbmxb);
+                    lyjcMapper.addJczbmxb(jczbmxbList);
+                }
             }
         }
         return lyjcMapper.updateJczb(jczb);
@@ -95,8 +109,8 @@ public class LyjcServiceImpl implements LyjcService {
     }
 
     @Override
-    public int deleteLyjcmxbByids(String[] ids) {
-        return lyjcMapper.deleteLyjcmxbByids(ids);
+    public int deleteLyjcmxbByIds(String[] ids) {
+        return lyjcMapper.deleteLyjcmxbByIds(ids);
     }
 
     @Override

@@ -95,7 +95,7 @@
         INSERT INTO SGDWLYJCB(PMMTLYJCB_ID, PMMTLYJCB_DWMC, PMMTLYJCB_DWBH, PMMTLYJCB_DWID, PMMTLYJCB_BMMC, PMMTLYJCB_BMBH, PMMTLYJCB_BMID, PMMTLYJCB_TBR, PMMTLYJCB_TBRID, PMMTLYJCB_TBRQ, PMMTLYJCB_SPZT, PMMTLYJCB_WFID,
          PMMTLYJCB_HTBH, PMMTLYJCB_JCRQ, PMMTLYJCB_SGDW, PMMTLYJCB_FJHJ,PMMTLYJCB_GLDW, PMMTLYJCB_JCR, PMMTLYJCB_HTJE, PMMTLYJCB_BZ, PMMTLYJCB_HTMC)
         VALUES (#{id,jdbcType=VARCHAR},#{dwmc,jdbcType=VARCHAR},#{dwbh,jdbcType=VARCHAR},#{dwid,jdbcType=VARCHAR},#{bmmc,jdbcType=VARCHAR},#{bmbh,jdbcType=VARCHAR},#{bmid,jdbcType=VARCHAR},#{tbr,jdbcType=VARCHAR},#{tbrid,jdbcType=VARCHAR},
-         to_date(#{tbrq,jdbcType=VARCHAR},'yyyy/mm/dd'),#{spzt,jdbcType=VARCHAR},#{wfid,jdbcType=VARCHAR},#{htbh,jdbcType=VARCHAR},to_date(#{jcrq,jdbcType=TIMESTAMP},'yyyy/mm/dd'),
+         to_date(#{tbrq,jdbcType=TIMESTAMP},'yyyy/mm/dd'),#{spzt,jdbcType=VARCHAR},#{wfid,jdbcType=VARCHAR},#{htbh,jdbcType=VARCHAR},to_date(#{jcrq,jdbcType=TIMESTAMP},'yyyy/mm/dd'),
          #{sgdw,jdbcType=VARCHAR},#{fjhj,jdbcType=NUMERIC},#{gldw,jdbcType=VARCHAR},#{jcr,jdbcType=VARCHAR}, #{htje,jdbcType=NUMERIC}, #{bz,jdbcType=VARCHAR} ,#{htmc,jdbcType=VARCHAR})
     </insert>
 
@@ -112,7 +112,7 @@
       </foreach>
     </insert>
 
-    <delete id="deleteLyjcmxbById">
+    <delete id="deleteLyjcmxbByMid">
         DELETE FROM sgdwlyjcbmx WHERE pmmtlyjcbmx_mid IN
         <foreach collection="array" item="id" open="(" close=")" separator=",">
             #{id}
@@ -126,7 +126,7 @@
         </foreach>
     </delete>
 
-    <select id="getLyjcbmxById" resultType="com.hdsx.rcyh.entity.Lyjcmxb">
+    <select id="getLyjcbmxByMid" resultType="com.hdsx.rcyh.entity.Lyjcmxb">
         SELECT PMMTLYJCBMX_ID id, PMMTLYJCBMX_MID mid, PMMTLYJCBMX_JCNR jcnr, PMMTLYJCBMX_FJ fj, PMMTLYJCBMX_MEMO memo, PMMTLYJCBMX_BH bh
         FROM sgdwlyjcbmx WHERE pmmtlyjcbmx_mid = #{id}
     </select>
@@ -142,16 +142,16 @@
             <if test="bmid != null and bmid != ''"> PMMTLYJCB_BMID = #{bmid}, </if>
             <if test="tbr != null and tbr != ''"> PMMTLYJCB_TBR = #{tbr}, </if>
             <if test="tbrid != null and tbrid != ''"> PMMTLYJCB_TBRID = #{tbrid}, </if>
-            <if test="tbrq != null and tbrq != ''"> PMMTLYJCB_TBRQ = to_date(#{tbrq},'yyyy/mm/dd'), </if>
+            <if test="tbrq != null and tbrq != ''"> PMMTLYJCB_TBRQ = to_date(#{tbrq,jdbcType=TIMESTAMP},'yyyy/mm/dd'), </if>
             <if test="spzt != null and spzt != ''"> PMMTLYJCB_SPZT = #{spzt}, </if>
             <if test="wfid != null and wfid != ''"> PMMTLYJCB_WFID = #{wfid}, </if>
             <if test="htbh != null and htbh != ''"> PMMTLYJCB_HTBH = #{htbh}, </if>
-            <if test="jcrq != null and jcrq != ''"> PMMTLYJCB_JCRQ = to_date(#{jcrq},'yyyy/mm/dd'), </if>
+            <if test="jcrq != null and jcrq != ''"> PMMTLYJCB_JCRQ = to_date(#{jcrq,jdbcType=TIMESTAMP},'yyyy/mm/dd'), </if>
             <if test="sgdw != null and sgdw != ''"> PMMTLYJCB_SGDW = #{sgdw}, </if>
-            <if test="fjhj != null and fjhj != ''"> PMMTLYJCB_FJHJ = #{fjhj}, </if>
+            <if test="fjhj != null and fjhj != ''"> PMMTLYJCB_FJHJ = #{fjhj,jdbcType=NUMERIC}, </if>
             <if test="gldw != null and gldw != ''"> PMMTLYJCB_GLDW = #{gldw}, </if>
             <if test="jcr != null and jcr != ''"> PMMTLYJCB_JCR = #{jcr}, </if>
-            <if test="htje != null and htje != ''"> PMMTLYJCB_HTJE = #{htje}, </if>
+            <if test="htje != null and htje != ''"> PMMTLYJCB_HTJE = #{htje,jdbcType=NUMERIC}, </if>
             <if test="bz != null and bz != ''"> PMMTLYJCB_BZ = #{bz}, </if>
             <if test="htmc != null and htmc != ''"> PMMTLYJCB_HTMC = #{htmc}, </if>
         </set>
@@ -162,7 +162,7 @@
         UPDATE SGDWLYJCBMX
         <set>
             <if test="jcnr != null and jcnr != ''"> PMMTLYJCBMX_JCNR = #{jcnr}, </if>
-            <if test="fj != null and fj != ''"> PMMTLYJCBMX_FJ = #{fj}, </if>
+            <if test="fj != null and fj != ''"> PMMTLYJCBMX_FJ = #{fj,jdbcType=NUMERIC}, </if>
             <if test="memo != null and memo != ''"> PMMTLYJCBMX_MEMO = #{memo}, </if>
             <if test="bh != null and bh != ''"> PMMTLYJCBMX_BH = #{bh}, </if>
         </set>
@@ -203,7 +203,7 @@
       </foreach>
     </insert>
 
-    <delete id="deleteJczbmxbByIds">
+    <delete id="deleteJczbmxbByMid">
         DELETE FROM JCZBQKJCBMX WHERE PMMTJCZBQKJCBMX_MID IN
         <foreach collection="array" item="id" open="(" close=")" separator=",">
             #{id}
@@ -228,18 +228,18 @@
             <if test="bmid != null and bmid != ''">PMMTJCZBQKJCB_BMID= #{bmid},</if>
             <if test="tbr != null and tbr != ''">PMMTJCZBQKJCB_TBR= #{tbr},</if>
             <if test="tbrid != null and tbrid != ''">PMMTJCZBQKJCB_TBRID= #{tbrid},</if>
-            <if test="tbrq != null and tbrq != ''">PMMTJCZBQKJCB_TBRQ= to_date(#{tbrq},'yyyy/mm/dd'),</if>
+            <if test="tbrq != null and tbrq != ''">PMMTJCZBQKJCB_TBRQ= to_date(#{tbrq,jdbcType=TIMESTAMP},'yyyy/mm/dd'),</if>
             <if test="spzt != null and spzt != ''">PMMTJCZBQKJCB_SPZT= #{spzt},</if>
             <if test="wfid != null and wfid != ''">PMMTJCZBQKJCB_WFID= #{wfid},</if>
             <if test="htbh != null and htbh != ''">PMMTJCZBQKJCB_HTBH= #{htbh},</if>
-            <if test="jcrq != null and jcrq != ''">PMMTJCZBQKJCB_JCRQ= to_date(#{jcrq},'yyyy/mm/dd'),</if>
+            <if test="jcrq != null and jcrq != ''">PMMTJCZBQKJCB_JCRQ= to_date(#{jcrq,jdbcType=NUMERIC},'yyyy/mm/dd'),</if>
             <if test="sgdw != null and sgdw != ''">PMMTJCZBQKJCB_SGDW= #{sgdw},</if>
             <if test="xmmc != null and xmmc != ''">PMMTJCZBQKJCB_XMMC= #{xmmc},</if>
             <if test="gldw != null and gldw != ''">PMMTJCZBQKJCB_GLDW= #{gldw},</if>
-            <if test="htje != null and htje != ''">PMMTJCZBQKJCB_HTJE= #{htje},</if>
-            <if test="bz != null and bz != ''">PMMTJCZBQKJCB_WYFJ= #{bz},</if>
+            <if test="htje != null and htje != ''">PMMTJCZBQKJCB_HTJE= #{htje,jdbcType=NUMERIC},</if>
+            <if test="bz != null and bz != ''">PMMTJCZBQKJCB_BZ= #{bz},</if>
             <if test="htmc != null and htmc != ''">PMMTJCZBQKJCB_HTMC= #{htmc},</if>
-            <if test="wyfj != null and wyfj != ''">PMMTJCZBQKJCB_BZ= #{wyfj},</if>
+            <if test="wyfj != null and wyfj != ''">PMMTJCZBQKJCB_WYFJ= #{wyfj,jdbcType=NUMERIC},</if>
             <if test="jcr != null and jcr != ''">PMMTJCZBQKJCB_JCR= #{jcr},</if>
         </set>
         WHERE PMMTJCZBQKJCB_ID = #{id}
@@ -248,12 +248,12 @@
     <update id="updateJczbmxb" parameterType="com.hdsx.rcyh.entity.Jczbmxb">
         UPDATE JCZBQKJCBMX
         <set>
-            <if test="jcnr != null and jcnr != ''"> PMMTLYJCBMX_JCNR = #{jcnr}, </if>
-            <if test="fj != null and fj != ''"> PMMTLYJCBMX_FJ = #{fj}, </if>
-            <if test="memo != null and memo != ''"> PMMTLYJCBMX_MEMO = #{memo}, </if>
-            <if test="bh != null and bh != ''"> PMMTLYJCBMX_BH = #{bh}, </if>
+            <if test="jcnr != null and jcnr != ''"> PMMTJCZBQKJCBMX_JCNR = #{jcnr}, </if>
+            <if test="fj != null and fj != ''"> PMMTJCZBQKJCBMX_FJ = #{fj,jdbcType=NUMERIC}, </if>
+            <if test="memo != null and memo != ''"> PMMTJCZBQKJCBMX_MEMO = #{memo}, </if>
+            <if test="bh != null and bh != ''"> PMMTJCZBQKJCBMX_BH = #{bh}, </if>
         </set>
-        WHERE PMMTLYJCBMX_ID = #{id}
+        WHERE PMMTJCZBQKJCBMX_ID = #{id}
     </update>
 
     <select id="getJczbmxById" resultType="com.hdsx.rcyh.entity.Jczbmxb">
