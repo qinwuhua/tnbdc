@@ -141,10 +141,11 @@ public class YhrwdshContrller {
     @ApiOperation(value = "修改审核状态", httpMethod = "POST")
     @RequestMapping(value = "/updateshzt", method = {RequestMethod.POST})
     public Msg updateshzt(@RequestParam(value = "yhrwddjbh")String yhrwddjbh,
-                        @RequestParam(value = "yhrwdshzt")String yhrwdshzt) {
+                        @RequestParam(value = "yhrwdrwdshzt")String yhrwdrwdshzt) {
         try {
-            return ResultUtil.success(yhrwdshService.updateshzt(yhrwddjbh, yhrwdshzt));
+            return ResultUtil.success(yhrwdshService.updateshzt(yhrwddjbh, yhrwdrwdshzt));
         } catch (Exception e) {
+            e.printStackTrace();
             return ResultUtil.error("修改失败！");
         }
 

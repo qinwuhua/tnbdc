@@ -81,10 +81,10 @@ public class YhrwdshServiceImpl implements YhrwdshService {
     }
 
     @Override
-    public int updateshzt(String yhrwddjbh, String yhrwdshzt) {
+    public int updateshzt(String yhrwddjbh, String yhrwdrwdshzt) {
         HashMap<String, Object> param = new HashMap<>();
         param.put("yhrwddjbh", yhrwddjbh);
-        param.put("yhrwdshzt", yhrwdshzt);
+        param.put("yhrwdrwdshzt", yhrwdrwdshzt);
         return yhrwdshMapper.updateshzt(param);
 
     }
