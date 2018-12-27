@@ -281,6 +281,24 @@ public class JlzfController {
 
     }
 
+    @RequestMapping(value = "delGcjldMxById", method = RequestMethod.DELETE, produces = "application/json")
+    @ApiOperation(value = "通过明细id删除计量支付-工程计量单数据")
+    @ApiImplicitParam(paramType="query", dataType = "String", name = "gcjlmx_id", value = "明细id(以“,”隔开)", required = true)
+    public Msg delGcjldMxById(@RequestParam(value = "gcjlmx_id",required = true) String gcjlmx_id){
+        try {
+
+            int flag=jlzfService.delGcjldMxById(gcjlmx_id);
+            if(flag>0)
+                return ResultUtil.success("删除成功");
+            else
+                return ResultUtil.error("删除失败");
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResultUtil.error("删除失败，接口异常");
+        }
+
+    }
+
 
     //以下是计工日审批表
 
@@ -328,6 +346,24 @@ public class JlzfController {
                 l.add(djbh[i]);
             }
             int flag=jlzfService.delJgrspForJlzf(l);
+            if(flag>0)
+                return ResultUtil.success("删除成功");
+            else
+                return ResultUtil.error("删除失败");
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResultUtil.error("删除失败，接口异常");
+        }
+
+    }
+
+    @RequestMapping(value = "delJgrspMxById", method = RequestMethod.DELETE, produces = "application/json")
+    @ApiOperation(value = "通过明细id删除计量支付-计日工审批明细数据")
+    @ApiImplicitParam(paramType="query", dataType = "String", name = "jrgmx_id", value = "明细id(以“,”隔开)", required = true)
+    public Msg delJgrspMxById(@RequestParam(value = "jrgmx_id",required = true) String jrgmx_id){
+        try {
+
+            int flag=jlzfService.delJgrspMxById(jrgmx_id);
             if(flag>0)
                 return ResultUtil.success("删除成功");
             else
@@ -447,6 +483,24 @@ public class JlzfController {
                 l.add(zfqh[i]);
             }
             int flag=jlzfService.delZqcwzfForJlzf(l);
+            if(flag>0)
+                return ResultUtil.success("删除成功");
+            else
+                return ResultUtil.error("删除失败");
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResultUtil.error("删除失败，接口异常");
+        }
+
+    }
+
+    @RequestMapping(value = "delZqcwzfMxById", method = RequestMethod.DELETE, produces = "application/json")
+    @ApiOperation(value = "通过明细id删除计量支付-中(终)期财务支付证书明细数据")
+    @ApiImplicitParam(paramType="query", dataType = "String", name = "zqzfmx_id", value = "明细id(以“,”隔开)", required = true)
+    public Msg delZqcwzfMxById(@RequestParam(value = "zqzfmx_id",required = true) String zqzfmx_id){
+        try {
+
+            int flag=jlzfService.delZqcwzfMxById(zqzfmx_id);
             if(flag>0)
                 return ResultUtil.success("删除成功");
             else

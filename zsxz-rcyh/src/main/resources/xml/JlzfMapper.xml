@@ -432,6 +432,10 @@
         </foreach>
     </delete>
 
+    <delete id="delGcjldMxById" parameterType="string" >
+        delete from GCJLDMX
+        where gcjlmx_id = #{value}
+    </delete>
     <!--  添加计日工  -->
     <insert id="addJrgspFbForJlzf" parameterType="com.hdsx.rcyh.entity.Jlzf_jrgsp">
         begin
@@ -541,6 +545,12 @@
         </foreach>
     </delete>
 
+    <!--  通过id删除计日工明细 -->
+
+    <delete id="delJgrspMxById" parameterType="string">
+        delete from JRGTBSP_JLMX where jrgmx_id=#{value}
+    </delete>
+
     <!-- 查询计日工审批列表数据 -->
     <select id="getJgrspList" parameterType="hashmap" resultMap="jrgsp">
 
@@ -588,9 +598,12 @@
     <select id="getHtCwInfoByBm" parameterType="hashmap" resultMap="zqcwzf">
         select ht.htxx_htbh ZQCWZF_HTBH,ht.HTXX_ID ZQCWZF_HTID,ht.HTXX_HTMC ZQCWZF_HTMC,gj.HTGJXX_cgxmmc ZQCWZF_GCMC,xm.yhhtxx_gldw ZQCWZF_GLDW,xm.yhhtxx_cbdw ZQCWZF_CBDW,xm.yhhtxx_jldw ZQCWZF_JLDW,
         zm.zmht_zmh ZQZFMX_ZMBH,zm.zmht_zmmc ZQZFMX_ZMMC,zm.zmht_jldw ZQZFMX_JLDW,zm.zmht_sl ZQZFMX_HTSL,zm.zmht_dj ZQZFMX_HTDJ,zm.zmht_je ZQZFMX_HTJE,
-        '0%'ZQZFMX_LJWC,0 ZQZFMX_BQWCSL,0 ZQZFMX_BQWCJE,0 ZQZFMX_SQWCSL,0 ZQZFMX_SQWCJE,0 ZQZFMX_BQSL,0 ZQZFMX_BQJE,zm.zmht_id zqzfmx_zmid,zm.zmht_htbh zqzfmx_htbh
+        100*round(decode(nvl(zm.zmht_je,0),0,0,nvl(ljwc.ljje,0)/sum(nvl(zm.zmht_je,0)) OVER()),4)||'%' ZQZFMX_LJWC,
+        nvl(ljwc.ljsl,0) ZQZFMX_BQWCSL,nvl(ljwc.ljje,0) ZQZFMX_BQWCJE,nvl(ljwc.ljsl,0)-nvl(bcwc.bcsl,0) ZQZFMX_SQWCSL,nvl(ljwc.ljje,0)-nvl(bcwc.bcje,0) ZQZFMX_SQWCJE,nvl(bcwc.bcsl,0) ZQZFMX_BQSL,nvl(bcwc.bcje,0) ZQZFMX_BQJE,zm.zmht_id zqzfmx_zmid,zm.zmht_htbh zqzfmx_htbh
         from djsj_htxx ht left join djsj_htxx_htgjxx gj on ht.htxx_htbh=gj.HTGJXX_HTBH left join djsj_htxx_yhxmxx xm on ht.htxx_htbh=xm.yhhtxx_htbh
         left join zm_ht zm on ht.htxx_htbh=zm.zmht_htbh
+        left join (select gcjlmx_zmid,sum(nvl(jlmx.gcjlmx_wcsl,0)) ljsl,sum(nvl(jlmx.gcjlmx_wcsl,0)*nvl(jlmx.gcjlmx_htdj,0)) ljje from gcjldmx jlmx group by gcjlmx_zmid) ljwc on zm.zmht_id=ljwc.gcjlmx_zmid
+        left join (select gcjlmx_zmid,sum(nvl(jlmx.gcjlmx_wcsl,0)) bcsl,sum(nvl(jlmx.gcjlmx_wcsl,0)*nvl(jlmx.gcjlmx_htdj,0)) bcje from gcjldmx jlmx where jlmx.gcjlmx_djbh in (select jld.gcjl_djbh from gcjld jld where jlmx.gcjlmx_djbh=jld.gcjl_djbh and jld.gcjl_tbrq=(select max(tjl.gcjl_tbrq) from gcjld tjl where tjl.gcjl_djbh=jld.gcjl_djbh)) group by gcjlmx_zmid) bcwc on zm.zmht_id=bcwc.gcjlmx_zmid
         where 1=1
         <if test="htbh != null and htbh != ''">
             and ht.htxx_htbh=#{htbh}
@@ -732,7 +745,10 @@
             #{id}
         </foreach>
     </delete>
-
+    <delete id="delZqcwzfMxById" parameterType="string" >
+        delete from ZQCWZFZS_JLMX
+        where zqzfmx_id=#{value}
+    </delete>
     <!-- 查询中(终)期财务支付证书列表数据 -->
     <select id="getZqcwzfList" parameterType="hashmap" resultMap="zqcwzf">
 
