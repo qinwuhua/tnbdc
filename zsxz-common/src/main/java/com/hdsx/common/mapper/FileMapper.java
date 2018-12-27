@@ -1,5 +1,6 @@
 package com.hdsx.common.mapper;
 
+import com.hdsx.common.entity.FileData;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.HashMap;
@@ -8,9 +9,10 @@ import java.util.List;
 @Mapper
 public interface FileMapper {
 
-     boolean addFiles(HashMap<String, Object> fileMap);
+     int addFileDataToFiles(List<FileData> fileDataList);
 
      List<HashMap<String, Object>> getFilesDataById(String id);
 
-     boolean deleteFilesDataById(String id);
+     int deleteFilesDataById(String id);
+
 }

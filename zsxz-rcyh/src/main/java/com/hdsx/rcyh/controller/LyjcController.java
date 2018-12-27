@@ -16,7 +16,8 @@ import javax.annotation.Resource;
 import java.util.HashMap;
 
 @RestController
-@Api(value = "日常养护-履约检查")
+@RequestMapping("lyjc")
+@Api(value = "日常养护-履约检查",description = "履约检查控制器")
 public class LyjcController{
 
     @Resource
@@ -67,13 +68,11 @@ public class LyjcController{
     }
 
     @DeleteMapping("deleteLyjc")
-    @ApiImplicitParams({
-            @ApiImplicitParam(paramType="query", dataType = "String", name = "id", value = "主键ID", required = true)
-    })
+    @ApiImplicitParam(paramType="query", dataType = "array", name = "ids", value = "主键ID", allowMultiple = true, required = true)
     @ApiOperation(value = "删除履约检查信息")
-    public Msg deleteLyjc(@RequestParam("id") String id){
+    public Msg deleteLyjc(@RequestParam("ids") String[] ids){
         try {
-            if (lyjcService.deleteLyjc(id)>0){
+            if (lyjcService.deleteLyjc(ids)>0){
                 return ResultUtil.success("删除信息成功！");
             }else {
                 return ResultUtil.error("删除信息失败！");
@@ -83,6 +82,9 @@ public class LyjcController{
             return ResultUtil.error("接口异常！");
         }
     }
+
+
+
 
     @PutMapping("updateLyjc")
     @ApiOperation(value = "更新履约检查信息")
@@ -155,13 +157,11 @@ public class LyjcController{
     }
 
     @DeleteMapping("deleteJczb")
-    @ApiImplicitParams({
-            @ApiImplicitParam(paramType="query", dataType = "String", name = "id", value = "主键ID", required = true)
-    })
+    @ApiImplicitParam(paramType="query", dataType = "array", name = "ids", value = "主键ID", allowMultiple = true, required = true)
     @ApiOperation(value = "删除履约检查信息")
-    public Msg deleteJczb(@RequestParam("id") String id){
+    public Msg deleteJczb(@RequestParam("id") String[] ids){
         try {
-            if (lyjcService.deleteJczb(id)>0){
+            if (lyjcService.deleteJczb(ids)>0){
                 return ResultUtil.success("添加信息成功！");
             }else {
                 return ResultUtil.error("添加信息失败！");
@@ -199,4 +199,35 @@ public class LyjcController{
         }
     }
 
+    @DeleteMapping("deleteLyjcmxbByIds")
+    @ApiOperation(value = "根据主键ID删除履约检查明细表")
+    @ApiImplicitParam(paramType="query", dataType = "array", name = "ids", value = "主键ID", allowMultiple = true, required = true)
+    public Msg deleteLyjcmxb(@RequestParam("ids")String[] ids){
+        try {
+            if (lyjcService.deleteLyjcmxbByids(ids) > 0){
+                return ResultUtil.success("删除成功！");
+            }else {
+                return ResultUtil.error("删除失败！");
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResultUtil.error("接口错误！");
+        }
+    }
+
+    @DeleteMapping("deleteJczbmxByIds")
+    @ApiOperation(value = "根据主键ID删除进场准备明细表")
+    @ApiImplicitParam(paramType="query", dataType = "array", name = "ids", value = "主键ID", allowMultiple = true, required = true)
+    public Msg deleteJczbmxByIds(@RequestParam("ids")String[] ids){
+        try {
+            if (lyjcService.deleteJczbmxByIds(ids) > 0){
+                return ResultUtil.success("删除成功！");
+            }else {
+                return ResultUtil.error("删除失败！");
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResultUtil.error("接口错误！");
+        }
+    }
 }

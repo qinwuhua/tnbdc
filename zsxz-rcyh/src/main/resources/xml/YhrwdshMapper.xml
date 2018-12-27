@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hdsx.rcyh.mapper.YhrwdshMapper">
+
+    <resultMap type="com.hdsx.rcyh.entity.Yhrwd" id="yhrwddjbh">
+        <result column="YHRWD_DJBH" property="yhrwddjbh"/>
+        <result column="YHRWD_LX" property="yhrwdlx"/>
+        <result column="YHRWD_RQ" property="yhrwdrq"/>
+        <result column="YHRWD_YD" property="yhrwdyd"/>
+        <result column="YHRWD_YHDW" property="yhrwdyhdw"/>
+        <result column="YHRWD_GYDW" property="yhrwdgydw"/>
+        <result column="YHRWD_RWDSHZT" property="yhrwdrwdshzt"/>
+        <result column="YHRWD_YSZT" property="yhrwdyszt"/>
+
+        <collection property="yhrwmxes" ofType="com.hdsx.rcyh.entity.Yhrwmx" column="yhrwddjbh">
+            <result column="jldbh" property="yhrwdid"/><!-- 这里的column对应的是下面查询的别名，而不是表字段名 -->
+            <result column="YHRWD_DJBH" property="yhrwddjbh"/><!-- property对应JavaBean中的属性名 -->
+            <result column="YHRWD_SJBH" property="yhrwdsjbh"/><!-- property对应JavaBean中的属性名 -->
+            <result column="YHRWD_XCDW" property="yhrwdxcdw"/>
+            <result column="YHRWD_XCFX" property="yhrwdxcfx"/>
+            <result column="YHRWD_CD" property="yhrwdcd"/>
+            <result column="YHRWD_DWGC" property="yhrwddwgc"/>
+            <result column="YHRWD_BHLX" property="yhrwdbhlx"/>
+            <result column="YHRWD_BHSL" property="yhrwdbhsl"/>
+            <result column="YHRWD_GCLLX" property="yhrwdgcllx"/>
+            <result column="YHRWD_ZH" property="yhrwdzh"/>
+            <result column="YHRWD_BHSM" property="yhrwdbhsm"/>
+            <result column="YHRWD_SJ" property="yhrwdsj"/>
+        </collection>
+
+    </resultMap>
+
+    <select id="queryyhdw" resultType="java.util.Map">
+        SELECT distinct  HTXX_XMSGLX  from DJSJ_HTXX
+    </select>
+
+    <select id="querygldw" resultType="java.util.Map">
+        SELECT distinct  HTXX_XMGLDW from DJSJ_HTXX
+    </select>
+    <!--主表添加-->
+    <insert id="insert" parameterType="com.hdsx.rcyh.entity.Yhrwd">
+        insert into XXRW_YHRWD
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="yhrwddjbh != null" >YHRWD_DJBH,</if>
+            <if test="yhrwdlx != null" >YHRWD_LX,</if>
+            <if test="yhrwdrq != null" >YHRWD_RQ,</if>
+            <if test="yhrwdyd != null" >YHRWD_YD,</if>
+            <if test="yhrwdyhdw != null" >YHRWD_YHDW,</if>
+            <if test="yhrwdgydw != null" >YHRWD_GYDW,</if>
+            <if test="yhrwdrwdshzt != null" >YHRWD_RWDSHZT,</if>
+            <if test="yhrwdyszt != null" >YHRWD_YSZT,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="yhrwddjbh != null" >#{yhrwddjbh},</if>
+            <if test="yhrwdlx != null" >#{yhrwdlx},</if>
+            <if test="yhrwdrq != null" >to_date(#{yhrwdrq},'yyyy/mm/dd'),</if>
+            <if test="yhrwdyd != null" >#{yhrwdyd},</if>
+            <if test="yhrwdyhdw != null" >#{yhrwdyhdw},</if>
+            <if test="yhrwdgydw != null" >#{yhrwdgydw},</if>
+            <if test="yhrwdrwdshzt != null" >'未处理',</if>
+            <if test="yhrwdyszt != null" > '未审核',</if>
+        </trim>
+    </insert>
+    <!--子表添加-->
+    <insert id="insertzb" parameterType="com.hdsx.rcyh.entity.Yhrwmx">
+        insert into XXRW_YHRWD_MX
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="yhrwdid != null" >YHRWD_ID,</if>
+            <if test="yhrwddjbh != null" >YHRWD_DJBH,</if>
+            <if test="yhrwdsjbh != null" >YHRWD_SJBH,</if>
+            <if test="yhrwdxcdw != null" >YHRWD_XCDW,</if>
+            <if test="yhrwdxcfx != null" >YHRWD_XCFX,</if>
+            <if test="yhrwdcd != null" >YHRWD_CD,</if>
+            <if test="yhrwddwgc != null" >YHRWD_DWGC,</if>
+            <if test="yhrwdbhlx != null" >YHRWD_BHLX,</if>
+            <if test="yhrwdbhsl != null" >YHRWD_BHSL,</if>
+            <if test="yhrwdgcllx != null" >YHRWD_GCLLX,</if>
+            <if test="yhrwdzh != null" >YHRWD_ZH,</if>
+            <if test="yhrwdbhsm != null" >YHRWD_BHSM,</if>
+            <if test="yhrwdsj != null" >YHRWD_SJ,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="yhrwdid != null" >#{yhrwdid},</if>
+            <if test="yhrwddjbh != null" >#{yhrwddjbh},</if>
+            <if test="yhrwdsjbh != null" >#{yhrwdsjbh},</if>
+            <if test="yhrwdxcdw != null" >#{yhrwdxcdw},</if>
+            <if test="yhrwdcd != null" >#{yhrwdcd},</if>
+            <if test="yhrwdxcfx != null" >#{yhrwdxcfx},</if>
+            <if test="yhrwddwgc != null" >#{yhrwddwgc},</if>
+            <if test="yhrwdbhlx != null" >#{yhrwdbhlx},</if>
+            <if test="yhrwdbhsl != null" >#{yhrwdbhsl},</if>
+            <if test="yhrwdgcllx != null" >#{yhrwdgcllx},</if>
+            <if test="yhrwdzh != null" >#{yhrwdzh},</if>
+            <if test="yhrwdbhsm != null" >#{yhrwdbhsm},</if>
+            <if test="yhrwdsj != null" >to_date(#{yhrwdsj},'yyyy/mm/dd'),</if>
+        </trim>
+    </insert>
+<!--主表-->
+    <update id="update" parameterType="com.hdsx.rcyh.entity.Yhrwd">
+        update XXRW_YHRWD
+        <set>
+            <if test="yhrwddjbh != null" >YHRWD_DJBH=#{yhrwddjbh},</if>
+            <if test="yhrwdlx != null" >YHRWD_LX=#{yhrwdlx},</if>
+            <if test="yhrwdrq != null" >YHRWD_RQ=to_date(#{yhrwdrq},'yyyy/mm/dd'),</if>
+            <if test="yhrwdyd != null" >YHRWD_YD=#{yhrwdyd},</if>
+            <if test="yhrwdyhdw != null" >YHRWD_YHDW=#{yhrwdyhdw},</if>
+            <if test="yhrwdgydw != null" >YHRWD_GYDW=#{yhrwdgydw},</if>
+            <if test="yhrwdrwdshzt != null" >YHRWD_RWDSHZT=#{yhrwdrwdshzt},</if>
+            <if test="yhrwdyszt != null" >YHRWD_YSZT=#{yhrwdyszt},</if>
+        </set>
+        where 1=1 and pmmtgcspsqs_djbh=#{pmmtgcspsqs_djbh}
+    </update>
+
+    <!--子表-->
+    <update id="updatezb" parameterType="com.hdsx.rcyh.entity.Yhrwmx">
+        update XXRW_YHRWD
+        <set>
+            <if test="yhrwdid != null" >YHRWD_ID=#{yhrwdid},</if>
+            <if test="yhrwddjbh != null" >YHRWD_DJBH=#{yhrwddjbh},</if>
+            <if test="yhrwdsjbh != null" >YHRWD_SJBH=#{yhrwdsjbh},</if>
+            <if test="yhrwdxcdw != null" >YHRWD_XCDW=#{yhrwdxcdw},</if>
+            <if test="yhrwdxcfx != null" >YHRWD_XCFX=#{yhrwdxcfx},</if>
+            <if test="yhrwdcd != null" >YHRWD_CD=#{yhrwdcd},</if>
+            <if test="yhrwddwgc != null" >YHRWD_DWGC=#{yhrwddwgc},</if>
+            <if test="yhrwdbhlx != null" >YHRWD_BHLX=#{yhrwdbhlx},</if>
+            <if test="yhrwdbhsl != null" >YHRWD_BHSL=#{yhrwdbhsl},</if>
+            <if test="yhrwdgcllx != null" >YHRWD_GCLLX=#{yhrwdgcllx},</if>
+            <if test="yhrwdzh != null" >YHRWD_ZH=#{yhrwdzh},</if>
+            <if test="yhrwdbhsm != null" >YHRWD_BHSM=#{yhrwdbhsm},</if>
+            <if test="yhrwdsj != null" >YHRWD_SJ=to_date(#{yhrwdsj},'yyyy/mm/dd'),</if>
+        </set>
+        where 1=1 and pmmtgcspsqs_djbh=#{pmmtgcspsqs_djbh}
+    </update>
+
+    <!--删除主表-->
+    <delete id="delete" parameterType="java.lang.String">
+        delete from XXRW_YHRWD
+        where YHRWD_DJBH in
+        <foreach collection="list" item="yhrwddjbh"  open="(" separator="," close=")">
+            #{yhrwddjbh}
+        </foreach>
+
+    </delete>
+
+    <!--删除子表-->
+    <delete id="deletezb" parameterType="java.lang.String">
+        delete from XXRW_YHRWD_MX
+        where YHRWD_DJBH in
+        <foreach collection="list" item="yhrwddjbh"  open="(" separator="," close=")">
+            #{yhrwddjbh}
+        </foreach>
+    </delete>
+
+    <select id="getYhrwdshList" parameterType="hashmap" resultType="com.hdsx.rcyh.entity.Yhrwd">
+      select *from XXRW_YHRWD A
+      <if test="yhrwdlx != null and yhrwdlx !=''">
+          and A.YHRWD_LX=#{yhrwdlx}
+      </if>
+        <if test="yhrwdyd != null and yhrwdyd !=''">
+            and A.YHRWD_YD=#{yhrwdyd}
+        </if>
+        <if test="yhrwdyhdw != null and yhrwdyhdw !=''">
+            and A.YHRWD_YHDW=#{yhrwdyhdw}
+        </if>
+        <if test="yhrwdgydw != null and yhrwdgydw !=''">
+            and A.YHRWD_GYDW=#{yhrwdgydw}
+        </if>
+      left join (select *from XXRW_YHRWD_MX) B on A.YHRWD_DJBH=B.YHRWD_DJBH
+    </select>
+
+
+
+
+    <update id="updatezt" parameterType="com.hdsx.rcyh.entity.Yhrwd">
+        update XXRW_YHRWD
+        set
+          YHRWD_RWDSHZT = #{yhrwdrwdshzt,jdbcType=VARCHAR},
+          YHRWD_YSZT=#{yhrwdyszt,jdbcType=VARCHAR}
+          where YHRWD_DJBH = #{yhrwddjbh,jdbcType=VARCHAR}
+    </update>
+
+</mapper>

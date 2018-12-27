@@ -147,7 +147,7 @@
     <!-- 查询索赔申请单列表数据 -->
     <select id="getSpsqdList" parameterType="hashmap" resultType="com.hdsx.rcyh.entity.Jlzf">
         select g.PMMTGCSPSQS_ID,g.PMMTGCSPSQS_DWMC,g.PMMTGCSPSQS_DWBH,g.PMMTGCSPSQS_DWID,g.PMMTGCSPSQS_BMMC,g.PMMTGCSPSQS_BMBH,g.PMMTGCSPSQS_BMID,g.PMMTGCSPSQS_TBR,to_char(g.PMMTGCSPSQS_TBRQ,'yyyy/mm/dd') PMMTGCSPSQS_TBRQ,g.PMMTGCSPSQS_SPZT,g.PMMTGCSPSQS_FILE,g.PMMTGCSPSQS_DJBH,g.PMMTGCSPSQS_CJRQ,g.PMMTGCSPSQS_GCMC,g.PMMTGCSPSQS_HTBH,g.PMMTGCSPSQS_SQJE,g.PMMTGCSPSQS_SPSJ,g.PMMTGCSPSQS_SCYJS,g.PMMTGCSPSQS_SPYJS,g.PMMTGCSPSQS_SPJE,g.PMMTGCSPSQS_CJDW,g.PMMTGCSPSQS_GLDW,to_char(g.PMMTGCSPSQS_SQRQ,'yyyy/mm/dd') PMMTGCSPSQS_SQRQ,g.PMMTGCSPSQS_CBDW,g.PMMTGCSPSQS_SPSJJS
-         from GCSPSQS g where 1=1
+        from GCSPSQS g where 1=1
         <if test="pmmtgcspsqs_htbh != null and pmmtgcspsqs_htbh != ''">
             and g.pmmtgcspsqs_htbh=#{pmmtgcspsqs_htbh}
         </if>

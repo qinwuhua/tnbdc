@@ -1,5 +1,6 @@
 package com.hdsx.common.service.Impl;
 
+import com.hdsx.common.entity.FileData;
 import com.hdsx.common.mapper.FileMapper;
 import com.hdsx.common.service.FileService;
 import org.springframework.beans.factory.annotation.Value;
@@ -10,7 +11,8 @@ import javax.annotation.Resource;
 import java.io.File;
 import java.io.IOException;
 import java.text.DecimalFormat;
-import java.util.ArrayList;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
@@ -25,8 +27,19 @@ public class FileServiceImpl implements FileService {
     FileMapper fileMapper;
 
     @Override
-    public List<HashMap<String, Object>> uploadFiles(String id, MultipartFile[] multipartFiles, String type) {
-        List<HashMap<String, Object>> fileList = new ArrayList<>();
+    public HashMap<String, Object> uploadFiles(MultipartFile multipartFile) {
+        if (multipartFile != null) {
+            SimpleDateFormat nyr = new SimpleDateFormat("yyyyMMdd");
+            String nyrdate = nyr.format(new Date());
+            String filePath = fileSavePath + nyrdate+"/";
+            File fileFold = new File(filePath);
+            if (!fileFold.exists()) {
+                fileFold.mkdirs();
+            }
+            return this.transferTo(multipartFile,filePath);
+        }
+
+/*        List<HashMap<String, Object>> fileList = new ArrayList<>();
         if (multipartFiles != null && multipartFiles.length >0){
             String filePath = fileSavePath + type + "/";
             File fileFold = new File(filePath);
@@ -42,7 +55,7 @@ public class FileServiceImpl implements FileService {
                 }
             }
             return fileList;
-        }
+        }*/
         return null;
     }
 
@@ -52,7 +65,7 @@ public class FileServiceImpl implements FileService {
     }
 
     @Override
-    public boolean deleteFilesById(String id) {
+    public int deleteFilesById(String id) {
         List<HashMap<String, Object>> fileUrl = fileMapper.getFilesDataById(id);
         for (int i = 0; i < fileUrl.size(); i++){
             File file = new File(String.valueOf(fileUrl.get(i).get("FILES_PATH")));
@@ -60,43 +73,7 @@ public class FileServiceImpl implements FileService {
                 file.delete();
             }
         }
-        if(fileMapper.deleteFilesDataById(id)){
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public List<HashMap<String, Object>> updateFiles(String id, MultipartFile[] multipartFiles, String type) {
-        if (multipartFiles != null && multipartFiles.length > 0){
-            List<HashMap<String, Object>> fileUrl = fileMapper.getFilesDataById(id);
-            if (fileUrl != null && fileUrl.size() > 0){
-                List<HashMap<String, Object>> fileList = new ArrayList<>();
-                for (int i = 0; i < fileUrl.size(); i++){
-                    File file = new File(String.valueOf(fileUrl.get(i).get("FILES_PATH")));
-                    if (file.isFile() && file.exists()) {
-                        file.delete();
-                    }
-                }
-                if (fileMapper.deleteFilesDataById(id)){
-                    String filePath = fileSavePath + type + "/";
-                    File fileFold = new File(filePath);
-                    if (!fileFold.exists()){
-                        fileFold.mkdirs();
-                    }
-                    for (int i = 0; i < multipartFiles.length; i++){
-                        MultipartFile file = multipartFiles[i];
-                        HashMap<String, Object> fileMap = this.transferTo(file,filePath);
-                        fileMap.put("files_id", id);
-                        if (fileMapper.addFiles(fileMap)){
-                            fileList.add(fileMap);
-                        }
-                    }
-                }
-                return fileList;
-            }
-        }
-        return null;
+        return fileMapper.deleteFilesDataById(id);
     }
 
     public HashMap<String,Object> transferTo(MultipartFile file, String filePath) {
@@ -144,4 +121,19 @@ public class FileServiceImpl implements FileService {
         return null;
     }
 
+    @Override
+    public int addFileDataToFiles(List<FileData> fileDataList) {
+        if (fileDataList != null && fileDataList.size() > 0){
+            return fileMapper.addFileDataToFiles(fileDataList);
+        }
+        return 0;
+    }
+
+    @Override
+    public int updateFileDataToFiles(List<FileData> fileDataList){
+        if (fileDataList != null && fileDataList.size() > 0){
+            fileMapper.deleteFilesDataById(fileDataList.get(0).getFile_id());
+        }
+        return fileMapper.addFileDataToFiles(fileDataList);
+    }
 }

@@ -10,7 +10,7 @@ import java.util.List;
 public interface XccspzMapper {
     int delete(String xccsId);
 
-    int deletes(String[] xccsId);
+/*    int deletes(String[] xccsId);*/
 
     int insert(Xccspz xccspz);
 

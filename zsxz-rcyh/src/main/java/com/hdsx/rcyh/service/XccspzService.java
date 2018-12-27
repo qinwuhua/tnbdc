@@ -9,7 +9,7 @@ public interface XccspzService {
 
     int delete(String xccsId);
 
-    int deletes(String[] xccsId);
+   /* int deletes(String[] xccsId);*/
 
     int insert(Xccspz xccspz);
 

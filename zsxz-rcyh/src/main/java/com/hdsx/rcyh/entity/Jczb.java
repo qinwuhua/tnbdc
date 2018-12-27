@@ -6,7 +6,6 @@ import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Date;
 import java.util.List;
 
 @Data
@@ -24,11 +23,11 @@ public class Jczb implements Serializable {
     private String bmid;
     private String tbr;
     private String tbrid;
-    private Date tbrq;
+    private String tbrq;
     private String spzt;
     private String wfid;
     private String htbh;
-    private Date jcrq;
+    private String jcrq;
     private String sgdw;
     private String xmmc;
     private String gldw;

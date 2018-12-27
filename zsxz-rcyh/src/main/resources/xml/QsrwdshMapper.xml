@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hdsx.rcyh.mapper.QsrwdMapper">
+
+    <insert id="insert" parameterType="com.hdsx.rcyh.entity.Qsrwd">
+      insert into XXRW_QSRWD(QSRWD_ID, QSRWD_DJBH, QSRWD_XXLY,
+      QSRWD_SJLX, QSRWD_SJSJ, QSRWD_SJDD,
+      QSRWD_SJLD, QSRWD_FX, QSRWD_ZH,QSRWD_LXR,QSRWD_LXDH,QSRWD_LXJBSY,QSRWD_SJSM,QSRWD_TBR,QSRWD_TBSJ,QSRWD_TBDW,QSRWD_TBBM,
+      QSRWD_BZ,QSRWD_SHZT
+      )
+      values (#{qsrwdid,jdbcType=VARCHAR}, #{qsrwddjbh,jdbcType=VARCHAR}, #{qsrwdxxly,jdbcType=VARCHAR},
+      #{qsrwdsjlx,jdbcType=VARCHAR}, #{qsrwdsjsj,jdbcType=TIMESTAMP}, #{qsrwdsjdd,jdbcType=VARCHAR},
+      #{qsrwdsjld,jdbcType=VARCHAR}, #{qsrwdfx,jdbcType=VARCHAR}, #{qsrwdzh,jdbcType=VARCHAR}, #{qsrwdlxr,jdbcType=VARCHAR},
+      #{qsrwdlxdh,jdbcType=VARCHAR}, #{qsrwdlmjbsy,jdbcType=VARCHAR},
+      #{qsrwdsjsm,jdbcType=VARCHAR}, #{qsrwdstbr,jdbcType=VARCHAR}
+      , #{qsrwdtbsj,jdbcType=TIMESTAMP}
+      , #{qsrwdtbdw,jdbcType=VARCHAR}
+      , #{qsrwdtbbm,jdbcType=VARCHAR}
+      , #{qsrwdbz,jdbcType=VARCHAR}
+      , #{qsrwdshzt,jdbcType=VARCHAR}
+      )
+    </insert>
+
+
+    <delete id="delete" parameterType="java.lang.String">
+    delete from XXRW_QSRWD
+    where QSRWD_ID = #{qsrwdid,jdbcType=VARCHAR}
+    </delete>
+
+    <select id="getQsrwdList" parameterType="hashmap" resultType="com.hdsx.rcyh.entity.Qsrwd">
+        SELECT
+        T.QSRWD_ID qsrwdid,
+        T.QSRWD_DJBH qsrwddjbh,
+        T.QSRWD_XXLY qsrwdxxly,
+        T.QSRWD_SJLX qsrwdsjlx,
+        T.QSRWD_SJDD qsrwdsjdd,
+        T.QSRWD_SJLD qsrwdsjld,
+        T.QSRWD_FX qsrwdfx,
+        T.QSRWD_ZH qsrwdzh,
+        T.QSRWD_LXR qsrwdlxr,
+        T.QSRWD_LXDH qsrwdlxdh,
+        T.QSRWD_LXJBSY qsrwdlmjbsy,
+        T.QSRWD_SJSM qsrwdsjsm,
+        T.QSRWD_TBR qsrwdstbr,
+        T.QSRWD_TBDW qsrwdtbdw,
+        T.QSRWD_TBBM qsrwdtbbm,
+        T.QSRWD_BZ qsrwdbz,
+        T.QSRWD_SHZT qsrwdshzt,
+        T.QSRWD_SJSJ qsrwdsjsj,
+        T.QSRWD_TBSJ qsrwdtbsj
+        FROM XXRW_QSRWD T
+        <if test="qsrwdsjlx != null and qsrwdsjlx != ''">
+            and T.qsrwdsjlx=#{qsrwdsjlx}
+        </if>
+        <if test="qsrwdtbdw != null and qsrwdtbdw != ''">
+            and T.qsrwdtbdw=#{qsrwdtbdw}
+        </if>
+        <if test="qsrwdtbbm != null and qsrwdtbbm != ''">
+            and T.v=#{qsrwdtbbm}
+        </if>
+        <if test="qsrwdsjsj != null and qsrwdsjsj != ''">
+            and T.qsrwdsjsj=#{qsrwdsjsj}
+        </if>
+        ORDER BY qsrwdsjsj DESC
+    </select>
+    <update id="update" parameterType="com.hdsx.rcyh.entity.Qsrwd">
+ update XCCSPZ
+    set
+      QSRWD_ID = #{qsrwdid,jdbcType=VARCHAR},
+      QSRWD_DJBH = #{qsrwddjbh,jdbcType=VARCHAR},
+      QSRWD_XXLY = #{qsrwdxxly,jdbcType=VARCHAR},
+      QSRWD_SJLX = #{qsrwdsjlx,jdbcType=VARCHAR},
+      QSRWD_SJSJ = #{qsrwdsjsj,jdbcType=TIMESTAMP},
+      QSRWD_SJDD = #{qsrwdsjdd,jdbcType=VARCHAR},
+      QSRWD_SJLD = #{qsrwdsjld,jdbcType=VARCHAR},
+      QSRWD_FX = #{qsrwdfx,jdbcType=VARCHAR},
+      QSRWD_ZH = #{qsrwdzh,jdbcType=VARCHAR},
+      QSRWD_LXR = #{qsrwdlxr,jdbcType=VARCHAR},
+      QSRWD_LXDH = #{qsrwdlxdh,jdbcType=VARCHAR},
+      QSRWD_LXJBSY = #{qsrwdlmjbsy,jdbcType=VARCHAR},
+      QSRWD_SJSM = #{qsrwdsjsm,jdbcType=VARCHAR},
+      QSRWD_TBR = #{qsrwdstbr,jdbcType=VARCHAR},
+      QSRWD_TBSJ = #{qsrwdtbsj,jdbcType=TIMESTAMP},
+      QSRWD_TBDW = #{qsrwdtbdw,jdbcType=VARCHAR},
+      QSRWD_TBBM = #{qsrwdtbbm,jdbcType=VARCHAR},
+      QSRWD_BZ = #{qsrwdbz,jdbcType=VARCHAR},
+      QSRWD_SHZT = #{qsrwdshzt,jdbcType=VARCHAR}
+    where QSRWD_ID = #{qsrwdid,jdbcType=VARCHAR}
+    </update>
+
+</mapper>

@@ -29,23 +29,15 @@ public class LyjcServiceImpl implements LyjcService {
     @Override
     public int addLyjc(Lyjc lyjc) {
         if (lyjc.getLyjcmxb() != null && lyjc.getLyjcmxb().size() > 0){
-            /*for (Lyjcmxb lyjcmxb : lyjc.getLyjcmxb()){
-                String id = "LYJC_" + System.currentTimeMillis();
-                lyjcmxb.setId(id);
-                lyjcmxb.setMid(lyjc.getId());
-                lyjcMapper.addLyjcmxb(lyjcmxb);
-            }*/
             lyjcMapper.addLyjcmxb(lyjc.getLyjcmxb());
         }
         return lyjcMapper.addLyjc(lyjc);
     }
 
     @Override
-    public int deleteLyjc(String id) {
-        if (lyjcMapper.deleteLyjcmxbById(id)>0){
-            return lyjcMapper.deleteLyjcById(id);
-        }
-        return 0;
+    public int deleteLyjc(String[] ids) {
+        lyjcMapper.deleteLyjcmxbById(ids);
+        return lyjcMapper.deleteLyjcById(ids);
     }
 
     @Override
@@ -60,7 +52,7 @@ public class LyjcServiceImpl implements LyjcService {
     }
 
     @Override
-    public List<HashMap<String, Object>> getLyjcbmxById(String id) {
+    public List<Lyjcmxb> getLyjcbmxById(String id) {
         return lyjcMapper.getLyjcbmxById(id);
     }
 
@@ -81,11 +73,9 @@ public class LyjcServiceImpl implements LyjcService {
 
 
     @Override
-    public int deleteJczb(String id) {
-        if (lyjcMapper.deleteJczbmxbById(id)>0){
-            return lyjcMapper.deleteJczbById(id);
-        }
-        return 0;
+    public int deleteJczb(String[] ids) {
+        lyjcMapper.deleteJczbmxbById(ids);
+        return lyjcMapper.deleteJczbById(ids);
     }
 
     @Override
@@ -100,8 +90,18 @@ public class LyjcServiceImpl implements LyjcService {
     }
 
     @Override
-    public List<HashMap<String, Object>> getJczbmxById(String id) {
+    public List<Jczbmxb> getJczbmxById(String id) {
         return lyjcMapper.getJczbmxById(id);
+    }
+
+    @Override
+    public int deleteLyjcmxbByids(String[] ids) {
+        return lyjcMapper.deleteLyjcmxbByids(ids);
+    }
+
+    @Override
+    public int deleteJczbmxByIds(String[] ids) {
+        return lyjcMapper.deleteJczbmxByIds(ids);
     }
 
 }

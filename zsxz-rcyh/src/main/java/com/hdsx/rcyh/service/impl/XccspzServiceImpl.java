@@ -12,6 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 
 @Service
+@Transactional
 public class XccspzServiceImpl implements XccspzService {
 
     @Resource
@@ -20,8 +21,11 @@ public class XccspzServiceImpl implements XccspzService {
 
     @Override
     public int delete(String xccsId) {
-        System.out.println("11111111"+xccspzMapper.delete(xccsId));
-        return xccspzMapper.delete(xccsId);
+        if (xccspzMapper.delete(xccsId) > 0) {
+            System.out.println("fhg" + xccspzMapper.delete(xccsId));
+            return xccspzMapper.delete(xccsId);
+        }
+        return 0;
     }
 
 
@@ -33,7 +37,7 @@ public class XccspzServiceImpl implements XccspzService {
     }
 
 
-    @Override
+   /* @Override
     public int deletes(String[] xccsId) {
         int deleteNum = 0;
         for (int i = 0; i < xccsId.length; i++) {
@@ -41,10 +45,11 @@ public class XccspzServiceImpl implements XccspzService {
         }
         return deleteNum;
 
-    }
+    }*/
 
     @Override
     public int insert(Xccspz xccspz) {
+        System.out.println(xccspz);
         return xccspzMapper.insert(xccspz);
     }
 

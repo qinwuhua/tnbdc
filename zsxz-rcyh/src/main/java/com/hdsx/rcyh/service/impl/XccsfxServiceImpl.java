@@ -1,5 +1,6 @@
 package com.hdsx.rcyh.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import com.hdsx.rcyh.mapper.XccsfxMapper;
 import com.hdsx.rcyh.service.XccsfxService;
 import org.springframework.stereotype.Service;
@@ -17,18 +18,23 @@ public class XccsfxServiceImpl implements XccsfxService {
 
 
     @Override
-    public List<HashMap<String, Object>> selectDay() {
-        System.out.println("sssssss"+xccsfxMapper.selectDay());
-        return xccsfxMapper.selectDay();
+    public List<HashMap<String, Object>> selectDay(int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<HashMap<String, Object>> list = xccsfxMapper.selectDay();
+        return list;
     }
 
     @Override
-    public List<HashMap<String, Object>> selectMonth() {
-        return xccsfxMapper.selectMonth();
+    public List<HashMap<String, Object>> selectMonth(int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<HashMap<String, Object>> list = xccsfxMapper.selectMonth();
+        return list;
     }
 
     @Override
-    public List<HashMap<String, Object>> selectYear() {
-        return xccsfxMapper.selectYear();
+    public List<HashMap<String, Object>> selectYear(int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<HashMap<String, Object>> list = xccsfxMapper.selectYear();
+        return list;
     }
 }
