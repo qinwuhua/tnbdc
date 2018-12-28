@@ -95,10 +95,10 @@ public class YhycController {
 
     @DeleteMapping("deleteGcyssqd")
     @ApiOperation(value = "删除养护工程验收申请单数据")
-    @ApiImplicitParam(paramType="query", dataType = "array", name = "djbhs", value = "单据编号", allowMultiple = true ,required = true)
-    public Msg deleteGcyssqd(@RequestParam("djbhs")String[] djbhs){
+    @ApiImplicitParam(paramType="query", dataType = "array", name = "ids", value = "主键ID", allowMultiple = true ,required = true)
+    public Msg deleteGcyssqd(@RequestParam("ids")String[] ids){
         try {
-            if (yhycService.deleteGcyssqd(djbhs) > 0){
+            if (yhycService.deleteGcyssqd(ids) > 0){
                 return ResultUtil.success("删除成功！");
             }else {
                 return ResultUtil.error("删除失败！");
@@ -169,10 +169,10 @@ public class YhycController {
 
     @DeleteMapping("deleteGcyhysd")
     @ApiOperation(value = "删除养护工程验收单数据")
-    @ApiImplicitParam(paramType="query", dataType = "array", name = "djbhs", value = "单据编号", allowMultiple = true ,required = true)
-    public Msg deleteGcyhysd(@RequestParam("djbhs")String[] djbhs){
+    @ApiImplicitParam(paramType="query", dataType = "array", name = "ids", value = "单据编号", allowMultiple = true ,required = true)
+    public Msg deleteGcyhysd(@RequestParam("ids")String[] ids){
         try {
-            if (yhycService.deleteGcyhysd(djbhs) > 0){
+            if (yhycService.deleteGcyhysd(ids) > 0){
                 return ResultUtil.success("删除成功！");
             }else {
                 return ResultUtil.error("删除失败！");

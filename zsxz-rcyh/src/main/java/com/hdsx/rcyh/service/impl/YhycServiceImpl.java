@@ -35,8 +35,8 @@ public class YhycServiceImpl implements YhycService {
     }
 
     @Override
-    public int deleteGcyssqd(String[] djbhs){
-        return yhycMapper.deleteGcyssqd(djbhs);
+    public int deleteGcyssqd(String[] ids){
+        return yhycMapper.deleteGcyssqd(ids);
     }
 
     @Override
@@ -62,8 +62,8 @@ public class YhycServiceImpl implements YhycService {
     }
 
     @Override
-    public int deleteGcyhysd(String[] djbhs) {
-        return yhycMapper.deleteGcyhysd(djbhs);
+    public int deleteGcyhysd(String[] ids) {
+        return yhycMapper.deleteGcyhysd(ids);
     }
 
 

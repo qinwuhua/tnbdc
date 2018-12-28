@@ -16,7 +16,7 @@ public interface YhycService {
 
     int updateGcyssqd(Gcyssqd gcyssqd);
 
-    int deleteGcyssqd(String[] djbhs);
+    int deleteGcyssqd(String[] ids);
 
     List<Gcyhysd> getGcyhysdAll(HashMap<String, String>paramMap, int pageNum, int pageSize);
 
@@ -24,6 +24,6 @@ public interface YhycService {
 
     int updateGcyhysd(Gcyhysd gcyhysd);
 
-    int deleteGcyhysd(String[] djbhs);
+    int deleteGcyhysd(String[] ids);
 
 }

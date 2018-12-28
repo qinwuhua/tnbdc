@@ -29,4 +29,6 @@ public interface JgjsMapper {
     List<Jgjs> getJgjssList(Map<String, String> param);
 
     int delJgjsMxById(String pmmtjgjssmx_id);
+
+    int spJgjssForJgjs(Map<String, Object> param);
 }

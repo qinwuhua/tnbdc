@@ -24,6 +24,8 @@
         <result column="GCYSSQD_TBBM" property="tbbm"/>
         <result column="GCYSSQD_TBDW" property="tbdw"/>
         <result column="GCYSSQD_SPZT" property="spzt"/>
+        <result column="GCYSSQD_DJBH" property="djbh"/>
+        <result column="GCYSSQD_JYFZBYJ" property="jyfzbyj"/>
     </resultMap>
 
     <resultMap id="gcysyhBean" type="com.hdsx.rcyh.entity.Gcyhysd">
@@ -54,7 +56,7 @@
     </resultMap>
 
     <select id="getGcyssqdAll" parameterType="hashmap" resultMap="gcyssqdBean">
-        SELECT GCYSSQD_ID, GCYSSQD_SQBH, GCYSSQD_HTMC, to_char(GCYSSQD_SQRQ,'yyyy/mm/dd')GCYSSQD_SQRQ, GCYSSQD_HTBH, GCYSSQD_SGDW, GCYSSQD_GLDW, to_char(GCYSSQD_HTKGRQ,'yyyy/mm/dd')GCYSSQD_HTKGRQ, to_char(GCYSSQD_HTJGRQ,'yyyy/mm/dd')GCYSSQD_HTJGRQ, GCYSSQD_YSLX, GCYSSQD_SGFYJ, GCYSSQD_JLDWYJ, GCYSSQD_GCJSBYJ, GCYSSQD_TBRID, GCYSSQD_TBR, to_char(GCYSSQD_TBRQ,'yyyy/mm/dd')GCYSSQD_TBRQ, GCYSSQD_TBBM, GCYSSQD_TBDW, GCYSSQD_SPZT, GCYSSQD_DJBH
+        SELECT GCYSSQD_ID, GCYSSQD_SQBH, GCYSSQD_HTMC, to_char(GCYSSQD_SQRQ,'yyyy/mm/dd')GCYSSQD_SQRQ, GCYSSQD_HTBH, GCYSSQD_SGDW, GCYSSQD_GLDW, to_char(GCYSSQD_HTKGRQ,'yyyy/mm/dd')GCYSSQD_HTKGRQ, to_char(GCYSSQD_HTJGRQ,'yyyy/mm/dd')GCYSSQD_HTJGRQ, GCYSSQD_YSLX, GCYSSQD_SGFYJ, GCYSSQD_JLDWYJ, GCYSSQD_GCJSBYJ, GCYSSQD_TBRID, GCYSSQD_TBR, to_char(GCYSSQD_TBRQ,'yyyy/mm/dd')GCYSSQD_TBRQ, GCYSSQD_TBBM, GCYSSQD_TBDW, GCYSSQD_SPZT, GCYSSQD_DJBH, GCYSSQD_JYFZBYJ
         FROM GCYSSQD
         <where>
             <trim suffixOverrides=",">
@@ -68,50 +70,52 @@
     </select>
 
     <select id="getGcyssqdByDjbh" parameterType="java.lang.String" resultMap="gcyssqdBean">
-        SELECT * FROM GCYSSQD WHERE GCYSSQD_DJBH = #{djbh}
+        SELECT GCYSSQD_ID, GCYSSQD_SQBH, GCYSSQD_HTMC, to_char(GCYSSQD_SQRQ,'yyyy/mm/dd')GCYSSQD_SQRQ, GCYSSQD_HTBH, GCYSSQD_SGDW, GCYSSQD_GLDW, to_char(GCYSSQD_HTKGRQ,'yyyy/mm/dd')GCYSSQD_HTKGRQ, to_char(GCYSSQD_HTJGRQ,'yyyy/mm/dd')GCYSSQD_HTJGRQ, GCYSSQD_YSLX, GCYSSQD_SGFYJ, GCYSSQD_JLDWYJ, GCYSSQD_GCJSBYJ, GCYSSQD_TBRID, GCYSSQD_TBR, to_char(GCYSSQD_TBRQ,'yyyy/mm/dd')GCYSSQD_TBRQ, GCYSSQD_TBBM, GCYSSQD_TBDW, GCYSSQD_SPZT, GCYSSQD_DJBH, GCYSSQD_JYFZBYJ
+        FROM GCYSSQD WHERE GCYSSQD_DJBH = #{djbh}
     </select>
     
     <insert id="addGcyssqd" parameterType="com.hdsx.rcyh.entity.Gcyssqd">
-        INSERT INTO GCYSSQD(GCYSSQD_ID, GCYSSQD_SQBH, GCYSSQD_HTMC, GCYSSQD_SQRQ, GCYSSQD_HTBH, GCYSSQD_SGDW, GCYSSQD_GLDW, GCYSSQD_HTKGRQ, GCYSSQD_HTJGRQ, GCYSSQD_YSLX, GCYSSQD_SGFYJ, GCYSSQD_JLDWYJ, GCYSSQD_GCJSBYJ, GCYSSQD_TBRID, GCYSSQD_TBR, GCYSSQD_TBRQ, GCYSSQD_TBBM, GCYSSQD_TBDW, GCYSSQD_SPZT)
-        VALUES (#{id,jdbcType=VARCHAR}, #{sqbh,jdbcType=VARCHAR}, #{htmc,jdbcType=VARCHAR}, to_date(#{sqrq,jdbcType=TIMESTAMP},'yyyy/mm/dd'), #{htbh,jdbcType=VARCHAR}, #{sgdw,jdbcType=VARCHAR}, #{gldw,jdbcType=VARCHAR}, to_date(#{htkgrq,jdbcType=VARCHAR},'yyyy/mm/dd'), to_date(#{htjgrq,jdbcType=VARCHAR},'yyyy/mm/dd'), #{yslx,jdbcType=VARCHAR}, #{sgfyj,jdbcType=VARCHAR}, #{jldwyj,jdbcType=VARCHAR}, #{gcjsbyj,jdbcType=VARCHAR}, #{tbrid,jdbcType=VARCHAR}, #{tbr,jdbcType=VARCHAR}, to_date(#{tbrq,jdbcType=VARCHAR},'yyyy/mm/dd'), #{tbbm,jdbcType=VARCHAR}, #{tbdw,jdbcType=VARCHAR}, #{spzt,jdbcType=VARCHAR})
+        INSERT INTO GCYSSQD(GCYSSQD_ID, GCYSSQD_SQBH, GCYSSQD_HTMC, GCYSSQD_SQRQ, GCYSSQD_HTBH, GCYSSQD_SGDW, GCYSSQD_GLDW, GCYSSQD_HTKGRQ, GCYSSQD_HTJGRQ, GCYSSQD_YSLX, GCYSSQD_SGFYJ, GCYSSQD_JLDWYJ, GCYSSQD_GCJSBYJ, GCYSSQD_TBRID, GCYSSQD_TBR, GCYSSQD_TBRQ, GCYSSQD_TBBM, GCYSSQD_TBDW, GCYSSQD_SPZT, GCYSSQD_DJBH, GCYSSQD_JYFZBYJ)
+        VALUES (sys_guid(), #{sqbh,jdbcType=VARCHAR}, #{htmc,jdbcType=VARCHAR}, to_date(#{sqrq,jdbcType=TIMESTAMP},'yyyy/mm/dd'), #{htbh,jdbcType=VARCHAR}, #{sgdw,jdbcType=VARCHAR}, #{gldw,jdbcType=VARCHAR}, to_date(#{htkgrq,jdbcType=VARCHAR},'yyyy/mm/dd'), to_date(#{htjgrq,jdbcType=VARCHAR},'yyyy/mm/dd'), #{yslx,jdbcType=VARCHAR}, #{sgfyj,jdbcType=VARCHAR}, #{jldwyj,jdbcType=VARCHAR}, #{gcjsbyj,jdbcType=VARCHAR}, #{tbrid,jdbcType=VARCHAR}, #{tbr,jdbcType=VARCHAR}, to_date(#{tbrq,jdbcType=VARCHAR},'yyyy/mm/dd'), #{tbbm,jdbcType=VARCHAR}, #{tbdw,jdbcType=VARCHAR}, '未处理', #{djbh,jdbcType=VARCHAR}, #{jyfzbyj,jdbcType=VARCHAR})
     </insert>
 
     <update id="updateGcyssqd" parameterType="com.hdsx.rcyh.entity.Gcyssqd">
         UPDATE GCYSSQD
         <set>
-            <if test="sqbh != null and sqbh != ''"> GCYSSQD_SQBH= #{sqbh}  </if>
-            <if test="htmc != null and htmc != ''"> GCYSSQD_HTMC= #{htmc}  </if>
-            <if test="sqrq != null and sqrq != ''"> GCYSSQD_SQRQ= to_date(#{sqrq},'yyyy/mm/dd')</if>
-            <if test="htbh != null and htbh != ''"> GCYSSQD_HTBH= #{htbh}  </if>
-            <if test="sgdw != null and sgdw != ''"> GCYSSQD_SGDW= #{sgdw}  </if>
-            <if test="gldw != null and gldw != ''"> GCYSSQD_GLDW= #{gldw}  </if>
-            <if test="htkgrq != null and htkgrq != ''"> GCYSSQD_HTKGRQ= to_date(#{htkgrq},'yyyy/mm/dd')  </if>
-            <if test="htjgrq != null and htjgrq != ''"> GCYSSQD_HTJGRQ= to_date(#{htjgrq},'yyyy/mm/dd')  </if>
-            <if test="yslx != null and yslx != ''"> GCYSSQD_YSLX= #{yslx}  </if>
-            <if test="sgfyj != null and sgfyj != ''"> GCYSSQD_SGFYJ= #{sgfyj}  </if>
-            <if test="jldwyj != null and jldwyj != ''"> GCYSSQD_JLDWYJ= #{jldwyj}  </if>
-            <if test="gcjsbyj != null and gcjsbyj != ''"> GCYSSQD_GCJSBYJ= #{gcjsbyj}  </if>
-            <if test="tbrid != null and tbrid != ''"> GCYSSQD_TBRID= #{tbrid}  </if>
-            <if test="tbr != null and tbr != ''"> GCYSSQD_TBR= #{tbr}  </if>
-            <if test="tbrq != null and tbrq != ''"> GCYSSQD_TBRQ= to_date(#{tbrq},'yyyy/mm/dd')  </if>
-            <if test="tbbm != null and tbbm != ''"> GCYSSQD_TBBM= #{tbbm}  </if>
-            <if test="tbdw != null and tbdw != ''"> GCYSSQD_TBDW= #{tbdw}  </if>
-            <if test="spzt != null and spzt != ''"> GCYSSQD_SPZT= #{spzt}  </if>
+            <if test="sqbh != null and sqbh != ''"> GCYSSQD_SQBH= #{sqbh},  </if>
+            <if test="htmc != null and htmc != ''"> GCYSSQD_HTMC= #{htmc}, </if>
+            <if test="sqrq != null and sqrq != ''"> GCYSSQD_SQRQ= to_date(#{sqrq},'yyyy/mm/dd'),</if>
+            <if test="htbh != null and htbh != ''"> GCYSSQD_HTBH= #{htbh},  </if>
+            <if test="sgdw != null and sgdw != ''"> GCYSSQD_SGDW= #{sgdw},  </if>
+            <if test="gldw != null and gldw != ''"> GCYSSQD_GLDW= #{gldw},  </if>
+            <if test="htkgrq != null and htkgrq != ''"> GCYSSQD_HTKGRQ= to_date(#{htkgrq},'yyyy/mm/dd'),  </if>
+            <if test="htjgrq != null and htjgrq != ''"> GCYSSQD_HTJGRQ= to_date(#{htjgrq},'yyyy/mm/dd'),  </if>
+            <if test="yslx != null and yslx != ''"> GCYSSQD_YSLX= #{yslx},  </if>
+            <if test="sgfyj != null and sgfyj != ''"> GCYSSQD_SGFYJ= #{sgfyj},  </if>
+            <if test="jldwyj != null and jldwyj != ''"> GCYSSQD_JLDWYJ= #{jldwyj},  </if>
+            <if test="gcjsbyj != null and gcjsbyj != ''"> GCYSSQD_GCJSBYJ= #{gcjsbyj},  </if>
+            <if test="tbrid != null and tbrid != ''"> GCYSSQD_TBRID= #{tbrid},  </if>
+            <if test="tbr != null and tbr != ''"> GCYSSQD_TBR= #{tbr},  </if>
+            <if test="tbrq != null and tbrq != ''"> GCYSSQD_TBRQ= to_date(#{tbrq},'yyyy/mm/dd'),  </if>
+            <if test="tbbm != null and tbbm != ''"> GCYSSQD_TBBM= #{tbbm},  </if>
+            <if test="tbdw != null and tbdw != ''"> GCYSSQD_TBDW= #{tbdw},  </if>
+            <if test="spzt != null and spzt != ''"> GCYSSQD_SPZT= #{spzt}, </if>
+            <if test="jyfzbyj != null and jyfzbyj != ''"> GCYSSQD_JYFZBYJ= #{jyfzbyj}, </if>
         </set>
-        WHERE GCYSSQD_DJBH = #{djbh}
+        WHERE GCYSSQD_ID = #{id}
     </update>
 
     <delete id="deleteGcyssqd">
-        DELETE FROM GCYSSQD WHERE GCYSSQD_DJBH IN
-        <foreach collection="array" item="djbh" open="(" close=")" separator=",">
-            #{djbh}
+        DELETE FROM GCYSSQD WHERE GCYSSQD_ID IN
+        <foreach collection="array" item="id" open="(" close=")" separator=",">
+            #{id}
         </foreach>
     </delete>
 
     <select id="getGcyhysdAll" parameterType="hashmap" resultMap="gcysyhBean">
         SELECT GCYHYSD_SPZT,GCYSSQD_SQBH GCYHYSD_SQBH, GCYSSQD_HTMC GCYHYSD_HTMC, GCYSSQD_HTBH GCYHYSD_HTBH, GCYHYSD_HTJE, GCYSSQD_DJBH GCYHYSD_DJBH,
-               to_char(GCYHYSD_YSRQ,'yyyy/mm/dd'), GCYSSQD_SGDW GCYHYSD_SGDW, GCYSSQD_GLDW GCYHYSD_GLDW, GCYHYSD_CJYSRY, GCYHYSD_GCNR, GCYHYSD_SGFYJ,
-               GCYHYSD_YZYSXZYJ, GCYSSQD_TBR GCYHYSD_TBR, to_char(GCYSSQD_TBRQ,'yyyy/mm/dd') GCYHYSD_TBRQ, GCYSSQD_TBDW GCYHYSD_TBDW, GCYSSQD_TBBM GCYHYSD_TBBM
+        to_char(GCYHYSD_YSRQ,'yyyy/mm/dd'), GCYSSQD_SGDW GCYHYSD_SGDW, GCYSSQD_GLDW GCYHYSD_GLDW, GCYHYSD_CJYSRY, GCYHYSH_GCNR, GCYHYSD_SGFYJ,
+        GCYHYSD_YZYSXZYJ, GCYSSQD_TBR GCYHYSD_TBR, to_char(GCYSSQD_TBRQ,'yyyy/mm/dd') GCYHYSD_TBRQ, GCYSSQD_TBDW GCYHYSD_TBDW, GCYSSQD_TBBM GCYHYSD_TBBM
         FROM GCYSSQD sq
         LEFT JOIN GCYHYSD ys ON sq.GCYSSQD_DJBH = ys.GCYHYSD_DJBH
         WHERE GCYSSQD_SPZT LIKE '%已下发%'
@@ -128,42 +132,42 @@
 
     <insert id="addGcyhysd" parameterType="com.hdsx.rcyh.entity.Gcyhysd">
         INSERT INTO GCYHYSD(GCYHYSD_ID, GCYHYSD_SQBH, GCYHYSD_SQRQ, GCYHYSD_DJBH, GCYHYSD_HTBH, GCYHYSD_HTMC, GCYHYSD_HTJE, GCYHYSD_YSRQ, GCYHYSD_SGDW, GCYHYSD_GLDW, GCYHYSD_CJYSRY, GCYHYSD_GCNR, GCYHYSD_SGFYJ, GCYHYSD_JLDWYJ, GCYHYSD_YZYSXZYJ, GCYHYSD_GCJSBYJ, GCYHYSD_YSLX, GCYHYSD_JYFZBYJ, GCYHYSD_TBRID, GCYHYSD_TBR, GCYHYSD_TBRQ, GCYHYSD_TBBM, GCYHYSD_TBDW, GCYHYSD_SPZT)
-        VALUES (#{id,jdbcType=VARCHAR}, #{sqbh,jdbcType=VARCHAR}, to_date(#{sqrq,jdbcType=VARCHAR},'yyyy/mm/dd'), #{djbh,jdbcType=VARCHAR}, #{htbh,jdbcType=VARCHAR}, #{htmc,jdbcType=VARCHAR}, #{htje,jdbcType=NUMERIC}, to_date(#{ysrq,jdbcType=VARCHAR},'yyyy/mm/dd'), #{sgdw,jdbcType=VARCHAR}, #{gldw,jdbcType=VARCHAR}, #{cjysry,jdbcType=VARCHAR}, #{gcnr,jdbcType=VARCHAR}, #{sgfyj,jdbcType=VARCHAR}, #{jldwyj,jdbcType=VARCHAR}, #{yzysxzyj,jdbcType=VARCHAR}, #{gcjsbyj,jdbcType=VARCHAR}, #{yslx,jdbcType=VARCHAR}, #{jyfzbyj,jdbcType=VARCHAR}, #{tbrid,jdbcType=VARCHAR}, #{tbr,jdbcType=VARCHAR}, to_date(#{tbrq,jdbcType=VARCHAR},'yyyy/mm/dd'), #{tbbm,jdbcType=VARCHAR}, #{tbdw,jdbcType=VARCHAR}, #{spzt)
+        VALUES (#{id,jdbcType=VARCHAR}, #{sqbh,jdbcType=VARCHAR}, to_date(#{sqrq,jdbcType=VARCHAR},'yyyy/mm/dd'), #{djbh,jdbcType=VARCHAR}, #{htbh,jdbcType=VARCHAR}, #{htmc,jdbcType=VARCHAR}, #{htje,jdbcType=NUMERIC}, to_date(#{ysrq,jdbcType=VARCHAR},'yyyy/mm/dd'), #{sgdw,jdbcType=VARCHAR}, #{gldw,jdbcType=VARCHAR}, #{cjysry,jdbcType=VARCHAR}, #{gcnr,jdbcType=VARCHAR}, #{sgfyj,jdbcType=VARCHAR}, #{jldwyj,jdbcType=VARCHAR}, #{yzysxzyj,jdbcType=VARCHAR}, #{gcjsbyj,jdbcType=VARCHAR}, #{yslx,jdbcType=VARCHAR}, #{jyfzbyj,jdbcType=VARCHAR}, #{tbrid,jdbcType=VARCHAR}, #{tbr,jdbcType=VARCHAR}, to_date(#{tbrq,jdbcType=VARCHAR},'yyyy/mm/dd'), #{tbbm,jdbcType=VARCHAR}, #{tbdw,jdbcType=VARCHAR}, #{spzt,jdbcType=VARCHAR})
     </insert>
 
     <update id="updateGcyhysd" parameterType="com.hdsx.rcyh.entity.Gcyssqd">
         UPDATE GCYHYSD
         <set>
-            <if test="sqbh != null and sqbh != ''"> GCYHYSD_SQBH= #{sqbh}  </if>
-            <if test="sqrq != null and sqrq != ''"> GCYHYSD_SQRQ= #{sqrq}  </if>
-            <if test="htbh != null and htbh != ''"> GCYHYSD_HTBH= #{htbh}  </if>
-            <if test="htmc != null and htmc != ''"> GCYHYSD_HTMC= #{htmc}  </if>
-            <if test="htje != null and htje != ''"> GCYHYSD_HTJE= #{htje}  </if>
-            <if test="ysrq != null and ysrq != ''"> GCYHYSD_YSRQ= to_date(#{ysrq},'yyyy/mm/dd')  </if>
-            <if test="sgdw != null and sgdw != ''"> GCYHYSD_SGDW= #{sgdw}  </if>
-            <if test="gldw != null and gldw != ''"> GCYHYSD_GLDW= #{gldw}  </if>
-            <if test="cjysry != null and cjysry != ''"> GCYHYSD_CJYSRY= #{cjysry}  </if>
-            <if test="gcnr != null and gcnr != ''"> GCYHYSD_GCNR= #{gcnr}  </if>
-            <if test="sgfyj != null and sgfyj != ''"> GCYHYSD_SGFYJ= #{sgfyj}  </if>
-            <if test="jldwyj != null and jldwyj != ''"> GCYHYSD_JLDWYJ= #{jldwyj}  </if>
-            <if test="yzysxzyj != null and yzysxzyj != ''"> GCYHYSD_YZYSXZYJ= #{yzysxzyj}  </if>
-            <if test="gcjsbyj != null and gcjsbyj != ''"> GCYHYSD_GCJSBYJ= #{gcjsbyj}  </if>
-            <if test="yslx != null and yslx != ''"> GCYHYSD_YSLX= #{yslx}  </if>
-            <if test="jyfzbyj != null and jyfzbyj != ''"> GCYHYSD_JYFZBYJ= #{jyfzbyj}  </if>
-            <if test="tbrid != null and tbrid != ''"> GCYHYSD_TBRID= #{tbrid}  </if>
-            <if test="tbr != null and tbr != ''"> GCYHYSD_TBR= #{tbr}  </if>
-            <if test="tbrq != null and tbrq != ''"> GCYHYSD_TBRQ= to_date(#{tbrq},'yyyy/mm/dd')  </if>
-            <if test="tbbm != null and tbbm != ''"> GCYHYSD_TBBM= #{tbbm}  </if>
-            <if test="tbdw != null and tbdw != ''"> GCYHYSD_TBDW= #{tbdw}  </if>
-            <if test="spzt != null and spzt != ''"> GCYHYSD_SPZT= #{spzt} </if>
+            <if test="sqbh != null and sqbh != ''"> GCYHYSD_SQBH= #{sqbh},  </if>
+            <if test="sqrq != null and sqrq != ''"> GCYHYSD_SQRQ= to_date(#{sqrq,jdbcType=TIMESTAMP},'yyyy/mm/dd'),  </if>
+            <if test="htbh != null and htbh != ''"> GCYHYSD_HTBH= #{htbh},  </if>
+            <if test="htmc != null and htmc != ''"> GCYHYSD_HTMC= #{htmc},  </if>
+            <if test="htje != null and htje != ''"> GCYHYSD_HTJE= #{htje},  </if>
+            <if test="ysrq != null and ysrq != ''"> GCYHYSD_YSRQ= to_date(#{ysrq,jdbcType=TIMESTAMP},'yyyy/mm/dd'),  </if>
+            <if test="sgdw != null and sgdw != ''"> GCYHYSD_SGDW= #{sgdw},  </if>
+            <if test="gldw != null and gldw != ''"> GCYHYSD_GLDW= #{gldw},  </if>
+            <if test="cjysry != null and cjysry != ''"> GCYHYSD_CJYSRY= #{cjysry},  </if>
+            <if test="gcnr != null and gcnr != ''"> GCYHYSD_GCNR= #{gcnr},  </if>
+            <if test="sgfyj != null and sgfyj != ''"> GCYHYSD_SGFYJ= #{sgfyj},  </if>
+            <if test="jldwyj != null and jldwyj != ''"> GCYHYSD_JLDWYJ= #{jldwyj},  </if>
+            <if test="yzysxzyj != null and yzysxzyj != ''"> GCYHYSD_YZYSXZYJ= #{yzysxzyj},  </if>
+            <if test="gcjsbyj != null and gcjsbyj != ''"> GCYHYSD_GCJSBYJ= #{gcjsbyj},  </if>
+            <if test="yslx != null and yslx != ''"> GCYHYSD_YSLX= #{yslx},  </if>
+            <if test="jyfzbyj != null and jyfzbyj != ''"> GCYHYSD_JYFZBYJ= #{jyfzbyj},  </if>
+            <if test="tbrid != null and tbrid != ''"> GCYHYSD_TBRID= #{tbrid},  </if>
+            <if test="tbr != null and tbr != ''"> GCYHYSD_TBR= #{tbr},  </if>
+            <if test="tbrq != null and tbrq != ''"> GCYHYSD_TBRQ= to_date(#{tbrq,jdbcType=TIMESTAMP},'yyyy/mm/dd'),  </if>
+            <if test="tbbm != null and tbbm != ''"> GCYHYSD_TBBM= #{tbbm},  </if>
+            <if test="tbdw != null and tbdw != ''"> GCYHYSD_TBDW= #{tbdw},  </if>
+            <if test="spzt != null and spzt != ''"> GCYHYSD_SPZT= #{spzt}, </if>
         </set>
-        WHERE GCYHYSD_DJBH = #{djbh}
+        WHERE GCYHYSD_ID = #{id}
     </update>
 
     <delete id="deleteGcyhysd" parameterType="java.lang.String">
-        DELETE FROM GCYHYSD WHERE GCYHYSD_DJBH IN
-        <foreach collection="array" item="djbh" close="(" open=")" separator=",">
-            #{djbh}
+        DELETE FROM GCYHYSD WHERE GCYHYSD_ID IN
+        <foreach collection="array" item="id" open="(" close=")" separator=",">
+            #{id}
         </foreach>
     </delete>
 
