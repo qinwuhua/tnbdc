@@ -1,13 +1,15 @@
 package com.hdsx.rcyh.service.impl;
 
 import com.github.pagehelper.PageHelper;
-import com.hdsx.rcyh.entity.*;
+import com.hdsx.rcyh.entity.Sgjh;
+import com.hdsx.rcyh.entity.Sgjhsbmx;
+import com.hdsx.rcyh.entity.Sgjhwc;
+import com.hdsx.rcyh.entity.Sgjhwcmx;
 import com.hdsx.rcyh.mapper.SgjhMapper;
 import com.hdsx.rcyh.service.SgjhService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -34,18 +36,9 @@ public class SgjhServiceImpl implements SgjhService {
 
     @Override
     public int upateSgjh(Sgjh sgjh) {
+        sgjhMapper.deleteSgjhmx(new String[]{sgjh.getId()});
         if (sgjh.getSgjhsbmx() != null && sgjh.getSgjhsbmx().size() > 0){
-            for (Sgjhsbmx sgjhsbmx : sgjh.getSgjhsbmx()){
-                if (sgjhsbmx.getId() != null && sgjhsbmx.getId().length() > 0){
-                    sgjhsbmx.setMid(sgjh.getId());
-                    sgjhMapper.updateSgjhmx(sgjhsbmx);
-                }else {
-                    List<Sgjhsbmx> sgjhsbmxList = new ArrayList<>();
-                    sgjhsbmx.setMid(sgjh.getId());
-                    sgjhsbmxList.add(sgjhsbmx);
-                    sgjhMapper.addSgjhmx(sgjhsbmxList);
-                }
-            }
+            sgjhMapper.addSgjhmx(sgjh.getSgjhsbmx());
         }
         return sgjhMapper.updateSgjh(sgjh);
     }
@@ -78,18 +71,9 @@ public class SgjhServiceImpl implements SgjhService {
 
     @Override
     public int upateWcsgjh(Sgjhwc sgjhwc) {
+        sgjhMapper.deleteWcSgjhmx(new String[]{sgjhwc.getId()});
         if (sgjhwc.getSgjhwcmx() != null && sgjhwc.getSgjhwcmx().size() > 0){
-            for (Sgjhwcmx sgjhwcmx : sgjhwc.getSgjhwcmx()){
-                if (sgjhwcmx.getId() != null && sgjhwcmx.getId().length() > 0){
-                    sgjhwcmx.setMid(sgjhwc.getId());
-                    sgjhMapper.updateWcSgjhmx(sgjhwcmx);
-                }else {
-                    List<Sgjhwcmx> sgjhwcmxList = new ArrayList<>();
-                    sgjhwcmx.setMid(sgjhwc.getId());
-                    sgjhwcmxList.add(sgjhwcmx);
-                    sgjhMapper.addWcsgjhmx(sgjhwcmxList);
-                }
-            }
+            sgjhMapper.addWcsgjhmx(sgjhwc.getSgjhwcmx());
         }
         return sgjhMapper.upateWcsgjh(sgjhwc);
     }

@@ -33,4 +33,5 @@ public class Gcyssqd implements Serializable {
     private String tbdw;
     private String spzt;
     private String djbh;
+    private String jyfzbyj;
 }

@@ -10,7 +10,6 @@ import com.hdsx.rcyh.service.LyjcService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -43,18 +42,9 @@ public class LyjcServiceImpl implements LyjcService {
 
     @Override
     public int updateLyjc(Lyjc lyjc) {
-        if (lyjc.getLyjcmxb()!=null && lyjc.getLyjcmxb().size() > 0){
-            for (Lyjcmxb lyjcmxb : lyjc.getLyjcmxb()){
-                //先查询明细表中是否有记录有就更新没有就删除
-                if (lyjcmxb.getId() != null && lyjcmxb.getId().length() > 0){
-                    lyjcmxb.setMid(lyjc.getId());
-                    lyjcMapper.updateLyjcmxb(lyjcmxb);
-                }else {
-                    List<Lyjcmxb> lyjcmxbList = new ArrayList<>();
-                    lyjcmxbList.add(lyjcmxb);
-                    lyjcMapper.addLyjcmxb(lyjcmxbList);
-                }
-            }
+        lyjcMapper.deleteLyjcmxbByMid(new String[]{lyjc.getId()});
+        if (lyjc.getLyjcmxb() != null && lyjc.getLyjcmxb().size() > 0){
+            lyjcMapper.addLyjcmxb(lyjc.getLyjcmxb());
         }
         return lyjcMapper.updateLyjc(lyjc);
     }
@@ -88,17 +78,9 @@ public class LyjcServiceImpl implements LyjcService {
 
     @Override
     public int updateJczb(Jczb jczb) {
-        if (jczb.getJczbmxb()!=null && jczb.getJczbmxb().size() > 0){
-            for (Jczbmxb jczbmxb : jczb.getJczbmxb()){
-                if (jczbmxb.getId() != null && jczbmxb.getId().length() > 0){
-                    jczbmxb.setMid(jczb.getId());
-                    lyjcMapper.updateJczbmxb(jczbmxb);
-                }else {
-                    List<Jczbmxb> jczbmxbList = new ArrayList<>();
-                    jczbmxbList.add(jczbmxb);
-                    lyjcMapper.addJczbmxb(jczbmxbList);
-                }
-            }
+        lyjcMapper.deleteJczbmxbByMid(new String[]{jczb.getId()});
+        if (jczb.getJczbmxb() != null && jczb.getJczbmxb().size() > 0){
+            lyjcMapper.addJczbmxb(jczb.getJczbmxb());
         }
         return lyjcMapper.updateJczb(jczb);
     }

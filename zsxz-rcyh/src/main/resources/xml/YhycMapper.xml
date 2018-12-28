@@ -25,6 +25,7 @@
         <result column="GCYSSQD_TBDW" property="tbdw"/>
         <result column="GCYSSQD_SPZT" property="spzt"/>
         <result column="GCYSSQD_DJBH" property="djbh"/>
+        <result column="GCYSSQD_JYFZBYJ" property="jyfzbyj"/>
     </resultMap>
 
     <resultMap id="gcysyhBean" type="com.hdsx.rcyh.entity.Gcyhysd">
@@ -55,7 +56,7 @@
     </resultMap>
 
     <select id="getGcyssqdAll" parameterType="hashmap" resultMap="gcyssqdBean">
-        SELECT GCYSSQD_ID, GCYSSQD_SQBH, GCYSSQD_HTMC, to_char(GCYSSQD_SQRQ,'yyyy/mm/dd')GCYSSQD_SQRQ, GCYSSQD_HTBH, GCYSSQD_SGDW, GCYSSQD_GLDW, to_char(GCYSSQD_HTKGRQ,'yyyy/mm/dd')GCYSSQD_HTKGRQ, to_char(GCYSSQD_HTJGRQ,'yyyy/mm/dd')GCYSSQD_HTJGRQ, GCYSSQD_YSLX, GCYSSQD_SGFYJ, GCYSSQD_JLDWYJ, GCYSSQD_GCJSBYJ, GCYSSQD_TBRID, GCYSSQD_TBR, to_char(GCYSSQD_TBRQ,'yyyy/mm/dd')GCYSSQD_TBRQ, GCYSSQD_TBBM, GCYSSQD_TBDW, GCYSSQD_SPZT, GCYSSQD_DJBH
+        SELECT GCYSSQD_ID, GCYSSQD_SQBH, GCYSSQD_HTMC, to_char(GCYSSQD_SQRQ,'yyyy/mm/dd')GCYSSQD_SQRQ, GCYSSQD_HTBH, GCYSSQD_SGDW, GCYSSQD_GLDW, to_char(GCYSSQD_HTKGRQ,'yyyy/mm/dd')GCYSSQD_HTKGRQ, to_char(GCYSSQD_HTJGRQ,'yyyy/mm/dd')GCYSSQD_HTJGRQ, GCYSSQD_YSLX, GCYSSQD_SGFYJ, GCYSSQD_JLDWYJ, GCYSSQD_GCJSBYJ, GCYSSQD_TBRID, GCYSSQD_TBR, to_char(GCYSSQD_TBRQ,'yyyy/mm/dd')GCYSSQD_TBRQ, GCYSSQD_TBBM, GCYSSQD_TBDW, GCYSSQD_SPZT, GCYSSQD_DJBH, GCYSSQD_JYFZBYJ
         FROM GCYSSQD
         <where>
             <trim suffixOverrides=",">
@@ -69,13 +70,13 @@
     </select>
 
     <select id="getGcyssqdByDjbh" parameterType="java.lang.String" resultMap="gcyssqdBean">
-        SELECT GCYSSQD_ID, GCYSSQD_SQBH, GCYSSQD_HTMC, to_char(GCYSSQD_SQRQ,'yyyy/mm/dd')GCYSSQD_SQRQ, GCYSSQD_HTBH, GCYSSQD_SGDW, GCYSSQD_GLDW, to_char(GCYSSQD_HTKGRQ,'yyyy/mm/dd')GCYSSQD_HTKGRQ, to_char(GCYSSQD_HTJGRQ,'yyyy/mm/dd')GCYSSQD_HTJGRQ, GCYSSQD_YSLX, GCYSSQD_SGFYJ, GCYSSQD_JLDWYJ, GCYSSQD_GCJSBYJ, GCYSSQD_TBRID, GCYSSQD_TBR, to_char(GCYSSQD_TBRQ,'yyyy/mm/dd')GCYSSQD_TBRQ, GCYSSQD_TBBM, GCYSSQD_TBDW, GCYSSQD_SPZT, GCYSSQD_DJBH
+        SELECT GCYSSQD_ID, GCYSSQD_SQBH, GCYSSQD_HTMC, to_char(GCYSSQD_SQRQ,'yyyy/mm/dd')GCYSSQD_SQRQ, GCYSSQD_HTBH, GCYSSQD_SGDW, GCYSSQD_GLDW, to_char(GCYSSQD_HTKGRQ,'yyyy/mm/dd')GCYSSQD_HTKGRQ, to_char(GCYSSQD_HTJGRQ,'yyyy/mm/dd')GCYSSQD_HTJGRQ, GCYSSQD_YSLX, GCYSSQD_SGFYJ, GCYSSQD_JLDWYJ, GCYSSQD_GCJSBYJ, GCYSSQD_TBRID, GCYSSQD_TBR, to_char(GCYSSQD_TBRQ,'yyyy/mm/dd')GCYSSQD_TBRQ, GCYSSQD_TBBM, GCYSSQD_TBDW, GCYSSQD_SPZT, GCYSSQD_DJBH, GCYSSQD_JYFZBYJ
         FROM GCYSSQD WHERE GCYSSQD_DJBH = #{djbh}
     </select>
     
     <insert id="addGcyssqd" parameterType="com.hdsx.rcyh.entity.Gcyssqd">
-        INSERT INTO GCYSSQD(GCYSSQD_ID, GCYSSQD_SQBH, GCYSSQD_HTMC, GCYSSQD_SQRQ, GCYSSQD_HTBH, GCYSSQD_SGDW, GCYSSQD_GLDW, GCYSSQD_HTKGRQ, GCYSSQD_HTJGRQ, GCYSSQD_YSLX, GCYSSQD_SGFYJ, GCYSSQD_JLDWYJ, GCYSSQD_GCJSBYJ, GCYSSQD_TBRID, GCYSSQD_TBR, GCYSSQD_TBRQ, GCYSSQD_TBBM, GCYSSQD_TBDW, GCYSSQD_SPZT, GCYSSQD_DJBH)
-        VALUES (#{id,jdbcType=VARCHAR}, #{sqbh,jdbcType=VARCHAR}, #{htmc,jdbcType=VARCHAR}, to_date(#{sqrq,jdbcType=TIMESTAMP},'yyyy/mm/dd'), #{htbh,jdbcType=VARCHAR}, #{sgdw,jdbcType=VARCHAR}, #{gldw,jdbcType=VARCHAR}, to_date(#{htkgrq,jdbcType=VARCHAR},'yyyy/mm/dd'), to_date(#{htjgrq,jdbcType=VARCHAR},'yyyy/mm/dd'), #{yslx,jdbcType=VARCHAR}, #{sgfyj,jdbcType=VARCHAR}, #{jldwyj,jdbcType=VARCHAR}, #{gcjsbyj,jdbcType=VARCHAR}, #{tbrid,jdbcType=VARCHAR}, #{tbr,jdbcType=VARCHAR}, to_date(#{tbrq,jdbcType=VARCHAR},'yyyy/mm/dd'), #{tbbm,jdbcType=VARCHAR}, #{tbdw,jdbcType=VARCHAR}, '未处理', #{djbh,jdbcType=VARCHAR})
+        INSERT INTO GCYSSQD(GCYSSQD_ID, GCYSSQD_SQBH, GCYSSQD_HTMC, GCYSSQD_SQRQ, GCYSSQD_HTBH, GCYSSQD_SGDW, GCYSSQD_GLDW, GCYSSQD_HTKGRQ, GCYSSQD_HTJGRQ, GCYSSQD_YSLX, GCYSSQD_SGFYJ, GCYSSQD_JLDWYJ, GCYSSQD_GCJSBYJ, GCYSSQD_TBRID, GCYSSQD_TBR, GCYSSQD_TBRQ, GCYSSQD_TBBM, GCYSSQD_TBDW, GCYSSQD_SPZT, GCYSSQD_DJBH, GCYSSQD_DJBH, GCYSSQD_JYFZBYJ)
+        VALUES (#{id,jdbcType=VARCHAR}, #{sqbh,jdbcType=VARCHAR}, #{htmc,jdbcType=VARCHAR}, to_date(#{sqrq,jdbcType=TIMESTAMP},'yyyy/mm/dd'), #{htbh,jdbcType=VARCHAR}, #{sgdw,jdbcType=VARCHAR}, #{gldw,jdbcType=VARCHAR}, to_date(#{htkgrq,jdbcType=VARCHAR},'yyyy/mm/dd'), to_date(#{htjgrq,jdbcType=VARCHAR},'yyyy/mm/dd'), #{yslx,jdbcType=VARCHAR}, #{sgfyj,jdbcType=VARCHAR}, #{jldwyj,jdbcType=VARCHAR}, #{gcjsbyj,jdbcType=VARCHAR}, #{tbrid,jdbcType=VARCHAR}, #{tbr,jdbcType=VARCHAR}, to_date(#{tbrq,jdbcType=VARCHAR},'yyyy/mm/dd'), #{tbbm,jdbcType=VARCHAR}, #{tbdw,jdbcType=VARCHAR}, '未处理', #{djbh,jdbcType=VARCHAR}, #{jyfzbyj,jdbcType=VARCHAR})
     </insert>
 
     <update id="updateGcyssqd" parameterType="com.hdsx.rcyh.entity.Gcyssqd">
@@ -99,6 +100,7 @@
             <if test="tbbm != null and tbbm != ''"> GCYSSQD_TBBM= #{tbbm},  </if>
             <if test="tbdw != null and tbdw != ''"> GCYSSQD_TBDW= #{tbdw},  </if>
             <if test="spzt != null and spzt != ''"> GCYSSQD_SPZT= #{spzt}, </if>
+            <if test="jyfzbyj != null and jyfzbyj != ''"> GCYSSQD_JYFZBYJ= #{jyfzbyj}, </if>
         </set>
         WHERE GCYSSQD_DJBH = #{djbh}
     </update>
