@@ -413,6 +413,81 @@ public class JlzfController {
 
     }
 
+    @RequestMapping(value = "spSpsqsForJlzf", method = RequestMethod.PUT, produces = "application/json")
+    @ApiOperation(value = "审批计量支付-索赔申请书")
+    @ApiImplicitParam(paramType="query", dataType = "String", name = "djbhs", value = "单据编号(以“,”隔开)", required = true)
+    public Msg spSpsqsForJlzf(@RequestParam(value = "djbhs",required = true) String djbhs,
+                              @RequestParam(value = "spzt",required = true) String spzt){
+        try {
+            String[] djbh=djbhs.split(",");
+            List<String> l = new ArrayList<String>();
+            for (int i=0;i<djbh.length;i++){
+                l.add(djbh[i]);
+            }
+            Map<String,Object> param=new HashMap<String,Object>();
+            param.put("spzt",spzt);param.put("djbhs",l);
+            int flag=jlzfService.spSpsqsForJlzf(param);
+            if(flag>0)
+                return ResultUtil.success("审批成功");
+            else
+                return ResultUtil.error("审批失败");
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResultUtil.error("审批失败，接口异常");
+        }
+
+    }
+
+    @RequestMapping(value = "spGcjldForJlzf", method = RequestMethod.PUT, produces = "application/json")
+    @ApiOperation(value = "审批计量支付-工程计量单")
+    @ApiImplicitParam(paramType="query", dataType = "String", name = "djbhs", value = "单据编号(以“,”隔开)", required = true)
+    public Msg spGcjldForJlzf(@RequestParam(value = "djbhs",required = true) String djbhs,
+                              @RequestParam(value = "spzt",required = true) String spzt){
+        try {
+            String[] djbh=djbhs.split(",");
+            List<String> l = new ArrayList<String>();
+            for (int i=0;i<djbh.length;i++){
+                l.add(djbh[i]);
+            }
+            Map<String,Object> param=new HashMap<String,Object>();
+            param.put("spzt",spzt);param.put("djbhs",l);
+            int flag=jlzfService.spGcjldForJlzf(param);
+            if(flag>0)
+                return ResultUtil.success("审批成功");
+            else
+                return ResultUtil.error("审批失败");
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResultUtil.error("审批失败，接口异常");
+        }
+
+    }
+
+    @RequestMapping(value = "spZqcwzfForJlzf", method = RequestMethod.PUT, produces = "application/json")
+    @ApiOperation(value = "审批计量支付-中期财务支付证书")
+    @ApiImplicitParam(paramType="query", dataType = "String", name = "djbhs", value = "支付期号(以“,”隔开)", required = true)
+    public Msg spZqcwzfForJlzf(@RequestParam(value = "zfbhs",required = true) String zfbhs,
+                              @RequestParam(value = "spzt",required = true) String spzt){
+        try {
+            String[] djbh=zfbhs.split(",");
+            List<String> l = new ArrayList<String>();
+            for (int i=0;i<djbh.length;i++){
+                l.add(djbh[i]);
+            }
+            Map<String,Object> param=new HashMap<String,Object>();
+            param.put("spzt",spzt);param.put("djbhs",l);
+            int flag=jlzfService.spZqcwzfForJlzf(param);
+            if(flag>0)
+                return ResultUtil.success("审批成功");
+            else
+                return ResultUtil.error("审批失败");
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResultUtil.error("审批失败，接口异常");
+        }
+
+    }
+
     @RequestMapping(value = "spJgrspForJlzf", method = RequestMethod.PUT, produces = "application/json")
     @ApiOperation(value = "审批计量支付-计日工审批数据")
     @ApiImplicitParam(paramType="query", dataType = "String", name = "djbhs", value = "单据编号(以“,”隔开)", required = true)
@@ -555,17 +630,21 @@ public class JlzfController {
     @RequestMapping(value = "getZqcwzfReport", method = RequestMethod.GET, produces = "application/json")
     @ApiImplicitParams({
             @ApiImplicitParam(paramType="query", dataType = "String", name = "htbh", value = "合同编号", required = false),
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "zfqh", value = "支付期号", required = false),
             @ApiImplicitParam(paramType="query", dataType = "String", name = "ksrq", value = "申请开始日期(yyyy/mm/dd)", required = false),
             @ApiImplicitParam(paramType="query", dataType = "String", name = "jsrq", value = "申请结束日期(yyyy/mm/dd)", required = false)
     })
     @ApiOperation(value = "查询计量支付-清单期中（终）支付报表")
     public Msg getZqcwzfReport(@RequestParam(value = "htbh",required = false) String htbh,
+                               @RequestParam(value = "zfqh",required = false) String zfqh,
                              @RequestParam(value = "ksrq",required = false) String ksrq,
-                             @RequestParam(value = "jsrq",required = false) String jsrq) {
+                             @RequestParam(value = "jsrq",required = false) String jsrq
+                               ) {
         Map<String, String> param = new HashMap<String, String>();
         param.put("htbh", htbh);
         param.put("ksrq", ksrq);
         param.put("jsrq", jsrq);
+        param.put("zfqh", zfqh);
         List<Jlzf_zqcwzfmx> list = jlzfService.getZqcwzfReport(param);
         return ResultUtil.success(list);
     }

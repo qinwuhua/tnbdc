@@ -160,4 +160,29 @@ public class JgjsController {
         return ResultUtil.success(new PageInfo<Jgjs>(list));
     }
 
+    @RequestMapping(value = "spJgjssForJgjs", method = RequestMethod.PUT, produces = "application/json")
+    @ApiOperation(value = "审批交工结算")
+    @ApiImplicitParam(paramType="query", dataType = "String", name = "jssbh", value = "结算书编号(以“,”隔开)", required = true)
+    public Msg spJgjssForJgjs(@RequestParam(value = "jssbh",required = true) String jssbh,
+                              @RequestParam(value = "spzt",required = true) String spzt){
+        try {
+            String[] djbh=jssbh.split(",");
+            List<String> l = new ArrayList<String>();
+            for (int i=0;i<djbh.length;i++){
+                l.add(djbh[i]);
+            }
+            Map<String,Object> param=new HashMap<String,Object>();
+            param.put("spzt",spzt);param.put("djbhs",l);
+            int flag=jgjsService.spJgjssForJgjs(param);
+            if(flag>0)
+                return ResultUtil.success("审批成功");
+            else
+                return ResultUtil.error("审批失败");
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResultUtil.error("审批失败，接口异常");
+        }
+
+    }
+
 }

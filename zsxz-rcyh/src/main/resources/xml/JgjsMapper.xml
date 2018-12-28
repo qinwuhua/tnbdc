@@ -66,7 +66,7 @@
         jl.jlhtje pmmtjgjss_gzjhtje,jl.jlje pmmtjgjss_gzjjlje,jl.jlje pmmtjgjss_gzjjsje,
         jl.jlhtje pmmtjgjss_htzdje,jl.jlje pmmtjgjss_jlzdje,jl.jlje pmmtjgjss_jgjszdje,
         jl.fj pmmtjgjss_fj,sp.pmmtgcspsqs_spje pmmtjgjss_spfy,gj.htgjxx_htje*gj.htgjxx_zlbzjbl/100 pmmtjgjss_zlbzj,
-        zf.zfje pmmtjgjss_ljzfgck,jl.jlje pmmtjgjss_yzfkk,money_to_chinese(to_char(round(jl.jlje,2))) pmmtjgjss_yzfkkdx,
+        zf.zfje pmmtjgjss_ljzfgck,nvl(jl.jlje,0)-nvl(jl.fj,0) pmmtjgjss_yzfkk,money_to_chinese(to_char(round(jl.jlje,2))) pmmtjgjss_yzfkkdx,
         nvl(zmzb.PMMTJGJSSMX_ZMBH,' ') PMMTJGJSSMX_ZMBH, nvl(zmzb.PMMTJGJSSMX_ZMID,' ') PMMTJGJSSMX_ZMID, nvl(zmzb.PMMTJGJSSMX_HTBH,' ') PMMTJGJSSMX_HTBH, nvl(zmzb.PMMTJGJSSMX_ZMMC,' ') PMMTJGJSSMX_ZMMC,nvl(zmzb.PMMTJGJSSMX_DW,' ') PMMTJGJSSMX_DW, nvl(zmzb.PMMTJGJSSMX_HTDJ,0) PMMTJGJSSMX_HTDJ, nvl(zmzb.PMMTJGJSSMX_YHTS,0) PMMTJGJSSMX_YHTS, nvl(zmzb.PMMTJGJSSMX_YHTJE,0) PMMTJGJSSMX_YHTJE, nvl(zmzb.PMMTJGJSSMX_SJJLSL,0) PMMTJGJSSMX_SJJLSL, nvl(zmzb.PMMTJGJSSMX_SJJLJE,0) PMMTJGJSSMX_SJJLJE, nvl(zmzb.PMMTJGJSSMX_JGJSSL,0) PMMTJGJSSMX_JGJSSL, nvl(zmzb.PMMTJGJSSMX_JGJSJE,0) PMMTJGJSSMX_JGJSJE, nvl(zmzb.PMMTJGJSSMX_YSJBSL,0) PMMTJGJSSMX_YSJBSL, nvl(zmzb.PMMTJGJSSMX_YSJBJE,0) PMMTJGJSSMX_YSJBJE, nvl(zmzb.PMMTJGJSSMX_REMARK,' ') PMMTJGJSSMX_REMARK,
         to_char(sysdate,'yyyy/mm/dd') PMMTJGJSS_BZRQ
         from djsj_htxx ht left join djsj_htxx_htgjxx gj on ht.htxx_htbh=gj.HTGJXX_HTBH
@@ -270,4 +270,12 @@
         where 1=1 and zb.pmmtjgjss_jssbh=#{djbh}
 
     </select>
+    <update id="spJgjssForJgjs" parameterType="hashmap">
+        update JGJSS set PMMTJGJSS_SPZT=#{spzt}
+        where PMMTJGJSS_JSSBH in
+        <foreach collection="djbhs" item="id"  open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </update>
+
 </mapper>

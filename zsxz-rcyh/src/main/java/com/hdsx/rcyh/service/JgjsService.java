@@ -22,4 +22,6 @@ public interface JgjsService {
     List<Jgjs> getJgjssList(Map<String, String> param, int pageNum, int pageSize);
 
     int delJgjsMxById(String pmmtjgjssmx_id);
+
+    int spJgjssForJgjs(Map<String, Object> param);
 }

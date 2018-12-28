@@ -223,5 +223,20 @@ public class JlzfServiceImpl implements JlzfService {
         return jlzfMapper.delZqcwzfMxById(zqzfmx_id);
     }
 
+    @Override
+    public int spSpsqsForJlzf(Map<String, Object> param) {
+        return jlzfMapper.spSpsqsForJlzf(param);
+    }
+
+    @Override
+    public int spGcjldForJlzf(Map<String, Object> param) {
+        return jlzfMapper.spGcjldForJlzf(param);
+    }
+
+    @Override
+    public int spZqcwzfForJlzf(Map<String, Object> param) {
+        return jlzfMapper.spZqcwzfForJlzf(param);
+    }
+
 
 }

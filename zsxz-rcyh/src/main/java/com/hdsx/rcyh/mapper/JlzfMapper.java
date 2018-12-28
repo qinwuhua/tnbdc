@@ -97,4 +97,10 @@ public interface JlzfMapper {
     int delGcjldMxById(String gcjlmx_id);
 
     int delZqcwzfMxById(String zqzfmx_id);
+
+    int spSpsqsForJlzf(Map<String, Object> param);
+
+    int spGcjldForJlzf(Map<String, Object> param);
+
+    int spZqcwzfForJlzf(Map<String, Object> param);
 }
