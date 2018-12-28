@@ -91,7 +91,7 @@
         <if test="zmid != null and zmid !=''"> where 1=1 and zm.zmht_id in (${zmid}) </if>
         ) zmzb on ht.htxx_htbh=zmzb.pmmtjgjssmx_htbh
         where 1=1
-        and ht.htxx_htbh in (select GCYHYSD_HTBH from GCYHYSD where GCYHYSD_YSZT='已验收)
+         and ht.htxx_htbh in (select GCYHYSD_HTBH from GCYHYSD where GCYHYSD_YSZT='已验收')
         <if test="htbh != null and htbh != ''">
             and ht.htxx_htbh=#{htbh}
         </if>
