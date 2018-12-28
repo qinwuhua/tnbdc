@@ -75,8 +75,8 @@
     </select>
     
     <insert id="addGcyssqd" parameterType="com.hdsx.rcyh.entity.Gcyssqd">
-        INSERT INTO GCYSSQD(GCYSSQD_ID, GCYSSQD_SQBH, GCYSSQD_HTMC, GCYSSQD_SQRQ, GCYSSQD_HTBH, GCYSSQD_SGDW, GCYSSQD_GLDW, GCYSSQD_HTKGRQ, GCYSSQD_HTJGRQ, GCYSSQD_YSLX, GCYSSQD_SGFYJ, GCYSSQD_JLDWYJ, GCYSSQD_GCJSBYJ, GCYSSQD_TBRID, GCYSSQD_TBR, GCYSSQD_TBRQ, GCYSSQD_TBBM, GCYSSQD_TBDW, GCYSSQD_SPZT, GCYSSQD_DJBH, GCYSSQD_DJBH, GCYSSQD_JYFZBYJ)
-        VALUES (#{id,jdbcType=VARCHAR}, #{sqbh,jdbcType=VARCHAR}, #{htmc,jdbcType=VARCHAR}, to_date(#{sqrq,jdbcType=TIMESTAMP},'yyyy/mm/dd'), #{htbh,jdbcType=VARCHAR}, #{sgdw,jdbcType=VARCHAR}, #{gldw,jdbcType=VARCHAR}, to_date(#{htkgrq,jdbcType=VARCHAR},'yyyy/mm/dd'), to_date(#{htjgrq,jdbcType=VARCHAR},'yyyy/mm/dd'), #{yslx,jdbcType=VARCHAR}, #{sgfyj,jdbcType=VARCHAR}, #{jldwyj,jdbcType=VARCHAR}, #{gcjsbyj,jdbcType=VARCHAR}, #{tbrid,jdbcType=VARCHAR}, #{tbr,jdbcType=VARCHAR}, to_date(#{tbrq,jdbcType=VARCHAR},'yyyy/mm/dd'), #{tbbm,jdbcType=VARCHAR}, #{tbdw,jdbcType=VARCHAR}, '未处理', #{djbh,jdbcType=VARCHAR}, #{jyfzbyj,jdbcType=VARCHAR})
+        INSERT INTO GCYSSQD(GCYSSQD_ID, GCYSSQD_SQBH, GCYSSQD_HTMC, GCYSSQD_SQRQ, GCYSSQD_HTBH, GCYSSQD_SGDW, GCYSSQD_GLDW, GCYSSQD_HTKGRQ, GCYSSQD_HTJGRQ, GCYSSQD_YSLX, GCYSSQD_SGFYJ, GCYSSQD_JLDWYJ, GCYSSQD_GCJSBYJ, GCYSSQD_TBRID, GCYSSQD_TBR, GCYSSQD_TBRQ, GCYSSQD_TBBM, GCYSSQD_TBDW, GCYSSQD_SPZT, GCYSSQD_DJBH, GCYSSQD_JYFZBYJ)
+        VALUES (sys_guid(), #{sqbh,jdbcType=VARCHAR}, #{htmc,jdbcType=VARCHAR}, to_date(#{sqrq,jdbcType=TIMESTAMP},'yyyy/mm/dd'), #{htbh,jdbcType=VARCHAR}, #{sgdw,jdbcType=VARCHAR}, #{gldw,jdbcType=VARCHAR}, to_date(#{htkgrq,jdbcType=VARCHAR},'yyyy/mm/dd'), to_date(#{htjgrq,jdbcType=VARCHAR},'yyyy/mm/dd'), #{yslx,jdbcType=VARCHAR}, #{sgfyj,jdbcType=VARCHAR}, #{jldwyj,jdbcType=VARCHAR}, #{gcjsbyj,jdbcType=VARCHAR}, #{tbrid,jdbcType=VARCHAR}, #{tbr,jdbcType=VARCHAR}, to_date(#{tbrq,jdbcType=VARCHAR},'yyyy/mm/dd'), #{tbbm,jdbcType=VARCHAR}, #{tbdw,jdbcType=VARCHAR}, '未处理', #{djbh,jdbcType=VARCHAR}, #{jyfzbyj,jdbcType=VARCHAR})
     </insert>
 
     <update id="updateGcyssqd" parameterType="com.hdsx.rcyh.entity.Gcyssqd">
@@ -102,13 +102,13 @@
             <if test="spzt != null and spzt != ''"> GCYSSQD_SPZT= #{spzt}, </if>
             <if test="jyfzbyj != null and jyfzbyj != ''"> GCYSSQD_JYFZBYJ= #{jyfzbyj}, </if>
         </set>
-        WHERE GCYSSQD_DJBH = #{djbh}
+        WHERE GCYSSQD_ID = #{id}
     </update>
 
     <delete id="deleteGcyssqd">
-        DELETE FROM GCYSSQD WHERE GCYSSQD_DJBH IN
-        <foreach collection="array" item="djbh" open="(" close=")" separator=",">
-            #{djbh}
+        DELETE FROM GCYSSQD WHERE GCYSSQD_ID IN
+        <foreach collection="array" item="id" open="(" close=")" separator=",">
+            #{id}
         </foreach>
     </delete>
 
@@ -161,13 +161,13 @@
             <if test="tbdw != null and tbdw != ''"> GCYHYSD_TBDW= #{tbdw},  </if>
             <if test="spzt != null and spzt != ''"> GCYHYSD_SPZT= #{spzt}, </if>
         </set>
-        WHERE GCYHYSD_DJBH = #{djbh}
+        WHERE GCYHYSD_ID = #{id}
     </update>
 
     <delete id="deleteGcyhysd" parameterType="java.lang.String">
-        DELETE FROM GCYHYSD WHERE GCYHYSD_DJBH IN
-        <foreach collection="array" item="djbh" open="(" close=")" separator=",">
-            #{djbh}
+        DELETE FROM GCYHYSD WHERE GCYHYSD_ID IN
+        <foreach collection="array" item="id" open="(" close=")" separator=",">
+            #{id}
         </foreach>
     </delete>
 
