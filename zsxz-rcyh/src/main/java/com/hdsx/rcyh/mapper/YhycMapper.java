@@ -28,4 +28,6 @@ public interface YhycMapper {
 
     int deleteGcyhysd(String[] djbhs);
 
+    int addGcqdToGcysd(Gcyssqd gcyssqd);
+
 }

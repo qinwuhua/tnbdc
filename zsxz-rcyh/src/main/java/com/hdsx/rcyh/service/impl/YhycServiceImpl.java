@@ -31,7 +31,13 @@ public class YhycServiceImpl implements YhycService {
 
     @Override
     public int updateGcyssqd(Gcyssqd gcyssqd) {
-        return yhycMapper.updateGcyssqd(gcyssqd);
+       int ssqd = yhycMapper.updateGcyssqd(gcyssqd);
+        if (ssqd > 0) {
+            if ("已下发".equals(gcyssqd.getSpzt())){
+                yhycMapper.addGcqdToGcysd(gcyssqd);
+            }
+        }
+        return ssqd;
     }
 
     @Override
