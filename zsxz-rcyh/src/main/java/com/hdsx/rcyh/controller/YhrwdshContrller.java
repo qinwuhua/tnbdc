@@ -44,7 +44,7 @@ public class YhrwdshContrller {
         }
     }
 
-    @ApiOperation(value = "主表添加一条信息", httpMethod = "POST")
+ /*   @ApiOperation(value = "主表添加一条信息", httpMethod = "POST")
     @RequestMapping(value = "insert", method = RequestMethod.POST)
     @ResponseBody
     public Msg insert(@RequestBody Yhrwd yhrwd) {
@@ -54,8 +54,8 @@ public class YhrwdshContrller {
             e.printStackTrace();
             return ResultUtil.error("添加失败！");
         }
-    }
-    @ApiOperation(value = "子表添加一条信息", httpMethod = "POST")
+    }*/
+    /*@ApiOperation(value = "子表添加一条信息", httpMethod = "POST")
     @RequestMapping(value = "insertzb", method = RequestMethod.POST)
     @ResponseBody
     public Msg insertzb(@RequestBody Yhrwmx yhrwmx) {
@@ -65,7 +65,7 @@ public class YhrwdshContrller {
             e.printStackTrace();
             return ResultUtil.error("添加失败！");
         }
-    }
+    }*/
 
     @ApiOperation(value = "删除一条信息")
     @ApiImplicitParam(name = "yhrwddjbh", value = "主键", dataType = "string", paramType = "query", required = true)
@@ -100,7 +100,7 @@ public class YhrwdshContrller {
         }
 
     }
-
+/*
     @ApiOperation(value = "修改子表", httpMethod = "POST")
     @RequestMapping(value = "/updatezb", method = {RequestMethod.POST})
     public Msg<Integer> updatezb(@RequestBody Yhrwmx yhrwmx) {
@@ -110,7 +110,7 @@ public class YhrwdshContrller {
             return ResultUtil.error("修改失败！");
         }
 
-    }
+    }*/
 
     @RequestMapping(value = "getYhrwdshList", method = RequestMethod.GET, produces = "application/json")
     @ApiImplicitParams({

@@ -2,33 +2,33 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hdsx.rcyh.mapper.YhrwdshMapper">
 
-    <!--<resultMap type="com.hdsx.rcyh.entity.Yhrwd" id="yhrwddjbh">-->
-        <!--<result column="YHRWD_DJBH" property="yhrwddjbh"/>-->
-        <!--<result column="YHRWD_LX" property="yhrwdlx"/>-->
-        <!--<result column="YHRWD_RQ" property="yhrwdrq"/>-->
-        <!--<result column="YHRWD_YD" property="yhrwdyd"/>-->
-        <!--<result column="YHRWD_YHDW" property="yhrwdyhdw"/>-->
-        <!--<result column="YHRWD_GYDW" property="yhrwdgydw"/>-->
-        <!--<result column="YHRWD_RWDSHZT" property="yhrwdrwdshzt"/>-->
-        <!--<result column="YHRWD_YSZT" property="yhrwdyszt"/>-->
+    <resultMap type="com.hdsx.rcyh.entity.Yhrwd" id="yhrwddjbh">
+        <result column="YHRWD_DJBH" property="yhrwddjbh"/>
+        <result column="YHRWD_LX" property="yhrwdlx"/>
+        <result column="YHRWD_RQ" property="yhrwdrq"/>
+        <result column="YHRWD_YD" property="yhrwdyd"/>
+        <result column="YHRWD_YHDW" property="yhrwdyhdw"/>
+        <result column="YHRWD_GYDW" property="yhrwdgydw"/>
+        <result column="YHRWD_RWDSHZT" property="yhrwdrwdshzt"/>
+        <result column="YHRWD_YSZT" property="yhrwdyszt"/>
 
-        <!--<collection property="yhrwmxes" ofType="com.hdsx.rcyh.entity.Yhrwmx" column="yhrwddjbh">-->
-            <!--<result column="jldbh" property="yhrwdid"/>&lt;!&ndash; 这里的column对应的是下面查询的别名，而不是表字段名 &ndash;&gt;-->
-            <!--<result column="YHRWD_DJBH" property="yhrwdmxdjbh"/>&lt;!&ndash; property对应JavaBean中的属性名 &ndash;&gt;-->
-            <!--<result column="YHRWD_SJBH" property="yhrwdsjbh"/>&lt;!&ndash; property对应JavaBean中的属性名 &ndash;&gt;-->
-            <!--<result column="YHRWD_XCDW" property="yhrwdxcdw"/>-->
-            <!--<result column="YHRWD_XCFX" property="yhrwdxcfx"/>-->
-            <!--<result column="YHRWD_CD" property="yhrwdcd"/>-->
-            <!--<result column="YHRWD_DWGC" property="yhrwddwgc"/>-->
-            <!--<result column="YHRWD_BHLX" property="yhrwdbhlx"/>-->
-            <!--<result column="YHRWD_BHSL" property="yhrwdbhsl"/>-->
-            <!--<result column="YHRWD_GCLLX" property="yhrwdgcllx"/>-->
-            <!--<result column="YHRWD_ZH" property="yhrwdzh"/>-->
-            <!--<result column="YHRWD_BHSM" property="yhrwdbhsm"/>-->
-            <!--<result column="YHRWD_SJ" property="yhrwdsj"/>-->
-        <!--</collection>-->
+        <collection property="yhrwmxes" ofType="com.hdsx.rcyh.entity.Yhrwmx" column="yhrwdid">
+            <result column="jldbh" property="yhrwdid"/><!-- 这里的column对应的是下面查询的别名，而不是表字段名 -->
+            <result column="YHRWD_DJBH" property="yhrwdmxdjbh"/><!-- property对应JavaBean中的属性名 -->
+            <result column="YHRWD_SJBH" property="yhrwdsjbh"/><!-- property对应JavaBean中的属性名 -->
+            <result column="YHRWD_XCDW" property="yhrwdxcdw"/>
+            <result column="YHRWD_XCFX" property="yhrwdxcfx"/>
+            <result column="YHRWD_CD" property="yhrwdcd"/>
+            <result column="YHRWD_DWGC" property="yhrwddwgc"/>
+            <result column="YHRWD_BHLX" property="yhrwdbhlx"/>
+            <result column="YHRWD_BHSL" property="yhrwdbhsl"/>
+            <result column="YHRWD_GCLLX" property="yhrwdgcllx"/>
+            <result column="YHRWD_ZH" property="yhrwdzh"/>
+            <result column="YHRWD_BHSM" property="yhrwdbhsm"/>
+            <result column="YHRWD_SJ" property="yhrwdsj"/>
+        </collection>
 
-    <!--</resultMap>-->
+    </resultMap>
 
     <select id="queryyhdw" resultType="java.util.Map">
         SELECT distinct  HTXX_XMSGLX  from DJSJ_HTXX
@@ -110,12 +110,12 @@
         where 1=1 and YHRWD_DJBH=#{yhrwddjbh}
     </update>
 
-    <!--子表-->
+    <!--&lt;!&ndash;子表&ndash;&gt;
     <update id="updatezb" parameterType="com.hdsx.rcyh.entity.Yhrwmx">
         update XXRW_YHRWD
         <set>
             <if test="yhrwdid != null" >YHRWD_ID=#{yhrwdid},</if>
-            <if test="yhrwddjbh != null" >YHRWD_DJBH=#{yhrwddjbh},</if>
+            <if test="yhrwdmxdjbh != null" >YHRWD_DJBH=#{yhrwdmxdjbh},</if>
             <if test="yhrwdsjbh != null" >YHRWD_SJBH=#{yhrwdsjbh},</if>
             <if test="yhrwdxcdw != null" >YHRWD_XCDW=#{yhrwdxcdw},</if>
             <if test="yhrwdxcfx != null" >YHRWD_XCFX=#{yhrwdxcfx},</if>
@@ -128,9 +128,9 @@
             <if test="yhrwdbhsm != null" >YHRWD_BHSM=#{yhrwdbhsm},</if>
             <if test="yhrwdsj != null" >YHRWD_SJ=to_date(#{yhrwdsj},'yyyy/mm/dd'),</if>
         </set>
-        where 1=1 and pmmtgcspsqs_djbh=#{pmmtgcspsqs_djbh}
+        where 1=1 and YHRWD_ID=#{yhrwdid}
     </update>
-
+-->
     <!--删除主表-->
     <delete id="delete" parameterType="java.lang.String">
         delete from XXRW_YHRWD
@@ -143,8 +143,8 @@
         where YHRWD_DJBH = #{yhrwddjbh}
     </delete>
 
-    <select id="getYhrwdshList" parameterType="hashmap" resultType="com.hdsx.rcyh.entity.Yhrwd">
-      select *from XXRW_YHRWD A
+    <select id="getYhrwdshList" parameterType="hashmap" resultMap="yhrwddjbh">
+      select * from XXRW_YHRWD A
       <if test="yhrwdlx != null and yhrwdlx !=''">
           and A.YHRWD_LX=#{yhrwdlx}
       </if>
@@ -157,7 +157,7 @@
         <if test="yhrwdgydw != null and yhrwdgydw !=''">
             and A.YHRWD_GYDW=#{yhrwdgydw}
         </if>
-      left join (select *from XXRW_YHRWD_MX) B on A.YHRWD_DJBH=B.YHRWD_DJBH
+      left join (select * from XXRW_YHRWD_MX) B on A.YHRWD_DJBH=B.YHRWD_DJBH
     </select>
 
 

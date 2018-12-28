@@ -46,22 +46,23 @@
         T.QSRWD_TBBM qsrwdtbbm,
         T.QSRWD_BZ qsrwdbz,
         T.QSRWD_SHZT qsrwdshzt,
-        to_date(T.QSRWD_SJSJ ,'yyyy/mm/dd') qsrwdsjsj,
-        to_date(T.QSRWD_TBSJ ,'yyyy/mm/dd') qsrwdtbsj
+        T.QSRWD_SJSJ  qsrwdsjsj,
+        T.QSRWD_TBSJ  qsrwdtbsj
         FROM XXRW_QSRWD T
+        where 1=1
         <if test="qsrwdsjlx != null and qsrwdsjlx != ''">
-            and T.qsrwdsjlx=#{qsrwdsjlx}
+            and T.QSRWD_SJLX=#{qsrwdsjlx}
         </if>
         <if test="qsrwdtbdw != null and qsrwdtbdw != ''">
-            and T.qsrwdtbdw=#{qsrwdtbdw}
+            and T.QSRWD_TBDW=#{qsrwdtbdw}
         </if>
         <if test="qsrwdtbbm != null and qsrwdtbbm != ''">
-            and T.v=#{qsrwdtbbm}
+            and T.QSRWD_TBBM=#{qsrwdtbbm}
         </if>
-        <if test="qsrwdsjsj != null and qsrwdsjsj != ''">
-            and T.qsrwdsjsj=#{qsrwdsjsj}
-        </if>
-        ORDER BY qsrwdsjsj DESC
+      <!--  <if test="qsrwdsjsj != null and qsrwdsjsj != ''">
+            and T.QSRWD_SJSJ=to_date(#{qsrwdsjsj},'yyyy/mm/dd')
+        </if>-->
+       /* ORDER BY qsrwdsjsj DESC*/
     </select>
     <update id="update" parameterType="com.hdsx.rcyh.entity.Qsrwd">
  update XXRW_QSRWD
