@@ -27,7 +27,9 @@ spring:
       test-while-idle:  true
       test-on-borrow: false
       test-on-return: false
-
+  jackson:
+      date-format: yyyy/MM/dd
+      time-zone: GMT+8
 
 mybatis:
   mapper-locations: classpath:/xml/*.xml

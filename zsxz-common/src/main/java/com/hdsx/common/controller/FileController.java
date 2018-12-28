@@ -24,9 +24,9 @@ public class FileController {
 
     @PostMapping(value = "uploadFile")
     @ApiOperation(value = "文件上传信息")
-    public Msg uploadFiles(@RequestParam("multipartFile") MultipartFile multipartFile) {
+    public Msg uploadFiles(@RequestParam("file") MultipartFile file) {
         try {
-            HashMap<String, Object> fileMap = fileService.uploadFiles(multipartFile);
+            HashMap<String, Object> fileMap = fileService.uploadFiles(file);
             if (fileMap != null){
                 return ResultUtil.success(fileMap);
             }else {
