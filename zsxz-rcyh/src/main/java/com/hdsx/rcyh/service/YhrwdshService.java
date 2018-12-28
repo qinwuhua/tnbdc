@@ -24,8 +24,8 @@ public interface YhrwdshService {
     int updateyszt(String yhrwddjbh, String yhrwdyszt);
 
     int deletezb(String yhrwdid);
+/*
+    int insertzb(Yhrwmx yhrwmx);*/
 
-    int insertzb(Yhrwmx yhrwmx);
-
-    int updatezb(Yhrwmx yhrwmx);
+   /* int updatezb(Yhrwmx yhrwmx);*/
 }

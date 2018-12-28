@@ -12,7 +12,6 @@ import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 @Service
 @Transactional
@@ -103,14 +102,14 @@ public class YhrwdshServiceImpl implements YhrwdshService {
         return yhrwdshMapper.deletezb(yhrwdid);
     }
 
-    @Override
+/*    @Override
     public int insertzb(Yhrwmx yhrwmx) {
         return yhrwdshMapper.insertzb(yhrwmx);
-    }
+    }*/
 
-    @Override
+/*    @Override
     public int updatezb(Yhrwmx yhrwmx) {
         return yhrwdshMapper.updatezb(yhrwmx);
-    }
+    }*/
 
 }

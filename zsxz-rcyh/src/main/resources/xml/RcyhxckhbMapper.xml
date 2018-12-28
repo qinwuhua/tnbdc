@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hdsx.rcyh.mapper.RcyhxckhbMapper">
+    <resultMap type="com.hdsx.rcyh.entity.Rcyhxckhb" id="rcyhxckhbdjbh">
+        <result column="RCYHXCKHB_DJBH" property="rcyhxckhbdjbh"/>
+        <result column="RCYHXCKHB_YD" property="rcyhxckhbyd"/>
+        <result column="RCYHXCKHB_GCMC" property="rcyhxckhbgcmc"/>
+        <result column="RCYHXCKHB_SGDW" property="rcyhxckhbsgdw"/>
+        <result column="RCYHXCKHB_GLDW" property="rcyhxckhbgldw"/>
+        <result column="RCYHXCKHB_KHRQ" property="rcyhxckhbkhrq"/>
+        <result column="RCYHXCKHB_BYKKHJ" property="rcyhxckhbbykkhj"/>
+
+        <collection property="rcyhxckhbmxes" ofType="com.hdsx.rcyh.entity.Rcyhxckhbmx" column="rcyhxckhbid">
+            <result column="RCYHXCKHB_ID" property="rcyhxckhbid"/><!-- 这里的column对应的是下面查询的别名，而不是表字段名 -->
+            <result column="RCYHXCKHB_DJBH" property="rcyhxckhbmxdjbh"/><!-- property对应JavaBean中的属性名 -->
+            <result column="RCYHXCKHB_SJBH" property="rcyhxckhbsjbh"/><!-- property对应JavaBean中的属性名 -->
+            <result column="RCYHXCKHB_GCXM" property="rcyhxckhbgcxm"/>
+            <result column="RCYHXCKHB_KHNR" property="rcyhxckhbkhnr"/>
+            <result column="RCYHXCKHB_BZJYQ" property="rcyhxckhbbzjyq"/>
+            <result column="RCYHXCKHB_BYKK" property="rcyhxckhbbykk"/>
+
+        </collection>
+
+    </resultMap>
+    <!--主表添加-->
+    <insert id="insert" parameterType="com.hdsx.rcyh.entity.Rcyhxckhb">
+        insert into RCYHXCKHB
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="rcyhxckhbdjbh != null" >RCYHXCKHB_DJBH,</if>
+            <if test="rcyhxckhbyd != null" >RCYHXCKHB_YD,</if>
+            <if test="rcyhxckhbgcmc != null" >RCYHXCKHB_GCMC,</if>
+            <if test="rcyhxckhbsgdw != null" >RCYHXCKHB_SGDW,</if>
+            <if test="rcyhxckhbgldw != null" >RCYHXCKHB_GLDW,</if>
+            <if test="rcyhxckhbkhrq != null" >RCYHXCKHB_KHRQ,</if>
+            <if test="rcyhxckhbbykkhj != null" >RCYHXCKHB_BYKKHJ,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="rcyhxckhbdjbh != null" >#{rcyhxckhbdjbh},</if>
+            <if test="rcyhxckhbyd != null" >#{rcyhxckhbyd},</if>
+            <if test="rcyhxckhbgcmc != null" >#{rcyhxckhbgcmc},</if>
+            <if test="rcyhxckhbsgdw != null" >#{rcyhxckhbsgdw},</if>
+            <if test="rcyhxckhbgldw != null" >#{rcyhxckhbgldw},</if>
+            <if test="rcyhxckhbkhrq != null" >to_date(#{rcyhxckhbkhrq},'yyyy/mm/dd'),</if>
+            <if test="rcyhxckhbbykkhj != null" >#{rcyhxckhbbykkhj},</if>
+        </trim>
+    </insert>
+    <!--子表添加-->
+    <insert id="insertzb" parameterType="com.hdsx.rcyh.entity.Rcyhxckhbmx">
+        insert into RCYHXCKHBMX
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="rcyhxckhbid != null" >RCYHXCKHB_ID,</if>
+            <if test="rcyhxckhbmxdjbh != null" >RCYHXCKHB_DJBH,</if>
+            <if test="rcyhxckhbsjbh != null" >RCYHXCKHB_SJBH,</if>
+            <if test="rcyhxckhbgcxm != null" >RCYHXCKHB_GCXM,</if>
+            <if test="rcyhxckhbkhnr != null" >RCYHXCKHB_KHNR,</if>
+            <if test="rcyhxckhbbzjyq != null" >RCYHXCKHB_BZJYQ,</if>
+            <if test="rcyhxckhbbykk != null" >RCYHXCKHB_BYKK,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="rcyhxckhbid != null" >#{rcyhxckhbid},</if>
+            <if test="rcyhxckhbmxdjbh != null" >#{rcyhxckhbmxdjbh},</if>
+            <if test="rcyhxckhbsjbh != null" >#{rcyhxckhbsjbh},</if>
+            <if test="rcyhxckhbgcxm != null" >#{rcyhxckhbgcxm},</if>
+            <if test="rcyhxckhbkhnr != null" >#{rcyhxckhbkhnr},</if>
+            <if test="rcyhxckhbbzjyq != null" >#{rcyhxckhbbzjyq},</if>
+            <if test="rcyhxckhbbykk != null" >#{rcyhxckhbbykk},</if>
+        </trim>
+    </insert>
+    <!--主表-->
+    <update id="update" parameterType="com.hdsx.rcyh.entity.Rcyhxckhb">
+        update RCYHXCKHB
+        <set>
+            <if test="rcyhxckhbyd != null" >RCYHXCKHB_YD=#{rcyhxckhbyd},</if>
+            <if test="rcyhxckhbgcmc != null" >RCYHXCKHB_GCMC=#{rcyhxckhbgcmc},</if>
+            <if test="rcyhxckhbsgdw != null" >RCYHXCKHB_SGDW=#{rcyhxckhbsgdw},</if>
+            <if test="rcyhxckhbgldw != null" >RCYHXCKHB_GLDW=#{rcyhxckhbgldw},</if>
+            <if test="rcyhxckhbkhrq != null" >RCYHXCKHB_KHRQ=to_date(#{rcyhxckhbkhrq},'yyyy/mm/dd'),</if>
+            <if test="rcyhxckhbbykkhj != null" >RCYHXCKHB_BYKKHJ=#{rcyhxckhbbykkhj},</if>
+        </set>
+        where 1=1 and RCYHXCKHB_DJBH=#{rcyhxckhbdjbh}
+    </update>
+
+    <!--子表-->
+   <!-- <update id="updatezb" parameterType="com.hdsx.rcyh.entity.Rcyhxckhbmx">
+        update RCYHXCKHBMX
+        <set>
+            <if test="rcyhxckhbid != null" >RCYHXCKHB_ID=#{rcyhxckhbid},</if>
+            <if test="rcyhxckhbmxdjbh != null" >RCYHXCKHB_DJBH=#{rcyhxckhbmxdjbh},</if>
+            <if test="rcyhxckhbsjbh != null" >RCYHXCKHB_SJBH=#{rcyhxckhbsjbh},</if>
+            <if test="rcyhxckhbgcxm != null" >RCYHXCKHB_GCXM=#{rcyhxckhbgcxm},</if>
+            <if test="rcyhxckhbkhnr != null" >RCYHXCKHB_KHNR=#{rcyhxckhbkhnr},</if>
+            <if test="rcyhxckhbbzjyq != null" >RCYHXCKHB_BZJYQ=#{rcyhxckhbbzjyq},</if>
+            <if test="rcyhxckhbbykk != null" >RCYHXCKHB_BYKK=#{rcyhxckhbbykk},</if>
+            </set>
+        where 1=1 and RCYHXCKHB_DJBH=#{rcyhxckhbmxdjbh}
+    </update>-->
+
+    <!--删除主表-->
+    <delete id="delete" parameterType="java.lang.String">
+        delete from RCYHXCKHB
+        where RCYHXCKHB_DJBH = #{rcyhxckhbdjbh}
+    </delete>
+
+    <!--删除子表-->
+    <delete id="deletezb" parameterType="java.lang.String">
+        delete from RCYHXCKHBMX
+        where RCYHXCKHB_DJBH = #{rcyhxckhbmxdjbh}
+    </delete>
+
+    <select id="getRcyhxckhbList" parameterType="hashmap" resultMap="rcyhxckhbdjbh">
+        select * from RCYHXCKHB A
+        <if test="rcyhxckhbyd != null and rcyhxckhbyd !=''">
+            and A.RCYHXCKHB_YD=#{rcyhxckhbyd}
+        </if>
+        <if test="rcyhxckhbgldw != null and rcyhxckhbgldw !=''">
+            and A.RCYHXCKHB_GLDW=#{rcyhxckhbgldw}
+        </if>
+
+        left join (select *from RCYHXCKHBMX) B on A.RCYHXCKHB_DJBH=B.RCYHXCKHB_DJBH
+    </select>
+
+</mapper>

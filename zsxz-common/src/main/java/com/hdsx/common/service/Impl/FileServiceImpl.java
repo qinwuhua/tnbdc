@@ -68,7 +68,7 @@ public class FileServiceImpl implements FileService {
     public int deleteFilesById(String id) {
         List<HashMap<String, Object>> fileUrl = fileMapper.getFilesDataById(id);
         for (int i = 0; i < fileUrl.size(); i++){
-            File file = new File(String.valueOf(fileUrl.get(i).get("FILES_PATH")));
+            File file = new File(String.valueOf(fileUrl.get(i).get("FILE_PATH")));
             if (file.isFile() && file.exists()) {
                 file.delete();
             }
@@ -97,20 +97,20 @@ public class FileServiceImpl implements FileService {
         DecimalFormat df = new DecimalFormat("#.00");
         try {
             file.transferTo(dest); //保存文件
-            urlMap.put("files_yname",fileName);
-            urlMap.put("files_type","."+fileName.substring(fileName.lastIndexOf(".") + 1));
-            urlMap.put("files_name",newFileName);
-            urlMap.put("files_path",filePath + newFileName);
+            urlMap.put("file_yname",fileName);
+            urlMap.put("file_type","."+fileName.substring(fileName.lastIndexOf(".") + 1));
+            urlMap.put("file_name",newFileName);
+            urlMap.put("file_path",filePath + newFileName);
             /*urlMap.put("files_path",imageServer+"/" +nyrdate+"/"+ newFileName);*/
             if(file.getSize()/1024<1024){
-                urlMap.put("files_dx",df.format((float)file.getSize()/1024)+"KB");
+                urlMap.put("file_dx",df.format((float)file.getSize()/1024)+"KB");
             }else{
-                urlMap.put("files_dx",df.format((float)file.getSize()/1024/1024)+"MB");
+                urlMap.put("file_dx",df.format((float)file.getSize()/1024/1024)+"MB");
             }
-            urlMap.put("files_mjlx","");
+            urlMap.put("file_mjlx","");
             urlMap.put("remarks","");
-            urlMap.put("files_status","0101");
-            urlMap.put("files_depict","");
+            urlMap.put("file_status","0101");
+            urlMap.put("file_depict","");
             urlMap.put("id",uuid);
             return urlMap;
         } catch (IllegalStateException e) {

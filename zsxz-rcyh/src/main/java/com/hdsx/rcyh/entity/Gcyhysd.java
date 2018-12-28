@@ -37,5 +37,5 @@ public class Gcyhysd implements Serializable {
     private String tbrq;
     private String tbbm;
     private String tbdw;
-    private String spzt;
+    private String yszt;
 }

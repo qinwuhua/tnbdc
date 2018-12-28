@@ -28,7 +28,7 @@ public interface YhrwdshMapper {
 
     int insertzb(Yhrwmx yhrwmx);
 
-    int updatezb(Yhrwmx yhrwmx);
+/*    int updatezb(Yhrwmx yhrwmx);*/
 
     int deletezb(String yhrwdid);
 }

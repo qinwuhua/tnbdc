@@ -83,9 +83,9 @@ public class YhycController {
     public Msg updateGcyssqd(@RequestBody Gcyssqd gcyssqd){
         try {
             if (yhycService.updateGcyssqd(gcyssqd)>0){
-                return ResultUtil.success("添加信息成功！");
+                return ResultUtil.success("更新信息成功！");
             }else {
-                return ResultUtil.error("添加信息失败！");
+                return ResultUtil.error("更新信息失败！");
             }
         }catch (Exception e){
             e.printStackTrace();

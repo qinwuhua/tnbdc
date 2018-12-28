@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hdsx.rcyh.mapper.LhyhpfbMapper">
+    <resultMap type="com.hdsx.rcyh.entity.Lhyhpfb" id="lhyhdjbh">
+        <result column="LHYH_DJBH" property="lhyhdjbh"/>
+        <result column="LHYH_YD" property="lhyhyd"/>
+        <result column="LHYH_GCMC" property="lhyhgcmc"/>
+        <result column="LHYH_SGDW" property="lhyhsgdw"/>
+        <result column="LHYH_GLDW" property="lhyhgldw"/>
+        <result column="LHYH_KHRQ" property="lhyhkhrq"/>
+        <result column="LHYH_FZZJ" property="lhyhfzzj"/>
+
+        <collection property="lhyhpfbmxes" ofType="com.hdsx.rcyh.entity.Lhyhpfbmx" column="lhyhid">
+            <result column="LHYH_ID" property="lhyhid"/><!-- 这里的column对应的是下面查询的别名，而不是表字段名 -->
+            <result column="LHYH_DJBH" property="lhyhmxdjbh"/><!-- property对应JavaBean中的属性名 -->
+            <result column="LHYH_SJBH" property="lhyhsjbh"/><!-- property对应JavaBean中的属性名 -->
+            <result column="LHYH_JCFL" property="lhyhjcfl"/>
+            <result column="LHYH_NRJYQ" property="lhyhnrjyq"/>
+            <result column="LHYH_PFBF" property="lhyhpfbf"/>
+            <result column="LHYH_DFFZ" property="lhyhdffz"/>
+            <result column="LHYH_ZT" property="lhyhzt"/>
+        </collection>
+
+    </resultMap>
+    <!--主表添加-->
+    <insert id="insert" parameterType="com.hdsx.rcyh.entity.Lhyhpfb">
+        insert into LHYHPFB
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="lhyhdjbh != null" >LHYH_DJBH,</if>
+            <if test="lhyhyd != null" >LHYH_YD,</if>
+            <if test="lhyhgcmc != null" >LHYH_GCMC,</if>
+            <if test="lhyhsgdw != null" >LHYH_SGDW,</if>
+            <if test="lhyhgldw != null" >LHYH_GLDW,</if>
+            <if test="lhyhkhrq != null" >LHYH_KHRQ,</if>
+            <if test="lhyhfzzj != null" >LHYH_FZZJ,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="lhyhdjbh != null" >#{lhyhdjbh},</if>
+            <if test="lhyhyd != null" >#{lhyhyd},</if>
+            <if test="lhyhgcmc != null" >#{lhyhgcmc},</if>
+            <if test="lhyhsgdw != null" >#{lhyhsgdw},</if>
+            <if test="lhyhgldw != null" >#{lhyhgldw},</if>
+            <if test="lhyhkhrq != null" >to_date(#{lhyhkhrq},'yyyy/mm/dd'),</if>
+            <if test="lhyhfzzj != null" >#{lhyhfzzj},</if>
+        </trim>
+    </insert>
+    <!--子表添加-->
+    <insert id="insertzb" parameterType="com.hdsx.rcyh.entity.Lhyhpfbmx">
+        insert into LHYHPFBMX
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="lhyhid != null" >LHYH_ID,</if>
+            <if test="lhyhmxdjbh != null" >LHYH_DJBH,</if>
+            <if test="lhyhsjbh != null" >LHYH_SJBH,</if>
+            <if test="lhyhjcfl != null" >LHYH_JCFL,</if>
+            <if test="lhyhnrjyq != null" >LHYH_NRJYQ,</if>
+            <if test="lhyhpfbf != null" >LHYH_PFBF,</if>
+            <if test="lhyhdffz != null" >LHYH_DFFZ,</if>
+            <if test="lhyhzt != null" >LHYH_ZT,</if>
+
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="lhyhid != null" >#{lhyhid},</if>
+            <if test="lhyhmxdjbh != null" >#{lhyhmxdjbh},</if>
+            <if test="lhyhsjbh != null" >#{lhyhsjbh},</if>
+            <if test="lhyhjcfl != null" >#{lhyhjcfl},</if>
+            <if test="lhyhnrjyq != null" >#{lhyhnrjyq},</if>
+            <if test="lhyhpfbf != null" >#{lhyhpfbf},</if>
+            <if test="lhyhdffz != null" >#{lhyhdffz},</if>
+            <if test="lhyhzt != null" >#{lhyhzt},</if>
+
+        </trim>
+    </insert>
+    <!--主表-->
+    <update id="update" parameterType="hashmap">
+        update LHYHPFB
+        <set>
+            <if test="lhyhyd != null" >LHYH_YD=#{lhyhyd},</if>
+            <if test="lhyhgcmc != null" >LHYH_GCMC=#{lhyhgcmc},</if>
+            <if test="lhyhsgdw != null" >LHYH_SGDW=#{lhyhsgdw},</if>
+            <if test="lhyhgldw != null" >LHYH_GLDW=#{lhyhgldw},</if>
+            <if test="lhyhkhrq != null" >LHYH_KHRQ=to_date(#{lhyhkhrq},'yyyy/mm/dd'),</if>
+            <if test="lhyhfzzj != null" >LHYH_FZZJ=#{lhyhfzzj},</if>
+        </set>
+        where 1=1 and LHYH_DJBH=#{lhyhdjbh}
+    </update>
+    <!--子表-->
+<!--    <update id="updatezb" parameterType="com.hdsx.rcyh.entity.Lhyhpfbmx">
+        update LHYHPFB
+        <set>
+            <if test="lhyhid != null" >LHYH_ID=#{lhyhid},</if>
+            <if test="lhyhmxdjbh != null" >LHYH_DJBH=#{lhyhmxdjbh},</if>
+            <if test="lhyhsjbh != null" >LHYH_SJBH=#{lhyhsjbh},</if>
+            <if test="lhyhjcfl != null" >LHYH_JCFL=#{lhyhjcfl},</if>
+            <if test="lhyhnrjyq != null" >LHYH_NRJYQ=#{lhyhnrjyq},</if>
+            <if test="lhyhpfbf != null" >LHYH_PFBF=#{lhyhpfbf},</if>
+            <if test="lhyhdffz != null" >LHYH_DFFZ=#{lhyhdffz},</if>
+            <if test="lhyhzt != null" >LHYH_ZT=#{lhyhzt},</if>
+
+        </set>
+        where 1=1 and LHYH_DJBH=#{lhyhmxdjbh}
+    </update>-->
+
+    <!--删除主表-->
+    <delete id="delete" parameterType="java.lang.String">
+        delete from LHYHPFB
+        where LHYH_DJBH = #{lhyhdjbh}
+    </delete>
+
+    <!--删除子表-->
+    <delete id="deletezb" parameterType="java.lang.String">
+        delete from LHYHPFBMX
+        where LHYH_DJBH = #{lhyhmxdjbh}
+    </delete>
+
+    <select id="getLhyhrwList" parameterType="hashmap" resultMap="lhyhdjbh">
+        select * from LHYHPFB A
+        <if test="lhyhyd != null and lhyhyd !=''">
+            and A.LHYH_YD=#{lhyhyd}
+        </if>
+        <if test="lhyhgldw != null and lhyhgldw !=''">
+            and A.LHYH_GLDW=#{lhyhgldw}
+        </if>
+        left join (select *from LHYHPFBMX) B on A.LHYH_DJBH=B.LHYH_DJBH
+    </select>
+
+    <update id="updatezt" parameterType="hashmap">
+        update LHYHPFBMX
+        set
+        LHYH_ZT = #{lhyhzt,jdbcType=VARCHAR}
+        where
+        LHYH_ID = #{lhyhid,jdbcType=VARCHAR}
+    </update>
+</mapper>

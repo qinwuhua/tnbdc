@@ -1,7 +1,7 @@
 package com.hdsx.common.controller;
 
-import com.hdsx.common.entity.FileData;
 import com.hdsx.common.entity.Msg;
+import com.hdsx.common.entity.Xtfile;
 import com.hdsx.common.service.FileService;
 import com.hdsx.common.utils.ResultUtil;
 import io.swagger.annotations.Api;
@@ -12,7 +12,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
-import java.util.List;
 
 @RestController
 @Api(value = "文件信息")
@@ -67,10 +66,9 @@ public class FileController {
 
     @PostMapping("addFileDataToFiles")
     @ApiOperation("保存文件信息")
-    @ApiImplicitParam(paramType="query", dataType = "array", name = "fileDataList", value = "文件信息", allowMultiple = true, required = true)
-    public Msg addFileDataToFiles(@RequestParam("fileDataList") List<FileData> fileDataList){
+    public Msg addFileDataToFiles(@RequestBody Xtfile xtfile){
         try {
-            if (fileService.addFileDataToFiles(fileDataList) > 0){
+            if (fileService.addFileDataToFiles(xtfile.getDataList()) > 0){
                 return ResultUtil.success("文件添加成功！");
             }else {
                 return ResultUtil.error("文件添加失败!");
@@ -82,10 +80,9 @@ public class FileController {
 
     @PostMapping("updateFileDataToFiles")
     @ApiOperation("编辑文件信息")
-    @ApiImplicitParam(paramType="query", dataType = "array", name = "fileDataList", value = "文件信息", allowMultiple = true, required = true)
-    public Msg updateFileDataToFiles(@RequestParam("fileDataList") List<FileData> fileDataList){
+    public Msg updateFileDataToFiles(@RequestBody Xtfile xtfile){
         try {
-            if (fileService.updateFileDataToFiles(fileDataList) > 0){
+            if (fileService.updateFileDataToFiles(xtfile.getDataList()) > 0){
                 return ResultUtil.success("文件更新成功！");
             }else {
                 return ResultUtil.error("文件更新失败!");
