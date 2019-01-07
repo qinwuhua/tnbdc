@@ -1,4 +1,4 @@
-package com.hdsx.zsxzzxyh;
+package com.hdsx.zxyh;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
