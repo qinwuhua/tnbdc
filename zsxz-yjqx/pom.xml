@@ -8,10 +8,10 @@
         <version>1.5.18.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.hdsx.zxyh</groupId>
-    <artifactId>zsxz-zxyh</artifactId>
+    <groupId>com.hdsx.yjqx</groupId>
+    <artifactId>zsxz-yjqx</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>zsxz-zxyh</name>
+    <name>zsxz-yjqx</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
@@ -91,7 +91,6 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
-        <finalName>zsxz-zxyh</finalName>
     </build>
 
 </project>
