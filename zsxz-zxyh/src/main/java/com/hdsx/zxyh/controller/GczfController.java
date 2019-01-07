@@ -2,6 +2,8 @@ package com.hdsx.zxyh.controller;
 
 
 import com.github.pagehelper.PageInfo;
+import com.hdsx.zxyh.entity.Gczfgcjld;
+import com.hdsx.zxyh.entity.Msg;
 import com.hdsx.zxyh.service.GczfService;
 import com.hdsx.zxyh.utils.ResultUtil;
 import io.swagger.annotations.Api;
@@ -19,11 +21,136 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("zxyh/gczf")
-@Api(value = "计量支付控制器",description = "计量支付控制器")
+@Api(value = "工程支付控制器",description = "工程支付控制器")
 public class GczfController {
 
     @Resource
     private GczfService gczfService;
+
+
+    @RequestMapping(value = "getHtXxInfoByBm", method = RequestMethod.GET, produces = "application/json")
+    @ApiOperation(value = "获取合同详细信息(工程计量单模块使用)")
+    @ApiImplicitParam(paramType="query", dataType = "String", name = "htbh", value = "合同编号", required = false)
+    public Msg getHtXxInfoByBm(@RequestParam(value = "htbh",required = false) String htbh){
+        try {
+            Map<String, String> param = new HashMap<String, String>();
+            param.put("htbh", htbh);
+            List<Gczfgcjld> map=gczfService.getHtXxInfoByBm(param);
+            return ResultUtil.success(map);
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResultUtil.error("查询失败，接口异常");
+        }
+
+    }
+    @RequestMapping(value = "getGcjldList", method = RequestMethod.GET, produces = "application/json")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "dwbh", value = "单位编号", required = false),
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "gcjl_htbh", value = "合同编号", required = false),
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "ksrq", value = "申请开始日期(yyyy/mm/dd)", required = false),
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "jsrq", value = "申请结束日期(yyyy/mm/dd)", required = false),
+            @ApiImplicitParam(paramType="query", dataType = "int", name = "pageNum", value = "页码", required = true),
+            @ApiImplicitParam(paramType="query", dataType = "int", name = "pageSize", value = "每页条数", required = true)
+    })
+    @ApiOperation(value = "查询工程计量单列表数据")
+    public Msg getGcjldList(@RequestParam(value = "dwbh",required = false) String dwbh,
+                            @RequestParam(value = "gcjl_htbh",required = false) String gcjl_htbh,
+                            @RequestParam(value = "ksrq",required = false) String ksrq,
+                            @RequestParam(value = "jsrq",required = false) String jsrq,
+                            @RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
+                            @RequestParam(value = "pageSize", defaultValue = "10") int pageSize) {
+        Map<String, String> param = new HashMap<String, String>();
+        param.put("dwbh", dwbh);
+        param.put("gcjl_htbh", gcjl_htbh);
+        param.put("ksrq", ksrq);
+        param.put("jsrq", jsrq);
+        List<Gczfgcjld> list = gczfService.getGcjldList(param, pageNum, pageSize);
+        return ResultUtil.success(new PageInfo<Gczfgcjld>(list));
+    }
+
+    @RequestMapping(value = "addGcjldForGczf", method = RequestMethod.POST, produces = "application/json")
+    @ApiOperation(value = "添加工程计量单数据")
+    public Msg addGcjldForGczf(@RequestBody Gczfgcjld gczfgcjld){
+        try {
+            int flag=gczfService.addGcjldForGczf(gczfgcjld);
+            if(flag>0)
+                return ResultUtil.success("保存成功");
+            else
+                return ResultUtil.error("保存失败");
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResultUtil.error("保存失败，接口异常");
+        }
+
+    }
+
+
+    @RequestMapping(value = "editGcjldForGczf", method = RequestMethod.PUT, produces = "application/json")
+    @ApiOperation(value = "编辑工程计量单数据")
+    public Msg editGcjldForGczf(@RequestBody Gczfgcjld gczfgcjld){
+        try {
+            int flag=gczfService.editGcjldForGczf(gczfgcjld);
+            if(flag>0)
+                return ResultUtil.success("保存成功");
+            else
+                return ResultUtil.error("保存失败");
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResultUtil.error("保存失败，接口异常");
+        }
+
+    }
+
+
+    @RequestMapping(value = "delGcjldForGczf", method = RequestMethod.DELETE, produces = "application/json")
+    @ApiOperation(value = "删除工程计量单数据")
+    @ApiImplicitParam(paramType="query", dataType = "String", name = "djbhs", value = "单据编号(以“,”隔开)", required = true)
+    public Msg delGcjldForGczf(@RequestParam(value = "djbhs",required = true) String djbhs){
+        try {
+            String[] djbh=djbhs.split(",");
+            List<String> l = new ArrayList<String>();
+            for (int i=0;i<djbh.length;i++){
+                l.add(djbh[i]);
+            }
+            int flag=gczfService.delGcjldForGczf(l);
+            if(flag>0)
+                return ResultUtil.success("删除成功");
+            else
+                return ResultUtil.error("删除失败");
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResultUtil.error("删除失败，接口异常");
+        }
+
+    }
+
+    @RequestMapping(value = "spGcjldForGczf", method = RequestMethod.PUT, produces = "application/json")
+    @ApiOperation(value = "审批工程计量单")
+    @ApiImplicitParam(paramType="query", dataType = "String", name = "djbhs", value = "单据编号(以“,”隔开)", required = true)
+    public Msg spGcjldForGczf(@RequestParam(value = "djbhs",required = true) String djbhs,
+                              @RequestParam(value = "spzt",required = true) String spzt){
+        try {
+            String[] djbh=djbhs.split(",");
+            List<String> l = new ArrayList<String>();
+            for (int i=0;i<djbh.length;i++){
+                l.add(djbh[i]);
+            }
+            Map<String,Object> param=new HashMap<String,Object>();
+            param.put("spzt",spzt);param.put("djbhs",l);
+            int flag=gczfService.spGcjldForGczf(param);
+            if(flag>0)
+                return ResultUtil.success("审批成功");
+            else
+                return ResultUtil.error("审批失败");
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResultUtil.error("审批失败，接口异常");
+        }
+
+    }
+
+
+
 
     /*@RequestMapping(value = "addSpsqsForJlzf", method = RequestMethod.POST, produces = "application/json")
     @ApiOperation(value = "添加计量支付-索赔申请书数据")
