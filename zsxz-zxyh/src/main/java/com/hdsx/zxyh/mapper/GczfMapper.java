@@ -1,6 +1,7 @@
 package com.hdsx.zxyh.mapper;
 
 import com.hdsx.zxyh.entity.Gczfgcjld;
+import com.hdsx.zxyh.entity.Gczfzqcwzf;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -19,7 +20,7 @@ public interface GczfMapper {
 
     int addGcjldForGczf(Gczfgcjld gczfgcjld);
 
-    int delGcjldByDjbh(String gcjl_djbh);
+    int delGcjldMxByDjbh(String gcjl_djbh);
 
     int editGcjldForGczf(Gczfgcjld gczfgcjld);
 
@@ -28,4 +29,26 @@ public interface GczfMapper {
     int delGcjldForGczf(List<String> l);
 
     int spGcjldForGczf(Map<String, Object> param);
+
+    List<Gczfzqcwzf> getHtCwInfoByBm(Map<String, String> param);
+
+    Gczfgcjld getGcjldInfoByDjbh(Map<String, String> param);
+
+    List<Gczfzqcwzf> getZqcwzfList(Map<String, String> param);
+
+    Gczfzqcwzf getZqcwzfInfoByZfqh(Map<String, String> param);
+
+    void addZqcwzfMxForGczf(Gczfzqcwzf gczfzqcwzf);
+
+    int addZqcwzfForGczf(Gczfzqcwzf gczfzqcwzf);
+
+    void delZqcwzfMxByDjbh(String zqcwzf_zfqh);
+
+    int editZqcwzfForGczf(Gczfzqcwzf gczfzqcwzf);
+
+    void delZqcwzfMxForGczf(List<String> l);
+
+    int delZqcwzfForGczf(List<String> l);
+
+    int spZqcwzfForGczf(Map<String, Object> param);
 }
