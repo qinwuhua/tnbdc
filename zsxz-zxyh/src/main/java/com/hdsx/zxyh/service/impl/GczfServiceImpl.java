@@ -17,94 +17,94 @@ import java.util.Map;
 public class GczfServiceImpl implements GczfService {
 
     @Resource
-    private GczfMapper GczfMapper;
+    private GczfMapper gczfMapper;
 
 
     @Override
     public List<Gczfgcjld> getGcjldList(Map<String, String> param, int pageNum, int pageSize) {
         PageHelper.startPage(pageNum, pageSize);
-        List<Gczfgcjld> list = GczfMapper.getGcjldList(param);
+        List<Gczfgcjld> list = gczfMapper.getGcjldList(param);
         return list;
     }
 
     @Override
     public List<Gczfgcjld> getHtXxInfoByBm(Map<String, String> param) {
-        return GczfMapper.getHtXxInfoByBm(param);
+        return gczfMapper.getHtXxInfoByBm(param);
     }
 
     @Override
     public int addGcjldForGczf(Gczfgcjld gczfgcjld) {
-        GczfMapper.addGcjldMxForGczf(gczfgcjld);
-        return GczfMapper.addGcjldForGczf(gczfgcjld);
+        gczfMapper.addGcjldMxForGczf(gczfgcjld);
+        return gczfMapper.addGcjldForGczf(gczfgcjld);
     }
 
     @Override
     public int editGcjldForGczf(Gczfgcjld gczfgcjld) {
         //根据单据编号删除子表
-        GczfMapper.delGcjldMxByDjbh(gczfgcjld.getGcjl_djbh());
+        gczfMapper.delGcjldMxByDjbh(gczfgcjld.getGcjl_djbh());
         //插入子表
-        GczfMapper.addGcjldMxForGczf(gczfgcjld);
+        gczfMapper.addGcjldMxForGczf(gczfgcjld);
         //修改主表
-        return GczfMapper.editGcjldForGczf(gczfgcjld);
+        return gczfMapper.editGcjldForGczf(gczfgcjld);
     }
 
     @Override
     public int delGcjldForGczf(List<String> l) {
-        GczfMapper.delGcjldMxForGczf(l);
-        return GczfMapper.delGcjldForGczf(l);
+        gczfMapper.delGcjldMxForGczf(l);
+        return gczfMapper.delGcjldForGczf(l);
     }
 
     @Override
     public int spGcjldForGczf(Map<String, Object> param) {
-        return GczfMapper.spGcjldForGczf(param);
+        return gczfMapper.spGcjldForGczf(param);
     }
 
     @Override
     public List<Gczfzqcwzf> getHtCwInfoByBm(Map<String, String> param) {
-        return GczfMapper.getHtCwInfoByBm(param);
+        return gczfMapper.getHtCwInfoByBm(param);
     }
 
     @Override
     public Gczfgcjld getGcjldInfoByDjbh(Map<String, String> param) {
-        return GczfMapper.getGcjldInfoByDjbh(param);
+        return gczfMapper.getGcjldInfoByDjbh(param);
     }
 
     @Override
     public List<Gczfzqcwzf> getZqcwzfList(Map<String, String> param, int pageNum, int pageSize) {
         PageHelper.startPage(pageNum, pageSize);
-        List<Gczfzqcwzf> list = GczfMapper.getZqcwzfList(param);
+        List<Gczfzqcwzf> list = gczfMapper.getZqcwzfList(param);
         return list;
     }
 
     @Override
     public Gczfzqcwzf getZqcwzfInfoByZfqh(Map<String, String> param) {
-        return GczfMapper.getZqcwzfInfoByZfqh(param);
+        return gczfMapper.getZqcwzfInfoByZfqh(param);
     }
 
     @Override
     public int addZqcwzfForGczf(Gczfzqcwzf gczfzqcwzf) {
-        GczfMapper.addZqcwzfMxForGczf(gczfzqcwzf);
-        return GczfMapper.addZqcwzfForGczf(gczfzqcwzf);
+        gczfMapper.addZqcwzfMxForGczf(gczfzqcwzf);
+        return gczfMapper.addZqcwzfForGczf(gczfzqcwzf);
     }
 
     @Override
     public int editZqcwzfForGczf(Gczfzqcwzf gczfzqcwzf) {
         //根据单据编号删除子表
-        GczfMapper.delZqcwzfMxByDjbh(gczfzqcwzf.getZqcwzf_zfqh());
+        gczfMapper.delZqcwzfMxByDjbh(gczfzqcwzf.getZqcwzf_zfqh());
         //插入子表
-        GczfMapper.addZqcwzfMxForGczf(gczfzqcwzf);
+        gczfMapper.addZqcwzfMxForGczf(gczfzqcwzf);
         //修改主表
-        return GczfMapper.editZqcwzfForGczf(gczfzqcwzf);
+        return gczfMapper.editZqcwzfForGczf(gczfzqcwzf);
     }
 
     @Override
     public int delZqcwzfForGczf(List<String> l) {
-        GczfMapper.delZqcwzfMxForGczf(l);
-        return GczfMapper.delZqcwzfForGczf(l);
+        gczfMapper.delZqcwzfMxForGczf(l);
+        return gczfMapper.delZqcwzfForGczf(l);
     }
 
     @Override
     public int spZqcwzfForGczf(Map<String, Object> param) {
-        return GczfMapper.spZqcwzfForGczf(param);
+        return gczfMapper.spZqcwzfForGczf(param);
     }
 }

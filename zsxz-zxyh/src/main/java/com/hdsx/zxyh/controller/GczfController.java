@@ -286,7 +286,7 @@ public class GczfController {
 
     @RequestMapping(value = "spZqcwzfForGczf", method = RequestMethod.PUT, produces = "application/json")
     @ApiOperation(value = "审批中期财务支付证书")
-    @ApiImplicitParam(paramType="query", dataType = "String", name = "djbhs", value = "支付期号(以“,”隔开)", required = true)
+    @ApiImplicitParam(paramType="query", dataType = "String", name = "zfbhs", value = "支付期号(以“,”隔开)", required = true)
     public Msg spZqcwzfForGczf(@RequestParam(value = "zfbhs",required = true) String zfbhs,
                                @RequestParam(value = "spzt",required = true) String spzt){
         try {
