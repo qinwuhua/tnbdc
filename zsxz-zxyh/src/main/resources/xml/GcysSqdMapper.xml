@@ -2,106 +2,120 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.hdsx.zxyh.mapper.GczfMapper">
-
-    <resultMap type="com.hdsx.zxyh.entity.Gczfgcjld" id="gcjld">
-        <result column="gcjl_djbh" property="gcjl_djbh"/>
-        <result column="gcjl_gcmc" property="gcjl_gcmc"/>
-        <result column="gcjl_sqrq" property="gcjl_sqrq"/>
-        <result column="gcjl_yd" property="gcjl_yd"/>
-        <result column="gcjl_htmc" property="gcjl_htmc"/>
-        <result column="gcjl_htid" property="gcjl_htid"/>
-        <result column="gcjl_htbh" property="gcjl_htbh"/>
-        <result column="gcjl_cbdw" property="gcjl_cbdw"/>
-        <result column="gcjl_qdzh" property="gcjl_qdzh"/>
-        <result column="gcjl_zdzh" property="gcjl_zdzh"/>
-        <result column="gcjl_bw" property="gcjl_bw"/>
-        <result column="gcjl_th" property="gcjl_th"/>
-        <result column="gcjl_spzt" property="gcjl_spzt"/>
-        <result column="gcjl_zjdbh" property="gcjl_zjdbh"/>
-        <result column="gcjl_jtsm" property="gcjl_jtsm"/>
-        <result column="gcjl_tbr" property="gcjl_tbr"/>
-        <result column="gcjl_tbrid" property="gcjl_tbrid"/>
-        <result column="gcjl_tbrq" property="gcjl_tbrq"/>
-
-        <collection property="mx" ofType="com.hdsx.zxyh.entity.Gczfgcjldmx" column="gcjldmx">
-            <result column="gcjlmx_id" property="gcjlmx_id"/>
-            <result column="gcjl_id" property="gcjl_id"/>
-            <result column="gcjlmx_mid" property="gcjlmx_mid"/>
-            <result column="gcjlmx_zmh" property="gcjlmx_zmh"/>
-            <result column="gcjlmx_zmmc" property="gcjlmx_zmmc"/>
-            <result column="gcjlmx_jldw" property="gcjlmx_jldw"/>
-            <result column="gcjlmx_htsl" property="gcjlmx_htsl"/>
-            <result column="gcjlmx_htdj" property="gcjlmx_htdj"/>
-            <result column="gcjlmx_kkje" property="gcjlmx_kkje"/>
-            <result column="gcjlmx_htje" property="gcjlmx_htje"/>
-            <result column="gcjlmx_zje" property="gcjlmx_zje"/>
-            <result column="gcjlmx_djbh" property="gcjlmx_djbh"/>
-            <result column="gcjlmx_zmid" property="gcjlmx_zmid"/>
-            <result column="gcjlmx_htbh" property="gcjlmx_htbh"/>
-            <result column="gcjlmx_wcsl" property="gcjlmx_wcsl"/>
-
-        </collection>
-
-    </resultMap>
-
-    <resultMap type="com.hdsx.zxyh.entity.Gczfzqcwzf" id="zqcwzf">
-        <result column="zqcwzf_id" property="zqcwzf_id"/>
-        <result column="zqcwzf_dwmc" property="zqcwzf_dwmc"/>
-        <result column="zqcwzf_dwbh" property="zqcwzf_dwbh"/>
-        <result column="zqcwzf_dwid" property="zqcwzf_dwid"/>
-        <result column="zqcwzf_bmmc" property="zqcwzf_bmmc"/>
-        <result column="zqcwzf_bmbh" property="zqcwzf_bmbh"/>
-        <result column="zqcwzf_bmid" property="zqcwzf_bmid"/>
-        <result column="zqcwzf_tbr" property="zqcwzf_tbr"/>
-        <result column="zqcwzf_tbrid" property="zqcwzf_tbrid"/>
-        <result column="zqcwzf_tbrq" property="zqcwzf_tbrq"/>
-        <result column="zqcwzf_spzt" property="zqcwzf_spzt"/>
-        <result column="zqcwzf_wfid" property="zqcwzf_wfid"/>
-        <result column="zqcwzf_note" property="zqcwzf_note"/>
-        <result column="zqcwzf_zfqh" property="zqcwzf_zfqh"/>
-        <result column="jrgsp_djbh" property="zqcwzf_djbh"/>
-        <result column="zqcwzf_xmmc" property="zqcwzf_xmmc"/>
-        <result column="zqcwzf_xmid" property="zqcwzf_xmid"/>
-        <result column="zqcwzf_xmbh" property="zqcwzf_xmbh"/>
-        <result column="zqcwzf_htmc" property="zqcwzf_htmc"/>
-        <result column="zqcwzf_htid" property="zqcwzf_htid"/>
-        <result column="zqcwzf_htbh" property="zqcwzf_htbh"/>
-        <result column="zqcwzf_cjdwmc" property="zqcwzf_cjdwmc"/>
-        <result column="zqcwzf_cjdwid" property="zqcwzf_cjdwid"/>
-        <result column="zqcwzf_cjdwbh" property="zqcwzf_cjdwbh"/>
-        <result column="zqcwzf_jzrq" property="zqcwzf_jzrq"/>
-        <result column="zqcwzf_flag" property="zqcwzf_flag"/>
-        <result column="zqcwzf_gldw" property="zqcwzf_gldw"/>
-        <result column="zqcwzf_jldw" property="zqcwzf_jldw"/>
-        <result column="zqcwzf_gcmc" property="zqcwzf_gcmc"/>
-        <result column="zqcwzf_cbdw" property="zqcwzf_cbdw"/>
-
-        <collection property="mx" ofType="com.hdsx.zxyh.entity.Gczfzqcwzfmx" column="zqcwzfmx">
-            <result column="zqzfmx_id" property="zqzfmx_id"/>
-            <result column="zqzfmx_mid" property="zqzfmx_mid"/>
-            <result column="zqzfmx_zmbh" property="zqzfmx_zmbh"/>
-            <result column="zqzfmx_zmmc" property="zqzfmx_zmmc"/>
-            <result column="zqzfmx_jldw" property="zqzfmx_jldw"/>
-            <result column="zqzfmx_jldwid" property="zqzfmx_jldwid"/>
-            <result column="zqzfmx_htsl" property="zqzfmx_htsl"/>
-            <result column="zqzfmx_htdj" property="zqzfmx_htdj"/>
-            <result column="zqzfmx_htje" property="zqzfmx_htje"/>
-            <result column="zqzfmx_ljwc" property="zqzfmx_ljwc"/>
-            <result column="zqzfmx_bqwcsl" property="zqzfmx_bqwcsl"/>
-            <result column="zqzfmx_bqwcje" property="zqzfmx_bqwcje"/>
-            <result column="zqzfmx_sqwcsl" property="zqzfmx_sqwcsl"/>
-            <result column="zqzfmx_sqwcje" property="zqzfmx_sqwcje"/>
-            <result column="zqzfmx_bqsl" property="zqzfmx_bqsl"/>
-            <result column="zqzfmx_bqje" property="zqzfmx_bqje"/>
-            <result column="zqzfmx_zmid" property="zqzfmx_zmid"/>
-            <result column="zqzfmx_htbh" property="zqzfmx_htbh"/>
-        </collection>
-
-    </resultMap>
+<mapper namespace="com.hdsx.zxyh.mapper.GcysSqdMapper">
 
 
-    <!--  通过部门查询合同信息  -->
+    <select id="getGcyssqdList" parameterType="hashmap" resultType="com.hdsx.zxyh.entity.Gcyssqd">
+
+        select g.* from ZXYH_GCYSSQD g
+        where 1=1
+        <if test="dwbh != null and dwbh != ''">
+            and g.tbdwbm like '%'||#{dwbh}||'%'
+        </if>
+        <if test="htbh != null and htbh != ''">
+            and g.htbh=#{htbh}
+        </if>
+        <if test="ksrq != null and ksrq != ''">
+            and to_date(sqsj,'yyyy/mm/dd')>=to_date(#{ksrq},'yyyy/mm/dd')
+        </if>
+        <if test="jsrq != null and jsrq != ''">
+            and to_date(sqsj,'yyyy/mm/dd')&lt;=to_date(#{jsrq},'yyyy/mm/dd')
+        </if>
+    </select>
+
+
+    <select id="getGcyssqdInfoBySqbh" parameterType="hashmap" resultType="com.hdsx.zxyh.entity.Gcyssqd">
+        select g.* from ZXYH_GCYSSQD g
+        where 1=1
+        <if test="sqbh != null and sqbh != ''">
+            and g.sqbh=#{sqbh}
+        </if>
+    </select>
+
+    <insert id="addGcyssqdForGcys" parameterType="com.hdsx.zxyh.entity.Gcyssqd">
+        insert into ZXYH_GCYSSQD
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="sqbh != null" >sqbh,</if>
+            <if test="xmmc != null" >xmmc,</if>
+            <if test="sqsj != null" >sqsj,</if>
+            <if test="htbh != null" >htbh,</if>
+            <if test="sgdw != null" >sgdw,</if>
+            <if test="gldw != null" >gldw,</if>
+            <if test="htksgq != null" >htksgq,</if>
+            <if test="htjsgq != null" >htjsgq,</if>
+            <if test="yslx != null" >yslx,</if>
+            <if test="sgfyj != null" >sgfyj,</if>
+            <if test="jldwyj != null" >jldwyj,</if>
+            <if test="gcjsbyj != null" >gcjsbyj,</if>
+            <if test="jyfzbyj != null" >jyfzbyj,</if>
+            <if test="tbr != null" >tbr,</if>
+            <if test="tbrq != null" >tbrq,</if>
+            <if test="tbdw != null" >tbdw,</if>
+            <if test="tbbm != null" >tbbm,</if>
+            <if test="tbdwbm != null" >tbdwbm,</if>
+            <if test="tbbmbm != null" >tbbmbm,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="sqbh != null" >#{sqbh},</if>
+            <if test="xmmc != null" >#{xmmc},</if>
+            <if test="sqsj != null" >#{sqsj},</if>
+            <if test="htbh != null" >#{htbh},</if>
+            <if test="sgdw != null" >#{sgdw},</if>
+            <if test="gldw != null" >#{gldw},</if>
+            <if test="htksgq != null" >#{htksgq},</if>
+            <if test="htjsgq != null" >#{htjsgq},</if>
+            <if test="yslx != null" >#{yslx},</if>
+            <if test="sgfyj != null" >#{sgfyj},</if>
+            <if test="jldwyj != null" >#{jldwyj},</if>
+            <if test="gcjsbyj != null" >#{gcjsbyj},</if>
+            <if test="jyfzbyj != null" >#{jyfzbyj},</if>
+            <if test="tbr != null" >#{tbr},</if>
+            <if test="tbrq != null" >to_date(#{tbrq},'yyyy/mm/dd'),</if>
+            <if test="tbdw != null" >#{tbdw},</if>
+            <if test="tbbm != null" >#{tbbm},</if>
+            <if test="tbdwbm != null" >#{tbdwbm},</if>
+            <if test="tbbmbm != null" >#{tbbmbm},</if>
+
+        </trim>
+    </insert>
+
+    <update id="editGcyssqdForGcys" parameterType="com.hdsx.zxyh.entity.Gcyssqd" >
+        update ZXYH_GCYSSQD
+        <set>
+            <if test="sqbh != null" >sqbh=#{sqbh},</if>
+            <if test="xmmc != null" >xmmc=#{xmmc},</if>
+            <if test="sqsj != null" >sqsj=#{sqsj},</if>
+            <if test="htbh != null" >htbh=#{htbh},</if>
+            <if test="sgdw != null" >sgdw=#{sgdw},</if>
+            <if test="gldw != null" >gldw=#{gldw},</if>
+            <if test="htksgq != null" >htksgq=#{htksgq},</if>
+            <if test="htjsgq != null" >htjsgq=#{htjsgq},</if>
+            <if test="yslx != null" >yslx=#{yslx},</if>
+            <if test="sgfyj != null" >sgfyj=#{sgfyj},</if>
+            <if test="jldwyj != null" >jldwyj=#{jldwyj},</if>
+            <if test="gcjsbyj != null" >gcjsbyj=#{gcjsbyj},</if>
+            <if test="jyfzbyj != null" >jyfzbyj=#{jyfzbyj},</if>
+            <if test="tbr != null" >tbr=#{tbr},</if>
+            <if test="tbrq != null" >tbrq=to_date(#{tbrq},'yyyy/mm/dd'),</if>
+            <if test="tbdw != null" >tbdw=#{tbdw},</if>
+            <if test="tbbm != null" >tbbm=#{tbbm},</if>
+            <if test="tbdwbm != null" >tbdwbm=#{tbdwbm},</if>
+            <if test="tbbmbm != null" >tbbmbm=#{tbbmbm},</if>
+        </set>
+        where 1=1 and sqbh=#{sqbh}
+    </update>
+
+    <delete id="delGcyssqdForGcys" parameterType="java.util.List" >
+        delete from ZXYH_GCYSSQD
+        where sqbh in
+        <foreach collection="list" item="id"  open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+<!--
+
+    &lt;!&ndash;  通过部门查询合同信息  &ndash;&gt;
     <select id="getHtXxInfoByBm" parameterType="hashmap" resultMap="gcjld">
         select ht.htxx_htbh gcjl_htbh,ht.HTXX_ID gcjl_htid,ht.HTXX_HTMC gcjl_htmc,xm.yhhtxx_qszh gcjl_qdzh,xm.yhhtxx_zzzh gcjl_zdzh,gj.HTGJXX_cgxmmc gcjl_gcmc,xm.yhhtxx_cbdw GCJL_CBDW,
         zm.zmht_zmh GCJLMX_ZMH,zm.zmht_zmmc GCJLMX_ZMMC,zm.zmht_jldw GCJLMX_JLDW,zm.zmht_sl GCJLMX_HTSL,zm.zmht_dj GCJLMX_HTDJ,zm.zmht_je GCJLMX_HTJE,0 GCJLMX_KKJE,zm.zmht_je GCJLMX_ZJE,zm.zmht_id GCJLMX_ZMID,zm.zmht_htbh GCJLMX_HTBH,0 GCJLMX_WCSL
@@ -113,7 +127,7 @@
         </if>
         order by gcjl_htbh,GCJLMX_ZMH
     </select>
-<!--  查询工程计量单列表 -->
+&lt;!&ndash;  查询工程计量单列表 &ndash;&gt;
     <select id="getGcjldList" parameterType="hashmap" resultMap="gcjld">
 
         select g.gcjl_dwmc, g.gcjl_dwbh, g.gcjl_dwid, g.gcjl_bmmc, g.gcjl_bmbh, g.gcjl_bmid, g.gcjl_tbr, g.gcjl_tbrid, to_char(gcjl_tbrq,'yyyy/mm/dd') gcjl_tbrq, gcjl_spzt, gcjl_file, gcjl_wfid, gcjl_note, gcjl_djbh, gcjl_code, gcjl_xmmc, gcjl_xmid, gcjl_xmbh, gcjl_htmc, gcjl_htid, gcjl_htbh, gcjl_cjdwmc, gcjl_cjdwbh, gcjl_cjdwid, gcjl_rq, gcjl_bw, gcjl_th, gcjl_zjdbh, gcjl_jtsm, gcjl_flag, gcjl_sfybgc, gcjl_ybgcdh, gcjl_gcmc, to_char(gcjl_sqrq,'yyyy/mm/dd') gcjl_sqrq, gcjl_yd, gcjl_cbdw, gcjl_qdzh, gcjl_zdzh, gcjl_sl,
@@ -121,7 +135,7 @@
         left join zxyh_GCJLDMX mx on g.gcjl_djbh=mx.gcjlmx_djbh
         where 1=1
         <if test="dwbh != null and dwbh != ''">
-            and g.gcjl_dwbh like '%'||#{htbh}||'%'
+            and g.gcjl_dwbh like '%'||#{gcjl_htbh}||'%'
         </if>
         <if test="gcjl_htbh != null and gcjl_htbh != ''">
             and g.gcjl_htbh=#{gcjl_htbh}
@@ -275,9 +289,6 @@
         fb.ZQZFMX_ID, fb.ZQZFMX_MID, fb.ZQZFMX_ZMBH, fb.ZQZFMX_ZMMC, fb.ZQZFMX_JLDW, fb.ZQZFMX_JLDWID, fb.ZQZFMX_HTSL, fb.ZQZFMX_HTDJ, fb.ZQZFMX_HTJE, fb.ZQZFMX_LJWC, fb.ZQZFMX_BQWCSL, fb.ZQZFMX_BQWCJE, fb.ZQZFMX_SQWCSL, fb.ZQZFMX_SQWCJE, fb.ZQZFMX_BQSL, fb.ZQZFMX_BQJE, fb.ZQZFMX_ZFQH
         from ZXYH_ZQCWZFZS zb left join ZXYH_ZQCWZFZSMX fb on zb.ZQCWZF_zfqh=fb.ZQZFMX_zfqh
         where 1=1
-        <if test="dwbh != null and dwbh != ''">
-            and zb.ZQCWZF_DWBH=#{dwbh}
-        </if>
         <if test="htbh != null and htbh != ''">
             and zb.ZQCWZF_HTBH=#{htbh}
         </if>
@@ -440,6 +451,7 @@
             #{id}
         </foreach>
     </update>
+-->
 
 
 </mapper>
