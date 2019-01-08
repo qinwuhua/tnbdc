@@ -1,0 +1,153 @@
+<?xml version='1.0' encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hdsx.yjqx.mapper.YjqxMapper">
+      <resultMap id="yjqxBean" type="com.hdsx.yjqx.entity.Yjqx">
+          <id column="YJQX_ID" property="id"/>
+          <result column="YJQX_DJBH" property="djbh"/>
+          <result column="YJQX_GCMC" property="gcmc"/>
+          <result column="YJQX_QXLD" property="qxld"/>
+          <result column="YJQX_FX" property="fx"/>
+          <result column="YJQX_QDZH" property="qdzh"/>
+          <result column="YJQX_ZDZH" property="zdzh"/>
+          <result column="YJQX_DLLC" property="dllc"/>
+          <result column="YJQX_FYGS" property="fygs"/>
+          <result column="YJQX_QL" property="ql"/>
+          <result column="YJQX_SD" property="sd"/>
+          <result column="YJQX_LXR" property="lxr"/>
+          <result column="YJQX_LXFS" property="lxfs"/>
+          <result column="YJQX_GCFL" property="gcfl"/>
+          <result column="YJQX_GCMS" property="gcmc"/>
+          <result column="YJQX_GLDWBH" property="gldwbh"/>
+          <result column="YJQX_GLDWMC" property="gldwmc"/>
+          <result column="YJQX_SGDWBH" property="sgdwbh"/>
+          <result column="YJQX_SGDWMC" property="sgdwmc"/>
+          <result column="YJQX_BZDWBH" property="bzdwbh"/>
+          <result column="YJQX_BZDWMC" property="bzdwmc"/>
+          <result column="YJQX_BZRQ" property="bzrq"/>
+          <result column="YJQX_TBRID" property="tbrid"/>
+          <result column="YJQX_TBR" property="tbr"/>
+          <result column="YJQX_TBRQ" property="tbrq"/>
+          <result column="YJQX_HTBH" property="htbh"/>
+          <result column="YJQX_SPZT" property="spzt"/>
+      </resultMap>
+
+    <insert id="addYjqxgc" parameterType="com.hdsx.yjqx.entity.Yjqx">
+        INSERT INTO YJQX_GCDJB
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            YJQX_ID,
+            <if test="djbh != null">YJQX_DJBH,</if>
+            <if test="gcmc != null">YJQX_GCMC,</if>
+            <if test="qxld != null">YJQX_QXLD,</if>
+            <if test="fx != null">YJQX_FX,</if>
+            <if test="qdzh != null">YJQX_QDZH,</if>
+            <if test="zdzh != null">YJQX_ZDZH,</if>
+            <if test="dllc != null">YJQX_DLLC,</if>
+            <if test="fygs != null">YJQX_FYGS,</if>
+            <if test="ql != null">YJQX_QL,</if>
+            <if test="sd != null">YJQX_SD,</if>
+            <if test="lxr != null">YJQX_LXR,</if>
+            <if test="lxfs != null">YJQX_LXFS,</if>
+            <if test="gcfl != null">YJQX_GCFL,</if>
+            <if test="gcms != null">YJQX_GCMS,</if>
+            <if test="gldwbh != null">YJQX_GLDWBH,</if>
+            <if test="gldwmc != null">YJQX_GLDWMC,</if>
+            <if test="sgdwbh != null">YJQX_SGDWBH,</if>
+            <if test="sgdwmc != null">YJQX_SGDWMC,</if>
+            <if test="bzdwbh != null">YJQX_BZDWBH,</if>
+            <if test="bzdwmc != null">YJQX_BZDWMC,</if>
+            <if test="bzrq != null">YJQX_BZRQ,</if>
+            <if test="tbrid != null">YJQX_TBRID,</if>
+            <if test="tbr != null">YJQX_TBR,</if>
+            <if test="tbrq != null">YJQX_TBRQ,</if>
+            <if test="htbh != null">YJQX_HTBH,</if>
+            YJQX_SPZT
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            sys_guid(),
+            <if test="djbh != null">#{djbh},</if>
+            <if test="gcmc != null">#{gcmc},</if>
+            <if test="qxld != null">#{qxld},</if>
+            <if test="fx != null">#{fx},</if>
+            <if test="qdzh != null">#{qdzh},</if>
+            <if test="zdzh != null">#{zdzh},</if>
+            <if test="dllc != null">#{dllc},</if>
+            <if test="fygs != null">#{fygs},</if>
+            <if test="ql != null">#{ql},</if>
+            <if test="sd != null">#{sd},</if>
+            <if test="lxr != null">#{lxr},</if>
+            <if test="lxfs != null">#{lxfs},</if>
+            <if test="gcfl != null">#{gcfl},</if>
+            <if test="gcms != null">#{gcms},</if>
+            <if test="gldwbh != null">#{gldwbh},</if>
+            <if test="gldwmc != null">#{gldwmc},</if>
+            <if test="sgdwbh != null">#{sgdwbh},</if>
+            <if test="sgdwmc != null">#{sgdwmc},</if>
+            <if test="bzdwbh != null">#{bzdwbh},</if>
+            <if test="bzdwmc != null">#{bzdwmc},</if>
+            <if test="bzrq != null">to_date(#{bzrq},'yyyy/mm'),</if>
+            <if test="tbrid != null">#{tbrid},</if>
+            <if test="tbr != null">#{tbr},</if>
+            <if test="tbrq != null">to_date(#{tbrq},'yyyy/mm/dd'),</if>
+            <if test="htbh != null">#{htbh},</if>
+            '未处理'
+        </trim>
+    </insert>
+
+    <update id="editYjqxgc" parameterType="com.hdsx.yjqx.entity.Yjqx">
+        UPDATE YJQX_GCDJB
+        <set>
+            <if test="djbh != null"> YJQX_DJBH=#{djbh},</if>
+            <if test="gcmc != null"> YJQX_GCMC=#{gcmc},</if>
+            <if test="qxld != null"> YJQX_QXLD=#{qxld},</if>
+            <if test="fx != null"> YJQX_FX=#{fx},</if>
+            <if test="qdzh != null"> YJQX_QDZH=#{qdzh},</if>
+            <if test="zdzh != null"> YJQX_ZDZH=#{zdzh},</if>
+            <if test="dllc != null"> YJQX_DLLC=#{dllc},</if>
+            <if test="fygs != null"> YJQX_FYGS=#{fygs},</if>
+            <if test="ql != null"> YJQX_QL=#{ql},</if>
+            <if test="sd != null"> YJQX_SD=#{sd},</if>
+            <if test="lxr != null"> YJQX_LXR=#{lxr},</if>
+            <if test="lxfs != null"> YJQX_LXFS=#{lxfs},</if>
+            <if test="gcfl != null"> YJQX_GCFL=#{gcfl},</if>
+            <if test="gcms != null"> YJQX_GCMS=#{gcms},</if>
+            <if test="gldwbh != null"> YJQX_GLDWBH=#{gldwbh},</if>
+            <if test="gldwmc != null"> YJQX_GLDWMC=#{gldwmc},</if>
+            <if test="sgdwbh != null"> YJQX_SGDWBH=#{sgdwbh},</if>
+            <if test="sgdwmc != null"> YJQX_SGDWMC=#{sgdwmc},</if>
+            <if test="bzdwbh != null"> YJQX_BZDWBH=#{bzdwbh},</if>
+            <if test="bzdwmc != null"> YJQX_BZDWMC=#{bzdwmc},</if>
+            <if test="bzrq != null"> YJQX_BZRQ=to_date(#{bzrq},'yyyy/mm'),</if>
+            <if test="tbrid != null"> YJQX_TBRID=#{tbrid},</if>
+            <if test="tbr != null"> YJQX_TBR=#{tbr},</if>
+            <if test="tbrq != null"> YJQX_TBRQ=to_date(#{tbrq},'yyyy/mm/dd'),</if>
+            <if test="htbh != null"> YJQX_HTBH=#{htbh},</if>
+            <if test="spzt != null"> YJQX_SPZT=#{spzt},</if>
+        </set>
+        WHERE YJQX_ID = #{id}
+    </update>
+
+    <delete id="delYjqxgcByIds">
+        DELETE FROM YJQX_GCDJB WHERE YJQX_ID IN
+        <foreach collection="array" item="id" open="(" close=")" index="index" separator=",">
+            #{id}
+        </foreach>
+    </delete>
+
+    <select id="getYjqxgcList" parameterType="hashmap" resultMap="yjqxBean">
+        SELECT YJQX_ID, YJQX_DJBH, YJQX_GCMC, YJQX_QXLD, YJQX_FX, YJQX_QDZH, YJQX_ZDZH, YJQX_DLLC,
+        YJQX_FYGS, YJQX_QL, YJQX_SD, YJQX_LXR, YJQX_LXFS, YJQX_GCFL, YJQX_GCMS, YJQX_GLDWBH, YJQX_GLDWMC,
+         YJQX_SGDWBH, YJQX_SGDWMC, YJQX_BZDWBH, YJQX_BZDWMC, to_char(YJQX_BZRQ,'yyyy/mm')YJQX_BZRQ, YJQX_TBRID, YJQX_TBR, to_char(YJQX_TBRQ,'yyyy/mm/dd')YJQX_TBRQ,
+         YJQX_HTBH, YJQX_SPZT
+         FROM YJQX_GCDJB
+         <where>
+             <if test="djbh != null and djbh != ''"> AND YJQX_DJBH LIKE '%'||trim(#{djbh})||'%'</if>
+             <if test="gcmc != null and gcmc != ''"> AND YJQX_GCMC LIKE '%'||trim(#{gcmc})||'%'</if>
+             <if test="fx != null and fx != ''"> AND YJQX_FX LIKE '%'||trim(#{fx})||'%'</if>
+             <if test="ksrq != null and ksrq != ''"> AND to_date(to_char(YJQX_TBRQ,'yyyy/mm/dd'),'yyyy/mm/dd') >= to_date(#{ksrq},'yyyy/mm/dd')</if>
+             <if test="jsrq != null and jsrq != ''"> AND to_date(to_char(YJQX_TBRQ,'yyyy/mm/dd'),'yyyy/mm/dd') &lt;= to_date(#{jsrq},'yyyy/mm/dd')</if>
+         </where>
+    </select>
+
+</mapper>
