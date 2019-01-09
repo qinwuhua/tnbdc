@@ -36,7 +36,7 @@
     <insert id="addYjqxgc" parameterType="com.hdsx.yjqx.entity.Yjqx">
         INSERT INTO YJQX_GCDJB
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            YJQX_ID,
+            <if test="id != null">YJQX_ID,</if>
             <if test="djbh != null">YJQX_DJBH,</if>
             <if test="gcmc != null">YJQX_GCMC,</if>
             <if test="qxld != null">YJQX_QXLD,</if>
@@ -65,7 +65,7 @@
             YJQX_SPZT
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-            sys_guid(),
+            <if test="id != null">#{id},</if>
             <if test="djbh != null">#{djbh},</if>
             <if test="gcmc != null">#{gcmc},</if>
             <if test="qxld != null">#{qxld},</if>
