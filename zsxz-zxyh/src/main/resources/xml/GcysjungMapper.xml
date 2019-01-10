@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hdsx.zxyh.mapper.GcysjungMapper">
+
+    <resultMap type="com.hdsx.zxyh.entity.Gcysjung" id="jgjs">
+        <result column="jssbh" property="jssbh"/>
+        <result column="gcmc" property="gcmc"/>
+        <result column="htbh" property="htbh"/>
+        <result column="cbdw" property="cbdw"/>
+        <result column="jldw" property="jldw"/>
+        <result column="gldw" property="gldw"/>
+        <result column="htje" property="htje"/>
+        <result column="jiesje" property="jiesje"/>
+        <result column="zbj" property="zbj"/>
+        <result column="zlqxkk" property="zlqxkk"/>
+        <result column="juesje" property="juesje"/>
+        <result column="wcht" property="wcht"/>
+        <result column="jshzf" property="jshzf"/>
+        <result column="gcnr" property="gcnr"/>
+        <result column="ysyj" property="ysyj"/>
+        <result column="remark" property="remark"/>
+        <result column="bzdw" property="bzdw"/>
+        <result column="bzdwbh" property="bzdwbh"/>
+        <result column="bzrq" property="bzrq"/>
+        <result column="spzt" property="spzt"/>
+        <collection property="mx" ofType="com.hdsx.zxyh.entity.Gcysjungmx" column="jldbh">
+            <result column="mxjssbh" property="mxjssbh"/>
+            <result column="zmh" property="zmh"/>
+            <result column="zmnr" property="zmnr"/>
+            <result column="dw" property="dw"/>
+            <result column="htdj" property="htdj"/>
+            <result column="htsl" property="htsl"/>
+            <result column="htje" property="htje"/>
+            <result column="wcsl" property="wcsl"/>
+            <result column="wcje" property="wcje"/>
+            <result column="ljwczb" property="ljwczb"/>
+            <result column="zmid" property="zmid"/>
+            <result column="mxhtbh" property="mxhtbh"/>
+
+        </collection>
+
+    </resultMap>
+
+    <select id="getHtJungInfoByBm" parameterType="hashmap" resultMap="jgjs">
+
+        select gj.htgjxx_cgxmmc gcmc,ht.htxx_htbh htbh,xm.yhhtxx_cbdw cbdw,xm.yhhtxx_jldw jldw,xm.yhhtxx_gldw gldw,gj.htgjxx_htje htje,
+        jl.jlje jiesje,gj.htgjxx_htje*gj.htgjxx_zlbzjbl/100 zbj,zmzb.*
+        from djsj_htxx ht left join djsj_htxx_htgjxx gj on ht.htxx_htbh=gj.HTGJXX_HTBH
+        left join djsj_htxx_yhxmxx xm on ht.htxx_htbh=xm.yhhtxx_htbh
+        left join (select sum(nvl(gcjlmx_htdj,0)*nvl(gcjlmx_htsl,0)) jlhtje,sum(nvl(gcjlmx_htdj,0)*nvl(gcjlmx_wcsl,0)) jlje,sum(nvl(gcjlmx_kkje,0)) fj,gcjlmx_htbh from zxyh_gcjldmx
+        where 1=1 and gcjlmx_djbh in (select gcjl_djbh from zxyh_gcjld where gcjl_spzt='已下发')
+        <if test="zmid != null and zmid !=''">  and gcjlmx_zmid in (${zmid}) </if>
+        group by gcjlmx_htbh) jl on ht.htxx_htbh=jl.gcjlmx_htbh
+        left join (select zqzfmx_htbh,sum(nvl(zqzfmx_bqje,0)) zfje from zxyh_zqcwzfzsmx
+        where 1=1 and zqzfmx_zfqh in (select zqcwzf_zfqh from zxyh_zqcwzfzs where zqcwzf_spzt='已下发')
+        <if test="zmid != null and zmid !=''"> and zqzfmx_zmid in (${zmid}) </if>
+        group by zqzfmx_htbh) zf on ht.htxx_htbh=zf.zqzfmx_htbh
+        left join (select pmmtgcspsqs_htbh,sum(nvl(pmmtgcspsqs_spje,0)) pmmtgcspsqs_spje from zxyh_gcspsqs  group by pmmtgcspsqs_htbh) sp on ht.htxx_htbh=sp.pmmtgcspsqs_htbh
+        left join  (
+        select zm.zmht_zmh zmh,zm.zmht_id zmid,zm.zmht_htbh mxhtbh,zm.zmht_zmmc zmnr,zm.zmht_jldw dw,zm.zmht_dj htdj,
+        NVL(zm.zmht_sl,0) htsl,nvl(zm.zmht_sl,0)* nvl(zm.zmht_dj,0) htje,
+        NVL(gc.gcjlmx_wcsl,0) wcsl,NVL(gc.gcjlmx_wcsl,0)*nvl(zm.zmht_dj,0) wcje,
+        100*round(NVL(gc.gcjlmx_wcsl,0)*nvl(zm.zmht_dj,0)/SUM(nvl(zm.zmht_sl,0)* nvl(zm.zmht_dj,0)) OVER(),4)||'%' ljwczb
+        from zm_ht zm left join  (select sum(nvl(t1.gcjlmx_wcsl,0)) gcjlmx_wcsl,gcjlmx_zmid  from zxyh_gcjldmx t1 where 1=1 and gcjlmx_djbh in (select gcjl_djbh from zxyh_gcjld where gcjl_spzt='已下发') <if test="zmid != null and zmid !=''"> and gcjlmx_zmid in (${zmid}) </if> group by t1.gcjlmx_zmid) gc on zm.zmht_id=gc.gcjlmx_zmid
+        left join (select t2.zqzfmx_zmid,sum(nvl(t2.zqzfmx_bqsl,0)) zqzfmx_bqsl,sum(nvl(t2.zqzfmx_bqje,0)) zqzfmx_bqje from zxyh_zqcwzfzsmx t2 where 1=1 and zqzfmx_zfqh in (select zqcwzf_zfqh from zxyh_zqcwzfzs where zqcwzf_spzt='已下发') <if test="zmid != null and zmid !=''"> and zqzfmx_zmid in (${zmid}) </if> group by t2.zqzfmx_zmid) zq on zm.zmht_id=zq.zqzfmx_zmid
+        <if test="zmid != null and zmid !=''"> where 1=1 and zm.zmht_id in (${zmid}) </if>
+        ) zmzb on ht.htxx_htbh=zmzb.mxhtbh
+        where 1=1
+        and ht.htxx_htbh in (select HTBH from zxyh_gcyssqd where spzt='已下发')
+        <if test="htbh != null and htbh != ''">
+            and ht.htxx_htbh=#{htbh}
+        </if>
+        order by htbh,zmh
+    </select>
+
+
+    <insert id="addJungMxForGcys" parameterType="com.hdsx.zxyh.entity.Gcysjung">
+        begin
+        <foreach collection="mx" item="item" index="index" separator=";">
+            insert into ZXYH_JUNGMX(mxjssbh, zmh, zmnr, dw, htdj, htsl, htje, wcsl, wcje, ljwczb, zmid, mxhtbh )  values
+            (trim(#{jssbh}),trim(#{item.zmh}),trim(#{item.zmnr}),trim(#{item.dw}),trim(#{item.htdj}),trim(#{item.htsl}),trim(#{item.htje}),trim(#{item.wcsl}),trim(#{item.wcje}),trim(#{item.ljwczb}),trim(#{item.zmid}),trim(#{item.mxhtbh}))
+        </foreach>
+        ;end;
+    </insert>
+
+    <insert id="addJungForGcys" parameterType="com.hdsx.zxyh.entity.Gcysjung">
+        insert into ZXYH_JUNG
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="jssbh != null" >jssbh,</if>
+            <if test="gcmc != null" >gcmc,</if>
+            <if test="htbh != null" >htbh,</if>
+            <if test="cbdw != null" >cbdw,</if>
+            <if test="jldw != null" >jldw,</if>
+            <if test="gldw != null" >gldw,</if>
+            <if test="htje != null" >htje,</if>
+            <if test="jiesje != null" >jiesje,</if>
+            <if test="zbj != null" >zbj,</if>
+            <if test="zlqxkk != null" >zlqxkk,</if>
+            <if test="juesje != null" >juesje,</if>
+            <if test="wcht != null" >wcht,</if>
+            <if test="jshzf != null" >jshzf,</if>
+            <if test="gcnr != null" >gcnr,</if>
+            <if test="ysyj != null" >ysyj,</if>
+            <if test="remark != null" >remark,</if>
+            <if test="bzdw != null" >bzdw,</if>
+            <if test="bzdwbh != null" >bzdwbh,</if>
+            <if test="bzrq != null" >bzrq,</if>
+
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="jssbh != null" >#{jssbh},</if>
+            <if test="gcmc != null" >#{gcmc},</if>
+            <if test="htbh != null" >#{htbh},</if>
+            <if test="cbdw != null" >#{cbdw},</if>
+            <if test="jldw != null" >#{jldw},</if>
+            <if test="gldw != null" >#{gldw},</if>
+            <if test="htje != null" >#{htje},</if>
+            <if test="jiesje != null" >#{jiesje},</if>
+            <if test="zbj != null" >#{zbj},</if>
+            <if test="zlqxkk != null" >#{zlqxkk},</if>
+            <if test="juesje != null" >#{juesje},</if>
+            <if test="wcht != null" >#{wcht},</if>
+            <if test="jshzf != null" >#{jshzf},</if>
+            <if test="gcnr != null" >#{gcnr},</if>
+            <if test="ysyj != null" >#{ysyj},</if>
+            <if test="remark != null" >#{remark},</if>
+            <if test="bzdw != null" >#{bzdw},</if>
+            <if test="bzdwbh != null" >#{bzdwbh},</if>
+            <if test="bzrq != null" >#{bzrq},</if>
+
+        </trim>
+    </insert>
+
+    <delete id="delJungMxByDjbh" parameterType="string">
+        delete from ZXYH_JUNGMX where JSSBH=#{value}
+    </delete>
+
+    <update id="editJungForGcys" parameterType="com.hdsx.zxyh.entity.Gcysjung" >
+        update ZXYH_JUNG
+        <set>
+            <if test="jssbh != null" >jssbh=#{jssbh},</if>
+            <if test="gcmc != null" >gcmc=#{gcmc},</if>
+            <if test="htbh != null" >htbh=#{htbh},</if>
+            <if test="cbdw != null" >cbdw=#{cbdw},</if>
+            <if test="jldw != null" >jldw=#{jldw},</if>
+            <if test="gldw != null" >gldw=#{gldw},</if>
+            <if test="htje != null" >htje=#{htje},</if>
+            <if test="jiesje != null" >jiesje=#{jiesje},</if>
+            <if test="zbj != null" >zbj=#{zbj},</if>
+            <if test="zlqxkk != null" >zlqxkk=#{zlqxkk},</if>
+            <if test="juesje != null" >juesje=#{juesje},</if>
+            <if test="wcht != null" >wcht=#{wcht},</if>
+            <if test="jshzf != null" >jshzf=#{jshzf},</if>
+            <if test="gcnr != null" >gcnr=#{gcnr},</if>
+            <if test="ysyj != null" >ysyj=#{ysyj},</if>
+            <if test="remark != null" >remark=#{remark},</if>
+            <if test="bzdw != null" >bzdw=#{bzdw},</if>
+            <if test="bzdwbh != null" >bzdwbh=#{bzdwbh},</if>
+            <if test="bzrq != null" >bzr#{bzrq},</if>
+        </set>
+        where 1=1 and jssbh=#{jssbh}
+    </update>
+
+    <delete id="delJungMxForGcys" parameterType="java.util.List" >
+        delete from ZXYH_JUNGMX
+        where mxjssbh in
+        <foreach collection="list" item="id"  open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    <delete id="delJungForGcys" parameterType="java.util.List" >
+        delete from ZXYH_JUNG
+        where jssbh in
+        <foreach collection="list" item="id"  open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <select id="getJungList" parameterType="hashmap" resultMap="jgjs">
+
+        select zb.*,
+        fb.*
+        from
+        ZXYH_JUNG zb left join ZXYH_JUNGMX fb on zb.jssbh=fb.mxjssbh
+
+        where 1=1
+        <if test="dwbh != null and dwbh != ''">
+            and zb.bzdwbh like '%'||#{dwbh}||'%'
+        </if>
+        <if test="htbh != null and htbh != ''">
+            and zb.htbh=#{htbh}
+        </if>
+        <if test="ksrq != null and ksrq != ''">
+            and to_date(bzrq,'yyyy/mm/dd')>=to_date(#{ksrq},'yyyy/mm/dd')
+        </if>
+        <if test="jsrq != null and jsrq != ''">
+            and to_date(bzrq,'yyyy/mm/dd')&lt;=to_date(#{jsrq},'yyyy/mm/dd')
+        </if>
+    </select>
+
+    <select id="getJungInfoByDjbh" parameterType="hashmap" resultMap="jgjs">
+
+        select zb.*,fb.*
+        from
+        ZXYH_JUNG zb left join ZXYH_JUNGMX fb on zb.jssbh=fb.mxjssbh
+        where 1=1 and zb.pmmtjgjss_jssbh=#{djbh}
+
+    </select>
+    <update id="spJungForGcys" parameterType="hashmap">
+        update ZXYH_JUNG set SPZT=#{spzt}
+        where jssbh in
+        <foreach collection="djbhs" item="id"  open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </update>
+
+    <!--
+
+
+
+    &lt;!&ndash; 删除交工结算书  &ndash;&gt;
+
+
+
+    &lt;!&ndash; 查询交工结算书列表数据 &ndash;&gt;
+    -->
+
+</mapper>
