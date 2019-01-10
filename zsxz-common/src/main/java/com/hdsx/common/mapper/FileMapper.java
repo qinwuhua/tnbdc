@@ -11,8 +11,8 @@ public interface FileMapper {
 
      int addFileDataToFiles(List<FileData> fileDataList);
 
-     List<HashMap<String, Object>> getFilesDataById(String id);
+     List<FileData> getFilesDataById(String id);
 
-     int deleteFilesDataById(String id);
+     int deleteFilesByFid(String[] id);
 
 }
