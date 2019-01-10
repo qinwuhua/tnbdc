@@ -1,27 +1,23 @@
-# 公共接口模块
-
-# 多口设置
 server:
-  port: 8001
-
+  port: 8005
 # 数据库设置
 spring:
   application:
-    name: zsxz-common
+    name: zsxz-yjqx
   datasource:
-#    url: jdbc:oracle:thin:@211.101.37.237:1521:orcl
-#    username: zsxz
-#    password: zsxz
-    url: jdbc:oracle:thin:@192.168.10.230:1521:orcl
-    username: c##zsxz
+    url: jdbc:oracle:thin:@211.101.37.237:1521:orcl
+    username: zsxz
     password: zsxz
+    #    url: jdbc:oracle:thin:@192.168.10.230:1521:orcl
+    #    username: c##zsxz
+    #    password: zsxz
     driver-class-name: oracle.jdbc.driver.OracleDriver
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
       filters: stat,logging
       initial-size: 8
       min-idle: 3
-      max-active: 10
+      max-active: 100
       query-timeout: 6000
       transaction-query-timeout: 6000
       remove-abandoned-timeout: 1800
@@ -37,7 +33,7 @@ spring:
 
 mybatis:
   mapper-locations: classpath:/xml/*.xml
-  type-aliases-package: com.hdsx.common.etity
+  type-aliases-package: com.hdsx.yjqx.etity
   config-location: classpath:mybatis-config.xml
 
 #pagehelper分页插件配置
@@ -48,7 +44,3 @@ pagehelper:
   offset-as-page-num: true
   row-bounds-with-count: true
   params: count=countSql
-
-#上传文件相关信息
-file:
-  fileSavePath: /usr/tomcat/tomcat8.5/webapps/uploadFiles/

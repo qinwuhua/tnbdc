@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hdsx.zxyh.mapper.KgsqdMapper">
+
+    <!-- 定义数据库字段与实体对象的映射关系 -->
+    <resultMap id="kgsqdBean" type="com.hdsx.zxyh.entity.Kgsqd">
+        <id column="djbh" property="djbh"/>
+        <result column="htbh" property="htbh"/>
+        <result column="bpzdwz" property="bpzdwz"/>
+        <result column="zxkfx" property="zxkfx"/>
+        <result column="isxl" property="isxl"/>
+        <result column="isfd" property="isfd"/>
+    </resultMap>
+    
+    <select id="getAll" resultType="com.hdsx.zxyh.entity.Kgsqd"></select>
+
+</mapper>

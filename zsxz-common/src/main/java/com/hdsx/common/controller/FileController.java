@@ -37,7 +37,7 @@ public class FileController {
         }
     }
 
-    @PostMapping("getFilesDataById")
+    @GetMapping("getFilesDataById")
     @ApiOperation(value = "根据表单ID查找文件")
     @ApiImplicitParam(paramType="query", dataType = "String", name = "id", value = "表单主键ID", required = true)
     public Msg getFilesDataById(@RequestParam("id") String id){
@@ -78,7 +78,7 @@ public class FileController {
         }
     }
 
-    @PostMapping("updateFileDataToFiles")
+    @PutMapping("updateFileDataToFiles")
     @ApiOperation("编辑文件信息")
     public Msg updateFileDataToFiles(@RequestBody Xtfile xtfile){
         try {
