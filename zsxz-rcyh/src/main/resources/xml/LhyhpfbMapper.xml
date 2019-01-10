@@ -24,7 +24,7 @@
     </resultMap>
     <!--主表添加-->
     <insert id="insert" parameterType="com.hdsx.rcyh.entity.Lhyhpfb">
-        insert into LHYHPFB
+        insert into LHYHZJPFB
         <trim prefix="(" suffix=")" suffixOverrides="," >
             <if test="lhyhdjbh != null" >LHYH_DJBH,</if>
             <if test="lhyhyd != null" >LHYH_YD,</if>
@@ -36,7 +36,7 @@
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides="," >
             <if test="lhyhdjbh != null" >#{lhyhdjbh},</if>
-            <if test="lhyhyd != null" >#{lhyhyd},</if>
+            <if test="lhyhyd != null" >to_date(#{lhyhyd},'yyyy/mm'),</if>
             <if test="lhyhgcmc != null" >#{lhyhgcmc},</if>
             <if test="lhyhsgdw != null" >#{lhyhsgdw},</if>
             <if test="lhyhgldw != null" >#{lhyhgldw},</if>
@@ -46,7 +46,7 @@
     </insert>
     <!--子表添加-->
     <insert id="insertzb" parameterType="com.hdsx.rcyh.entity.Lhyhpfbmx">
-        insert into LHYHPFBMX
+        insert into LHYHZLPFBMX
         <trim prefix="(" suffix=")" suffixOverrides="," >
             <if test="lhyhid != null" >LHYH_ID,</if>
             <if test="lhyhmxdjbh != null" >LHYH_DJBH,</if>
@@ -55,7 +55,7 @@
             <if test="lhyhnrjyq != null" >LHYH_NRJYQ,</if>
             <if test="lhyhpfbf != null" >LHYH_PFBF,</if>
             <if test="lhyhdffz != null" >LHYH_DFFZ,</if>
-            <if test="lhyhzt != null" >LHYH_ZT,</if>
+            LHYH_ZT,
 
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -66,15 +66,15 @@
             <if test="lhyhnrjyq != null" >#{lhyhnrjyq},</if>
             <if test="lhyhpfbf != null" >#{lhyhpfbf},</if>
             <if test="lhyhdffz != null" >#{lhyhdffz},</if>
-            <if test="lhyhzt != null" >#{lhyhzt},</if>
+            '未处理',
 
         </trim>
     </insert>
     <!--主表-->
     <update id="update" parameterType="hashmap">
-        update LHYHPFB
+        update LHYHZLPFB
         <set>
-            <if test="lhyhyd != null" >LHYH_YD=#{lhyhyd},</if>
+            <if test="lhyhyd != null" >LHYH_YD=to_date(#{lhyhyd},'yyyy/mm'),</if>
             <if test="lhyhgcmc != null" >LHYH_GCMC=#{lhyhgcmc},</if>
             <if test="lhyhsgdw != null" >LHYH_SGDW=#{lhyhsgdw},</if>
             <if test="lhyhgldw != null" >LHYH_GLDW=#{lhyhgldw},</if>
@@ -102,29 +102,29 @@
 
     <!--删除主表-->
     <delete id="delete" parameterType="java.lang.String">
-        delete from LHYHPFB
+        delete from LHYHZLPFB
         where LHYH_DJBH = #{lhyhdjbh}
     </delete>
 
     <!--删除子表-->
     <delete id="deletezb" parameterType="java.lang.String">
-        delete from LHYHPFBMX
+        delete from LHYHZLPFBMX
         where LHYH_DJBH = #{lhyhmxdjbh}
     </delete>
 
     <select id="getLhyhrwList" parameterType="hashmap" resultMap="lhyhdjbh">
-        select * from LHYHPFB A
+        select * from(select LHYH_DJBH,to_char(LHYH_YD,'yyyy/mm') LHYH_YD,LHYH_GCMC,LHYH_SGDW,LHYH_GLDW,to_char(LHYH_KHRQ,'yyyy/mm/dd') LHYH_KHRQ,LHYH_FZZJ from  LHYHZLPFB )A
         <if test="lhyhyd != null and lhyhyd !=''">
             and A.LHYH_YD=#{lhyhyd}
         </if>
         <if test="lhyhgldw != null and lhyhgldw !=''">
             and A.LHYH_GLDW=#{lhyhgldw}
         </if>
-        left join (select *from LHYHPFBMX) B on A.LHYH_DJBH=B.LHYH_DJBH
+        left join (select * from LHYHZLPFBMX) B on A.LHYH_DJBH=B.LHYH_DJBH
     </select>
 
     <update id="updatezt" parameterType="hashmap">
-        update LHYHPFBMX
+        update LHYHZLPFBMX
         set
         LHYH_ZT = #{lhyhzt,jdbcType=VARCHAR}
         where

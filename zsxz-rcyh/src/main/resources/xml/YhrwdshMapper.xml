@@ -13,7 +13,7 @@
         <result column="YHRWD_YSZT" property="yhrwdyszt"/>
 
         <collection property="yhrwmxes" ofType="com.hdsx.rcyh.entity.Yhrwmx" column="yhrwdid">
-            <result column="jldbh" property="yhrwdid"/><!-- 这里的column对应的是下面查询的别名，而不是表字段名 -->
+            <result column="YHRWD_ID" property="yhrwdid"/><!-- 这里的column对应的是下面查询的别名，而不是表字段名 -->
             <result column="YHRWD_DJBH" property="yhrwdmxdjbh"/><!-- property对应JavaBean中的属性名 -->
             <result column="YHRWD_SJBH" property="yhrwdsjbh"/><!-- property对应JavaBean中的属性名 -->
             <result column="YHRWD_XCDW" property="yhrwdxcdw"/>
@@ -38,6 +38,31 @@
         SELECT distinct  HTXX_XMGLDW from DJSJ_HTXX
     </select>
     <!--主表添加-->
+    <!--<insert id="insert" parameterType="com.hdsx.rcyh.entity.Yhrwd">
+        insert into XXRW_YHRWD
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="yhrwddjbh != null" >YHRWD_DJBH,</if>
+            <if test="yhrwdlx != null" >YHRWD_LX,</if>
+            <if test="yhrwdrq != null" >YHRWD_RQ,</if>
+            <if test="yhrwdyd != null" >YHRWD_YD,</if>
+            <if test="yhrwdyhdw != null" >YHRWD_YHDW,</if>
+            <if test="yhrwdgydw != null" >YHRWD_GYDW,</if>
+            YHRWD_RWDSHZT,
+            YHRWD_YSZT
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="yhrwddjbh != null" >#{yhrwddjbh},</if>
+            <if test="yhrwdlx != null" >#{yhrwdlx},</if>
+            <if test="yhrwdrq != null" >to_date(#{yhrwdrq,jdbcType=TIMESTAMP},'yyyy/mm/dd'),</if>
+            <if test="yhrwdyd != null" >to_date(#{yhrwdyd,jdbcType=TIMESTAMP},'yyyy/mm'),</if>
+            <if test="yhrwdyhdw != null" >#{yhrwdyhdw},</if>
+            <if test="yhrwdgydw != null" >#{yhrwdgydw},</if>
+            '未处理',
+             '未处理'
+        </trim>
+    </insert>-->
+
+
     <insert id="insert" parameterType="com.hdsx.rcyh.entity.Yhrwd">
         insert into XXRW_YHRWD
         <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -47,20 +72,22 @@
             <if test="yhrwdyd != null" >YHRWD_YD,</if>
             <if test="yhrwdyhdw != null" >YHRWD_YHDW,</if>
             <if test="yhrwdgydw != null" >YHRWD_GYDW,</if>
-            <if test="yhrwdrwdshzt != null" >YHRWD_RWDSHZT,</if>
-            <if test="yhrwdyszt != null" >YHRWD_YSZT,</if>
+           YHRWD_RWDSHZT,
+            YHRWD_YSZT,
+
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides="," >
             <if test="yhrwddjbh != null" >#{yhrwddjbh},</if>
             <if test="yhrwdlx != null" >#{yhrwdlx},</if>
-            <if test="yhrwdrq != null" >to_date(#{yhrwdrq},'yyyy/mm/dd'),</if>
-            <if test="yhrwdyd != null" >#{yhrwdyd},</if>
+            <if test="yhrwdrq != null" >to_date(#{yhrwdrq,jdbcType=TIMESTAMP},'yyyy/mm/dd'),</if>
+            <if test="yhrwdyd != null" >to_date(#{yhrwdyd,jdbcType=TIMESTAMP},'yyyy/mm'),</if>
             <if test="yhrwdyhdw != null" >#{yhrwdyhdw},</if>
             <if test="yhrwdgydw != null" >#{yhrwdgydw},</if>
-            <if test="yhrwdrwdshzt != null" >#{yhrwdrwdshzt},</if>
-            <if test="yhrwdyszt != null" > #{yhrwdyszt},</if>
+           '未处理',
+            '未处理',
         </trim>
     </insert>
+
     <!--子表添加-->
     <insert id="insertzb" parameterType="com.hdsx.rcyh.entity.Yhrwmx">
         insert into XXRW_YHRWD_MX
@@ -92,7 +119,7 @@
             <if test="yhrwdgcllx != null" >#{yhrwdgcllx},</if>
             <if test="yhrwdzh != null" >#{yhrwdzh},</if>
             <if test="yhrwdbhsm != null" >#{yhrwdbhsm},</if>
-            <if test="yhrwdsj != null" >to_date(#{yhrwdsj},'yyyy/mm/dd'),</if>
+            <if test="yhrwdsj != null" >to_date(#{yhrwdsj,jdbcType=TIMESTAMP},'yyyy/mm/dd'),</if>
         </trim>
     </insert>
 <!--主表-->
@@ -100,8 +127,8 @@
         update XXRW_YHRWD
         <set>
             <if test="yhrwdlx != null" >YHRWD_LX=#{yhrwdlx},</if>
-            <if test="yhrwdrq != null" >YHRWD_RQ=to_date(#{yhrwdrq},'yyyy/mm/dd'),</if>
-            <if test="yhrwdyd != null" >YHRWD_YD=#{yhrwdyd},</if>
+            <if test="yhrwdrq != null" >YHRWD_RQ=to_date(#{yhrwdrq,jdbcType=TIMESTAMP},'yyyy/mm/dd'),</if>
+            <if test="yhrwdyd != null" >YHRWD_YD=to_date(#{yhrwdyd,jdbcType=TIMESTAMP},'yyyy/mm'),</if>
             <if test="yhrwdyhdw != null" >YHRWD_YHDW=#{yhrwdyhdw},</if>
             <if test="yhrwdgydw != null" >YHRWD_GYDW=#{yhrwdgydw},</if>
             <if test="yhrwdrwdshzt != null" >YHRWD_RWDSHZT=#{yhrwdrwdshzt},</if>
@@ -140,14 +167,22 @@
     <!--删除子表-->
     <delete id="deletezb" parameterType="java.lang.String">
         delete from XXRW_YHRWD_MX
-        where YHRWD_DJBH = #{yhrwddjbh}
+        where YHRWD_DJBH = #{yhrwdmxdjbh}
     </delete>
 
     <select id="getYhrwdshList" parameterType="hashmap" resultMap="yhrwddjbh">
-      select * from XXRW_YHRWD A
-      <if test="yhrwdlx != null and yhrwdlx !=''">
+        select * from ( select YHRWD_DJBH,YHRWD_LX,to_char(YHRWD_RQ,'yyyy/mm/dd') YHRWD_RQ,to_char(YHRWD_YD,'yyyy/mm') YHRWD_YD,
+        YHRWD_YHDW,YHRWD_GYDW,YHRWD_RWDSHZT,YHRWD_YSZT
+        from XXRW_YHRWD) A
+        left join (select YHRWD_ID,YHRWD_DJBH,YHRWD_SJBH,YHRWD_XCDW,YHRWD_XCFX,YHRWD_CD,YHRWD_DWGC
+        ,YHRWD_BHLX,YHRWD_BHSL,YHRWD_GCLLX,YHRWD_ZH,YHRWD_BHSM,to_char(YHRWD_SJ,'yyyy/mm/dd') YHRWD_SJ
+        from XXRW_YHRWD_MX)
+        B on A.YHRWD_DJBH=B.YHRWD_DJBH
+        where 1=1
+
+        <if test="yhrwdlx != null and yhrwdlx !=''">
           and A.YHRWD_LX=#{yhrwdlx}
-      </if>
+        </if>
         <if test="yhrwdyd != null and yhrwdyd !=''">
             and A.YHRWD_YD=#{yhrwdyd}
         </if>
@@ -157,7 +192,9 @@
         <if test="yhrwdgydw != null and yhrwdgydw !=''">
             and A.YHRWD_GYDW=#{yhrwdgydw}
         </if>
-      left join (select * from XXRW_YHRWD_MX) B on A.YHRWD_DJBH=B.YHRWD_DJBH
+
+
+
     </select>
 
 

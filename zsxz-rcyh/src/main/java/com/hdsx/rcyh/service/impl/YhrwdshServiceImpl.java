@@ -66,6 +66,7 @@ public class YhrwdshServiceImpl implements YhrwdshService {
                 yhrwmx.setYhrwdmxdjbh(yhrwd.getYhrwddjbh());
                 yhrwdshMapper.insertzb(yhrwmx);
             }
+
         }
         //djbh更新主表
         int a = yhrwdshMapper.update(yhrwd);
@@ -76,6 +77,7 @@ public class YhrwdshServiceImpl implements YhrwdshService {
     public List<Yhrwd> getYhrwdshList(Map<String, String> param, int pageNum, int pageSize) {
             PageHelper.startPage(pageNum, pageSize);
             List<Yhrwd> list = yhrwdshMapper.getYhrwdshList(param);
+            System.out.println(list.toString());
             return list;
     }
 

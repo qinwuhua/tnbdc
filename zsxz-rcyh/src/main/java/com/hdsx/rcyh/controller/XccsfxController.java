@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 
 @RestController
-@Api(value = "日常养护-巡查次数分析")
+@Api(description = "日常养护-巡查次数分析")
 @RequestMapping("/xccsfx")
 public class XccsfxController {
     @Resource
