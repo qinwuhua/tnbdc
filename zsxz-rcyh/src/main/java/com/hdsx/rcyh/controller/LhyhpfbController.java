@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@Api(value = "日常养护-绿化养护评分表")
+@Api(description = "日常养护-绿化养护评分表")
 @RequestMapping("/lhyhpfb")
 public class LhyhpfbController {
     @Resource

@@ -37,9 +37,9 @@ public class FileController {
         }
     }
 
-    @PostMapping("getFilesDataById")
-    @ApiOperation(value = "根据表单ID查找文件")
-    @ApiImplicitParam(paramType="query", dataType = "String", name = "id", value = "表单主键ID", required = true)
+    @GetMapping("getFilesDataById")
+    @ApiOperation(value = "根据关联表单ID查找文件")
+    @ApiImplicitParam(paramType="query", dataType = "String", name = "id", value = "表单关联ID", required = true)
     public Msg getFilesDataById(@RequestParam("id") String id){
         try {
             return ResultUtil.success(fileService.getFilesDataById(id));
@@ -48,12 +48,12 @@ public class FileController {
         }
     }
 
-    @DeleteMapping("deleteFilesById")
-    @ApiOperation("根据表单ID删除文件")
-    @ApiImplicitParam(paramType="query", dataType = "String", name = "id", value = "表单主键ID", required = true)
-    public Msg deleteFilesById(@RequestParam("id")String id){
+    @DeleteMapping("deleteFilesDataById")
+    @ApiOperation("根据关联表单ID删除文件")
+    @ApiImplicitParam(paramType="query", dataType = "String", name = "ids", value = "表单关联ID", required = true)
+    public Msg deleteFilesByFid(@RequestParam("ids")String[] ids){
         try {
-            if (fileService.deleteFilesById(id)>0){
+            if (fileService.deleteFilesByFid(ids)>0){
                 return ResultUtil.success("文件删除成功！");
             }else {
                 return ResultUtil.error("文件删除失败！");
@@ -78,17 +78,4 @@ public class FileController {
         }
     }
 
-    @PostMapping("updateFileDataToFiles")
-    @ApiOperation("编辑文件信息")
-    public Msg updateFileDataToFiles(@RequestBody Xtfile xtfile){
-        try {
-            if (fileService.updateFileDataToFiles(xtfile.getDataList()) > 0){
-                return ResultUtil.success("文件更新成功！");
-            }else {
-                return ResultUtil.error("文件更新失败!");
-            }
-        }catch (Exception e){
-            return ResultUtil.error("接口出错！");
-        }
-    }
 }

@@ -65,12 +65,17 @@
         select gj.htgjxx_cgxmmc pmmtjgjss_gcmc,ht.htxx_htbh pmmtjgjss_htbh,xm.yhhtxx_cbdw pmmtjgjss_cbdw,xm.yhhtxx_jldw pmmtjgjss_jldw,xm.yhhtxx_gldw pmmtjgjss_gldw,gj.htgjxx_htje pmmtjgjss_htje,
         jl.jlhtje pmmtjgjss_gzjhtje,jl.jlje pmmtjgjss_gzjjlje,jl.jlje pmmtjgjss_gzjjsje,
         jl.jlhtje pmmtjgjss_htzdje,jl.jlje pmmtjgjss_jlzdje,jl.jlje pmmtjgjss_jgjszdje,
-        jl.fj pmmtjgjss_fj,sp.pmmtgcspsqs_spje pmmtjgjss_spfy,gj.htgjxx_htje*gj.htgjxx_zlbzjbl/100 pmmtjgjss_zlbzj,
-        zf.zfje pmmtjgjss_ljzfgck,nvl(jl.jlje,0)-nvl(jl.fj,0) pmmtjgjss_yzfkk,money_to_chinese(to_char(round(jl.jlje,2))) pmmtjgjss_yzfkkdx,
+        fj.fj pmmtjgjss_fj,sp.pmmtgcspsqs_spje pmmtjgjss_spfy,gj.htgjxx_htje*gj.htgjxx_zlbzjbl/100 pmmtjgjss_zlbzj,
+        zf.zfje pmmtjgjss_ljzfgck,nvl(jl.jlje,0)-nvl(fj.fj,0) pmmtjgjss_yzfkk,money_to_chinese(to_char(round(nvl(jl.jlje,0)-nvl(fj.fj,0),2))) pmmtjgjss_yzfkkdx,
         nvl(zmzb.PMMTJGJSSMX_ZMBH,' ') PMMTJGJSSMX_ZMBH, nvl(zmzb.PMMTJGJSSMX_ZMID,' ') PMMTJGJSSMX_ZMID, nvl(zmzb.PMMTJGJSSMX_HTBH,' ') PMMTJGJSSMX_HTBH, nvl(zmzb.PMMTJGJSSMX_ZMMC,' ') PMMTJGJSSMX_ZMMC,nvl(zmzb.PMMTJGJSSMX_DW,' ') PMMTJGJSSMX_DW, nvl(zmzb.PMMTJGJSSMX_HTDJ,0) PMMTJGJSSMX_HTDJ, nvl(zmzb.PMMTJGJSSMX_YHTS,0) PMMTJGJSSMX_YHTS, nvl(zmzb.PMMTJGJSSMX_YHTJE,0) PMMTJGJSSMX_YHTJE, nvl(zmzb.PMMTJGJSSMX_SJJLSL,0) PMMTJGJSSMX_SJJLSL, nvl(zmzb.PMMTJGJSSMX_SJJLJE,0) PMMTJGJSSMX_SJJLJE, nvl(zmzb.PMMTJGJSSMX_JGJSSL,0) PMMTJGJSSMX_JGJSSL, nvl(zmzb.PMMTJGJSSMX_JGJSJE,0) PMMTJGJSSMX_JGJSJE, nvl(zmzb.PMMTJGJSSMX_YSJBSL,0) PMMTJGJSSMX_YSJBSL, nvl(zmzb.PMMTJGJSSMX_YSJBJE,0) PMMTJGJSSMX_YSJBJE, nvl(zmzb.PMMTJGJSSMX_REMARK,' ') PMMTJGJSSMX_REMARK,
         to_char(sysdate,'yyyy/mm/dd') PMMTJGJSS_BZRQ
         from djsj_htxx ht left join djsj_htxx_htgjxx gj on ht.htxx_htbh=gj.HTGJXX_HTBH
         left join djsj_htxx_yhxmxx xm on ht.htxx_htbh=xm.yhhtxx_htbh
+        left join (select htbh,sum(nvl(fj,0)) fj from(
+        select pmmtlyjcb_htbh htbh,sum(nvl(lymx.pmmtlyjcbmx_fj,0)) fj from SGDWLYJCB ly left join SGDWLYJCBMX lymx on ly.pmmtlyjcb_id=lymx.pmmtlyjcbmx_mid group by ly.pmmtlyjcb_htbh
+        union all
+        select PMMTJCZBQKJCB_HTBH htbh,sum(nvl(lymx.PMMTJCZBQKJCBMX_FJ,0)) fj from jczbqkjcb ly left join jczbqkjcbmx lymx on ly.PMMTJCZBQKJCB_ID=lymx.PMMTJCZBQKJCBMX_MID group by ly.PMMTJCZBQKJCB_HTBH
+        ) group by htbh) fj on ht.htxx_htbh=fj.htbh
         left join (select sum(nvl(gcjlmx_htdj,0)*nvl(gcjlmx_htsl,0)) jlhtje,sum(nvl(gcjlmx_htdj,0)*nvl(gcjlmx_wcsl,0)) jlje,sum(nvl(gcjlmx_kkje,0)) fj,gcjlmx_htbh from gcjldmx
         where 1=1 and gcjlmx_djbh in (select gcjl_djbh from gcjld where gcjl_spzt='已下发')
         <if test="zmid != null and zmid !=''">  and gcjlmx_zmid in (${zmid}) </if>

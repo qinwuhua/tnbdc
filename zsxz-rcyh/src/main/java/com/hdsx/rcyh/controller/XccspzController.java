@@ -15,7 +15,7 @@ import javax.annotation.Resource;
 import java.util.List;
 
 @RestController
-@Api(value = "养护管理-巡查次数配置")
+@Api(description = "养护管理-巡查次数配置")
 @RequestMapping("/xccspz")
 public class XccspzController {
     @Resource

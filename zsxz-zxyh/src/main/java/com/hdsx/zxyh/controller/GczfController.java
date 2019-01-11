@@ -71,7 +71,7 @@ public class GczfController {
 
     @RequestMapping(value = "getGcjldInfoByDjbh", method = RequestMethod.GET, produces = "application/json")
     @ApiOperation(value = "通过单据编号获取工程计量单详细信息")
-    @ApiImplicitParam(paramType="query", dataType = "String", name = "djbh", value = "支付期号", required = true)
+    @ApiImplicitParam(paramType="query", dataType = "String", name = "djbh", value = "单据编号", required = true)
     public Msg getGcjldInfoByDjbh(@RequestParam(value = "djbh",required = true) String djbh){
         try {
             Map<String, String> param = new HashMap<String, String>();
@@ -286,7 +286,7 @@ public class GczfController {
 
     @RequestMapping(value = "spZqcwzfForGczf", method = RequestMethod.PUT, produces = "application/json")
     @ApiOperation(value = "审批中期财务支付证书")
-    @ApiImplicitParam(paramType="query", dataType = "String", name = "djbhs", value = "支付期号(以“,”隔开)", required = true)
+    @ApiImplicitParam(paramType="query", dataType = "String", name = "zfbhs", value = "支付期号(以“,”隔开)", required = true)
     public Msg spZqcwzfForGczf(@RequestParam(value = "zfbhs",required = true) String zfbhs,
                                @RequestParam(value = "spzt",required = true) String spzt){
         try {

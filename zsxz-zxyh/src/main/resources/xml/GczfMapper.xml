@@ -121,7 +121,7 @@
         left join zxyh_GCJLDMX mx on g.gcjl_djbh=mx.gcjlmx_djbh
         where 1=1
         <if test="dwbh != null and dwbh != ''">
-            and g.gcjl_dwbh like '%'||#{gcjl_htbh}||'%'
+            and g.gcjl_dwbh like '%'||#{htbh}||'%'
         </if>
         <if test="gcjl_htbh != null and gcjl_htbh != ''">
             and g.gcjl_htbh=#{gcjl_htbh}
@@ -275,6 +275,9 @@
         fb.ZQZFMX_ID, fb.ZQZFMX_MID, fb.ZQZFMX_ZMBH, fb.ZQZFMX_ZMMC, fb.ZQZFMX_JLDW, fb.ZQZFMX_JLDWID, fb.ZQZFMX_HTSL, fb.ZQZFMX_HTDJ, fb.ZQZFMX_HTJE, fb.ZQZFMX_LJWC, fb.ZQZFMX_BQWCSL, fb.ZQZFMX_BQWCJE, fb.ZQZFMX_SQWCSL, fb.ZQZFMX_SQWCJE, fb.ZQZFMX_BQSL, fb.ZQZFMX_BQJE, fb.ZQZFMX_ZFQH
         from ZXYH_ZQCWZFZS zb left join ZXYH_ZQCWZFZSMX fb on zb.ZQCWZF_zfqh=fb.ZQZFMX_zfqh
         where 1=1
+        <if test="dwbh != null and dwbh != ''">
+            and zb.ZQCWZF_DWBH=#{dwbh}
+        </if>
         <if test="htbh != null and htbh != ''">
             and zb.ZQCWZF_HTBH=#{htbh}
         </if>

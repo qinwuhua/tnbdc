@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@Api(value = "养护管理-养护任务单审核")
+@Api(description = "养护管理-养护任务单审核")
 @RequestMapping("/yhrwdsh")
 public class YhrwdshContrller {
     @Resource
@@ -44,7 +44,7 @@ public class YhrwdshContrller {
         }
     }
 
- /*   @ApiOperation(value = "主表添加一条信息", httpMethod = "POST")
+    @ApiOperation(value = "主表添加一条信息", httpMethod = "POST")
     @RequestMapping(value = "insert", method = RequestMethod.POST)
     @ResponseBody
     public Msg insert(@RequestBody Yhrwd yhrwd) {
@@ -54,7 +54,7 @@ public class YhrwdshContrller {
             e.printStackTrace();
             return ResultUtil.error("添加失败！");
         }
-    }*/
+    }
     /*@ApiOperation(value = "子表添加一条信息", httpMethod = "POST")
     @RequestMapping(value = "insertzb", method = RequestMethod.POST)
     @ResponseBody
@@ -115,14 +115,14 @@ public class YhrwdshContrller {
     @RequestMapping(value = "getYhrwdshList", method = RequestMethod.GET, produces = "application/json")
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "query", dataType = "String", name = "yhrwdlx", value = "路线", required = false),
-            @ApiImplicitParam(paramType = "query", dataType = "String", name = "yhrwdyd", value = "月度", required = false),
+            @ApiImplicitParam(paramType = "query", dataType = "String", name = "yhrwdyd", value = "月度 yyyy/mm", required = false),
             @ApiImplicitParam(paramType = "query", dataType = "String", name = "yhrwdyhdw", value = "养护单位", required = false),
             @ApiImplicitParam(paramType = "query", dataType = "String", name = "yhrwdgydw", value = "管理单位", required = false),
             @ApiImplicitParam(paramType = "query", dataType = "int", name = "pageNum", value = "页码", required = true),
             @ApiImplicitParam(paramType = "query", dataType = "int", name = "pageSize", value = "每页条数", required = true)
     })
     @ApiOperation(value = "获取养护任务单审核列表数据")
-    public Msg getLhyhrwList(@RequestParam(value = "yhrwdlx", required = false) String yhrwdlx,
+    public Msg getYhrwdshList(@RequestParam(value = "yhrwdlx", required = false) String yhrwdlx,
                              @RequestParam(value = "yhrwdyd", required = false) String yhrwdyd,
                              @RequestParam(value = "yhrwdyhdw", required = false) String yhrwdyhdw,
                              @RequestParam(value = "yhrwdgydw", required = false) String yhrwdgydw,
@@ -131,7 +131,8 @@ public class YhrwdshContrller {
         Map<String,String> param=new HashMap<String,String>();
         param.put("yhrwdlx",yhrwdlx);param.put("yhrwdyd",yhrwdyd);param.put("yhrwdyhdw",yhrwdyhdw);param.put("yhrwdgydw",yhrwdgydw);
         List<Yhrwd> list = yhrwdshService.getYhrwdshList(param, pageNum, pageSize);
-        return ResultUtil.success(new PageInfo<>(list));
+        System.out.println("11111111111111111111111111111111111"+list);
+        return ResultUtil.success(new PageInfo<Yhrwd>(list));
     }
 
 

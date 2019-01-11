@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hdsx.rcyh.mapper.XcsbMapper">
+    <select id="getXcsb" resultType="java.util.HashMap">
+        SELECT  RWMX_ID, RWMX_MID,RWMX_DWMC,RWMX_DWBH,
+        RWMX_DWID,RWMX_BMMC,RWMX_BMBH,RWMX_BMID,
+        RWMX_TBR,RWMX_TBRID,to_char(RWMX_TBRQ,'yyyy/mm/dd') RWMX_TBRQ,RWMX_NOTE,RWMX_SJDH,RWMX_GPS,RWMX_SJLX,RWMX_SJSM,
+        RWMX_JJD,RWMX_TP,RWMX_SP,RWMX_ZH,to_char(RWMX_FXSJ,'yyyy/mm/dd')RWMX_FXSJ,
+        RWMX_SHLX,RWMX_BHLX,RWMX_BHSL,RWMX_KHNR,RWMX_CD,RWMX_CZFS from XCSB
+
+    </select>
+</mapper>
