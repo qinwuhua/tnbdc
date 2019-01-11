@@ -134,7 +134,7 @@
     </insert>
 
     <delete id="delJungMxByDjbh" parameterType="string">
-        delete from ZXYH_JUNGMX where JSSBH=#{value}
+        delete from ZXYH_JUNGMX where MXJSSBH=#{value}
     </delete>
 
     <update id="editJungForGcys" parameterType="com.hdsx.zxyh.entity.Gcysjung" >

@@ -124,7 +124,7 @@ public class GcysjungController {
 
     @RequestMapping(value = "getJungList", method = RequestMethod.GET, produces = "application/json")
     @ApiImplicitParams({
-            @ApiImplicitParam(paramType="query", dataType = "String", name = "dwbh", value = "合同编号", required = false),
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "dwbh", value = "单位编号", required = false),
             @ApiImplicitParam(paramType="query", dataType = "String", name = "htbh", value = "合同编号", required = false),
             @ApiImplicitParam(paramType="query", dataType = "String", name = "ksrq", value = "申请开始日期(yyyy/mm/dd)", required = false),
             @ApiImplicitParam(paramType="query", dataType = "String", name = "jsrq", value = "申请结束日期(yyyy/mm/dd)", required = false),
