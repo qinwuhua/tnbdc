@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * 计量支付
@@ -12,8 +13,9 @@ import java.io.Serializable;
 @Data
 @Accessors(chain = true)
 @NoArgsConstructor
-public class Gcyssqd implements Serializable{
+public class Gcysjung implements Serializable{
 
     private static final long serialVersionUID = 3834262618582486202L;
-    private String sqbh, xmmc, sqsj, htbh, sgdw, gldw, htksgq, htjsgq, yslx, sgfyj, jldwyj, gcjsbyj, jyfzbyj, tbr, tbrq, tbdw, tbbm, tbdwbm, tbbmbm, spzt;
+    private String jssbh, gcmc, htbh, cbdw, jldw, gldw, htje, jiesje, zbj, zlqxkk, juesje, wcht, jshzf, gcnr, ysyj, remark, bzdw, bzdwbh, bzrq, spzt;
+    List<Gcysjungmx> mx;
 }

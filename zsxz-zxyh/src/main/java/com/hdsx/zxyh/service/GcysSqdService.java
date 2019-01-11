@@ -20,4 +20,6 @@ public interface GcysSqdService {
     int editGcyssqdForGcys(Gcyssqd gcyssqd);
 
     int delGcyssqdForGcys(List<String> l);
+
+    int spGcyssqdForGcys(Map<String, Object> param);
 }

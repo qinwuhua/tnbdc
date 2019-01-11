@@ -113,5 +113,13 @@
         </foreach>
     </delete>
 
+    <update id="spGcyssqdForGcys" parameterType="hashmap">
+        update ZXYH_GCYSSQD set SPZT=#{spzt}
+        where sqbh in
+        <foreach collection="djbhs" item="id"  open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </update>
+
 
 </mapper>
