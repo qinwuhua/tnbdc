@@ -38,4 +38,10 @@ public class Yjqx implements Serializable {
     private String tbrq;
     private String htbh;
     private String spzt;
+    private String dwid;
+    private String dwbh;
+    private String dwmc;
+    private String bmid;
+    private String bmbh;
+    private String bmmc;
 }
