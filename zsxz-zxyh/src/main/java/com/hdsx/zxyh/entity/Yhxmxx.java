@@ -30,7 +30,7 @@ public class Yhxmxx {
     private String lljdbm;
     private String sglx;
     private String gldw;
-    private String gbdw;
+    private String cbdw;
     private String jldw;
     private String xmlxr;
     private String lxdh;

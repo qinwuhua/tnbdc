@@ -18,4 +18,19 @@ public class KgsqdServiceImpl implements KgsqdService {
     public List<Kgsqd> getAll() {
         return kgsqdMapper.getAll();
     }
+
+    @Override
+    public int addKgsqd(Kgsqd kgsqd) {
+        return kgsqdMapper.addKgsqd(kgsqd);
+    }
+
+    @Override
+    public int updateKgsqd(Kgsqd kgsqd) {
+        return kgsqdMapper.updateKgsqd(kgsqd);
+    }
+
+    @Override
+    public int deleteKgsqd(String[] djbhs) {
+        return kgsqdMapper.deleteKgsqd(djbhs);
+    }
 }
