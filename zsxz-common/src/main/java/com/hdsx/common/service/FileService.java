@@ -10,11 +10,10 @@ public interface FileService {
 
     HashMap<String, Object> uploadFiles(MultipartFile file);
 
-    List<HashMap<String, Object>> getFilesDataById(String id);
+    List<FileData> getFilesDataById(String id);
 
-    int deleteFilesById(String id);
+    int deleteFilesByFid(String[] id);
 
     int addFileDataToFiles(List<FileData> fileDataList);
 
-    int updateFileDataToFiles(List<FileData> fileDataList);
 }

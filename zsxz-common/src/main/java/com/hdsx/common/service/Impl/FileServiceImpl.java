@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.annotation.Resource;
 import java.io.File;
 import java.io.IOException;
+import java.net.InetAddress;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -23,6 +24,9 @@ public class FileServiceImpl implements FileService {
     @Value("${file.fileSavePath}")
     private String fileSavePath;
 
+    @Value("${file.fileUrl}")
+    private String fileUrl;
+
     @Resource
     FileMapper fileMapper;
 
@@ -31,12 +35,43 @@ public class FileServiceImpl implements FileService {
         if (multipartFile != null) {
             SimpleDateFormat nyr = new SimpleDateFormat("yyyyMMdd");
             String nyrdate = nyr.format(new Date());
-            String filePath = fileSavePath + nyrdate+"/";
+            String filePath = fileSavePath + nyrdate+"/"; //文件服务器访问路径
+            String fileHttpUrl = fileUrl + nyrdate+"/"; //文件HTTP访问路径
             File fileFold = new File(filePath);
             if (!fileFold.exists()) {
                 fileFold.mkdirs();
             }
-            return this.transferTo(multipartFile,filePath);
+            String uuid = UUID.randomUUID().toString().replaceAll("-","");
+            HashMap<String,Object> urlMap = new HashMap<>();
+            String fileName = multipartFile.getOriginalFilename();
+            //文件重命名
+            String newFileName= "hdsx_" + System.currentTimeMillis() + "_" + fileName;
+            File dest = new File(filePath + newFileName);
+            DecimalFormat df = new DecimalFormat("#.00");
+            try {
+                multipartFile.transferTo(dest); //保存文件
+                urlMap.put("file_yname",fileName);
+                urlMap.put("file_type","."+fileName.substring(fileName.lastIndexOf(".") + 1));
+                urlMap.put("file_name",newFileName);
+                urlMap.put("file_path", fileHttpUrl + newFileName);
+                if(multipartFile.getSize()/1024<1024){
+                    urlMap.put("file_dx",df.format((float)multipartFile.getSize()/1024)+"KB");
+                }else{
+                    urlMap.put("file_dx",df.format((float)multipartFile.getSize()/1024/1024)+"MB");
+                }
+                urlMap.put("file_mjlx","");
+                urlMap.put("remarks","");
+                urlMap.put("file_status","0101");
+                urlMap.put("file_depict","");
+                urlMap.put("id",uuid);
+                urlMap.put("file_date",nyrdate);
+                return urlMap;
+            } catch (IllegalStateException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return urlMap;
         }
 
 /*        List<HashMap<String, Object>> fileList = new ArrayList<>();
@@ -60,66 +95,25 @@ public class FileServiceImpl implements FileService {
     }
 
     @Override
-    public List<HashMap<String, Object>> getFilesDataById(String id) {
+    public List<FileData> getFilesDataById(String id) {
         return fileMapper.getFilesDataById(id);
     }
 
+
     @Override
-    public int deleteFilesById(String id) {
-        List<HashMap<String, Object>> fileUrl = fileMapper.getFilesDataById(id);
-        for (int i = 0; i < fileUrl.size(); i++){
-            File file = new File(String.valueOf(fileUrl.get(i).get("FILE_PATH")));
-            if (file.isFile() && file.exists()) {
-                file.delete();
+    public int deleteFilesByFid(String[] ids) {
+        for(String id : ids){
+            List<FileData> fileUrl = fileMapper.getFilesDataById(id);
+            for (int i = 0; i < fileUrl.size(); i++){
+                File file = new File(fileSavePath+fileUrl.get(i).getFile_date()+File.separator+fileUrl.get(i).getFile_name());
+                if (file.isFile() && file.exists()) {
+                    file.delete();
+                }
             }
         }
-        return fileMapper.deleteFilesDataById(id);
+        return fileMapper.deleteFilesByFid(ids);
     }
 
-    public HashMap<String,Object> transferTo(MultipartFile file, String filePath) {
-        String uuid = UUID.randomUUID().toString().replaceAll("-","");
-        HashMap<String,Object> urlMap = new HashMap<>();
-        String fileName = file.getOriginalFilename();
-        /*String name = file.getName();*/
-        //文件重命名
-        String newFileName= "hdsx_" + System.currentTimeMillis() + "_" + fileName;
-        /*int size = (int) file.getSize();*/
-        /*System.out.println(fileName + "-->" + size);*/
-        //获得文件夹
-        /*SimpleDateFormat nyr = new SimpleDateFormat("yyyyMMdd");
-        String nyrdate = nyr.format(new Date());
-        File dest = new File(path +"/" +nyrdate+"/"+ newFileName);
-
-        if(!dest.getParentFile().exists()){ //判断文件父目录是否存在
-            dest.getParentFile().mkdirs();
-        }*/
-        File dest = new File(filePath + newFileName);
-        DecimalFormat df = new DecimalFormat("#.00");
-        try {
-            file.transferTo(dest); //保存文件
-            urlMap.put("file_yname",fileName);
-            urlMap.put("file_type","."+fileName.substring(fileName.lastIndexOf(".") + 1));
-            urlMap.put("file_name",newFileName);
-            urlMap.put("file_path",filePath + newFileName);
-            /*urlMap.put("files_path",imageServer+"/" +nyrdate+"/"+ newFileName);*/
-            if(file.getSize()/1024<1024){
-                urlMap.put("file_dx",df.format((float)file.getSize()/1024)+"KB");
-            }else{
-                urlMap.put("file_dx",df.format((float)file.getSize()/1024/1024)+"MB");
-            }
-            urlMap.put("file_mjlx","");
-            urlMap.put("remarks","");
-            urlMap.put("file_status","0101");
-            urlMap.put("file_depict","");
-            urlMap.put("id",uuid);
-            return urlMap;
-        } catch (IllegalStateException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
 
     @Override
     public int addFileDataToFiles(List<FileData> fileDataList) {
@@ -129,11 +123,4 @@ public class FileServiceImpl implements FileService {
         return 0;
     }
 
-    @Override
-    public int updateFileDataToFiles(List<FileData> fileDataList){
-        if (fileDataList != null && fileDataList.size() > 0){
-            fileMapper.deleteFilesDataById(fileDataList.get(0).getFile_id());
-        }
-        return fileMapper.addFileDataToFiles(fileDataList);
-    }
 }

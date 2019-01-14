@@ -5,22 +5,40 @@
 
 <mapper namespace="com.hdsx.common.mapper.FileMapper">
 
+    <resultMap id="filesBean" type="com.hdsx.common.entity.FileData">
+        <id column="ID" property="id"/>
+        <result column="FILES_ID" property="file_id"/>
+        <result column="FILES_NAME" property="file_name"/>
+        <result column="FILES_DEPICT" property="file_depict"/>
+        <result column="FILES_PATH" property="file_path"/>
+        <result column="FILES_DATE" property="file_date"/>
+        <result column="FILES_STATUS" property="file_status"/>
+        <result column="REMARKS" property="file_remarks"/>
+        <result column="FILES_DX" property="file_dx"/>
+        <result column="FILES_YNAME" property="file_yname"/>
+        <result column="FILES_TYPE" property="file_type"/>
+        <result column="FILES_MJLX" property="file_mjlx"/>
+    </resultMap>
+
     <insert id="addFileDataToFiles" parameterType="java.util.List">
         INSERT INTO files(id,files_id, files_name, files_depict, files_path, files_date, files_status, remarks, files_dx, files_yname, files_type, files_mjlx)
         <foreach collection="list" item="item" index="index" open="(" close=")" separator="union">
             SELECT #{item.id,jdbcType=VARCHAR},#{item.file_id,jdbcType=VARCHAR},#{item.file_name,jdbcType=VARCHAR},
-              #{item.file_depict,jdbcType=VARCHAR},#{item.file_path,jdbcType=VARCHAR},to_char(sysdate,'YYYY-MM-DD HH24:MI:SS'),
+              #{item.file_depict,jdbcType=VARCHAR},#{item.file_path,jdbcType=VARCHAR},#{item.file_date,jdbcType=VARCHAR},
               #{item.file_status,jdbcType=VARCHAR},#{item.file_remarks,jdbcType=VARCHAR}, #{item.file_dx,jdbcType=VARCHAR},#{item.file_yname,jdbcType=VARCHAR},
               #{item.file_type,jdbcType=VARCHAR},#{item.file_mjlx,jdbcType=VARCHAR} FROM DUAL
         </foreach>
     </insert>
 
-    <select id="getFilesDataById" parameterType="String" resultType="hashmap">
+    <select id="getFilesDataById" parameterType="String" resultMap="filesBean">
         SELECT * FROM files WHERE files_id = #{id}
     </select>
 
-    <delete id="deleteFilesDataById">
-        DELETE FROM files WHERE files_id = #{id}
+    <delete id="deleteFilesByFid">
+        DELETE FROM files WHERE files_id IN
+        <foreach collection="array" item="id" index="index" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
     </delete>
 
 </mapper>

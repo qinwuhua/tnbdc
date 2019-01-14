@@ -130,4 +130,29 @@ public class GcysSqdController {
     }
 
 
+    @RequestMapping(value = "spGcyssqdForGcys", method = RequestMethod.PUT, produces = "application/json")
+    @ApiOperation(value = "审批工程验收申请单")
+    @ApiImplicitParam(paramType="query", dataType = "String", name = "sqbhs", value = "单据编号(以“,”隔开)", required = true)
+    public Msg spGcyssqdForGcys(@RequestParam(value = "sqbhs",required = true) String sqbhs,
+                                @RequestParam(value = "spzt",required = true) String spzt){
+        try {
+            String[] djbh=sqbhs.split(",");
+            List<String> l = new ArrayList<String>();
+            for (int i=0;i<djbh.length;i++){
+                l.add(djbh[i]);
+            }
+            Map<String,Object> param=new HashMap<String,Object>();
+            param.put("spzt",spzt);param.put("djbhs",l);
+            int flag=gcysSqdService.spGcyssqdForGcys(param);
+            if(flag>0)
+                return ResultUtil.success("审批成功");
+            else
+                return ResultUtil.error("审批失败");
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResultUtil.error("审批失败，接口异常");
+        }
+
+    }
+
 }

@@ -31,6 +31,12 @@
           <result column="YJQX_TBRQ" property="tbrq"/>
           <result column="YJQX_HTBH" property="htbh"/>
           <result column="YJQX_SPZT" property="spzt"/>
+          <result column="YJQX_DWID" property="dwid"/>
+          <result column="YJQX_DWBH" property="dwbh"/>
+          <result column="YJQX_DWMC" property="dwmc"/>
+          <result column="YJQX_BMID" property="bmid"/>
+          <result column="YJQX_BMBH" property="bmbh"/>
+          <result column="YJQX_BMMC" property="bmmc"/>
       </resultMap>
 
     <insert id="addYjqxgc" parameterType="com.hdsx.yjqx.entity.Yjqx">
@@ -62,6 +68,12 @@
             <if test="tbr != null">YJQX_TBR,</if>
             <if test="tbrq != null">YJQX_TBRQ,</if>
             <if test="htbh != null">YJQX_HTBH,</if>
+            <if test="dwid != null">YJQX_DWID,</if>
+            <if test="dwbh != null">YJQX_DWBH,</if>
+            <if test="dwmc != null">YJQX_DWMC,</if>
+            <if test="bmid != null">YJQX_BMID,</if>
+            <if test="bmbh != null">YJQX_BMBH,</if>
+            <if test="bmmc != null">YJQX_BMMC,</if>
             YJQX_SPZT
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -91,6 +103,12 @@
             <if test="tbr != null">#{tbr},</if>
             <if test="tbrq != null">to_date(#{tbrq},'yyyy/mm/dd'),</if>
             <if test="htbh != null">#{htbh},</if>
+            <if test="dwid != null">#{dwid},</if>
+            <if test="dwbh != null">#{dwbh},</if>
+            <if test="dwmc != null">#{dwmc},</if>
+            <if test="bmid != null">#{bmid},</if>
+            <if test="bmbh != null">#{bmbh},</if>
+            <if test="bmmc != null">#{bmmc},</if>
             '未处理'
         </trim>
     </insert>
@@ -124,6 +142,12 @@
             <if test="tbrq != null"> YJQX_TBRQ=to_date(#{tbrq},'yyyy/mm/dd'),</if>
             <if test="htbh != null"> YJQX_HTBH=#{htbh},</if>
             <if test="spzt != null"> YJQX_SPZT=#{spzt},</if>
+            <if test="dwid != null"> YJQX_DWID=#{dwid},</if>
+            <if test="dwbh != null"> YJQX_DWBH=#{dwbh},</if>
+            <if test="dwmc != null"> YJQX_DWMC=#{dwmc},</if>
+            <if test="bmid != null"> YJQX_BMID=#{bmid},</if>
+            <if test="bmbh != null"> YJQX_BMBH=#{bmbh},</if>
+            <if test="bmmc != null"> YJQX_BMMC=#{bmmc},</if>
         </set>
         WHERE YJQX_ID = #{id}
     </update>
@@ -139,7 +163,7 @@
         SELECT YJQX_ID, YJQX_DJBH, YJQX_GCMC, YJQX_QXLD, YJQX_FX, YJQX_QDZH, YJQX_ZDZH, YJQX_DLLC,
         YJQX_FYGS, YJQX_QL, YJQX_SD, YJQX_LXR, YJQX_LXFS, YJQX_GCFL, YJQX_GCMS, YJQX_GLDWBH, YJQX_GLDWMC,
          YJQX_SGDWBH, YJQX_SGDWMC, YJQX_BZDWBH, YJQX_BZDWMC, to_char(YJQX_BZRQ,'yyyy/mm')YJQX_BZRQ, YJQX_TBRID, YJQX_TBR, to_char(YJQX_TBRQ,'yyyy/mm/dd')YJQX_TBRQ,
-         YJQX_HTBH, YJQX_SPZT
+         YJQX_HTBH, YJQX_SPZT, YJQX_DWID, YJQX_DWBH, YJQX_DWMC, YJQX_BMID, YJQX_BMBH, YJQX_BMMC
          FROM YJQX_GCDJB
          <where>
              <if test="djbh != null and djbh != ''"> AND YJQX_DJBH LIKE '%'||trim(#{djbh})||'%'</if>

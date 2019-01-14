@@ -15,5 +15,5 @@ import java.io.Serializable;
 public class Gcyssqd implements Serializable{
 
     private static final long serialVersionUID = 3834262618582486202L;
-    private String sqbh, xmmc, sqsj, htbh, sgdw, gldw, htksgq, htjsgq, yslx, sgfyj, jldwyj, gcjsbyj, jyfzbyj, tbr, tbrq, tbdw, tbbm, tbdwbm, tbbmbm;
+    private String sqbh, xmmc, sqsj, htbh, sgdw, gldw, htksgq, htjsgq, yslx, sgfyj, jldwyj, gcjsbyj, jyfzbyj, tbr, tbrq, tbdw, tbbm, tbdwbm, tbbmbm, spzt;
 }

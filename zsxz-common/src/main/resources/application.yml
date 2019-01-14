@@ -9,9 +9,9 @@ spring:
   application:
     name: zsxz-common
   datasource:
-#    url: jdbc:oracle:thin:@211.101.37.237:1521:orcl
-#    username: zsxz
-#    password: zsxz
+    #url: jdbc:oracle:thin:@211.101.37.237:1521:orcl
+    #username: zsxz
+    #password: zsxz
     url: jdbc:oracle:thin:@192.168.10.230:1521:orcl
     username: c##zsxz
     password: zsxz
@@ -52,3 +52,4 @@ pagehelper:
 #上传文件相关信息
 file:
   fileSavePath: /usr/tomcat/tomcat8.5/webapps/uploadFiles/
+  fileUrl: http://192.168.10.234/uploadFiles/

@@ -29,9 +29,9 @@ public class YjqxController {
     public Msg addYjqxgc(@RequestBody Yjqx yjqx){
        try {
            if (yjqxService.addYjqxgc(yjqx) > 0){
-               return ResultUtil.success("查询成功");
+               return ResultUtil.success("添加成功");
            }else {
-               return ResultUtil.error("查询失败！");
+               return ResultUtil.error("添加失败！");
            }
        }catch (Exception e){
            e.printStackTrace();

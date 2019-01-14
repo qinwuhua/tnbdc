@@ -2,8 +2,6 @@ package com.hdsx.zxyh.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.hdsx.zxyh.entity.Gcyssqd;
-import com.hdsx.zxyh.entity.Gczfgcjld;
-import com.hdsx.zxyh.entity.Gczfzqcwzf;
 import com.hdsx.zxyh.mapper.GcysSqdMapper;
 import com.hdsx.zxyh.service.GcysSqdService;
 import org.springframework.stereotype.Service;
@@ -44,6 +42,11 @@ public class GcysSqdServiceImpl implements GcysSqdService {
     @Override
     public int delGcyssqdForGcys(List<String> l) {
         return gcysSqdMapper.delGcyssqdForGcys(l);
+    }
+
+    @Override
+    public int spGcyssqdForGcys(Map<String, Object> param) {
+        return gcysSqdMapper.spGcyssqdForGcys(param);
     }
 
 
