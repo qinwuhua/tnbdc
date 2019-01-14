@@ -15,17 +15,17 @@
         <collection property="yhrwmxes" ofType="com.hdsx.rcyh.entity.Yhrwmx" column="yhrwdid">
             <result column="YHRWD_ID" property="yhrwdid"/><!-- 这里的column对应的是下面查询的别名，而不是表字段名 -->
             <result column="YHRWD_DJBH" property="yhrwdmxdjbh"/><!-- property对应JavaBean中的属性名 -->
-            <result column="YHRWD_SJBH" property="yhrwdsjbh"/><!-- property对应JavaBean中的属性名 -->
-            <result column="YHRWD_XCDW" property="yhrwdxcdw"/>
-            <result column="YHRWD_XCFX" property="yhrwdxcfx"/>
-            <result column="YHRWD_CD" property="yhrwdcd"/>
-            <result column="YHRWD_DWGC" property="yhrwddwgc"/>
-            <result column="YHRWD_BHLX" property="yhrwdbhlx"/>
-            <result column="YHRWD_BHSL" property="yhrwdbhsl"/>
-            <result column="YHRWD_GCLLX" property="yhrwdgcllx"/>
-            <result column="YHRWD_ZH" property="yhrwdzh"/>
-            <result column="YHRWD_BHSM" property="yhrwdbhsm"/>
-            <result column="YHRWD_SJ" property="yhrwdsj"/>
+            <result column="RWMX_SJDH" property="yhrwdsjbh"/><!-- property对应JavaBean中的属性名 -->
+            <result column="RWMX_DWMC" property="yhrwdxcdw"/>
+            <result column="RWMX_XCFX" property="yhrwdxcfx"/>
+            <result column="RWMX_CD" property="yhrwdcd"/>
+            <result column="RWMX_DWGC" property="yhrwddwgc"/>
+            <result column="RWMX_BHLX" property="yhrwdbhlx"/>
+            <result column="RWMX_BHSL" property="yhrwdbhsl"/>
+            <result column="RWMX_GCLLX" property="yhrwdgcllx"/>
+            <result column="RWMX_ZH" property="yhrwdzh"/>
+            <result column="RWMX_BHSM" property="yhrwdbhsm"/>
+            <result column="RWMX_TBRQ" property="yhrwdsj"/>
         </collection>
 
     </resultMap>
@@ -94,17 +94,17 @@
         <trim prefix="(" suffix=")" suffixOverrides="," >
             <if test="yhrwdid != null" >YHRWD_ID,</if>
             <if test="yhrwdmxdjbh != null" >YHRWD_DJBH,</if>
-            <if test="yhrwdsjbh != null" >YHRWD_SJBH,</if>
-            <if test="yhrwdxcdw != null" >YHRWD_XCDW,</if>
-            <if test="yhrwdxcfx != null" >YHRWD_XCFX,</if>
-            <if test="yhrwdcd != null" >YHRWD_CD,</if>
-            <if test="yhrwddwgc != null" >YHRWD_DWGC,</if>
-            <if test="yhrwdbhlx != null" >YHRWD_BHLX,</if>
-            <if test="yhrwdbhsl != null" >YHRWD_BHSL,</if>
-            <if test="yhrwdgcllx != null" >YHRWD_GCLLX,</if>
-            <if test="yhrwdzh != null" >YHRWD_ZH,</if>
-            <if test="yhrwdbhsm != null" >YHRWD_BHSM,</if>
-            <if test="yhrwdsj != null" >YHRWD_SJ,</if>
+            <if test="yhrwdsjbh != null" >RWMX_SJDH,</if>
+            <if test="yhrwdxcdw != null" >RWMX_DWMC,</if>
+            <if test="yhrwdxcfx != null" >RWMX_XCFX,</if>
+            <if test="yhrwdcd != null" >RWMX_CD,</if>
+            <if test="yhrwddwgc != null" >RWMX_DWGC,</if>
+            <if test="yhrwdbhlx != null" >RWMX_BHLX,</if>
+            <if test="yhrwdbhsl != null" >RWMX_BHSL,</if>
+            <if test="yhrwdgcllx != null" >RWMX_GCLLX,</if>
+            <if test="yhrwdzh != null" >RWMX_ZH,</if>
+            <if test="yhrwdbhsm != null" >RWMX_BHSM,</if>
+            <if test="yhrwdsj != null" >RWMX_TBRQ,</if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides="," >
             <if test="yhrwdid != null" >#{yhrwdid},</if>
@@ -174,8 +174,8 @@
         select * from ( select YHRWD_DJBH,YHRWD_LX,to_char(YHRWD_RQ,'yyyy/mm/dd') YHRWD_RQ,to_char(YHRWD_YD,'yyyy/mm') YHRWD_YD,
         YHRWD_YHDW,YHRWD_GYDW,YHRWD_RWDSHZT,YHRWD_YSZT
         from XXRW_YHRWD) A
-        left join (select YHRWD_ID,YHRWD_DJBH,YHRWD_SJBH,YHRWD_XCDW,YHRWD_XCFX,YHRWD_CD,YHRWD_DWGC
-        ,YHRWD_BHLX,YHRWD_BHSL,YHRWD_GCLLX,YHRWD_ZH,YHRWD_BHSM,to_char(YHRWD_SJ,'yyyy/mm/dd') YHRWD_SJ
+        left join (select YHRWD_ID,YHRWD_DJBH,RWMX_SJDH,RWMX_DWMC,RWMX_XCFX,RWMX_CD,RWMX_DWGC
+        ,RWMX_BHLX,RWMX_BHSL,RWMX_GCLLX,RWMX_ZH,RWMX_BHSM,to_char(RWMX_TBRQ,'yyyy/mm/dd') RWMX_TBRQ
         from XXRW_YHRWD_MX)
         B on A.YHRWD_DJBH=B.YHRWD_DJBH
         where 1=1
