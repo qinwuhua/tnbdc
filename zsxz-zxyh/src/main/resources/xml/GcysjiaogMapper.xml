@@ -71,10 +71,10 @@
         to_char(sysdate,'yyyy/mm/dd') PMMTJGJSS_BZRQ
         from djsj_htxx ht left join djsj_htxx_htgjxx gj on ht.htxx_htbh=gj.HTGJXX_HTBH
         left join djsj_htxx_yhxmxx xm on ht.htxx_htbh=xm.yhhtxx_htbh
-        left join (select htbh,sum(nvl(fj,0)) fj from(
-        select pmmtlyjcb_htbh htbh,sum(nvl(lymx.pmmtlyjcbmx_fj,0)) fj from SGDWLYJCB ly left join SGDWLYJCBMX lymx on ly.pmmtlyjcb_id=lymx.pmmtlyjcbmx_mid group by ly.pmmtlyjcb_htbh
+        left join (select htbh,sum(nvl(fj,0)) fj from (
+        select htbh,sum(nvl(t2.fj,0)) fj from ZXYH_LYJC t1 left join ZXYH_LYJC_MX t2 on t1.id=t2.lyjcid group by t1.htbh
         union all
-        select PMMTJCZBQKJCB_HTBH htbh,sum(nvl(lymx.PMMTJCZBQKJCBMX_FJ,0)) fj from jczbqkjcb ly left join jczbqkjcbmx lymx on ly.PMMTJCZBQKJCB_ID=lymx.PMMTJCZBQKJCBMX_MID group by ly.PMMTJCZBQKJCB_HTBH
+        select htbh,sum(nvl(t2.fj,0)) fj from ZXYH_JCZBQKB t1 left join ZXYH_JCZBQKB_MX t2 on t1.id=t2.jcid group by t1.htbh
         ) group by htbh) fj on ht.htxx_htbh=fj.htbh
         left join (select sum(nvl(gcjlmx_htdj,0)*nvl(gcjlmx_htsl,0)) jlhtje,sum(nvl(gcjlmx_htdj,0)*nvl(gcjlmx_wcsl,0)) jlje,sum(nvl(gcjlmx_kkje,0)) fj,gcjlmx_htbh from zxyh_gcjldmx
         where 1=1 and gcjlmx_djbh in (select gcjl_djbh from zxyh_gcjld where gcjl_spzt='已下发')
