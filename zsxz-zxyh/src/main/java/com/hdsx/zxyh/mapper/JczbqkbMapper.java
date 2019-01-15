@@ -1,6 +1,7 @@
 package com.hdsx.zxyh.mapper;
 
 import com.hdsx.zxyh.entity.Jczbqkb;
+import com.hdsx.zxyh.entity.Jczbqkbmx;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.HashMap;
@@ -13,11 +14,11 @@ public interface JczbqkbMapper {
 
     int addJczbqkb(Jczbqkb jczbqkb);
 
-    int addJczbqkbMid(List<HashMap<String, Object>> list);
+    int addJczbqkbMx(List<Jczbqkbmx> list);
 
-    int deleteJczbqkb(String id);
+    int deleteJczbqkb(String[] ids);
 
-    int deleteJczbqkbMid(String jczbid);
+    int deleteJczbqkbMx(String[] jczbids);
 
     int updateJczbqkb(Jczbqkb jczbqkb);
 }

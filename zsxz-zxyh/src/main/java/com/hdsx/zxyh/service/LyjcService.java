@@ -6,11 +6,11 @@ import java.util.List;
 
 public interface LyjcService {
 
-    List<Lyjc> getLyjc(String htbh, String gldw);
+    List<Lyjc> getLyjc(String htbh, String gldw,int pageNum, int pageSize);
 
     int addLyjc(Lyjc lyjc);
 
-    int deleteLyjc(String id);
+    int deleteLyjc(String[] ids);
 
     int updateLyjc(Lyjc lyjc);
 }

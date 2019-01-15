@@ -4,6 +4,34 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hdsx.zxyh.mapper.LyjcMapper">
 
+    <!--&lt;!&ndash; 定义数据库字段与实体对象的映射关系 &ndash;&gt;-->
+    <!--<resultMap id="lyjcBean" type="com.hdsx.zxyh.entity.Lyjc">-->
+        <!--<id column="id" property="id"/>-->
+        <!--<result column="htbh" property="htbh"/>-->
+        <!--<result column="jcrq" property="jcrq"/>-->
+        <!--<result column="jcr" property="jcr"/>-->
+        <!--&lt;!&ndash; 一对一的关系 &ndash;&gt;-->
+        <!--&lt;!&ndash; property: 指的是属性的值, javaType：指的是元素的类型 &ndash;&gt;-->
+        <!--<association property="htxx" javaType="com.hdsx.zxyh.entity.Htxx">-->
+            <!--<id column="htxx_id" property="id" />-->
+            <!--<result column="htxx_htbh" property="htbh"/>-->
+            <!--<result column="htxx_htmc" property="htmc"/>-->
+            <!--<result column="htxx_xmsglx" property="xmsglx" />-->
+            <!--<result column="htxx_xmgldw" property="xmgldw"/>-->
+            <!--<result column="htxx_htjehs" property="htjehs"/>-->
+        <!--</association>-->
+
+        <!--&lt;!&ndash; 一对多的关系 &ndash;&gt;-->
+        <!--&lt;!&ndash; property: 指的是集合属性的值, ofType：指的是集合中元素的类型 &ndash;&gt;-->
+        <!--<collection property="list" ofType="com.hdsx.zxyh.entity.Lyjcmx">-->
+            <!--<result property="mxid" column="mxid"/>-->
+            <!--<result column="lyjcid" property="lyjcid"/>-->
+            <!--<result column="htlyid" property="htlyid"/>-->
+            <!--<result column="htlynr" property="htlynr"/>-->
+            <!--<result column="fj" property="fj"/>-->
+        <!--</collection>-->
+    <!--</resultMap>-->
+
     <!-- 定义数据库字段与实体对象的映射关系 -->
     <resultMap id="lyjcBean" type="com.hdsx.zxyh.entity.Lyjc">
         <id column="id" property="id"/>
@@ -23,23 +51,24 @@
 
         <!-- 一对多的关系 -->
         <!-- property: 指的是集合属性的值, ofType：指的是集合中元素的类型 -->
-        <collection property="list" ofType="com.hdsx.zxyh.entity.Lyjcmx">
-            <id column="lyjc_id" property="id"/>
-            <result column="lyjc_mid" property="mid"/>
-            <result column="lyjc_nr" property="nr"/>
-            <result column="lyjc_bl" property="bl"/>
-            <result column="lyjc_note" property="note"/>
-            <result column="lyjc_je" property="je"/>
-        </collection>
+        <collection property="list" ofType="com.hdsx.zxyh.entity.Lyjcmx" select="selectMx" column="id"></collection>
     </resultMap>
 
+    <resultMap id="lyjcmxBean" type="com.hdsx.zxyh.entity.Lyjcmx">
+        <result property="mxid" column="mxid"/>
+        <result column="lyjcid" property="lyjcid"/>
+        <result column="htlyid" property="htlyid"/>
+        <result column="htlynr" property="htlynr"/>
+        <result column="fj" property="fj"/>
+    </resultMap>
+    
+    <select id="selectMx" resultMap="lyjcmxBean">
+        select * from ZXYH_LYJC_MX where lyjcid in #{id}
+    </select>
+
     <select id="getLyjc" parameterType="hashmap" resultMap="lyjcBean">
-      select *
-      from ZXYH_LYJC ly
-      left join DJSJ_HTXX ht
-      on ly.htbh = ht.htxx_htbh
-      left join DJSJ_HTXX_LYJCMX lymx
-      on lymx.lyjc_id in (select mxid from zxyh_lyjc_mx where lyjcid= ly.id)
+        SELECT *
+        FROM ZXYH_LYJC ly left join DJSJ_HTXX ht on ly.htbh = ht.htxx_htbh
       where 1 = 1
       <if test="htbh != null and htbh !=''">
           and ly.htbh = #{htbh}
@@ -81,28 +110,36 @@
         </trim>
     </insert>
 
-    <insert id="addLyjcMid" parameterType="list">
+    <insert id="addLyjcMx" parameterType="list">
         BEGIN
         <foreach collection ="list" item="item" index= "index" separator =" ">
           insert into ZXYH_LYJC_MX
-            (ID, LYJCID, MXID)
+            (MXID, LYJCID, HTLYID, HTLYNR, FJ)
           values
           (
-            #{item.id},
+            #{item.mxid},
             #{item.lyjcid},
-            #{item.mxid}
+            #{item.htlyid},
+            #{item.htlynr},
+            #{item.fj}
           );
         </foreach>
         COMMIT;
         END;
     </insert>
 
-    <delete id="deleteLyjcMid" parameterType="string">
-        delete FROM ZXYH_LYJC_MX WHERE LYJCID=#{lyjcid}
+    <delete id="deleteLyjcMx" parameterType="string">
+        DELETE FROM ZXYH_LYJC_MX WHERE LYJCID IN
+        <foreach collection="array" item="lyjcid" open="(" close=")" separator=",">
+            #{lyjcid}
+        </foreach>
     </delete>
 
     <delete id="deleteLyjc" parameterType="string">
-        delete from zxyh_lyjc where id = #{id}
+        DELETE FROM zxyh_lyjc WHERE id IN
+        <foreach collection="array" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
     </delete>
 
     <update id="updateLyjc" parameterType="com.hdsx.zxyh.entity.Lyjc">

@@ -5,20 +5,20 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 /**
- * 履约检查明细实体
+ * 进场准备情况明细表实体
  */
 @Data
 @Accessors(chain = true)
 @NoArgsConstructor
-public class Lyjcmx {
+public class Jczbqkbmx {
 
-    //id
+    // mxid
     private String mxid;
-    // 履约检查id
-    private String lyjcid;
+    // 进场id
+    private String jcid;
     // 合同履约id
     private String htlyid;
-    // 合同履约名称
+    // 合同履约内容
     private String htlynr;
     // 罚金
     private String fj;

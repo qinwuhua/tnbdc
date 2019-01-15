@@ -1,5 +1,6 @@
 package com.hdsx.zxyh.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.hdsx.zxyh.entity.Jczbqkb;
 import com.hdsx.zxyh.entity.Msg;
 import com.hdsx.zxyh.mapper.JczbqkbMapper;
@@ -23,9 +24,11 @@ public class JczbqkbController {
     @ApiOperation("获取进场准备情况")
     public Msg getLyjc(
             @RequestParam(value = "htbh", required = false)String htbh,
-            @RequestParam(value = "gldw", required = false)String gldw) {
+            @RequestParam(value = "gldw", required = false)String gldw,
+            @RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
+            @RequestParam(value = "pageSize", defaultValue = "10") int pageSize) {
         try {
-            return ResultUtil.success(jczbqkbService.getJczbqkb(htbh, gldw));
+            return ResultUtil.success(new PageInfo<>(jczbqkbService.getJczbqkb(htbh, gldw, pageNum, pageSize)));
         } catch (Exception e) {
             e.printStackTrace();
             return ResultUtil.error("接口异常");
@@ -49,9 +52,9 @@ public class JczbqkbController {
 
     @DeleteMapping("deleteJczbqkb")
     @ApiOperation("删除进场准备情况")
-    public Msg deleteJczbqkb(@RequestParam("id") String id){
+    public Msg deleteJczbqkb(String[] ids){
         try {
-            if (jczbqkbService.deleteJczbqkb(id)>0) {
+            if (jczbqkbService.deleteJczbqkb(ids)>0) {
                 return ResultUtil.success("删除进场准备成功");
             } else {
                 return ResultUtil.error("删除进场准备失败");

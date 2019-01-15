@@ -1,6 +1,7 @@
 package com.hdsx.zxyh.controller;
 
 
+import com.github.pagehelper.PageInfo;
 import com.hdsx.zxyh.entity.Kgsqd;
 import com.hdsx.zxyh.entity.Msg;
 import com.hdsx.zxyh.service.KgsqdService;
@@ -24,9 +25,12 @@ public class KgsqdController {
 
     @GetMapping("getAll")
     @ApiOperation("获取所有开工申请单")
-    public Msg getAll() {
+    public Msg getAll(
+            @RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
+            @RequestParam(value = "pageSize", defaultValue = "10") int pageSize
+    ) {
         try {
-            return ResultUtil.success(kgsqdService.getAll());
+            return ResultUtil.success(new PageInfo<>(kgsqdService.getAll(pageNum, pageSize)));
         }catch (Exception e) {
             return ResultUtil.error("开工申请单请求失败！");
         }

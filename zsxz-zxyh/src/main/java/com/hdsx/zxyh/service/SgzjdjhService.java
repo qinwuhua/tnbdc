@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface SgzjdjhService {
 
-    List<Sgzjdjh> getSgzjdjh();
+    List<Sgzjdjh> getSgzjdjh(int pageNum, int pageSize);
 
     int addSgzjdjh(Sgzjdjh sgzjdjh);
 

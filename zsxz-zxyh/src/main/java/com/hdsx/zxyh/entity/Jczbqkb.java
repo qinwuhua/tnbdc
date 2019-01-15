@@ -7,7 +7,7 @@ import lombok.experimental.Accessors;
 import java.util.List;
 
 /**
- * 经常准备情况表实体
+ * 进场准备情况表实体
  */
 @Data
 @Accessors(chain = true)
@@ -25,5 +25,5 @@ public class Jczbqkb {
     // 合同信息
     private Htxx htxx;
     // 履约检查明细
-    private List<Lyjcmx> list;
+    private List<Jczbqkbmx> list;
 }

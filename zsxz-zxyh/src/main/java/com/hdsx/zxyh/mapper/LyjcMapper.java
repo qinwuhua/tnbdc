@@ -1,6 +1,7 @@
 package com.hdsx.zxyh.mapper;
 
 import com.hdsx.zxyh.entity.Lyjc;
+import com.hdsx.zxyh.entity.Lyjcmx;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.HashMap;
@@ -13,11 +14,11 @@ public interface LyjcMapper {
 
     int addLyjc(Lyjc lyjc);
 
-    int addLyjcMid(List<HashMap<String, Object>> list);
+    int addLyjcMx(List<Lyjcmx> list);
 
-    int deleteLyjc(String id);
+    int deleteLyjc(String[] ids);
 
-    int deleteLyjcMid(String lyjcid);
+    int deleteLyjcMx(String[] lyjcids);
 
     int updateLyjc(Lyjc lyjc);
 }

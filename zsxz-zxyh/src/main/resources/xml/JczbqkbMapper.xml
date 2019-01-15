@@ -23,23 +23,24 @@
 
         <!-- 一对多的关系 -->
         <!-- property: 指的是集合属性的值, ofType：指的是集合中元素的类型 -->
-        <collection property="list" ofType="com.hdsx.zxyh.entity.Lyjcmx">
-            <id column="lyjc_id" property="id"/>
-            <result column="lyjc_mid" property="mid"/>
-            <result column="lyjc_nr" property="nr"/>
-            <result column="lyjc_bl" property="bl"/>
-            <result column="lyjc_note" property="note"/>
-            <result column="lyjc_je" property="je"/>
+        <collection property="list" ofType="com.hdsx.zxyh.entity.Jczbqkbmx" select="selectMx" column="id">
+
         </collection>
     </resultMap>
 
+    <resultMap id="jczbqkbmxBean" type="com.hdsx.zxyh.entity.Jczbqkbmx">
+        <id column="mxid" property="mxid"/>
+        <result column="jcid" property="jcid"/>
+        <result column="htlyid" property="htlyid"/>
+        <result column="htlynr" property="htlynr"/>
+        <result column="fj" property="fj"/>
+    </resultMap>
+    <select id="selectMx" resultMap="jczbqkbmxBean">
+      select * from ZXYH_JCZBQKB_MX where jcid=#{id}
+    </select>
     <select id="getJczbqkb" parameterType="hashmap" resultMap="jczbqkbBean">
       select *
-      from ZXYH_JCZBQKB jc
-      left join DJSJ_HTXX ht
-      on jc.htbh = ht.htxx_htbh
-      left join DJSJ_HTXX_LYJCMX lymx
-      on lymx.lyjc_id in (select mxid from ZXYH_JCZB_MX where jczbid= jc.id)
+      from ZXYH_JCZBQKB jc left join DJSJ_HTXX ht on jc.htbh = ht.htxx_htbh
       where 1 = 1
       <if test="htbh != null and htbh !=''">
           and jc.htbh = #{htbh}
@@ -81,28 +82,36 @@
         </trim>
     </insert>
 
-    <insert id="addJczbqkbMid" parameterType="list">
+    <insert id="addJczbqkbMx" parameterType="list">
         BEGIN
         <foreach collection ="list" item="item" index= "index" separator =" ">
-          insert into ZXYH_JCZB_MX
-            (ID, JCZBID, MXID)
+          insert into ZXYH_JCZBQKB_MX
+            (MXID, JCID, HTLYID, HTLYNR, FJ)
           values
           (
-            #{item.id},
-            #{item.jczbid},
-            #{item.mxid}
+            #{item.mxid},
+            #{item.jcid},
+            #{item.htlyid},
+            #{item.htlynr},
+            #{item.fj}
           );
         </foreach>
         COMMIT;
         END;
     </insert>
 
-    <delete id="deleteJczbqkbMid" parameterType="string">
-        delete FROM ZXYH_JCZB_MX WHERE JCZBID=#{jczbid}
+    <delete id="deleteJczbqkbMx" parameterType="string">
+        DELETE FROM ZXYH_JCZBQKB_MX WHERE JCID IN
+        <foreach collection="array" item="jcid" open="(" close=")" separator=",">
+            #{jcid}
+        </foreach>
     </delete>
 
     <delete id="deleteJczbqkb" parameterType="string">
-        delete from ZXYH_JCZBQKB where id = #{id}
+        DELETE FROM ZXYH_JCZBQKB WHERE id IN
+        <foreach collection="array" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
     </delete>
 
     <update id="updateJczbqkb" parameterType="com.hdsx.zxyh.entity.Jczbqkb">
