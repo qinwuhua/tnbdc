@@ -91,6 +91,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
+        <finalName>zsxz-yjqx</finalName>
     </build>
 
 </project>

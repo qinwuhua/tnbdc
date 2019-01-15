@@ -76,7 +76,7 @@
 
     <select id="getLyjcAll" parameterType="hashmap" resultMap="lyjcBean">
         SELECT
-        PMMTLYJCB_ID, PMMTLYJCB_DWMC, PMMTLYJCB_DWBH, PMMTLYJCB_DWID, PMMTLYJCB_BMMC, PMMTLYJCB_BMBH, PMMTLYJCB_BMID, PMMTLYJCB_TBR, PMMTLYJCB_TBRID, to_char(PMMTLYJCB_TBRQ,'yyyy/mm/dd')PMMTLYJCB_TBRQ, PMMTLYJCB_SPZT, PMMTLYJCB_WFID, PMMTLYJCB_HTBH, to_char(PMMTLYJCB_JCRQ,'yyyy/mm/dd')PMMTLYJCB_JCRQ, PMMTLYJCB_SGDW, PMMTLYJCB_FJHJ, PMMTLYJCB_GLDW, PMMTLYJCB_JCR, PMMTLYJCB_HTJE, PMMTLYJCB_BZ, PMMTLYJCB_HTMC,
+        PMMTLYJCB_ID, PMMTLYJCB_DWMC, PMMTLYJCB_DWBH, PMMTLYJCB_DWID, PMMTLYJCB_BMMC, PMMTLYJCB_BMBH, PMMTLYJCB_BMID, PMMTLYJCB_TBR, PMMTLYJCB_TBRID, to_char(PMMTLYJCB_TBRQ,'yyyy-MM-dd')PMMTLYJCB_TBRQ, PMMTLYJCB_SPZT, PMMTLYJCB_WFID, PMMTLYJCB_HTBH, to_char(PMMTLYJCB_JCRQ,'yyyy-MM-dd')PMMTLYJCB_JCRQ, PMMTLYJCB_SGDW, PMMTLYJCB_FJHJ, PMMTLYJCB_GLDW, PMMTLYJCB_JCR, PMMTLYJCB_HTJE, PMMTLYJCB_BZ, PMMTLYJCB_HTMC,
         PMMTLYJCBMX_ID, PMMTLYJCBMX_MID, PMMTLYJCBMX_JCNR, PMMTLYJCBMX_FJ, PMMTLYJCBMX_MEMO, PMMTLYJCBMX_BH
         FROM sgdwlyjcb jh
         LEFT JOIN SGDWLYJCBMX mx ON mx.PMMTLYJCBMX_MID = PMMTLYJCB_ID
@@ -85,8 +85,8 @@
                 <if test="id != null and id != ''"> AND PMMTLYJCB_ID LIKE '%'||trim(#{id})||'%'</if>
                 <if test="htmc != null and htmc != ''"> AND PMMTLYJCB_HTMC LIKE '%'||trim(#{htmc})||'%'</if>
                 <if test="spzt != null and spzt != ''"> AND PMMTLYJCB_SPZT LIKE '%'||trim(#{spzt})||'%'</if>
-                <if test="ksrq != null and ksrq != ''"> AND to_date(to_char(PMMTLYJCB_TBRQ,'yyyy/mm/dd'),'yyyy/mm/dd')>to_date(#{ksrq},'yyyy/mm/dd')</if>
-                <if test="jsrq != null and jsrq != ''"> AND to_date(to_char(PMMTLYJCB_TBRQ,'yyyy/mm/dd'),'yyyy/mm/dd')&lt;to_date(#{jsrq},'yyyy/mm/dd')</if>
+                <if test="ksrq != null and ksrq != ''"> AND to_date(to_char(PMMTLYJCB_TBRQ,'yyyy-MM-dd'),'yyyy-MM-dd')>to_date(#{ksrq},'yyyy-MM-dd')</if>
+                <if test="jsrq != null and jsrq != ''"> AND to_date(to_char(PMMTLYJCB_TBRQ,'yyyy-MM-dd'),'yyyy-MM-dd')&lt;to_date(#{jsrq},'yyyy-MM-dd')</if>
            </trim>
         </where>
     </select>
@@ -95,7 +95,7 @@
         INSERT INTO SGDWLYJCB(PMMTLYJCB_ID, PMMTLYJCB_DWMC, PMMTLYJCB_DWBH, PMMTLYJCB_DWID, PMMTLYJCB_BMMC, PMMTLYJCB_BMBH, PMMTLYJCB_BMID, PMMTLYJCB_TBR, PMMTLYJCB_TBRID, PMMTLYJCB_TBRQ, PMMTLYJCB_SPZT, PMMTLYJCB_WFID,
          PMMTLYJCB_HTBH, PMMTLYJCB_JCRQ, PMMTLYJCB_SGDW, PMMTLYJCB_FJHJ,PMMTLYJCB_GLDW, PMMTLYJCB_JCR, PMMTLYJCB_HTJE, PMMTLYJCB_BZ, PMMTLYJCB_HTMC)
         VALUES (#{id,jdbcType=VARCHAR},#{dwmc,jdbcType=VARCHAR},#{dwbh,jdbcType=VARCHAR},#{dwid,jdbcType=VARCHAR},#{bmmc,jdbcType=VARCHAR},#{bmbh,jdbcType=VARCHAR},#{bmid,jdbcType=VARCHAR},#{tbr,jdbcType=VARCHAR},#{tbrid,jdbcType=VARCHAR},
-         to_date(#{tbrq,jdbcType=TIMESTAMP},'yyyy/mm/dd'),#{spzt,jdbcType=VARCHAR},#{wfid,jdbcType=VARCHAR},#{htbh,jdbcType=VARCHAR},to_date(#{jcrq,jdbcType=TIMESTAMP},'yyyy/mm/dd'),
+         to_date(#{tbrq,jdbcType=TIMESTAMP},'yyyy-MM-dd'),#{spzt,jdbcType=VARCHAR},#{wfid,jdbcType=VARCHAR},#{htbh,jdbcType=VARCHAR},to_date(#{jcrq,jdbcType=TIMESTAMP},'yyyy-MM-dd'),
          #{sgdw,jdbcType=VARCHAR},#{fjhj,jdbcType=NUMERIC},#{gldw,jdbcType=VARCHAR},#{jcr,jdbcType=VARCHAR}, #{htje,jdbcType=NUMERIC}, #{bz,jdbcType=VARCHAR} ,#{htmc,jdbcType=VARCHAR})
     </insert>
 
@@ -142,11 +142,11 @@
             <if test="bmid != null and bmid != ''"> PMMTLYJCB_BMID = #{bmid}, </if>
             <if test="tbr != null and tbr != ''"> PMMTLYJCB_TBR = #{tbr}, </if>
             <if test="tbrid != null and tbrid != ''"> PMMTLYJCB_TBRID = #{tbrid}, </if>
-            <if test="tbrq != null and tbrq != ''"> PMMTLYJCB_TBRQ = to_date(#{tbrq,jdbcType=TIMESTAMP},'yyyy/mm/dd'), </if>
+            <if test="tbrq != null and tbrq != ''"> PMMTLYJCB_TBRQ = to_date(#{tbrq,jdbcType=TIMESTAMP},'yyyy-MM-dd'), </if>
             <if test="spzt != null and spzt != ''"> PMMTLYJCB_SPZT = #{spzt}, </if>
             <if test="wfid != null and wfid != ''"> PMMTLYJCB_WFID = #{wfid}, </if>
             <if test="htbh != null and htbh != ''"> PMMTLYJCB_HTBH = #{htbh}, </if>
-            <if test="jcrq != null and jcrq != ''"> PMMTLYJCB_JCRQ = to_date(#{jcrq,jdbcType=TIMESTAMP},'yyyy/mm/dd'), </if>
+            <if test="jcrq != null and jcrq != ''"> PMMTLYJCB_JCRQ = to_date(#{jcrq,jdbcType=TIMESTAMP},'yyyy-MM-dd'), </if>
             <if test="sgdw != null and sgdw != ''"> PMMTLYJCB_SGDW = #{sgdw}, </if>
             <if test="fjhj != null and fjhj != ''"> PMMTLYJCB_FJHJ = #{fjhj,jdbcType=NUMERIC}, </if>
             <if test="gldw != null and gldw != ''"> PMMTLYJCB_GLDW = #{gldw}, </if>
@@ -170,7 +170,7 @@
     </update>
 
     <select id="getJczbAll" parameterType="hashmap" resultMap="jczbBean">
-        SELECT PMMTJCZBQKJCB_ID, PMMTJCZBQKJCB_DWMC, PMMTJCZBQKJCB_DWBH, PMMTJCZBQKJCB_DWID, PMMTJCZBQKJCB_BMMC, PMMTJCZBQKJCB_BMBH, PMMTJCZBQKJCB_BMID, PMMTJCZBQKJCB_TBR, PMMTJCZBQKJCB_TBRID, to_char(PMMTJCZBQKJCB_TBRQ,'yyyy/mm/dd')PMMTJCZBQKJCB_TBRQ, PMMTJCZBQKJCB_SPZT, PMMTJCZBQKJCB_WFID, PMMTJCZBQKJCB_HTBH, to_char(PMMTJCZBQKJCB_JCRQ,'yyyy/mm/dd')PMMTJCZBQKJCB_JCRQ, PMMTJCZBQKJCB_SGDW, PMMTJCZBQKJCB_XMMC, PMMTJCZBQKJCB_GLDW, PMMTJCZBQKJCB_HTJE, PMMTJCZBQKJCB_WYFJ, PMMTJCZBQKJCB_HTMC, PMMTJCZBQKJCB_BZ, PMMTJCZBQKJCB_JCR,
+        SELECT PMMTJCZBQKJCB_ID, PMMTJCZBQKJCB_DWMC, PMMTJCZBQKJCB_DWBH, PMMTJCZBQKJCB_DWID, PMMTJCZBQKJCB_BMMC, PMMTJCZBQKJCB_BMBH, PMMTJCZBQKJCB_BMID, PMMTJCZBQKJCB_TBR, PMMTJCZBQKJCB_TBRID, to_char(PMMTJCZBQKJCB_TBRQ,'yyyy-MM-dd')PMMTJCZBQKJCB_TBRQ, PMMTJCZBQKJCB_SPZT, PMMTJCZBQKJCB_WFID, PMMTJCZBQKJCB_HTBH, to_char(PMMTJCZBQKJCB_JCRQ,'yyyy-MM-dd')PMMTJCZBQKJCB_JCRQ, PMMTJCZBQKJCB_SGDW, PMMTJCZBQKJCB_XMMC, PMMTJCZBQKJCB_GLDW, PMMTJCZBQKJCB_HTJE, PMMTJCZBQKJCB_WYFJ, PMMTJCZBQKJCB_HTMC, PMMTJCZBQKJCB_BZ, PMMTJCZBQKJCB_JCR,
         PMMTJCZBQKJCBMX_ID, PMMTJCZBQKJCBMX_MID, PMMTJCZBQKJCBMX_JCNR, PMMTJCZBQKJCBMX_FJ, PMMTJCZBQKJCBMX_MEMO, PMMTJCZBQKJCBMX_BH
         FROM JCZBQKJCB jh
         LEFT JOIN JCZBQKJCBMX mx on mx.PMMTJCZBQKJCBMX_MID = jh.PMMTJCZBQKJCB_ID
@@ -179,15 +179,15 @@
                 <if test="id != null and id != ''"> AND PMMTJCZBQKJCB_ID LIKE '%'||trim(#{id})||'%'</if>
                 <if test="htmc != null and htmc != ''"> AND PMMTJCZBQKJCB_HTMC LIKE '%'||trim(#{htmc})||'%'</if>
                 <if test="spzt != null and spzt != ''"> AND PMMTJCZBQKJCB_SPZT LIKE '%'||trim(#{spzt})||'%'</if>
-                <if test="ksrq != null and ksrq != ''"> AND to_date(to_char(PMMTJCZBQKJCB_TBRQ,'yyyy/mm/dd'),'yyyy/mm/dd')>to_date(#{ksrq},'yyyy/mm/dd')</if>
-                <if test="jsrq != null and jsrq != ''"> AND to_date(to_char(PMMTJCZBQKJCB_TBRQ,'yyyy/mm/dd'),'yyyy/mm/dd')&lt;to_date(#{jsrq},'yyyy/mm/dd')</if>
+                <if test="ksrq != null and ksrq != ''"> AND to_date(to_char(PMMTJCZBQKJCB_TBRQ,'yyyy-MM-dd'),'yyyy-MM-dd')>to_date(#{ksrq},'yyyy-MM-dd')</if>
+                <if test="jsrq != null and jsrq != ''"> AND to_date(to_char(PMMTJCZBQKJCB_TBRQ,'yyyy-MM-dd'),'yyyy-MM-dd')&lt;to_date(#{jsrq},'yyyy-MM-dd')</if>
             </trim>
         </where>
     </select>
 
     <insert id="addJczb" parameterType="com.hdsx.rcyh.entity.Jczb">
         INSERT INTO JCZBQKJCB(PMMTJCZBQKJCB_ID, PMMTJCZBQKJCB_DWMC, PMMTJCZBQKJCB_DWBH, PMMTJCZBQKJCB_DWID, PMMTJCZBQKJCB_BMMC, PMMTJCZBQKJCB_BMBH, PMMTJCZBQKJCB_BMID, PMMTJCZBQKJCB_TBR, PMMTJCZBQKJCB_TBRID, PMMTJCZBQKJCB_TBRQ, PMMTJCZBQKJCB_SPZT, PMMTJCZBQKJCB_WFID, PMMTJCZBQKJCB_HTBH, PMMTJCZBQKJCB_JCRQ, PMMTJCZBQKJCB_SGDW, PMMTJCZBQKJCB_XMMC, PMMTJCZBQKJCB_GLDW, PMMTJCZBQKJCB_HTJE, PMMTJCZBQKJCB_WYFJ, PMMTJCZBQKJCB_HTMC, PMMTJCZBQKJCB_BZ, PMMTJCZBQKJCB_JCR)
-        VALUES (#{id,jdbcType=VARCHAR}, #{dwmc,jdbcType=VARCHAR}, #{dwbh,jdbcType=VARCHAR}, #{dwid,jdbcType=VARCHAR}, #{bmmc,jdbcType=VARCHAR}, #{bmbh,jdbcType=VARCHAR}, #{bmid,jdbcType=VARCHAR}, #{tbr,jdbcType=VARCHAR}, #{tbrid,jdbcType=VARCHAR}, to_date(#{tbrq,jdbcType=TIMESTAMP},'yyyy/mm/dd'), #{spzt,jdbcType=VARCHAR}, #{wfid,jdbcType=VARCHAR}, #{htbh,jdbcType=VARCHAR}, to_date(#{jcrq,jdbcType=TIMESTAMP},'yyyy/mm/dd'), #{sgdw,jdbcType=VARCHAR}, #{xmmc,jdbcType=VARCHAR}, #{gldw,jdbcType=VARCHAR}, #{htje,jdbcType=VARCHAR}, #{wyfj,jdbcType=VARCHAR}, #{htmc,jdbcType=VARCHAR}, #{bz,jdbcType=VARCHAR}, #{jcr,jdbcType=VARCHAR})
+        VALUES (#{id,jdbcType=VARCHAR}, #{dwmc,jdbcType=VARCHAR}, #{dwbh,jdbcType=VARCHAR}, #{dwid,jdbcType=VARCHAR}, #{bmmc,jdbcType=VARCHAR}, #{bmbh,jdbcType=VARCHAR}, #{bmid,jdbcType=VARCHAR}, #{tbr,jdbcType=VARCHAR}, #{tbrid,jdbcType=VARCHAR}, to_date(#{tbrq,jdbcType=TIMESTAMP},'yyyy-MM-dd'), #{spzt,jdbcType=VARCHAR}, #{wfid,jdbcType=VARCHAR}, #{htbh,jdbcType=VARCHAR}, to_date(#{jcrq,jdbcType=TIMESTAMP},'yyyy-MM-dd'), #{sgdw,jdbcType=VARCHAR}, #{xmmc,jdbcType=VARCHAR}, #{gldw,jdbcType=VARCHAR}, #{htje,jdbcType=VARCHAR}, #{wyfj,jdbcType=VARCHAR}, #{htmc,jdbcType=VARCHAR}, #{bz,jdbcType=VARCHAR}, #{jcr,jdbcType=VARCHAR})
     </insert>
 
     <insert id="addJczbmxb" parameterType="java.util.List">
@@ -228,11 +228,11 @@
             <if test="bmid != null and bmid != ''">PMMTJCZBQKJCB_BMID= #{bmid},</if>
             <if test="tbr != null and tbr != ''">PMMTJCZBQKJCB_TBR= #{tbr},</if>
             <if test="tbrid != null and tbrid != ''">PMMTJCZBQKJCB_TBRID= #{tbrid},</if>
-            <if test="tbrq != null and tbrq != ''">PMMTJCZBQKJCB_TBRQ= to_date(#{tbrq,jdbcType=TIMESTAMP},'yyyy/mm/dd'),</if>
+            <if test="tbrq != null and tbrq != ''">PMMTJCZBQKJCB_TBRQ= to_date(#{tbrq,jdbcType=TIMESTAMP},'yyyy-MM-dd'),</if>
             <if test="spzt != null and spzt != ''">PMMTJCZBQKJCB_SPZT= #{spzt},</if>
             <if test="wfid != null and wfid != ''">PMMTJCZBQKJCB_WFID= #{wfid},</if>
             <if test="htbh != null and htbh != ''">PMMTJCZBQKJCB_HTBH= #{htbh},</if>
-            <if test="jcrq != null and jcrq != ''">PMMTJCZBQKJCB_JCRQ= to_date(#{jcrq,jdbcType=NUMERIC},'yyyy/mm/dd'),</if>
+            <if test="jcrq != null and jcrq != ''">PMMTJCZBQKJCB_JCRQ= to_date(#{jcrq,jdbcType=NUMERIC},'yyyy-MM-dd'),</if>
             <if test="sgdw != null and sgdw != ''">PMMTJCZBQKJCB_SGDW= #{sgdw},</if>
             <if test="xmmc != null and xmmc != ''">PMMTJCZBQKJCB_XMMC= #{xmmc},</if>
             <if test="gldw != null and gldw != ''">PMMTJCZBQKJCB_GLDW= #{gldw},</if>
@@ -261,7 +261,7 @@
         FROM JCZBQKJCBMX WHERE PMMTJCZBQKJCBMX_ID = #{id}
     </select>
 
-    <delete id="deleteLyjcmxbByids">
+    <delete id="deleteLyjcmxbByIds">
         DELETE FROM SGDWLYJCBMX WHERE PMMTLYJCBMX_ID IN
         <foreach collection="array" item="id" open="(" close=")" separator=",">
             #{id}

@@ -5,13 +5,13 @@ spring:
   application:
     name: zsxz-zxyh
   datasource:
-#    url: jdbc:oracle:thin:@211.101.37.237:1521:orcl
-    url: jdbc:oracle:thin:@192.168.3.113:1521:orcl
-    username: zsxz
+    #url: jdbc:oracle:thin:@211.101.37.237:1521:orcl
+    #url: jdbc:oracle:thin:@192.168.3.113:1521:orcl
+    #username: zsxz
+    #password: zsxz
+    url: jdbc:oracle:thin:@192.168.10.230:1521:orcl
+    username: c##zsxz
     password: zsxz
-#    url: jdbc:oracle:thin:@192.168.10.230:1521:orcl
-#    username: c##zsxz
-#    password: zsxz
     driver-class-name: oracle.jdbc.driver.OracleDriver
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
@@ -29,7 +29,7 @@ spring:
       test-on-borrow: false
       test-on-return: false
   jackson:
-    date-format: yyyy/MM/dd
+    date-format: yyyy-MM-dd
     time-zone: GMT+8
 
 mybatis:

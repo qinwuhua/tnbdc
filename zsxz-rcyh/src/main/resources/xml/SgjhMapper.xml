@@ -97,8 +97,8 @@
     </resultMap>
 
     <select id="getSgjhAll" parameterType="hashmap" resultMap="sgjhBean">
-        SELECT YDJH_ID, YDJH_DWMC, YDJH_DWBH, YDJH_DWID, YDJH_BMMC, YDJH_BMBH, YDJH_BMID, YDJH_TBR, YDJH_TBRID, to_char(YDJH_TBRQ,'yyyy/mm/dd')YDJH_TBRQ, YDJH_SPZT, YDJH_FILE, YDJH_WFID, YDJH_NOTE, YDJH_DJBH, to_char(YDJH_YF,'yyyy/mm')YDJH_YF, YDJH_YHDWMC, YDJH_YHDWID, YDJH_YHDWBH, YDJH_XMFL, YDJH_XMFLID, YDJH_BZ, YDJH_HTMC, YDJH_TBDW, YDJH_TBBM, YDJH_GLDW, YDJH_HTID, YDJH_HTBH,
-        YHJHMX2_ID, YHJHMX2_MID, YHJHMX2_XMNR, YHJHMX2_QDZH, YHJHMX2_ZDZH, YHJHMX2_YJGCL, to_char(YHJHMX2_JHKSRQ,'yyyy/mm/dd')YHJHMX2_JHKSRQ, to_char(YHJHMX2_JHJSRQ,'yyyy/mm/dd')YHJHMX2_JHJSRQ, YHJHMX2_BZ
+        SELECT YDJH_ID, YDJH_DWMC, YDJH_DWBH, YDJH_DWID, YDJH_BMMC, YDJH_BMBH, YDJH_BMID, YDJH_TBR, YDJH_TBRID, to_char(YDJH_TBRQ,'yyyy-MM-dd')YDJH_TBRQ, YDJH_SPZT, YDJH_FILE, YDJH_WFID, YDJH_NOTE, YDJH_DJBH, to_char(YDJH_YF,'yyyy-MM')YDJH_YF, YDJH_YHDWMC, YDJH_YHDWID, YDJH_YHDWBH, YDJH_XMFL, YDJH_XMFLID, YDJH_BZ, YDJH_HTMC, YDJH_TBDW, YDJH_TBBM, YDJH_GLDW, YDJH_HTID, YDJH_HTBH,
+        YHJHMX2_ID, YHJHMX2_MID, YHJHMX2_XMNR, YHJHMX2_QDZH, YHJHMX2_ZDZH, YHJHMX2_YJGCL, to_char(YHJHMX2_JHKSRQ,'yyyy-MM-dd')YHJHMX2_JHKSRQ, to_char(YHJHMX2_JHJSRQ,'yyyy-MM-dd')YHJHMX2_JHJSRQ, YHJHMX2_BZ
         FROM YDSGJH jh
         LEFT JOIN YDSGJHSBMX mx ON mx.YHJHMX2_MID = jh.YDJH_ID
         <where>
@@ -106,15 +106,15 @@
                 <if test="id != null and id != ''"> AND YDJH_ID LIKE '%'||trim(#{id})||'%',</if>
                 <if test="htmc != null and htmc != ''"> AND YDJH_HTMC LIKE '%'||trim(#{htmc})||'%',</if>
                 <if test="spzt != null and spzt != ''"> AND YDJH_SPZT LIKE '%'||trim(#{spzt})||'%',</if>
-                <if test="ksrq != null and ksrq != ''"> AND to_date(to_char(YDJH_TBRQ,'yyyy/mm/dd'),'yyyy/mm/dd')>to_date(#{ksrq},'yyyy/mm/dd'),</if>
-                <if test="jsrq != null and jsrq != ''"> AND to_date(to_char(YDJH_TBRQ,'yyyy/mm/dd'),'yyyy/mm/dd')&lt;to_date(#{jsrq},'yyyy/mm/dd'),</if>
+                <if test="ksrq != null and ksrq != ''"> AND to_date(to_char(YDJH_TBRQ,'yyyy-MM-dd'),'yyyy-MM-dd')>to_date(#{ksrq},'yyyy-MM-dd'),</if>
+                <if test="jsrq != null and jsrq != ''"> AND to_date(to_char(YDJH_TBRQ,'yyyy-MM-dd'),'yyyy-MM-dd')&lt;to_date(#{jsrq},'yyyy-MM-dd'),</if>
             </trim>
         </where>
     </select>
 
     <insert id="addSgjh" parameterType="com.hdsx.rcyh.entity.Sgjh">
         INSERT INTO YDSGJH(YDJH_ID, YDJH_DWMC, YDJH_DWBH, YDJH_DWID, YDJH_BMMC, YDJH_BMBH, YDJH_BMID, YDJH_TBR, YDJH_TBRID, YDJH_TBRQ, YDJH_SPZT, YDJH_FILE, YDJH_WFID, YDJH_NOTE, YDJH_DJBH, YDJH_YF, YDJH_YHDWMC, YDJH_YHDWID, YDJH_YHDWBH, YDJH_XMFL, YDJH_XMFLID, YDJH_BZ, YDJH_HTMC, YDJH_TBDW, YDJH_TBBM, YDJH_GLDW, YDJH_HTID, YDJH_HTBH)
-        VALUES (#{id,jdbcType=VARCHAR}, #{dwmc,jdbcType=VARCHAR}, #{dwbh,jdbcType=VARCHAR}, #{dwid,jdbcType=VARCHAR}, #{bmmc,jdbcType=VARCHAR}, #{bmbh,jdbcType=VARCHAR}, #{bmid,jdbcType=VARCHAR}, #{tbr,jdbcType=VARCHAR}, #{tbrid,jdbcType=VARCHAR}, to_date(#{tbrq,jdbcType=TIMESTAMP},'yyyy/mm/dd'), '未处理', #{file,jdbcType=VARCHAR}, #{wfid,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR}, #{djbh,jdbcType=VARCHAR}, to_date(#{yf,jdbcType=TIMESTAMP},'yyyy/mm'), #{yhdwmc,jdbcType=VARCHAR}, #{yhdwid,jdbcType=VARCHAR}, #{yhdwbh,jdbcType=VARCHAR}, #{xmfl,jdbcType=VARCHAR}, #{xmflid,jdbcType=VARCHAR}, #{bz,jdbcType=VARCHAR}, #{htmc,jdbcType=VARCHAR}, #{tbdw,jdbcType=VARCHAR}, #{tbbm,jdbcType=VARCHAR}, #{gldw,jdbcType=VARCHAR}, #{htid,jdbcType=VARCHAR}, #{htbh,jdbcType=VARCHAR})
+        VALUES (#{id,jdbcType=VARCHAR}, #{dwmc,jdbcType=VARCHAR}, #{dwbh,jdbcType=VARCHAR}, #{dwid,jdbcType=VARCHAR}, #{bmmc,jdbcType=VARCHAR}, #{bmbh,jdbcType=VARCHAR}, #{bmid,jdbcType=VARCHAR}, #{tbr,jdbcType=VARCHAR}, #{tbrid,jdbcType=VARCHAR}, to_date(#{tbrq,jdbcType=TIMESTAMP},'yyyy-MM-dd'), '未处理', #{file,jdbcType=VARCHAR}, #{wfid,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR}, #{djbh,jdbcType=VARCHAR}, to_date(#{yf,jdbcType=TIMESTAMP},'yyyy-MM'), #{yhdwmc,jdbcType=VARCHAR}, #{yhdwid,jdbcType=VARCHAR}, #{yhdwbh,jdbcType=VARCHAR}, #{xmfl,jdbcType=VARCHAR}, #{xmflid,jdbcType=VARCHAR}, #{bz,jdbcType=VARCHAR}, #{htmc,jdbcType=VARCHAR}, #{tbdw,jdbcType=VARCHAR}, #{tbbm,jdbcType=VARCHAR}, #{gldw,jdbcType=VARCHAR}, #{htid,jdbcType=VARCHAR}, #{htbh,jdbcType=VARCHAR})
     </insert>
 
     <insert id="addSgjhmx" parameterType="java.util.List">
@@ -127,8 +127,8 @@
                    #{item.qdzh,jdbcType=VARCHAR},
                    #{item.zdzh,jdbcType=VARCHAR},
                    #{item.yjgcl,jdbcType=NUMERIC},
-                   to_date(#{item.jhksrq,jdbcType=TIMESTAMP},'yyyy/mm/dd'),
-                   to_date(#{item.jhjsrq,jdbcType=TIMESTAMP},'yyyy/mm/dd'),
+                   to_date(#{item.jhksrq,jdbcType=TIMESTAMP},'yyyy-MM-dd'),
+                   to_date(#{item.jhjsrq,jdbcType=TIMESTAMP},'yyyy-MM-dd'),
                    #{item.bz,jdbcType=VARCHAR}
             FROM DUAL
         </foreach>
@@ -146,13 +146,13 @@
             <if test="bmid != null and bmid != ''"> YDJH_BMID= #{bmid}, </if>
             <if test="tbr != null and tbr != ''"> YDJH_TBR= #{tbr}, </if>
             <if test="tbrid != null and tbrid != ''"> YDJH_TBRID= #{tbrid}, </if>
-            <if test="tbrq != null and tbrq != ''"> YDJH_TBRQ= to_date(#{tbrq,jdbcType=TIMESTAMP},'yyyy/mm/dd'), </if>
+            <if test="tbrq != null and tbrq != ''"> YDJH_TBRQ= to_date(#{tbrq,jdbcType=TIMESTAMP},'yyyy-MM-dd'), </if>
             <if test="spzt != null and spzt != ''"> YDJH_SPZT= #{spzt}, </if>
             <if test="file != null and file != ''"> YDJH_FILE= #{file}, </if>
             <if test="wfid != null and wfid != ''"> YDJH_WFID= #{wfid}, </if>
             <if test="note != null and note != ''"> YDJH_NOTE= #{note}, </if>
             <if test="djbh != null and djbh != ''"> YDJH_DJBH= #{djbh}, </if>
-            <if test="yf != null and yf != ''"> YDJH_YF= to_date(#{yf,jdbcType=TIMESTAMP},'yyyy/mm'), </if>
+            <if test="yf != null and yf != ''"> YDJH_YF= to_date(#{yf,jdbcType=TIMESTAMP},'yyyy-MM'), </if>
             <if test="yhdwmc != null and yhdwmc != ''"> YDJH_YHDWMC= #{yhdwmc}, </if>
             <if test="yhdwid != null and yhdwid != ''"> YDJH_YHDWID= #{yhdwid}, </if>
             <if test="yhdwbh != null and yhdwbh != ''"> YDJH_YHDWBH= #{yhdwbh}, </if>
@@ -176,8 +176,8 @@
             <if test="qdzh != null and qdzh != ''"> YHJHMX2_QDZH = #{qdzh}, </if>
             <if test="zdzh != null and zdzh != ''"> YHJHMX2_ZDZH = #{zdzh}, </if>
             <if test="yjgcl != null and yjgcl != ''"> YHJHMX2_YJGCL = #{yjgcl}, </if>
-            <if test="jhksrq != null and jhksrq != ''"> YHJHMX2_JHKSRQ = to_date(#{jhksrq,jdbcType=TIMESTAMP},'yyyy/mm/dd'), </if>
-            <if test="jhjsrq != null and jhjsrq != ''"> YHJHMX2_JHJSRQ = to_date(#{jhjsrq,jdbcType=TIMESTAMP},'yyyy/mm/dd'), </if>
+            <if test="jhksrq != null and jhksrq != ''"> YHJHMX2_JHKSRQ = to_date(#{jhksrq,jdbcType=TIMESTAMP},'yyyy-MM-dd'), </if>
+            <if test="jhjsrq != null and jhjsrq != ''"> YHJHMX2_JHJSRQ = to_date(#{jhjsrq,jdbcType=TIMESTAMP},'yyyy-MM-dd'), </if>
             <if test="bz != null and bz != ''"> YHJHMX2_BZ = #{bz}, </if>
         </set>
         WHERE YHJHMX2_ID = #{id}
@@ -204,8 +204,8 @@
     </delete>
 
     <select id="getWcSgjhAll" parameterType="hashmap" resultMap="wcsgjhBean">
-        SELECT YDWC_ID, YDWC_DWMC, YDWC_DWBH, YDWC_DWID, YDWC_BMMC, YDWC_BMBH, YDWC_BMID, YDWC_TBR, YDWC_TBRID, to_char(YDWC_TBRQ,'yyyy/mm/dd')YDWC_TBRQ, YDWC_SPZT, YDWC_FILE, YDWC_WFID, YDWC_NOTE, YDWC_DJBH, to_char(YDWC_YF,'yyyy/mm')YDWC_YF, YDWC_YHDWMC, YDWC_YHDWID, YDWC_YHDWBH, YDWC_XMFL, YDWC_XMFLID, YDWC_BZ, YDWC_HTMC, YDWC_TBDW, YDWC_TBBM, YDWC_GLDW, YDWC_HTID, YDWC_HTBH,
-        YHJHWCMX2_ID, YHJHWCMX2_MID, YHJHWCMX2_XMNR, YHJHWCMX2_QDZH, YHJHWCMX2_ZDZH, YHJHWCMX2_YJGCL, YHJHWCMX2_WCGCL, to_char(YHJHWCMX2_JHKSRQ,'yyyy/mm/dd')YHJHWCMX2_JHKSRQ, to_char(YHJHWCMX2_JHJSRQ,'yyyy/mm/dd')YHJHWCMX2_JHJSRQ, to_char(YHJHWCMX2_SJKSRQ,'yyyy/mm/dd')YHJHWCMX2_SJKSRQ, to_char(YHJHWCMX2_SJJSRQ,'yyyy/mm/dd')YHJHWCMX2_SJJSRQ, YHJHWCMX2_BZ
+        SELECT YDWC_ID, YDWC_DWMC, YDWC_DWBH, YDWC_DWID, YDWC_BMMC, YDWC_BMBH, YDWC_BMID, YDWC_TBR, YDWC_TBRID, to_char(YDWC_TBRQ,'yyyy-MM-dd')YDWC_TBRQ, YDWC_SPZT, YDWC_FILE, YDWC_WFID, YDWC_NOTE, YDWC_DJBH, to_char(YDWC_YF,'yyyy-MM')YDWC_YF, YDWC_YHDWMC, YDWC_YHDWID, YDWC_YHDWBH, YDWC_XMFL, YDWC_XMFLID, YDWC_BZ, YDWC_HTMC, YDWC_TBDW, YDWC_TBBM, YDWC_GLDW, YDWC_HTID, YDWC_HTBH,
+        YHJHWCMX2_ID, YHJHWCMX2_MID, YHJHWCMX2_XMNR, YHJHWCMX2_QDZH, YHJHWCMX2_ZDZH, YHJHWCMX2_YJGCL, YHJHWCMX2_WCGCL, to_char(YHJHWCMX2_JHKSRQ,'yyyy-MM-dd')YHJHWCMX2_JHKSRQ, to_char(YHJHWCMX2_JHJSRQ,'yyyy-MM-dd')YHJHWCMX2_JHJSRQ, to_char(YHJHWCMX2_SJKSRQ,'yyyy-MM-dd')YHJHWCMX2_SJKSRQ, to_char(YHJHWCMX2_SJJSRQ,'yyyy-MM-dd')YHJHWCMX2_SJJSRQ, YHJHWCMX2_BZ
         FROM YDSGWC jh
         LEFT JOIN YDSGWCMX mx ON mx.YHJHWCMX2_MID = jh.YDWC_ID
         <where>
@@ -213,15 +213,15 @@
                 <if test="id != null and id != ''"> AND YDWC_ID LIKE '%'||trim(#{id})||'%',</if>
                 <if test="htmc != null and htmc != ''"> AND YDWC_HTMC LIKE '%'||trim(#{htmc})||'%',</if>
                 <if test="spzt != null and spzt != ''"> AND YDWC_SPZT LIKE '%'||trim(#{spzt})||'%',</if>
-                <if test="ksrq != null and ksrq != ''"> AND to_date(to_char(YDWC_TBRQ,'yyyy/mm/dd'),'yyyy/mm/dd')>to_date(#{ksrq},'yyyy/mm/dd'),</if>
-                <if test="jsrq != null and jsrq != ''"> AND to_date(to_char(YDWC_TBRQ,'yyyy/mm/dd'),'yyyy/mm/dd')&lt;to_date(#{jsrq},'yyyy/mm/dd'),</if>
+                <if test="ksrq != null and ksrq != ''"> AND to_date(to_char(YDWC_TBRQ,'yyyy-MM-dd'),'yyyy-MM-dd')>to_date(#{ksrq},'yyyy-MM-dd'),</if>
+                <if test="jsrq != null and jsrq != ''"> AND to_date(to_char(YDWC_TBRQ,'yyyy-MM-dd'),'yyyy-MM-dd')&lt;to_date(#{jsrq},'yyyy-MM-dd'),</if>
             </trim>
         </where>
     </select>
 
     <insert id="addWcSgjh" parameterType="com.hdsx.rcyh.entity.Sgjhwc">
         INSERT INTO YDSGWC(YDWC_ID, YDWC_DWMC, YDWC_DWBH, YDWC_DWID, YDWC_BMMC, YDWC_BMBH, YDWC_BMID, YDWC_TBR, YDWC_TBRID, YDWC_TBRQ, YDWC_SPZT, YDWC_FILE, YDWC_WFID, YDWC_NOTE, YDWC_DJBH, YDWC_YF, YDWC_YHDWMC, YDWC_YHDWID, YDWC_YHDWBH, YDWC_XMFL, YDWC_XMFLID, YDWC_BZ, YDWC_HTMC, YDWC_TBDW, YDWC_TBBM, YDWC_GLDW, YDWC_HTID, YDWC_HTBH)
-        VALUES (#{id,jdbcType=VARCHAR}, #{dwmc,jdbcType=VARCHAR}, #{dwbh,jdbcType=VARCHAR}, #{dwid,jdbcType=VARCHAR}, #{bmmc,jdbcType=VARCHAR}, #{bmbh,jdbcType=VARCHAR}, #{bmid,jdbcType=VARCHAR}, #{tbr,jdbcType=VARCHAR}, #{tbrid,jdbcType=VARCHAR}, to_date(#{tbrq,jdbcType=TIMESTAMP},'yyyy/mm/dd'), '未处理', #{file,jdbcType=VARCHAR}, #{wfid,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR}, #{djbh,jdbcType=VARCHAR}, to_date(#{yf,jdbcType=TIMESTAMP},'yyyy/mm'), #{yhdwmc,jdbcType=VARCHAR}, #{yhdwid,jdbcType=VARCHAR}, #{yhdwbh,jdbcType=VARCHAR}, #{xmfl,jdbcType=VARCHAR}, #{xmflid,jdbcType=VARCHAR}, #{bz,jdbcType=VARCHAR}, #{htmc,jdbcType=VARCHAR}, #{tbdw,jdbcType=VARCHAR}, #{tbbm,jdbcType=VARCHAR}, #{gldw,jdbcType=VARCHAR}, #{htid,jdbcType=VARCHAR}, #{htbh,jdbcType=VARCHAR})
+        VALUES (#{id,jdbcType=VARCHAR}, #{dwmc,jdbcType=VARCHAR}, #{dwbh,jdbcType=VARCHAR}, #{dwid,jdbcType=VARCHAR}, #{bmmc,jdbcType=VARCHAR}, #{bmbh,jdbcType=VARCHAR}, #{bmid,jdbcType=VARCHAR}, #{tbr,jdbcType=VARCHAR}, #{tbrid,jdbcType=VARCHAR}, to_date(#{tbrq,jdbcType=TIMESTAMP},'yyyy-MM-dd'), '未处理', #{file,jdbcType=VARCHAR}, #{wfid,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR}, #{djbh,jdbcType=VARCHAR}, to_date(#{yf,jdbcType=TIMESTAMP},'yyyy-MM'), #{yhdwmc,jdbcType=VARCHAR}, #{yhdwid,jdbcType=VARCHAR}, #{yhdwbh,jdbcType=VARCHAR}, #{xmfl,jdbcType=VARCHAR}, #{xmflid,jdbcType=VARCHAR}, #{bz,jdbcType=VARCHAR}, #{htmc,jdbcType=VARCHAR}, #{tbdw,jdbcType=VARCHAR}, #{tbbm,jdbcType=VARCHAR}, #{gldw,jdbcType=VARCHAR}, #{htid,jdbcType=VARCHAR}, #{htbh,jdbcType=VARCHAR})
     </insert>
 
     <insert id="addWcsgjhmx" parameterType="java.util.List">
@@ -230,7 +230,7 @@
         <foreach collection="list" item="item" index="index" open="(" close=")" separator="union">
             SELECT sys_guid(),#{item.mid,jdbcType=VARCHAR},#{item.xmnr,jdbcType=VARCHAR},
             #{item.qdzh,jdbcType=VARCHAR},#{item.zdzh,jdbcType=VARCHAR},#{item.yjgcl,jdbcType=NUMERIC},#{item.wcgcl,jdbcType=NUMERIC},
-            to_date(#{item.jhksrq,jdbcType=TIMESTAMP},'yyyy/mm/dd'),to_date(#{item.jhjsrq,jdbcType=TIMESTAMP},'yyyy/mm/dd'),to_date(#{item.sjksrq,jdbcType=TIMESTAMP},'yyyy/mm/dd'),to_date(#{item.sjjsrq,jdbcType=TIMESTAMP},'yyyy/mm/dd'),#{item.bz,jdbcType=VARCHAR}
+            to_date(#{item.jhksrq,jdbcType=TIMESTAMP},'yyyy-MM-dd'),to_date(#{item.jhjsrq,jdbcType=TIMESTAMP},'yyyy-MM-dd'),to_date(#{item.sjksrq,jdbcType=TIMESTAMP},'yyyy-MM-dd'),to_date(#{item.sjjsrq,jdbcType=TIMESTAMP},'yyyy-MM-dd'),#{item.bz,jdbcType=VARCHAR}
             FROM DUAL
         </foreach>
     </insert>
@@ -246,13 +246,13 @@
             <if test="bmid != null and bmid != ''"> YDWC_BMID= #{bmid}, </if>
             <if test="tbr != null and tbr != ''"> YDWC_TBR= #{tbr}, </if>
             <if test="tbrid != null and tbrid != ''"> YDWC_TBRID= #{tbrid}, </if>
-            <if test="tbrq != null and tbrq != ''"> YDWC_TBRQ= to_date(#{tbrq,jdbcType=TIMESTAMP},'yyyy/mm/dd'), </if>
+            <if test="tbrq != null and tbrq != ''"> YDWC_TBRQ= to_date(#{tbrq,jdbcType=TIMESTAMP},'yyyy-MM-dd'), </if>
             <if test="spzt != null and spzt != ''"> YDWC_SPZT= #{spzt}, </if>
             <if test="file != null and file != ''"> YDWC_FILE= #{file}, </if>
             <if test="wfid != null and wfid != ''"> YDWC_WFID= #{wfid}, </if>
             <if test="note != null and note != ''"> YDWC_NOTE= #{note}, </if>
             <if test="djbh != null and djbh != ''"> YDWC_DJBH= #{djbh}, </if>
-            <if test="yf != null and yf != ''"> YDWC_YF= to_date(#{yf,jdbcType=TIMESTAMP},'yyyy/mm'), </if>
+            <if test="yf != null and yf != ''"> YDWC_YF= to_date(#{yf,jdbcType=TIMESTAMP},'yyyy-MM'), </if>
             <if test="yhdwmc != null and yhdwmc != ''"> YDWC_YHDWMC= #{yhdwmc}, </if>
             <if test="yhdwid != null and yhdwid != ''"> YDWC_YHDWID= #{yhdwid}, </if>
             <if test="yhdwbh != null and yhdwbh != ''"> YDWC_YHDWBH= #{yhdwbh}, </if>
@@ -277,10 +277,10 @@
             <if test="zdzh != null and zdzh != ''"> YHJHWCMX2_ZDZH = #{zdzh}, </if>
             <if test="yjgcl != null and yjgcl != ''"> YHJHWCMX2_YJGCL = #{yjgcl}, </if>
             <if test="wcgcl != null and wcgcl != ''"> YHJHWCMX2_WCGCL = #{wcgcl}, </if>
-            <if test="jhksrq != null and jhksrq != ''"> YHJHWCMX2_JHKSRQ = to_date(#{jhksrq,jdbcType=TIMESTAMP},'yyyy/mm/dd'), </if>
-            <if test="jhjsrq != null and jhjsrq != ''"> YHJHWCMX2_JHJSRQ = to_date(#{jhjsrq,jdbcType=TIMESTAMP},'yyyy/mm/dd'), </if>
-            <if test="sjksrq != null and sjksrq != ''"> YHJHWCMX2_SJKSRQ = to_date(#{sjksrq,jdbcType=TIMESTAMP},'yyyy/mm/dd'), </if>
-            <if test="sjjsrq != null and sjjsrq != ''"> YHJHWCMX2_SJJSRQ = to_date(#{sjjsrq,jdbcType=TIMESTAMP},'yyyy/mm/dd'), </if>
+            <if test="jhksrq != null and jhksrq != ''"> YHJHWCMX2_JHKSRQ = to_date(#{jhksrq,jdbcType=TIMESTAMP},'yyyy-MM-dd'), </if>
+            <if test="jhjsrq != null and jhjsrq != ''"> YHJHWCMX2_JHJSRQ = to_date(#{jhjsrq,jdbcType=TIMESTAMP},'yyyy-MM-dd'), </if>
+            <if test="sjksrq != null and sjksrq != ''"> YHJHWCMX2_SJKSRQ = to_date(#{sjksrq,jdbcType=TIMESTAMP},'yyyy-MM-dd'), </if>
+            <if test="sjjsrq != null and sjjsrq != ''"> YHJHWCMX2_SJJSRQ = to_date(#{sjjsrq,jdbcType=TIMESTAMP},'yyyy-MM-dd'), </if>
             <if test="bz != null and bz != ''"> YHJHWCMX2_BZ = #{bz}, </if>
         </set>
         WHERE YHJHWCMX2_ID = #{id}
