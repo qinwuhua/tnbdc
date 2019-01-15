@@ -68,7 +68,7 @@
         fj.fj pmmtjgjss_fj,sp.pmmtgcspsqs_spje pmmtjgjss_spfy,gj.htgjxx_htje*gj.htgjxx_zlbzjbl/100 pmmtjgjss_zlbzj,
         zf.zfje pmmtjgjss_ljzfgck,nvl(jl.jlje,0)-nvl(fj.fj,0) pmmtjgjss_yzfkk,money_to_chinese(to_char(round(nvl(jl.jlje,0)-nvl(fj.fj,0),2))) pmmtjgjss_yzfkkdx,
         nvl(zmzb.PMMTJGJSSMX_ZMBH,' ') PMMTJGJSSMX_ZMBH, nvl(zmzb.PMMTJGJSSMX_ZMID,' ') PMMTJGJSSMX_ZMID, nvl(zmzb.PMMTJGJSSMX_HTBH,' ') PMMTJGJSSMX_HTBH, nvl(zmzb.PMMTJGJSSMX_ZMMC,' ') PMMTJGJSSMX_ZMMC,nvl(zmzb.PMMTJGJSSMX_DW,' ') PMMTJGJSSMX_DW, nvl(zmzb.PMMTJGJSSMX_HTDJ,0) PMMTJGJSSMX_HTDJ, nvl(zmzb.PMMTJGJSSMX_YHTS,0) PMMTJGJSSMX_YHTS, nvl(zmzb.PMMTJGJSSMX_YHTJE,0) PMMTJGJSSMX_YHTJE, nvl(zmzb.PMMTJGJSSMX_SJJLSL,0) PMMTJGJSSMX_SJJLSL, nvl(zmzb.PMMTJGJSSMX_SJJLJE,0) PMMTJGJSSMX_SJJLJE, nvl(zmzb.PMMTJGJSSMX_JGJSSL,0) PMMTJGJSSMX_JGJSSL, nvl(zmzb.PMMTJGJSSMX_JGJSJE,0) PMMTJGJSSMX_JGJSJE, nvl(zmzb.PMMTJGJSSMX_YSJBSL,0) PMMTJGJSSMX_YSJBSL, nvl(zmzb.PMMTJGJSSMX_YSJBJE,0) PMMTJGJSSMX_YSJBJE, nvl(zmzb.PMMTJGJSSMX_REMARK,' ') PMMTJGJSSMX_REMARK,
-        to_char(sysdate,'yyyy/mm/dd') PMMTJGJSS_BZRQ
+        to_char(sysdate,'yyyy-mm-dd') PMMTJGJSS_BZRQ
         from djsj_htxx ht left join djsj_htxx_htgjxx gj on ht.htxx_htbh=gj.HTGJXX_HTBH
         left join djsj_htxx_yhxmxx xm on ht.htxx_htbh=xm.yhhtxx_htbh
         left join (select htbh,sum(nvl(fj,0)) fj from (
@@ -160,7 +160,7 @@
             <if test="pmmtjgjss_tbr != null" >#{pmmtjgjss_tbr},</if>
             <if test="pmmtjgjss_spzt != null" >#{pmmtjgjss_spzt},</if>
             <if test="pmmtjgjss_djbh != null" >#{pmmtjgjss_djbh},</if>
-            <if test="pmmtjgjss_bzrq != null" >to_date(#{pmmtjgjss_bzrq},'yyyy/mm/dd'),</if>
+            <if test="pmmtjgjss_bzrq != null" >to_date(#{pmmtjgjss_bzrq},'yyyy-mm-dd'),</if>
             <if test="pmmtjgjss_gcmc != null" >#{pmmtjgjss_gcmc},</if>
             <if test="pmmtjgjss_htbh != null" >#{pmmtjgjss_htbh},</if>
             <if test="pmmtjgjss_cbdw != null" >#{pmmtjgjss_cbdw},</if>
@@ -203,7 +203,7 @@
             <if test="pmmtjgjss_tbr != null" >pmmtjgjss_tbr=#{pmmtjgjss_tbr},</if>
             <if test="pmmtjgjss_spzt != null" >pmmtjgjss_spzt=#{pmmtjgjss_spzt},</if>
             <if test="pmmtjgjss_djbh != null" >pmmtjgjss_djbh=#{pmmtjgjss_djbh},</if>
-            <if test="pmmtjgjss_bzrq != null" >pmmtjgjss_bzrq=to_date(#{pmmtjgjss_bzrq},'yyyy/mm/dd'),</if>
+            <if test="pmmtjgjss_bzrq != null" >pmmtjgjss_bzrq=to_date(#{pmmtjgjss_bzrq},'yyyy-mm-dd'),</if>
             <if test="pmmtjgjss_gcmc != null" >pmmtjgjss_gcmc=#{pmmtjgjss_gcmc},</if>
             <if test="pmmtjgjss_htbh != null" >pmmtjgjss_htbh=#{pmmtjgjss_htbh},</if>
             <if test="pmmtjgjss_cbdw != null" >pmmtjgjss_cbdw=#{pmmtjgjss_cbdw},</if>
@@ -248,7 +248,7 @@
     <!-- 查询交工结算书列表数据 -->
     <select id="getJiaogList" parameterType="hashmap" resultMap="jgjs">
 
-        select zb.pmmtjgjss_id, zb.pmmtjgjss_dwmc, zb.pmmtjgjss_dwbh, zb.pmmtjgjss_dwid, zb.pmmtjgjss_bmmc, zb.pmmtjgjss_bmbh, zb.pmmtjgjss_bmid, zb.pmmtjgjss_tbr, zb.pmmtjgjss_spzt, zb.pmmtjgjss_file, zb.pmmtjgjss_djbh, to_char(zb.pmmtjgjss_bzrq,'yyyy/mm/dd') pmmtjgjss_bzrq, zb.pmmtjgjss_gcmc, zb.pmmtjgjss_htbh, zb.pmmtjgjss_cbdw, zb.pmmtjgjss_gldw, zb.pmmtjgjss_jldw, zb.pmmtjgjss_htje, zb.pmmtjgjss_bz, zb.pmmtjgjss_gzjhtje, zb.pmmtjgjss_gzjjlje, zb.pmmtjgjss_gzjjsje, zb.pmmtjgjss_htzdje, zb.pmmtjgjss_jlzdje, zb.pmmtjgjss_jgjszdje, zb.pmmtjgjss_spfy, zb.pmmtjgjss_fj, zb.pmmtjgjss_zlbzj, zb.pmmtjgjss_ljzfgck, zb.pmmtjgjss_yzfkk, zb.pmmtjgjss_yzfkkdx, zb.pmmtjgjss_jssbh，
+        select zb.pmmtjgjss_id, zb.pmmtjgjss_dwmc, zb.pmmtjgjss_dwbh, zb.pmmtjgjss_dwid, zb.pmmtjgjss_bmmc, zb.pmmtjgjss_bmbh, zb.pmmtjgjss_bmid, zb.pmmtjgjss_tbr, zb.pmmtjgjss_spzt, zb.pmmtjgjss_file, zb.pmmtjgjss_djbh, to_char(zb.pmmtjgjss_bzrq,'yyyy-mm-dd') pmmtjgjss_bzrq, zb.pmmtjgjss_gcmc, zb.pmmtjgjss_htbh, zb.pmmtjgjss_cbdw, zb.pmmtjgjss_gldw, zb.pmmtjgjss_jldw, zb.pmmtjgjss_htje, zb.pmmtjgjss_bz, zb.pmmtjgjss_gzjhtje, zb.pmmtjgjss_gzjjlje, zb.pmmtjgjss_gzjjsje, zb.pmmtjgjss_htzdje, zb.pmmtjgjss_jlzdje, zb.pmmtjgjss_jgjszdje, zb.pmmtjgjss_spfy, zb.pmmtjgjss_fj, zb.pmmtjgjss_zlbzj, zb.pmmtjgjss_ljzfgck, zb.pmmtjgjss_yzfkk, zb.pmmtjgjss_yzfkkdx, zb.pmmtjgjss_jssbh，
         fb.*
         from
         ZXYH_JGJSS zb left join ZXYH_JGJSSMX fb on zb.pmmtjgjss_jssbh=fb.PMMTJGJSSMX_JSSBH
@@ -261,16 +261,16 @@
             and zb.pmmtjgjss_htbh=#{htbh}
         </if>
         <if test="ksrq != null and ksrq != ''">
-            and to_date(to_char(zb.pmmtjgjss_bzrq,'yyyy/mm/dd'),'yyyy/mm/dd')>=to_date(#{ksrq},'yyyy/mm/dd')
+            and to_date(to_char(zb.pmmtjgjss_bzrq,'yyyy-mm-dd'),'yyyy-mm-dd')>=to_date(#{ksrq},'yyyy-mm-dd')
         </if>
         <if test="jsrq != null and jsrq != ''">
-            and to_date(to_char(zb.pmmtjgjss_bzrq,'yyyy/mm/dd'),'yyyy/mm/dd')&lt;=to_date(#{jsrq},'yyyy/mm/dd')
+            and to_date(to_char(zb.pmmtjgjss_bzrq,'yyyy-mm-dd'),'yyyy-mm-dd')&lt;=to_date(#{jsrq},'yyyy-mm-dd')
         </if>
     </select>
 
     <select id="getJiaogInfoByDjbh" parameterType="hashmap" resultMap="jgjs">
 
-        select zb.pmmtjgjss_id, zb.pmmtjgjss_dwmc, zb.pmmtjgjss_dwbh, zb.pmmtjgjss_dwid, zb.pmmtjgjss_bmmc, zb.pmmtjgjss_bmbh, zb.pmmtjgjss_bmid, zb.pmmtjgjss_tbr, zb.pmmtjgjss_spzt, zb.pmmtjgjss_file, zb.pmmtjgjss_djbh, to_char(zb.pmmtjgjss_bzrq,'yyyy/mm/dd') pmmtjgjss_bzrq, zb.pmmtjgjss_gcmc, zb.pmmtjgjss_htbh, zb.pmmtjgjss_cbdw, zb.pmmtjgjss_gldw, zb.pmmtjgjss_jldw, zb.pmmtjgjss_htje, zb.pmmtjgjss_bz, zb.pmmtjgjss_gzjhtje, zb.pmmtjgjss_gzjjlje, zb.pmmtjgjss_gzjjsje, zb.pmmtjgjss_htzdje, zb.pmmtjgjss_jlzdje, zb.pmmtjgjss_jgjszdje, zb.pmmtjgjss_spfy, zb.pmmtjgjss_fj, zb.pmmtjgjss_zlbzj, zb.pmmtjgjss_ljzfgck, zb.pmmtjgjss_yzfkk, zb.pmmtjgjss_yzfkkdx, zb.pmmtjgjss_jssbh，
+        select zb.pmmtjgjss_id, zb.pmmtjgjss_dwmc, zb.pmmtjgjss_dwbh, zb.pmmtjgjss_dwid, zb.pmmtjgjss_bmmc, zb.pmmtjgjss_bmbh, zb.pmmtjgjss_bmid, zb.pmmtjgjss_tbr, zb.pmmtjgjss_spzt, zb.pmmtjgjss_file, zb.pmmtjgjss_djbh, to_char(zb.pmmtjgjss_bzrq,'yyyy-mm-dd') pmmtjgjss_bzrq, zb.pmmtjgjss_gcmc, zb.pmmtjgjss_htbh, zb.pmmtjgjss_cbdw, zb.pmmtjgjss_gldw, zb.pmmtjgjss_jldw, zb.pmmtjgjss_htje, zb.pmmtjgjss_bz, zb.pmmtjgjss_gzjhtje, zb.pmmtjgjss_gzjjlje, zb.pmmtjgjss_gzjjsje, zb.pmmtjgjss_htzdje, zb.pmmtjgjss_jlzdje, zb.pmmtjgjss_jgjszdje, zb.pmmtjgjss_spfy, zb.pmmtjgjss_fj, zb.pmmtjgjss_zlbzj, zb.pmmtjgjss_ljzfgck, zb.pmmtjgjss_yzfkk, zb.pmmtjgjss_yzfkkdx, zb.pmmtjgjss_jssbh，
         fb.*
         from
         ZXYH_JGJSS zb left join ZXYH_JGJSSMX fb on zb.pmmtjgjss_jssbh=fb.PMMTJGJSSMX_JSSBH

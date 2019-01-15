@@ -113,10 +113,10 @@
             and g.htbh=#{htbh}
         </if>
         <if test="ksrq != null and ksrq != ''">
-            and to_date(BZRQ,'yyyy/mm/dd')>=to_date(#{ksrq},'yyyy/mm/dd')
+            and to_date(BZRQ,'yyyy-mm-dd')>=to_date(#{ksrq},'yyyy-mm-dd')
         </if>
         <if test="jsrq != null and jsrq != ''">
-            and to_date(BZRQ,'yyyy/mm/dd')&lt;=to_date(#{jsrq},'yyyy/mm/dd')
+            and to_date(BZRQ,'yyyy-mm-dd')&lt;=to_date(#{jsrq},'yyyy-mm-dd')
         </if>
     </select>
 
@@ -214,10 +214,10 @@
             and g.htbh=#{htbh}
         </if>
         <if test="ksrq != null and ksrq != ''">
-            and to_date(BZRQ,'yyyy/mm/dd')>=to_date(#{ksrq},'yyyy/mm/dd')
+            and to_date(BZRQ,'yyyy-mm-dd')>=to_date(#{ksrq},'yyyy-mm-dd')
         </if>
         <if test="jsrq != null and jsrq != ''">
-            and to_date(BZRQ,'yyyy/mm/dd')&lt;=to_date(#{jsrq},'yyyy/mm/dd')
+            and to_date(BZRQ,'yyyy-mm-dd')&lt;=to_date(#{jsrq},'yyyy-mm-dd')
         </if>
     </select>
 
@@ -352,10 +352,10 @@
             and g.htbh=#{htbh}
         </if>
         <if test="ksrq != null and ksrq != ''">
-            and to_date(bzrq,'yyyy/mm/dd')>=to_date(#{ksrq},'yyyy/mm/dd')
+            and to_date(bzrq,'yyyy-mm-dd')>=to_date(#{ksrq},'yyyy-mm-dd')
         </if>
         <if test="jsrq != null and jsrq != ''">
-            and to_date(bzrq,'yyyy/mm/dd')&lt;=to_date(#{jsrq},'yyyy/mm/dd')
+            and to_date(bzrq,'yyyy-mm-dd')&lt;=to_date(#{jsrq},'yyyy-mm-dd')
         </if>
         order by djbh
     </select>

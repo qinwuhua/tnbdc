@@ -147,16 +147,16 @@
 
     <!-- 查询索赔申请单列表数据 -->
     <select id="getSpsqdList" parameterType="hashmap" resultType="com.hdsx.rcyh.entity.Jlzf">
-        select g.PMMTGCSPSQS_ID,g.PMMTGCSPSQS_DWMC,g.PMMTGCSPSQS_DWBH,g.PMMTGCSPSQS_DWID,g.PMMTGCSPSQS_BMMC,g.PMMTGCSPSQS_BMBH,g.PMMTGCSPSQS_BMID,g.PMMTGCSPSQS_TBR,to_char(g.PMMTGCSPSQS_TBRQ,'yyyy/mm/dd') PMMTGCSPSQS_TBRQ,g.PMMTGCSPSQS_SPZT,g.PMMTGCSPSQS_FILE,g.PMMTGCSPSQS_DJBH,g.PMMTGCSPSQS_CJRQ,g.PMMTGCSPSQS_GCMC,g.PMMTGCSPSQS_HTBH,g.PMMTGCSPSQS_SQJE,g.PMMTGCSPSQS_SPSJ,g.PMMTGCSPSQS_SCYJS,g.PMMTGCSPSQS_SPYJS,g.PMMTGCSPSQS_SPJE,g.PMMTGCSPSQS_CJDW,g.PMMTGCSPSQS_GLDW,to_char(g.PMMTGCSPSQS_SQRQ,'yyyy/mm/dd') PMMTGCSPSQS_SQRQ,g.PMMTGCSPSQS_CBDW,g.PMMTGCSPSQS_SPSJJS
+        select g.PMMTGCSPSQS_ID,g.PMMTGCSPSQS_DWMC,g.PMMTGCSPSQS_DWBH,g.PMMTGCSPSQS_DWID,g.PMMTGCSPSQS_BMMC,g.PMMTGCSPSQS_BMBH,g.PMMTGCSPSQS_BMID,g.PMMTGCSPSQS_TBR,to_char(g.PMMTGCSPSQS_TBRQ,'yyyy-mm-dd') PMMTGCSPSQS_TBRQ,g.PMMTGCSPSQS_SPZT,g.PMMTGCSPSQS_FILE,g.PMMTGCSPSQS_DJBH,g.PMMTGCSPSQS_CJRQ,g.PMMTGCSPSQS_GCMC,g.PMMTGCSPSQS_HTBH,g.PMMTGCSPSQS_SQJE,g.PMMTGCSPSQS_SPSJ,g.PMMTGCSPSQS_SCYJS,g.PMMTGCSPSQS_SPYJS,g.PMMTGCSPSQS_SPJE,g.PMMTGCSPSQS_CJDW,g.PMMTGCSPSQS_GLDW,to_char(g.PMMTGCSPSQS_SQRQ,'yyyy-mm-dd') PMMTGCSPSQS_SQRQ,g.PMMTGCSPSQS_CBDW,g.PMMTGCSPSQS_SPSJJS
         from GCSPSQS g where 1=1
         <if test="pmmtgcspsqs_htbh != null and pmmtgcspsqs_htbh != ''">
             and g.pmmtgcspsqs_htbh=#{pmmtgcspsqs_htbh}
         </if>
         <if test="ksrq != null and ksrq != ''">
-            and to_date(to_char(g.pmmtgcspsqs_sqrq,'yyyy/mm/dd'),'yyyy/mm/dd')>=to_date(#{ksrq},'yyyy/mm/dd')
+            and to_date(to_char(g.pmmtgcspsqs_sqrq,'yyyy-mm-dd'),'yyyy-mm-dd')>=to_date(#{ksrq},'yyyy-mm-dd')
         </if>
         <if test="jsrq != null and jsrq != ''">
-            and to_date(to_char(g.pmmtgcspsqs_sqrq,'yyyy/mm/dd'),'yyyy/mm/dd')&lt;=to_date(#{jsrq},'yyyy/mm/dd')
+            and to_date(to_char(g.pmmtgcspsqs_sqrq,'yyyy-mm-dd'),'yyyy-mm-dd')&lt;=to_date(#{jsrq},'yyyy-mm-dd')
         </if>
     </select>
 
@@ -181,7 +181,7 @@
 		<trim prefix="values (" suffix=")" suffixOverrides="," >
 			<if test="pmmtgcspsqs_djbh != null" >#{pmmtgcspsqs_djbh},</if>
 			<if test="pmmtgcspsqs_gcmc != null" >#{pmmtgcspsqs_gcmc},</if>
-			<if test="pmmtgcspsqs_sqrq != null" >to_date(#{pmmtgcspsqs_sqrq},'yyyy/mm/dd'),</if>
+			<if test="pmmtgcspsqs_sqrq != null" >to_date(#{pmmtgcspsqs_sqrq},'yyyy-mm-dd'),</if>
 			<if test="pmmtgcspsqs_htbh != null" >#{pmmtgcspsqs_htbh},</if>
 			<if test="pmmtgcspsqs_gldw != null" >#{pmmtgcspsqs_gldw},</if>
 			<if test="pmmtgcspsqs_cbdw != null" >#{pmmtgcspsqs_cbdw},</if>
@@ -189,7 +189,7 @@
 			<if test="pmmtgcspsqs_sqje != null" >#{pmmtgcspsqs_sqje},</if>
 			<if test="pmmtgcspsqs_spje != null" >#{pmmtgcspsqs_spje},</if>
 			<if test="pmmtgcspsqs_tbr != null" >#{pmmtgcspsqs_tbr},</if>
-            <if test="pmmtgcspsqs_tbrq != null" >to_date(#{pmmtgcspsqs_tbrq},'yyyy/mm/dd'),</if>
+            <if test="pmmtgcspsqs_tbrq != null" >to_date(#{pmmtgcspsqs_tbrq},'yyyy-mm-dd'),</if>
             <if test="pmmtgcspsqs_bmmc != null" >#{pmmtgcspsqs_bmmc},</if>
             <if test="pmmtgcspsqs_dwmc != null" >#{pmmtgcspsqs_dwmc},</if>
 		</trim>
@@ -200,7 +200,7 @@
         update GCSPSQS
         <set>
             <if test="pmmtgcspsqs_gcmc != null" >pmmtgcspsqs_gcmc=#{pmmtgcspsqs_gcmc},</if>
-            <if test="pmmtgcspsqs_sqrq != null" >pmmtgcspsqs_sqrq=to_date(#{pmmtgcspsqs_sqrq},'yyyy/mm/dd'),</if>
+            <if test="pmmtgcspsqs_sqrq != null" >pmmtgcspsqs_sqrq=to_date(#{pmmtgcspsqs_sqrq},'yyyy-mm-dd'),</if>
             <if test="pmmtgcspsqs_htbh != null" >pmmtgcspsqs_htbh=#{pmmtgcspsqs_htbh},</if>
             <if test="pmmtgcspsqs_gldw != null" >pmmtgcspsqs_gldw=#{pmmtgcspsqs_gldw},</if>
             <if test="pmmtgcspsqs_cbdw != null" >pmmtgcspsqs_cbdw=#{pmmtgcspsqs_cbdw},</if>
@@ -208,7 +208,7 @@
             <if test="pmmtgcspsqs_sqje != null" >pmmtgcspsqs_sqje=#{pmmtgcspsqs_sqje},</if>
             <if test="pmmtgcspsqs_spje != null" >pmmtgcspsqs_spje=#{pmmtgcspsqs_spje},</if>
             <if test="pmmtgcspsqs_tbr != null" >pmmtgcspsqs_tbr=#{pmmtgcspsqs_tbr},</if>
-            <if test="pmmtgcspsqs_tbrq != null" >pmmtgcspsqs_tbrq=to_date(#{pmmtgcspsqs_tbrq},'yyyy/mm/dd'),</if>
+            <if test="pmmtgcspsqs_tbrq != null" >pmmtgcspsqs_tbrq=to_date(#{pmmtgcspsqs_tbrq},'yyyy-mm-dd'),</if>
             <if test="pmmtgcspsqs_bmmc != null" >pmmtgcspsqs_bmmc=#{pmmtgcspsqs_bmmc},</if>
             <if test="pmmtgcspsqs_dwmc != null" >pmmtgcspsqs_dwmc=#{pmmtgcspsqs_dwmc},</if>
         </set>
@@ -226,7 +226,7 @@
 
     <!--  通过单据编号查询索赔申请书  -->
     <select id="getSpsqsInfoByDjbh" parameterType="string" resultType="com.hdsx.rcyh.entity.Jlzf">
-        select g.PMMTGCSPSQS_ID,g.PMMTGCSPSQS_DWMC,g.PMMTGCSPSQS_DWBH,g.PMMTGCSPSQS_DWID,g.PMMTGCSPSQS_BMMC,g.PMMTGCSPSQS_BMBH,g.PMMTGCSPSQS_BMID,g.PMMTGCSPSQS_TBR,to_char(g.PMMTGCSPSQS_TBRQ,'yyyy/mm/dd') PMMTGCSPSQS_TBRQ,g.PMMTGCSPSQS_SPZT,g.PMMTGCSPSQS_FILE,g.PMMTGCSPSQS_DJBH,g.PMMTGCSPSQS_CJRQ,g.PMMTGCSPSQS_GCMC,g.PMMTGCSPSQS_HTBH,g.PMMTGCSPSQS_SQJE,g.PMMTGCSPSQS_SPSJ,g.PMMTGCSPSQS_SCYJS,g.PMMTGCSPSQS_SPYJS,g.PMMTGCSPSQS_SPJE,g.PMMTGCSPSQS_CJDW,g.PMMTGCSPSQS_GLDW,to_char(g.PMMTGCSPSQS_SQRQ,'yyyy/mm/dd') PMMTGCSPSQS_SQRQ,g.PMMTGCSPSQS_CBDW,g.PMMTGCSPSQS_SPSJJS
+        select g.PMMTGCSPSQS_ID,g.PMMTGCSPSQS_DWMC,g.PMMTGCSPSQS_DWBH,g.PMMTGCSPSQS_DWID,g.PMMTGCSPSQS_BMMC,g.PMMTGCSPSQS_BMBH,g.PMMTGCSPSQS_BMID,g.PMMTGCSPSQS_TBR,to_char(g.PMMTGCSPSQS_TBRQ,'yyyy-mm-dd') PMMTGCSPSQS_TBRQ,g.PMMTGCSPSQS_SPZT,g.PMMTGCSPSQS_FILE,g.PMMTGCSPSQS_DJBH,g.PMMTGCSPSQS_CJRQ,g.PMMTGCSPSQS_GCMC,g.PMMTGCSPSQS_HTBH,g.PMMTGCSPSQS_SQJE,g.PMMTGCSPSQS_SPSJ,g.PMMTGCSPSQS_SCYJS,g.PMMTGCSPSQS_SPYJS,g.PMMTGCSPSQS_SPJE,g.PMMTGCSPSQS_CJDW,g.PMMTGCSPSQS_GLDW,to_char(g.PMMTGCSPSQS_SQRQ,'yyyy-mm-dd') PMMTGCSPSQS_SQRQ,g.PMMTGCSPSQS_CBDW,g.PMMTGCSPSQS_SPSJJS
         from GCSPSQS g where pmmtgcspsqs_djbh=#{value}
     </select>
 
@@ -274,7 +274,7 @@
         <trim prefix="values (" suffix=")" suffixOverrides="," >
             <if test="gcjl_djbh != null" >#{gcjl_djbh},</if>
             <if test="gcjl_gcmc != null" >#{gcjl_gcmc},</if>
-            <if test="gcjl_sqrq != null" >to_date(#{gcjl_sqrq},'yyyy/mm/dd'),</if>
+            <if test="gcjl_sqrq != null" >to_date(#{gcjl_sqrq},'yyyy-mm-dd'),</if>
             <if test="gcjl_yd != null" >#{gcjl_yd},</if>
             <if test="gcjl_htmc != null" >#{gcjl_htmc},</if>
             <if test="gcjl_htid != null" >#{gcjl_htid},</if>
@@ -288,7 +288,7 @@
             <if test="gcjl_jtsm != null" >#{gcjl_jtsm},</if>
             <if test="gcjl_tbr != null" >#{gcjl_tbr},</if>
             <if test="gcjl_tbrid != null" >#{gcjl_tbrid},</if>
-            <if test="gcjl_tbrq != null" >to_date(#{gcjl_tbrq},'yyyy/mm/dd'),</if>
+            <if test="gcjl_tbrq != null" >to_date(#{gcjl_tbrq},'yyyy-mm-dd'),</if>
         </trim>
     </insert>
 
@@ -333,7 +333,7 @@
         update GCJLD
         <set>
             <if test="gcjl_gcmc != null" >gcjl_gcmc=#{gcjl_gcmc},</if>
-            <if test="gcjl_sqrq != null" >gcjl_sqrq=to_date(#{gcjl_sqrq},'yyyy/mm/dd'),</if>
+            <if test="gcjl_sqrq != null" >gcjl_sqrq=to_date(#{gcjl_sqrq},'yyyy-mm-dd'),</if>
             <if test="gcjl_yd != null" >gcjl_yd=#{gcjl_yd},</if>
             <if test="gcjl_htmc != null" >gcjl_htmc=#{gcjl_htmc},</if>
             <if test="gcjl_htid != null" >gcjl_htid=#{gcjl_htid},</if>
@@ -347,13 +347,13 @@
             <if test="gcjl_jtsm != null" >gcjl_jtsm=#{gcjl_jtsm},</if>
             <if test="gcjl_tbr != null" >gcjl_tbr=#{gcjl_tbr},</if>
             <if test="gcjl_tbrid != null" >gcjl_tbrid=#{gcjl_tbrid},</if>
-            <if test="gcjl_tbrq != null" >gcjl_tbrq=to_date(#{gcjl_tbrq},'yyyy/mm/dd'),</if>
+            <if test="gcjl_tbrq != null" >gcjl_tbrq=to_date(#{gcjl_tbrq},'yyyy-mm-dd'),</if>
         </set>
         where 1=1 and gcjl_djbh=#{gcjl_djbh}
     </update>
     <!--  通过单据编号查询工程计量单信息  -->
     <select id="getGcjldInfoByDjbh" resultMap="jlzfmaps" parameterType="hashmap">
-        select g.gcjl_dwmc, g.gcjl_dwbh, g.gcjl_dwid, g.gcjl_bmmc, g.gcjl_bmbh, g.gcjl_bmid, g.gcjl_tbr, g.gcjl_tbrid, to_char(gcjl_tbrq,'yyyy/mm/dd') gcjl_tbrq, gcjl_spzt, gcjl_file, gcjl_wfid, gcjl_note, gcjl_djbh, gcjl_code, gcjl_xmmc, gcjl_xmid, gcjl_xmbh, gcjl_htmc, gcjl_htid, gcjl_htbh, gcjl_cjdwmc, gcjl_cjdwbh, gcjl_cjdwid, gcjl_rq, gcjl_bw, gcjl_th, gcjl_zjdbh, gcjl_jtsm, gcjl_flag, gcjl_sfybgc, gcjl_ybgcdh, gcjl_gcmc, to_char(gcjl_sqrq,'yyyy/mm/dd') gcjl_sqrq, gcjl_yd, gcjl_cbdw, gcjl_qdzh, gcjl_zdzh, gcjl_sl,
+        select g.gcjl_dwmc, g.gcjl_dwbh, g.gcjl_dwid, g.gcjl_bmmc, g.gcjl_bmbh, g.gcjl_bmid, g.gcjl_tbr, g.gcjl_tbrid, to_char(gcjl_tbrq,'yyyy-mm-dd') gcjl_tbrq, gcjl_spzt, gcjl_file, gcjl_wfid, gcjl_note, gcjl_djbh, gcjl_code, gcjl_xmmc, gcjl_xmid, gcjl_xmbh, gcjl_htmc, gcjl_htid, gcjl_htbh, gcjl_cjdwmc, gcjl_cjdwbh, gcjl_cjdwid, gcjl_rq, gcjl_bw, gcjl_th, gcjl_zjdbh, gcjl_jtsm, gcjl_flag, gcjl_sfybgc, gcjl_ybgcdh, gcjl_gcmc, to_char(gcjl_sqrq,'yyyy-mm-dd') gcjl_sqrq, gcjl_yd, gcjl_cbdw, gcjl_qdzh, gcjl_zdzh, gcjl_sl,
         mx.* from GCJLD g
         left join GCJLDMX mx on g.gcjl_djbh=mx.gcjlmx_djbh
         where g.gcjl_djbh=#{djbh}
@@ -369,7 +369,7 @@
     <!-- 查询工程计量单列表数据 -->
     <select id="getGcjldList" parameterType="hashmap" resultMap="jlzfmaps">
 
-        select g.gcjl_dwmc, g.gcjl_dwbh, g.gcjl_dwid, g.gcjl_bmmc, g.gcjl_bmbh, g.gcjl_bmid, g.gcjl_tbr, g.gcjl_tbrid, to_char(gcjl_tbrq,'yyyy/mm/dd') gcjl_tbrq, gcjl_spzt, gcjl_file, gcjl_wfid, gcjl_note, gcjl_djbh, gcjl_code, gcjl_xmmc, gcjl_xmid, gcjl_xmbh, gcjl_htmc, gcjl_htid, gcjl_htbh, gcjl_cjdwmc, gcjl_cjdwbh, gcjl_cjdwid, gcjl_rq, gcjl_bw, gcjl_th, gcjl_zjdbh, gcjl_jtsm, gcjl_flag, gcjl_sfybgc, gcjl_ybgcdh, gcjl_gcmc, to_char(gcjl_sqrq,'yyyy/mm/dd') gcjl_sqrq, gcjl_yd, gcjl_cbdw, gcjl_qdzh, gcjl_zdzh, gcjl_sl,
+        select g.gcjl_dwmc, g.gcjl_dwbh, g.gcjl_dwid, g.gcjl_bmmc, g.gcjl_bmbh, g.gcjl_bmid, g.gcjl_tbr, g.gcjl_tbrid, to_char(gcjl_tbrq,'yyyy-mm-dd') gcjl_tbrq, gcjl_spzt, gcjl_file, gcjl_wfid, gcjl_note, gcjl_djbh, gcjl_code, gcjl_xmmc, gcjl_xmid, gcjl_xmbh, gcjl_htmc, gcjl_htid, gcjl_htbh, gcjl_cjdwmc, gcjl_cjdwbh, gcjl_cjdwid, gcjl_rq, gcjl_bw, gcjl_th, gcjl_zjdbh, gcjl_jtsm, gcjl_flag, gcjl_sfybgc, gcjl_ybgcdh, gcjl_gcmc, to_char(gcjl_sqrq,'yyyy-mm-dd') gcjl_sqrq, gcjl_yd, gcjl_cbdw, gcjl_qdzh, gcjl_zdzh, gcjl_sl,
         mx.* from GCJLD g
         left join GCJLDMX mx on g.gcjl_djbh=mx.gcjlmx_djbh
         where 1=1
@@ -377,17 +377,17 @@
             and g.gcjl_htbh=#{gcjl_htbh}
         </if>
         <if test="ksrq != null and ksrq != ''">
-            and to_date(to_char(g.gcjl_sqrq,'yyyy/mm/dd'),'yyyy/mm/dd')>=to_date(#{ksrq},'yyyy/mm/dd')
+            and to_date(to_char(g.gcjl_sqrq,'yyyy-mm-dd'),'yyyy-mm-dd')>=to_date(#{ksrq},'yyyy-mm-dd')
         </if>
         <if test="jsrq != null and jsrq != ''">
-            and to_date(to_char(g.gcjl_sqrq,'yyyy/mm/dd'),'yyyy/mm/dd')&lt;=to_date(#{jsrq},'yyyy/mm/dd')
+            and to_date(to_char(g.gcjl_sqrq,'yyyy-mm-dd'),'yyyy-mm-dd')&lt;=to_date(#{jsrq},'yyyy-mm-dd')
         </if>
     </select>
 
     <!-- 查询工程计量单列表汇总数据 -->
     <select id="getGcjldHzList" parameterType="hashmap" resultType="com.hdsx.rcyh.entity.Zmzb">
 
-        select g.gcjl_dwmc, g.gcjl_dwbh, g.gcjl_dwid, g.gcjl_bmmc, g.gcjl_bmbh, g.gcjl_bmid, g.gcjl_tbr, g.gcjl_tbrid, to_char(gcjl_tbrq,'yyyy/mm/dd') gcjl_tbrq, gcjl_spzt, gcjl_file, gcjl_wfid, gcjl_note, gcjl_djbh, gcjl_code, gcjl_xmmc, gcjl_xmid, gcjl_xmbh, gcjl_htmc, gcjl_htid, gcjl_htbh, gcjl_cjdwmc, gcjl_cjdwbh, gcjl_cjdwid, gcjl_rq, gcjl_bw, gcjl_th, gcjl_zjdbh, gcjl_jtsm, gcjl_flag, gcjl_sfybgc, gcjl_ybgcdh, gcjl_gcmc, to_char(gcjl_sqrq,'yyyy/mm/dd') gcjl_sqrq, gcjl_yd, gcjl_cbdw, gcjl_qdzh, gcjl_zdzh, gcjl_sl,
+        select g.gcjl_dwmc, g.gcjl_dwbh, g.gcjl_dwid, g.gcjl_bmmc, g.gcjl_bmbh, g.gcjl_bmid, g.gcjl_tbr, g.gcjl_tbrid, to_char(gcjl_tbrq,'yyyy-mm-dd') gcjl_tbrq, gcjl_spzt, gcjl_file, gcjl_wfid, gcjl_note, gcjl_djbh, gcjl_code, gcjl_xmmc, gcjl_xmid, gcjl_xmbh, gcjl_htmc, gcjl_htid, gcjl_htbh, gcjl_cjdwmc, gcjl_cjdwbh, gcjl_cjdwid, gcjl_rq, gcjl_bw, gcjl_th, gcjl_zjdbh, gcjl_jtsm, gcjl_flag, gcjl_sfybgc, gcjl_ybgcdh, gcjl_gcmc, to_char(gcjl_sqrq,'yyyy-mm-dd') gcjl_sqrq, gcjl_yd, gcjl_cbdw, gcjl_qdzh, gcjl_zdzh, gcjl_sl,
         mxzb.* from GCJLD g
         left join (select gcjlmx_djbh jldbh,gcjlmx_zmh zmh,max(gcjlmx_zmmc) zmmc,max(gcjlmx_jldw) dw,sum(nvl(gcjlmx_wcsl,0)) sl from GCJLDMX t group by t.gcjlmx_djbh,t.gcjlmx_zmh
         ) mxzb on g.gcjl_djbh=mxzb.jldbh
@@ -397,10 +397,10 @@
             and g.gcjl_htbh=#{gcjl_htbh}
         </if>
         <if test="ksrq != null and ksrq != ''">
-            and to_date(to_char(g.gcjl_sqrq,'yyyy/mm/dd'),'yyyy/mm/dd')>=to_date(#{ksrq},'yyyy/mm/dd')
+            and to_date(to_char(g.gcjl_sqrq,'yyyy-mm-dd'),'yyyy-mm-dd')>=to_date(#{ksrq},'yyyy-mm-dd')
         </if>
         <if test="jsrq != null and jsrq != ''">
-            and to_date(to_char(g.gcjl_sqrq,'yyyy/mm/dd'),'yyyy/mm/dd')&lt;=to_date(#{jsrq},'yyyy/mm/dd')
+            and to_date(to_char(g.gcjl_sqrq,'yyyy-mm-dd'),'yyyy-mm-dd')&lt;=to_date(#{jsrq},'yyyy-mm-dd')
         </if>
     </select>
 
@@ -448,7 +448,7 @@
         begin
             <foreach collection="jlzf_jrgspmx" item="item" index="index" separator=";">
                 insert into JRGTBSP_JLMX(JRGMX_ID, JRGMX_MID, JRGMX_XMH, JRGMX_XMMC, JRGMX_JLDW, JRGMX_SL, JRGMX_DJ, JRGMX_JE, JRGMX_YT, JRGMX_RQ, JRGMX_DJBH )  values
-                (sys_guid(),trim(#{jrgsp_djbh}),trim(#{item.jrgmx_xmh}),trim(#{item.jrgmx_xmmc}),trim(#{item.jrgmx_jldw}),trim(#{item.jrgmx_sl}),trim(#{item.jrgmx_dj}),trim(#{item.jrgmx_sl})*trim(#{item.jrgmx_dj}),trim(#{item.jrgmx_yt}),to_date(trim(#{item.jrgmx_rq}),'yyyy/mm/dd'),trim(#{jrgsp_djbh}))
+                (sys_guid(),trim(#{jrgsp_djbh}),trim(#{item.jrgmx_xmh}),trim(#{item.jrgmx_xmmc}),trim(#{item.jrgmx_jldw}),trim(#{item.jrgmx_sl}),trim(#{item.jrgmx_dj}),trim(#{item.jrgmx_sl})*trim(#{item.jrgmx_dj}),trim(#{item.jrgmx_yt}),to_date(trim(#{item.jrgmx_rq}),'yyyy-mm-dd'),trim(#{jrgsp_djbh}))
             </foreach>
         ;end;
     </insert>
@@ -488,7 +488,7 @@
             <if test="jrgsp_bmid != null" >#{jrgsp_bmid},</if>
             <if test="jrgsp_tbr != null" >#{jrgsp_tbr},</if>
             <if test="jrgsp_tbrid != null" >#{jrgsp_tbrid},</if>
-            <if test="jrgsp_tbrq != null" >to_date(#{jrgsp_tbrq},'yyyy/mm/dd'),</if>
+            <if test="jrgsp_tbrq != null" >to_date(#{jrgsp_tbrq},'yyyy-mm-dd'),</if>
             <if test="jrgsp_spzt != null" >#{jrgsp_spzt},</if>
             <if test="jrgsp_wfid != null" >#{jrgsp_wfid},</if>
             <if test="jrgsp_note != null" >#{jrgsp_note},</if>
@@ -520,7 +520,7 @@
             <if test="jrgsp_bmid != null" >jrgsp_bmid=#{jrgsp_bmid},</if>
             <if test="jrgsp_tbr != null" >jrgsp_tbr=#{jrgsp_tbr},</if>
             <if test="jrgsp_tbrid != null" >jrgsp_tbrid=#{jrgsp_tbrid},</if>
-            <if test="jrgsp_tbrq != null" >jrgsp_tbrq=to_date(#{jrgsp_tbrq},'yyyy/mm/dd'),</if>
+            <if test="jrgsp_tbrq != null" >jrgsp_tbrq=to_date(#{jrgsp_tbrq},'yyyy-mm-dd'),</if>
             <if test="jrgsp_spzt != null" >jrgsp_spzt=#{jrgsp_spzt},</if>
             <if test="jrgsp_wfid != null" >jrgsp_wfid=#{jrgsp_wfid},</if>
             <if test="jrgsp_note != null" >jrgsp_note=#{jrgsp_note},</if>
@@ -561,8 +561,8 @@
     <!-- 查询计日工审批列表数据 -->
     <select id="getJgrspList" parameterType="hashmap" resultMap="jrgsp">
 
-        select zb.JRGSP_HTBH,zb.JRGSP_ID,zb.JRGSP_DWMC,zb.jRGSP_DWBH,zb.jRGSP_DWID,zb.jRGSP_BMMC,zb.jRGSP_BMBH,zb.jRGSP_BMID,zb.jRGSP_TBR,zb.jRGSP_TBRID,to_char(zb.jRGSP_TBRQ,'yyyy/mm/dd') jRGSP_TBRQ,zb.jRGSP_SPZT,zb.jRGSP_FILE,zb.jRGSP_WFID,zb.jRGSP_NOTE,zb.jRGSP_DJBH,zb.jRGSP_XMMC,zb.jRGSP_XMBH,zb.jRGSP_XMID,zb.jRGSP_CBDWMC,zb.jRGSP_CBDWID,zb.jRGSP_CBDWBH,tz.zje jRGSP_HJJE,zb.jRGSP_GCMC,
-        fb.JRGMX_ID, fb.JRGMX_MID, fb.JRGMX_XMH, fb.JRGMX_XMMC, fb.JRGMX_JLDW, fb.JRGMX_SL, fb.JRGMX_DJ, fb.JRGMX_JE, fb.JRGMX_YT, to_char(fb.JRGMX_RQ,'yyyy/mm/dd') JRGMX_RQ, fb.JRGMX_DJBH
+        select zb.JRGSP_HTBH,zb.JRGSP_ID,zb.JRGSP_DWMC,zb.jRGSP_DWBH,zb.jRGSP_DWID,zb.jRGSP_BMMC,zb.jRGSP_BMBH,zb.jRGSP_BMID,zb.jRGSP_TBR,zb.jRGSP_TBRID,to_char(zb.jRGSP_TBRQ,'yyyy-mm-dd') jRGSP_TBRQ,zb.jRGSP_SPZT,zb.jRGSP_FILE,zb.jRGSP_WFID,zb.jRGSP_NOTE,zb.jRGSP_DJBH,zb.jRGSP_XMMC,zb.jRGSP_XMBH,zb.jRGSP_XMID,zb.jRGSP_CBDWMC,zb.jRGSP_CBDWID,zb.jRGSP_CBDWBH,tz.zje jRGSP_HJJE,zb.jRGSP_GCMC,
+        fb.JRGMX_ID, fb.JRGMX_MID, fb.JRGMX_XMH, fb.JRGMX_XMMC, fb.JRGMX_JLDW, fb.JRGMX_SL, fb.JRGMX_DJ, fb.JRGMX_JE, fb.JRGMX_YT, to_char(fb.JRGMX_RQ,'yyyy-mm-dd') JRGMX_RQ, fb.JRGMX_DJBH
         from
         JRGTBSP zb left join Jrgtbsp_Jlmx fb on zb.jrgsp_djbh=fb.jrgmx_djbh
         left join (
@@ -573,17 +573,17 @@
             and zb.JRGSP_HTBH=#{htbh}
         </if>
         <if test="ksrq != null and ksrq != ''">
-            and to_date(to_char(zb.jRGSP_TBRQ,'yyyy/mm/dd'),'yyyy/mm/dd')>=to_date(#{ksrq},'yyyy/mm/dd')
+            and to_date(to_char(zb.jRGSP_TBRQ,'yyyy-mm-dd'),'yyyy-mm-dd')>=to_date(#{ksrq},'yyyy-mm-dd')
         </if>
         <if test="jsrq != null and jsrq != ''">
-            and to_date(to_char(zb.jRGSP_TBRQ,'yyyy/mm/dd'),'yyyy/mm/dd')&lt;=to_date(#{jsrq},'yyyy/mm/dd')
+            and to_date(to_char(zb.jRGSP_TBRQ,'yyyy-mm-dd'),'yyyy-mm-dd')&lt;=to_date(#{jsrq},'yyyy-mm-dd')
         </if>
     </select>
 
     <select id="getJgrspInfoByDjbh" parameterType="hashmap" resultMap="jrgsp">
 
-        select zb.JRGSP_HTBH,zb.JRGSP_ID,zb.JRGSP_DWMC,zb.jRGSP_DWBH,zb.jRGSP_DWID,zb.jRGSP_BMMC,zb.jRGSP_BMBH,zb.jRGSP_BMID,zb.jRGSP_TBR,zb.jRGSP_TBRID,to_char(zb.jRGSP_TBRQ,'yyyy/mm/dd') jRGSP_TBRQ,zb.jRGSP_SPZT,zb.jRGSP_FILE,zb.jRGSP_WFID,zb.jRGSP_NOTE,zb.jRGSP_DJBH,zb.jRGSP_XMMC,zb.jRGSP_XMBH,zb.jRGSP_XMID,zb.jRGSP_CBDWMC,zb.jRGSP_CBDWID,zb.jRGSP_CBDWBH,tz.zje jRGSP_HJJE,zb.jRGSP_GCMC,
-        fb.JRGMX_ID, fb.JRGMX_MID, fb.JRGMX_XMH, fb.JRGMX_XMMC, fb.JRGMX_JLDW, fb.JRGMX_SL, fb.JRGMX_DJ, fb.JRGMX_JE, fb.JRGMX_YT, to_char(fb.JRGMX_RQ,'yyyy/mm/dd') JRGMX_RQ, fb.JRGMX_DJBH
+        select zb.JRGSP_HTBH,zb.JRGSP_ID,zb.JRGSP_DWMC,zb.jRGSP_DWBH,zb.jRGSP_DWID,zb.jRGSP_BMMC,zb.jRGSP_BMBH,zb.jRGSP_BMID,zb.jRGSP_TBR,zb.jRGSP_TBRID,to_char(zb.jRGSP_TBRQ,'yyyy-mm-dd') jRGSP_TBRQ,zb.jRGSP_SPZT,zb.jRGSP_FILE,zb.jRGSP_WFID,zb.jRGSP_NOTE,zb.jRGSP_DJBH,zb.jRGSP_XMMC,zb.jRGSP_XMBH,zb.jRGSP_XMID,zb.jRGSP_CBDWMC,zb.jRGSP_CBDWID,zb.jRGSP_CBDWBH,tz.zje jRGSP_HJJE,zb.jRGSP_GCMC,
+        fb.JRGMX_ID, fb.JRGMX_MID, fb.JRGMX_XMH, fb.JRGMX_XMMC, fb.JRGMX_JLDW, fb.JRGMX_SL, fb.JRGMX_DJ, fb.JRGMX_JE, fb.JRGMX_YT, to_char(fb.JRGMX_RQ,'yyyy-mm-dd') JRGMX_RQ, fb.JRGMX_DJBH
         from
         JRGTBSP zb left join Jrgtbsp_Jlmx fb on zb.jrgsp_djbh=fb.jrgmx_djbh
         left join (
@@ -688,7 +688,7 @@
             <if test="zqcwzf_bmid != null" >#{zqcwzf_bmid},</if>
             <if test="zqcwzf_tbr != null" >#{zqcwzf_tbr},</if>
             <if test="zqcwzf_tbrid != null" >#{zqcwzf_tbrid},</if>
-            <if test="zqcwzf_tbrq != null" >to_date(#{zqcwzf_tbrq},'yyyy/mm/dd'),</if>
+            <if test="zqcwzf_tbrq != null" >to_date(#{zqcwzf_tbrq},'yyyy-mm-dd'),</if>
             <if test="zqcwzf_wfid != null" >#{zqcwzf_wfid},</if>
             <if test="zqcwzf_note != null" >#{zqcwzf_note},</if>
             <if test="zqcwzf_djbh != null" >#{zqcwzf_djbh},</if>
@@ -702,7 +702,7 @@
             <if test="zqcwzf_cjdwmc != null" >#{zqcwzf_cjdwmc},</if>
             <if test="zqcwzf_cjdwid != null" >#{zqcwzf_cjdwid},</if>
             <if test="zqcwzf_cjdwbh != null" >#{zqcwzf_cjdwbh},</if>
-            <if test="zqcwzf_jzrq != null" >to_date(#{zqcwzf_tbrq},'yyyy/mm/dd'),</if>
+            <if test="zqcwzf_jzrq != null" >to_date(#{zqcwzf_tbrq},'yyyy-mm-dd'),</if>
             <if test="zqcwzf_flag != null" >#{zqcwzf_flag},</if>
             <if test="zqcwzf_gldw != null" >#{zqcwzf_gldw},</if>
             <if test="zqcwzf_jldw != null" >#{zqcwzf_jldw},</if>
@@ -739,7 +739,7 @@
             <if test="zqcwzf_bmid != null" >zqcwzf_bmid=#{zqcwzf_bmid},</if>
             <if test="zqcwzf_tbr != null" >zqcwzf_tbr=#{zqcwzf_tbr},</if>
             <if test="zqcwzf_tbrid != null" >zqcwzf_tbrid=#{zqcwzf_tbrid},</if>
-            <if test="zqcwzf_tbrq != null" >zqcwzf_tbrq=to_date(#{zqcwzf_tbrq},'yyyy/mm/dd'),</if>
+            <if test="zqcwzf_tbrq != null" >zqcwzf_tbrq=to_date(#{zqcwzf_tbrq},'yyyy-mm-dd'),</if>
             <if test="zqcwzf_wfid != null" >zqcwzf_wfid=#{zqcwzf_wfid},</if>
             <if test="zqcwzf_note != null" >zqcwzf_note=#{zqcwzf_note},</if>
             <if test="zqcwzf_djbh != null" >zqcwzf_djbh=#{zqcwzf_djbh},</if>
@@ -753,7 +753,7 @@
             <if test="zqcwzf_cjdwmc != null" >zqcwzf_cjdwmc=#{zqcwzf_cjdwmc},</if>
             <if test="zqcwzf_cjdwid != null" >zqcwzf_cjdwid=#{zqcwzf_cjdwid},</if>
             <if test="zqcwzf_cjdwbh != null" >zqcwzf_cjdwbh=#{zqcwzf_cjdwbh},</if>
-            <if test="zqcwzf_jzrq != null" >zqcwzf_jzrq=to_date(#{zqcwzf_tbrq},'yyyy/mm/dd'),</if>
+            <if test="zqcwzf_jzrq != null" >zqcwzf_jzrq=to_date(#{zqcwzf_tbrq},'yyyy-mm-dd'),</if>
             <if test="zqcwzf_flag != null" >zqcwzf_flag=#{zqcwzf_flag},</if>
             <if test="zqcwzf_gldw != null" >zqcwzf_gldw=#{zqcwzf_gldw},</if>
             <if test="zqcwzf_jldw != null" >zqcwzf_jldw=#{zqcwzf_jldw},</if>
@@ -784,7 +784,7 @@
     <select id="getZqcwzfList" parameterType="hashmap" resultMap="zqcwzf">
 
         select
-        zb.ZQCWZF_ID, zb.ZQCWZF_DWMC, zb.ZQCWZF_DWBH, zb.ZQCWZF_DWID, zb.ZQCWZF_BMMC, zb.ZQCWZF_BMBH, zb.ZQCWZF_BMID, zb.ZQCWZF_TBR, zb.ZQCWZF_TBRID, to_char(zb.ZQCWZF_TBRQ,'yyyy/mm/dd') ZQCWZF_TBRQ, zb.ZQCWZF_SPZT, zb.ZQCWZF_FILLE, zb.ZQCWZF_WFID, zb.ZQCWZF_NOTE, zb.ZQCWZF_DJBH, zb.ZQCWZF_ZFQH, zb.ZQCWZF_XMMC, zb.ZQCWZF_XMID, zb.ZQCWZF_XMBH, zb.ZQCWZF_HTMC, zb.ZQCWZF_HTID, zb.ZQCWZF_HTBH, zb.ZQCWZF_CJDWMC, zb.ZQCWZF_CJDWID, zb.ZQCWZF_CJDWBH, to_char(zb.ZQCWZF_JZRQ,'yyyy/mm/dd')  ZQCWZF_JZRQ, zb.ZQCWZF_FLAG, zb.ZQCWZF_GLDW, zb.ZQCWZF_JLDW, zb.ZQCWZF_GCMC, zb.ZQCWZF_CBDW,
+        zb.ZQCWZF_ID, zb.ZQCWZF_DWMC, zb.ZQCWZF_DWBH, zb.ZQCWZF_DWID, zb.ZQCWZF_BMMC, zb.ZQCWZF_BMBH, zb.ZQCWZF_BMID, zb.ZQCWZF_TBR, zb.ZQCWZF_TBRID, to_char(zb.ZQCWZF_TBRQ,'yyyy-mm-dd') ZQCWZF_TBRQ, zb.ZQCWZF_SPZT, zb.ZQCWZF_FILLE, zb.ZQCWZF_WFID, zb.ZQCWZF_NOTE, zb.ZQCWZF_DJBH, zb.ZQCWZF_ZFQH, zb.ZQCWZF_XMMC, zb.ZQCWZF_XMID, zb.ZQCWZF_XMBH, zb.ZQCWZF_HTMC, zb.ZQCWZF_HTID, zb.ZQCWZF_HTBH, zb.ZQCWZF_CJDWMC, zb.ZQCWZF_CJDWID, zb.ZQCWZF_CJDWBH, to_char(zb.ZQCWZF_JZRQ,'yyyy-mm-dd')  ZQCWZF_JZRQ, zb.ZQCWZF_FLAG, zb.ZQCWZF_GLDW, zb.ZQCWZF_JLDW, zb.ZQCWZF_GCMC, zb.ZQCWZF_CBDW,
         fb.ZQZFMX_ID, fb.ZQZFMX_MID, fb.ZQZFMX_ZMBH, fb.ZQZFMX_ZMMC, fb.ZQZFMX_JLDW, fb.ZQZFMX_JLDWID, fb.ZQZFMX_HTSL, fb.ZQZFMX_HTDJ, fb.ZQZFMX_HTJE, fb.ZQZFMX_LJWC, fb.ZQZFMX_BQWCSL, fb.ZQZFMX_BQWCJE, fb.ZQZFMX_SQWCSL, fb.ZQZFMX_SQWCJE, fb.ZQZFMX_BQSL, fb.ZQZFMX_BQJE, fb.ZQZFMX_ZFQH
         from ZQCWZFZS zb left join ZQCWZFZS_JLMX fb on zb.ZQCWZF_zfqh=fb.ZQZFMX_zfqh
         where 1=1
@@ -792,10 +792,10 @@
             and zb.ZQCWZF_HTBH=#{htbh}
         </if>
         <if test="ksrq != null and ksrq != ''">
-            and to_date(to_char(zb.ZQCWZF_TBRQ,'yyyy/mm/dd'),'yyyy/mm/dd')>=to_date(#{ksrq},'yyyy/mm/dd')
+            and to_date(to_char(zb.ZQCWZF_TBRQ,'yyyy-mm-dd'),'yyyy-mm-dd')>=to_date(#{ksrq},'yyyy-mm-dd')
         </if>
         <if test="jsrq != null and jsrq != ''">
-            and to_date(to_char(zb.ZQCWZF_TBRQ,'yyyy/mm/dd'),'yyyy/mm/dd')&lt;=to_date(#{jsrq},'yyyy/mm/dd')
+            and to_date(to_char(zb.ZQCWZF_TBRQ,'yyyy-mm-dd'),'yyyy-mm-dd')&lt;=to_date(#{jsrq},'yyyy-mm-dd')
         </if>
         order by ZQCWZF_zfqh,ZQZFMX_ZMBH
     </select>
@@ -803,7 +803,7 @@
     <!-- 通过支付期号查询中(终)期财务支付证书数据 -->
     <select id="getZqcwzfInfoByZfqh" parameterType="hashmap" resultMap="zqcwzf">
         select
-        zb.ZQCWZF_ID, zb.ZQCWZF_DWMC, zb.ZQCWZF_DWBH, zb.ZQCWZF_DWID, zb.ZQCWZF_BMMC, zb.ZQCWZF_BMBH, zb.ZQCWZF_BMID, zb.ZQCWZF_TBR, zb.ZQCWZF_TBRID, to_char(zb.ZQCWZF_TBRQ,'yyyy/mm/dd') ZQCWZF_TBRQ, zb.ZQCWZF_SPZT, zb.ZQCWZF_FILLE, zb.ZQCWZF_WFID, zb.ZQCWZF_NOTE, zb.ZQCWZF_DJBH, zb.ZQCWZF_ZFQH, zb.ZQCWZF_XMMC, zb.ZQCWZF_XMID, zb.ZQCWZF_XMBH, zb.ZQCWZF_HTMC, zb.ZQCWZF_HTID, zb.ZQCWZF_HTBH, zb.ZQCWZF_CJDWMC, zb.ZQCWZF_CJDWID, zb.ZQCWZF_CJDWBH, to_char(zb.ZQCWZF_JZRQ,'yyyy/mm/dd')  ZQCWZF_JZRQ, zb.ZQCWZF_FLAG, zb.ZQCWZF_GLDW, zb.ZQCWZF_JLDW, zb.ZQCWZF_GCMC, zb.ZQCWZF_CBDW, fb.ZQZFMX_ID, fb.ZQZFMX_MID, fb.ZQZFMX_ZMBH, fb.ZQZFMX_ZMMC, fb.ZQZFMX_JLDW, fb.ZQZFMX_JLDWID, fb.ZQZFMX_HTSL, fb.ZQZFMX_HTDJ, fb.ZQZFMX_HTJE, fb.ZQZFMX_LJWC, fb.ZQZFMX_BQWCSL, fb.ZQZFMX_BQWCJE, fb.ZQZFMX_SQWCSL, fb.ZQZFMX_SQWCJE, fb.ZQZFMX_BQSL, fb.ZQZFMX_BQJE, fb.ZQZFMX_ZFQH
+        zb.ZQCWZF_ID, zb.ZQCWZF_DWMC, zb.ZQCWZF_DWBH, zb.ZQCWZF_DWID, zb.ZQCWZF_BMMC, zb.ZQCWZF_BMBH, zb.ZQCWZF_BMID, zb.ZQCWZF_TBR, zb.ZQCWZF_TBRID, to_char(zb.ZQCWZF_TBRQ,'yyyy-mm-dd') ZQCWZF_TBRQ, zb.ZQCWZF_SPZT, zb.ZQCWZF_FILLE, zb.ZQCWZF_WFID, zb.ZQCWZF_NOTE, zb.ZQCWZF_DJBH, zb.ZQCWZF_ZFQH, zb.ZQCWZF_XMMC, zb.ZQCWZF_XMID, zb.ZQCWZF_XMBH, zb.ZQCWZF_HTMC, zb.ZQCWZF_HTID, zb.ZQCWZF_HTBH, zb.ZQCWZF_CJDWMC, zb.ZQCWZF_CJDWID, zb.ZQCWZF_CJDWBH, to_char(zb.ZQCWZF_JZRQ,'yyyy-mm-dd')  ZQCWZF_JZRQ, zb.ZQCWZF_FLAG, zb.ZQCWZF_GLDW, zb.ZQCWZF_JLDW, zb.ZQCWZF_GCMC, zb.ZQCWZF_CBDW, fb.ZQZFMX_ID, fb.ZQZFMX_MID, fb.ZQZFMX_ZMBH, fb.ZQZFMX_ZMMC, fb.ZQZFMX_JLDW, fb.ZQZFMX_JLDWID, fb.ZQZFMX_HTSL, fb.ZQZFMX_HTDJ, fb.ZQZFMX_HTJE, fb.ZQZFMX_LJWC, fb.ZQZFMX_BQWCSL, fb.ZQZFMX_BQWCJE, fb.ZQZFMX_SQWCSL, fb.ZQZFMX_SQWCJE, fb.ZQZFMX_BQSL, fb.ZQZFMX_BQJE, fb.ZQZFMX_ZFQH
         from ZQCWZFZS zb left join ZQCWZFZS_JLMX fb on zb.ZQCWZF_zfqh=fb.ZQZFMX_zfqh
         where 1=1
         and ZQCWZF_zfqh=#{zfqh}
@@ -822,10 +822,10 @@
             and zb.ZQCWZF_ZFQH=#{zfqh}
         </if>
         <if test="ksrq != null and ksrq != ''">
-            and to_date(to_char(zb.ZQCWZF_TBRQ,'yyyy/mm/dd'),'yyyy/mm/dd')>=to_date(#{ksrq},'yyyy/mm/dd')
+            and to_date(to_char(zb.ZQCWZF_TBRQ,'yyyy-mm-dd'),'yyyy-mm-dd')>=to_date(#{ksrq},'yyyy-mm-dd')
         </if>
         <if test="jsrq != null and jsrq != ''">
-            and to_date(to_char(zb.ZQCWZF_TBRQ,'yyyy/mm/dd'),'yyyy/mm/dd')&lt;=to_date(#{jsrq},'yyyy/mm/dd')
+            and to_date(to_char(zb.ZQCWZF_TBRQ,'yyyy-mm-dd'),'yyyy-mm-dd')&lt;=to_date(#{jsrq},'yyyy-mm-dd')
         </if>
         order by ZQZFMX_zfqh,ZQZFMX_ZMBH
     </select>
@@ -839,10 +839,10 @@
             and zb.ZQCWZF_HTBH=#{htbh}
         </if>
         <if test="ksrq != null and ksrq != ''">
-            and to_date(to_char(zb.ZQCWZF_TBRQ,'yyyy/mm/dd'),'yyyy/mm/dd')>=to_date(#{ksrq},'yyyy/mm/dd')
+            and to_date(to_char(zb.ZQCWZF_TBRQ,'yyyy-mm-dd'),'yyyy-mm-dd')>=to_date(#{ksrq},'yyyy-mm-dd')
         </if>
         <if test="jsrq != null and jsrq != ''">
-            and to_date(to_char(zb.ZQCWZF_TBRQ,'yyyy/mm/dd'),'yyyy/mm/dd')&lt;=to_date(#{jsrq},'yyyy/mm/dd')
+            and to_date(to_char(zb.ZQCWZF_TBRQ,'yyyy-mm-dd'),'yyyy-mm-dd')&lt;=to_date(#{jsrq},'yyyy-mm-dd')
         </if>
 
         union all
@@ -855,10 +855,10 @@
             and zb.ZQCWZF_HTBH=#{htbh}
         </if>
         <if test="ksrq != null and ksrq != ''">
-            and to_date(to_char(zb.ZQCWZF_TBRQ,'yyyy/mm/dd'),'yyyy/mm/dd')>=to_date(#{ksrq},'yyyy/mm/dd')
+            and to_date(to_char(zb.ZQCWZF_TBRQ,'yyyy-mm-dd'),'yyyy-mm-dd')>=to_date(#{ksrq},'yyyy-mm-dd')
         </if>
         <if test="jsrq != null and jsrq != ''">
-            and to_date(to_char(zb.ZQCWZF_TBRQ,'yyyy/mm/dd'),'yyyy/mm/dd')&lt;=to_date(#{jsrq},'yyyy/mm/dd')
+            and to_date(to_char(zb.ZQCWZF_TBRQ,'yyyy-mm-dd'),'yyyy-mm-dd')&lt;=to_date(#{jsrq},'yyyy-mm-dd')
         </if>
 
         order by ZQZFMX_zfqh,zmbh

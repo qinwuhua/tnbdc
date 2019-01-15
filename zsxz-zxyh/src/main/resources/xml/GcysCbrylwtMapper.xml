@@ -25,7 +25,7 @@
     </resultMap>
     <select id="getCbrylwtList" parameterType="hashmap" resultMap="cbrylwt">
 
-        select djbh, gcmc, htbh, cbdw, ramark, bzdw, to_char(bzrq,'yyyy/mm/dd') bzrq, dwbm, spzt,mx.* from ZXYH_CBRYLWT g left join ZXYH_CBRYLWTMX mx on g.djbh=mx.mxdjbh
+        select djbh, gcmc, htbh, cbdw, ramark, bzdw, to_char(bzrq,'yyyy-mm-dd') bzrq, dwbm, spzt,mx.* from ZXYH_CBRYLWT g left join ZXYH_CBRYLWTMX mx on g.djbh=mx.mxdjbh
         where 1=1
         <if test="dwbh != null and dwbh != ''">
             and g.dwbm like '%'||#{dwbh}||'%'
@@ -34,17 +34,17 @@
             and g.htbh=#{htbh}
         </if>
         <if test="ksrq != null and ksrq != ''">
-            and to_date(bzrq,'yyyy/mm/dd')>=to_date(#{ksrq},'yyyy/mm/dd')
+            and to_date(bzrq,'yyyy-mm-dd')>=to_date(#{ksrq},'yyyy-mm-dd')
         </if>
         <if test="jsrq != null and jsrq != ''">
-            and to_date(bzrq,'yyyy/mm/dd')&lt;=to_date(#{jsrq},'yyyy/mm/dd')
+            and to_date(bzrq,'yyyy-mm-dd')&lt;=to_date(#{jsrq},'yyyy-mm-dd')
         </if>
         order by djbh,xh
     </select>
 
 
     <select id="getCbrylwtInfoByDjbh" parameterType="hashmap" resultMap="cbrylwt">
-        select djbh, gcmc, htbh, cbdw, ramark, bzdw, to_char(bzrq,'yyyy/mm/dd') bzrq, dwbm, spzt,mx.* from ZXYH_CBRYLWT g left join ZXYH_CBRYLWTMX mx on g.djbh=mx.mxdjbh
+        select djbh, gcmc, htbh, cbdw, ramark, bzdw, to_char(bzrq,'yyyy-mm-dd') bzrq, dwbm, spzt,mx.* from ZXYH_CBRYLWT g left join ZXYH_CBRYLWTMX mx on g.djbh=mx.mxdjbh
         where 1=1
         <if test="djbh != null and djbh != ''">
             and g.djbh=#{djbh}
@@ -72,7 +72,7 @@
             <if test="cbdw != null" >#{cbdw},</if>
             <if test="ramark != null" >#{ramark},</if>
             <if test="bzdw != null" >#{bzdw},</if>
-            <if test="bzrq != null" >to_date(#{bzrq},'yyyy/mm/dd'),</if>
+            <if test="bzrq != null" >to_date(#{bzrq},'yyyy-mm-dd'),</if>
             <if test="dwbm != null" >#{dwbm},</if>
 
         </trim>
@@ -100,7 +100,7 @@
             <if test="cbdw != null" >cbdw=#{cbdw},</if>
             <if test="ramark != null" >ramark=#{ramark},</if>
             <if test="bzdw != null" >bzdw=#{bzdw},</if>
-            <if test="bzrq != null" >bzrq=to_date(#{bzrq},'yyyy/mm/dd'),</if>
+            <if test="bzrq != null" >bzrq=to_date(#{bzrq},'yyyy-mm-dd'),</if>
             <if test="dwbm != null" >dwbm=#{dwbm},</if>
         </set>
         where 1=1 and djbh=#{djbh}
