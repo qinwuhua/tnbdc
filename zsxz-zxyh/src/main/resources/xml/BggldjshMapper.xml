@@ -138,10 +138,10 @@
             and zb.htbh=#{htbh}
         </if>
         <if test="ksrq != null and ksrq != ''">
-            and to_date(sqrq,'yyyy/mm/dd')>=to_date(#{sqrq},'yyyy/mm/dd')
+            and to_date(sqrq,'yyyy-mm-dd')>=to_date(#{sqrq},'yyyy-mm-dd')
         </if>
         <if test="jsrq != null and jsrq != ''">
-            and to_date(sqrq,'yyyy/mm/dd')&lt;=to_date(#{sqrq},'yyyy/mm/dd')
+            and to_date(sqrq,'yyyy-mm-dd')&lt;=to_date(#{sqrq},'yyyy-mm-dd')
         </if>
     </select>
 

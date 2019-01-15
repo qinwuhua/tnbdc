@@ -6,7 +6,7 @@
 
     <!-- 查询索赔申请单列表数据 -->
     <select id="getSpsqdList" parameterType="hashmap" resultType="com.hdsx.zxyh.entity.Bgglspsqs">
-        select g.PMMTGCSPSQS_ID,g.PMMTGCSPSQS_DWMC,g.PMMTGCSPSQS_DWBH,g.PMMTGCSPSQS_DWID,g.PMMTGCSPSQS_BMMC,g.PMMTGCSPSQS_BMBH,g.PMMTGCSPSQS_BMID,g.PMMTGCSPSQS_TBR,to_char(g.PMMTGCSPSQS_TBRQ,'yyyy/mm/dd') PMMTGCSPSQS_TBRQ,g.PMMTGCSPSQS_SPZT,g.PMMTGCSPSQS_FILE,g.PMMTGCSPSQS_DJBH,g.PMMTGCSPSQS_CJRQ,g.PMMTGCSPSQS_GCMC,g.PMMTGCSPSQS_HTBH,g.PMMTGCSPSQS_SQJE,g.PMMTGCSPSQS_SPSJ,g.PMMTGCSPSQS_SCYJS,g.PMMTGCSPSQS_SPYJS,g.PMMTGCSPSQS_SPJE,g.PMMTGCSPSQS_CJDW,g.PMMTGCSPSQS_GLDW,to_char(g.PMMTGCSPSQS_SQRQ,'yyyy/mm/dd') PMMTGCSPSQS_SQRQ,g.PMMTGCSPSQS_CBDW,g.PMMTGCSPSQS_SPSJJS
+        select g.PMMTGCSPSQS_ID,g.PMMTGCSPSQS_DWMC,g.PMMTGCSPSQS_DWBH,g.PMMTGCSPSQS_DWID,g.PMMTGCSPSQS_BMMC,g.PMMTGCSPSQS_BMBH,g.PMMTGCSPSQS_BMID,g.PMMTGCSPSQS_TBR,to_char(g.PMMTGCSPSQS_TBRQ,'yyyy-mm-dd') PMMTGCSPSQS_TBRQ,g.PMMTGCSPSQS_SPZT,g.PMMTGCSPSQS_FILE,g.PMMTGCSPSQS_DJBH,g.PMMTGCSPSQS_CJRQ,g.PMMTGCSPSQS_GCMC,g.PMMTGCSPSQS_HTBH,g.PMMTGCSPSQS_SQJE,g.PMMTGCSPSQS_SPSJ,g.PMMTGCSPSQS_SCYJS,g.PMMTGCSPSQS_SPYJS,g.PMMTGCSPSQS_SPJE,g.PMMTGCSPSQS_CJDW,g.PMMTGCSPSQS_GLDW,to_char(g.PMMTGCSPSQS_SQRQ,'yyyy-mm-dd') PMMTGCSPSQS_SQRQ,g.PMMTGCSPSQS_CBDW,g.PMMTGCSPSQS_SPSJJS
         from ZXYH_GCSPSQS g where 1=1
         <if test="dwbh != null and dwbh != ''">
             and g.PMMTGCSPSQS_DWBH=#{dwbh}
@@ -15,10 +15,10 @@
             and g.pmmtgcspsqs_htbh=#{pmmtgcspsqs_htbh}
         </if>
         <if test="ksrq != null and ksrq != ''">
-            and to_date(to_char(g.pmmtgcspsqs_sqrq,'yyyy/mm/dd'),'yyyy/mm/dd')>=to_date(#{ksrq},'yyyy/mm/dd')
+            and to_date(to_char(g.pmmtgcspsqs_sqrq,'yyyy-mm-dd'),'yyyy-mm-dd')>=to_date(#{ksrq},'yyyy-mm-dd')
         </if>
         <if test="jsrq != null and jsrq != ''">
-            and to_date(to_char(g.pmmtgcspsqs_sqrq,'yyyy/mm/dd'),'yyyy/mm/dd')&lt;=to_date(#{jsrq},'yyyy/mm/dd')
+            and to_date(to_char(g.pmmtgcspsqs_sqrq,'yyyy-mm-dd'),'yyyy-mm-dd')&lt;=to_date(#{jsrq},'yyyy-mm-dd')
         </if>
     </select>
 
@@ -43,7 +43,7 @@
         <trim prefix="values (" suffix=")" suffixOverrides="," >
             <if test="pmmtgcspsqs_djbh != null" >#{pmmtgcspsqs_djbh},</if>
             <if test="pmmtgcspsqs_gcmc != null" >#{pmmtgcspsqs_gcmc},</if>
-            <if test="pmmtgcspsqs_sqrq != null" >to_date(#{pmmtgcspsqs_sqrq},'yyyy/mm/dd'),</if>
+            <if test="pmmtgcspsqs_sqrq != null" >to_date(#{pmmtgcspsqs_sqrq},'yyyy-mm-dd'),</if>
             <if test="pmmtgcspsqs_htbh != null" >#{pmmtgcspsqs_htbh},</if>
             <if test="pmmtgcspsqs_gldw != null" >#{pmmtgcspsqs_gldw},</if>
             <if test="pmmtgcspsqs_cbdw != null" >#{pmmtgcspsqs_cbdw},</if>
@@ -51,7 +51,7 @@
             <if test="pmmtgcspsqs_sqje != null" >#{pmmtgcspsqs_sqje},</if>
             <if test="pmmtgcspsqs_spje != null" >#{pmmtgcspsqs_spje},</if>
             <if test="pmmtgcspsqs_tbr != null" >#{pmmtgcspsqs_tbr},</if>
-            <if test="pmmtgcspsqs_tbrq != null" >to_date(#{pmmtgcspsqs_tbrq},'yyyy/mm/dd'),</if>
+            <if test="pmmtgcspsqs_tbrq != null" >to_date(#{pmmtgcspsqs_tbrq},'yyyy-mm-dd'),</if>
             <if test="pmmtgcspsqs_bmmc != null" >#{pmmtgcspsqs_bmmc},</if>
             <if test="pmmtgcspsqs_dwmc != null" >#{pmmtgcspsqs_dwmc},</if>
         </trim>
@@ -62,7 +62,7 @@
         update ZXYH_GCSPSQS
         <set>
             <if test="pmmtgcspsqs_gcmc != null" >pmmtgcspsqs_gcmc=#{pmmtgcspsqs_gcmc},</if>
-            <if test="pmmtgcspsqs_sqrq != null" >pmmtgcspsqs_sqrq=to_date(#{pmmtgcspsqs_sqrq},'yyyy/mm/dd'),</if>
+            <if test="pmmtgcspsqs_sqrq != null" >pmmtgcspsqs_sqrq=to_date(#{pmmtgcspsqs_sqrq},'yyyy-mm-dd'),</if>
             <if test="pmmtgcspsqs_htbh != null" >pmmtgcspsqs_htbh=#{pmmtgcspsqs_htbh},</if>
             <if test="pmmtgcspsqs_gldw != null" >pmmtgcspsqs_gldw=#{pmmtgcspsqs_gldw},</if>
             <if test="pmmtgcspsqs_cbdw != null" >pmmtgcspsqs_cbdw=#{pmmtgcspsqs_cbdw},</if>
@@ -70,7 +70,7 @@
             <if test="pmmtgcspsqs_sqje != null" >pmmtgcspsqs_sqje=#{pmmtgcspsqs_sqje},</if>
             <if test="pmmtgcspsqs_spje != null" >pmmtgcspsqs_spje=#{pmmtgcspsqs_spje},</if>
             <if test="pmmtgcspsqs_tbr != null" >pmmtgcspsqs_tbr=#{pmmtgcspsqs_tbr},</if>
-            <if test="pmmtgcspsqs_tbrq != null" >pmmtgcspsqs_tbrq=to_date(#{pmmtgcspsqs_tbrq},'yyyy/mm/dd'),</if>
+            <if test="pmmtgcspsqs_tbrq != null" >pmmtgcspsqs_tbrq=to_date(#{pmmtgcspsqs_tbrq},'yyyy-mm-dd'),</if>
             <if test="pmmtgcspsqs_bmmc != null" >pmmtgcspsqs_bmmc=#{pmmtgcspsqs_bmmc},</if>
             <if test="pmmtgcspsqs_dwmc != null" >pmmtgcspsqs_dwmc=#{pmmtgcspsqs_dwmc},</if>
         </set>
@@ -88,7 +88,7 @@
 
     <!--  通过单据编号查询索赔申请书  -->
     <select id="getSpsqsInfoByDjbh" parameterType="string" resultType="com.hdsx.zxyh.entity.Bgglspsqs">
-        select g.PMMTGCSPSQS_ID,g.PMMTGCSPSQS_DWMC,g.PMMTGCSPSQS_DWBH,g.PMMTGCSPSQS_DWID,g.PMMTGCSPSQS_BMMC,g.PMMTGCSPSQS_BMBH,g.PMMTGCSPSQS_BMID,g.PMMTGCSPSQS_TBR,to_char(g.PMMTGCSPSQS_TBRQ,'yyyy/mm/dd') PMMTGCSPSQS_TBRQ,g.PMMTGCSPSQS_SPZT,g.PMMTGCSPSQS_FILE,g.PMMTGCSPSQS_DJBH,g.PMMTGCSPSQS_CJRQ,g.PMMTGCSPSQS_GCMC,g.PMMTGCSPSQS_HTBH,g.PMMTGCSPSQS_SQJE,g.PMMTGCSPSQS_SPSJ,g.PMMTGCSPSQS_SCYJS,g.PMMTGCSPSQS_SPYJS,g.PMMTGCSPSQS_SPJE,g.PMMTGCSPSQS_CJDW,g.PMMTGCSPSQS_GLDW,to_char(g.PMMTGCSPSQS_SQRQ,'yyyy/mm/dd') PMMTGCSPSQS_SQRQ,g.PMMTGCSPSQS_CBDW,g.PMMTGCSPSQS_SPSJJS
+        select g.PMMTGCSPSQS_ID,g.PMMTGCSPSQS_DWMC,g.PMMTGCSPSQS_DWBH,g.PMMTGCSPSQS_DWID,g.PMMTGCSPSQS_BMMC,g.PMMTGCSPSQS_BMBH,g.PMMTGCSPSQS_BMID,g.PMMTGCSPSQS_TBR,to_char(g.PMMTGCSPSQS_TBRQ,'yyyy-mm-dd') PMMTGCSPSQS_TBRQ,g.PMMTGCSPSQS_SPZT,g.PMMTGCSPSQS_FILE,g.PMMTGCSPSQS_DJBH,g.PMMTGCSPSQS_CJRQ,g.PMMTGCSPSQS_GCMC,g.PMMTGCSPSQS_HTBH,g.PMMTGCSPSQS_SQJE,g.PMMTGCSPSQS_SPSJ,g.PMMTGCSPSQS_SCYJS,g.PMMTGCSPSQS_SPYJS,g.PMMTGCSPSQS_SPJE,g.PMMTGCSPSQS_CJDW,g.PMMTGCSPSQS_GLDW,to_char(g.PMMTGCSPSQS_SQRQ,'yyyy-mm-dd') PMMTGCSPSQS_SQRQ,g.PMMTGCSPSQS_CBDW,g.PMMTGCSPSQS_SPSJJS
         from GCSPSQS g where pmmtgcspsqs_djbh=#{value}
     </select>
 

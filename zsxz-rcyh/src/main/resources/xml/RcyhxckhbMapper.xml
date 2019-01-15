@@ -108,7 +108,7 @@
     </delete>
 
     <select id="getRcyhxckhbList" parameterType="hashmap" resultMap="rcyhxckhbdjbh">
-        select * from(select RCYHXCKHB_DJBH,to_char( RCYHXCKHB_YD,'yyyy/mm/dd' ) RCYHXCKHB_YD,RCYHXCKHB_GCMC,RCYHXCKHB_SGDW, RCYHXCKHB_GLDW,to_char(RCYHXCKHB_KHRQ,'yyyy/mm/dd') RCYHXCKHB_KHRQ,RCYHXCKHB_BYKKHJ from RCYHXCKHB) A
+        select * from(select RCYHXCKHB_DJBH,to_char( RCYHXCKHB_YD,'yyyy/mm' ) RCYHXCKHB_YD,RCYHXCKHB_GCMC,RCYHXCKHB_SGDW, RCYHXCKHB_GLDW,to_char(RCYHXCKHB_KHRQ,'yyyy/mm/dd') RCYHXCKHB_KHRQ,RCYHXCKHB_BYKKHJ from RCYHXCKHB) A
         <if test="rcyhxckhbyd != null and rcyhxckhbyd !=''">
             and A.RCYHXCKHB_YD=#{rcyhxckhbyd}
         </if>

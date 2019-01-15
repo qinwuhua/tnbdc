@@ -3,6 +3,40 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hdsx.zxyh.mapper.BgglGcbgMapper">
+    <resultMap type="com.hdsx.zxyh.entity.Bgglbgd" id="bgd">
+        <result column="djbh" property="djbh"/>
+        <result column="gcmc" property="gcmc"/>
+        <result column="sqrq" property="sqrq"/>
+        <result column="bw" property="bw"/>
+        <result column="cbdw" property="cbdw"/>
+        <result column="gldw" property="gldw"/>
+        <result column="qdzh" property="qdzh"/>
+        <result column="zdzh" property="zdzh"/>
+        <result column="sqbbh" property="sqbbh"/>
+        <result column="bglbh" property="bglbh"/>
+        <result column="bgly" property="bgly"/>
+        <result column="bgnr" property="bgnr"/>
+        <result column="gjzjje" property="gjzjje"/>
+        <result column="cbdwbh" property="cbdwbh"/>
+        <result column="bzrq" property="bzrq"/>
+        <result column="spzt" property="spzt"/>
+        <result column="htbh" property="htbh"/>
+        <collection property="mx" ofType="com.hdsx.zxyh.entity.Bgglbgdmx" column="bgdmx">
+            <result column="mxdjbh" property="mxdjbh"/>
+            <result column="zmh" property="zmh"/>
+            <result column="zmmc" property="zmmc"/>
+            <result column="dw" property="dw"/>
+            <result column="dj" property="dj"/>
+            <result column="gclbgq" property="gclbgq"/>
+            <result column="gclbgh" property="gclbgh"/>
+            <result column="jebgq" property="jebgq"/>
+            <result column="jebgh" property="jebgh"/>
+            <result column="zmid" property="zmid"/>
+            <result column="mxhtbh" property="mxhtbh"/>
+            <result column="id" property="id"/>
+        </collection>
+
+    </resultMap>
 
     <insert id="addBgsqbForBggl" parameterType="com.hdsx.zxyh.entity.Bgglbgsqb">
         insert into ZXYH_GCBGSQB
@@ -79,10 +113,10 @@
             and g.htbh=#{htbh}
         </if>
         <if test="ksrq != null and ksrq != ''">
-            and to_date(BZRQ,'yyyy/mm/dd')>=to_date(#{ksrq},'yyyy/mm/dd')
+            and to_date(BZRQ,'yyyy-mm-dd')>=to_date(#{ksrq},'yyyy-mm-dd')
         </if>
         <if test="jsrq != null and jsrq != ''">
-            and to_date(BZRQ,'yyyy/mm/dd')&lt;=to_date(#{jsrq},'yyyy/mm/dd')
+            and to_date(BZRQ,'yyyy-mm-dd')&lt;=to_date(#{jsrq},'yyyy-mm-dd')
         </if>
     </select>
 
@@ -180,10 +214,10 @@
             and g.htbh=#{htbh}
         </if>
         <if test="ksrq != null and ksrq != ''">
-            and to_date(BZRQ,'yyyy/mm/dd')>=to_date(#{ksrq},'yyyy/mm/dd')
+            and to_date(BZRQ,'yyyy-mm-dd')>=to_date(#{ksrq},'yyyy-mm-dd')
         </if>
         <if test="jsrq != null and jsrq != ''">
-            and to_date(BZRQ,'yyyy/mm/dd')&lt;=to_date(#{jsrq},'yyyy/mm/dd')
+            and to_date(BZRQ,'yyyy-mm-dd')&lt;=to_date(#{jsrq},'yyyy-mm-dd')
         </if>
     </select>
 
@@ -194,5 +228,176 @@
             #{id}
         </foreach>
     </update>
+
+    <insert id="addBgdMxForBggl" parameterType="com.hdsx.zxyh.entity.Bgglbgd">
+        insert into ZXYH_GCBGD
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="djbh != null" >djbh,</if>
+            <if test="gcmc != null" >gcmc,</if>
+            <if test="sqrq != null" >sqrq,</if>
+            <if test="bw != null" >bw,</if>
+            <if test="htbh != null" >htbh,</if>
+            <if test="gldw != null" >gldw,</if>
+            <if test="qdzh != null" >qdzh,</if>
+            <if test="zdzh != null" >zdzh,</if>
+            <if test="sqbbh != null" >sqbbh,</if>
+            <if test="bglbh != null" >bglbh,</if>
+            <if test="bgly != null" >bgly,</if>
+            <if test="bgnr != null" >bgnr,</if>
+            <if test="gjzjje != null" >gjzjje,</if>
+            <if test="cbdw != null" >cbdw,</if>
+            <if test="cbdwbh != null" >cbdwbh,</if>
+            <if test="bzrq != null" >bzrq,</if>
+
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="djbh != null" >#{djbh},</if>
+            <if test="gcmc != null" >#{gcmc},</if>
+            <if test="sqrq != null" >#{sqrq},</if>
+            <if test="bw != null" >#{bw},</if>
+            <if test="htbh != null" >#{htbh},</if>
+            <if test="gldw != null" >#{gldw},</if>
+            <if test="qdzh != null" >#{qdzh},</if>
+            <if test="zdzh != null" >#{zdzh},</if>
+            <if test="sqbbh != null" >#{sqbbh},</if>
+            <if test="bglbh != null" >#{bglbh},</if>
+            <if test="bgly != null" >#{bgly},</if>
+            <if test="bgnr != null" >#{bgnr},</if>
+            <if test="gjzjje != null" >#{gjzjje},</if>
+            <if test="cbdw != null" >#{cbdw},</if>
+            <if test="cbdwbh != null" >#{cbdwbh},</if>
+            <if test="bzrq != null" >#{bzrq},</if>
+        </trim>
+    </insert>
+
+    <insert id="addBgdForBggl" parameterType="com.hdsx.zxyh.entity.Bgglbgd">
+        begin
+        <foreach collection="mx" item="item" index="index" separator=";">
+            insert into ZXYH_GCBGDMX(mxdjbh, zmh, zmmc, dw, dj, gclbgq, gclbgh, jebgq, jebgh, zmid, mxhtbh)  values
+            (trim(#{djbh,jdbcType=VARCHAR}),trim(#{item.zmh,jdbcType=VARCHAR}),trim(#{item.zmmc,jdbcType=VARCHAR}),trim(#{item.dw,jdbcType=VARCHAR}),trim(#{item.dj,jdbcType=VARCHAR}),
+            trim(#{item.gclbgq,jdbcType=VARCHAR}),trim(#{item.gclbgh,jdbcType=VARCHAR}),trim(#{item.jebgq,jdbcType=VARCHAR}),trim(#{item.jebgh,jdbcType=VARCHAR}),trim(#{item.zmid,jdbcType=VARCHAR}),trim(#{item.mxhtbh,jdbcType=VARCHAR})
+            )
+        </foreach>
+        ;end;
+    </insert>
+
+
+    <delete id="delBgdMxByDjbh" parameterType="string">
+        delete from ZXYH_GCBGDMX where mxdjbh=#{value}
+    </delete>
+
+    <update id="editBgdForBggl" parameterType="com.hdsx.zxyh.entity.Bgglbgd" >
+        update ZXYH_GCBGD
+        <set>
+            <if test="djbh != null" >djbh=#{djbh},</if>
+            <if test="gcmc != null" >gcmc=#{gcmc},</if>
+            <if test="sqrq != null" >sqrq=#{sqrq},</if>
+            <if test="bw != null" >bw=#{bw},</if>
+            <if test="htbh != null" >htbh=#{htbh},</if>
+            <if test="gldw != null" >gldw=#{gldw},</if>
+            <if test="qdzh != null" >qdzh=#{qdzh},</if>
+            <if test="zdzh != null" >zdzh=#{zdzh},</if>
+            <if test="sqbbh != null" >sqbbh=#{sqbbh},</if>
+            <if test="bglbh != null" >bglbh=#{bglbh},</if>
+            <if test="bgly != null" >bgly=#{bgly},</if>
+            <if test="bgnr != null" >bgnr=#{bgnr},</if>
+            <if test="gjzjje != null" >gjzjje=#{gjzjje},</if>
+            <if test="cbdw != null" >cbdw=#{cbdw},</if>
+            <if test="cbdwbh != null" >cbdwbh=#{cbdwbh},</if>
+            <if test="bzrq != null" >bzrq=#{bzrq},</if>
+        </set>
+        where 1=1 and djbh=#{djbh}
+    </update>
+
+    <delete id="delBgdMxForBggl" parameterType="java.util.List" >
+        delete from ZXYH_GCBGDMX
+        where mxdjbh in
+        <foreach collection="list" item="id"  open="(" separator="," close=")">
+            #{id}
+        </foreach>
+
+    </delete>
+    <delete id="delBgdForBggl" parameterType="java.util.List" >
+        delete from ZXYH_GCBGD
+        where djbh in
+        <foreach collection="list" item="id"  open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+
+    <select id="getBgdInfoByDjbh" parameterType="hashmap" resultMap="bgd">
+        select djbh, gcmc, sqrq, bw, htbh, gldw, qdzh, zdzh, sqbbh, bglbh, bgly, bgnr, zj.gjzjje gjzjje, cbdw, cbdwbh, bzrq, spzt,
+        mx.* from ZXYH_GCBGD g left join ZXYH_GCBGDMX mx on g.djbh=mx.mxdjbh left join (
+        select mxdjbh,sum(nvl(jebgh,0)-nvl(jebgq,0)) gjzjje from ZXYH_GCBGDMX group by mxdjbh
+        ) zj on g.djbh=zj.mxdjbh
+        where 1=1
+        <if test="djbh != null and djbh != ''">
+            and g.djbh=#{djbh}
+        </if>
+        order by djbh
+    </select>
+
+    <select id="getBgdList" parameterType="hashmap" resultMap="bgd">
+
+        select djbh, gcmc, sqrq, bw, htbh, gldw, qdzh, zdzh, sqbbh, bglbh, bgly, bgnr, zj.gjzjje gjzjje, cbdw, cbdwbh, bzrq, spzt,
+        mx.* from ZXYH_GCBGD g left join ZXYH_GCBGDMX mx on g.djbh=mx.mxdjbh left join (
+        select mxdjbh,sum(nvl(jebgh,0)-nvl(jebgq,0)) gjzjje from ZXYH_GCBGDMX group by mxdjbh
+        ) zj on g.djbh=zj.mxdjbh
+        where 1=1
+        <if test="dwbh != null and dwbh != ''">
+            and g.cbdwbh like '%'||#{dwbh}||'%'
+        </if>
+        <if test="htbh != null and htbh != ''">
+            and g.htbh=#{htbh}
+        </if>
+        <if test="ksrq != null and ksrq != ''">
+            and to_date(bzrq,'yyyy-mm-dd')>=to_date(#{ksrq},'yyyy-mm-dd')
+        </if>
+        <if test="jsrq != null and jsrq != ''">
+            and to_date(bzrq,'yyyy-mm-dd')&lt;=to_date(#{jsrq},'yyyy-mm-dd')
+        </if>
+        order by djbh
+    </select>
+
+    <update id="spBgdForBggl" parameterType="hashmap">
+        update ZXYH_GCBGD set SPZT=#{spzt}
+        where djbh in
+        <foreach collection="djbhs" item="id"  open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </update>
+
+    <select id="getBgdMx" parameterType="hashmap" resultType="com.hdsx.zxyh.entity.Bgglbgdmx">
+        select * from ZXYH_GCBGDMX where mxdjbh in
+        <foreach collection="djbhs" item="id"  open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </select>
+
+    <update id="updateHtByBgd" parameterType="java.util.List" useGeneratedKeys="false">
+        begin
+        <foreach collection="list" item="item" index="index" separator=";">
+            update zm_ht set zmht_sl=trim(#{item.gclbgh}),zmht_je=trim(#{item.jebgh})
+            where zmht_id=trim(#{item.zmid})
+        </foreach>
+        ;end;
+    </update>
+
+    <!--  通过部门查询合同信息  -->
+    <select id="getHtBgdInfoByBm" parameterType="hashmap" resultMap="bgd">
+        select gj.HTGJXX_cgxmmc gcmc,ht.htxx_htbh htbh,xm.yhhtxx_gldw gldw,ht.HTXX_HTMC htmc,xm.yhhtxx_qszh qdzh,xm.yhhtxx_zzzh zdzh,xm.yhhtxx_cbdw cbdw,
+        bg.sqbbh sqbbh,bg.bglbh bglbh,sqb.bgyy bgly,bg.bgnr,
+        zm.zmht_zmh zmh,zm.zmht_zmmc zmmc,zm.zmht_jldw dw,zm.zmht_sl gclbgq,zm.zmht_dj dj,zm.zmht_je jebgq,zm.zmht_id zmid,zm.zmht_htbh xmhtbh
+        from djsj_htxx ht left join djsj_htxx_htgjxx gj on ht.htxx_htbh=gj.HTGJXX_htbh left join djsj_htxx_yhxmxx xm on ht.htxx_htbh=xm.yhhtxx_htbh
+        left join zm_ht zm on ht.htxx_htbh=zm.zmht_htbh
+        left join zxyh_gcbgl bg on ht.htxx_htbh=bg.htbh
+        left join zxyh_gcbgsqb sqb on bg.sqbbh=sqb.djbh
+        where 1=1 and bg.spzt='已下发'
+        <if test="htbh != null and htbh != ''">
+            and ht.htxx_htbh=#{htbh}
+        </if>
+        order by htbh,zmh
+    </select>
 
 </mapper>

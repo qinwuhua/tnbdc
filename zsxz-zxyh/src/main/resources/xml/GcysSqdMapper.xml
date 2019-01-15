@@ -7,7 +7,7 @@
 
     <select id="getGcyssqdList" parameterType="hashmap" resultType="com.hdsx.zxyh.entity.Gcyssqd">
 
-        select sqbh, xmmc, sqsj, htbh, sgdw, gldw, htksgq, htjsgq, yslx, sgfyj, jldwyj, gcjsbyj, jyfzbyj, tbr,to_char(tbrq,'yyyy/mm/dd') tbrq, tbdw, tbbm, tbdwbm, tbbmbm from ZXYH_GCYSSQD g
+        select sqbh, xmmc, sqsj, htbh, sgdw, gldw, htksgq, htjsgq, yslx, sgfyj, jldwyj, gcjsbyj, jyfzbyj, tbr,to_char(tbrq,'yyyy-mm-dd') tbrq, tbdw, tbbm, tbdwbm, tbbmbm from ZXYH_GCYSSQD g
         where 1=1
         <if test="dwbh != null and dwbh != ''">
             and g.tbdwbm like '%'||#{dwbh}||'%'
@@ -16,16 +16,16 @@
             and g.htbh=#{htbh}
         </if>
         <if test="ksrq != null and ksrq != ''">
-            and to_date(sqsj,'yyyy/mm/dd')>=to_date(#{ksrq},'yyyy/mm/dd')
+            and to_date(sqsj,'yyyy-mm-dd')>=to_date(#{ksrq},'yyyy-mm-dd')
         </if>
         <if test="jsrq != null and jsrq != ''">
-            and to_date(sqsj,'yyyy/mm/dd')&lt;=to_date(#{jsrq},'yyyy/mm/dd')
+            and to_date(sqsj,'yyyy-mm-dd')&lt;=to_date(#{jsrq},'yyyy-mm-dd')
         </if>
     </select>
 
 
     <select id="getGcyssqdInfoBySqbh" parameterType="hashmap" resultType="com.hdsx.zxyh.entity.Gcyssqd">
-        select sqbh, xmmc, sqsj, htbh, sgdw, gldw, htksgq, htjsgq, yslx, sgfyj, jldwyj, gcjsbyj, jyfzbyj, tbr,to_char(tbrq,'yyyy/mm/dd') tbrq, tbdw, tbbm, tbdwbm, tbbmbm from ZXYH_GCYSSQD g
+        select sqbh, xmmc, sqsj, htbh, sgdw, gldw, htksgq, htjsgq, yslx, sgfyj, jldwyj, gcjsbyj, jyfzbyj, tbr,to_char(tbrq,'yyyy-mm-dd') tbrq, tbdw, tbbm, tbdwbm, tbbmbm from ZXYH_GCYSSQD g
         where 1=1
         <if test="sqbh != null and sqbh != ''">
             and g.sqbh=#{sqbh}
@@ -70,7 +70,7 @@
             <if test="gcjsbyj != null" >#{gcjsbyj},</if>
             <if test="jyfzbyj != null" >#{jyfzbyj},</if>
             <if test="tbr != null" >#{tbr},</if>
-            <if test="tbrq != null" >to_date(#{tbrq},'yyyy/mm/dd'),</if>
+            <if test="tbrq != null" >to_date(#{tbrq},'yyyy-mm-dd'),</if>
             <if test="tbdw != null" >#{tbdw},</if>
             <if test="tbbm != null" >#{tbbm},</if>
             <if test="tbdwbm != null" >#{tbdwbm},</if>
@@ -96,7 +96,7 @@
             <if test="gcjsbyj != null" >gcjsbyj=#{gcjsbyj},</if>
             <if test="jyfzbyj != null" >jyfzbyj=#{jyfzbyj},</if>
             <if test="tbr != null" >tbr=#{tbr},</if>
-            <if test="tbrq != null" >tbrq=to_date(#{tbrq},'yyyy/mm/dd'),</if>
+            <if test="tbrq != null" >tbrq=to_date(#{tbrq},'yyyy-mm-dd'),</if>
             <if test="tbdw != null" >tbdw=#{tbdw},</if>
             <if test="tbbm != null" >tbbm=#{tbbm},</if>
             <if test="tbdwbm != null" >tbdwbm=#{tbdwbm},</if>

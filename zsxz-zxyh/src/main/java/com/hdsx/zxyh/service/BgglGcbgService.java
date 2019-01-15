@@ -1,6 +1,7 @@
 package com.hdsx.zxyh.service;
 
 
+import com.hdsx.zxyh.entity.Bgglbgd;
 import com.hdsx.zxyh.entity.Bgglbgl;
 import com.hdsx.zxyh.entity.Bgglbgsqb;
 import com.hdsx.zxyh.entity.Bgglspsqs;
@@ -36,4 +37,18 @@ public interface BgglGcbgService {
     List<Bgglbgl> getBglList(Map<String, String> param, int pageNum, int pageSize);
 
     int spBglForBggl(Map<String, Object> param);
+
+    int addBgdForBggl(Bgglbgd bgglbgd);
+
+    int editBgdForBggl(Bgglbgd bgglbgd);
+
+    int delBgdForBggl(List<String> l);
+
+    Bgglbgd getBgdInfoByDjbh(String djbh);
+
+    List<Bgglbgd> getBgdList(Map<String, String> param, int pageNum, int pageSize);
+
+    int spBgdForBggl(Map<String, Object> param);
+
+    List<Bgglbgd> getHtBgdInfoByBm(Map<String, String> param);
 }
