@@ -6,55 +6,25 @@
 
     <!-- 定义数据库字段与实体对象的映射关系 -->
     <resultMap id="sgzjdjhBean" type="com.hdsx.zxyh.entity.Sgzjdjh">
-        <id column="id" property="id"/>
-        <result column="bz" property="bz"/>
-        <result column="bzr" property="bzr"/>
-        <result column="bzrq" property="bzrq"/>
-        <result column="bzbm" property="bzbm"/>
-        <result column="bzdw" property="bzdw" />
-        <result column="djbh" property="djbh" />
-        <!-- 一对一的关系 -->
-        <!-- property: 指的是属性的值, javaType：指的是元素的类型 -->
-        <association property="htxx" javaType="com.hdsx.zxyh.entity.Htxx">
-            <id column="htxx_id" property="id" />
-            <result column="htxx_htbh" property="htbh"/>
-            <result column="htxx_htmc" property="htmc"/>
-            <result column="htxx_xmsglx" property="xmsglx" />
-            <result column="htxx_xmgldw" property="xmgldw"/>
-            <result column="htxx_htjehs" property="htjehs"/>
-        </association>
-        
-        <association property="htgjxx" javaType="com.hdsx.zxyh.entity.Htgjxx">
-            <id column="htgjxx_htbh" property="htbh"/>
-            <result column="htgjxx_htmc" property="htmc"/>
-            <result column="htgjxx_htje" property="htje"/>
-            <result column="htgjxx_htxdf" property="htxdf"/>
-            <result column="htgjxx_lb" property="lb"/>
-            <result column="htgjxx_xlb" property="xlb"/>
-            <result column="htgjxx_qdrq" property="qdrq"/>
-            <result column="htgjxx_lxbh" property="lxbh"/>
-            <result column="htgjxx_cgxmmc" property="cgxmmc"/>
-            <result column="htgjxx_khh" property="khh"/>
-            <result column="htgjxx_yhzh" property="yhzh"/>
-            <result column="htgjxx_zlbzjbl" property="zlbzjbl"/>
-            <result column="htgjxx_fwxt" property="fwxt"/>
-            <result column="htgjxx_bz" property="bz"/>
-            <result column="htgjxx_fj" property="fj"/>
-            <result column="htgjxx_tbr" property="tbr"/>
-            <result column="htgjxx_lrsj" property="lrsj"/>
-            <result column="htgjxx_tbdw" property="tbdw"/>
-            <result column="htgjxx_tbbm" property="tbbm"/>
-            <result column="htgjxx_jbr" property="jbr"/>
-            <result column="htgjxx_qcrq" property="qcrq"/>
-            <result column="htgjxx_jbdw" property="jbdw"/>
-            <result column="htgjxx_jbbm" property="jbbm"/>
-        </association>
+        <id property="id" column="id"/>
+        <result property="djbh" column="djbh"/>
+        <result property="gcmc" column="gcmc"/>
+        <result property="htmc" column="htmc"/>
+        <result property="gldw" column="gldw"/>
+        <result property="htkgrq" column="htkgrq"/>
+        <result property="htjgrq" column="htjgrq"/>
+        <result property="jhgq" column="jhgq"/>
+        <result property="cbdw" column="cbdw"/>
+        <result property="bz" column="bz"/>
+        <result property="bzr" column="bzr"/>
+        <result property="bzrq" column="bzrq"/>
+        <result property="bzdw" column="bzdw"/>
+        <result property="bzbm" column="bzbm"/>
     </resultMap>
 
     <select id="getSgzjdjh" resultMap="sgzjdjhBean">
-      select * from ZXYH_SGZJDJH sg left join DJSJ_HTXX_HTGJXX ht on sg.djbh=ht.htgjxx_htbh
+      select * from ZXYH_SGZJDJH
     </select>
-
     <insert id="addSgzjdjh" parameterType="com.hdsx.zxyh.entity.Sgzjdjh">
         insert into ZXYH_SGZJDJH
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -63,6 +33,27 @@
             </if>
             <if test="djbh != null and djbh != ''">
                 djbh,
+            </if>
+            <if test="gcmc != null and gcmc != ''">
+                gcmc,
+            </if>
+            <if test="htmc != null and htmc != ''">
+                htmc,
+            </if>
+            <if test="gldw != null and gldw != ''">
+                gldw,
+            </if>
+            <if test="htkgrq != null and htkgrq != ''">
+                htkgrq,
+            </if>
+            <if test="htjgrq != null and htjgrq != ''">
+                htjgrq,
+            </if>
+            <if test="jhgq != null and jhgq != ''">
+                jhgq,
+            </if>
+            <if test="cbdw != null and cbdw != ''">
+                cbdw,
             </if>
             <if test="bz !=null and bz != ''">
                 bz,
@@ -86,6 +77,27 @@
             </if>
             <if test="djbh != null and djbh != ''">
                 #{djbh},
+            </if>
+            <if test="gcmc != null and gcmc != ''">
+                #{gcmc},
+            </if>
+            <if test="htmc != null and htmc != ''">
+                #{htmc},
+            </if>
+            <if test="gldw != null and gldw != ''">
+                #{gldw},
+            </if>
+            <if test="htkgrq != null and htkgrq != ''">
+                to_date(#{htkgrq}, 'yyyy/mm/dd'),
+            </if>
+            <if test="htjgrq != null and htjgrq != ''">
+                to_date(#{htjgrq}, 'yyyy/mm/dd'),
+            </if>
+            <if test="jhgq != null and jhgq != ''">
+                #{jhgq},
+            </if>
+            <if test="cbdw != null and cbdw != ''">
+                #{cbdw},
             </if>
             <if test="bz !=null and bz != ''">
                 #{bz},
@@ -111,6 +123,27 @@
             <if test="djbh != null and djbh != ''">
                 djbh=#{djbh},
             </if>
+            <if test="gcmc != null and gcmc != ''">
+                gcmc=#{gcmc},
+            </if>
+            <if test="htmc != null and htmc != ''">
+                htmc=#{htmc},
+            </if>
+            <if test="gldw != null and gldw != ''">
+                gldw=#{gldw},
+            </if>
+            <if test="htkgrq != null and htkgrq != ''">
+                htkgrq=to_date(#{htkgrq},'yyyy/mm/dd'),
+            </if>
+            <if test="htjgrq != null and htjgrq != ''">
+                htjgrq=to_date(#{htjgrq},'yyyy/mm/dd'),
+            </if>
+            <if test="jhgq != null and jhgq != ''">
+                jhgq=#{jhgq},
+            </if>
+            <if test="cbdw != null and cbdw != ''">
+                cbdw=#{cbdw},
+            </if>
             <if test="bz !=null and bz != ''">
                 bz=#{bz},
             </if>
@@ -118,13 +151,13 @@
                 bzr=#{bzr},
             </if>
             <if test="bzrq != null and bzrq != ''">
-                bzrq=#{bzrq},
+                bzrq=to_date(#{bzrq},'yyyy/mm/dd'),
             </if>
             <if test="bzbm != null and bzbm != ''">
                 bzbm=#{bzbm},
             </if>
             <if test="bzdw != null and bzdw != ''">
-                bzdw=#{bzdw}
+                bzdw=#{bzdw},
             </if>
         </set>
         where id=#{id}

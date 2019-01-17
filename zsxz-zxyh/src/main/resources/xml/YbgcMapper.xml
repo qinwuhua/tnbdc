@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hdsx.zxyh.mapper.YbgcMapper">
+
+    <!-- 定义数据库字段与实体对象的映射关系 -->
+    <resultMap id="ybgcBean" type="com.hdsx.zxyh.entity.Ybgc">
+        <id column="id" property="id"/>
+        <result column="djbh" property="djbh"/>
+        <result column="htbh" property="htbh"/>
+        <result column="htmc" property="htmc"/>
+        <result column="yjrq" property="yjrq"/>
+        <result column="yjxm" property="yjxm"/>
+        <result column="yjbw" property="yjbw"/>
+        <result column="ybgcnr" property="ybgcnr"/>
+        <result column="jcjl" property="jcjl"/>
+        <result column="zlwt" property="zlwt"/>
+        <result column="bzdw" property="bzdw"/>
+        <result column="bzrq" property="bzrq"/>
+        <!-- 一对多的关系 -->
+        <!-- property: 指的是集合属性的值, ofType：指的是集合中元素的类型 -->
+        <collection property="ybgcmxList" ofType="com.hdsx.zxyh.entity.Ybgc" select="selectMx" column="id">
+        </collection>
+    </resultMap>
+
+    <resultMap id="ybgcmxBean" type="com.hdsx.zxyh.entity.Ybgcmx">
+        <result property="id" column="id"/>
+        <result property="ybid" column="ybid"/>
+        <result property="zmh" column="zmh"/>
+        <result property="zmmc" column="zmmc"/>
+        <result property="dw" column="dw"/>
+        <result property="sl" column="sl"/>
+    </resultMap>
+
+    <select id="selectMx" resultMap="ybgcmxBean">
+        select * from ZXYH_YBGC_MX WHERE ybid = #{id}
+    </select>
+
+    <select id="getYbgc" resultMap="ybgcBean">
+        select * from ZXYH_YBGC
+    </select>
+
+    <insert id="addYbgc" parameterType="com.hdsx.zxyh.entity.Ybgc">
+        insert into ZXYH_YBGC
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null and id != ''">
+                id,
+            </if>
+            <if test="djbh != null and djbh != ''">
+                djbh,
+            </if>
+            <if test="htbh != null and htbh != ''">
+                htbh,
+            </if>
+            <if test="yjrq != null and yjrq != ''">
+                yjrq,
+            </if>
+            <if test="yjxm != null and yjxm != ''">
+                yjxm,
+            </if>
+            <if test="yjbw != null and yjbw != ''">
+                yjbw,
+            </if>
+            <if test="ybgcnr != null and ybgcnr != ''">
+                ybgcnr,
+            </if>
+            <if test="jcjl != null and jcjl != ''">
+                jcjl,
+            </if>
+            <if test="zlwt != null and zlwt != ''">
+                zlwt,
+            </if>
+            <if test="bzdw != null and bzdw != ''">
+                bzdw,
+            </if>
+            <if test="bzrq != null and bzrq != ''">
+                bzrq,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null and id != ''">
+                #{id},
+            </if>
+            <if test="djbh != null and djbh != ''">
+                #{djbh},
+            </if>
+            <if test="htbh != null and htbh != ''">
+                #{htbh},
+            </if>
+            <if test="yjrq != null and yjrq != ''">
+                to_date(#{yjrq}, 'yyyy/mm/dd'),
+            </if>
+            <if test="yjxm != null and yjxm != ''">
+                #{yjxm},
+            </if>
+            <if test="yjbw != null and yjbw != ''">
+                #{yjbw},
+            </if>
+            <if test="ybgcnr != null and ybgcnr != ''">
+                #{ybgcnr},
+            </if>
+            <if test="jcjl != null and jcjl != ''">
+                #{jcjl},
+            </if>
+            <if test="zlwt != null and zlwt != ''">
+                #{zlwt},
+            </if>
+            <if test="bzdw != null and bzdw != ''">
+                #{bzdw},
+            </if>
+            <if test="bzrq != null and bzrq != ''">
+                to_date(#{bzrq}, 'yyyy/mm/dd'),
+            </if>
+        </trim>
+    </insert>
+
+    <insert id="addYbgcmx" parameterType="list">
+        BEGIN
+        <foreach collection ="list" item="item" index= "index" separator =" ">
+            insert into ZXYH_YBGC_MX
+              (ID, YBID, ZMH, ZMMC, DW, SL)
+            values
+              (
+                #{item.id},
+                #{item.ybid},
+                #{item.zmh},
+                #{item.zmmc},
+                #{item.dw},
+                #{item.sl}
+              );
+        </foreach>
+        COMMIT;
+        END;
+    </insert>
+
+    <delete id="deleteYbgc" parameterType="string">
+        DELETE FROM ZXYH_YBGC WHERE id IN
+        <foreach collection="array" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </delete>
+
+    <delete id="deleteYbgcmx" parameterType="string">
+        DELETE FROM ZXYH_YBGC_MX WHERE ybid IN
+        <foreach collection="array" item="ybid" open="(" close=")" separator=",">
+            #{ybid}
+        </foreach>
+    </delete>
+
+    <update id="updateYbgc" parameterType="com.hdsx.zxyh.entity.Ybgc">
+        update ZXYH_YBGC
+        <set>
+            <if test="djbh != null and djbh != ''">
+                djbh=#{djbh},
+            </if>
+            <if test="htbh != null and htbh != ''">
+                htbh=#{htbh},
+            </if>
+            <if test="yjrq != null and yjrq != ''">
+                yjrq=to_date(#{yjrq}, 'yyyy/mm/dd'),
+            </if>
+            <if test="yjxm != null and yjxm != ''">
+                yjxm=#{yjxm},
+            </if>
+            <if test="yjbw != null and yjbw != ''">
+                yjbw=#{yjbw},
+            </if>
+            <if test="ybgcnr != null and ybgcnr != ''">
+                ybgcnr=#{ybgcnr},
+            </if>
+            <if test="jcjl != null and jcjl != ''">
+                jcjl=#{jcjl},
+            </if>
+            <if test="zlwt != null and zlwt != ''">
+                zlwt=#{zlwt},
+            </if>
+            <if test="bzdw != null and bzdw != ''">
+                bzdw=#{bzdw},
+            </if>
+            <if test="bzrq != null and bzrq != ''">
+                bzrq=to_date(#{bzrq}, 'yyyy/mm/dd'),
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+</mapper>

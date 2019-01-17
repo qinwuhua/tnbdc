@@ -19,82 +19,86 @@
         <result column="tbdw" property="tbdw" />
         <result column="tbrq" property="tbrq" />
         <result column="zt" property="zt"/>
-        <!-- 一对一的关系 -->
-        <!-- property: 指的是属性的值, javaType：指的是元素的类型 -->
-        <association property="yhxmxx" javaType="com.hdsx.zxyh.entity.Yhxmxx">
-            <id column="yhhtxx_htbh" property="htbh" />
-            <result column="yhhtxx_htmc" property="htmc" />
-            <result column="yhhtxx_lxmc" property="lxmc" />
-            <result column="yhhtxx_cd" property="cd"/>
-            <result column="yhhtxx_qszh" property="qszh"/>
-            <result column="yhhtxx_zzzh" property="zzzh"/>
-            <result column="yhhtxx_dwgc" property="dwgc"/>
-            <result column="yhhtxx_gcfl" property="gcfl"/>
-            <result column="yhhtxx_htkgrq" property="htkgrq"/>
-            <result column="yhhtxx_htwgrq" property="htwgrq"/>
-            <result column="yhhtxx_htgq" property="htgq"/>
-            <result column="yhhtxx_sjkgrq" property="sjkgrq"/>
-            <result column="yhhtxx_sjwgsj" property="sjwgsj"/>
-            <result column="yhhtxx_zgspdw" property="zgspdw"/>
-            <result column="yhhtxx_wh" property="wh"/>
-            <result column="yhhtxx_sprq" property="sprq"/>
-            <result column="yhhtxx_lljdbm" property="lljdbm"/>
-            <result column="yhhtxx_sglx" property="sglx"/>
-            <result column="yhhtxx_gldw" property="gldw"/>
-            <result column="yhhtxx_cbdw" property="cbdw"/>
-            <result column="yhhtxx_jldw" property="jldw"/>
-            <result column="yhhtxx_xmlxr" property="xmlxr"/>
-            <result column="yhhtxx_lxdh" property="lxdh"/>
-            <result column="yhhtxx_xmjs" property="xmjs"/>
-        </association>
+        <result column="gcxm" property="gcxm"/>
+        <result column="cbdw" property="cbdw"/>
+        <result column="gldw" property="gldw"/>
+        <result column="htmc" property="htmc"/>
+        <result column="lxmc" property="lxmc"/>
+        <result column="qdzh" property="qdzh"/>
+        <result column="zdzh" property="zdzh"/>
+        <result column="fx" property="fx"/>
     </resultMap>
     
     <select id="getAll" resultMap="kgsqdBean">
-        select * from zxyh_kgsqd kg left join djsj_htxx_yhxmxx ht on kg.htbh=ht.yhhtxx_htbh
+        select * from zxyh_kgsqd
     </select>
 
     <insert id="addKgsqd" parameterType="com.hdsx.zxyh.entity.Kgsqd">
         insert into ZXYH_KGSQD
         <trim prefix="(" suffix=")" suffixOverrides=",">
-          <if test="djbh != null and djbh != ''">
-              djbh,
-          </if>
-          <if test="htbh != null and htbh != ''">
-              htbh,
-          </if>
-          <if test="bpzdwz != null and bpzdwz != ''">
-              bpzdwz,
-          </if>
-          <if test="zxkfx != null and zxkfx != ''">
-              zxkfx,
-          </if>
-          <if test="isxl !=null and isxl !=''">
-              isxl,
-          </if>
-          <if test="isfd != null and isfd !=''">
-              isfd,
-          </if>
-          <if test="xcfzr !=null and xcfzr !=''">
-              xcfzr,
-          </if>
-          <if test="lxdh !=null and lxdh !=''">
-              lxdh,
-          </if>
-          <if test="sgzbqksm !=null and sgzbqksm!=''">
-              sgzbqksm,
-          </if>
-          <if test="spyj !=null and spyj !=''">
-              spyj,
-          </if>
-          <if test="tbdw != null and tbdw != ''">
-              tbdw,
-          </if>
-          <if test="tbrq != null">
-              tbrq,
-          </if>
-          <if test="zt !=null and zt !=''">
-              zt,
-          </if>
+            <if test="djbh != null and djbh != ''">
+                djbh,
+            </if>
+            <if test="htbh != null and htbh != ''">
+                htbh,
+            </if>
+            <if test="bpzdwz != null and bpzdwz != ''">
+                bpzdwz,
+            </if>
+            <if test="zxkfx != null and zxkfx != ''">
+                zxkfx,
+            </if>
+            <if test="isxl !=null and isxl !=''">
+                isxl,
+            </if>
+            <if test="isfd != null and isfd !=''">
+                isfd,
+            </if>
+            <if test="xcfzr !=null and xcfzr !=''">
+                xcfzr,
+            </if>
+            <if test="lxdh !=null and lxdh !=''">
+                lxdh,
+            </if>
+            <if test="sgzbqksm !=null and sgzbqksm!=''">
+                sgzbqksm,
+            </if>
+            <if test="spyj !=null and spyj !=''">
+                spyj,
+            </if>
+            <if test="tbdw != null and tbdw != ''">
+                tbdw,
+            </if>
+            <if test="tbrq != null">
+                tbrq,
+            </if>
+            <if test="zt !=null and zt !=''">
+                zt,
+            </if>
+            <if test="gcxm !=null and gcxm !=''">
+                gcxm,
+            </if>
+            <if test="cbdw !=null and cbdw !=''">
+                cbdw,
+            </if>
+            <if test="gldw !=null and gldw !=''">
+                gldw,
+            </if>
+            <if test="htmc !=null and htmc !=''">
+                htmc,
+            </if>
+            <if test="lxmc !=null and lxmc !=''">
+                lxmc,
+            </if>
+            <if test="qdzh !=null and qdzh !=''">
+                qdzh,
+            </if>
+            <if test="zdzh !=null and zdzh !=''">
+                zdzh,
+            </if>
+            <if test="fx !=null and fx != ''">
+                fx,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="djbh != null and djbh != ''">
@@ -134,7 +138,31 @@
                 to_date(#{tbrq}, 'yyyy/mm/dd'),
             </if>
             <if test="zt !=null and zt != ''">
-                未开工,
+                '未开工',
+            </if>
+            <if test="gcxm !=null and gcxm !=''">
+                #{gcxm},
+            </if>
+            <if test="cbdw !=null and cbdw !=''">
+                #{cbdw},
+            </if>
+            <if test="gldw !=null and gldw !=''">
+                #{gldw},
+            </if>
+            <if test="htmc !=null and htmc !=''">
+                #{htmc},
+            </if>
+            <if test="lxmc !=null and lxmc !=''">
+                #{lxmc},
+            </if>
+            <if test="qdzh !=null and qdzh !=''">
+                #{qdzh},
+            </if>
+            <if test="zdzh !=null and zdzh !=''">
+                #{zdzh},
+            </if>
+            <if test="fx !=null and fx != ''">
+                #{fx},
             </if>
         </trim>
     </insert>
@@ -149,7 +177,7 @@
                 bpzdwz=#{bpzdwz},
             </if>
             <if test="zxkfx != null and zxkfx != ''">
-                zxkfx=#{zxkfx}
+                zxkfx=#{zxkfx},
             </if>
             <if test="isxl !=null and isxl !=''">
                 isxl=#{isxl},
@@ -172,11 +200,35 @@
             <if test="tbdw != null and tbdw != ''">
                 tbdw=#{tbdw},
             </if>
-            <if test="tbrq != null">
+            <if test="tbrq != null and tbrq != ''">
                 tbrq=to_date(#{tbrq}, 'yyyy/mm/dd'),
             </if>
             <if test="zt != null and zt != ''">
-                zt=#{zt}
+                zt=#{zt},
+            </if>
+            <if test="gcxm !=null and gcxm !=''">
+                gcxm=#{gcxm},
+            </if>
+            <if test="cbdw !=null and cbdw !=''">
+                cbdw=#{cbdw},
+            </if>
+            <if test="gldw !=null and gldw !=''">
+                gldw=#{gldw},
+            </if>
+            <if test="htmc !=null and htmc !=''">
+                htmc=#{htmc},
+            </if>
+            <if test="lxmc !=null and lxmc !=''">
+                lxmc=#{lxmc},
+            </if>
+            <if test="qdzh !=null and qdzh !=''">
+                qdzh=#{qdzh},
+            </if>
+            <if test="zdzh !=null and zdzh !=''">
+                zdzh=#{zdzh},
+            </if>
+            <if test="fx != null and fx != ''">
+                fx=#{fx},
             </if>
         </set>
         where djbh = #{djbh}

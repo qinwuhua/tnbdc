@@ -22,8 +22,18 @@ public class Jczbqkb {
     private String jcrq;
     // 检查人
     private String jcr;
-    // 合同信息
-    private Htxx htxx;
+
+    // 项目名称
+    private String xmmc;
+    // 施工单位
+    private String sgdw;
+    // 管理单位
+    private String gldw;
+    // 合同金额
+    private String htje;
+    // 罚金合计
+    private String fjhj;
+
     // 履约检查明细
     private List<Jczbqkbmx> list;
 }

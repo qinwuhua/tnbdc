@@ -13,7 +13,7 @@ import lombok.experimental.Accessors;
 public class Ydjhmx {
 
     // id
-    private String id;
+    private String mxid;
     // 月度id
     private String ydid;
     // 起点桩号
@@ -34,4 +34,10 @@ public class Ydjhmx {
     private String jhksrq;
     // 计划完成日期
     private String jhwcrq;
+    // 实际工程量
+    private String sjgcl;
+    // 实际开始日期
+    private String sjksrq;
+    // 实际完成日期
+    private String sjwcrq;
 }

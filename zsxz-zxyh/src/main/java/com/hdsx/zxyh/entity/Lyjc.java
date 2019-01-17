@@ -18,12 +18,20 @@ public class Lyjc {
     private String id;
     // 合同编号
     private String htbh;
+    // 项目名称
+    private String xmmc;
+    // 施工单位
+    private String sgdw;
+    // 管理单位
+    private String gldw;
+    // 合同金额
+    private String htje;
+    // 合计金额
+    private String hjje;
     // 检测日期
     private String jcrq;
     // 检测人
     private String jcr;
-    // 合同信息
-    private Htxx htxx;
     // 履约检查明细
     private List<Lyjcmx> list;
 }

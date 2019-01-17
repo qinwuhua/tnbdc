@@ -10,21 +10,14 @@
         <result column="htbh" property="htbh"/>
         <result column="jcrq" property="jcrq"/>
         <result column="jcr" property="jcr"/>
-        <!-- 一对一的关系 -->
-        <!-- property: 指的是属性的值, javaType：指的是元素的类型 -->
-        <association property="htxx" javaType="com.hdsx.zxyh.entity.Htxx">
-            <id column="htxx_id" property="id" />
-            <result column="htxx_htbh" property="htbh"/>
-            <result column="htxx_htmc" property="htmc"/>
-            <result column="htxx_xmsglx" property="xmsglx" />
-            <result column="htxx_xmgldw" property="xmgldw"/>
-            <result column="htxx_htjehs" property="htjehs"/>
-        </association>
-
+        <result column="xmmc" property="xmmc"/>
+        <result column="sgdw" property="sgdw"/>
+        <result column="gldw" property="gldw"/>
+        <result column="htje" property="htje"/>
+        <result column="fjhj" property="fjhj"/>
         <!-- 一对多的关系 -->
         <!-- property: 指的是集合属性的值, ofType：指的是集合中元素的类型 -->
         <collection property="list" ofType="com.hdsx.zxyh.entity.Jczbqkbmx" select="selectMx" column="id">
-
         </collection>
     </resultMap>
 
@@ -40,31 +33,46 @@
     </select>
     <select id="getJczbqkb" parameterType="hashmap" resultMap="jczbqkbBean">
       select *
-      from ZXYH_JCZBQKB jc left join DJSJ_HTXX ht on jc.htbh = ht.htxx_htbh
+      from ZXYH_JCZBQKB
       where 1 = 1
       <if test="htbh != null and htbh !=''">
-          and jc.htbh = #{htbh}
+          and htbh = #{htbh}
       </if>
       <if test="gldw != null and gldw !=''">
-          and ht.htxx_xmgldw = #{gldw}
+          and gldw = #{gldw}
       </if>
     </select>
 
     <insert id="addJczbqkb" parameterType="com.hdsx.zxyh.entity.Jczbqkb">
         insert into ZXYH_JCZBQKB
         <trim prefix="(" suffix=")" suffixOverrides=",">
-          <if test="id !=null and id !=''">
-            id,
-          </if>
-          <if test="htbh !=null and htbh !=''">
-            htbh,
-          </if>
-          <if test="jcrq !=null and jcrq !=''">
-            jcrq,
-          </if>
-          <if test="jcr != null and jcr !=''">
-            jcr,
-          </if>
+            <if test="id !=null and id !=''">
+                id,
+            </if>
+            <if test="htbh !=null and htbh !=''">
+                htbh,
+            </if>
+            <if test="jcrq !=null and jcrq !=''">
+                jcrq,
+            </if>
+            <if test="jcr != null and jcr !=''">
+                jcr,
+            </if>
+            <if test="xmmc != null and xmmc !=''">
+                xmmc,
+            </if>
+            <if test="sgdw != null and sgdw !=''">
+                sgdw,
+            </if>
+            <if test="gldw != null and gldw !=''">
+                gldw,
+            </if>
+            <if test="htje != null and htje !=''">
+                htje,
+            </if>
+            <if test="fjhj != null and fjhj !=''">
+                fjhj,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id !=null and id !=''">
@@ -78,6 +86,21 @@
             </if>
             <if test="jcr != null and jcr !=''">
                 #{jcr},
+            </if>
+            <if test="xmmc != null and xmmc !=''">
+                #{xmmc},
+            </if>
+            <if test="sgdw != null and sgdw !=''">
+                #{sgdw},
+            </if>
+            <if test="gldw != null and gldw !=''">
+                #{gldw},
+            </if>
+            <if test="htje != null and htje !=''">
+                #{htje},
+            </if>
+            <if test="fjhj != null and fjhj !=''">
+                #{fjhj},
             </if>
         </trim>
     </insert>
@@ -124,7 +147,22 @@
                 jcrq=to_date(#{jcrq}, 'yyyy/mm/dd'),
             </if>
             <if test="jcr != null and jcr !=''">
-                jcr=#{jcr}
+                jcr=#{jcr},
+            </if>
+            <if test="xmmc != null and xmmc !=''">
+                xmmc=#{xmmc},
+            </if>
+            <if test="sgdw != null and sgdw !=''">
+                sgdw=#{sgdw},
+            </if>
+            <if test="gldw != null and gldw !=''">
+                gldw=#{gldw},
+            </if>
+            <if test="htje != null and htje !=''">
+                htje=#{htje},
+            </if>
+            <if test="fjhj != null and fjhj !=''">
+                fjhj=#{fjhj},
             </if>
         </set>
         where id=#{id}
