@@ -24,7 +24,7 @@ public interface BgglGcbgService {
 
     int spBgsqbForBggl(Map<String, Object> param);
 
-    Bgglbgl getBglBgsqbInfo();
+    List<Bgglbgl> getBglBgsqbInfo();
 
     int addBglForBggl(Bgglbgl bgglbgl);
 

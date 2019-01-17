@@ -23,7 +23,7 @@ public interface BgglGcbgMapper {
 
     int spBgsqbForBggl(Map<String, Object> param);
 
-    Bgglbgl getBglBgsqbInfo();
+    List<Bgglbgl> getBglBgsqbInfo();
 
     int addBglForBggl(Bgglbgl bgglbgl);
 
