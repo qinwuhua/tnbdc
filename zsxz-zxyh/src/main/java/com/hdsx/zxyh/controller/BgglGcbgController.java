@@ -150,7 +150,7 @@ public class BgglGcbgController {
     @ApiOperation(value = "选择已下发的变更申请表（变更令模块）")
     public Msg getBglBgsqbInfo(){
         try {
-            Bgglbgl bgglbgl=bgglGcbgService.getBglBgsqbInfo();
+            List<Bgglbgl> bgglbgl=bgglGcbgService.getBglBgsqbInfo();
             return ResultUtil.success(bgglbgl);
         }catch (Exception e){
             e.printStackTrace();

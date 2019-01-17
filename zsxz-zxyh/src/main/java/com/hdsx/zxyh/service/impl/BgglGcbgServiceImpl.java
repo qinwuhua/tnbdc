@@ -52,7 +52,7 @@ public class BgglGcbgServiceImpl implements BgglGcbgService {
     }
 
     @Override
-    public Bgglbgl getBglBgsqbInfo() {
+    public List<Bgglbgl> getBglBgsqbInfo() {
         return bgglGcbgMapper.getBglBgsqbInfo();
     }
 
