@@ -11,7 +11,7 @@
         <result column="cbdw" property="cbdw"/>
         <result column="jldw" property="jldw"/>
         <result column="gldw" property="gldw"/>
-        <result column="htje" property="htje"/>
+        <result column="htzje" property="htzje"/>
         <result column="jiesje" property="jiesje"/>
         <result column="zbj" property="zbj"/>
         <result column="zlqxkk" property="zlqxkk"/>
@@ -45,7 +45,7 @@
 
     <select id="getHtJungInfoByBm" parameterType="hashmap" resultMap="jgjs">
 
-        select gj.htgjxx_cgxmmc gcmc,ht.htxx_htbh htbh,xm.yhhtxx_cbdw cbdw,xm.yhhtxx_jldw jldw,xm.yhhtxx_gldw gldw,gj.htgjxx_htje htje,
+        select gj.htgjxx_cgxmmc gcmc,ht.htxx_htbh htbh,xm.yhhtxx_cbdw cbdw,xm.yhhtxx_jldw jldw,xm.yhhtxx_gldw gldw,gj.htgjxx_htje htzje,
         jl.jlje jiesje,gj.htgjxx_htje*gj.htgjxx_zlbzjbl/100 zbj,zmzb.*
         from djsj_htxx ht left join djsj_htxx_htgjxx gj on ht.htxx_htbh=gj.HTGJXX_HTBH
         left join djsj_htxx_yhxmxx xm on ht.htxx_htbh=xm.yhhtxx_htbh
@@ -94,7 +94,7 @@
             <if test="cbdw != null" >cbdw,</if>
             <if test="jldw != null" >jldw,</if>
             <if test="gldw != null" >gldw,</if>
-            <if test="htje != null" >htje,</if>
+            <if test="htzje != null" >htzje,</if>
             <if test="jiesje != null" >jiesje,</if>
             <if test="zbj != null" >zbj,</if>
             <if test="zlqxkk != null" >zlqxkk,</if>
@@ -116,7 +116,7 @@
             <if test="cbdw != null" >#{cbdw},</if>
             <if test="jldw != null" >#{jldw},</if>
             <if test="gldw != null" >#{gldw},</if>
-            <if test="htje != null" >#{htje},</if>
+            <if test="htzje != null" >#{htzje},</if>
             <if test="jiesje != null" >#{jiesje},</if>
             <if test="zbj != null" >#{zbj},</if>
             <if test="zlqxkk != null" >#{zlqxkk},</if>
@@ -146,7 +146,7 @@
             <if test="cbdw != null" >cbdw=#{cbdw},</if>
             <if test="jldw != null" >jldw=#{jldw},</if>
             <if test="gldw != null" >gldw=#{gldw},</if>
-            <if test="htje != null" >htje=#{htje},</if>
+            <if test="htzje != null" >htzje=#{htzje},</if>
             <if test="jiesje != null" >jiesje=#{jiesje},</if>
             <if test="zbj != null" >zbj=#{zbj},</if>
             <if test="zlqxkk != null" >zlqxkk=#{zlqxkk},</if>
