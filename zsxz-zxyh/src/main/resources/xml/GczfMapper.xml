@@ -369,7 +369,7 @@
 
     <insert id="addZqcwzfMxForGczf" parameterType="com.hdsx.zxyh.entity.Gczfzqcwzf">
         begin
-        <foreach collection="zqcwzfmx" item="item" index="index" separator=";">
+        <foreach collection="mx" item="item" index="index" separator=";">
             insert into ZXYH_ZQCWZFZSMX(ZQZFMX_ID, ZQZFMX_MID, ZQZFMX_ZMBH, ZQZFMX_ZMMC, ZQZFMX_JLDW,  ZQZFMX_HTSL, ZQZFMX_HTDJ, ZQZFMX_HTJE, ZQZFMX_LJWC, ZQZFMX_BQWCSL, ZQZFMX_BQWCJE, ZQZFMX_SQWCSL, ZQZFMX_SQWCJE, ZQZFMX_BQSL, ZQZFMX_BQJE, ZQZFMX_ZFQH,ZQZFMX_ZMID,ZQZFMX_HTBH )  values
             (sys_guid(),trim(#{zqcwzf_zfqh,jdbcType=VARCHAR}),trim(#{item.zqzfmx_zmbh,jdbcType=VARCHAR}),trim(#{item.zqzfmx_zmmc,jdbcType=VARCHAR}),trim(#{item.zqzfmx_jldw,jdbcType=VARCHAR}),trim(#{item.zqzfmx_htsl}),trim(#{item.zqzfmx_htdj}),trim(#{item.zqzfmx_htdj})*trim(#{item.zqzfmx_htsl}),
             trim(#{item.zqzfmx_ljwc,jdbcType=VARCHAR}),nvl(trim(#{item.zqzfmx_sqwcsl}),0)+nvl(trim(#{item.zqzfmx_bqsl}),0),nvl(trim(#{item.zqzfmx_sqwcje}),0)+nvl(trim(#{item.zqzfmx_bqje}),0),
