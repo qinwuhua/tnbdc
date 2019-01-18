@@ -36,11 +36,11 @@
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides="," >
             <if test="rcyhxckhbdjbh != null" >#{rcyhxckhbdjbh},</if>
-            <if test="rcyhxckhbyd != null" >to_date(#{rcyhxckhbyd},'yyyy/mm'),</if>
+            <if test="rcyhxckhbyd != null" >to_date(#{rcyhxckhbyd},'yyyy-mm'),</if>
             <if test="rcyhxckhbgcmc != null" >#{rcyhxckhbgcmc},</if>
             <if test="rcyhxckhbsgdw != null" >#{rcyhxckhbsgdw},</if>
             <if test="rcyhxckhbgldw != null" >#{rcyhxckhbgldw},</if>
-            <if test="rcyhxckhbkhrq != null" >to_date(#{rcyhxckhbkhrq},'yyyy/mm/dd'),</if>
+            <if test="rcyhxckhbkhrq != null" >to_date(#{rcyhxckhbkhrq},'yyyy-mm-dd'),</if>
             <if test="rcyhxckhbbykkhj != null" >#{rcyhxckhbbykkhj},</if>
         </trim>
     </insert>
@@ -70,11 +70,11 @@
     <update id="update" parameterType="com.hdsx.rcyh.entity.Rcyhxckhb">
         update RCYHXCKHB
         <set>
-            <if test="rcyhxckhbyd != null" >RCYHXCKHB_YD=to_date(#{rcyhxckhbyd},'yyyy/mm'),</if>
+            <if test="rcyhxckhbyd != null" >RCYHXCKHB_YD=to_date(#{rcyhxckhbyd},'yyyy-mm'),</if>
             <if test="rcyhxckhbgcmc != null" >RCYHXCKHB_GCMC=#{rcyhxckhbgcmc},</if>
             <if test="rcyhxckhbsgdw != null" >RCYHXCKHB_SGDW=#{rcyhxckhbsgdw},</if>
             <if test="rcyhxckhbgldw != null" >RCYHXCKHB_GLDW=#{rcyhxckhbgldw},</if>
-            <if test="rcyhxckhbkhrq != null" >RCYHXCKHB_KHRQ=to_date(#{rcyhxckhbkhrq},'yyyy/mm/dd'),</if>
+            <if test="rcyhxckhbkhrq != null" >RCYHXCKHB_KHRQ=to_date(#{rcyhxckhbkhrq},'yyyy-mm-dd'),</if>
             <if test="rcyhxckhbbykkhj != null" >RCYHXCKHB_BYKKHJ=#{rcyhxckhbbykkhj},</if>
         </set>
         where 1=1 and RCYHXCKHB_DJBH=#{rcyhxckhbdjbh}
@@ -108,7 +108,7 @@
     </delete>
 
     <select id="getRcyhxckhbList" parameterType="hashmap" resultMap="rcyhxckhbdjbh">
-        select * from(select RCYHXCKHB_DJBH,to_char( RCYHXCKHB_YD,'yyyy/mm' ) RCYHXCKHB_YD,RCYHXCKHB_GCMC,RCYHXCKHB_SGDW, RCYHXCKHB_GLDW,to_char(RCYHXCKHB_KHRQ,'yyyy/mm/dd') RCYHXCKHB_KHRQ,RCYHXCKHB_BYKKHJ from RCYHXCKHB) A
+        select * from(select RCYHXCKHB_DJBH,to_char( RCYHXCKHB_YD,'yyyy-mm' ) RCYHXCKHB_YD,RCYHXCKHB_GCMC,RCYHXCKHB_SGDW, RCYHXCKHB_GLDW,to_char(RCYHXCKHB_KHRQ,'yyyy-mm-dd') RCYHXCKHB_KHRQ,RCYHXCKHB_BYKKHJ from RCYHXCKHB) A
         <if test="rcyhxckhbyd != null and rcyhxckhbyd !=''">
             and A.RCYHXCKHB_YD=#{rcyhxckhbyd}
         </if>

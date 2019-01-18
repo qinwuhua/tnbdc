@@ -9,11 +9,11 @@
       QSRWD_BZ,QSRWD_SHZT
       )
       values (#{qsrwdid,jdbcType=VARCHAR}, #{qsrwddjbh,jdbcType=VARCHAR}, #{qsrwdxxly,jdbcType=VARCHAR},
-      #{qsrwdsjlx,jdbcType=VARCHAR}, to_date(#{qsrwdsjsj},'yyyy/mm/dd'), #{qsrwdsjdd,jdbcType=VARCHAR},
+      #{qsrwdsjlx,jdbcType=VARCHAR}, to_date(#{qsrwdsjsj},'yyyy-mm-dd'), #{qsrwdsjdd,jdbcType=VARCHAR},
       #{qsrwdsjld,jdbcType=VARCHAR}, #{qsrwdfx,jdbcType=VARCHAR}, #{qsrwdzh,jdbcType=VARCHAR}, #{qsrwdlxr,jdbcType=VARCHAR},
       #{qsrwdlxdh,jdbcType=VARCHAR}, #{qsrwdlmjbsy,jdbcType=VARCHAR},
       #{qsrwdsjsm,jdbcType=VARCHAR}, #{qsrwdstbr,jdbcType=VARCHAR}
-      , to_date(#{qsrwdtbsj},'yyyy/mm/dd')
+      , to_date(#{qsrwdtbsj},'yyyy-mm-dd')
       , #{qsrwdtbdw,jdbcType=VARCHAR}
       , #{qsrwdtbbm,jdbcType=VARCHAR}
       , #{qsrwdbz,jdbcType=VARCHAR}
@@ -60,7 +60,7 @@
             and T.QSRWD_TBBM=#{qsrwdtbbm}
         </if>
       <!--  <if test="qsrwdsjsj != null and qsrwdsjsj != ''">
-            and T.QSRWD_SJSJ=to_date(#{qsrwdsjsj},'yyyy/mm/dd')
+            and T.QSRWD_SJSJ=to_date(#{qsrwdsjsj},'yyyy-mm-dd')
         </if>-->
        /* ORDER BY qsrwdsjsj DESC*/
     </select>
@@ -71,7 +71,7 @@
       QSRWD_DJBH = #{qsrwddjbh,jdbcType=VARCHAR},
       QSRWD_XXLY = #{qsrwdxxly,jdbcType=VARCHAR},
       QSRWD_SJLX = #{qsrwdsjlx,jdbcType=VARCHAR},
-      QSRWD_SJSJ = to_date(#{qsrwdsjsj},'yyyy/mm/dd'),
+      QSRWD_SJSJ = to_date(#{qsrwdsjsj},'yyyy-mm-dd'),
       QSRWD_SJDD = #{qsrwdsjdd,jdbcType=VARCHAR},
       QSRWD_SJLD = #{qsrwdsjld,jdbcType=VARCHAR},
       QSRWD_FX = #{qsrwdfx,jdbcType=VARCHAR},
@@ -81,7 +81,7 @@
       QSRWD_LXJBSY = #{qsrwdlmjbsy,jdbcType=VARCHAR},
       QSRWD_SJSM = #{qsrwdsjsm,jdbcType=VARCHAR},
       QSRWD_TBR = #{qsrwdstbr,jdbcType=VARCHAR},
-      QSRWD_TBSJ = to_date(#{qsrwdtbsj},'yyyy/mm/dd'),
+      QSRWD_TBSJ = to_date(#{qsrwdtbsj},'yyyy-mm-dd'),
       QSRWD_TBDW = #{qsrwdtbdw,jdbcType=VARCHAR},
       QSRWD_TBBM = #{qsrwdtbbm,jdbcType=VARCHAR},
       QSRWD_BZ = #{qsrwdbz,jdbcType=VARCHAR},

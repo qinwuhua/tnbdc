@@ -66,7 +66,7 @@ public class QsrwdController {
             @ApiImplicitParam(paramType = "query", dataType = "String", name = "qsrwdsjlx", value = "事件类型", required = false),
             @ApiImplicitParam(paramType = "query", dataType = "String", name = "qsrwdtbdw", value = "填报单位", required = false),
             @ApiImplicitParam(paramType = "query", dataType = "String", name = "qsrwdtbbm", value = "填报部门", required = false),
-            @ApiImplicitParam(paramType = "query", dataType = "Date", name = "qsrwdsjsj", value = "事件时间(yyyy/mm/dd)", required = false),
+            @ApiImplicitParam(paramType = "query", dataType = "Date", name = "qsrwdsjsj", value = "事件时间(yyyy-mm-dd)", required = false),
             @ApiImplicitParam(paramType = "query", dataType = "int", name = "pageNum", value = "页码", required = true),
             @ApiImplicitParam(paramType = "query", dataType = "int", name = "pageSize", value = "每页条数", required = true)
     })

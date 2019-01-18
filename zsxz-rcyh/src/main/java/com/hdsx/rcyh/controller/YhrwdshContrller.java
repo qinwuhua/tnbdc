@@ -115,7 +115,7 @@ public class YhrwdshContrller {
     @RequestMapping(value = "getYhrwdshList", method = RequestMethod.GET, produces = "application/json")
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "query", dataType = "String", name = "yhrwdlx", value = "路线", required = false),
-            @ApiImplicitParam(paramType = "query", dataType = "String", name = "yhrwdyd", value = "月度 yyyy/mm", required = false),
+            @ApiImplicitParam(paramType = "query", dataType = "String", name = "yhrwdyd", value = "月度 -", required = false),
             @ApiImplicitParam(paramType = "query", dataType = "String", name = "yhrwdyhdw", value = "养护单位", required = false),
             @ApiImplicitParam(paramType = "query", dataType = "String", name = "yhrwdgydw", value = "管理单位", required = false),
             @ApiImplicitParam(paramType = "query", dataType = "int", name = "pageNum", value = "页码", required = true),
