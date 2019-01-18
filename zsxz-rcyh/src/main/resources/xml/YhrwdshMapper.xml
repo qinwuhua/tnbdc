@@ -171,7 +171,7 @@
     </delete>
 
     <select id="getYhrwdshList" parameterType="hashmap" resultMap="yhrwddjbh">
-        select * from ( select YHRWD_DJBH,YHRWD_LX,to_char(YHRWD_RQ,'yyyy-mm/dd') YHRWD_RQ,to_char(YHRWD_YD,'yyyy-mm') YHRWD_YD,
+        select * from ( select YHRWD_DJBH,YHRWD_LX,to_char(YHRWD_RQ,'yyyy-mm-dd') YHRWD_RQ,to_char(YHRWD_YD,'yyyy-mm') YHRWD_YD,
         YHRWD_YHDW,YHRWD_GYDW,YHRWD_RWDSHZT,YHRWD_YSZT
         from XXRW_YHRWD) A
         left join (select YHRWD_ID,YHRWD_DJBH,RWMX_SJDH,RWMX_DWMC,RWMX_XCFX,RWMX_CD,RWMX_DWGC
