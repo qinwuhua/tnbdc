@@ -11,8 +11,24 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @NoArgsConstructor
 public class Sgzjdjh {
-    // 主键
+    // id
     private String id;
+    // 单据编号
+    private String djbh;
+    // 工程名称
+    private String gcmc;
+    // 合同名称
+    private String htmc;
+    // 管理单位
+    private String gldw;
+    // 合同开工日期
+    private String htkgrq;
+    // 合同竣工日期
+    private String htjgrq;
+    // 计划工期
+    private String jhgq;
+    // 承包单位
+    private String cbdw;
     // 备注
     private String bz;
     // 编制人
@@ -23,10 +39,4 @@ public class Sgzjdjh {
     private String bzdw;
     // 编制部门
     private String bzbm;
-    // 单据编号
-    private String djbh;
-    // 合同信息
-    private Htxx htxx;
-    // 合同关键信息
-    private Htgjxx htgjxx;
 }

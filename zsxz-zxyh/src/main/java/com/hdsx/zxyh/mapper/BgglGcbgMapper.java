@@ -1,8 +1,6 @@
 package com.hdsx.zxyh.mapper;
 
-import com.hdsx.zxyh.entity.Bgglbgl;
-import com.hdsx.zxyh.entity.Bgglbgsqb;
-import com.hdsx.zxyh.entity.Bgglspsqs;
+import com.hdsx.zxyh.entity.*;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -25,7 +23,7 @@ public interface BgglGcbgMapper {
 
     int spBgsqbForBggl(Map<String, Object> param);
 
-    Bgglbgl getBglBgsqbInfo();
+    List<Bgglbgl> getBglBgsqbInfo();
 
     int addBglForBggl(Bgglbgl bgglbgl);
 
@@ -38,4 +36,28 @@ public interface BgglGcbgMapper {
     List<Bgglbgl> getBglList(Map<String, String> param);
 
     int spBglForBggl(Map<String, Object> param);
+
+    int addBgdMxForBggl(Bgglbgd bgglbgd);
+
+    int addBgdForBggl(Bgglbgd bgglbgd);
+
+    int delBgdMxByDjbh(String djbh);
+
+    int editBgdForBggl(Bgglbgd bgglbgd);
+
+    int delBgdMxForBggl(List<String> l);
+
+    int delBgdForBggl(List<String> l);
+
+    Bgglbgd getBgdInfoByDjbh(String djbh);
+
+    List<Bgglbgd> getBgdList(Map<String, String> param);
+
+    int spBgdForBggl(Map<String, Object> param);
+
+    int updateHtByBgd(List<Bgglbgdmx> param);
+
+    List<Bgglbgdmx> getBgdMx(Map<String, Object> param);
+
+    List<Bgglbgd> getHtBgdInfoByBm(Map<String, String> param);
 }

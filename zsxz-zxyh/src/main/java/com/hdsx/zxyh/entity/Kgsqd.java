@@ -15,8 +15,24 @@ public class Kgsqd {
 
     // 单据编号
     private String djbh;
+    // 工程项目
+    private String gcxm;
     // 合同编号
     private String htbh;
+    // 承包单位
+    private String cbdw;
+    // 管理单位
+    private String gldw;
+    // 合同名称
+    private String htmc;
+    // 路线名称
+    private String lxmc;
+    // 上下行
+    private String fx;
+    // 起点桩号
+    private String qdzh;
+    // 止点桩号
+    private String zdzh;
     // 爆破阻断位置
     private String bpzdwz;
     // 主线卡方向
@@ -37,8 +53,6 @@ public class Kgsqd {
     private String tbdw;
     // 填报日期
     private String tbrq;
-    // 养护项目信息
-    private Yhxmxx yhxmxx;
     // 状态
     private String zt;
 }

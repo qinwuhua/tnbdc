@@ -1,5 +1,7 @@
 package com.hdsx.zxyh.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInterceptor;
 import com.hdsx.zxyh.entity.Sgzjdjh;
 import com.hdsx.zxyh.mapper.SgzjdjhMapper;
 import com.hdsx.zxyh.service.SgzjdjhService;
@@ -16,7 +18,8 @@ public class SgzjdjhServiceImpl implements SgzjdjhService {
     private SgzjdjhMapper sgzjdjhMapper;
 
     @Override
-    public List<Sgzjdjh> getSgzjdjh() {
+    public List<Sgzjdjh> getSgzjdjh(int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
         return sgzjdjhMapper.getSgzjdjh();
     }
 

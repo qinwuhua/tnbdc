@@ -1,16 +1,16 @@
 package com.hdsx.zxyh.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import com.hdsx.zxyh.entity.Jczbqkb;
-import com.hdsx.zxyh.entity.Lyjcmx;
+import com.hdsx.zxyh.entity.Jczbqkbmx;
 import com.hdsx.zxyh.mapper.JczbqkbMapper;
 import com.hdsx.zxyh.service.JczbqkbService;
+import com.hdsx.zxyh.utils.UuidUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.UUID;
 
 @Service
 public class JczbqkbServiceImpl implements JczbqkbService {
@@ -19,57 +19,50 @@ public class JczbqkbServiceImpl implements JczbqkbService {
     private JczbqkbMapper jczbqkbMapper;
 
     @Override
-    public List<Jczbqkb> getJczbqkb(String htbh, String gldw) {
+    public List<Jczbqkb> getJczbqkb(String htbh, String gldw, int pageNum, int pageSize) {
         HashMap<String, Object> param = new HashMap<>();
         param.put("htbh", htbh);
         param.put("gldw", gldw);
+        PageHelper.startPage(pageNum, pageSize);
         return jczbqkbMapper.getJczbqkb(param);
     }
 
     @Override
     public int addJczbqkb(Jczbqkb jczbqkb) {
         if (jczbqkb.getId() == null || jczbqkb.getId() == ""){
-            jczbqkb.setId(UUID.randomUUID().toString());
+            jczbqkb.setId(UuidUtil.getUUID());
         }
-        // 增加中间表
-        if (jczbqkb.getList().size()>0){
-            List<HashMap<String, Object>> list = new ArrayList<>();
-            for (Lyjcmx lyjcmx : jczbqkb.getList()) {
-                HashMap<String, Object> param = new HashMap<>();
-                param.put("id", UUID.randomUUID().toString());
-                param.put("jczbid", jczbqkb.getId());
-                param.put("mxid", lyjcmx.getId());
-                list.add(param);
+        // 增加进场准备情况表明细
+        if (jczbqkb.getList().size()>0) {
+            for (Jczbqkbmx jczbqkbmx:jczbqkb.getList()) {
+                jczbqkbmx.setMxid(UuidUtil.getUUID());
+                jczbqkbmx.setJcid(jczbqkb.getId());
             }
-            jczbqkbMapper.addJczbqkbMid(list);
+            jczbqkbMapper.addJczbqkbMx(jczbqkb.getList());
         }
-        // 增加专项履约检查表
+        // 增加进场准备情况表
         return jczbqkbMapper.addJczbqkb(jczbqkb);
     }
 
     @Override
-    public int deleteJczbqkb(String id) {
+    public int deleteJczbqkb(String[] ids) {
         // 先删除子表
-        jczbqkbMapper.deleteJczbqkbMid(id);
+        jczbqkbMapper.deleteJczbqkbMx(ids);
         // 删除主表
-        return jczbqkbMapper.deleteJczbqkb(id);
+        return jczbqkbMapper.deleteJczbqkb(ids);
     }
 
     @Override
     public int updateJczbqkb(Jczbqkb jczbqkb) {
         // 删除子表
-        jczbqkbMapper.deleteJczbqkbMid(jczbqkb.getId());
+        jczbqkbMapper.deleteJczbqkbMx(new String[] {jczbqkb.getId()});
         // 增加子表
-        if (jczbqkb.getList().size()>0){
-            List<HashMap<String, Object>> list = new ArrayList<>();
-            for (Lyjcmx lyjcmx:jczbqkb.getList()) {
-                HashMap<String, Object> param = new HashMap<>();
-                param.put("id", UUID.randomUUID().toString());
-                param.put("jczbid", jczbqkb.getId());
-                param.put("mxid", lyjcmx.getId());
-                list.add(param);
+        if (jczbqkb.getList().size()>0) {
+            for (Jczbqkbmx jczbqkbmx:jczbqkb.getList()) {
+                jczbqkbmx.setMxid(UuidUtil.getUUID());
+                jczbqkbmx.setJcid(jczbqkb.getId());
             }
-            jczbqkbMapper.addJczbqkbMid(list);
+            jczbqkbMapper.addJczbqkbMx(jczbqkb.getList());
         }
         // 更新主表
         return jczbqkbMapper.updateJczbqkb(jczbqkb);

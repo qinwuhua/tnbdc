@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hdsx.zxyh.mapper.GcxczljcMapper">
+
+    <select id="getGcxczljc" resultType="com.hdsx.zxyh.entity.Gcxczljc">
+        select * from ZXYH_GCXCZLJC
+    </select>
+
+    <insert id="addGcxczljc" parameterType="com.hdsx.zxyh.entity.Gcxczljc">
+        insert into ZXYH_GCXCZLJC
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null and id != ''">
+                id,
+            </if>
+            <if test="djbh != null and djbh != ''">
+                djbh,
+            </if>
+            <if test="jcrq != null and jcrq != ''">
+                jcrq,
+            </if>
+            <if test="gcmc != null and gcmc != ''">
+                gcmc,
+            </if>
+            <if test="htbh != null and htbh != ''">
+                htbh,
+            </if>
+            <if test="jcxs != null and jcxs != ''">
+                jcxs,
+            </if>
+            <if test="gcbw != null and gcbw != ''">
+                gcbw,
+            </if>
+            <if test="gldw != null and gldw != ''">
+                gldw,
+            </if>
+            <if test="cbdw != null and cbdw != ''">
+                cbdw,
+            </if>
+            <if test="gcnr != null and gcnr != ''">
+                gcnr,
+            </if>
+            <if test="xcjcqk != null and xcjcqk != ''">
+                xcjcqk,
+            </if>
+            <if test="iszg != null and iszg != ''">
+                iszg,
+            </if>
+            <if test="zgyj != null and zgyj != ''">
+                zgyj,
+            </if>
+            <if test="zgqk != null and zgqk != ''">
+                zgqk,
+            </if>
+            <if test="fc != null and fc != ''">
+                fc,
+            </if>
+            <if test="bzdw != null and bzdw != ''">
+                bzdw,
+            </if>
+            <if test="bzrq != null and bzrq != ''">
+                bzrq,
+            </if>
+
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null and id != ''">
+                #{id},
+            </if>
+            <if test="djbh != null and djbh != ''">
+                #{djbh},
+            </if>
+            <if test="jcrq != null and jcrq != ''">
+                to_date(#{jcrq}, 'yyyy/mm/dd'),
+            </if>
+            <if test="gcmc != null and gcmc != ''">
+                #{gcmc},
+            </if>
+            <if test="htbh != null and htbh != ''">
+                #{htbh},
+            </if>
+            <if test="jcxs != null and jcxs != ''">
+                #{jcxs},
+            </if>
+            <if test="gcbw != null and gcbw != ''">
+                #{gcbw},
+            </if>
+            <if test="gldw != null and gldw != ''">
+                #{gldw},
+            </if>
+            <if test="cbdw != null and cbdw != ''">
+                #{cbdw},
+            </if>
+            <if test="gcnr != null and gcnr != ''">
+                #{gcnr},
+            </if>
+            <if test="xcjcqk != null and xcjcqk != ''">
+                #{xcjcqk},
+            </if>
+            <if test="iszg != null and iszg != ''">
+                #{iszg},
+            </if>
+            <if test="zgyj != null and zgyj != ''">
+                #{zgyj},
+            </if>
+            <if test="zgqk != null and zgqk != ''">
+                #{zgqk},
+            </if>
+            <if test="fc != null and fc != ''">
+                #{fc},
+            </if>
+            <if test="bzdw != null and bzdw != ''">
+                #{bzdw},
+            </if>
+            <if test="bzrq != null and bzrq != ''">
+                to_date(#{bzrq}, 'yyyy/mm/dd'),
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateGcxczljc" parameterType="com.hdsx.zxyh.entity.Gcxczljc">
+        update ZXYH_GCXCZLJC
+        <set>
+            <if test="djbh != null and djbh != ''">
+                djbh=djbh},
+            </if>
+            <if test="jcrq != null and jcrq != ''">
+                jcrq=to_date(#{jcrq}, 'yyyy/mm/dd'),
+            </if>
+            <if test="gcmc != null and gcmc != ''">
+                gcmc=#{gcmc},
+            </if>
+            <if test="htbh != null and htbh != ''">
+                htbh=#{htbh},
+            </if>
+            <if test="jcxs != null and jcxs != ''">
+                jcxs=#{jcxs},
+            </if>
+            <if test="gcbw != null and gcbw != ''">
+                gcbw=#{gcbw},
+            </if>
+            <if test="gldw != null and gldw != ''">
+                gldw=#{gldw},
+            </if>
+            <if test="cbdw != null and cbdw != ''">
+                cbdw=#{cbdw},
+            </if>
+            <if test="gcnr != null and gcnr != ''">
+                gcnr=#{gcnr},
+            </if>
+            <if test="xcjcqk != null and xcjcqk != ''">
+                xcjcqk=#{xcjcqk},
+            </if>
+            <if test="iszg != null and iszg != ''">
+                iszg=#{iszg},
+            </if>
+            <if test="zgyj != null and zgyj != ''">
+                zgyj=#{zgyj},
+            </if>
+            <if test="zgqk != null and zgqk != ''">
+                zgqk=#{zgqk},
+            </if>
+            <if test="fc != null and fc != ''">
+                fc=#{fc},
+            </if>
+            <if test="bzdw != null and bzdw != ''">
+                bzdw=#{bzdw},
+            </if>
+            <if test="bzrq != null and bzrq != ''">
+                bzrq=to_date(#{bzrq}, 'yyyy/mm/dd'),
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteGcxczljc">
+        DELETE FROM ZXYH_GCXCZLJC WHERE id IN
+        <foreach collection="array" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

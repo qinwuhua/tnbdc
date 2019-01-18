@@ -1,5 +1,6 @@
 package com.hdsx.zxyh.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.hdsx.zxyh.entity.Msg;
 import com.hdsx.zxyh.entity.Sgzjdjh;
 import com.hdsx.zxyh.service.SgzjdjhService;
@@ -20,9 +21,12 @@ public class SgzjdjhController {
 
     @GetMapping("getSgzjdjh")
     @ApiOperation("获取施工总进度计划")
-    public Msg getSgzjdjh() {
+    public Msg getSgzjdjh(
+            @RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
+            @RequestParam(value = "pageSize", defaultValue = "10") int pageSize
+    ) {
         try {
-            return ResultUtil.success(sgzjdjhService.getSgzjdjh());
+            return ResultUtil.success(new PageInfo<>(sgzjdjhService.getSgzjdjh(pageNum,pageSize)));
         } catch (Exception e) {
             e.printStackTrace();
             return ResultUtil.error("接口异常");

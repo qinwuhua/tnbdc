@@ -28,7 +28,7 @@ spring:
       test-on-borrow: false
       test-on-return: false
   jackson:
-      date-format: yyyy/MM/dd
+      date-format: yyyy-MM-dd
       time-zone: GMT+8
 
 mybatis:

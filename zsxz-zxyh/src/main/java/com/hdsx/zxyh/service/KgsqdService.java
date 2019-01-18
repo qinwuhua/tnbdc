@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface KgsqdService {
 
-    List<Kgsqd> getAll();
+    List<Kgsqd> getAll(int pageNum, int pageSize);
 
     int addKgsqd(Kgsqd kgsqd);
 

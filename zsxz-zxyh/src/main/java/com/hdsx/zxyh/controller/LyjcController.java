@@ -1,6 +1,7 @@
 package com.hdsx.zxyh.controller;
 
 
+import com.github.pagehelper.PageInfo;
 import com.hdsx.zxyh.entity.Lyjc;
 import com.hdsx.zxyh.entity.Msg;
 import com.hdsx.zxyh.service.LyjcService;
@@ -23,9 +24,11 @@ public class LyjcController {
     @ApiOperation("获取履约检查")
     public Msg getLyjc(
             @RequestParam(value = "htbh", required = false)String htbh,
-            @RequestParam(value = "gldw", required = false)String gldw) {
+            @RequestParam(value = "gldw", required = false)String gldw,
+            @RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
+            @RequestParam(value = "pageSize", defaultValue = "10") int pageSize) {
         try {
-            return ResultUtil.success(lyjcService.getLyjc(htbh, gldw));
+            return ResultUtil.success(new PageInfo<>(lyjcService.getLyjc(htbh, gldw, pageNum, pageSize)));
         } catch (Exception e) {
             e.printStackTrace();
             return ResultUtil.error("接口异常");
@@ -49,9 +52,9 @@ public class LyjcController {
 
     @DeleteMapping("deleteLyjc")
     @ApiOperation("删除履约检查")
-    public Msg deleteLyjc(@RequestParam("id") String id){
+    public Msg deleteLyjc(String[] ids){
         try {
-            if (lyjcService.deleteLyjc(id)>0) {
+            if (lyjcService.deleteLyjc(ids)>0) {
                 return ResultUtil.success("删除履约检查成功");
             } else {
                 return ResultUtil.error("删除履约检查失败");

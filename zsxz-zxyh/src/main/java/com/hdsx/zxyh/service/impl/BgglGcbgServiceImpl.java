@@ -1,9 +1,7 @@
 package com.hdsx.zxyh.service.impl;
 
 import com.github.pagehelper.PageHelper;
-import com.hdsx.zxyh.entity.Bgglbgl;
-import com.hdsx.zxyh.entity.Bgglbgsqb;
-import com.hdsx.zxyh.entity.Bgglspsqs;
+import com.hdsx.zxyh.entity.*;
 import com.hdsx.zxyh.mapper.BgglGcbgMapper;
 import com.hdsx.zxyh.mapper.BgglspsqMapper;
 import com.hdsx.zxyh.service.BgglGcbgService;
@@ -54,7 +52,7 @@ public class BgglGcbgServiceImpl implements BgglGcbgService {
     }
 
     @Override
-    public Bgglbgl getBglBgsqbInfo() {
+    public List<Bgglbgl> getBglBgsqbInfo() {
         return bgglGcbgMapper.getBglBgsqbInfo();
     }
 
@@ -88,6 +86,54 @@ public class BgglGcbgServiceImpl implements BgglGcbgService {
     @Override
     public int spBglForBggl(Map<String, Object> param) {
         return bgglGcbgMapper.spBglForBggl(param);
+    }
+
+    @Override
+    public int addBgdForBggl(Bgglbgd bgglbgd) {
+        bgglGcbgMapper.addBgdMxForBggl(bgglbgd);
+        return bgglGcbgMapper.addBgdForBggl(bgglbgd);
+    }
+
+    @Override
+    public int editBgdForBggl(Bgglbgd bgglbgd) {
+        //根据单据编号删除子表
+        bgglGcbgMapper.delBgdMxByDjbh(bgglbgd.getDjbh());
+        //插入子表
+        bgglGcbgMapper.addBgdMxForBggl(bgglbgd);
+        //修改主表
+        return bgglGcbgMapper.editBgdForBggl(bgglbgd);
+    }
+
+    @Override
+    public int delBgdForBggl(List<String> l) {
+        bgglGcbgMapper.delBgdMxForBggl(l);
+        return bgglGcbgMapper.delBgdForBggl(l);
+    }
+
+    @Override
+    public Bgglbgd getBgdInfoByDjbh(String djbh) {
+        return bgglGcbgMapper.getBgdInfoByDjbh(djbh);
+    }
+
+    @Override
+    public List<Bgglbgd> getBgdList(Map<String, String> param, int pageNum, int pageSize) {
+        return bgglGcbgMapper.getBgdList(param);
+    }
+
+    @Override
+    public int spBgdForBggl(Map<String, Object> param) {
+        //审批
+        bgglGcbgMapper.spBgdForBggl(param);
+        //查询
+        List<Bgglbgdmx> list =bgglGcbgMapper.getBgdMx(param);
+        //修改子目信息
+
+        return bgglGcbgMapper.updateHtByBgd(list);
+    }
+
+    @Override
+    public List<Bgglbgd> getHtBgdInfoByBm(Map<String, String> param) {
+        return bgglGcbgMapper.getHtBgdInfoByBm(param);
     }
 
 

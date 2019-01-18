@@ -1,5 +1,6 @@
 package com.hdsx.zxyh.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import com.hdsx.zxyh.entity.Kgsqd;
 import com.hdsx.zxyh.mapper.KgsqdMapper;
 import com.hdsx.zxyh.service.KgsqdService;
@@ -15,7 +16,8 @@ public class KgsqdServiceImpl implements KgsqdService {
     private KgsqdMapper kgsqdMapper;
 
     @Override
-    public List<Kgsqd> getAll() {
+    public List<Kgsqd> getAll(int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
         return kgsqdMapper.getAll();
     }
 
