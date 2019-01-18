@@ -16,6 +16,6 @@ import java.util.List;
 public class Gcysjung implements Serializable{
 
     private static final long serialVersionUID = 3834262618582486202L;
-    private String jssbh, gcmc, htbh, cbdw, jldw, gldw, htje, jiesje, zbj, zlqxkk, juesje, wcht, jshzf, gcnr, ysyj, remark, bzdw, bzdwbh, bzrq, spzt;
+    private String jssbh, gcmc, htbh, cbdw, jldw, gldw, htzje, jiesje, zbj, zlqxkk, juesje, wcht, jshzf, gcnr, ysyj, remark, bzdw, bzdwbh, bzrq, spzt;
     List<Gcysjungmx> mx;
 }

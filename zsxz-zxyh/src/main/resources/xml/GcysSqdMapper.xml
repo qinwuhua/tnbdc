@@ -7,7 +7,7 @@
 
     <select id="getGcyssqdList" parameterType="hashmap" resultType="com.hdsx.zxyh.entity.Gcyssqd">
 
-        select sqbh, xmmc, sqsj, htbh, sgdw, gldw, htksgq, htjsgq, yslx, sgfyj, jldwyj, gcjsbyj, jyfzbyj, tbr,to_char(tbrq,'yyyy-mm-dd') tbrq, tbdw, tbbm, tbdwbm, tbbmbm from ZXYH_GCYSSQD g
+        select sqbh, xmmc, sqsj, htbh, sgdw, gldw, htksgq, htjsgq, yslx, sgfyj, jldwyj, gcjsbyj, jyfzbyj, tbr,to_char(tbrq,'yyyy-mm-dd') tbrq, tbdw, tbbm, tbdwbm, tbbmbm,spzt from ZXYH_GCYSSQD g
         where 1=1
         <if test="dwbh != null and dwbh != ''">
             and g.tbdwbm like '%'||#{dwbh}||'%'
@@ -25,7 +25,7 @@
 
 
     <select id="getGcyssqdInfoBySqbh" parameterType="hashmap" resultType="com.hdsx.zxyh.entity.Gcyssqd">
-        select sqbh, xmmc, sqsj, htbh, sgdw, gldw, htksgq, htjsgq, yslx, sgfyj, jldwyj, gcjsbyj, jyfzbyj, tbr,to_char(tbrq,'yyyy-mm-dd') tbrq, tbdw, tbbm, tbdwbm, tbbmbm from ZXYH_GCYSSQD g
+        select sqbh, xmmc, sqsj, htbh, sgdw, gldw, htksgq, htjsgq, yslx, sgfyj, jldwyj, gcjsbyj, jyfzbyj, tbr,to_char(tbrq,'yyyy-mm-dd') tbrq, tbdw, tbbm, tbdwbm, tbbmbm,spzt from ZXYH_GCYSSQD g
         where 1=1
         <if test="sqbh != null and sqbh != ''">
             and g.sqbh=#{sqbh}
