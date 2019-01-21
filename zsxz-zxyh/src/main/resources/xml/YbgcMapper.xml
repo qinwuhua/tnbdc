@@ -53,7 +53,7 @@
             <if test="htbh != null and htbh != ''">
                 htbh,
             </if>
-            <if test="yjrq != null and yjrq != ''">
+            <if test="yjrq != null">
                 yjrq,
             </if>
             <if test="yjxm != null and yjxm != ''">
@@ -74,7 +74,7 @@
             <if test="bzdw != null and bzdw != ''">
                 bzdw,
             </if>
-            <if test="bzrq != null and bzrq != ''">
+            <if test="bzrq != null">
                 bzrq,
             </if>
         </trim>
@@ -88,8 +88,8 @@
             <if test="htbh != null and htbh != ''">
                 #{htbh},
             </if>
-            <if test="yjrq != null and yjrq != ''">
-                to_date(#{yjrq}, 'yyyy/mm/dd'),
+            <if test="yjrq != null">
+                #{yjrq},
             </if>
             <if test="yjxm != null and yjxm != ''">
                 #{yjxm},
@@ -109,8 +109,8 @@
             <if test="bzdw != null and bzdw != ''">
                 #{bzdw},
             </if>
-            <if test="bzrq != null and bzrq != ''">
-                to_date(#{bzrq}, 'yyyy/mm/dd'),
+            <if test="bzrq != null">
+                #{bzrq},
             </if>
         </trim>
     </insert>
@@ -157,8 +157,8 @@
             <if test="htbh != null and htbh != ''">
                 htbh=#{htbh},
             </if>
-            <if test="yjrq != null and yjrq != ''">
-                yjrq=to_date(#{yjrq}, 'yyyy/mm/dd'),
+            <if test="yjrq != null ">
+                yjrq=#{yjrq},
             </if>
             <if test="yjxm != null and yjxm != ''">
                 yjxm=#{yjxm},
@@ -178,8 +178,8 @@
             <if test="bzdw != null and bzdw != ''">
                 bzdw=#{bzdw},
             </if>
-            <if test="bzrq != null and bzrq != ''">
-                bzrq=to_date(#{bzrq}, 'yyyy/mm/dd'),
+            <if test="bzrq != null ">
+                bzrq=#{bzrq},
             </if>
         </set>
         where id=#{id}

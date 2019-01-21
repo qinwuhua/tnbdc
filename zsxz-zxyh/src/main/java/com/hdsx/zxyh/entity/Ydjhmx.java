@@ -4,6 +4,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
+import java.util.Date;
+
 /**
  * 月度计划明细实体
  */
@@ -31,13 +33,13 @@ public class Ydjhmx {
     // 计划工程量
     private String jhgcl;
     // 计划开始日期
-    private String jhksrq;
+    private Date jhksrq;
     // 计划完成日期
-    private String jhwcrq;
+    private Date jhwcrq;
     // 实际工程量
     private String sjgcl;
     // 实际开始日期
-    private String sjksrq;
+    private Date sjksrq;
     // 实际完成日期
-    private String sjwcrq;
+    private Date sjwcrq;
 }

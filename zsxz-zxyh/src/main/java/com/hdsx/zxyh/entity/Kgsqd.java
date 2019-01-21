@@ -4,6 +4,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
+import java.util.Date;
+
 
 /**
  * 开工申请单
@@ -52,7 +54,14 @@ public class Kgsqd {
     // 填报单位
     private String tbdw;
     // 填报日期
-    private String tbrq;
+    private Date tbrq;
     // 状态
     private String zt;
+
+    // 工程主要内容
+    private String gczynr;
+    // 申请开工日期
+    private Date sqkgrq;
+    // 预计完工日期
+    private Date yjwgrq;
 }

@@ -6,12 +6,12 @@ spring:
     name: zsxz-zxyh
   datasource:
     #url: jdbc:oracle:thin:@211.101.37.237:1521:orcl
-    url: jdbc:oracle:thin:@192.168.3.113:1521:orcl
-    username: zsxz
-    password: zsxz
-#    url: jdbc:oracle:thin:@192.168.10.230:1521:orcl
-#    username: c##zsxz
+#    url: jdbc:oracle:thin:@192.168.3.113:1521:orcl
+#    username: zsxz
 #    password: zsxz
+    url: jdbc:oracle:thin:@192.168.10.230:1521:orcl
+    username: c##zsxz
+    password: zsxz
     driver-class-name: oracle.jdbc.driver.OracleDriver
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
@@ -34,7 +34,7 @@ spring:
 
 mybatis:
   mapper-locations: classpath:/xml/*.xml
-  type-aliases-package: com.hdsx.rcyh.etity
+  type-aliases-package: com.hdsx.zxyh.etity
   config-location: classpath:mybatis-config.xml
 
 #pagehelper分页插件配置

@@ -43,10 +43,10 @@
             <if test="gldw != null and gldw != ''">
                 gldw,
             </if>
-            <if test="htkgrq != null and htkgrq != ''">
+            <if test="htkgrq != null">
                 htkgrq,
             </if>
-            <if test="htjgrq != null and htjgrq != ''">
+            <if test="htjgrq != null">
                 htjgrq,
             </if>
             <if test="jhgq != null and jhgq != ''">
@@ -61,7 +61,7 @@
             <if test="bzr != null and bzr != ''">
                 bzr,
             </if>
-            <if test="bzrq != null and bzrq != ''">
+            <if test="bzrq != null">
                 bzrq,
             </if>
             <if test="bzbm != null and bzbm != ''">
@@ -87,11 +87,11 @@
             <if test="gldw != null and gldw != ''">
                 #{gldw},
             </if>
-            <if test="htkgrq != null and htkgrq != ''">
-                to_date(#{htkgrq}, 'yyyy/mm/dd'),
+            <if test="htkgrq != null">
+                #{htkgrq},
             </if>
-            <if test="htjgrq != null and htjgrq != ''">
-                to_date(#{htjgrq}, 'yyyy/mm/dd'),
+            <if test="htjgrq != null">
+                #{htjgrq},
             </if>
             <if test="jhgq != null and jhgq != ''">
                 #{jhgq},
@@ -106,7 +106,7 @@
                 #{bzr},
             </if>
             <if test="bzrq != null and bzrq != ''">
-                to_date(#{bzrq}, 'yyyy/mm/dd'),
+                #{bzrq},
             </if>
             <if test="bzbm != null and bzbm != ''">
                 #{bzbm},
@@ -132,11 +132,11 @@
             <if test="gldw != null and gldw != ''">
                 gldw=#{gldw},
             </if>
-            <if test="htkgrq != null and htkgrq != ''">
-                htkgrq=to_date(#{htkgrq},'yyyy/mm/dd'),
+            <if test="htkgrq != null">
+                htkgrq=#{htkgrq},
             </if>
-            <if test="htjgrq != null and htjgrq != ''">
-                htjgrq=to_date(#{htjgrq},'yyyy/mm/dd'),
+            <if test="htjgrq != null">
+                htjgrq=#{htjgrq},
             </if>
             <if test="jhgq != null and jhgq != ''">
                 jhgq=#{jhgq},
@@ -151,7 +151,7 @@
                 bzr=#{bzr},
             </if>
             <if test="bzrq != null and bzrq != ''">
-                bzrq=to_date(#{bzrq},'yyyy/mm/dd'),
+                bzrq=#{bzrq},
             </if>
             <if test="bzbm != null and bzbm != ''">
                 bzbm=#{bzbm},

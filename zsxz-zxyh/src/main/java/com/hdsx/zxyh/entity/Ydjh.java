@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -29,7 +30,7 @@ public class Ydjh {
     // 编制人
     private String bzr;
     // 编制日期
-    private String bzrq;
+    private Date bzrq;
     // 编制单位
     private String bzdw;
     // 编制部门

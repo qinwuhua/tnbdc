@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -19,7 +20,7 @@ public class Jczbqkb {
     // 合同编号
     private String htbh;
     // 检查日期
-    private String jcrq;
+    private Date jcrq;
     // 检查人
     private String jcr;
 

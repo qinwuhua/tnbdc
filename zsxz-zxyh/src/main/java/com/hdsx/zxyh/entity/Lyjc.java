@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -29,7 +30,7 @@ public class Lyjc {
     // 合计金额
     private String hjje;
     // 检测日期
-    private String jcrq;
+    private Date jcrq;
     // 检测人
     private String jcr;
     // 履约检查明细

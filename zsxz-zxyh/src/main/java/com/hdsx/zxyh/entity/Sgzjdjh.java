@@ -4,6 +4,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
+import java.util.Date;
+
 /**
  * 施工总进度的计划实体
  */
@@ -22,9 +24,9 @@ public class Sgzjdjh {
     // 管理单位
     private String gldw;
     // 合同开工日期
-    private String htkgrq;
+    private Date htkgrq;
     // 合同竣工日期
-    private String htjgrq;
+    private Date htjgrq;
     // 计划工期
     private String jhgq;
     // 承包单位
@@ -34,7 +36,7 @@ public class Sgzjdjh {
     // 编制人
     private String bzr;
     // 编制日期
-    private String bzrq;
+    private Date bzrq;
     // 编制单位
     private String bzdw;
     // 编制部门

@@ -97,7 +97,7 @@
             <if test="bzr !=null and bzr !=''">
                 bzr,
             </if>
-            <if test="bzrq !=null and bzrq !=''">
+            <if test="bzrq !=null">
                 bzrq,
             </if>
             <if test="bzdw !=null and bzdw !=''">
@@ -135,8 +135,8 @@
             <if test="bzr !=null and bzr !=''">
                 #{bzr},
             </if>
-            <if test="bzrq !=null and bzrq !=''">
-                to_date(#{bzrq}, 'yyyy/mm/dd'),
+            <if test="bzrq !=null">
+                #{bzrq},
             </if>
             <if test="bzdw !=null and bzdw !=''">
                 #{bzdw},
@@ -185,19 +185,19 @@
                 <if test="item.jhgcl !=null and item.jhgcl !=''">
                     jhgcl,
                 </if>
-                <if test="item.jhksrq != null and item.jhksrq != ''">
+                <if test="item.jhksrq != null">
                     jhksrq,
                 </if>
-                <if test="item.jhwcrq != null and item.jhwcrq != ''">
+                <if test="item.jhwcrq != null ">
                     jhwcrq,
                 </if>
                 <if test="item.sjgcl != null and item.sjgcl != ''">
                     sjgcl,
                 </if>
-                <if test="item.sjksrq != null and item.sjksrq != ''">
+                <if test="item.sjksrq != null">
                     sjksrq,
                 </if>
-                <if test="item.sjwcrq != null and item.sjwcrq != ''">
+                <if test="item.sjwcrq != null">
                     sjwcrq,
                 </if>
             </trim>
@@ -229,20 +229,20 @@
                 <if test="item.jhgcl !=null and item.jhgcl !=''">
                     #{item.jhgcl},
                 </if>
-                <if test="item.jhksrq != null and item.jhksrq != ''">
-                    to_date(#{item.jhksrq}, 'yyyy/mm/dd'),
+                <if test="item.jhksrq != null ">
+                    #{item.jhksrq},
                 </if>
-                <if test="item.jhwcrq != null and item.jhwcrq != ''">
-                    to_date(#{item.jhwcrq}, 'yyyy/mm/dd'),
+                <if test="item.jhwcrq != null ">
+                    #{item.jhwcrq},
                 </if>
                 <if test="item.sjgcl != null and item.sjgcl != ''">
                     #{item.sjgcl},
                 </if>
-                <if test="item.sjksrq != null and item.sjksrq != ''">
-                    to_date(#{item.sjksrq}, 'yyyy/mm/dd'),
+                <if test="item.sjksrq != null ">
+                    #{item.sjksrq},
                 </if>
-                <if test="item.sjwcrq != null and item.sjwcrq != ''">
-                    to_date(#{item.sjwcrq}, 'yyyy/mm/dd'),
+                <if test="item.sjwcrq != null ">
+                    #{item.sjwcrq},
                 </if>
             </trim>;
         </foreach>
@@ -285,8 +285,8 @@
           <if test="bzr !=null and bzr !=''">
               bzr=#{bzr},
           </if>
-          <if test="bzrq !=null and bzrq !=''">
-              bzrq=to_date(#{bzrq}, 'yyyy/mm/dd'),
+          <if test="bzrq !=null">
+              bzrq=#{bzrq},
           </if>
           <if test="bzdw !=null and bzdw !=''">
               bzdw=#{bzdw},

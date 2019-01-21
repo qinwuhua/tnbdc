@@ -52,7 +52,7 @@
             <if test="htbh !=null and htbh !=''">
                 htbh,
             </if>
-            <if test="jcrq !=null and jcrq !=''">
+            <if test="jcrq !=null">
                 jcrq,
             </if>
             <if test="jcr != null and jcr !=''">
@@ -81,8 +81,8 @@
             <if test="htbh !=null and htbh !=''">
                 #{htbh},
             </if>
-            <if test="jcrq !=null and jcrq !=''">
-                to_date(#{jcrq}, 'yyyy/mm/dd'),
+            <if test="jcrq !=null">
+                #{jcrq},
             </if>
             <if test="jcr != null and jcr !=''">
                 #{jcr},
@@ -143,8 +143,8 @@
             <if test="htbh !=null and htbh !=''">
                 htbh=#{htbh},
             </if>
-            <if test="jcrq !=null and jcrq !=''">
-                jcrq=to_date(#{jcrq}, 'yyyy/mm/dd'),
+            <if test="jcrq !=null ">
+                jcrq=#{jcrq},
             </if>
             <if test="jcr != null and jcr !=''">
                 jcr=#{jcr},

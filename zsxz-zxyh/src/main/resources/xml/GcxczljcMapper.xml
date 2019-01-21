@@ -71,8 +71,8 @@
             <if test="djbh != null and djbh != ''">
                 #{djbh},
             </if>
-            <if test="jcrq != null and jcrq != ''">
-                to_date(#{jcrq}, 'yyyy/mm/dd'),
+            <if test="jcrq != null">
+                #{jcrq},
             </if>
             <if test="gcmc != null and gcmc != ''">
                 #{gcmc},
@@ -113,8 +113,8 @@
             <if test="bzdw != null and bzdw != ''">
                 #{bzdw},
             </if>
-            <if test="bzrq != null and bzrq != ''">
-                to_date(#{bzrq}, 'yyyy/mm/dd'),
+            <if test="bzrq != null ">
+                #{bzrq},
             </if>
         </trim>
     </insert>
@@ -125,8 +125,8 @@
             <if test="djbh != null and djbh != ''">
                 djbh=djbh},
             </if>
-            <if test="jcrq != null and jcrq != ''">
-                jcrq=to_date(#{jcrq}, 'yyyy/mm/dd'),
+            <if test="jcrq != null ">
+                jcrq=#{jcrq},
             </if>
             <if test="gcmc != null and gcmc != ''">
                 gcmc=#{gcmc},
@@ -167,8 +167,8 @@
             <if test="bzdw != null and bzdw != ''">
                 bzdw=#{bzdw},
             </if>
-            <if test="bzrq != null and bzrq != ''">
-                bzrq=to_date(#{bzrq}, 'yyyy/mm/dd'),
+            <if test="bzrq != null">
+                bzrq=#{bzrq},
             </if>
         </set>
         where id = #{id}

@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -23,7 +24,7 @@ public class Ybgc {
     //工程名称
     private String htmc;
     //隐检日期
-    private String yjrq;
+    private Date yjrq;
     //隐检项目
     private String yjxm;
     //隐检部位
@@ -37,7 +38,7 @@ public class Ybgc {
     //编制单位
     private String bzdw;
     //编制日期
-    private String bzrq;
+    private Date bzrq;
     // 子目合同信息
     private List<Ybgcmx> ybgcmxList;
 }

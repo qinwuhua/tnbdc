@@ -4,6 +4,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
+import java.util.Date;
+
 /**
  * 工程现场质量检查实体
  */
@@ -17,7 +19,7 @@ public class Gcxczljc {
     // 单据编号
     private String djbh;
     // 检查日期
-    private String jcrq;
+    private Date jcrq;
     // 工程名称
     private String gcmc;
     // 合同编号
@@ -45,5 +47,5 @@ public class Gcxczljc {
     // 编制单位
     private String bzdw;
     // 编制日期
-    private String bzrq;
+    private Date bzrq;
 }
