@@ -5,7 +5,7 @@
 
 
   <select id="selectDay" parameterType="java.lang.String" resultType="java.util.HashMap">
-     select e.XCRW_TBRQ,e.XCRW_XCLX,e.XCCS_RCS,e.qdxc_count from (select *from (select a.XCRW_DWMC,a.XCRW_DWBH,to_char(a.XCRW_TBRQ, 'yyyy/mm/dd')as XCRW_TBRQ,A.XCRW_XCLX,
+     select e.XCRW_TBRQ,e.XCRW_XCLX,e.XCCS_RCS,e.qdxc_count from (select *from (select a.XCRW_DWMC,a.XCRW_DWBH,to_char(a.XCRW_TBRQ, 'yyyy-mm-dd')as XCRW_TBRQ,A.XCRW_XCLX,
     (select count(XCRW_TBRQ) from qdxc b where b.XCRW_DWBH=a.XCRW_DWBH
     )as qdxc_count from qdxc a)c left join
     (select XCCS_DWMC,XCCS_DWBH,XCCS_DWID,XCCS_XCLX,XCCS_RCS from xccspz)
@@ -15,7 +15,7 @@
 
 
   <select id="selectMonth" parameterType="java.lang.String" resultType="java.util.HashMap">
-    select e.XCRW_TBRQ,e.XCRW_XCLX,e.XCCS_RCS,e.qdxc_count from (select * from (select to_char(XCRW_TBRQ, 'yyyy/mm')as XCRW_TBRQ ,XCRW_DWMC,XCRW_DWBH,XCRW_XCLX,
+    select e.XCRW_TBRQ,e.XCRW_XCLX,e.XCCS_RCS,e.qdxc_count from (select * from (select to_char(XCRW_TBRQ, 'yyyy-mm')as XCRW_TBRQ ,XCRW_DWMC,XCRW_DWBH,XCRW_XCLX,
     (select count(XCRW_TBRQ) from qdxc b where b.XCRW_DWBH=a.XCRW_DWBH
     )as qdxc_count from qdxc a)c left join (select XCCS_DWMC,XCCS_DWBH,XCCS_DWID,XCCS_XCLX,XCCS_RCS from xccspz)
     d on
