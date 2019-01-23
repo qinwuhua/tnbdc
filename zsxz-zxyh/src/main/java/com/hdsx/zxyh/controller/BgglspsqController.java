@@ -21,7 +21,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("zxyh/bgglspsq")
-@Api(value = "變更管理索賠申請書控制器",description = "變更管理索賠申請書控制器")
+@Api(value = "变更管理索赔申请书控制器",description = "变更管理索赔申请书控制器")
 public class BgglspsqController {
 
     @Resource
