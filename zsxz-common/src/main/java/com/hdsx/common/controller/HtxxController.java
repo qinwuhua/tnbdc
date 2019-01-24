@@ -22,46 +22,6 @@ public class HtxxController {
     @Resource
     private HtxxService htxxService;
 
-    @GetMapping("getHtxxAll")
-    @ApiOperation(value = "查询合同信息")
-    private Msg getHtxxAll(){
-        try {
-            return ResultUtil.success(htxxService.getHtxxAll());
-        }catch (Exception e){
-            return ResultUtil.error("查询失败！");
-        }
-    }
-
-    @GetMapping("getHtxxLyjcAll")
-    @ApiOperation(value = "查询履约检查合同信息")
-    private Msg getHtxxLyjcAll(){
-        try {
-            return ResultUtil.success(htxxService.getHtxxLyjcAll());
-        }catch (Exception e){
-            return ResultUtil.error("查询失败！");
-        }
-    }
-
-    @GetMapping("getHtgjxxAll")
-    @ApiOperation(value = "查询合同关键信息")
-    private Msg getHtgjxxAll(){
-        try {
-            return ResultUtil.success(htxxService.getHtgjxxAll());
-        }catch (Exception e){
-            return ResultUtil.error("查询失败！");
-        }
-    }
-
-    @GetMapping("getHtxxYhAll")
-    @ApiOperation(value = "查询养护项目合同信息")
-    private Msg getHtxxYhAll(){
-        try {
-            return ResultUtil.success(htxxService.getHtxxYhAll());
-        }catch (Exception e){
-            return ResultUtil.error("查询失败！");
-        }
-    }
-
     @GetMapping("getHtxxRelatedAll")
     @ApiOperation(value = "查询合同全部相关信息")
     @ApiImplicitParam(paramType="query", dataType = "String", name = "htbh", value = "合同编号")
