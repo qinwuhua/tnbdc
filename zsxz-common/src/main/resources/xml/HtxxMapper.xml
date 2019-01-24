@@ -82,6 +82,22 @@
         </collection>
     </resultMap>
 
+    <select id="getHtxxAll" resultType="hashmap">
+        SELECT * FROM DJSJ_HTXX
+    </select>
+
+    <select id="getHtxxLyjcAll" resultType="hashmap">
+        SELECT * FROM DJSJ_HTXX_LYJCMX
+    </select>
+
+    <select id="getHtgjxxAll" resultType="hashmap">
+        SELECT * FROM DJSJ_HTXX_HTGJXX
+    </select>
+
+    <select id="getHtxxYhAll" resultType="hashmap">
+        SELECT * FROM DJSJ_HTXX_YHXMXX
+    </select>
+
     <select id="getHtxxRelateAll" parameterType="hashmap" resultMap="htxxBean">
         SELECT jc.*,gj.*,
         ly.*,yh.*,
@@ -95,5 +111,4 @@
             <if test="htbh != null and htbh != ''"> AND jc.htxx_htbh LIKE '%'||trim(#{htbh})||'%'</if>
         </where>
     </select>
-
 </mapper>

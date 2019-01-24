@@ -15,6 +15,27 @@ public class HtxxServiceImpl implements HtxxService {
     @Resource
     HtxxMapper htxxMapper;
 
+
+    @Override
+    public List<HashMap<String, Object>> getHtxxAll() {
+        return htxxMapper.getHtxxAll();
+    }
+
+    @Override
+    public List<HashMap<String, Object>> getHtxxLyjcAll() {
+        return htxxMapper.getHtxxLyjcAll();
+    }
+
+    @Override
+    public List<HashMap<String, Object>> getHtgjxxAll() {
+        return htxxMapper.getHtgjxxAll();
+    }
+
+    @Override
+    public List<HashMap<String, Object>> getHtxxYhAll() {
+        return htxxMapper.getHtxxYhAll();
+    }
+
     @Override
     public List<Htxx> getHtxxRelatedAll(HashMap<String,String> paramMap) {
         return htxxMapper.getHtxxRelateAll(paramMap);
