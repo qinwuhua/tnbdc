@@ -18,7 +18,7 @@
           <result column="YJQX_LXR" property="lxr"/>
           <result column="YJQX_LXFS" property="lxfs"/>
           <result column="YJQX_GCFL" property="gcfl"/>
-          <result column="YJQX_GCMS" property="gcmc"/>
+          <result column="YJQX_GCMS" property="gcms"/>
           <result column="YJQX_GLDWBH" property="gldwbh"/>
           <result column="YJQX_GLDWMC" property="gldwmc"/>
           <result column="YJQX_SGDWBH" property="sgdwbh"/>
@@ -98,7 +98,7 @@
             <if test="sgdwmc != null">#{sgdwmc},</if>
             <if test="bzdwbh != null">#{bzdwbh},</if>
             <if test="bzdwmc != null">#{bzdwmc},</if>
-            <if test="bzrq != null">to_date(#{bzrq},'yyyy-MM'),</if>
+            <if test="bzrq != null">to_date(#{bzrq},'yyyy-MM-dd'),</if>
             <if test="tbrid != null">#{tbrid},</if>
             <if test="tbr != null">#{tbr},</if>
             <if test="tbrq != null">to_date(#{tbrq},'yyyy-MM-dd'),</if>
@@ -136,7 +136,7 @@
             <if test="sgdwmc != null"> YJQX_SGDWMC=#{sgdwmc},</if>
             <if test="bzdwbh != null"> YJQX_BZDWBH=#{bzdwbh},</if>
             <if test="bzdwmc != null"> YJQX_BZDWMC=#{bzdwmc},</if>
-            <if test="bzrq != null"> YJQX_BZRQ=to_date(#{bzrq},'yyyy-MM'),</if>
+            <if test="bzrq != null"> YJQX_BZRQ=to_date(#{bzrq},'yyyy-MM-dd'),</if>
             <if test="tbrid != null"> YJQX_TBRID=#{tbrid},</if>
             <if test="tbr != null"> YJQX_TBR=#{tbr},</if>
             <if test="tbrq != null"> YJQX_TBRQ=to_date(#{tbrq},'yyyy-MM-dd'),</if>
@@ -162,7 +162,7 @@
     <select id="getYjqxgcList" parameterType="hashmap" resultMap="yjqxBean">
         SELECT YJQX_ID, YJQX_DJBH, YJQX_GCMC, YJQX_QXLD, YJQX_FX, YJQX_QDZH, YJQX_ZDZH, YJQX_DLLC,
         YJQX_FYGS, YJQX_QL, YJQX_SD, YJQX_LXR, YJQX_LXFS, YJQX_GCFL, YJQX_GCMS, YJQX_GLDWBH, YJQX_GLDWMC,
-         YJQX_SGDWBH, YJQX_SGDWMC, YJQX_BZDWBH, YJQX_BZDWMC, to_char(YJQX_BZRQ,'yyyy-MM')YJQX_BZRQ, YJQX_TBRID, YJQX_TBR, to_char(YJQX_TBRQ,'yyyy-MM-dd')YJQX_TBRQ,
+         YJQX_SGDWBH, YJQX_SGDWMC, YJQX_BZDWBH, YJQX_BZDWMC, to_char(YJQX_BZRQ,'yyyy-MM-dd')YJQX_BZRQ, YJQX_TBRID, YJQX_TBR, to_char(YJQX_TBRQ,'yyyy-MM-dd')YJQX_TBRQ,
          YJQX_HTBH, YJQX_SPZT, YJQX_DWID, YJQX_DWBH, YJQX_DWMC, YJQX_BMID, YJQX_BMBH, YJQX_BMMC
          FROM YJQX_GCDJB
          <where>
