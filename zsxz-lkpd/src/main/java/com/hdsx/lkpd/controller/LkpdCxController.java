@@ -27,20 +27,20 @@ public class LkpdCxController {
 
     @RequestMapping(value = "getMxbForLksjcx", method = RequestMethod.GET, produces = "application/json")
     @ApiImplicitParams({
-            @ApiImplicitParam(paramType="query", dataType = "String", name = "lxcode", value = "路线编码", required = true),
-            @ApiImplicitParam(paramType="query", dataType = "String", name = "xcfx", value = "行车方向", required = true),
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "lxcode", value = "路线编码", required = false),
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "xcfx", value = "行车方向", required = false),
             @ApiImplicitParam(paramType="query", dataType = "String", name = "bbid", value = "版本id", required = true),
-            @ApiImplicitParam(paramType="query", dataType = "String", name = "szhh", value = "起点桩号", required = true),
-            @ApiImplicitParam(paramType="query", dataType = "String", name = "ezhh", value = "止点桩号", required = true),
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "szhh", value = "起点桩号", required = false),
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "ezhh", value = "止点桩号", required = false),
             @ApiImplicitParam(paramType="query", dataType = "int", name = "pageNum", value = "页码", required = true),
             @ApiImplicitParam(paramType="query", dataType = "int", name = "pageSize", value = "每页条数", required = true)
     })
     @ApiOperation(value = "获取技术状况评定明细表数据")
-    public Msg getMxbForLksjcx(@RequestParam("lxcode") String lxcode,
-                               @RequestParam("xcfx") String xcfx,
+    public Msg getMxbForLksjcx(@RequestParam(value="lxcode",required = false) String lxcode,
+                               @RequestParam(value="xcfx",required = false) String xcfx,
                                @RequestParam("bbid") String bbid,
-                               @RequestParam("szhh") String szhh,
-                               @RequestParam("ezhh") String ezhh,
+                               @RequestParam(value="szhh",required = false) String szhh,
+                               @RequestParam(value="ezhh",required = false) String ezhh,
                                @RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
                                @RequestParam(value = "pageSize", defaultValue = "10") int pageSize){
         Map<String,String> param=new HashMap<String,String>();
@@ -53,20 +53,20 @@ public class LkpdCxController {
 
     @RequestMapping(value = "getHzbForLksjcx", method = RequestMethod.GET, produces = "application/json")
     @ApiImplicitParams({
-            @ApiImplicitParam(paramType="query", dataType = "String", name = "lxcode", value = "路线编码", required = true),
-            @ApiImplicitParam(paramType="query", dataType = "String", name = "xcfx", value = "行车方向", required = true),
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "lxcode", value = "路线编码", required = false),
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "xcfx", value = "行车方向", required = false),
             @ApiImplicitParam(paramType="query", dataType = "String", name = "bbid", value = "版本id", required = true),
-            @ApiImplicitParam(paramType="query", dataType = "String", name = "szhh", value = "起点桩号", required = true),
-            @ApiImplicitParam(paramType="query", dataType = "String", name = "ezhh", value = "止点桩号", required = true),
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "szhh", value = "起点桩号", required = false),
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "ezhh", value = "止点桩号", required = false),
             @ApiImplicitParam(paramType="query", dataType = "int", name = "pageNum", value = "页码", required = true),
             @ApiImplicitParam(paramType="query", dataType = "int", name = "pageSize", value = "每页条数", required = true)
     })
     @ApiOperation(value = "获取技术状况评定汇总表数据")
-    public Msg getHzbForLksjcx(@RequestParam("lxcode") String lxcode,
-                               @RequestParam("xcfx") String xcfx,
+    public Msg getHzbForLksjcx(@RequestParam(value="lxcode",required = false) String lxcode,
+                               @RequestParam(value="xcfx",required = false) String xcfx,
                                @RequestParam("bbid") String bbid,
-                               @RequestParam("szhh") String szhh,
-                               @RequestParam("ezhh") String ezhh,
+                               @RequestParam(value="szhh",required = false) String szhh,
+                               @RequestParam(value="ezhh",required = false) String ezhh,
                                @RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
                                @RequestParam(value = "pageSize", defaultValue = "10") int pageSize){
         Map<String,String> param=new HashMap<String,String>();
@@ -171,25 +171,24 @@ public class LkpdCxController {
 
     @RequestMapping(value = "createMxbDataForLksjcx", method = RequestMethod.POST, produces = "application/json")
     @ApiImplicitParams({
-            @ApiImplicitParam(paramType="query", dataType = "String", name = "lxcode", value = "路线编码", required = true),
-            @ApiImplicitParam(paramType="query", dataType = "String", name = "szhh", value = "起点桩号", required = true),
-            @ApiImplicitParam(paramType="query", dataType = "String", name = "ezhh", value = "止点桩号", required = true),
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "dwbm", value = "单位编码", required = true),
             @ApiImplicitParam(paramType="query", dataType = "String", name = "bbid", value = "版本id", required = true),
             @ApiImplicitParam(paramType="query", dataType = "String", name = "pdsj", value = "评定时间", required = true)
     })
     @ApiOperation(value = "生成明细表数据")
-    public Msg createMxbDataForLksjcx(@RequestParam(value = "lxcode",required = true) String lxcode,
+    public Msg createMxbDataForLksjcx(@RequestParam(value = "dwbm",required = true) String dwbm,
                                       @RequestParam(value = "bbid",required = true) String bbid,
-                                      @RequestParam("szhh") String szhh,
-                                      @RequestParam("ezhh") String ezhh,
-                                      @RequestParam("pdsj") String pdsj
+                                      @RequestParam(value="pdsj",required = true) String pdsj
                                       ){
         Map<String,String> param=new HashMap<String,String>();
-        param.put("lxcode",lxcode);param.put("bbid",bbid);param.put("szhh",szhh);param.put("ezhh",ezhh);param.put("pdsj",pdsj);
+        param.put("dwbm",dwbm);param.put("bbid",bbid);param.put("pdsj",pdsj);
         try {
             boolean bl=lkpdCxService.createMxbDataForLksjcx(param);
-
+            //修改状态为已发布
+            if(bl)
             return ResultUtil.success("生成数据成功");
+            else
+            return ResultUtil.success("生成数据失败");
         }catch (Exception e){
             e.printStackTrace();
             return ResultUtil.error("生成数据失败，接口异常");

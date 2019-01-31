@@ -22,8 +22,10 @@
 				<if test="ezhh != null and ezhh != ''">
 					and q.szhh&lt;${ezhh}
 				</if>
+				<if test="xcfx != null and xcfx != ''">
+					and q.fx = #{xcfx}
+				</if>
 				and q.lmlx=#{lmlx}
-                and q.fx = #{xcfx}
 				order by q.szhh,q.fx
 
     </select>
@@ -158,14 +160,7 @@
 	<delete id="dropMxb" parameterType="hashmap">
 		DELETE FROM JCPD_LKPDMXB
 		WHERE BBID=#{bbid}
-		AND LDID IN (SELECT LDID FROM JCPD_QMLDB QM WHERE LXCODE=#{lxcode}
-		<if test="szhh != null and szhh != ''">
-		and qm.ezhh>${szhh}
-		</if>
-		<if test="ezhh != null and ezhh != ''">
-			and qm.szhh&lt;${ezhh}
-		</if>
-	  	AND BBID=(SELECT QMBBID FROM JCPD_BBKZB WHERE BBID=#{bbid}) )
+
 	</delete>
 
 	<!-- 获取路面四项指标 -->
@@ -173,22 +168,31 @@
 		select qm.*,nvl(lm1.zhi,100) as rqi,lm1.pjz as iri,nvl(lm2.zhi,100) as rdi,
 		nvl(lm3.zhi,100) as sri,nvl(lm4.zhi,100) as pssi
 		from jcpd_qmldb qm
-		left join (select * from jcpd_lmjcb where bbid=#{bbid} and jclx='0401')lm1
+		left join (select * from JCPD_LMJCB WHERE to_date(jcrq,'yyyy-mm-dd')&lt;=
+		(select to_date(sjsjsx,'yyyy-mm-dd') from jcpd_bbkzb where bbid=#{bbid})
+		and to_date(jcrq,'yyyy-mm-dd')>=
+		(select to_date(sjsjxx,'yyyy-mm-dd') from jcpd_bbkzb where bbid=#{bbid})
+		and jclx='0401')lm1
 		on qm.ldid=lm1.ldid
-		left join (select * from jcpd_lmjcb where bbid=#{bbid} and jclx='0402')lm2
+		left join (select * from JCPD_LMJCB WHERE to_date(jcrq,'yyyy-mm-dd')&lt;=
+		(select to_date(sjsjsx,'yyyy-mm-dd') from jcpd_bbkzb where bbid=#{bbid})
+		and to_date(jcrq,'yyyy-mm-dd')>=
+		(select to_date(sjsjxx,'yyyy-mm-dd') from jcpd_bbkzb where bbid=#{bbid}) and jclx='0402')lm2
 		on qm.ldid=lm2.ldid
-		left join (select * from jcpd_lmjcb where bbid=#{bbid} and jclx='0403')lm3
+		left join (select * from JCPD_LMJCB WHERE to_date(jcrq,'yyyy-mm-dd')&lt;=
+		(select to_date(sjsjsx,'yyyy-mm-dd') from jcpd_bbkzb where bbid=#{bbid})
+		and to_date(jcrq,'yyyy-mm-dd')>=
+		(select to_date(sjsjxx,'yyyy-mm-dd') from jcpd_bbkzb where bbid=#{bbid}) and jclx='0403')lm3
 		on qm.ldid=lm3.ldid
-		left join (select * from jcpd_lmjcb where bbid=#{bbid} and jclx='0404')lm4
+		left join (select * from JCPD_LMJCB WHERE to_date(jcrq,'yyyy-mm-dd')&lt;=
+		(select to_date(sjsjsx,'yyyy-mm-dd') from jcpd_bbkzb where bbid=#{bbid})
+		and to_date(jcrq,'yyyy-mm-dd')>=
+		(select to_date(sjsjxx,'yyyy-mm-dd') from jcpd_bbkzb where bbid=#{bbid}) and jclx='0404')lm4
 		on qm.ldid=lm4.ldid
-		where qm.lxcode=#{lxcode}
-		<if test="szhh != null and szhh != ''">
-			and qm.ezhh>${szhh}
+		where 1=1
+		<if test="dwbm != null and dwbm != ''">
+			and qm.dwbm like #{dwbm}||'%'
 		</if>
-		<if test="ezhh != null and ezhh != ''">
-			and qm.szhh&lt;${ezhh}
-		</if>
-		and qm.bbid=(select qmbbid from jcpd_bbkzb where bbid=#{bbid})
 	</select>
 
 	<!-- 明细表中插入数据 -->
@@ -196,5 +200,68 @@
 		INSERT INTO JCPD_LKPDMXB(LDID,BBID,MQI,PQI,PCI,RQI,PSSI,RDI,SRI,SCI,BCI,TCI,IRI,pdsj)
 		VALUES(#{ldid},#{pdbbid},#{mqi},#{pqi},#{pci},#{rqi},#{pssi},#{rdi},#{sri},#{sci},#{bci},#{tci},#{iri},#{pdsj})
 	</insert>
+	<update id="updateFaZtYfb" parameterType="com.hdsx.lkpd.entity.Qmldb">
+		update JCPD_BBKZB set fbzt='已发布' where bbid=#{pdbbid}
+	</update>
+
+	<!-- 查询pci -->
+	<select id="getPcicx" parameterType="com.hdsx.lkpd.entity.Qmldb" resultType="Double">
+		select round(nvl(100-#{a0}*power(100*sum(qz*ljsj*dwkf)/(#{cd}*#{lmkd}),#{a1}),100),2) as pci from
+		(select nvl(l.ljsj,0) ljsj,lx.qz,lx.dwkf,lx.lxname from jcpd_lkdcfb l
+		left join jcpd_lkdclxb lx
+		on l.lxid=lx.lxid
+		where dcid=(select dcid from jcpd_lkdczb where
+      to_date(dcsj,'yyyy-mm-dd')&lt;=
+      (select to_date(sjsjsx,'yyyy-mm-dd') from jcpd_bbkzb where bbid=#{pdbbid})
+      and to_date(dcsj,'yyyy-mm-dd')>=
+      (select to_date(sjsjxx,'yyyy-mm-dd') from jcpd_bbkzb where bbid=#{pdbbid})
+      and ldid=#{ldid} and lxid=#{lxid}))
+
+	</select>
+	<!-- 查询sci -->
+	<select id="getScicx" parameterType="com.hdsx.lkpd.entity.Qmldb" resultType="Double">
+		select nvl(sum(qz*(case when(100-total)>0 then (100-total) else 0 end)),100) as sci from
+		(select lxName,sum(ljsj*dwkf) as total,avg(qz) as qz from
+		(select nvl(l.ljsj,0) ljsj,lx.dwkf,lx.qz,lx.lxname from jcpd_lkdcfb l
+		left join jcpd_lkdclxb lx
+		on l.lxid=lx.lxid
+		where dcid=(select dcid from jcpd_lkdczb where
+      to_date(dcsj,'yyyy-mm-dd')&lt;=
+      (select to_date(sjsjsx,'yyyy-mm-dd') from jcpd_bbkzb where bbid=#{pdbbid})
+      and to_date(dcsj,'yyyy-mm-dd')>=
+      (select to_date(sjsjxx,'yyyy-mm-dd') from jcpd_bbkzb where bbid=#{pdbbid})
+      and ldid=#{ldid} and lxid='02'))
+		group by lxName)
+	</select>
+	<!-- 查询bci -->
+	<select id="getBcicx" parameterType="com.hdsx.lkpd.entity.Qmldb" resultType="Double">
+		select (case when (100-nvl(max(total),0))>0 then (100-nvl(max(total),0)) else 0 end) as bci from
+		(select lxName,sum(ljsj*dwkf) as total from
+		(select nvl(l.ljsj,0) ljsj,lx.dwkf,lx.lxname from jcpd_lkdcfb l
+		left join jcpd_lkdclxb lx
+		on l.lxid=lx.lxid
+		where dcid=(select dcid from jcpd_lkdczb where
+      to_date(dcsj,'yyyy-mm-dd')&lt;=
+      (select to_date(sjsjsx,'yyyy-mm-dd') from jcpd_bbkzb where bbid=#{pdbbid})
+      and to_date(dcsj,'yyyy-mm-dd')>=
+      (select to_date(sjsjxx,'yyyy-mm-dd') from jcpd_bbkzb where bbid=#{pdbbid})
+      and ldid=#{ldid} and lxid='03'))
+		group by lxName)
+	</select>
+	<!-- 查询tci -->
+	<select id="getTcicx" parameterType="com.hdsx.lkpd.entity.Qmldb" resultType="Double">
+		select round(nvl(sum(qz*(case when (100-total)>0 then (100-total) else 0 end)),100),2) as tci from
+		(select lxName,sum(ljsj*dwkf) as total,avg(qz) as qz from
+		(select nvl(l.ljsj,0) ljsj,lx.dwkf,lx.qz,lx.lxname from jcpd_lkdcfb l
+		left join jcpd_lkdclxb lx
+		on l.lxid=lx.lxid
+		where dcid=(select dcid from jcpd_lkdczb where
+      to_date(dcsj,'yyyy-mm-dd')&lt;=
+      (select to_date(sjsjsx,'yyyy-mm-dd') from jcpd_bbkzb where bbid=#{pdbbid})
+      and to_date(dcsj,'yyyy-mm-dd')>=
+      (select to_date(sjsjxx,'yyyy-mm-dd') from jcpd_bbkzb where bbid=#{pdbbid})
+      and ldid=#{ldid} and lxid='04'))
+		group by lxName)
+	</select>
 
 </mapper>

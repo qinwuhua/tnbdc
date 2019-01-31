@@ -33,4 +33,14 @@ public interface LkpdCxMapper {
     List<Qmldb> getLmjc(Map<String, String> param);
 
     int addMxb(Qmldb qm);
+
+    double getBcicx(Qmldb qm);
+
+    double getPcicx(Qmldb qm);
+
+    double getTcicx(Qmldb qm);
+
+    double getScicx(Qmldb qm);
+
+    int updateFaZtYfb(Qmldb qm);
 }
