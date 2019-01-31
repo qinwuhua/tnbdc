@@ -36,17 +36,19 @@
         <result column="YDJH_HTBH" property="htbh"/>
         <!-- 一对多的关系 -->
         <!-- property: 指的是集合属性的值, ofType：指的是集合中元素的类型 -->
-        <collection property="sgjhsbmx" ofType="com.hdsx.rcyh.entity.Sgjhsbmx">
-            <id column="YHJHMX2_ID" property="id"/>
-            <result column="YHJHMX2_MID" property="mid"/>
-            <result column="YHJHMX2_XMNR" property="xmnr"/>
-            <result column="YHJHMX2_QDZH" property="qdzh"/>
-            <result column="YHJHMX2_ZDZH" property="zdzh"/>
-            <result column="YHJHMX2_YJGCL" property="yjgcl"/>
-            <result column="YHJHMX2_JHKSRQ" property="jhksrq"/>
-            <result column="YHJHMX2_JHJSRQ" property="jhjsrq"/>
-            <result column="YHJHMX2_BZ" property="bz"/>
-        </collection>
+        <collection property="sgjhsbmx" ofType="com.hdsx.rcyh.entity.Sgjhsbmx" select="getSgjhmxById" column="YDJH_ID"/>
+    </resultMap>
+
+    <resultMap id="sgjhsbmxBean" type="com.hdsx.rcyh.entity.Sgjhsbmx">
+        <id column="YHJHMX2_ID" property="id"/>
+        <result column="YHJHMX2_MID" property="mid"/>
+        <result column="YHJHMX2_XMNR" property="xmnr"/>
+        <result column="YHJHMX2_QDZH" property="qdzh"/>
+        <result column="YHJHMX2_ZDZH" property="zdzh"/>
+        <result column="YHJHMX2_YJGCL" property="yjgcl"/>
+        <result column="YHJHMX2_JHKSRQ" property="jhksrq"/>
+        <result column="YHJHMX2_JHJSRQ" property="jhjsrq"/>
+        <result column="YHJHMX2_BZ" property="bz"/>
     </resultMap>
 
     <resultMap id="wcsgjhBean" type="com.hdsx.rcyh.entity.Sgjhwc">
@@ -80,35 +82,33 @@
         <result column="YDWC_HTBH" property="htbh"/>
         <!-- 一对多的关系 -->
         <!-- property: 指的是集合属性的值, ofType：指的是集合中元素的类型 -->
-        <collection property="sgjhwcmx" ofType="com.hdsx.rcyh.entity.Sgjhwcmx">
-            <id column="YHJHWCMX2_ID" property="id"/>
-            <result column="YHJHWCMX2_MID" property="mid"/>
-            <result column="YHJHWCMX2_XMNR" property="xmnr"/>
-            <result column="YHJHWCMX2_QDZH" property="qdzh"/>
-            <result column="YHJHWCMX2_ZDZH" property="zdzh"/>
-            <result column="YHJHWCMX2_YJGCL" property="yjgcl"/>
-            <result column="YHJHWCMX2_WCGCL" property="wcgcl"/>
-            <result column="YHJHWCMX2_JHKSRQ" property="jhksrq"/>
-            <result column="YHJHWCMX2_JHJSRQ" property="jhjsrq"/>
-            <result column="YHJHWCMX2_SJKSRQ" property="sjksrq"/>
-            <result column="YHJHWCMX2_SJJSRQ" property="sjjsrq"/>
-            <result column="YHJHWCMX2_BZ" property="bz"/>
-        </collection>
+        <collection property="sgjhwcmx" ofType="com.hdsx.rcyh.entity.Sgjhwcmx" select="getWcSgjhmxById" column="YDWC_ID"/>
+    </resultMap>
+
+    <resultMap id="sgjhwcmxBean" type="com.hdsx.rcyh.entity.Sgjhwcmx">
+        <id column="YHJHWCMX2_ID" property="id"/>
+        <result column="YHJHWCMX2_MID" property="mid"/>
+        <result column="YHJHWCMX2_XMNR" property="xmnr"/>
+        <result column="YHJHWCMX2_QDZH" property="qdzh"/>
+        <result column="YHJHWCMX2_ZDZH" property="zdzh"/>
+        <result column="YHJHWCMX2_YJGCL" property="yjgcl"/>
+        <result column="YHJHWCMX2_WCGCL" property="wcgcl"/>
+        <result column="YHJHWCMX2_JHKSRQ" property="jhksrq"/>
+        <result column="YHJHWCMX2_JHJSRQ" property="jhjsrq"/>
+        <result column="YHJHWCMX2_SJKSRQ" property="sjksrq"/>
+        <result column="YHJHWCMX2_SJJSRQ" property="sjjsrq"/>
+        <result column="YHJHWCMX2_BZ" property="bz"/>
     </resultMap>
 
     <select id="getSgjhAll" parameterType="hashmap" resultMap="sgjhBean">
-        SELECT YDJH_ID, YDJH_DWMC, YDJH_DWBH, YDJH_DWID, YDJH_BMMC, YDJH_BMBH, YDJH_BMID, YDJH_TBR, YDJH_TBRID, to_char(YDJH_TBRQ,'yyyy-MM-dd')YDJH_TBRQ, YDJH_SPZT, YDJH_FILE, YDJH_WFID, YDJH_NOTE, YDJH_DJBH, to_char(YDJH_YF,'yyyy-MM')YDJH_YF, YDJH_YHDWMC, YDJH_YHDWID, YDJH_YHDWBH, YDJH_XMFL, YDJH_XMFLID, YDJH_BZ, YDJH_HTMC, YDJH_TBDW, YDJH_TBBM, YDJH_GLDW, YDJH_HTID, YDJH_HTBH,
-        YHJHMX2_ID, YHJHMX2_MID, YHJHMX2_XMNR, YHJHMX2_QDZH, YHJHMX2_ZDZH, YHJHMX2_YJGCL, to_char(YHJHMX2_JHKSRQ,'yyyy-MM-dd')YHJHMX2_JHKSRQ, to_char(YHJHMX2_JHJSRQ,'yyyy-MM-dd')YHJHMX2_JHJSRQ, YHJHMX2_BZ
+        SELECT YDJH_ID, YDJH_DWMC, YDJH_DWBH, YDJH_DWID, YDJH_BMMC, YDJH_BMBH, YDJH_BMID, YDJH_TBR, YDJH_TBRID, to_char(YDJH_TBRQ,'yyyy-MM-dd')YDJH_TBRQ, YDJH_SPZT, YDJH_FILE, YDJH_WFID, YDJH_NOTE, YDJH_DJBH, to_char(YDJH_YF,'yyyy-MM')YDJH_YF, YDJH_YHDWMC, YDJH_YHDWID, YDJH_YHDWBH, YDJH_XMFL, YDJH_XMFLID, YDJH_BZ, YDJH_HTMC, YDJH_TBDW, YDJH_TBBM, YDJH_GLDW, YDJH_HTID, YDJH_HTBH
         FROM YDSGJH jh
-        LEFT JOIN YDSGJHSBMX mx ON mx.YHJHMX2_MID = jh.YDJH_ID
         <where>
-            <trim suffixOverrides=",">
-                <if test="id != null and id != ''"> AND YDJH_ID LIKE '%'||trim(#{id})||'%',</if>
-                <if test="htmc != null and htmc != ''"> AND YDJH_HTMC LIKE '%'||trim(#{htmc})||'%',</if>
-                <if test="spzt != null and spzt != ''"> AND YDJH_SPZT LIKE '%'||trim(#{spzt})||'%',</if>
-                <if test="ksrq != null and ksrq != ''"> AND to_date(to_char(YDJH_TBRQ,'yyyy-MM-dd'),'yyyy-MM-dd')>to_date(#{ksrq},'yyyy-MM-dd'),</if>
-                <if test="jsrq != null and jsrq != ''"> AND to_date(to_char(YDJH_TBRQ,'yyyy-MM-dd'),'yyyy-MM-dd')&lt;to_date(#{jsrq},'yyyy-MM-dd'),</if>
-            </trim>
+            <if test="id != null and id != ''"> AND YDJH_ID LIKE '%'||trim(#{id})||'%'</if>
+            <if test="htmc != null and htmc != ''"> AND YDJH_HTMC LIKE '%'||trim(#{htmc})||'%'</if>
+            <if test="spzt != null and spzt != ''"> AND YDJH_SPZT LIKE '%'||trim(#{spzt})||'%'</if>
+            <if test="ksrq != null and ksrq != ''"> AND to_date(to_char(YDJH_TBRQ,'yyyy-MM-dd'),'yyyy-MM-dd')>to_date(#{ksrq},'yyyy-MM-dd')</if>
+            <if test="jsrq != null and jsrq != ''"> AND to_date(to_char(YDJH_TBRQ,'yyyy-MM-dd'),'yyyy-MM-dd')&lt;to_date(#{jsrq},'yyyy-MM-dd')</if>
         </where>
     </select>
 
@@ -183,9 +183,9 @@
         WHERE YHJHMX2_ID = #{id}
     </update>
 
-    <select id="getSgjhmxById" parameterType="String" resultType="com.hdsx.rcyh.entity.Sgjhsbmx">
-        SELECT YHJHMX2_ID id,YHJHMX2_MID mid,YHJHMX2_XMNR xmnr,YHJHMX2_QDZH qdzh,YHJHMX2_ZDZH zdzh,
-            YHJHMX2_YJGCL yjgcl, YHJHMX2_JHKSRQ jhksrq, YHJHMX2_JHJSRQ jhjsrq, YHJHMX2_BZ bz
+    <select id="getSgjhmxById" parameterType="String" resultMap="sgjhsbmxBean">
+        SELECT YHJHMX2_ID,YHJHMX2_MID,YHJHMX2_XMNR,YHJHMX2_QDZH,YHJHMX2_ZDZH ,
+            YHJHMX2_YJGCL, to_char(YHJHMX2_JHKSRQ,'yyyy-MM-dd') YHJHMX2_JHKSRQ, to_char(YHJHMX2_JHJSRQ,'yyyy-MM-dd') YHJHMX2_JHJSRQ, YHJHMX2_BZ
         FROM YDSGJHSBMX WHERE YHJHMX2_MID = #{id}
     </select>
 
@@ -204,18 +204,14 @@
     </delete>
 
     <select id="getWcSgjhAll" parameterType="hashmap" resultMap="wcsgjhBean">
-        SELECT YDWC_ID, YDWC_DWMC, YDWC_DWBH, YDWC_DWID, YDWC_BMMC, YDWC_BMBH, YDWC_BMID, YDWC_TBR, YDWC_TBRID, to_char(YDWC_TBRQ,'yyyy-MM-dd')YDWC_TBRQ, YDWC_SPZT, YDWC_FILE, YDWC_WFID, YDWC_NOTE, YDWC_DJBH, to_char(YDWC_YF,'yyyy-MM')YDWC_YF, YDWC_YHDWMC, YDWC_YHDWID, YDWC_YHDWBH, YDWC_XMFL, YDWC_XMFLID, YDWC_BZ, YDWC_HTMC, YDWC_TBDW, YDWC_TBBM, YDWC_GLDW, YDWC_HTID, YDWC_HTBH,
-        YHJHWCMX2_ID, YHJHWCMX2_MID, YHJHWCMX2_XMNR, YHJHWCMX2_QDZH, YHJHWCMX2_ZDZH, YHJHWCMX2_YJGCL, YHJHWCMX2_WCGCL, to_char(YHJHWCMX2_JHKSRQ,'yyyy-MM-dd')YHJHWCMX2_JHKSRQ, to_char(YHJHWCMX2_JHJSRQ,'yyyy-MM-dd')YHJHWCMX2_JHJSRQ, to_char(YHJHWCMX2_SJKSRQ,'yyyy-MM-dd')YHJHWCMX2_SJKSRQ, to_char(YHJHWCMX2_SJJSRQ,'yyyy-MM-dd')YHJHWCMX2_SJJSRQ, YHJHWCMX2_BZ
+        SELECT YDWC_ID, YDWC_DWMC, YDWC_DWBH, YDWC_DWID, YDWC_BMMC, YDWC_BMBH, YDWC_BMID, YDWC_TBR, YDWC_TBRID, to_char(YDWC_TBRQ,'yyyy-MM-dd')YDWC_TBRQ, YDWC_SPZT, YDWC_FILE, YDWC_WFID, YDWC_NOTE, YDWC_DJBH, to_char(YDWC_YF,'yyyy-MM')YDWC_YF, YDWC_YHDWMC, YDWC_YHDWID, YDWC_YHDWBH, YDWC_XMFL, YDWC_XMFLID, YDWC_BZ, YDWC_HTMC, YDWC_TBDW, YDWC_TBBM, YDWC_GLDW, YDWC_HTID, YDWC_HTBH
         FROM YDSGWC jh
-        LEFT JOIN YDSGWCMX mx ON mx.YHJHWCMX2_MID = jh.YDWC_ID
         <where>
-            <trim suffixOverrides=",">
-                <if test="id != null and id != ''"> AND YDWC_ID LIKE '%'||trim(#{id})||'%',</if>
-                <if test="htmc != null and htmc != ''"> AND YDWC_HTMC LIKE '%'||trim(#{htmc})||'%',</if>
-                <if test="spzt != null and spzt != ''"> AND YDWC_SPZT LIKE '%'||trim(#{spzt})||'%',</if>
-                <if test="ksrq != null and ksrq != ''"> AND to_date(to_char(YDWC_TBRQ,'yyyy-MM-dd'),'yyyy-MM-dd')>to_date(#{ksrq},'yyyy-MM-dd'),</if>
-                <if test="jsrq != null and jsrq != ''"> AND to_date(to_char(YDWC_TBRQ,'yyyy-MM-dd'),'yyyy-MM-dd')&lt;to_date(#{jsrq},'yyyy-MM-dd'),</if>
-            </trim>
+            <if test="id != null and id != ''"> AND YDWC_ID LIKE '%'||trim(#{id})||'%'</if>
+            <if test="htmc != null and htmc != ''"> AND YDWC_HTMC LIKE '%'||trim(#{htmc})||'%'</if>
+            <if test="spzt != null and spzt != ''"> AND YDWC_SPZT LIKE '%'||trim(#{spzt})||'%'</if>
+            <if test="ksrq != null and ksrq != ''"> AND to_date(to_char(YDWC_TBRQ,'yyyy-MM-dd'),'yyyy-MM-dd')>to_date(#{ksrq},'yyyy-MM-dd')</if>
+            <if test="jsrq != null and jsrq != ''"> AND to_date(to_char(YDWC_TBRQ,'yyyy-MM-dd'),'yyyy-MM-dd')&lt;to_date(#{jsrq},'yyyy-MM-dd')</if>
         </where>
     </select>
 
@@ -286,10 +282,10 @@
         WHERE YHJHWCMX2_ID = #{id}
     </update>
 
-    <select id="getWcSgjhmxById" parameterType="String" resultType="com.hdsx.rcyh.entity.Sgjhwcmx">
-        SELECT YHJHWCMX2_ID id,YHJHWCMX2_MID mid,YHJHWCMX2_XMNR xmnr,YHJHWCMX2_QDZH qdzh,YHJHWCMX2_ZDZH zdzh,
-            YHJHWCMX2_YJGCL yjgcl, YHJHWCMX2_WCGCL wcgcl, YHJHWCMX2_JHKSRQ jhksrq, YHJHWCMX2_JHJSRQ jhjsrq,
-            YHJHWCMX2_SJKSRQ sjksrq, YHJHWCMX2_SJJSRQ sjjsrq, YHJHWCMX2_BZ bz
+    <select id="getWcSgjhmxById" parameterType="String" resultMap="sgjhwcmxBean">
+        SELECT YHJHWCMX2_ID,YHJHWCMX2_MID,YHJHWCMX2_XMNR,YHJHWCMX2_QDZH,YHJHWCMX2_ZDZH,
+            YHJHWCMX2_YJGCL, YHJHWCMX2_WCGCL, to_char(YHJHWCMX2_JHKSRQ,'yyyy-MM-dd') YHJHWCMX2_JHKSRQ, to_char(YHJHWCMX2_JHJSRQ,'yyyy-MM-dd') YHJHWCMX2_JHJSRQ,
+            to_char(YHJHWCMX2_SJKSRQ,'yyyy-MM-dd') YHJHWCMX2_SJKSRQ , to_char(YHJHWCMX2_SJJSRQ,'yyyy-MM-dd') YHJHWCMX2_SJJSRQ , YHJHWCMX2_BZ
         FROM YDSGWCMX WHERE YHJHWCMX2_MID = #{id}
     </select>
     

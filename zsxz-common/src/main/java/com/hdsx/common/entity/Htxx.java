@@ -45,13 +45,6 @@ public class Htxx implements Serializable {
     private String gj_jbdw;
     private String gj_jbbm;
 
-    private String ly_id;
-    private String ly_mid;
-    private String ly_nr;
-    private BigDecimal ly_bl;
-    private String ly_note;
-    private String ly_je;
-
     private String yh_htbh;
     private String yh_htmc;
     private String yh_lxmc;
@@ -77,6 +70,7 @@ public class Htxx implements Serializable {
     private String yh_lxdh;
     private String yh_xmjs;
 
+    private List<HtxxLyjc> lyjcs;
     private List<Zmht> zmhts;
 
 }

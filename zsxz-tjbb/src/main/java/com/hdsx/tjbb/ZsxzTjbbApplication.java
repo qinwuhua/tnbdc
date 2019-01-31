@@ -1,16 +1,18 @@
-package com.hdsx.yjqx;
+package com.hdsx.tjbb;
 
-import com.hdsx.yjqx.config.CrossDomainFilter;
+import com.hdsx.tjbb.config.CrossDomainFilter;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 @SpringBootApplication
-public class ZsxzYjqxApplication {
+@Configuration
+public class ZsxzTjbbApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(ZsxzYjqxApplication.class, args);
+        SpringApplication.run(ZsxzTjbbApplication.class, args);
     }
 
     /**

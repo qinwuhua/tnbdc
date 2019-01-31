@@ -35,12 +35,6 @@
         <result column="HTGJXX_QCRQ" property="gj_qcrq"/>
         <result column="HTGJXX_JBDW" property="gj_jbdw"/>
         <result column="HTGJXX_JBBM" property="gj_jbbm"/>
-        <result column="LYJC_ID" property="ly_id"/>
-        <result column="LYJC_MID" property="ly_mid"/>
-        <result column="LYJC_NR" property="ly_nr"/>
-        <result column="LYJC_BL" property="ly_bl"/>
-        <result column="LYJC_NOTE" property="ly_note"/>
-        <result column="LYJC_JE" property="ly_je"/>
         <result column="YHHTXX_HTBH" property="yh_htbh"/>
         <result column="YHHTXX_HTMC" property="yh_htmc"/>
         <result column="YHHTXX_LXMC" property="yh_lxmc"/>
@@ -67,6 +61,14 @@
         <result column="YHHTXX_XMJS" property="yh_xmjs"/>
         <!-- 一对多的关系 -->
         <!-- property: 指的是集合属性的值, ofType：指的是集合中元素的类型 -->
+        <collection property="lyjcs" ofType="com.hdsx.common.entity.HtxxLyjc">
+            <id column="LYJC_ID" property="id"/>
+            <result column="LYJC_MID" property="mid"/>
+            <result column="LYJC_NR" property="nr"/>
+            <result column="LYJC_BL" property="bl"/>
+            <result column="LYJC_NOTE" property="note"/>
+            <result column="LYJC_JE" property="je"/>
+        </collection>
         <collection property="zmhts" ofType="com.hdsx.common.entity.Zmht">
             <id column="ZMHT_ID" property="id"/>
             <result column="ZMHT_HTBH" property="htbh"/>
@@ -106,9 +108,7 @@
         LEFT JOIN DJSJ_HTXX_YHXMXX yh on jc.htxx_htbh = yh.yhhtxx_htbh
         LeFT JOIN ZM_HT zm on jc.htxx_htbh = zm.zmht_htbh
         <where>
-            <trim suffixOverrides=",">
-                <if test="htbh != null and htbh != ''"> AND jc.htxx_htbh LIKE '%'||trim(#{htbh})||'%',</if>
-            </trim>
+            <if test="htbh != null and htbh != ''"> AND jc.htxx_htbh LIKE '%'||trim(#{htbh})||'%'</if>
         </where>
     </select>
 </mapper>

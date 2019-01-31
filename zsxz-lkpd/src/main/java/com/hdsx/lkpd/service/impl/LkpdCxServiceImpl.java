@@ -71,7 +71,7 @@ public class LkpdCxServiceImpl implements LkpdCxService {
         //清空某个版本的数据
         lkpdCxMapper.dropMxb(param);
         List<Qmldb> qmldbList = lkpdCxMapper.getLmjc(param);
-
+        boolean bl=false;
         for(Qmldb qm : qmldbList){
             qm.setPdbbid(Integer.parseInt(param.get("bbid")));
             qm.setPdsj(param.get("pdsj"));
@@ -92,10 +92,10 @@ public class LkpdCxServiceImpl implements LkpdCxService {
                     qm.setLxid("0103");
                     break;
             }
-            qm.setBci(lkpdDrMapper.getBci(qm));
-            qm.setPci(lkpdDrMapper.getPci(qm));
-            qm.setTci(lkpdDrMapper.getTci(qm));
-            qm.setSci(lkpdDrMapper.getSci(qm));
+            qm.setBci(lkpdCxMapper.getBcicx(qm));
+            qm.setPci(lkpdCxMapper.getPcicx(qm));
+            qm.setTci(lkpdCxMapper.getTcicx(qm));
+            qm.setSci(lkpdCxMapper.getScicx(qm));
 
             double pqi = 0;
             //计算pqi
@@ -120,8 +120,11 @@ public class LkpdCxServiceImpl implements LkpdCxService {
             Double mqi = 0.7*pqi+0.08*qm.getSci()+0.12*qm.getBci()+0.1*qm.getTci();
             qm.setMqi(Double.parseDouble(String.format("%.2f", mqi)));
 
-            lkpdCxMapper.addMxb(qm);
+            int fl=lkpdCxMapper.addMxb(qm);
+            lkpdCxMapper.updateFaZtYfb(qm);
+            System.out.println(fl);
+            if(fl>0) bl=true;
         }
-        return false;
+        return bl;
     }
 }

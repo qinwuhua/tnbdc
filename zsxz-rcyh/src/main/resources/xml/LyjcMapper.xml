@@ -29,14 +29,16 @@
         <result column="PMMTLYJCB_HTMC" property="htmc"/>
         <!-- 一对多的关系 -->
         <!-- property: 指的是集合属性的值, ofType：指的是集合中元素的类型 -->
-        <collection property="lyjcmxb" ofType="com.hdsx.rcyh.entity.Lyjcmxb">
-            <id column="PMMTLYJCBMX_ID" property="id"/>
-            <result column="PMMTLYJCBMX_MID" property="mid"/>
-            <result column="PMMTLYJCBMX_JCNR" property="jcnr"/>
-            <result column="PMMTLYJCBMX_FJ" property="fj"/>
-            <result column="PMMTLYJCBMX_MEMO" property="memo"/>
-            <result column="PMMTLYJCBMX_BH" property="bh"/>
-        </collection>
+        <collection property="lyjcmxb" ofType="com.hdsx.rcyh.entity.Lyjcmxb" select="getLyjcbmxByMid" column="PMMTLYJCB_ID"></collection>
+    </resultMap>
+
+    <resultMap id="lyjcmxbBean" type="com.hdsx.rcyh.entity.Lyjcmxb">
+        <id column="PMMTLYJCBMX_ID" property="id"/>
+        <result column="PMMTLYJCBMX_MID" property="mid"/>
+        <result column="PMMTLYJCBMX_JCNR" property="jcnr"/>
+        <result column="PMMTLYJCBMX_FJ" property="fj"/>
+        <result column="PMMTLYJCBMX_MEMO" property="memo"/>
+        <result column="PMMTLYJCBMX_BH" property="bh"/>
     </resultMap>
 
     <resultMap id="jczbBean" type="com.hdsx.rcyh.entity.Jczb">
@@ -64,30 +66,29 @@
         <result column="PMMTJCZBQKJCB_JCR" property="jcr"/>
         <!-- 一对多的关系 -->
         <!-- property: 指的是集合属性的值, ofType：指的是集合中元素的类型 -->
-        <collection property="jczbmxb" ofType="com.hdsx.rcyh.entity.Jczbmxb">
-            <id column="PMMTJCZBQKJCBMX_ID" property="id"/>
-            <result column="PMMTJCZBQKJCBMX_MID" property="mid"/>
-            <result column="PMMTJCZBQKJCBMX_JCNR" property="jcnr"/>
-            <result column="PMMTJCZBQKJCBMX_FJ" property="fj"/>
-            <result column="PMMTJCZBQKJCBMX_MEMO" property="memo"/>
-            <result column="PMMTJCZBQKJCBMX_BH" property="bh"/>
-        </collection>
+        <collection property="jczbmxb" ofType="com.hdsx.rcyh.entity.Jczbmxb" select="getJczbmxByMid" column="PMMTJCZBQKJCB_ID"></collection>
     </resultMap>
+
+    <resultMap id="jczbmxbBean" type="com.hdsx.rcyh.entity.Jczbmxb">
+        <id column="PMMTJCZBQKJCBMX_ID" property="id"/>
+        <result column="PMMTJCZBQKJCBMX_MID" property="mid"/>
+        <result column="PMMTJCZBQKJCBMX_JCNR" property="jcnr"/>
+        <result column="PMMTJCZBQKJCBMX_FJ" property="fj"/>
+        <result column="PMMTJCZBQKJCBMX_MEMO" property="memo"/>
+        <result column="PMMTJCZBQKJCBMX_BH" property="bh"/>
+    </resultMap>
+
 
     <select id="getLyjcAll" parameterType="hashmap" resultMap="lyjcBean">
         SELECT
-        PMMTLYJCB_ID, PMMTLYJCB_DWMC, PMMTLYJCB_DWBH, PMMTLYJCB_DWID, PMMTLYJCB_BMMC, PMMTLYJCB_BMBH, PMMTLYJCB_BMID, PMMTLYJCB_TBR, PMMTLYJCB_TBRID, to_char(PMMTLYJCB_TBRQ,'yyyy-MM-dd')PMMTLYJCB_TBRQ, PMMTLYJCB_SPZT, PMMTLYJCB_WFID, PMMTLYJCB_HTBH, to_char(PMMTLYJCB_JCRQ,'yyyy-MM-dd')PMMTLYJCB_JCRQ, PMMTLYJCB_SGDW, PMMTLYJCB_FJHJ, PMMTLYJCB_GLDW, PMMTLYJCB_JCR, PMMTLYJCB_HTJE, PMMTLYJCB_BZ, PMMTLYJCB_HTMC,
-        PMMTLYJCBMX_ID, PMMTLYJCBMX_MID, PMMTLYJCBMX_JCNR, PMMTLYJCBMX_FJ, PMMTLYJCBMX_MEMO, PMMTLYJCBMX_BH
+        PMMTLYJCB_ID, PMMTLYJCB_DWMC, PMMTLYJCB_DWBH, PMMTLYJCB_DWID, PMMTLYJCB_BMMC, PMMTLYJCB_BMBH, PMMTLYJCB_BMID, PMMTLYJCB_TBR, PMMTLYJCB_TBRID, to_char(PMMTLYJCB_TBRQ,'yyyy-MM-dd')PMMTLYJCB_TBRQ, PMMTLYJCB_SPZT, PMMTLYJCB_WFID, PMMTLYJCB_HTBH, to_char(PMMTLYJCB_JCRQ,'yyyy-MM-dd')PMMTLYJCB_JCRQ, PMMTLYJCB_SGDW, PMMTLYJCB_FJHJ, PMMTLYJCB_GLDW, PMMTLYJCB_JCR, PMMTLYJCB_HTJE, PMMTLYJCB_BZ, PMMTLYJCB_HTMC
         FROM sgdwlyjcb jh
-        LEFT JOIN SGDWLYJCBMX mx ON mx.PMMTLYJCBMX_MID = PMMTLYJCB_ID
         <where>
-            <trim suffixOverrides=",">
-                <if test="id != null and id != ''"> AND PMMTLYJCB_ID LIKE '%'||trim(#{id})||'%'</if>
-                <if test="htmc != null and htmc != ''"> AND PMMTLYJCB_HTMC LIKE '%'||trim(#{htmc})||'%'</if>
-                <if test="spzt != null and spzt != ''"> AND PMMTLYJCB_SPZT LIKE '%'||trim(#{spzt})||'%'</if>
-                <if test="ksrq != null and ksrq != ''"> AND to_date(to_char(PMMTLYJCB_TBRQ,'yyyy-MM-dd'),'yyyy-MM-dd')>to_date(#{ksrq},'yyyy-MM-dd')</if>
-                <if test="jsrq != null and jsrq != ''"> AND to_date(to_char(PMMTLYJCB_TBRQ,'yyyy-MM-dd'),'yyyy-MM-dd')&lt;to_date(#{jsrq},'yyyy-MM-dd')</if>
-           </trim>
+            <if test="id != null and id != ''"> AND PMMTLYJCB_ID LIKE '%'||trim(#{id})||'%'</if>
+            <if test="htmc != null and htmc != ''"> AND PMMTLYJCB_HTMC LIKE '%'||trim(#{htmc})||'%'</if>
+            <if test="spzt != null and spzt != ''"> AND PMMTLYJCB_SPZT LIKE '%'||trim(#{spzt})||'%'</if>
+            <if test="ksrq != null and ksrq != ''"> AND to_date(to_char(PMMTLYJCB_TBRQ,'yyyy-MM-dd'),'yyyy-MM-dd')>to_date(#{ksrq},'yyyy-MM-dd')</if>
+            <if test="jsrq != null and jsrq != ''"> AND to_date(to_char(PMMTLYJCB_TBRQ,'yyyy-MM-dd'),'yyyy-MM-dd')&lt;to_date(#{jsrq},'yyyy-MM-dd')</if>
         </where>
     </select>
 
@@ -126,8 +127,8 @@
         </foreach>
     </delete>
 
-    <select id="getLyjcbmxByMid" resultType="com.hdsx.rcyh.entity.Lyjcmxb">
-        SELECT PMMTLYJCBMX_ID id, PMMTLYJCBMX_MID mid, PMMTLYJCBMX_JCNR jcnr, PMMTLYJCBMX_FJ fj, PMMTLYJCBMX_MEMO memo, PMMTLYJCBMX_BH bh
+    <select id="getLyjcbmxByMid" resultMap="lyjcmxbBean">
+        SELECT PMMTLYJCBMX_ID, PMMTLYJCBMX_MID, PMMTLYJCBMX_JCNR, PMMTLYJCBMX_FJ, PMMTLYJCBMX_MEMO, PMMTLYJCBMX_BH
         FROM sgdwlyjcbmx WHERE pmmtlyjcbmx_mid = #{id}
     </select>
 
@@ -170,18 +171,14 @@
     </update>
 
     <select id="getJczbAll" parameterType="hashmap" resultMap="jczbBean">
-        SELECT PMMTJCZBQKJCB_ID, PMMTJCZBQKJCB_DWMC, PMMTJCZBQKJCB_DWBH, PMMTJCZBQKJCB_DWID, PMMTJCZBQKJCB_BMMC, PMMTJCZBQKJCB_BMBH, PMMTJCZBQKJCB_BMID, PMMTJCZBQKJCB_TBR, PMMTJCZBQKJCB_TBRID, to_char(PMMTJCZBQKJCB_TBRQ,'yyyy-MM-dd')PMMTJCZBQKJCB_TBRQ, PMMTJCZBQKJCB_SPZT, PMMTJCZBQKJCB_WFID, PMMTJCZBQKJCB_HTBH, to_char(PMMTJCZBQKJCB_JCRQ,'yyyy-MM-dd')PMMTJCZBQKJCB_JCRQ, PMMTJCZBQKJCB_SGDW, PMMTJCZBQKJCB_XMMC, PMMTJCZBQKJCB_GLDW, PMMTJCZBQKJCB_HTJE, PMMTJCZBQKJCB_WYFJ, PMMTJCZBQKJCB_HTMC, PMMTJCZBQKJCB_BZ, PMMTJCZBQKJCB_JCR,
-        PMMTJCZBQKJCBMX_ID, PMMTJCZBQKJCBMX_MID, PMMTJCZBQKJCBMX_JCNR, PMMTJCZBQKJCBMX_FJ, PMMTJCZBQKJCBMX_MEMO, PMMTJCZBQKJCBMX_BH
+        SELECT PMMTJCZBQKJCB_ID, PMMTJCZBQKJCB_DWMC, PMMTJCZBQKJCB_DWBH, PMMTJCZBQKJCB_DWID, PMMTJCZBQKJCB_BMMC, PMMTJCZBQKJCB_BMBH, PMMTJCZBQKJCB_BMID, PMMTJCZBQKJCB_TBR, PMMTJCZBQKJCB_TBRID, to_char(PMMTJCZBQKJCB_TBRQ,'yyyy-MM-dd')PMMTJCZBQKJCB_TBRQ, PMMTJCZBQKJCB_SPZT, PMMTJCZBQKJCB_WFID, PMMTJCZBQKJCB_HTBH, to_char(PMMTJCZBQKJCB_JCRQ,'yyyy-MM-dd')PMMTJCZBQKJCB_JCRQ, PMMTJCZBQKJCB_SGDW, PMMTJCZBQKJCB_XMMC, PMMTJCZBQKJCB_GLDW, PMMTJCZBQKJCB_HTJE, PMMTJCZBQKJCB_WYFJ, PMMTJCZBQKJCB_HTMC, PMMTJCZBQKJCB_BZ, PMMTJCZBQKJCB_JCR
         FROM JCZBQKJCB jh
-        LEFT JOIN JCZBQKJCBMX mx on mx.PMMTJCZBQKJCBMX_MID = jh.PMMTJCZBQKJCB_ID
         <where>
-            <trim suffixOverrides=",">
-                <if test="id != null and id != ''"> AND PMMTJCZBQKJCB_ID LIKE '%'||trim(#{id})||'%'</if>
-                <if test="htmc != null and htmc != ''"> AND PMMTJCZBQKJCB_HTMC LIKE '%'||trim(#{htmc})||'%'</if>
-                <if test="spzt != null and spzt != ''"> AND PMMTJCZBQKJCB_SPZT LIKE '%'||trim(#{spzt})||'%'</if>
-                <if test="ksrq != null and ksrq != ''"> AND to_date(to_char(PMMTJCZBQKJCB_TBRQ,'yyyy-MM-dd'),'yyyy-MM-dd')>to_date(#{ksrq},'yyyy-MM-dd')</if>
-                <if test="jsrq != null and jsrq != ''"> AND to_date(to_char(PMMTJCZBQKJCB_TBRQ,'yyyy-MM-dd'),'yyyy-MM-dd')&lt;to_date(#{jsrq},'yyyy-MM-dd')</if>
-            </trim>
+            <if test="id != null and id != ''"> AND PMMTJCZBQKJCB_ID LIKE '%'||trim(#{id})||'%'</if>
+            <if test="htmc != null and htmc != ''"> AND PMMTJCZBQKJCB_HTMC LIKE '%'||trim(#{htmc})||'%'</if>
+            <if test="spzt != null and spzt != ''"> AND PMMTJCZBQKJCB_SPZT LIKE '%'||trim(#{spzt})||'%'</if>
+            <if test="ksrq != null and ksrq != ''"> AND to_date(to_char(PMMTJCZBQKJCB_TBRQ,'yyyy-MM-dd'),'yyyy-MM-dd')>to_date(#{ksrq},'yyyy-MM-dd')</if>
+            <if test="jsrq != null and jsrq != ''"> AND to_date(to_char(PMMTJCZBQKJCB_TBRQ,'yyyy-MM-dd'),'yyyy-MM-dd')&lt;to_date(#{jsrq},'yyyy-MM-dd')</if>
         </where>
     </select>
 
@@ -259,6 +256,11 @@
     <select id="getJczbmxById" resultType="com.hdsx.rcyh.entity.Jczbmxb">
         SELECT PMMTJCZBQKJCBMX_ID id, PMMTJCZBQKJCBMX_MID mid, PMMTJCZBQKJCBMX_JCNR jcnr, PMMTJCZBQKJCBMX_FJ fj, PMMTJCZBQKJCBMX_MEMO memo, PMMTJCZBQKJCBMX_BH bh
         FROM JCZBQKJCBMX WHERE PMMTJCZBQKJCBMX_ID = #{id}
+    </select>
+
+    <select id="getJczbmxByMid" resultMap="jczbmxbBean">
+        SELECT PMMTJCZBQKJCBMX_ID, PMMTJCZBQKJCBMX_MID, PMMTJCZBQKJCBMX_JCNR, PMMTJCZBQKJCBMX_FJ, PMMTJCZBQKJCBMX_MEMO, PMMTJCZBQKJCBMX_BH
+        FROM JCZBQKJCBMX WHERE PMMTJCZBQKJCBMX_MID = #{id}
     </select>
 
     <delete id="deleteLyjcmxbByIds">
