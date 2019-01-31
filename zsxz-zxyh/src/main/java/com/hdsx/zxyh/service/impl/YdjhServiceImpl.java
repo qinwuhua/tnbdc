@@ -30,12 +30,12 @@ public class YdjhServiceImpl implements YdjhService {
             ydjh.setId(UuidUtil.getUUID());
         }
         // 增加子表
-        if (ydjh.getYdjhmxList().size()>0) {
-            for (Ydjhmx ydjhmx: ydjh.getYdjhmxList()) {
+        if (ydjh.getList().size()>0) {
+            for (Ydjhmx ydjhmx: ydjh.getList()) {
                 ydjhmx.setMxid(UuidUtil.getUUID());
                 ydjhmx.setYdid(ydjh.getId());
             }
-            ydjhMapper.addYdjhmx(ydjh.getYdjhmxList());
+            ydjhMapper.addYdjhmx(ydjh.getList());
         }
         // 增加主表
         return ydjhMapper.addYdjh(ydjh);
@@ -54,13 +54,13 @@ public class YdjhServiceImpl implements YdjhService {
         //删除子表
         ydjhMapper.deleteYdjhmx(new String[]{ydjh.getId()});
         //增加子表
-        if (ydjh.getYdjhmxList().size()>0) {
-            for (Ydjhmx ydjhmx : ydjh.getYdjhmxList()) {
+        if (ydjh.getList().size()>0) {
+            for (Ydjhmx ydjhmx : ydjh.getList()) {
                 ydjhmx.setMxid(UuidUtil.getUUID());
                 ydjhmx.setYdid(ydjh.getId());
             }
         }
-        ydjhMapper.addYdjhmx(ydjh.getYdjhmxList());
+        ydjhMapper.addYdjhmx(ydjh.getList());
         //更新主表
         return ydjhMapper.updateYdjh(ydjh);
     }

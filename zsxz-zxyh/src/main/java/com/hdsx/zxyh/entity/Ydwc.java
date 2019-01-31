@@ -8,12 +8,12 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * 月度计划实体
+ * 月度完成实体
  */
 @Data
 @Accessors(chain = true)
 @NoArgsConstructor
-public class Ydjh {
+public class Ydwc {
     // id
     private String id;
     // 单据编号
@@ -43,7 +43,7 @@ public class Ydjh {
     // 编制部门
     private String bzbm;
     // 月度计划明细
-    private List<Ydjhmx> list;
+    private List<Ydwcmx> list;
     // 状态
     private String zt;
 }

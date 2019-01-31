@@ -60,6 +60,7 @@ public class GcxczljcController {
                 return ResultUtil.error("更新工程现场质量检查失败");
             }
         } catch (Exception e) {
+            e.printStackTrace();
             return ResultUtil.error("接口异常");
         }
     }

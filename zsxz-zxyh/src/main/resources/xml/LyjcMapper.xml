@@ -173,7 +173,7 @@
                 htbh=#{htbh},
             </if>
             <if test="jcrq !=null">
-                jcrq=#{jcrq},,
+                jcrq=#{jcrq},
             </if>
             <if test="jcr != null and jcr !=''">
                 jcr=#{jcr},

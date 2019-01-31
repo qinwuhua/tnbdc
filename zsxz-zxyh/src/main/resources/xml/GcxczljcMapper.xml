@@ -17,7 +17,7 @@
             <if test="djbh != null and djbh != ''">
                 djbh,
             </if>
-            <if test="jcrq != null and jcrq != ''">
+            <if test="jcrq != null">
                 jcrq,
             </if>
             <if test="gcmc != null and gcmc != ''">
@@ -59,7 +59,7 @@
             <if test="bzdw != null and bzdw != ''">
                 bzdw,
             </if>
-            <if test="bzrq != null and bzrq != ''">
+            <if test="bzrq != null">
                 bzrq,
             </if>
 
@@ -123,7 +123,7 @@
         update ZXYH_GCXCZLJC
         <set>
             <if test="djbh != null and djbh != ''">
-                djbh=djbh},
+                djbh=#{djbh},
             </if>
             <if test="jcrq != null ">
                 jcrq=#{jcrq},

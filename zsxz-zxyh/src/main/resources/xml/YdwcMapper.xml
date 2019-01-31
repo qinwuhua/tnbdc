@@ -2,10 +2,10 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.hdsx.zxyh.mapper.YdjhMapper">
+<mapper namespace="com.hdsx.zxyh.mapper.YdwcMapper">
 
     <!-- 定义数据库字段与实体对象的映射关系 -->
-    <resultMap id="ydjhBean" type="com.hdsx.zxyh.entity.Ydjh">
+    <resultMap id="ydwcBean" type="com.hdsx.zxyh.entity.Ydwc">
         <id column="id" property="id"/>
         <result column="djbh" property="djbh"/>
         <result column="yd" property="yd"/>
@@ -23,10 +23,10 @@
         <result property="zt" column="zt"/>
         <!-- 一对多的关系 -->
         <!-- property: 指的是集合属性的值, ofType：指的是集合中元素的类型 -->
-        <collection property="list" ofType="com.hdsx.zxyh.entity.Ydjhmx" select="selectMx" column="id"></collection>
+        <collection property="list" ofType="com.hdsx.zxyh.entity.Ydwcmx" select="selectMx" column="id"></collection>
     </resultMap>
 
-    <resultMap id="ydjhmxBean" type="com.hdsx.zxyh.entity.Ydjhmx">
+    <resultMap id="ydwcmxBean" type="com.hdsx.zxyh.entity.Ydwcmx">
         <result column="mxid" property="mxid"/>
         <result column="ydid" property="ydid"/>
         <result column="qdzh" property="qdzh"/>
@@ -40,12 +40,12 @@
         <result column="jhwcrq" property="jhwcrq"/>
     </resultMap>
 
-    <select id="selectMx" resultMap="ydjhmxBean">
-        select * from ZXYH_YDJH_MX where ydid in #{id}
+    <select id="selectMx" resultMap="ydwcmxBean">
+        select * from ZXYH_YDWC_MX where ydid in #{id}
     </select>
 
-    <select id="getYdjh" resultMap="ydjhBean">
-        select * from ZXYH_YDJH yd where 1=1
+    <select id="getYdwc" resultMap="ydwcBean">
+        select * from ZXYH_YDWC yd where 1=1
         <if test="yd != null">
             and yd =#{yd}
         </if>
@@ -54,8 +54,8 @@
         </if>
     </select>
 
-    <insert id="addYdjh" parameterType="com.hdsx.zxyh.entity.Ydjh">
-        insert into ZXYH_YDJH
+    <insert id="addYdwc" parameterType="com.hdsx.zxyh.entity.Ydwc">
+        insert into ZXYH_YDWC
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id !=null and id !=''">
                 id,
@@ -152,10 +152,10 @@
         </trim>
     </insert>
 
-    <insert id="addYdjhmx" parameterType="list">
+    <insert id="addYdwcmx" parameterType="list">
         BEGIN
         <foreach collection ="list" item="item" index= "index" separator =" ">
-            insert into ZXYH_YDJH_MX
+            insert into ZXYH_YDWC_MX
             <trim prefix="(" suffix=")" suffixOverrides=",">
                 <if test="item.mxid !=null and item.mxid !=''">
                     mxid,
@@ -249,22 +249,22 @@
         END;
     </insert>
 
-    <delete id="deleteYdjh" parameterType="string">
-        DELETE FROM ZXYH_YDJH WHERE id IN
+    <delete id="deleteYdwc" parameterType="string">
+        DELETE FROM ZXYH_YDWC WHERE id IN
         <foreach collection="array" item="id" open="(" close=")" separator=",">
             #{id}
         </foreach>
     </delete>
 
-    <delete id="deleteYdjhmx" parameterType="string">
-        DELETE FROM ZXYH_YDJH_MX WHERE ydid IN
+    <delete id="deleteYdwcmx" parameterType="string">
+        DELETE FROM ZXYH_YDWC_MX WHERE ydid IN
         <foreach collection="array" item="ydid" open="(" close=")" separator=",">
             #{ydid}
         </foreach>
     </delete>
 
-    <update id="updateYdjh" parameterType="com.hdsx.zxyh.entity.Ydjh">
-      update ZXYH_YDJH
+    <update id="updateYdwc" parameterType="com.hdsx.zxyh.entity.Ydjh">
+      update ZXYH_YDWC
       <set>
           <if test="djbh !=null and djbh !=''">
               djbh=#{djbh},

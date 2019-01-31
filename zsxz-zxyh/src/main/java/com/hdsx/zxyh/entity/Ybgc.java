@@ -23,6 +23,10 @@ public class Ybgc {
     private String htbh;
     //工程名称
     private String htmc;
+    // 管理单位
+    private String gldw;
+    // 承包单位
+    private String cbdw;
     //隐检日期
     private Date yjrq;
     //隐检项目

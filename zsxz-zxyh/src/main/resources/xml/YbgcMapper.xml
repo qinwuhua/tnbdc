@@ -10,6 +10,8 @@
         <result column="djbh" property="djbh"/>
         <result column="htbh" property="htbh"/>
         <result column="htmc" property="htmc"/>
+        <result column="gldw" property="gldw"/>
+        <result column="cbdw" property="cbdw"/>
         <result column="yjrq" property="yjrq"/>
         <result column="yjxm" property="yjxm"/>
         <result column="yjbw" property="yjbw"/>
@@ -53,6 +55,15 @@
             <if test="htbh != null and htbh != ''">
                 htbh,
             </if>
+            <if test="htmc != null and htmc != ''">
+                htmc,
+            </if>
+            <if test="gldw != null and gldw != ''">
+                gldw,
+            </if>
+            <if test="cbdw != null and cbdw != ''">
+                cbdw,
+            </if>
             <if test="yjrq != null">
                 yjrq,
             </if>
@@ -87,6 +98,15 @@
             </if>
             <if test="htbh != null and htbh != ''">
                 #{htbh},
+            </if>
+            <if test="htmc != null and htmc != ''">
+                #{htmc},
+            </if>
+            <if test="gldw != null and gldw != ''">
+                #{gldw},
+            </if>
+            <if test="cbdw != null and cbdw != ''">
+                #{cbdw},
             </if>
             <if test="yjrq != null">
                 #{yjrq},
@@ -156,6 +176,15 @@
             </if>
             <if test="htbh != null and htbh != ''">
                 htbh=#{htbh},
+            </if>
+            <if test="htmc != null and htmc != ''">
+                htmc=#{htmc},
+            </if>
+            <if test="gldw != null and gldw != ''">
+                gldw=#{gldw},
+            </if>
+            <if test="cbdw != null and cbdw != ''">
+                cbdw=#{cbdw},
             </if>
             <if test="yjrq != null ">
                 yjrq=#{yjrq},

@@ -105,7 +105,7 @@
             <if test="bzr != null and bzr != ''">
                 #{bzr},
             </if>
-            <if test="bzrq != null and bzrq != ''">
+            <if test="bzrq != null">
                 #{bzrq},
             </if>
             <if test="bzbm != null and bzbm != ''">
@@ -150,7 +150,7 @@
             <if test="bzr != null and bzr != ''">
                 bzr=#{bzr},
             </if>
-            <if test="bzrq != null and bzrq != ''">
+            <if test="bzrq != null">
                 bzrq=#{bzrq},
             </if>
             <if test="bzbm != null and bzbm != ''">
@@ -164,7 +164,7 @@
     </update>
 
     <delete id="deleteSgzjdjh" parameterType="list">
-        DELETE FROM ZXYH_KGSQD WHERE djbh IN
+        DELETE FROM ZXYH_SGZJDJH WHERE id IN
         <foreach collection="array" item="id" open="(" close=")" separator=",">
             #{id}
         </foreach>
