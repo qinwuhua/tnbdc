@@ -108,6 +108,18 @@ public class LkpdCxController {
 
     }
 
+    @GetMapping("getFamc")
+    @ApiOperation("获取方案名称")
+    public Msg getFamc(@RequestParam(value = "famc")String famc) {
+        try {
+            Pdfa pdfa = lkpdCxService.getFamc(famc);
+            return ResultUtil.success(pdfa);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResultUtil.error("保存失败，接口异常");
+        }
+    }
+
     @RequestMapping(value = "getFaForLksjcx", method = RequestMethod.GET, produces = "application/json")
     @ApiImplicitParams({
             @ApiImplicitParam(paramType="query", dataType = "String", name = "famc", value = "方案名称", required = false),

@@ -25,5 +25,5 @@ public class Pdfa implements Serializable {
     private String tbsj;		//数据时间上限
     private String tbr;		//数据时间上限
     private String remark;		//备注
-
+    private String sl;      //附件数量
 }

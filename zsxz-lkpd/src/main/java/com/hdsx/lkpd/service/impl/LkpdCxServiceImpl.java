@@ -127,4 +127,9 @@ public class LkpdCxServiceImpl implements LkpdCxService {
         }
         return bl;
     }
+
+    @Override
+    public Pdfa getFamc(String famc) {
+        return lkpdCxMapper.getFamc(famc);
+    }
 }

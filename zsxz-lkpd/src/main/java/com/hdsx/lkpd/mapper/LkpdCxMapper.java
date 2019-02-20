@@ -43,4 +43,6 @@ public interface LkpdCxMapper {
     double getScicx(Qmldb qm);
 
     int updateFaZtYfb(Qmldb qm);
+
+    Pdfa getFamc(String famc);
 }

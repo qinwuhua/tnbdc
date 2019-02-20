@@ -113,8 +113,11 @@
 
 	<!--  查询方案数据列表 -->
 	<select id="getFaForLksjcx" resultType="com.hdsx.lkpd.entity.Pdfa" parameterType="hashmap">
-		select BBID djbh, BBMC famc,SJSJSX, SJSJXX, TBR, TBSJ, TBDW, TBBM, REMARK
-		from JCPD_BBKZB fa
+
+
+        select fa.BBID djbh,fa.BBMC famc,fa.SJSJSX, fa.SJSJXX,
+        fa.TBR, fa.TBSJ, fa.TBDW, fa.TBBM,fa.REMARK,
+        (select count(*) from htgl_files f where to_char(fa.bbid)=f.id) as sl from JCPD_BBKZB fa
 		where 1=1
 		<if test="famc != null and famc != ''">
 			and fa.bbmc like '%'||#{famc}||'%'
@@ -130,6 +133,12 @@
 		order by djbh
 
 	</select>
+
+    <select id="getFamc" parameterType="string" resultType="com.hdsx.lkpd.entity.Pdfa">
+        select BBID djbh, BBMC famc,SJSJSX, SJSJXX, TBR, TBSJ, TBDW, TBBM, REMARK
+		from JCPD_BBKZB fa
+		where fa.bbmc = #{famc}
+    </select>
 
 	<!--  编辑方案数据  -->
 	<update id="editFaForLksjcx" parameterType="com.hdsx.lkpd.entity.Pdfa" >

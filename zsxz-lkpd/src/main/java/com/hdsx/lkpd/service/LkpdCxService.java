@@ -25,4 +25,6 @@ public interface LkpdCxService {
     int delFaForLksjcx(List<Long> djbhs);
 
     boolean createMxbDataForLksjcx(Map<String, String> param);
+
+    Pdfa getFamc(String famc);
 }
