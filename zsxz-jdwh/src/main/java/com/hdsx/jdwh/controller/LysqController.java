@@ -51,7 +51,7 @@ public class LysqController {
                 param.put("bjbh",lysq.getMx().get(i).getBjbm());
                 param.put("ggxh",lysq.getMx().get(i).getGgxh());
                 List<Map<String,String>> map=lysqService.getBjLyInfo(param);
-                if(Double.parseDouble(lysq.getMx().get(i).getXysl()) > Double.parseDouble(String.valueOf(map.get(0).get("XYSL")) ) ) {
+                if(Double.parseDouble(lysq.getMx().get(i).getXysl()) > Double.parseDouble(String.valueOf(map.get(0).get("xysl")) ) ) {
                     return ResultUtil.error("数量超过已有数量,保存失败");
                 }
             }
@@ -80,7 +80,7 @@ public class LysqController {
                 int xx=0;
                 //param.put("id",lysq.getMx().get(i).getId());
                 List<Map<String,String>> map=lysqService.getBjLyInfo(param);
-                if(Double.parseDouble(lysq.getMx().get(i).getXysl()) > Double.parseDouble(String.valueOf(map.get(0).get("XYSL")) ) ) {
+                if(Double.parseDouble(lysq.getMx().get(i).getXysl()) > Double.parseDouble(String.valueOf(map.get(0).get("xysl")) ) ) {
                     return ResultUtil.error("数量超过已有数量,保存失败");
                 }
             }

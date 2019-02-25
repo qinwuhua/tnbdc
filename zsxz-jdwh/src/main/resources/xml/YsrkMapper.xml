@@ -42,11 +42,12 @@
     </select>
 
     <select id="getHtBjInfo" parameterType="hashmap" resultType="hashmap">
-        select zmht_zmh bjbh,zmht_zmmc bjmc,zmht_sl rksl,zmht_jldw jldw,' ' ggxh from lsb_zmht where zmht_htbh=#{htbh}
+        <!--   select zmht_zmh bjbh,zmht_zmmc bjmc,zmht_sl rksl,zmht_jldw jldw,' ' ggxh from lsb_zmht where zmht_htbh=#{htbh} -->
+        select zmht_zmh as "bjbh",zmht_zmmc as "bjmc",zmht_sl as "rksl",zmht_jldw as "jldw",'' as "ggxh" from lsb_zmht where HTXX_HTBH=#{htbh}
     </select>
 
     <select id="getWxBjInfo" parameterType="hashmap" resultType="hashmap">
-        select ' ' bjbh,sbmc bjmc,' ' rksl,' ' jldw,' ' ggxh from jdwh_gzbx where djbh=#{wxdh}
+        select ' ' as "bjbh",sbmc as "bjmc",'' as "rksl",'' as "jldw",ggxh as "ggxh" from jdwh_gzbx where djbh=#{wxdh}
     </select>
 
     <insert id="addYsrk" parameterType="com.hdsx.jdwh.entity.Ysrk">

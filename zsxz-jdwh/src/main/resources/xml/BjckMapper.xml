@@ -40,8 +40,8 @@
 
     <select id="getBjInfoByLySqd" parameterType="hashmap" resultType="com.hdsx.jdwh.entity.Bjckmx">
         select sq.bjmc,sq.bjbm bjbh,sq.ggxh,sq.jldw,sq.xysl cksl,nvl(rk.rksl,0)-nvl(ck.cksl,0) kcsl from jdwh_bj_lysqmx sq
-        left join (select bjmc,bjbh,ggxh,sum(nvl(rksl,0)) rksl from JDWX_BJ_RKMX group by bjmc,bjbh,ggxh) rk on sq.bjmc=rk.bjmc and sq.bjbm=rk.bjbh and sq.ggxh=rk.ggxh
-        left join (select bjmc,bjbh,ggxh,sum(nvl(cksl,0)) cksl from JDWX_BJ_CKMX where 1=1 <if test="id != null">and id != #{id}</if> group by bjmc,bjbh,ggxh) ck on sq.bjmc=ck.bjmc and sq.bjbm=ck.bjbh and sq.ggxh=ck.ggxh
+        left join (select bjmc,bjbh,ggxh,sum(nvl(rksl,0)) rksl from JDWX_BJ_RKMX group by bjmc,bjbh,ggxh) rk on sq.bjmc=rk.bjmc and sq.bjbm=rk.bjbh and nvl(sq.ggxh,0) = nvl(rk.ggxh,0)
+        left join (select bjmc,bjbh,ggxh,sum(nvl(cksl,0)) cksl from JDWX_BJ_CKMX where 1=1 <if test="id != null">and id != #{id}</if> group by bjmc,bjbh,ggxh) ck on sq.bjmc=ck.bjmc and sq.bjbm=ck.bjbh and nvl(sq.ggxh,0) = nvl(ck.ggxh,0)
         where 1=1
         <if test="sqdh != null">and sq.pdjbh like #{sqdh}</if>
         <if test="bjmc != null">and sq.bjmc=#{bjmc}</if>

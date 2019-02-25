@@ -70,7 +70,7 @@ public class YsrkController {
     }
 
     @RequestMapping(value = "getWxBjInfo", method = RequestMethod.GET, produces = "application/json")
-    @ApiOperation(value = "获取合同备件信息")
+    @ApiOperation(value = "获取维修备件信息")
     @ApiImplicitParam(paramType="query", dataType = "String", name = "wxdh", value = "维修单号", required = true)
     public Msg getWxBjInfo(@RequestParam(value = "wxdh",required = true) String wxdh){
         try {

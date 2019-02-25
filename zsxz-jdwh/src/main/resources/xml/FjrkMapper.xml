@@ -31,7 +31,7 @@
     </select>
 
     <select id="getWxdhInfByDw" parameterType="hashmap" resultType="hashmap">
-      select * from jdwh_gzbx where 1=1
+        select djbh as "wxdh",t.sbmc as "bjmc",ggxh as "ggxh",1 "tksl" from jdwh_gzbx t where 1=1
         <if test="djbh != null">and djbh=#{djbh}</if>
         <if test="tbdwdm != null">and tbdwdm like #{tbdwdm}||'%'</if>
     </select>

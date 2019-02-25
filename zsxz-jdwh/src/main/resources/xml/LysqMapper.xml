@@ -27,15 +27,15 @@
     </select>
 
     <select id="getBjLyInfo" parameterType="hashmap" resultType="hashmap">
-        select t1.bjmc,t1.bjbh bjbm,t1.ggxh,t1.jldw,nvl(rksl,0)-nvl(xysl,0) xysl  from
+        select t1.bjmc as "bjmc",t1.bjbh as "bjbm",nvl(t1.ggxh,' ') as "ggxh",t1.jldw as "jldw",nvl(rksl,0)-nvl(xysl,0) as "xysl"  from
         (select bjmc,bjbh,ggxh,min(jldw) jldw,sum(nvl(rksl,0)) rksl from JDWX_BJ_RKMX group by bjmc,bjbh,ggxh) t1
         left join
         (select bjmc,bjbh,ggxh,sum(nvl(cksl,0)) xysl from JDWX_BJ_CKMX where 1=1 <if test="id != null">and id!=#{id}</if> group by bjmc,bjbh,ggxh) t2
-        on t1.bjmc=t2.bjmc and t1.bjbh=t2.bjbh and t1.ggxh=t2.ggxh
+        on t1.bjmc=t2.bjmc and t1.bjbh=t2.bjbh and nvl(t1.ggxh,0) = nvl(t2.ggxh,0)
         where 1=1
         <if test="bjmc != null">and t1.bjmc=#{bjmc}</if>
         <if test="bjbh != null">and t1.bjbh=#{bjbh}</if>
-        <if test="ggxh != null">and t1.ggxh=#{ggxh}</if>
+        <if test="ggxh != null and ggxh != ' '">and (t1.ggxh=trim(#{ggxh}) or t1.ggxh is null)</if>
 
     </select>
 
