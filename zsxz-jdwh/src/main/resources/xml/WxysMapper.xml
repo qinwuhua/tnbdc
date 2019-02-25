@@ -1,0 +1,92 @@
+<?xml version='1.0' encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hdsx.jdwh.mapper.WxysMapper">
+    <select id="getDjBxdInfo" parameterType="hashmap" resultType="com.hdsx.jdwh.entity.Wxys">
+        select t1.bxdh,t2.sbmc,t2.ggxh,t2.bzrq,t2.bgr,t1.wxrq,t1.xcwxr,t1.gzms,t1.xcqkms,t1.wxjgms from jdwh_wxdj t1 left join jdwh_gzbx t2 on t1.bxdh=t2.djbh
+        where 1=1
+        <if test="tbdwdm !=null and tbdwdm !=''">and t1.tbdwdm like #{tbdwdm}||'%'</if>
+        <if test="bxdh !=null and bxdh !=''">and t2.djbh like #{bxdh}||'%'</if>
+    </select>
+
+    <insert id="addWxys" parameterType="com.hdsx.jdwh.entity.Wxys">
+        insert into JDWH_WXYS
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >id,</if>
+            <if test="djbh != null" >djbh,</if>
+            <if test="bxdh != null" >bxdh,</if>
+            <if test="bz != null" >bz,</if>
+            <if test="tbr != null" >tbr,</if>
+            <if test="tbsj != null" >tbsj,</if>
+            <if test="tbdw != null" >tbdw,</if>
+            <if test="tbbm != null" >tbbm,</if>
+            <if test="wxjgqr != null" >wxjgqr,</if>
+            <if test="qrr != null" >qrr,</if>
+            <if test="qrsj != null" >qrsj,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >#{id},</if>
+            <if test="djbh != null" >#{djbh},</if>
+            <if test="bxdh != null" >#{bxdh},</if>
+            <if test="bz != null" >#{bz},</if>
+            <if test="tbr != null" >#{tbr},</if>
+            <if test="tbsj != null" >#{tbsj},</if>
+            <if test="tbdw != null" >#{tbdw},</if>
+            <if test="tbbm != null" >#{tbbm},</if>
+            <if test="wxjgqr != null" >#{wxjgqr},</if>
+            <if test="qrr != null" >#{qrr},</if>
+            <if test="qrsj != null" >#{qrsj},</if>
+        </trim>
+    </insert>
+
+    <update id="editWxys" parameterType="com.hdsx.jdwh.entity.Wxys" >
+        update JDWH_WXYS
+        <set>
+            <if test="id != null" >id=#{id},</if>
+            <if test="djbh != null" >djbh=#{djbh},</if>
+            <if test="bxdh != null" >bxdh=#{bxdh},</if>
+            <if test="bz != null" >bz=#{bz},</if>
+            <if test="tbr != null" >tbr=#{tbr},</if>
+            <if test="tbsj != null" >tbsj=#{tbsj},</if>
+            <if test="tbdw != null" >tbdw=#{tbdw},</if>
+            <if test="tbbm != null" >tbbm=#{tbbm},</if>
+            <if test="wxjgqr != null" >wxjgqr=#{wxjgqr},</if>
+            <if test="qrr != null" >qrr=#{qrr},</if>
+            <if test="qrsj != null" >qrsj=#{qrsj},</if>
+        </set>
+        where 1=1 and djbh=#{djbh}
+    </update>
+
+    <delete id="delWxysByDjbhs" parameterType="java.util.List" >
+        delete from JDWH_WXYS
+        where djbh in
+        <foreach collection="list" item="id"  open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <select id="getWxysInfoByIDjbh" parameterType="string" resultType="com.hdsx.jdwh.entity.Wxys">
+        select t.*,t2.sbmc,t2.ggxh,t2.bzrq,t2.bgr,t1.wxrq,t1.xcwxr,t1.gzms,t1.xcqkms,t1.wxjgms from jdwh_wxys t left join jdwh_wxdj t1 on t.bxdh=t1.bxdh left join jdwh_gzbx t2 on t1.bxdh=t2.djbh
+        where 1=1
+        and t.djbh=#{value}
+    </select>
+
+    <select id="getWxysList" parameterType="string" resultType="com.hdsx.jdwh.entity.Wxys">
+        select t.*,t2.sbmc,t2.ggxh,t2.bzrq,t2.bgr,t1.wxrq,t1.xcwxr,t1.gzms,t1.xcqkms,t1.wxjgms from jdwh_wxys t left join jdwh_wxdj t1 on t.bxdh=t1.bxdh left join jdwh_gzbx t2 on t1.bxdh=t2.djbh
+        where 1=1
+        <if test="tbdwdm !=null and tbdwdm !=''">and t.tbdwdm like #{tbdwdm}||'%'</if>
+        <if test="bxdh !=null and bxdh !=''">and t.bxdh like #{bxdh}||'%'</if>
+    </select>
+
+    <update id="spWxysByDjbh" parameterType="hashmap">
+        update jdwh_wxys set SPZT=#{spzt}
+        where djbh in
+        <foreach collection="djbhs" item="id"  open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </update>
+
+
+</mapper>

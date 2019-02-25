@@ -1,0 +1,133 @@
+<?xml version='1.0' encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hdsx.jdwh.mapper.FjrkMapper" >
+
+    <resultMap type="com.hdsx.jdwh.entity.Fjrk" id="fjrk">
+        <result column="ID" property="id"/>
+        <result column="djbh" property="djbh"/>
+        <result column="ywqj" property="ywqj"/>
+        <result column="WXDH" property="wxdh"/>
+        <result column="ckmc" property="ckmc"/>
+        <result column="TKR" property="tkr"/>
+        <result column="TKSM" property="tksm"/>
+        <result column="BZ" property="bz"/>
+        <result column="TBR" property="tbr"/>
+        <result column="TBSJ" property="tbsj"/>
+        <result column="TBDW" property="tbdw"/>
+        <result column="TBBM" property="tbbm"/>
+        <result column="TBDWDM" property="tbdwdm"/>
+        <collection property="mx" ofType="com.hdsx.jdwh.entity.Fjrkmx" select="getFjrkmxByPdjbh" column="djbh" >
+        </collection>
+
+    </resultMap>
+
+    <select id="getFjrkmxByPdjbh" parameterType="string" resultType="com.hdsx.jdwh.entity.Fjrkmx">
+        select * from JDWX_BJ_FJMX
+        where 1=1
+        and TKDJBH=#{value}
+    </select>
+
+    <select id="getWxdhInfByDw" parameterType="hashmap" resultType="hashmap">
+      select * from jdwh_gzbx where 1=1
+        <if test="djbh != null">and djbh=#{djbh}</if>
+        <if test="tbdwdm != null">and tbdwdm like #{tbdwdm}||'%'</if>
+    </select>
+
+    <insert id="addFjrk" parameterType="com.hdsx.jdwh.entity.Fjrk">
+        insert into JDWH_BJ_FJRK
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >id,</if>
+            <if test="djbh != null" >djbh,</if>
+            <if test="wxdh != null" >wxdh,</if>
+            <if test="tkr != null" >tkr,</if>
+            <if test="tksm != null" >tksm,</if>
+            <if test="ywqj != null" >ywqj,</if>
+            <if test="ckmc != null" >ckmc,</if>
+            <if test="bz != null" >bz,</if>
+            <if test="tbr != null" >tbr,</if>
+            <if test="tbsj != null" >tbsj,</if>
+            <if test="tbdwdm != null" >tbdwdm,</if>
+            <if test="tbdw != null" >tbdw,</if>
+            <if test="tbbm != null" >tbbm,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >#{id},</if>
+            <if test="djbh != null" >#{djbh},</if>
+            <if test="wxdh != null" >#{wxdh},</if>
+            <if test="tkr != null" >#{tkr},</if>
+            <if test="tksm != null" >#{tksm},</if>
+            <if test="ywqj != null" >#{ywqj},</if>
+            <if test="ckmc != null" >#{ckmc},</if>
+            <if test="bz != null" >#{bz},</if>
+            <if test="tbr != null" >#{tbr},</if>
+            <if test="tbsj != null" >#{tbsj},</if>
+            <if test="tbdwdm != null" >#{tbdwdm},</if>
+            <if test="tbdw != null" >#{tbdw},</if>
+            <if test="tbbm != null" >#{tbbm},</if>
+        </trim>
+    </insert>
+
+    <insert id="addFjrkMx" parameterType="com.hdsx.jdwh.entity.Fjrk">
+        begin
+        <foreach collection="mx" item="item" index="index" separator=";">
+            insert into JDWX_BJ_FJMX (ID, TKDJBH, XH, BJMC, BJBH, GGXH, JLDW, TKSL, CFWZ, BJZT, BZ)  values
+            (sys_guid(),trim(#{djbh,jdbcType=VARCHAR}),trim(#{item.xh,jdbcType=VARCHAR}),trim(#{item.bjmc,jdbcType=VARCHAR}),trim(#{item.bjbh,jdbcType=VARCHAR}),trim(#{item.ggxh,jdbcType=VARCHAR}),trim(#{item.jldw,jdbcType=VARCHAR}),trim(#{item.tksl,jdbcType=VARCHAR}),trim(#{item.cfwz,jdbcType=VARCHAR}),trim(#{item.bjzt,jdbcType=VARCHAR}),trim(#{item.bz,jdbcType=VARCHAR}))
+        </foreach>
+        ;end;
+    </insert>
+
+    <update id="editFjrk" parameterType="com.hdsx.jdwh.entity.Fjrk" >
+        update JDWH_BJ_FJRK
+        <set>
+            <if test="id != null" >id=#{id},</if>
+            <if test="djbh != null" >djbh=#{djbh},</if>
+            <if test="wxdh != null" >wxdh=#{wxdh},</if>
+            <if test="tkr != null" >tkr=#{tkr},</if>
+            <if test="tksm != null" >tksm=#{tksm},</if>
+            <if test="ywqj != null" >ywqj=#{ywqj},</if>
+            <if test="ckmc != null" >ckmc=#{ckmc},</if>
+            <if test="bz != null" >bz=#{bz},</if>
+            <if test="tbr != null" >tbr=#{tbr},</if>
+            <if test="tbsj != null" >tbsj=#{tbsj},</if>
+            <if test="tbdwdm != null" >tbdwdm=#{tbdwdm},</if>
+            <if test="tbdw != null" >tbdw=#{tbdw},</if>
+            <if test="tbbm != null" >tbbm=#{tbbm},</if>
+        </set>
+        where 1=1 and djbh=#{djbh}
+    </update>
+    <delete id="delFjrkMx" parameterType="com.hdsx.jdwh.entity.Fjrk">
+        delete from JDWX_BJ_FJMX where tkdjbh=#{djbh}
+    </delete>
+
+    <delete id="delFjrkBydjbhs" parameterType="java.util.List" >
+        delete from JDWH_BJ_FJRK
+        where djbh in
+        <foreach collection="list" item="id"  open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <delete id="delFjrkMxBydjbhs" parameterType="java.util.List" >
+        delete from JDWX_BJ_FJMX
+        where tkdjbh in
+        <foreach collection="list" item="id"  open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <select id="getFjrkInfoByDjbh" parameterType="string" resultMap="fjrk">
+        select * from JDWH_BJ_FJRK zb
+        where zb.djbh=#{value}
+    </select>
+
+    <select id="getFjrkList" parameterType="hashmap" resultMap="fjrk">
+        select * from JDWH_BJ_FJRK zb
+        where 1=1
+        <if test="tbdwdm !=null and tbdwdm !=''">and zb.tbdwdm like #{tbdwdm}||'%'</if>
+    </select>
+
+
+</mapper>

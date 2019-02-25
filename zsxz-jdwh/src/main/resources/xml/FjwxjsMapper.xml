@@ -1,0 +1,159 @@
+<?xml version='1.0' encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hdsx.jdwh.mapper.FjwxjsMapper" >
+
+    <resultMap type="com.hdsx.jdwh.entity.Fjwxjs" id="fjrk">
+        <result column="ID" property="id"/>
+        <result column="ckmc" property="ckmc"/>
+        <result column="wxdh" property="wxdh"/>
+        <result column="wxfs" property="wxfs"/>
+        <result column="jsje" property="jsje"/>
+        <result column="wxcs" property="wxcs"/>
+        <result column="wxsm" property="wxsm"/>
+        <result column="BZ" property="bz"/>
+        <result column="TBR" property="tbr"/>
+        <result column="TBSJ" property="tbsj"/>
+        <result column="TBDW" property="tbdw"/>
+        <result column="TBBM" property="tbbm"/>
+        <result column="TBDWDM" property="tbdwdm"/>
+        <collection property="mx" ofType="com.hdsx.jdwh.entity.Fjwxjsmx" select="getFjwxjsmxByPdjbh" column="id" >
+        </collection>
+
+    </resultMap>
+
+    <select id="getFjwxjsmxByPdjbh" parameterType="string" resultType="com.hdsx.jdwh.entity.Fjwxjsmx">
+        select * from JDWH_BJ_WXJSMX
+        where 1=1
+        and Pid=#{value}
+    </select>
+
+    <select id="getFjwxdInfByDw" parameterType="hashmap" resultType="hashmap">
+        select * from jdwh_bj_fjwx where 1=1
+        <if test="tbdwdm != null"> and tbdwdm like #{tbdwdm}||'%'</if>
+    </select>
+
+    <select id="getFjwxdBjInfByDw" parameterType="hashmap" resultType="hashmap">
+        select * from jdwx_bj_wxmx where 1=1
+        <if test="djbh != null"> and pdjbh like #{djbh}</if>
+    </select>
+
+    <insert id="addFjwxjs" parameterType="com.hdsx.jdwh.entity.Fjwxjs">
+        insert into JDWH_BJ_WXJS
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >id,</if>
+            <if test="ckmc != null" >ckmc,</if>
+            <if test="wxdh != null" >wxdh,</if>
+            <if test="wxfs != null" >wxfs,</if>
+            <if test="jsje != null" >jsje,</if>
+            <if test="wxcs != null" >wxcs,</if>
+            <if test="wxsm != null" >wxsm,</if>
+            <if test="bz != null" >bz,</if>
+            <if test="tbr != null" >tbr,</if>
+            <if test="tbsj != null" >tbsj,</if>
+            <if test="tbdwdm != null" >tbdwdm,</if>
+            <if test="tbdw != null" >tbdw,</if>
+            <if test="tbbm != null" >tbbm,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >#{id},</if>
+            <if test="ckmc != null" >#{ckmc},</if>
+            <if test="wxdh != null" >#{wxdh},</if>
+            <if test="wxfs != null" >#{wxfs},</if>
+            <if test="jsje != null" >#{jsje},</if>
+            <if test="wxcs != null" >#{wxcs},</if>
+            <if test="wxsm != null" >#{wxsm},</if>
+            <if test="bz != null" >#{bz},</if>
+            <if test="tbr != null" >#{tbr},</if>
+            <if test="tbsj != null" >#{tbsj},</if>
+            <if test="tbdwdm != null" >#{tbdwdm},</if>
+            <if test="tbdw != null" >#{tbdw},</if>
+            <if test="tbbm != null" >#{tbbm},</if>
+        </trim>
+    </insert>
+
+    <insert id="addFjwxjsMx" parameterType="com.hdsx.jdwh.entity.Fjwxjs">
+        begin
+        <foreach collection="mx" item="item" index="index" separator=";">
+            insert into JDWH_BJ_WXJSMX (ID, PID, XH, WXBJ, WXFY, QTFY, FPH, SL, SE, BZ, FJID)  values
+            (sys_guid(),trim(#{id,jdbcType=VARCHAR}),trim(#{item.xh,jdbcType=VARCHAR}),trim(#{item.wxbj,jdbcType=VARCHAR}),trim(#{item.wxfy,jdbcType=VARCHAR}),trim(#{item.qtfy,jdbcType=VARCHAR}),trim(#{item.fph,jdbcType=VARCHAR}),trim(#{item.sl,jdbcType=VARCHAR}),trim(#{item.se,jdbcType=VARCHAR}),trim(#{item.bz,jdbcType=VARCHAR}),trim(#{item.fjid,jdbcType=VARCHAR}))
+        </foreach>
+        ;end;
+    </insert>
+
+    <update id="editFjZt" parameterType="com.hdsx.jdwh.entity.Fjwxjs">
+        begin
+        <foreach collection="mx" item="item" index="index" separator=";">
+            update jdwx_bj_fjmx set bjzt='可用' where id=trim(#{item.fjid,jdbcType=VARCHAR})
+        </foreach>
+        ;end;
+    </update>
+
+    <update id="editFjwxjs" parameterType="com.hdsx.jdwh.entity.Fjwxjs" >
+        update JDWH_BJ_WXJS
+        <set>
+            <if test="id != null" >id=#{id},</if>
+            <if test="ckmc != null" >ckmc=#{ckmc},</if>
+            <if test="wxdh != null" >wxdh=#{wxdh},</if>
+            <if test="wxfs != null" >wxfs=#{wxfs},</if>
+            <if test="jsje != null" >jsje=#{jsje},</if>
+            <if test="wxcs != null" >wxcs=#{wxcs},</if>
+            <if test="wxsm != null" >wxsm=#{wxsm},</if>
+            <if test="bz != null" >bz=#{bz},</if>
+            <if test="tbr != null" >tbr=#{tbr},</if>
+            <if test="tbsj != null" >tbsj=#{tbsj},</if>
+            <if test="tbdwdm != null" >tbdwdm=#{tbdwdm},</if>
+            <if test="tbdw != null" >tbdw=#{tbdw},</if>
+            <if test="tbbm != null" >tbbm=#{tbbm},</if>
+        </set>
+        where 1=1 and id=#{id}
+    </update>
+    <delete id="delFjwxjsMx" parameterType="com.hdsx.jdwh.entity.Fjwxjs">
+        delete from JDWH_BJ_WXJSMX where pid=#{id}
+    </delete>
+
+    <update id="editFjZt2" parameterType="com.hdsx.jdwh.entity.Fjwxjs">
+        update jdwx_bj_fjmx set bjzt='损坏' where id in
+        (select fjid from JDWH_BJ_WXJSMX where pid=#{id})
+    </update>
+
+    <delete id="delFjwxjsBydjbhs" parameterType="java.util.List" >
+        delete from JDWH_BJ_WXJS
+        where id in
+        <foreach collection="list" item="id"  open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <delete id="delFjwxjsMxBydjbhs" parameterType="java.util.List" >
+        delete from JDWH_BJ_WXJSMX
+        where pid in
+        <foreach collection="list" item="id"  open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    <update id="editFjZt3" parameterType="java.util.List">
+        update jdwx_bj_fjmx set bjzt='损坏' where id in(
+            select fjid from JDWH_BJ_WXJSMX
+            where pid in
+            <foreach collection="list" item="id"  open="(" separator="," close=")">
+                #{id}
+            </foreach>
+        )
+    </update>
+
+    <select id="getFjwxjsInfoById" parameterType="string" resultMap="fjrk">
+        select * from JDWH_BJ_WXJS zb
+        where zb.id=#{value}
+    </select>
+
+    <select id="getFjwxjsList" parameterType="hashmap" resultMap="fjrk">
+        select * from JDWH_BJ_WXJS zb
+        where 1=1
+        <if test="tbdwdm !=null and tbdwdm !=''">and zb.tbdwdm like #{tbdwdm}||'%'</if>
+    </select>
+
+
+</mapper>

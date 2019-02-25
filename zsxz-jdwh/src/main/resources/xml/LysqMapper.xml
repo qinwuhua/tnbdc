@@ -1,0 +1,132 @@
+<?xml version='1.0' encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hdsx.jdwh.mapper.LysqMapper">
+
+    <resultMap type="com.hdsx.jdwh.entity.Lysq" id="lysq">
+        <result column="ID" property="id"/>
+        <result column="djbh" property="djbh"/>
+        <result column="wxdh" property="wxdh"/>
+        <result column="xyr" property="xyr"/>
+        <result column="lysm" property="lysm"/>
+        <result column="BZ" property="bz"/>
+        <result column="TBR" property="tbr"/>
+        <result column="TBSJ" property="tbsj"/>
+        <result column="TBDW" property="tbdw"/>
+        <result column="TBBM" property="tbbm"/>
+        <result column="TBDWDM" property="tbdwdm"/>
+        <collection property="mx" ofType="com.hdsx.jdwh.entity.Lysqmx" select="getLysqmxByPdjbh" column="djbh" >
+        </collection>
+
+    </resultMap>
+
+    <select id="getLysqmxByPdjbh" parameterType="string" resultType="com.hdsx.jdwh.entity.Lysqmx">
+        select * from jdwh_bj_lysqmx where PDJBH=#{value}
+    </select>
+
+    <select id="getBjLyInfo" parameterType="hashmap" resultType="hashmap">
+        select t1.bjmc,t1.bjbh bjbm,t1.ggxh,t1.jldw,nvl(rksl,0)-nvl(xysl,0) xysl  from
+        (select bjmc,bjbh,ggxh,min(jldw) jldw,sum(nvl(rksl,0)) rksl from JDWX_BJ_RKMX group by bjmc,bjbh,ggxh) t1
+        left join
+        (select bjmc,bjbh,ggxh,sum(nvl(cksl,0)) xysl from JDWX_BJ_CKMX where 1=1 <if test="id != null">and id!=#{id}</if> group by bjmc,bjbh,ggxh) t2
+        on t1.bjmc=t2.bjmc and t1.bjbh=t2.bjbh and t1.ggxh=t2.ggxh
+        where 1=1
+        <if test="bjmc != null">and t1.bjmc=#{bjmc}</if>
+        <if test="bjbh != null">and t1.bjbh=#{bjbh}</if>
+        <if test="ggxh != null">and t1.ggxh=#{ggxh}</if>
+
+    </select>
+
+    <insert id="addLysq" parameterType="com.hdsx.jdwh.entity.Lysq">
+        insert into jdwh_bj_lysq
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >id,</if>
+            <if test="djbh != null" >djbh,</if>
+            <if test="wxdh != null" >wxdh,</if>
+            <if test="xyr != null" >xyr,</if>
+            <if test="lysm != null" >lysm,</if>
+            <if test="bz != null" >bz,</if>
+            <if test="tbr != null" >tbr,</if>
+            <if test="tbsj != null" >tbsj,</if>
+            <if test="tbdw != null" >tbdw,</if>
+            <if test="tbbm != null" >tbbm,</if>
+            <if test="tbdwdm != null" >tbdwdm,</if>
+
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >#{id},</if>
+            <if test="djbh != null" >#{djbh},</if>
+            <if test="wxdh != null" >#{wxdh},</if>
+            <if test="xyr != null" >#{xyr},</if>
+            <if test="lysm != null" >#{lysm},</if>
+            <if test="bz != null" >#{bz},</if>
+            <if test="tbr != null" >#{tbr},</if>
+            <if test="tbsj != null" >#{tbsj},</if>
+            <if test="tbdw != null" >#{tbdw},</if>
+            <if test="tbbm != null" >#{tbbm},</if>
+            <if test="tbdwdm != null" >#{tbdwdm},</if>
+        </trim>
+    </insert>
+
+    <insert id="addLysqMx" parameterType="com.hdsx.jdwh.entity.Lysq">
+        begin
+        <foreach collection="mx" item="item" index="index" separator=";">
+            insert into jdwh_bj_lysqmx (ID, PDJBH, XH, BJMC, BJBM, GGXH, JLDW, XYSL, BZ)  values
+            (sys_guid(),trim(#{djbh,jdbcType=VARCHAR}),trim(#{item.xh,jdbcType=VARCHAR}),trim(#{item.bjmc,jdbcType=VARCHAR}),trim(#{item.bjbm,jdbcType=VARCHAR}),trim(#{item.ggxh,jdbcType=VARCHAR}),trim(#{item.jldw,jdbcType=VARCHAR}),trim(#{item.xysl,jdbcType=VARCHAR}),trim(#{item.bz,jdbcType=VARCHAR}))
+        </foreach>
+        ;end;
+    </insert>
+
+
+    <update id="editLysq" parameterType="com.hdsx.jdwh.entity.Lysq" >
+        update jdwh_bj_lysq
+        <set>
+            <if test="id != null" >id=#{id},</if>
+            <if test="djbh != null" >djbh=#{djbh},</if>
+            <if test="wxdh != null" >wxdh=#{wxdh},</if>
+            <if test="xyr != null" >xyr=#{xyr},</if>
+            <if test="lysm != null" >lysm=#{lysm},</if>
+            <if test="bz != null" >bz=#{bz},</if>
+            <if test="tbr != null" >tbr=#{tbr},</if>
+            <if test="tbsj != null" >tbsj=#{tbsj},</if>
+            <if test="tbdw != null" >tbdw=#{tbdw},</if>
+            <if test="tbbm != null" >tbbm=#{tbbm},</if>
+            <if test="tbdwdm != null" >tbdwdm=#{tbdwdm},</if>
+        </set>
+        where 1=1 and djbh=#{djbh}
+    </update>
+    <delete id="delLysqMx" parameterType="com.hdsx.jdwh.entity.Lysq">
+        delete from jdwh_bj_lysqmx where pdjbh=#{djbh}
+    </delete>
+
+    <delete id="delLysqBydjbhs" parameterType="java.util.List" >
+        delete from jdwh_bj_lysq
+        where djbh in
+        <foreach collection="list" item="id"  open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <delete id="delLysqMxBydjbhs" parameterType="java.util.List" >
+        delete from jdwh_bj_lysqmx
+        where pdjbh in
+        <foreach collection="list" item="id"  open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <select id="getLysqInfoByDjbh" parameterType="string" resultMap="lysq">
+        select * from jdwh_bj_lysq zb
+        where zb.djbh=#{value}
+    </select>
+
+    <select id="getLysqList" parameterType="hashmap" resultMap="lysq">
+        select * from jdwh_bj_lysq zb
+        where 1=1
+        <if test="tbdwdm !=null and tbdwdm !=''">and zb.tbdwdm like #{tbdwdm}||'%'</if>
+    </select>
+
+
+</mapper>
