@@ -21,5 +21,11 @@ public class LhyhServiceImpl implements LhyhService {
         PageHelper.startPage(pageNum, pageSize);
         List<Lhyh> list = lhyhMapper.getLhyhrwList(param);
         return list;
+
+    }
+
+    @Override
+    public int insertLhyh(Lhyh lhyh) {
+        return lhyhMapper.insertLhyh(lhyh);
     }
 }

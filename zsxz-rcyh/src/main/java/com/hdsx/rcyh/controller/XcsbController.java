@@ -2,16 +2,14 @@ package com.hdsx.rcyh.controller;
 
 import com.github.pagehelper.PageInfo;
 import com.hdsx.rcyh.entity.Msg;
+import com.hdsx.rcyh.entity.Xcsb;
 import com.hdsx.rcyh.service.XcsbService;
 import com.hdsx.rcyh.utils.ResultUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -34,6 +32,22 @@ public class XcsbController {
             return ResultUtil.success(new PageInfo<>(xcsbService.getXcsb(pageNum,pageSize)));
         }catch (Exception e){
             return ResultUtil.error("查询失败！");
+        }
+    }
+
+    @ApiOperation(value = "添加巡查数据")
+    @ResponseBody
+    @RequestMapping(value = "insertXcsb", method = RequestMethod.POST)
+    public Msg insertXcsb(@RequestBody Xcsb xcsb) {
+        try {
+            if (xcsbService.insertXcsb(xcsb) > 0) {
+                return ResultUtil.success("添加成功");
+            } else {
+                return ResultUtil.error("添加失败");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResultUtil.error("接口异常！");
         }
     }
 }

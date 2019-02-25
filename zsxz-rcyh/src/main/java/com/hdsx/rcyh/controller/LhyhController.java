@@ -11,10 +11,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
@@ -52,6 +49,20 @@ public class LhyhController {
         return ResultUtil.success(new PageInfo<Lhyh>(list));
     }
 
-
+    @ApiOperation(value = "添加绿化养护事件")
+    @RequestMapping(value = "insertLhyh", method = RequestMethod.POST)
+    @ResponseBody
+    public Msg insertLhyh(@RequestBody Lhyh lhyh) {
+        try {
+            if (lhyhService.insertLhyh(lhyh) > 0) {
+                return ResultUtil.success("添加信息成功！");
+            } else {
+                return ResultUtil.error("添加信息失败！");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResultUtil.error("接口异常！");
+        }
+    }
 
 }

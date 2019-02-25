@@ -24,7 +24,7 @@
     </resultMap>
     <!--主表添加-->
     <insert id="insert" parameterType="com.hdsx.rcyh.entity.Rcyhxckhb">
-        insert into RCYHXCKHB
+        insert into rcyh_xckhb
         <trim prefix="(" suffix=")" suffixOverrides="," >
             <if test="rcyhxckhbdjbh != null" >RCYHXCKHB_DJBH,</if>
             <if test="rcyhxckhbyd != null" >RCYHXCKHB_YD,</if>
@@ -46,7 +46,7 @@
     </insert>
     <!--子表添加-->
     <insert id="insertzb" parameterType="com.hdsx.rcyh.entity.Rcyhxckhbmx">
-        insert into RCYHXCKHBMX
+        insert into rcyh_xckhb_mx
         <trim prefix="(" suffix=")" suffixOverrides="," >
             <if test="rcyhxckhbid != null" >RCYHXCKHB_ID,</if>
             <if test="rcyhxckhbmxdjbh != null" >RCYHXCKHB_DJBH,</if>
@@ -68,7 +68,7 @@
     </insert>
     <!--主表-->
     <update id="update" parameterType="com.hdsx.rcyh.entity.Rcyhxckhb">
-        update RCYHXCKHB
+        update rcyh_xckhb
         <set>
             <if test="rcyhxckhbyd != null" >RCYHXCKHB_YD=to_date(#{rcyhxckhbyd},'yyyy-mm'),</if>
             <if test="rcyhxckhbgcmc != null" >RCYHXCKHB_GCMC=#{rcyhxckhbgcmc},</if>
@@ -97,25 +97,25 @@
 
     <!--删除主表-->
     <delete id="delete" parameterType="java.lang.String">
-        delete from RCYHXCKHB
+        delete from rcyh_xckhb
         where RCYHXCKHB_DJBH = #{rcyhxckhbdjbh}
     </delete>
 
     <!--删除子表-->
     <delete id="deletezb" parameterType="java.lang.String">
-        delete from RCYHXCKHBMX
+        delete from rcyh_xckhb_mx
         where RCYHXCKHB_DJBH = #{rcyhxckhbmxdjbh}
     </delete>
 
     <select id="getRcyhxckhbList" parameterType="hashmap" resultMap="rcyhxckhbdjbh">
-        select * from(select RCYHXCKHB_DJBH,to_char( RCYHXCKHB_YD,'yyyy-mm' ) RCYHXCKHB_YD,RCYHXCKHB_GCMC,RCYHXCKHB_SGDW, RCYHXCKHB_GLDW,to_char(RCYHXCKHB_KHRQ,'yyyy-mm-dd') RCYHXCKHB_KHRQ,RCYHXCKHB_BYKKHJ from RCYHXCKHB) A
+        select * from(select RCYHXCKHB_DJBH,to_char( RCYHXCKHB_YD,'yyyy-mm' ) RCYHXCKHB_YD,RCYHXCKHB_GCMC,RCYHXCKHB_SGDW, RCYHXCKHB_GLDW,to_char(RCYHXCKHB_KHRQ,'yyyy-mm-dd') RCYHXCKHB_KHRQ,RCYHXCKHB_BYKKHJ from rcyh_xckhb) A
         <if test="rcyhxckhbyd != null and rcyhxckhbyd !=''">
             and A.RCYHXCKHB_YD=#{rcyhxckhbyd}
         </if>
         <if test="rcyhxckhbgldw != null and rcyhxckhbgldw !=''">
             and A.RCYHXCKHB_GLDW=#{rcyhxckhbgldw}
         </if>
-        left join (select *from RCYHXCKHBMX) B on A.RCYHXCKHB_DJBH=B.RCYHXCKHB_DJBH
+        left join (select *from rcyh_xckhb_mx) B on A.RCYHXCKHB_DJBH=B.RCYHXCKHB_DJBH
     </select>
 
 </mapper>

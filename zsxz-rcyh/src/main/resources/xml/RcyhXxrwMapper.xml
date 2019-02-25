@@ -388,7 +388,7 @@
     <!-- 添加“小修任务 - 养护任务单”数据 -->
     <insert id="insertXxrwYhrwd" parameterType="com.hdsx.rcyh.entity.YhrwdInsert">
         INSERT INTO RCYH_XXRW_YHRWD (YHRWD_DJBH,YHRWD_LX,YHRWD_RQ,YHRWD_YD,YHRWD_YHDW,YHRWD_GYDW,YHRWD_RWDSHZT,YHRWD_YSZT)
-        VALUES (#{yhrwddjbh}, #{yhrwdlx}, TO_DATE(#{yhrwdrq}, 'yyyy-MM-dd'), TO_DATE（#{yhrwdyd}, 'yyyy-MM'), #{yhrwdyhdw}, #{yhrwdgydw}, '1401', '1501')
+        VALUES (#{yhrwddjbh}, #{yhrwdlx}, TO_DATE(#{yhrwdrq}, 'yyyy-MM-dd'), TO_DATE(#{yhrwdyd}, 'yyyy-MM'), #{yhrwdyhdw}, #{yhrwdgydw}, '1401', '1501')
     </insert>
 
     <!-- 获取小修任务 - 养护任务单的数据列表 -->

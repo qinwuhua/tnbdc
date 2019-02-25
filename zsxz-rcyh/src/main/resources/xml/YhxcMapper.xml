@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper  namespace="com.hdsx.rcyh.mapper.YhxcMapper">
+
+    <insert id="insertYhxc" parameterType="com.hdsx.rcyh.entity.Qdxc">
+        insert into rcyh_qdxc(XCRW_ID,XCRW_DWMC,XCRW_DWBH,XCRW_DWID,XCRW_BMMC,XCRW_BMBH,XCRW_BMID,XCRW_TBR,XCRW_TBRID,XCRW_TBRQ,
+        XCRW_FILE,XCRW_WFID,XCRW_NOTE,XCRW_DJBH,XCRW_XCLX,XCRW_QQZH,XCRW_XCFX,XCRW_KSSJ,XCRW_JSSJ,XCRW_XCRY,XCRW_CPHM,XCRW_LX,XCRW_ZT)
+        VALUES (#{id,jdbcType=VARCHAR},#{dwmc,jdbcType=VARCHAR},#{dwbh,jdbcType=VARCHAR},#{dwid,jdbcType=VARCHAR},
+        #{bmmc,jdbcType=VARCHAR},#{bmbh,jdbcType=VARCHAR},#{bmid,jdbcType=VARCHAR},
+        #{tbr,jdbcType=VARCHAR},#{tbrid,jdbcType=VARCHAR},to_date(#{tbrq},'yyyy/mm/dd'),#{file,jdbcType=VARCHAR},
+        #{wfid,jdbcType=VARCHAR},#{note,jdbcType=VARCHAR},#{djbh,jdbcType=VARCHAR},#{xclx,jdbcType=VARCHAR},
+        #{qqzh,jdbcType=VARCHAR},#{xcfx,jdbcType=VARCHAR},to_date(#{kssj},'yyyy/mm/dd'),to_date(#{jssj},'yyyy/mm/dd'),
+        #{xcry,jdbcType=VARCHAR},#{cphm,jdbcType=VARCHAR},#{lx,jdbcType=VARCHAR},#{zt,jdbcType=VARCHAR})
+
+    </insert>
+    <select id="selectJdlx" parameterType="hashmap" resultType="com.hdsx.rcyh.entity.Qdxc">
+      SELECT
+      Q.XCRW_ID,
+      Q.XCRW_DWMC,
+      Q.XCRW_DWBH,
+      Q.XCRW_DWID,
+      Q.XCRW_BMMC,
+      Q.XCRW_BMBH,
+      Q.XCRW_BMID,
+      Q.XCRW_TBR,
+      Q.XCRW_TBRID,
+      to_char(Q.XCRW_TBRQ,'yyyy/mm/dd'),
+      Q.XCRW_FILE,
+      Q.XCRW_WFID,
+      Q.XCRW_NOTE,
+      Q.XCRW_DJBH,
+      Q.XCRW_XCLX,
+      Q.XCRW_QQZH,
+      Q.XCRW_XCFX,
+      to_char(Q.XCRW_KSSJ,'yyyy/mm/dd'),
+      to_char(Q.XCRW_JSSJ,'yyyy/mm/dd'),
+      Q.XCRW_XCRY,
+      Q.XCRW_CPHM,
+      Q.XCRW_LX,
+      Q.XCRW_ZT
+      from rcyh_qdxc Q
+      where 1=1
+        <if test="cphm != null and cphm != ''">
+            and Q.XCRW_CPHM=#{cphm}
+        </if>
+        <if test="kssj != null and kssj != ''">
+            and Q.XCRW_KSSJ=to_date(#{kssj},'yyyy/mm/dd')
+        </if>
+    </select>
+</mapper>

@@ -62,12 +62,12 @@
         <!-- 一对多的关系 -->
         <!-- property: 指的是集合属性的值, ofType：指的是集合中元素的类型 -->
         <collection property="lyjcs" ofType="com.hdsx.common.entity.HtxxLyjc">
-            <id column="LYJC_ID" property="id"/>
-            <result column="LYJC_MID" property="mid"/>
-            <result column="LYJC_NR" property="nr"/>
+            <id column="BH" property="bh"/>
+            <result column="MID" property="mid"/>
+            <result column="JCNR" property="jcnr"/>
             <result column="LYJC_BL" property="bl"/>
-            <result column="LYJC_NOTE" property="note"/>
-            <result column="LYJC_JE" property="je"/>
+            <result column="MEMO" property="memo"/>
+            <result column="FJ" property="fj"/>
         </collection>
         <collection property="zmhts" ofType="com.hdsx.common.entity.Zmht">
             <id column="ZMHT_ID" property="id"/>
@@ -104,9 +104,9 @@
         yh.*,zm.*
         FROM DJSJ_HTXX jc
         LEFT JOIN DJSJ_HTXX_HTGJXX gj ON jc.htxx_htbh = gj.htgjxx_htbh
-        LEFT JOIN DJSJ_HTXX_LYJCMX ly on jc.htxx_htbh = ly.lyjc_mid
+        LEFT JOIN DJSJ_HTXX_LYJCMX ly on jc.htxx_htbh = ly.mid
         LEFT JOIN DJSJ_HTXX_YHXMXX yh on jc.htxx_htbh = yh.yhhtxx_htbh
-        LeFT JOIN ZM_HT zm on jc.htxx_htbh = zm.zmht_htbh
+        LeFT JOIN gg_zmht zm on jc.htxx_htbh = zm.zmht_htbh
         <where>
             <if test="htbh != null and htbh != ''"> AND jc.htxx_htbh LIKE '%'||trim(#{htbh})||'%'</if>
         </where>

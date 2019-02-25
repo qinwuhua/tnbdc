@@ -22,4 +22,11 @@ public class RcqsServiceImpl implements RcqsService {
         List<Rcqs> list = rcqsMapper.getRcqsrwList(param);
         return list;
     }
+
+    @Override
+    public int insertRcqs(Rcqs rcqs) {
+
+        return rcqsMapper.insertRcqs(rcqs);
+    }
+
 }

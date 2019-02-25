@@ -49,5 +49,19 @@ public class RcqsController {
     }
 
 
-
+    @ApiOperation(value = "添加日常清扫事件")
+    @RequestMapping(value = "insertRcqs", method = RequestMethod.POST)
+    @ResponseBody
+    public Msg insertRcqs(@RequestBody Rcqs rcqs) {
+        try {
+            if (rcqsService.insertRcqs(rcqs) > 0) {
+                return ResultUtil.success("添加信息成功！");
+            } else {
+                return ResultUtil.error("添加信息失败！");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResultUtil.error("接口异常！");
+        }
+    }
 }

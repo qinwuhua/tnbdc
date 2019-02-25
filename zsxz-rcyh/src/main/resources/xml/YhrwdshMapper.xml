@@ -15,7 +15,7 @@
         <collection property="yhrwmxes" ofType="com.hdsx.rcyh.entity.Yhrwmx" column="yhrwdid">
             <result column="YHRWD_ID" property="yhrwdid"/><!-- 这里的column对应的是下面查询的别名，而不是表字段名 -->
             <result column="YHRWD_DJBH" property="yhrwdmxdjbh"/><!-- property对应JavaBean中的属性名 -->
-            <result column="RWMX_SJDH" property="yhrwdsjbh"/><!-- property对应JavaBean中的属性名 -->
+            <result column="RWMX_SJDH" property="yhrwdsjbh"/>
             <result column="RWMX_DWMC" property="yhrwdxcdw"/>
             <result column="RWMX_XCFX" property="yhrwdxcfx"/>
             <result column="RWMX_CD" property="yhrwdcd"/>
@@ -64,7 +64,7 @@
 
 
     <insert id="insert" parameterType="com.hdsx.rcyh.entity.Yhrwd">
-        insert into XXRW_YHRWD
+        insert into rcyh_xxrw_yhrwd
         <trim prefix="(" suffix=")" suffixOverrides="," >
             <if test="yhrwddjbh != null" >YHRWD_DJBH,</if>
             <if test="yhrwdlx != null" >YHRWD_LX,</if>
@@ -79,18 +79,18 @@
         <trim prefix="values (" suffix=")" suffixOverrides="," >
             <if test="yhrwddjbh != null" >#{yhrwddjbh},</if>
             <if test="yhrwdlx != null" >#{yhrwdlx},</if>
-            <if test="yhrwdrq != null" >to_date(#{yhrwdrq,jdbcType=TIMESTAMP},'yyyy-mm-dd'),</if>
-            <if test="yhrwdyd != null" >to_date(#{yhrwdyd,jdbcType=TIMESTAMP},'yyyy-mm'),</if>
+            <if test="yhrwdrq != null" >to_date(#{yhrwdrq,jdbcType=TIMESTAMP},'yyyy/mm/dd'),</if>
+            <if test="yhrwdyd != null" >to_date(#{yhrwdyd,jdbcType=TIMESTAMP},'yyyy/mm'),</if>
             <if test="yhrwdyhdw != null" >#{yhrwdyhdw},</if>
             <if test="yhrwdgydw != null" >#{yhrwdgydw},</if>
            '未处理',
-            '未处理',
+            '未验收',
         </trim>
     </insert>
 
     <!--子表添加-->
     <insert id="insertzb" parameterType="com.hdsx.rcyh.entity.Yhrwmx">
-        insert into XXRW_YHRWD_MX
+        insert into rcyh_xxrw_yhrwd_mx
         <trim prefix="(" suffix=")" suffixOverrides="," >
             <if test="yhrwdid != null" >YHRWD_ID,</if>
             <if test="yhrwdmxdjbh != null" >YHRWD_DJBH,</if>
@@ -119,16 +119,16 @@
             <if test="yhrwdgcllx != null" >#{yhrwdgcllx},</if>
             <if test="yhrwdzh != null" >#{yhrwdzh},</if>
             <if test="yhrwdbhsm != null" >#{yhrwdbhsm},</if>
-            <if test="yhrwdsj != null" >to_date(#{yhrwdsj,jdbcType=TIMESTAMP},'yyyy-mm-dd'),</if>
+            <if test="yhrwdsj != null" >to_date(#{yhrwdsj,jdbcType=TIMESTAMP},'yyyy/mm/dd'),</if>
         </trim>
     </insert>
 <!--主表-->
     <update id="update" parameterType="com.hdsx.rcyh.entity.Yhrwd">
-        update XXRW_YHRWD
+        update rcyh_xxrw_yhrwd
         <set>
             <if test="yhrwdlx != null" >YHRWD_LX=#{yhrwdlx},</if>
-            <if test="yhrwdrq != null" >YHRWD_RQ=to_date(#{yhrwdrq,jdbcType=TIMESTAMP},'yyyy-mm-dd'),</if>
-            <if test="yhrwdyd != null" >YHRWD_YD=to_date(#{yhrwdyd,jdbcType=TIMESTAMP},'yyyy-mm'),</if>
+            <if test="yhrwdrq != null" >YHRWD_RQ=to_date(#{yhrwdrq,jdbcType=TIMESTAMP},'yyyy/mm/dd'),</if>
+            <if test="yhrwdyd != null" >YHRWD_YD=to_date(#{yhrwdyd,jdbcType=TIMESTAMP},'yyyy/mm'),</if>
             <if test="yhrwdyhdw != null" >YHRWD_YHDW=#{yhrwdyhdw},</if>
             <if test="yhrwdgydw != null" >YHRWD_GYDW=#{yhrwdgydw},</if>
             <if test="yhrwdrwdshzt != null" >YHRWD_RWDSHZT=#{yhrwdrwdshzt},</if>
@@ -137,7 +137,7 @@
         where 1=1 and YHRWD_DJBH=#{yhrwddjbh}
     </update>
 
-    <!--&lt;!&ndash;子表&ndash;&gt;
+    <!--子表
     <update id="updatezb" parameterType="com.hdsx.rcyh.entity.Yhrwmx">
         update XXRW_YHRWD
         <set>
@@ -160,23 +160,23 @@
 -->
     <!--删除主表-->
     <delete id="delete" parameterType="java.lang.String">
-        delete from XXRW_YHRWD
+        delete from rcyh_xxrw_yhrwd
         where YHRWD_DJBH = #{yhrwddjbh}
     </delete>
 
     <!--删除子表-->
     <delete id="deletezb" parameterType="java.lang.String">
-        delete from XXRW_YHRWD_MX
+        delete from rcyh_xxrw_yhrwd_mx
         where YHRWD_DJBH = #{yhrwdmxdjbh}
     </delete>
 
     <select id="getYhrwdshList" parameterType="hashmap" resultMap="yhrwddjbh">
-        select * from ( select YHRWD_DJBH,YHRWD_LX,to_char(YHRWD_RQ,'yyyy-mm-dd') YHRWD_RQ,to_char(YHRWD_YD,'yyyy-mm') YHRWD_YD,
+        select * from ( select YHRWD_DJBH,YHRWD_LX,to_char(YHRWD_RQ,'yyyy/mm/dd') YHRWD_RQ,to_char(YHRWD_YD,'yyyy/mm') YHRWD_YD,
         YHRWD_YHDW,YHRWD_GYDW,YHRWD_RWDSHZT,YHRWD_YSZT
-        from XXRW_YHRWD) A
+        from rcyh_xxrw_yhrwd) A
         left join (select YHRWD_ID,YHRWD_DJBH,RWMX_SJDH,RWMX_DWMC,RWMX_XCFX,RWMX_CD,RWMX_DWGC
-        ,RWMX_BHLX,RWMX_BHSL,RWMX_GCLLX,RWMX_ZH,RWMX_BHSM,to_char(RWMX_TBRQ,'yyyy-mm-dd') RWMX_TBRQ
-        from XXRW_YHRWD_MX)
+        ,RWMX_BHLX,RWMX_BHSL,RWMX_GCLLX,RWMX_ZH,RWMX_BHSM,to_char(RWMX_TBRQ,'yyyy/mm/dd') RWMX_TBRQ
+        from rcyh_xxrw_yhrwd_mx)
         B on A.YHRWD_DJBH=B.YHRWD_DJBH
         where 1=1
 
@@ -193,15 +193,13 @@
             and A.YHRWD_GYDW=#{yhrwdgydw}
         </if>
 
-
-
     </select>
 
 
 
 
     <update id="updateshzt" parameterType="hashmap">
-        update XXRW_YHRWD
+        update 	rcyh_xxrw_yhrwd
         set
           YHRWD_RWDSHZT = #{yhrwdrwdshzt,jdbcType=VARCHAR}
         where
@@ -209,7 +207,7 @@
     </update>
 
     <update id="updateyszt" parameterType="hashmap">
-        update XXRW_YHRWD
+        update 	rcyh_xxrw_yhrwd
         set
           YHRWD_YSZT=#{yhrwdyszt,jdbcType=VARCHAR}
         where

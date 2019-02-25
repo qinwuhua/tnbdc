@@ -1,12 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hdsx.rcyh.mapper.XcsbMapper">
+    <insert id="insertXcsb" parameterType="com.hdsx.rcyh.entity.Xcsb">
+        insert into rcyh_xcsb(RWMX_ID,RWMX_MID,RWMX_DWMC,RWMX_DWBH,RWMX_DDWID,RWMX_BMMC,RWMX_BMBH,RWMX_BMID,RWMX_TBR,RWMX_TBRID,RWMX_TBRQ,
+        RWMX_NOTE,RWMX_SJDH,RWMX_GPS,RWMX_SJLX,RWMX_SJSM,RWMX_JJD,RWMX_TP,RWMX_SP,RWMX_ZH,RWMX_FXSJ,RWMX_SHLX,RWMX_BHLX,RWMX_,
+        RWMX_KHNR,RWMX_CD,RWMX_CZFS,RWMX_XCFX,RWMX_BHSM,RWMX_GCLLX,RWMX_DWGC)
+        VALUES (#{rwmx_id,jdbcType=VARCHAR},#{rwmx_mid,jdbcType=VARCHAR},#{rwmx_dwmc,jdbcType=VARCHAR},#{rwmx_dwbh,jdbcType=VARCHAR},
+        #{rwmx_dwid,jdbcType=VARCHAR},#{rwmx_bmmc,jdbcType=VARCHAR},#{rwmx_bmbh,jdbcType=VARCHAR},#{rwmx_bmid,jdbcType=VARCHAR},
+        #{rwmx_tbr,jdbcType=VARCHAR},#{rwmx_tbrid,jdbcType=VARCHAR},#{rwmx_note,jdbcType=VARCHAR},#{rwmx_sjdh,jdbcType=VARCHAR},
+        #{rwmx_gps,jdbcType=VARCHAR},#{rwmx_sjlx,jdbcType=VARCHAR},#{rwmx_sjsm,jdbcType=VARCHAR},#{rwmx_jjd,jdbcType=VARCHAR},
+        #{rwmx_tp,jdbcType=VARCHAR},#{rwmx_sp,jdbcType=VARCHAR},#{rwmx_zh,jdbcType=VARCHAR},#{rwmx_shlx,jdbcType=VARCHAR},
+        #{rwmx_bhlx,jdbcType=VARCHAR},#{rwmx_bhsl,jdbcType=VARCHAR},#{rwmx_khnr,jdbcType=VARCHAR},
+        #{rwmx_cd,jdbcType=VARCHAR},#{rwmx_czfs,jdbcType=VARCHAR},to_date(#{rwmx_tbrq},'yyyy/mm/dd'),to_date(#{rwmx_fxsj},'yyyy/mm/dd'))
+    </insert>
     <select id="getXcsb" resultType="java.util.HashMap">
         SELECT  RWMX_ID, RWMX_MID,RWMX_DWMC,RWMX_DWBH,
         RWMX_DWID,RWMX_BMMC,RWMX_BMBH,RWMX_BMID,
         RWMX_TBR,RWMX_TBRID,to_char(RWMX_TBRQ,'yyyy/mm/dd') RWMX_TBRQ,RWMX_NOTE,RWMX_SJDH,RWMX_GPS,RWMX_SJLX,RWMX_SJSM,
         RWMX_JJD,RWMX_TP,RWMX_SP,RWMX_ZH,to_char(RWMX_FXSJ,'yyyy/mm/dd')RWMX_FXSJ,
-        RWMX_SHLX,RWMX_BHLX,RWMX_BHSL,RWMX_KHNR,RWMX_CD,RWMX_CZFS from XCSB
+        RWMX_SHLX,RWMX_BHLX,RWMX_BHSL,RWMX_KHNR,RWMX_CD,RWMX_CZFS from rcyh_xcsb
 
     </select>
 </mapper>

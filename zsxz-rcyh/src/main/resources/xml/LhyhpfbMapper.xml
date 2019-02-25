@@ -24,7 +24,7 @@
     </resultMap>
     <!--主表添加-->
     <insert id="insert" parameterType="com.hdsx.rcyh.entity.Lhyhpfb">
-        insert into LHYHZJPFB
+        insert into rcyh_lhyhzlpfb
         <trim prefix="(" suffix=")" suffixOverrides="," >
             <if test="lhyhdjbh != null" >LHYH_DJBH,</if>
             <if test="lhyhyd != null" >LHYH_YD,</if>
@@ -46,7 +46,7 @@
     </insert>
     <!--子表添加-->
     <insert id="insertzb" parameterType="com.hdsx.rcyh.entity.Lhyhpfbmx">
-        insert into LHYHZLPFBMX
+        insert into rcyh_lhyhzlpfb_mx
         <trim prefix="(" suffix=")" suffixOverrides="," >
             <if test="lhyhid != null" >LHYH_ID,</if>
             <if test="lhyhmxdjbh != null" >LHYH_DJBH,</if>
@@ -72,7 +72,7 @@
     </insert>
     <!--主表-->
     <update id="update" parameterType="hashmap">
-        update LHYHZLPFB
+        update rcyh_lhyhzlpfb
         <set>
             <if test="lhyhyd != null" >LHYH_YD=to_date(#{lhyhyd},'yyyy-mm'),</if>
             <if test="lhyhgcmc != null" >LHYH_GCMC=#{lhyhgcmc},</if>
@@ -102,29 +102,29 @@
 
     <!--删除主表-->
     <delete id="delete" parameterType="java.lang.String">
-        delete from LHYHZLPFB
+        delete from rcyh_lhyhzlpfb
         where LHYH_DJBH = #{lhyhdjbh}
     </delete>
 
     <!--删除子表-->
     <delete id="deletezb" parameterType="java.lang.String">
-        delete from LHYHZLPFBMX
+        delete from rcyh_lhyhzlpfb_mx
         where LHYH_DJBH = #{lhyhmxdjbh}
     </delete>
 
     <select id="getLhyhrwList" parameterType="hashmap" resultMap="lhyhdjbh">
-        select * from(select LHYH_DJBH,to_char(LHYH_YD,'yyyy-mm') LHYH_YD,LHYH_GCMC,LHYH_SGDW,LHYH_GLDW,to_char(LHYH_KHRQ,'yyyy-mm-dd') LHYH_KHRQ,LHYH_FZZJ from  LHYHZLPFB )A
+        select * from(select LHYH_DJBH,to_char(LHYH_YD,'yyyy-mm') LHYH_YD,LHYH_GCMC,LHYH_SGDW,LHYH_GLDW,to_char(LHYH_KHRQ,'yyyy-mm-dd') LHYH_KHRQ,LHYH_FZZJ from  rcyh_lhyhzlpfb )A
         <if test="lhyhyd != null and lhyhyd !=''">
             and A.LHYH_YD=#{lhyhyd}
         </if>
         <if test="lhyhgldw != null and lhyhgldw !=''">
             and A.LHYH_GLDW=#{lhyhgldw}
         </if>
-        left join (select * from LHYHZLPFBMX) B on A.LHYH_DJBH=B.LHYH_DJBH
+        left join (select * from rcyh_lhyhzlpfb_mx) B on A.LHYH_DJBH=B.LHYH_DJBH
     </select>
 
     <update id="updatezt" parameterType="hashmap">
-        update LHYHZLPFBMX
+        update rcyh_lhyhzlpfb_mx
         set
         LHYH_ZT = #{lhyhzt,jdbcType=VARCHAR}
         where

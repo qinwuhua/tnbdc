@@ -1,6 +1,7 @@
 package com.hdsx.rcyh.service.impl;
 
 import com.github.pagehelper.PageHelper;
+import com.hdsx.rcyh.entity.Xcsb;
 import com.hdsx.rcyh.mapper.XcsbMapper;
 import com.hdsx.rcyh.service.XcsbService;
 import org.springframework.stereotype.Service;
@@ -20,5 +21,8 @@ public class XcsbServiceImpl implements XcsbService {
         List<HashMap<String, Object>> list = xcsbMapper.getXcsb();
         return list;
     }
-
+    @Override
+    public int insertXcsb(Xcsb xcsb) {
+        return xcsbMapper.insertXcsb(xcsb);
+    }
 }

@@ -15,11 +15,11 @@ public class HtxxLyjc implements Serializable {
 
     private static final long serialVersionUID = 4777738084460104089L;
 
-    private String id;
+    private String bh;
     private String mid;
-    private String nr;
+    private String jcnr;
     private BigDecimal bl;
-    private String note;
-    private String je;
+    private String memo;
+    private String fj;
 
 }

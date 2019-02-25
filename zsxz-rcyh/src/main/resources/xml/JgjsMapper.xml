@@ -72,31 +72,31 @@
         from djsj_htxx ht left join djsj_htxx_htgjxx gj on ht.htxx_htbh=gj.HTGJXX_HTBH
         left join djsj_htxx_yhxmxx xm on ht.htxx_htbh=xm.yhhtxx_htbh
         left join (select htbh,sum(nvl(fj,0)) fj from(
-        select pmmtlyjcb_htbh htbh,sum(nvl(lymx.pmmtlyjcbmx_fj,0)) fj from SGDWLYJCB ly left join SGDWLYJCBMX lymx on ly.pmmtlyjcb_id=lymx.pmmtlyjcbmx_mid group by ly.pmmtlyjcb_htbh
+        select pmmtlyjcb_htbh htbh,sum(nvl(lymx.pmmtlyjcbmx_fj,0)) fj from rcyh_sgdwlyjcb ly left join rcyh_sgdwlyjcb_mx lymx on ly.pmmtlyjcb_id=lymx.pmmtlyjcbmx_mid group by ly.pmmtlyjcb_htbh
         union all
-        select PMMTJCZBQKJCB_HTBH htbh,sum(nvl(lymx.PMMTJCZBQKJCBMX_FJ,0)) fj from jczbqkjcb ly left join jczbqkjcbmx lymx on ly.PMMTJCZBQKJCB_ID=lymx.PMMTJCZBQKJCBMX_MID group by ly.PMMTJCZBQKJCB_HTBH
+        select PMMTJCZBQKJCB_HTBH htbh,sum(nvl(lymx.PMMTJCZBQKJCBMX_FJ,0)) fj from rcyh_jczbqkjcb ly left join rcyh_jczbqkjcb_mx lymx on ly.PMMTJCZBQKJCB_ID=lymx.PMMTJCZBQKJCBMX_MID group by ly.PMMTJCZBQKJCB_HTBH
         ) group by htbh) fj on ht.htxx_htbh=fj.htbh
-        left join (select sum(nvl(gcjlmx_htdj,0)*nvl(gcjlmx_htsl,0)) jlhtje,sum(nvl(gcjlmx_htdj,0)*nvl(gcjlmx_wcsl,0)) jlje,sum(nvl(gcjlmx_kkje,0)) fj,gcjlmx_htbh from gcjldmx
-        where 1=1 and gcjlmx_djbh in (select gcjl_djbh from gcjld where gcjl_spzt='已下发')
+        left join (select sum(nvl(gcjlmx_htdj,0)*nvl(gcjlmx_htsl,0)) jlhtje,sum(nvl(gcjlmx_htdj,0)*nvl(gcjlmx_wcsl,0)) jlje,sum(nvl(gcjlmx_kkje,0)) fj,gcjlmx_htbh from rcyh_gcjld_mx
+        where 1=1 and gcjlmx_djbh in (select gcjl_djbh from rcyh_gcjld where gcjl_spzt='已下发')
         <if test="zmid != null and zmid !=''">  and gcjlmx_zmid in (${zmid}) </if>
         group by gcjlmx_htbh) jl on ht.htxx_htbh=jl.gcjlmx_htbh
-        left join (select zqzfmx_htbh,sum(nvl(zqzfmx_bqje,0)) zfje from zqcwzfzs_jlmx
-        where 1=1 and zqzfmx_zfqh in (select zqcwzf_zfqh from zqcwzfzs where zqcwzf_spzt='已下发')
+        left join (select zqzfmx_htbh,sum(nvl(zqzfmx_bqje,0)) zfje from rcyh_zqcwzfzs_jlmx
+        where 1=1 and zqzfmx_zfqh in (select zqcwzf_zfqh from rcyh_zqcwzfzs where zqcwzf_spzt='已下发')
         <if test="zmid != null and zmid !=''"> and zqzfmx_zmid in (${zmid}) </if>
         group by zqzfmx_htbh) zf on ht.htxx_htbh=zf.zqzfmx_htbh
-        left join (select pmmtgcspsqs_htbh,sum(nvl(pmmtgcspsqs_spje,0)) pmmtgcspsqs_spje from gcspsqs group by pmmtgcspsqs_htbh) sp on ht.htxx_htbh=sp.pmmtgcspsqs_htbh
+        left join (select pmmtgcspsqs_htbh,sum(nvl(pmmtgcspsqs_spje,0)) pmmtgcspsqs_spje from rcyh_gcspsqs group by pmmtgcspsqs_htbh) sp on ht.htxx_htbh=sp.pmmtgcspsqs_htbh
         left join  (
         select zm.zmht_zmh pmmtjgjssmx_zmbh,zm.zmht_id pmmtjgjssmx_zmid,zm.zmht_htbh pmmtjgjssmx_htbh,zm.zmht_zmmc pmmtjgjssmx_zmmc,zm.zmht_jldw pmmtjgjssmx_dw,zm.zmht_dj pmmtjgjssmx_htdj,
         NVL(zm.zmht_sl,0) pmmtjgjssmx_yhts,nvl(zm.zmht_sl,0)* nvl(zm.zmht_dj,0) pmmtjgjssmx_yhtje,
         NVL(gc.gcjlmx_wcsl,0) pmmtjgjssmx_sjjlsl,nvl(gc.gcjlmx_wcsl,0)* nvl(zm.zmht_dj,0) pmmtjgjssmx_sjjlje,
         NVL(zq.zqzfmx_bqsl,0) pmmtjgjssmx_jgjssl,nvl(zq.zqzfmx_bqsl,0)* nvl(zm.zmht_dj,0) pmmtjgjssmx_jgjsje,
         nvl(zq.zqzfmx_bqsl,0)-nvl(gc.gcjlmx_wcsl,0) pmmtjgjssmx_ysjbsl,nvl(zq.zqzfmx_bqsl,0)* nvl(zm.zmht_dj,0)-nvl(gc.gcjlmx_wcsl,0)* nvl(zm.zmht_dj,0) pmmtjgjssmx_ysjbje, '' PMMTJGJSSMX_remark
-        from zm_ht zm left join  (select sum(nvl(t1.gcjlmx_wcsl,0)) gcjlmx_wcsl,gcjlmx_zmid  from gcjldmx t1 where 1=1 and gcjlmx_djbh in (select gcjl_djbh from gcjld where gcjl_spzt='已下发') <if test="zmid != null and zmid !=''"> and gcjlmx_zmid in (${zmid}) </if> group by t1.gcjlmx_zmid) gc on zm.zmht_id=gc.gcjlmx_zmid
-        left join (select t2.zqzfmx_zmid,sum(nvl(t2.zqzfmx_bqsl,0)) zqzfmx_bqsl,sum(nvl(t2.zqzfmx_bqje,0)) zqzfmx_bqje from zqcwzfzs_jlmx t2 where 1=1 and zqzfmx_zfqh in (select zqcwzf_zfqh from zqcwzfzs where zqcwzf_spzt='已下发') <if test="zmid != null and zmid !=''"> and zqzfmx_zmid in (${zmid}) </if> group by t2.zqzfmx_zmid) zq on zm.zmht_id=zq.zqzfmx_zmid
+        from gg_zmht zm left join  (select sum(nvl(t1.gcjlmx_wcsl,0)) gcjlmx_wcsl,gcjlmx_zmid  from rcyh_gcjld_mx t1 where 1=1 and gcjlmx_djbh in (select gcjl_djbh from rcyh_gcjld where gcjl_spzt='已下发') <if test="zmid != null and zmid !=''"> and gcjlmx_zmid in (${zmid}) </if> group by t1.gcjlmx_zmid) gc on zm.zmht_id=gc.gcjlmx_zmid
+        left join (select t2.zqzfmx_zmid,sum(nvl(t2.zqzfmx_bqsl,0)) zqzfmx_bqsl,sum(nvl(t2.zqzfmx_bqje,0)) zqzfmx_bqje from rcyh_zqcwzfzs_jlmx t2 where 1=1 and zqzfmx_zfqh in (select zqcwzf_zfqh from rcyh_zqcwzfzs where zqcwzf_spzt='已下发') <if test="zmid != null and zmid !=''"> and zqzfmx_zmid in (${zmid}) </if> group by t2.zqzfmx_zmid) zq on zm.zmht_id=zq.zqzfmx_zmid
         <if test="zmid != null and zmid !=''"> where 1=1 and zm.zmht_id in (${zmid}) </if>
         ) zmzb on ht.htxx_htbh=zmzb.pmmtjgjssmx_htbh
         where 1=1
-         and ht.htxx_htbh in (select GCYHYSD_HTBH from GCYHYSD where GCYHYSD_YSZT='已验收')
+         and ht.htxx_htbh in (select GCYHYSD_HTBH from rcyh_gcyhysd where GCYHYSD_YSZT='已验收')
         <if test="htbh != null and htbh != ''">
             and ht.htxx_htbh=#{htbh}
         </if>
@@ -107,14 +107,14 @@
     <insert id="addJgjssFbForJgjs" parameterType="com.hdsx.rcyh.entity.Jgjs">
         begin
         <foreach collection="zmbs" item="item" index="index" separator=";">
-            insert into JGJSSMX(PMMTJGJSSMX_ID, PMMTJGJSSMX_MID, PMMTJGJSSMX_ZMBH, PMMTJGJSSMX_ZMMC, PMMTJGJSSMX_DW, PMMTJGJSSMX_HTDJ, PMMTJGJSSMX_YHTS, PMMTJGJSSMX_YHTJE, PMMTJGJSSMX_SJJLSL, PMMTJGJSSMX_SJJLJE, PMMTJGJSSMX_JGJSSL, PMMTJGJSSMX_JGJSJE, PMMTJGJSSMX_YSJBSL, PMMTJGJSSMX_YSJBJE, PMMTJGJSSMX_ZMID, PMMTJGJSSMX_HTBH, PMMTJGJSSMX_REMARK,PMMTJGJSSMX_JSSBH )  values
+            insert into rcyh_jgjss_mx(PMMTJGJSSMX_ID, PMMTJGJSSMX_MID, PMMTJGJSSMX_ZMBH, PMMTJGJSSMX_ZMMC, PMMTJGJSSMX_DW, PMMTJGJSSMX_HTDJ, PMMTJGJSSMX_YHTS, PMMTJGJSSMX_YHTJE, PMMTJGJSSMX_SJJLSL, PMMTJGJSSMX_SJJLJE, PMMTJGJSSMX_JGJSSL, PMMTJGJSSMX_JGJSJE, PMMTJGJSSMX_YSJBSL, PMMTJGJSSMX_YSJBJE, PMMTJGJSSMX_ZMID, PMMTJGJSSMX_HTBH, PMMTJGJSSMX_REMARK,PMMTJGJSSMX_JSSBH )  values
             (sys_guid(),trim(#{pmmtjgjss_jssbh}),trim(#{item.pmmtjgjssmx_zmbh}),trim(#{item.pmmtjgjssmx_zmmc}),trim(#{item.pmmtjgjssmx_dw}),trim(#{item.pmmtjgjssmx_htdj}),trim(#{item.pmmtjgjssmx_yhts}),trim(#{item.pmmtjgjssmx_yhtje}),trim(#{item.pmmtjgjssmx_sjjlsl}),trim(#{item.pmmtjgjssmx_sjjlje}),trim(#{item.pmmtjgjssmx_jgjssl}),trim(#{item.pmmtjgjssmx_jgjsje}),trim(#{item.pmmtjgjssmx_ysjbsl}),trim(#{item.pmmtjgjssmx_ysjbje}),trim(#{item.pmmtjgjssmx_zmid}),trim(#{item.pmmtjgjssmx_htbh}),trim(#{item.pmmtjgjssmx_remark}),trim(#{pmmtjgjss_jssbh}))
         </foreach>
         ;end;
     </insert>
 
     <insert id="addJgjssForJgjs" parameterType="com.hdsx.rcyh.entity.Jgjs">
-        insert into JGJSS
+        insert into rcyh_jgjss
         <trim prefix="(" suffix=")" suffixOverrides="," >
             <if test="pmmtjgjss_id != null" >pmmtjgjss_id,</if>
             <if test="pmmtjgjss_dwmc != null" >pmmtjgjss_dwmc,</if>
@@ -187,11 +187,11 @@
 
     <!--  通过单据编号删除计日工审批  -->
     <delete id="deleJgjssByDjbh" parameterType="string">
-        delete from JGJSSMX where PMMTJGJSSMX_JSSBH=#{value}
+        delete from rcyh_jgjss_mx where PMMTJGJSSMX_JSSBH=#{value}
     </delete>
     <!--  编辑计日工审批 -->
     <update id="editJgjssForJgjs" parameterType="com.hdsx.rcyh.entity.Jgjs" >
-        update JGJSS
+        update rcyh_jgjss
         <set>
             <if test="pmmtjgjss_id != null" >pmmtjgjss_id=#{pmmtjgjss_id},</if>
             <if test="pmmtjgjss_dwmc != null" >pmmtjgjss_dwmc=#{pmmtjgjss_dwmc},</if>
@@ -230,14 +230,14 @@
 
     <!-- 删除交工结算书  -->
     <delete id="delJgjssFbForJgjs" parameterType="java.util.List" >
-        delete from JGJSSMX
+        delete from rcyh_jgjss_mx
         where PMMTJGJSSMX_JSSBH in
         <foreach collection="list" item="id"  open="(" separator="," close=")">
             #{id}
         </foreach>
     </delete>
     <delete id="delJgjssForJgjs" parameterType="java.util.List" >
-        delete from JGJSS
+        delete from rcyh_jgjss
         where pmmtjgjss_jssbh in
         <foreach collection="list" item="id"  open="(" separator="," close=")">
             #{id}
@@ -245,7 +245,7 @@
     </delete>
 
     <delete id="delJgjsMxById" parameterType="hashmap" >
-        delete from JGJSSMX
+        delete from rcyh_jgjss_mx
         where pmmtjgjssmx_id = #{value}
     </delete>
     <!-- 查询计日工审批列表数据 -->
@@ -254,7 +254,7 @@
         select zb.pmmtjgjss_id, zb.pmmtjgjss_dwmc, zb.pmmtjgjss_dwbh, zb.pmmtjgjss_dwid, zb.pmmtjgjss_bmmc, zb.pmmtjgjss_bmbh, zb.pmmtjgjss_bmid, zb.pmmtjgjss_tbr, zb.pmmtjgjss_spzt, zb.pmmtjgjss_file, zb.pmmtjgjss_djbh, to_char(zb.pmmtjgjss_bzrq,'yyyy-mm-dd') pmmtjgjss_bzrq, zb.pmmtjgjss_gcmc, zb.pmmtjgjss_htbh, zb.pmmtjgjss_cbdw, zb.pmmtjgjss_gldw, zb.pmmtjgjss_jldw, zb.pmmtjgjss_htje, zb.pmmtjgjss_bz, zb.pmmtjgjss_gzjhtje, zb.pmmtjgjss_gzjjlje, zb.pmmtjgjss_gzjjsje, zb.pmmtjgjss_htzdje, zb.pmmtjgjss_jlzdje, zb.pmmtjgjss_jgjszdje, zb.pmmtjgjss_spfy, zb.pmmtjgjss_fj, zb.pmmtjgjss_zlbzj, zb.pmmtjgjss_ljzfgck, zb.pmmtjgjss_yzfkk, zb.pmmtjgjss_yzfkkdx, zb.pmmtjgjss_jssbh，
         fb.*
         from
-        JGJSS zb left join JGJSSMX fb on zb.pmmtjgjss_jssbh=fb.PMMTJGJSSMX_JSSBH
+        rcyh_jgjss zb left join rcyh_jgjss_mx fb on zb.pmmtjgjss_jssbh=fb.PMMTJGJSSMX_JSSBH
 
         where 1=1
         <if test="htbh != null and htbh != ''">
@@ -273,12 +273,12 @@
         select zb.pmmtjgjss_id, zb.pmmtjgjss_dwmc, zb.pmmtjgjss_dwbh, zb.pmmtjgjss_dwid, zb.pmmtjgjss_bmmc, zb.pmmtjgjss_bmbh, zb.pmmtjgjss_bmid, zb.pmmtjgjss_tbr, zb.pmmtjgjss_spzt, zb.pmmtjgjss_file, zb.pmmtjgjss_djbh, to_char(zb.pmmtjgjss_bzrq,'yyyy-mm-dd') pmmtjgjss_bzrq, zb.pmmtjgjss_gcmc, zb.pmmtjgjss_htbh, zb.pmmtjgjss_cbdw, zb.pmmtjgjss_gldw, zb.pmmtjgjss_jldw, zb.pmmtjgjss_htje, zb.pmmtjgjss_bz, zb.pmmtjgjss_gzjhtje, zb.pmmtjgjss_gzjjlje, zb.pmmtjgjss_gzjjsje, zb.pmmtjgjss_htzdje, zb.pmmtjgjss_jlzdje, zb.pmmtjgjss_jgjszdje, zb.pmmtjgjss_spfy, zb.pmmtjgjss_fj, zb.pmmtjgjss_zlbzj, zb.pmmtjgjss_ljzfgck, zb.pmmtjgjss_yzfkk, zb.pmmtjgjss_yzfkkdx, zb.pmmtjgjss_jssbh，
         fb.*
         from
-        JGJSS zb left join JGJSSMX fb on zb.pmmtjgjss_jssbh=fb.PMMTJGJSSMX_JSSBH
+        rcyh_jgjss zb left join rcyh_jgjss_mx fb on zb.pmmtjgjss_jssbh=fb.PMMTJGJSSMX_JSSBH
         where 1=1 and zb.pmmtjgjss_jssbh=#{djbh}
 
     </select>
     <update id="spJgjssForJgjs" parameterType="hashmap">
-        update JGJSS set PMMTJGJSS_SPZT=#{spzt}
+        update rcyh_jgjss set PMMTJGJSS_SPZT=#{spzt}
         where PMMTJGJSS_JSSBH in
         <foreach collection="djbhs" item="id"  open="(" separator="," close=")">
             #{id}

@@ -148,7 +148,7 @@
     <!-- 查询索赔申请单列表数据 -->
     <select id="getSpsqdList" parameterType="hashmap" resultType="com.hdsx.rcyh.entity.Jlzf">
         select g.PMMTGCSPSQS_ID,g.PMMTGCSPSQS_DWMC,g.PMMTGCSPSQS_DWBH,g.PMMTGCSPSQS_DWID,g.PMMTGCSPSQS_BMMC,g.PMMTGCSPSQS_BMBH,g.PMMTGCSPSQS_BMID,g.PMMTGCSPSQS_TBR,to_char(g.PMMTGCSPSQS_TBRQ,'yyyy-mm-dd') PMMTGCSPSQS_TBRQ,g.PMMTGCSPSQS_SPZT,g.PMMTGCSPSQS_FILE,g.PMMTGCSPSQS_DJBH,g.PMMTGCSPSQS_CJRQ,g.PMMTGCSPSQS_GCMC,g.PMMTGCSPSQS_HTBH,g.PMMTGCSPSQS_SQJE,g.PMMTGCSPSQS_SPSJ,g.PMMTGCSPSQS_SCYJS,g.PMMTGCSPSQS_SPYJS,g.PMMTGCSPSQS_SPJE,g.PMMTGCSPSQS_CJDW,g.PMMTGCSPSQS_GLDW,to_char(g.PMMTGCSPSQS_SQRQ,'yyyy-mm-dd') PMMTGCSPSQS_SQRQ,g.PMMTGCSPSQS_CBDW,g.PMMTGCSPSQS_SPSJJS
-        from GCSPSQS g where 1=1
+        from rcyh_gcspsqs g where 1=1
         <if test="pmmtgcspsqs_htbh != null and pmmtgcspsqs_htbh != ''">
             and g.pmmtgcspsqs_htbh=#{pmmtgcspsqs_htbh}
         </if>
@@ -162,7 +162,7 @@
 
 	<!--  添加索赔申请书  -->
 	<insert id="addSpsqsForJlzf" parameterType="com.hdsx.rcyh.entity.Jlzf">
-		insert into GCSPSQS
+		insert into rcyh_gcspsqs
 		<trim prefix="(" suffix=")" suffixOverrides="," >
 			<if test="pmmtgcspsqs_djbh != null" >pmmtgcspsqs_djbh,</if>
 			<if test="pmmtgcspsqs_gcmc != null" >pmmtgcspsqs_gcmc,</if>
@@ -197,7 +197,7 @@
 
     <!--  编辑索赔申请书  -->
     <update id="editSpsqsForJlzf" parameterType="com.hdsx.rcyh.entity.Jlzf" >
-        update GCSPSQS
+        update rcyh_gcspsqs
         <set>
             <if test="pmmtgcspsqs_gcmc != null" >pmmtgcspsqs_gcmc=#{pmmtgcspsqs_gcmc},</if>
             <if test="pmmtgcspsqs_sqrq != null" >pmmtgcspsqs_sqrq=to_date(#{pmmtgcspsqs_sqrq},'yyyy-mm-dd'),</if>
@@ -217,7 +217,7 @@
 
     <!--  删除索赔申请书  -->
     <delete id="delSpsqsForJlzf" parameterType="java.util.List" >
-        delete from GCSPSQS
+        delete from rcyh_gcspsqs
         where pmmtgcspsqs_djbh in
         <foreach collection="list" item="id"  open="(" separator="," close=")">
             #{id}
@@ -227,7 +227,7 @@
     <!--  通过单据编号查询索赔申请书  -->
     <select id="getSpsqsInfoByDjbh" parameterType="string" resultType="com.hdsx.rcyh.entity.Jlzf">
         select g.PMMTGCSPSQS_ID,g.PMMTGCSPSQS_DWMC,g.PMMTGCSPSQS_DWBH,g.PMMTGCSPSQS_DWID,g.PMMTGCSPSQS_BMMC,g.PMMTGCSPSQS_BMBH,g.PMMTGCSPSQS_BMID,g.PMMTGCSPSQS_TBR,to_char(g.PMMTGCSPSQS_TBRQ,'yyyy-mm-dd') PMMTGCSPSQS_TBRQ,g.PMMTGCSPSQS_SPZT,g.PMMTGCSPSQS_FILE,g.PMMTGCSPSQS_DJBH,g.PMMTGCSPSQS_CJRQ,g.PMMTGCSPSQS_GCMC,g.PMMTGCSPSQS_HTBH,g.PMMTGCSPSQS_SQJE,g.PMMTGCSPSQS_SPSJ,g.PMMTGCSPSQS_SCYJS,g.PMMTGCSPSQS_SPYJS,g.PMMTGCSPSQS_SPJE,g.PMMTGCSPSQS_CJDW,g.PMMTGCSPSQS_GLDW,to_char(g.PMMTGCSPSQS_SQRQ,'yyyy-mm-dd') PMMTGCSPSQS_SQRQ,g.PMMTGCSPSQS_CBDW,g.PMMTGCSPSQS_SPSJJS
-        from GCSPSQS g where pmmtgcspsqs_djbh=#{value}
+        from rcyh_gcspsqs g where pmmtgcspsqs_djbh=#{value}
     </select>
 
     <!--  通过部门查询合同信息  -->
@@ -243,7 +243,7 @@
 
     <!--  通过合同编号查询子目汇总信息  -->
     <select id="getHtZmHzInfoByHtbh" parameterType="hashmap" resultType="hashmap">
-        select zm.zmht_zmh zmh,max(zm.zmht_zmmc) zmmc,max(zm.zmht_jldw) jldw,sum(zm.zmht_sl) sl,zmht_htbh htbh  from ZM_HT zm
+        select zm.zmht_zmh zmh,max(zm.zmht_zmmc) zmmc,max(zm.zmht_jldw) jldw,sum(zm.zmht_sl) sl,zmht_htbh htbh  from gg_zmht zm
         where 1=1 and zm.zmht_htbh=#{htbh}
         group by zm.zmht_htbh,zm.zmht_zmh
         order by zmh
@@ -251,7 +251,7 @@
 
     <!--  添加工程计量单  -->
     <insert id="addGcjldForJlzf" parameterType="com.hdsx.rcyh.entity.Jlzf">
-        insert into GCJLD
+        insert into rcyh_gcjld
         <trim prefix="(" suffix=")" suffixOverrides="," >
             <if test="gcjl_djbh != null" >gcjl_djbh,</if>
             <if test="gcjl_gcmc != null" >gcjl_gcmc,</if>
@@ -295,7 +295,7 @@
     <insert id="addGcjldFbForJlzf" parameterType="com.hdsx.rcyh.entity.Jlzf">
         begin
             <foreach collection="zmbs" item="item" index="index" separator=";">
-                insert into GCJLDMX(GCJL_ID, GCJLMX_DJBH,GCJLMX_ZMID, GCJLMX_ZMH, GCJLMX_ZMMC, GCJLMX_HTSL, GCJLMX_JlDW, GCJLMX_HTDJ, GCJLMX_KKJE, GCJLMX_HTJE, GCJLMX_ZJE,GCJLMX_HTBH,GCJLMX_WCSL)  values
+                insert into rcyh_gcjld_mx(GCJL_ID, GCJLMX_DJBH,GCJLMX_ZMID, GCJLMX_ZMH, GCJLMX_ZMMC, GCJLMX_HTSL, GCJLMX_JlDW, GCJLMX_HTDJ, GCJLMX_KKJE, GCJLMX_HTJE, GCJLMX_ZJE,GCJLMX_HTBH,GCJLMX_WCSL)  values
                 (sys_guid(),trim(#{gcjl_djbh}),trim(#{item.gcjlmx_zmid}),trim(#{item.gcjlmx_zmh}),trim(#{item.gcjlmx_zmmc}),trim(#{item.gcjlmx_htsl}),trim(#{item.gcjlmx_jldw}),trim(#{item.gcjlmx_htdj}),trim(#{item.gcjlmx_kkje}),trim(#{item.gcjlmx_htje}),trim(#{item.gcjlmx_htje})-trim(#{item.gcjlmx_kkje}),trim(#{item.gcjlmx_htbh}),trim(#{item.gcjlmx_wcsl}))
             </foreach>
         ;end;
@@ -303,12 +303,12 @@
 
     <!--  通过合同编号查询子目明细信息  -->
     <select id="getHtZmMxInfoByHtbh" parameterType="hashmap" resultType="hashmap">
-        select zmht_id zmid,zmht_ZMH zmh,zmht_zmmc zmmc,zmht_sl sl,zmht_jldw dw,zmht_dj dj,0 kkje,zmht_je je,zmht_je zje  from ZM_HT zm
+        select zmht_id zmid,zmht_ZMH zmh,zmht_zmmc zmmc,zmht_sl sl,zmht_jldw dw,zmht_dj dj,0 kkje,zmht_je je,zmht_je zje  from gg_zmht zm
         where 1=1 and zm.zmht_htbh=#{htbh}
-         and zm.zmht_id not in(select GCJLMX_ZMID from GCJLDMX)
+         and zm.zmht_id not in(select GCJLMX_ZMID from rcyh_gcjld_mx)
          <if test="djbh != null and djbh !=''">
              union all
-             select GCJLMX_ZMID, GCJLMX_ZMH, GCJLMX_ZMMC, GCJLMX_HTSL, GCJLMX_JLDW, GCJLMX_HTDJ, GCJLMX_KKJE, GCJLMX_HTJE, GCJLMX_ZJE from GCJLDMX
+             select GCJLMX_ZMID, GCJLMX_ZMH, GCJLMX_ZMMC, GCJLMX_HTSL, GCJLMX_JLDW, GCJLMX_HTDJ, GCJLMX_KKJE, GCJLMX_HTJE, GCJLMX_ZJE from rcyh_gcjld_mx
              where GCJLMX_DJBH=#{djbh}
          </if>
 
@@ -317,7 +317,7 @@
 
     <!--  通过单据编号查询子目信息  -->
     <select id="getZmbsByDjbh" resultType="com.hdsx.rcyh.entity.Zmb" parameterType="hashmap">
-        select * from GCJLDMX where GCJLMX_DJBH=#{djbh}
+        select * from rcyh_gcjld_mx where GCJLMX_DJBH=#{djbh}
         <if test="zmh!=null">
             and gcjlmx_zmh=#{zmh}
         </if>
@@ -325,12 +325,12 @@
 
     <!--  通过单据编号删除子目信息  -->
     <delete id="delZmbByDjbh" parameterType="string">
-        delete from GCJLDMX where GCJLMX_DJBH=#{value}
+        delete from rcyh_gcjld_mx where GCJLMX_DJBH=#{value}
     </delete>
 
     <!--  编辑工程计量单  -->
     <update id="editGcjldForJlzf" parameterType="com.hdsx.rcyh.entity.Jlzf" >
-        update GCJLD
+        update rcyh_gcjld
         <set>
             <if test="gcjl_gcmc != null" >gcjl_gcmc=#{gcjl_gcmc},</if>
             <if test="gcjl_sqrq != null" >gcjl_sqrq=to_date(#{gcjl_sqrq},'yyyy-mm-dd'),</if>
@@ -354,14 +354,14 @@
     <!--  通过单据编号查询工程计量单信息  -->
     <select id="getGcjldInfoByDjbh" resultMap="jlzfmaps" parameterType="hashmap">
         select g.gcjl_dwmc, g.gcjl_dwbh, g.gcjl_dwid, g.gcjl_bmmc, g.gcjl_bmbh, g.gcjl_bmid, g.gcjl_tbr, g.gcjl_tbrid, to_char(gcjl_tbrq,'yyyy-mm-dd') gcjl_tbrq, gcjl_spzt, gcjl_file, gcjl_wfid, gcjl_note, gcjl_djbh, gcjl_code, gcjl_xmmc, gcjl_xmid, gcjl_xmbh, gcjl_htmc, gcjl_htid, gcjl_htbh, gcjl_cjdwmc, gcjl_cjdwbh, gcjl_cjdwid, gcjl_rq, gcjl_bw, gcjl_th, gcjl_zjdbh, gcjl_jtsm, gcjl_flag, gcjl_sfybgc, gcjl_ybgcdh, gcjl_gcmc, to_char(gcjl_sqrq,'yyyy-mm-dd') gcjl_sqrq, gcjl_yd, gcjl_cbdw, gcjl_qdzh, gcjl_zdzh, gcjl_sl,
-        mx.* from GCJLD g
-        left join GCJLDMX mx on g.gcjl_djbh=mx.gcjlmx_djbh
+        mx.* from rcyh_gcjld g
+        left join rcyh_gcjld_mx mx on g.gcjl_djbh=mx.gcjlmx_djbh
         where g.gcjl_djbh=#{djbh}
     </select>
 
     <!--  通过单据编号查询子目总表信息  -->
     <select id="getZmzbsByDjbh" resultType="com.hdsx.rcyh.entity.Zmzb" parameterType="hashmap">
-        select gcjlmx_djbh jldbh,gcjlmx_zmh zmh,max(gcjlmx_zmmc) zmmc,max(gcjlmx_jldw) dw,sum(nvl(gcjlmx_htsl,0)) sl from GCJLDMX t
+        select gcjlmx_djbh jldbh,gcjlmx_zmh zmh,max(gcjlmx_zmmc) zmmc,max(gcjlmx_jldw) dw,sum(nvl(gcjlmx_htsl,0)) sl from rcyh_gcjld_mx t
         where gcjlmx_djbh=#{djbh}
         group by t.gcjlmx_djbh,t.gcjlmx_zmh
     </select>
@@ -370,8 +370,8 @@
     <select id="getGcjldList" parameterType="hashmap" resultMap="jlzfmaps">
 
         select g.gcjl_dwmc, g.gcjl_dwbh, g.gcjl_dwid, g.gcjl_bmmc, g.gcjl_bmbh, g.gcjl_bmid, g.gcjl_tbr, g.gcjl_tbrid, to_char(gcjl_tbrq,'yyyy-mm-dd') gcjl_tbrq, gcjl_spzt, gcjl_file, gcjl_wfid, gcjl_note, gcjl_djbh, gcjl_code, gcjl_xmmc, gcjl_xmid, gcjl_xmbh, gcjl_htmc, gcjl_htid, gcjl_htbh, gcjl_cjdwmc, gcjl_cjdwbh, gcjl_cjdwid, gcjl_rq, gcjl_bw, gcjl_th, gcjl_zjdbh, gcjl_jtsm, gcjl_flag, gcjl_sfybgc, gcjl_ybgcdh, gcjl_gcmc, to_char(gcjl_sqrq,'yyyy-mm-dd') gcjl_sqrq, gcjl_yd, gcjl_cbdw, gcjl_qdzh, gcjl_zdzh, gcjl_sl,
-        mx.* from GCJLD g
-        left join GCJLDMX mx on g.gcjl_djbh=mx.gcjlmx_djbh
+        mx.* from rcyh_gcjld g
+        left join rcyh_gcjld_mx mx on g.gcjl_djbh=mx.gcjlmx_djbh
         where 1=1
         <if test="gcjl_htbh != null and gcjl_htbh != ''">
             and g.gcjl_htbh=#{gcjl_htbh}
@@ -388,8 +388,8 @@
     <select id="getGcjldHzList" parameterType="hashmap" resultType="com.hdsx.rcyh.entity.Zmzb">
 
         select g.gcjl_dwmc, g.gcjl_dwbh, g.gcjl_dwid, g.gcjl_bmmc, g.gcjl_bmbh, g.gcjl_bmid, g.gcjl_tbr, g.gcjl_tbrid, to_char(gcjl_tbrq,'yyyy-mm-dd') gcjl_tbrq, gcjl_spzt, gcjl_file, gcjl_wfid, gcjl_note, gcjl_djbh, gcjl_code, gcjl_xmmc, gcjl_xmid, gcjl_xmbh, gcjl_htmc, gcjl_htid, gcjl_htbh, gcjl_cjdwmc, gcjl_cjdwbh, gcjl_cjdwid, gcjl_rq, gcjl_bw, gcjl_th, gcjl_zjdbh, gcjl_jtsm, gcjl_flag, gcjl_sfybgc, gcjl_ybgcdh, gcjl_gcmc, to_char(gcjl_sqrq,'yyyy-mm-dd') gcjl_sqrq, gcjl_yd, gcjl_cbdw, gcjl_qdzh, gcjl_zdzh, gcjl_sl,
-        mxzb.* from GCJLD g
-        left join (select gcjlmx_djbh jldbh,gcjlmx_zmh zmh,max(gcjlmx_zmmc) zmmc,max(gcjlmx_jldw) dw,sum(nvl(gcjlmx_wcsl,0)) sl from GCJLDMX t group by t.gcjlmx_djbh,t.gcjlmx_zmh
+        mxzb.* from rcyh_gcjld g
+        left join (select gcjlmx_djbh jldbh,gcjlmx_zmh zmh,max(gcjlmx_zmmc) zmmc,max(gcjlmx_jldw) dw,sum(nvl(gcjlmx_wcsl,0)) sl from rcyh_gcjld_mx t group by t.gcjlmx_djbh,t.gcjlmx_zmh
         ) mxzb on g.gcjl_djbh=mxzb.jldbh
 
         where 1=1
@@ -409,7 +409,7 @@
         select ht.htxx_htbh gcjl_htbh,ht.HTXX_ID gcjl_htid,ht.HTXX_HTMC gcjl_htmc,xm.yhhtxx_qszh gcjl_qdzh,xm.yhhtxx_zzzh gcjl_zdzh,gj.HTGJXX_cgxmmc gcjl_gcmc,xm.yhhtxx_gldw pmmtgcspsqs_gldw,xm.yhhtxx_cbdw pmmtgcspsqs_cbdw,
         zm.zmht_zmh GCJLMX_ZMH,zm.zmht_zmmc GCJLMX_ZMMC,zm.zmht_jldw GCJLMX_JLDW,zm.zmht_sl GCJLMX_HTSL,zm.zmht_dj GCJLMX_HTDJ,zm.zmht_je GCJLMX_HTJE,0 GCJLMX_KKJE,zm.zmht_je GCJLMX_ZJE,zm.zmht_id GCJLMX_ZMID,zm.zmht_htbh GCJLMX_HTBH,0 GCJLMX_WCSL
         from djsj_htxx ht left join djsj_htxx_htgjxx gj on ht.htxx_htbh=gj.HTGJXX_htbh left join djsj_htxx_yhxmxx xm on ht.htxx_htbh=xm.yhhtxx_htbh
-        left join zm_ht zm on ht.htxx_htbh=zm.zmht_htbh
+        left join gg_zmht zm on ht.htxx_htbh=zm.zmht_htbh
         where 1=1
         <if test="htbh != null and htbh != ''">
             and ht.htxx_htbh=#{htbh}
@@ -418,13 +418,13 @@
     </select>
 
     <select id="getHtZmXxInfoByBm" resultType="com.hdsx.rcyh.entity.Zmb" parameterType="hashmap">
-        select ZMHT_ID gcjlmx_zmid, ZMHT_HTBH, ZMHT_HTMC, ZMHT_ZMH gcjlmx_zmh, ZMHT_ZMMC gcjlmx_zmmc, ZMHT_JLDW gcjlmx_jldw, ZMHT_SL gcjlmx_htsl, ZMHT_DJ gcjlmx_htdj, ZMHT_JE gcjlmx_htje ,ZMHT_JE gcjlmx_zje from ZM_HT
-        where ZMHT_HTBH=#{htbh} and ZMHT_ZMH=#{zmh} and zmht_id not in(select GCJLMX_ZMID from GCJLDMX)
+        select ZMHT_ID gcjlmx_zmid, ZMHT_HTBH, ZMHT_HTMC, ZMHT_ZMH gcjlmx_zmh, ZMHT_ZMMC gcjlmx_zmmc, ZMHT_JLDW gcjlmx_jldw, ZMHT_SL gcjlmx_htsl, ZMHT_DJ gcjlmx_htdj, ZMHT_JE gcjlmx_htje ,ZMHT_JE gcjlmx_zje from gg_zmht
+        where ZMHT_HTBH=#{htbh} and ZMHT_ZMH=#{zmh} and zmht_id not in(select GCJLMX_ZMID from rcyh_gcjld_mx)
     </select>
 
     <!-- 删除工程计量单  -->
     <delete id="delGcjldFbForJlzf" parameterType="java.util.List" >
-        delete from GCJLDMX
+        delete from rcyh_gcjld_mx
         where gcjlmx_djbh in
         <foreach collection="list" item="id"  open="(" separator="," close=")">
             #{id}
@@ -432,7 +432,7 @@
 
     </delete>
     <delete id="delGcjldForJlzf" parameterType="java.util.List" >
-        delete from GCJLD
+        delete from rcyh_gcjld
         where gcjl_djbh in
         <foreach collection="list" item="id"  open="(" separator="," close=")">
             #{id}
@@ -440,21 +440,21 @@
     </delete>
 
     <delete id="delGcjldMxById" parameterType="string" >
-        delete from GCJLDMX
+        delete from rcyh_gcjld_mx
         where gcjlmx_id = #{value}
     </delete>
     <!--  添加计日工  -->
     <insert id="addJrgspFbForJlzf" parameterType="com.hdsx.rcyh.entity.Jlzf_jrgsp">
         begin
             <foreach collection="jlzf_jrgspmx" item="item" index="index" separator=";">
-                insert into JRGTBSP_JLMX(JRGMX_ID, JRGMX_MID, JRGMX_XMH, JRGMX_XMMC, JRGMX_JLDW, JRGMX_SL, JRGMX_DJ, JRGMX_JE, JRGMX_YT, JRGMX_RQ, JRGMX_DJBH )  values
+                insert into rcyh_jrgtbsp_jlmx(JRGMX_ID, JRGMX_MID, JRGMX_XMH, JRGMX_XMMC, JRGMX_JLDW, JRGMX_SL, JRGMX_DJ, JRGMX_JE, JRGMX_YT, JRGMX_RQ, JRGMX_DJBH )  values
                 (sys_guid(),trim(#{jrgsp_djbh}),trim(#{item.jrgmx_xmh}),trim(#{item.jrgmx_xmmc}),trim(#{item.jrgmx_jldw}),trim(#{item.jrgmx_sl}),trim(#{item.jrgmx_dj}),trim(#{item.jrgmx_sl})*trim(#{item.jrgmx_dj}),trim(#{item.jrgmx_yt}),to_date(trim(#{item.jrgmx_rq}),'yyyy-mm-dd'),trim(#{jrgsp_djbh}))
             </foreach>
         ;end;
     </insert>
 
     <insert id="addJrgspForJlzf" parameterType="com.hdsx.rcyh.entity.Jlzf">
-        insert into JRGTBSP
+        insert into rcyh_jrgtbsp
         <trim prefix="(" suffix=")" suffixOverrides="," >
             <if test="jrgsp_dwmc != null" >jrgsp_dwmc,</if>
             <if test="jrgsp_htbh != null" >jrgsp_htbh,</if>
@@ -505,11 +505,11 @@
 
     <!--  通过单据编号删除计日工审批  -->
     <delete id="deleJrgspByDjbh" parameterType="string">
-        delete from JRGTBSP_JLMX where JRGMX_DJBH=#{value}
+        delete from rcyh_jrgtbsp_jlmx where JRGMX_DJBH=#{value}
     </delete>
     <!--  编辑计日工审批 -->
     <update id="editJrgspForJlzf" parameterType="com.hdsx.rcyh.entity.Jlzf_jrgsp" >
-        update JRGTBSP
+        update rcyh_jrgtbsp
         <set>
             <if test="jrgsp_htbh != null" >jrgsp_htbh=#{jrgsp_htbh},</if>
             <if test="jrgsp_dwmc != null" >jrgsp_dwmc=#{jrgsp_dwmc},</if>
@@ -538,14 +538,14 @@
 
     <!-- 删除计日工审批  -->
     <delete id="delJrgspFbForJlzf" parameterType="java.util.List" >
-        delete from JRGTBSP_JLMX
+        delete from rcyh_jrgtbsp_jlmx
         where JRGMX_DJBH in
         <foreach collection="list" item="id"  open="(" separator="," close=")">
             #{id}
         </foreach>
     </delete>
     <delete id="delJrgspForJlzf" parameterType="java.util.List" >
-        delete from JRGTBSP
+        delete from rcyh_jrgtbsp
         where jrgsp_djbh in
         <foreach collection="list" item="id"  open="(" separator="," close=")">
             #{id}
@@ -555,7 +555,7 @@
     <!--  通过id删除计日工明细 -->
 
     <delete id="delJgrspMxById" parameterType="string">
-        delete from JRGTBSP_JLMX where jrgmx_id=#{value}
+        delete from rcyh_jrgtbsp_jlmx where jrgmx_id=#{value}
     </delete>
 
     <!-- 查询计日工审批列表数据 -->
@@ -564,10 +564,10 @@
         select zb.JRGSP_HTBH,zb.JRGSP_ID,zb.JRGSP_DWMC,zb.jRGSP_DWBH,zb.jRGSP_DWID,zb.jRGSP_BMMC,zb.jRGSP_BMBH,zb.jRGSP_BMID,zb.jRGSP_TBR,zb.jRGSP_TBRID,to_char(zb.jRGSP_TBRQ,'yyyy-mm-dd') jRGSP_TBRQ,zb.jRGSP_SPZT,zb.jRGSP_FILE,zb.jRGSP_WFID,zb.jRGSP_NOTE,zb.jRGSP_DJBH,zb.jRGSP_XMMC,zb.jRGSP_XMBH,zb.jRGSP_XMID,zb.jRGSP_CBDWMC,zb.jRGSP_CBDWID,zb.jRGSP_CBDWBH,tz.zje jRGSP_HJJE,zb.jRGSP_GCMC,
         fb.JRGMX_ID, fb.JRGMX_MID, fb.JRGMX_XMH, fb.JRGMX_XMMC, fb.JRGMX_JLDW, fb.JRGMX_SL, fb.JRGMX_DJ, fb.JRGMX_JE, fb.JRGMX_YT, to_char(fb.JRGMX_RQ,'yyyy-mm-dd') JRGMX_RQ, fb.JRGMX_DJBH
         from
-        JRGTBSP zb left join Jrgtbsp_Jlmx fb on zb.jrgsp_djbh=fb.jrgmx_djbh
+        rcyh_jrgtbsp zb left join rcyh_jrgtbsp_jlmx fb on zb.jrgsp_djbh=fb.jrgmx_djbh
         left join (
         select jrgmx_djbh,sum(t.jrgmx_je) zje
-        from Jrgtbsp_Jlmx t group by jrgmx_djbh) tz on zb.jrgsp_djbh=tz.jrgmx_djbh
+        from rcyh_jrgtbsp_jlmx t group by jrgmx_djbh) tz on zb.jrgsp_djbh=tz.jrgmx_djbh
         where 1=1
         <if test="htbh != null and htbh != ''">
             and zb.JRGSP_HTBH=#{htbh}
@@ -585,16 +585,16 @@
         select zb.JRGSP_HTBH,zb.JRGSP_ID,zb.JRGSP_DWMC,zb.jRGSP_DWBH,zb.jRGSP_DWID,zb.jRGSP_BMMC,zb.jRGSP_BMBH,zb.jRGSP_BMID,zb.jRGSP_TBR,zb.jRGSP_TBRID,to_char(zb.jRGSP_TBRQ,'yyyy-mm-dd') jRGSP_TBRQ,zb.jRGSP_SPZT,zb.jRGSP_FILE,zb.jRGSP_WFID,zb.jRGSP_NOTE,zb.jRGSP_DJBH,zb.jRGSP_XMMC,zb.jRGSP_XMBH,zb.jRGSP_XMID,zb.jRGSP_CBDWMC,zb.jRGSP_CBDWID,zb.jRGSP_CBDWBH,tz.zje jRGSP_HJJE,zb.jRGSP_GCMC,
         fb.JRGMX_ID, fb.JRGMX_MID, fb.JRGMX_XMH, fb.JRGMX_XMMC, fb.JRGMX_JLDW, fb.JRGMX_SL, fb.JRGMX_DJ, fb.JRGMX_JE, fb.JRGMX_YT, to_char(fb.JRGMX_RQ,'yyyy-mm-dd') JRGMX_RQ, fb.JRGMX_DJBH
         from
-        JRGTBSP zb left join Jrgtbsp_Jlmx fb on zb.jrgsp_djbh=fb.jrgmx_djbh
+        rcyh_jrgtbsp zb left join rcyh_jrgtbsp_jlmx fb on zb.jrgsp_djbh=fb.jrgmx_djbh
         left join (
         select jrgmx_djbh,sum(t.jrgmx_je) zje
-        from Jrgtbsp_Jlmx t group by jrgmx_djbh) tz on zb.jrgsp_djbh=tz.jrgmx_djbh
+        from rcyh_jrgtbsp_jlmx t group by jrgmx_djbh) tz on zb.jrgsp_djbh=tz.jrgmx_djbh
         where 1=1 and zb.jrgsp_djbh=#{djbh}
 
     </select>
 
     <update id="spJgrspForJlzf" parameterType="hashmap">
-        update JRGTBSP set jRGSP_SPZT=#{spzt}
+        update rcyh_jrgtbsp set jRGSP_SPZT=#{spzt}
         where jrgsp_djbh in
         <foreach collection="djbhs" item="id"  open="(" separator="," close=")">
             #{id}
@@ -602,7 +602,7 @@
     </update>
 
     <update id="spSpsqsForJlzf" parameterType="hashmap">
-        update GCSPSQS set PMMTGCSPSQS_SPZT=#{spzt}
+        update rcyh_gcspsqs set PMMTGCSPSQS_SPZT=#{spzt}
         where PMMTGCSPSQS_DJBH in
         <foreach collection="djbhs" item="id"  open="(" separator="," close=")">
             #{id}
@@ -610,7 +610,7 @@
     </update>
 
     <update id="spGcjldForJlzf" parameterType="hashmap">
-        update GCJLD set GCJL_SPZT=#{spzt}
+        update rcyh_gcjld set GCJL_SPZT=#{spzt}
         where GCJL_DJBH in
         <foreach collection="djbhs" item="id"  open="(" separator="," close=")">
             #{id}
@@ -618,7 +618,7 @@
     </update>
 
     <update id="spZqcwzfForJlzf" parameterType="hashmap">
-        update ZQCWZFZS set ZQCWZF_SPZT=#{spzt}
+        update rcyh_zqcwzfzs set ZQCWZF_SPZT=#{spzt}
         where ZQCWZF_ZFQH in
         <foreach collection="djbhs" item="id"  open="(" separator="," close=")">
             #{id}
@@ -632,9 +632,9 @@
         100*round(decode(nvl(zm.zmht_je,0),0,0,nvl(ljwc.ljje,0)/sum(nvl(zm.zmht_je,0)) OVER()),4)||'%' ZQZFMX_LJWC,
         nvl(ljwc.ljsl,0) ZQZFMX_BQWCSL,nvl(ljwc.ljje,0) ZQZFMX_BQWCJE,nvl(ljwc.ljsl,0)-nvl(bcwc.bcsl,0) ZQZFMX_SQWCSL,nvl(ljwc.ljje,0)-nvl(bcwc.bcje,0) ZQZFMX_SQWCJE,nvl(bcwc.bcsl,0) ZQZFMX_BQSL,nvl(bcwc.bcje,0) ZQZFMX_BQJE,zm.zmht_id zqzfmx_zmid,zm.zmht_htbh zqzfmx_htbh
         from djsj_htxx ht left join djsj_htxx_htgjxx gj on ht.htxx_htbh=gj.HTGJXX_HTBH left join djsj_htxx_yhxmxx xm on ht.htxx_htbh=xm.yhhtxx_htbh
-        left join zm_ht zm on ht.htxx_htbh=zm.zmht_htbh
-        left join (select gcjlmx_zmid,sum(nvl(jlmx.gcjlmx_wcsl,0)) ljsl,sum(nvl(jlmx.gcjlmx_wcsl,0)*nvl(jlmx.gcjlmx_htdj,0)) ljje from gcjldmx jlmx group by gcjlmx_zmid) ljwc on zm.zmht_id=ljwc.gcjlmx_zmid
-        left join (select gcjlmx_zmid,sum(nvl(jlmx.gcjlmx_wcsl,0)) bcsl,sum(nvl(jlmx.gcjlmx_wcsl,0)*nvl(jlmx.gcjlmx_htdj,0)) bcje from gcjldmx jlmx where jlmx.gcjlmx_djbh in (select jld.gcjl_djbh from gcjld jld where jlmx.gcjlmx_djbh=jld.gcjl_djbh and jld.gcjl_tbrq=(select max(tjl.gcjl_tbrq) from gcjld tjl where tjl.gcjl_djbh=jld.gcjl_djbh)) group by gcjlmx_zmid) bcwc on zm.zmht_id=bcwc.gcjlmx_zmid
+        left join gg_zmht zm on ht.htxx_htbh=zm.zmht_htbh
+        left join (select gcjlmx_zmid,sum(nvl(jlmx.gcjlmx_wcsl,0)) ljsl,sum(nvl(jlmx.gcjlmx_wcsl,0)*nvl(jlmx.gcjlmx_htdj,0)) ljje from rcyh_gcjld_mx jlmx group by gcjlmx_zmid) ljwc on zm.zmht_id=ljwc.gcjlmx_zmid
+        left join (select gcjlmx_zmid,sum(nvl(jlmx.gcjlmx_wcsl,0)) bcsl,sum(nvl(jlmx.gcjlmx_wcsl,0)*nvl(jlmx.gcjlmx_htdj,0)) bcje from rcyh_gcjld_mx jlmx where jlmx.gcjlmx_djbh in (select jld.gcjl_djbh from rcyh_gcjld jld where jlmx.gcjlmx_djbh=jld.gcjl_djbh and jld.gcjl_tbrq=(select max(tjl.gcjl_tbrq) from rcyh_gcjld tjl where tjl.gcjl_djbh=jld.gcjl_djbh)) group by gcjlmx_zmid) bcwc on zm.zmht_id=bcwc.gcjlmx_zmid
         where 1=1
         <if test="htbh != null and htbh != ''">
             and ht.htxx_htbh=#{htbh}
@@ -644,7 +644,7 @@
 
     <!--  添加工程计量单  -->
     <insert id="addZqcwzfForJlzf" parameterType="com.hdsx.rcyh.entity.Jlzf_zqcwzf">
-        insert into ZQCWZFZS
+        insert into rcyh_zqcwzfzs
         <trim prefix="(" suffix=")" suffixOverrides="," >
             <if test="zqcwzf_gcmc != null" >zqcwzf_gcmc,</if>
             <if test="zqcwzf_cbdw != null" >zqcwzf_cbdw,</if>
@@ -712,7 +712,7 @@
     <insert id="addZqcwzfFbForJlzf" parameterType="com.hdsx.rcyh.entity.Jlzf_zqcwzf">
         begin
         <foreach collection="zqcwzfmx" item="item" index="index" separator=";">
-            insert into ZQCWZFZS_JLMX(ZQZFMX_ID, ZQZFMX_MID, ZQZFMX_ZMBH, ZQZFMX_ZMMC, ZQZFMX_JLDW,  ZQZFMX_HTSL, ZQZFMX_HTDJ, ZQZFMX_HTJE, ZQZFMX_LJWC, ZQZFMX_BQWCSL, ZQZFMX_BQWCJE, ZQZFMX_SQWCSL, ZQZFMX_SQWCJE, ZQZFMX_BQSL, ZQZFMX_BQJE, ZQZFMX_ZFQH,ZQZFMX_ZMID,ZQZFMX_HTBH )  values
+            insert into rcyh_zqcwzfzs_jlmx(ZQZFMX_ID, ZQZFMX_MID, ZQZFMX_ZMBH, ZQZFMX_ZMMC, ZQZFMX_JLDW,  ZQZFMX_HTSL, ZQZFMX_HTDJ, ZQZFMX_HTJE, ZQZFMX_LJWC, ZQZFMX_BQWCSL, ZQZFMX_BQWCJE, ZQZFMX_SQWCSL, ZQZFMX_SQWCJE, ZQZFMX_BQSL, ZQZFMX_BQJE, ZQZFMX_ZFQH,ZQZFMX_ZMID,ZQZFMX_HTBH )  values
             (sys_guid(),trim(#{zqcwzf_zfqh,jdbcType=VARCHAR}),trim(#{item.zqzfmx_zmbh,jdbcType=VARCHAR}),trim(#{item.zqzfmx_zmmc,jdbcType=VARCHAR}),trim(#{item.zqzfmx_jldw,jdbcType=VARCHAR}),trim(#{item.zqzfmx_htsl}),trim(#{item.zqzfmx_htdj}),trim(#{item.zqzfmx_htdj})*trim(#{item.zqzfmx_htsl}),
             trim(#{item.zqzfmx_ljwc,jdbcType=VARCHAR}),nvl(trim(#{item.zqzfmx_sqwcsl}),0)+nvl(trim(#{item.zqzfmx_bqsl}),0),nvl(trim(#{item.zqzfmx_sqwcje}),0)+nvl(trim(#{item.zqzfmx_bqje}),0),
             trim(#{item.zqzfmx_sqwcsl}),trim(#{item.zqzfmx_sqwcje}),trim(#{item.zqzfmx_bqsl}),trim(#{item.zqzfmx_bqje}),trim(#{zqcwzf_zfqh,jdbcType=VARCHAR}),trim(#{item.zqzfmx_zmid,jdbcType=VARCHAR}),trim(#{item.zqzfmx_htbh,jdbcType=VARCHAR}))
@@ -722,11 +722,11 @@
 
     <!--  通过单据编号删除计日工审批  -->
     <delete id="deleZqcwzfByDjbh" parameterType="string">
-        delete from ZQCWZFZS_JLMX where ZQZFMX_ZFQH=#{value}
+        delete from rcyh_zqcwzfzs_jlmx where ZQZFMX_ZFQH=#{value}
     </delete>
     <!--  编辑计日工审批 -->
     <update id="editZqcwzfForJlzf" parameterType="com.hdsx.rcyh.entity.Jlzf_zqcwzf" >
-        update ZQCWZFZS
+        update rcyh_zqcwzfzs
         <set>
             <if test="zqcwzf_gcmc != null" >zqcwzf_gcmc=#{zqcwzf_gcmc},</if>
             <if test="zqcwzf_cbdw != null" >zqcwzf_cbdw=#{zqcwzf_cbdw},</if>
@@ -763,21 +763,21 @@
 
     <!-- 删除中期财务支付  -->
     <delete id="delZqcwzfFbForJlzf" parameterType="java.util.List" >
-        delete from ZQCWZFZS_JLMX
+        delete from rcyh_zqcwzfzs_jlmx
         where ZQZFMX_ZFQH in
         <foreach collection="list" item="id"  open="(" separator="," close=")">
             #{id}
         </foreach>
     </delete>
     <delete id="delZqcwzfForJlzf" parameterType="java.util.List" >
-        delete from ZQCWZFZS
+        delete from rcyh_zqcwzfzs
         where zqcwzf_zfqh in
         <foreach collection="list" item="id"  open="(" separator="," close=")">
             #{id}
         </foreach>
     </delete>
     <delete id="delZqcwzfMxById" parameterType="string" >
-        delete from ZQCWZFZS_JLMX
+        delete from rcyh_zqcwzfzs_jlmx
         where zqzfmx_id=#{value}
     </delete>
     <!-- 查询中(终)期财务支付证书列表数据 -->
@@ -786,7 +786,7 @@
         select
         zb.ZQCWZF_ID, zb.ZQCWZF_DWMC, zb.ZQCWZF_DWBH, zb.ZQCWZF_DWID, zb.ZQCWZF_BMMC, zb.ZQCWZF_BMBH, zb.ZQCWZF_BMID, zb.ZQCWZF_TBR, zb.ZQCWZF_TBRID, to_char(zb.ZQCWZF_TBRQ,'yyyy-mm-dd') ZQCWZF_TBRQ, zb.ZQCWZF_SPZT, zb.ZQCWZF_FILLE, zb.ZQCWZF_WFID, zb.ZQCWZF_NOTE, zb.ZQCWZF_DJBH, zb.ZQCWZF_ZFQH, zb.ZQCWZF_XMMC, zb.ZQCWZF_XMID, zb.ZQCWZF_XMBH, zb.ZQCWZF_HTMC, zb.ZQCWZF_HTID, zb.ZQCWZF_HTBH, zb.ZQCWZF_CJDWMC, zb.ZQCWZF_CJDWID, zb.ZQCWZF_CJDWBH, to_char(zb.ZQCWZF_JZRQ,'yyyy-mm-dd')  ZQCWZF_JZRQ, zb.ZQCWZF_FLAG, zb.ZQCWZF_GLDW, zb.ZQCWZF_JLDW, zb.ZQCWZF_GCMC, zb.ZQCWZF_CBDW,
         fb.ZQZFMX_ID, fb.ZQZFMX_MID, fb.ZQZFMX_ZMBH, fb.ZQZFMX_ZMMC, fb.ZQZFMX_JLDW, fb.ZQZFMX_JLDWID, fb.ZQZFMX_HTSL, fb.ZQZFMX_HTDJ, fb.ZQZFMX_HTJE, fb.ZQZFMX_LJWC, fb.ZQZFMX_BQWCSL, fb.ZQZFMX_BQWCJE, fb.ZQZFMX_SQWCSL, fb.ZQZFMX_SQWCJE, fb.ZQZFMX_BQSL, fb.ZQZFMX_BQJE, fb.ZQZFMX_ZFQH
-        from ZQCWZFZS zb left join ZQCWZFZS_JLMX fb on zb.ZQCWZF_zfqh=fb.ZQZFMX_zfqh
+        from rcyh_zqcwzfzs zb left join rcyh_zqcwzfzs_jlmx fb on zb.ZQCWZF_zfqh=fb.ZQZFMX_zfqh
         where 1=1
         <if test="htbh != null and htbh != ''">
             and zb.ZQCWZF_HTBH=#{htbh}
@@ -804,7 +804,7 @@
     <select id="getZqcwzfInfoByZfqh" parameterType="hashmap" resultMap="zqcwzf">
         select
         zb.ZQCWZF_ID, zb.ZQCWZF_DWMC, zb.ZQCWZF_DWBH, zb.ZQCWZF_DWID, zb.ZQCWZF_BMMC, zb.ZQCWZF_BMBH, zb.ZQCWZF_BMID, zb.ZQCWZF_TBR, zb.ZQCWZF_TBRID, to_char(zb.ZQCWZF_TBRQ,'yyyy-mm-dd') ZQCWZF_TBRQ, zb.ZQCWZF_SPZT, zb.ZQCWZF_FILLE, zb.ZQCWZF_WFID, zb.ZQCWZF_NOTE, zb.ZQCWZF_DJBH, zb.ZQCWZF_ZFQH, zb.ZQCWZF_XMMC, zb.ZQCWZF_XMID, zb.ZQCWZF_XMBH, zb.ZQCWZF_HTMC, zb.ZQCWZF_HTID, zb.ZQCWZF_HTBH, zb.ZQCWZF_CJDWMC, zb.ZQCWZF_CJDWID, zb.ZQCWZF_CJDWBH, to_char(zb.ZQCWZF_JZRQ,'yyyy-mm-dd')  ZQCWZF_JZRQ, zb.ZQCWZF_FLAG, zb.ZQCWZF_GLDW, zb.ZQCWZF_JLDW, zb.ZQCWZF_GCMC, zb.ZQCWZF_CBDW, fb.ZQZFMX_ID, fb.ZQZFMX_MID, fb.ZQZFMX_ZMBH, fb.ZQZFMX_ZMMC, fb.ZQZFMX_JLDW, fb.ZQZFMX_JLDWID, fb.ZQZFMX_HTSL, fb.ZQZFMX_HTDJ, fb.ZQZFMX_HTJE, fb.ZQZFMX_LJWC, fb.ZQZFMX_BQWCSL, fb.ZQZFMX_BQWCJE, fb.ZQZFMX_SQWCSL, fb.ZQZFMX_SQWCJE, fb.ZQZFMX_BQSL, fb.ZQZFMX_BQJE, fb.ZQZFMX_ZFQH
-        from ZQCWZFZS zb left join ZQCWZFZS_JLMX fb on zb.ZQCWZF_zfqh=fb.ZQZFMX_zfqh
+        from rcyh_zqcwzfzs zb left join rcyh_zqcwzfzs_jlmx fb on zb.ZQCWZF_zfqh=fb.ZQZFMX_zfqh
         where 1=1
         and ZQCWZF_zfqh=#{zfqh}
     </select>
@@ -813,7 +813,7 @@
     <select id="getZqcwzfReport" parameterType="hashmap" resultType="com.hdsx.rcyh.entity.Jlzf_zqcwzfmx">
         select
         fb.ZQZFMX_ID, fb.ZQZFMX_MID, fb.ZQZFMX_ZMBH, fb.ZQZFMX_ZMMC, fb.ZQZFMX_JLDW, fb.ZQZFMX_JLDWID, fb.ZQZFMX_HTSL, fb.ZQZFMX_HTDJ, fb.ZQZFMX_HTJE, fb.ZQZFMX_LJWC, fb.ZQZFMX_BQWCSL, fb.ZQZFMX_BQWCJE, fb.ZQZFMX_SQWCSL, fb.ZQZFMX_SQWCJE, fb.ZQZFMX_BQSL, fb.ZQZFMX_BQJE, fb.ZQZFMX_ZFQH
-        from ZQCWZFZS zb left join ZQCWZFZS_JLMX fb on zb.ZQCWZF_zfqh=fb.ZQZFMX_zfqh
+        from rcyh_zqcwzfzs zb left join rcyh_zqcwzfzs_jlmx fb on zb.ZQCWZF_zfqh=fb.ZQZFMX_zfqh
         where 1=1
         <if test="htbh != null and htbh != ''">
             and zb.ZQCWZF_HTBH=#{htbh}
@@ -833,7 +833,7 @@
     <select id="getZqcwzfHzbReport" parameterType="hashmap" resultType="hashmap">
         select
         fb.ZQZFMX_ZMBH zmbh, fb.ZQZFMX_ZMMC zmmc, fb.ZQZFMX_JLDW jldw, fb.ZQZFMX_HTDJ dj, fb.ZQZFMX_HTSL sl, fb.ZQZFMX_HTJE, fb.ZQZFMX_ZFQH
-        from ZQCWZFZS zb left join ZQCWZFZS_JLMX fb on zb.ZQCWZF_zfqh=fb.ZQZFMX_zfqh
+        from rcyh_zqcwzfzs zb left join rcyh_zqcwzfzs_jlmx fb on zb.ZQCWZF_zfqh=fb.ZQZFMX_zfqh
         where 1=1
         <if test="htbh != null and htbh != ''">
             and zb.ZQCWZF_HTBH=#{htbh}
@@ -849,7 +849,7 @@
 
         select
         '' zmbh, '合计' zmmc, max(fb.ZQZFMX_JLDW) jldw, sum(nvl(fb.ZQZFMX_HTDJ,0)) dj, sum(nvl(fb.ZQZFMX_HTSL,0)) sl, sum(nvl(fb.ZQZFMX_HTJE,0)) je, null ZQZFMX_ZFQH
-        from ZQCWZFZS zb left join ZQCWZFZS_JLMX fb on zb.ZQCWZF_zfqh=fb.ZQZFMX_zfqh
+        from rcyh_zqcwzfzs zb left join rcyh_zqcwzfzs_jlmx fb on zb.ZQCWZF_zfqh=fb.ZQZFMX_zfqh
         where 1=1
         <if test="htbh != null and htbh != ''">
             and zb.ZQCWZF_HTBH=#{htbh}

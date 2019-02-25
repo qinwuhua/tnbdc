@@ -8,4 +8,5 @@
         from htgl_ldb
         where bmcode=#{bmCode}
     </select>
+
 </mapper>

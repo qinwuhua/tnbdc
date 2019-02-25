@@ -8,4 +8,6 @@ import java.util.Map;
 public interface LhyhService {
 
     List<Lhyh> getLhyhrwList(Map<String, String> param, int pageNum, int pageSize);
+
+    int insertLhyh(Lhyh lhyh);
 }

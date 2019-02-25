@@ -3,13 +3,51 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hdsx.rcyh.mapper.RcqsMapper">
-
-    <!-- 查询日常清扫任务列表数据 -->
+	<resultMap id="rcqsBean" type="com.hdsx.rcyh.entity.Rcqs">
+		<id column="RCQS_ID" property="id"/>
+		<result column="RCQS_GIS" property="gis"/>
+		<result column="RCQS_KSRQ" property="ksrq"/>
+		<result column="RCQS_DDRQ" property="ddrq"/>
+		<result column="RCQS_JSRQ" property="jsrq"/>
+		<result column="RCQS_QSRY" property="qsry"/>
+		<result column="RCQS_QSRYID" property="qsryid"/>
+		<result column="RCQS_QSXX" property="qsxx"/>
+		<result column="RCQS_YXZT" property="yxzt"/>
+		<result column="RCQS_DWMC" property="dwmc"/>
+		<result column="RCQS_DWBH" property="dwbh"/>
+		<result column="RCQS_DWID" property="dwid"/>
+		<result column="RCQS_BMMC" property="bmmc"/>
+		<result column="RCQS_BMBH" property="bmbh"/>
+		<result column="RCQS_BHID" property="bhid"/>
+		<result column="RCQS_TBR" property="tbr"/>
+		<result column="RCQS_TBRID" property="tbrid"/>
+		<result column="RCQS_TBRQ" property="tbrq"/>
+		<result column="RCQS_SPZT" property="spzt"/>
+		<result column="RCQS_FILE" property="fileid"/>
+		<result column="RCQS_WFID" property="wfid"/>
+		<result column="RCQS_NOTE" property="note"/>
+		<result column="RCQS_LXCODE" property="lxcode"/>
+		<result column="RCQS_XCFX" property="xcfx"/>
+	</resultMap>
+	<insert id="insertRcqs" parameterType="com.hdsx.rcyh.entity.Rcqs">
+		insert into rcyh_rcqs(RCQS_GIS,RCQS_KSRQ,RCQS_DDRQ,
+		RCQS_JSRQ,RCQS_QSRY,RCQS_QSRYID,RCQS_QSXX,RCQS_YXZT,
+		RCQS_ID,RCQS_DWMC,RCQS_DWBH,RCQS_DWID,RCQS_BMMC,
+		RCQS_BMBH,RCQS_BHID,RCQS_TBR,RCQS_TBRID,RCQS_TBRQ,
+		RCQS_SPZT,RCQS_FILE,RCQS_WFID,RCQS_NOTE,RCQS_LXCODE,RCQS_XCFX)
+		values (#{gis,jdbcType=VARCHAR},to_date(#{ksrq},'yyyy/mm/dd'),to_date(#{ddrq},'yyyy/mm/dd'),to_date(#{jsrq},'yyyy/mm/dd'),
+		#{qsry,jdbcType=VARCHAR},#{qsryid,jdbcType=VARCHAR},#{qsxx,jdbcType=VARCHAR},#{yxzt,jdbcType=VARCHAR},#{id,jdbcType=VARCHAR},
+		#{dwmc,jdbcType=VARCHAR},#{dwbh,jdbcType=VARCHAR},#{dwid,jdbcType=VARCHAR},#{bmmc,jdbcType=VARCHAR},#{bmbh,jdbcType=VARCHAR},
+		#{bhid,jdbcType=VARCHAR},#{tbr,jdbcType=VARCHAR},#{tbrid,jdbcType=VARCHAR},to_date(#{tbrq},'yyyy/mm/dd'),
+		#{spzt,jdbcType=VARCHAR},#{fileid,jdbcType=VARCHAR},#{wfid,jdbcType=VARCHAR},#{note,jdbcType=VARCHAR},#{lxcode,jdbcType=VARCHAR},
+		#{xcfx,jdbcType=VARCHAR})
+	</insert>
+	<!-- 查询日常清扫任务列表数据 -->
 	<select id="getRcqsrwList" parameterType="hashmap" resultType="com.hdsx.rcyh.entity.Rcqs">
 		SELECT
 		T.RCQS_GIS GIS,to_char(T.RCQS_KSRQ,'yyyy/mm/dd') KSRQ,T.RCQS_DDRQ DDRQ,to_char(T.RCQS_JSRQ,'yyyy/mm/dd') JSRQ,T.RCQS_QSRY QSRY,T.RCQS_QSRYID QSRYID,T.RCQS_QSXX QSXX,T.RCQS_YXZT YXZT,T.RCQS_ID ID,T.RCQS_DWMC DWMC,T.RCQS_DWBH DWBH,T.RCQS_DWID DWID,T.RCQS_BMMC BMMC,T.RCQS_BMBH BMBH,T.RCQS_BHID BHID,T.RCQS_TBR TBR,T.RCQS_TBRID TBRID,T.RCQS_TBRQ TBRQ,T.RCQS_SPZT SPZT,T.RCQS_FILE FILEID,T.RCQS_WFID WFID,T.RCQS_NOTE NOTE,T.RCQS_LXCODE LXCODE,E.MEIJUMC XCFX
-		FROM RCQS T
-		LEFT JOIN ENUMERATE E ON T.RCQS_XCFX=E.MEIJUBM
+		FROM rcyh_rcqs T
+		LEFT JOIN htgl_enumerate E ON T.RCQS_XCFX=E.MEIJUBM
 		WHERE 1=1
 		<if test="lxcode != null and lxcode != ''">
 			and t.rcqs_lxcode=#{lxcode}

@@ -11,4 +11,6 @@ import java.util.Map;
 public interface RcqsMapper {
 
     List<Rcqs> getRcqsrwList(Map<String, String> param);
+
+    int insertRcqs(Rcqs rcqs);
 }

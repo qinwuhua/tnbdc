@@ -11,4 +11,6 @@ import java.util.Map;
 public interface LhyhMapper {
 
     List<Lhyh> getLhyhrwList(Map<String, String> param);
+
+    int insertLhyh(Lhyh lhyh);
 }

@@ -8,4 +8,6 @@ import java.util.Map;
 public interface RcqsService {
 
     List<Rcqs> getRcqsrwList(Map<String, String> param, int pageNum, int pageSize);
+
+    int insertRcqs(Rcqs rcqs);
 }
