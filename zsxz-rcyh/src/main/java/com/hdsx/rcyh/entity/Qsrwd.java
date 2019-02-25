@@ -33,4 +33,8 @@ public class Qsrwd implements Serializable {
     private String qsrwdtbbm;
     private String qsrwdbz;
     private String qsrwdshzt;
+
+    private String bhid;//清扫单对应的病害/事件/巡查上报ID：用于添加“清扫任务单”的时候查询病害信息用于添加
+    private String qsrwdqszt;//清扫单的清扫状态字段：关联枚举表
+
 }
