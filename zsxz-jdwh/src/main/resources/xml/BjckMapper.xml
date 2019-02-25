@@ -1,0 +1,149 @@
+<?xml version='1.0' encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hdsx.jdwh.mapper.BjckMapper" >
+    <resultMap type="com.hdsx.jdwh.entity.Bjck" id="bjck">
+        <result column="ID" property="id"/>
+        <result column="djbh" property="djbh"/>
+        <result column="ywqj" property="ywqj"/>
+        <result column="cklx" property="cklx"/>
+        <result column="ckmc" property="ckmc"/>
+        <result column="sqdh" property="sqdh"/>
+        <result column="lyr" property="lyr"/>
+        <result column="ckjehj" property="ckjehj"/>
+        <result column="BZ" property="bz"/>
+        <result column="TBR" property="tbr"/>
+        <result column="TBSJ" property="tbsj"/>
+        <result column="TBDW" property="tbdw"/>
+        <result column="TBBM" property="tbbm"/>
+        <result column="TBDWDM" property="tbdwdm"/>
+        <collection property="mx" ofType="com.hdsx.jdwh.entity.Bjckmx" select="getBjckmxByPdjbh" column="djbh" >
+        </collection>
+
+    </resultMap>
+
+    <select id="getBjckmxByPdjbh" parameterType="string" resultType="com.hdsx.jdwh.entity.Bjckmx">
+        select t.ID, t.CKDJBH, t.XH, t.BJMC, t.BJBH, t.GGXH, t.JLDW, t.CKSL, t.CKDJ, t.CKJE,nvl(rk.rksl,0)-nvl(ck.cksl,0)+nvl(t.CKSL,0) KCSL, t.BZ from JDWX_BJ_CKMX t
+        left join (select bjmc,bjbh,ggxh,sum(nvl(rksl,0)) rksl from JDWX_BJ_RKMX group by bjmc,bjbh,ggxh) rk on t.bjmc=rk.bjmc and t.bjbh=rk.bjbh and t.ggxh=rk.ggxh
+        left join (select bjmc,bjbh,ggxh,sum(nvl(cksl,0)) cksl from JDWX_BJ_CKMX s group by bjmc,bjbh,ggxh) ck on t.bjmc=t.bjmc and t.bjbh=ck.bjbh and t.ggxh=ck.ggxh
+        where 1=1
+        and CKDJBH=#{value}
+    </select>
+
+
+    <select id="getBjLySqdInfo" parameterType="hashmap" resultType="hashmap">
+        select * from jdwh_bj_lysq where 1=1
+        <if test="tbdwdm != null">and tbdwdm like #{tbdwdm}||'%'</if>
+    </select>
+
+    <select id="getBjInfoByLySqd" parameterType="hashmap" resultType="com.hdsx.jdwh.entity.Bjckmx">
+        select sq.bjmc,sq.bjbm bjbh,sq.ggxh,sq.jldw,sq.xysl cksl,nvl(rk.rksl,0)-nvl(ck.cksl,0) kcsl from jdwh_bj_lysqmx sq
+        left join (select bjmc,bjbh,ggxh,sum(nvl(rksl,0)) rksl from JDWX_BJ_RKMX group by bjmc,bjbh,ggxh) rk on sq.bjmc=rk.bjmc and sq.bjbm=rk.bjbh and sq.ggxh=rk.ggxh
+        left join (select bjmc,bjbh,ggxh,sum(nvl(cksl,0)) cksl from JDWX_BJ_CKMX where 1=1 <if test="id != null">and id != #{id}</if> group by bjmc,bjbh,ggxh) ck on sq.bjmc=ck.bjmc and sq.bjbm=ck.bjbh and sq.ggxh=ck.ggxh
+        where 1=1
+        <if test="sqdh != null">and sq.pdjbh like #{sqdh}</if>
+        <if test="bjmc != null">and sq.bjmc=#{bjmc}</if>
+        <if test="bjbh != null">and sq.bjbm=#{bjbh}</if>
+        <if test="ggxh != null">and sq.ggxh=#{ggxh}</if>
+    </select>
+
+    <insert id="addBjck" parameterType="com.hdsx.jdwh.entity.Bjck">
+        insert into JDWH_BJ_YSRK_CK
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >id,</if>
+            <if test="djbh != null" >djbh,</if>
+            <if test="ywqj != null" >ywqj,</if>
+            <if test="cklx != null" >cklx,</if>
+            <if test="ckmc != null" >ckmc,</if>
+            <if test="sqdh != null" >sqdh,</if>
+            <if test="lyr != null" >lyr,</if>
+            <if test="ckjehj != null" >ckjehj,</if>
+            <if test="bz != null" >bz,</if>
+            <if test="tbr != null" >tbr,</if>
+            <if test="tbsj != null" >tbsj,</if>
+            <if test="tbdwdm != null" >tbdwdm,</if>
+            <if test="tbdw != null" >tbdw,</if>
+            <if test="tbbm != null" >tbbm,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >#{id},</if>
+            <if test="djbh != null" >#{djbh},</if>
+            <if test="ywqj != null" >#{ywqj},</if>
+            <if test="cklx != null" >#{cklx},</if>
+            <if test="ckmc != null" >#{ckmc},</if>
+            <if test="sqdh != null" >#{sqdh},</if>
+            <if test="lyr != null" >#{lyr},</if>
+            <if test="ckjehj != null" >#{ckjehj},</if>
+            <if test="bz != null" >#{bz},</if>
+            <if test="tbr != null" >#{tbr},</if>
+            <if test="tbsj != null" >#{tbsj},</if>
+            <if test="tbdwdm != null" >#{tbdwdm},</if>
+            <if test="tbdw != null" >#{tbdw},</if>
+            <if test="tbbm != null" >#{tbbm},</if>
+        </trim>
+    </insert>
+
+    <insert id="addBjckMx" parameterType="com.hdsx.jdwh.entity.Bjck">
+        begin
+        <foreach collection="mx" item="item" index="index" separator=";">
+            insert into JDWX_BJ_CKMX (ID, CKDJBH, XH, BJMC, BJBH, GGXH, JLDW, CKSL, CKDJ, CKJE, KCSL, BZ)  values
+            (sys_guid(),trim(#{djbh,jdbcType=VARCHAR}),trim(#{item.xh,jdbcType=VARCHAR}),trim(#{item.bjmc,jdbcType=VARCHAR}),trim(#{item.bjbh,jdbcType=VARCHAR}),trim(#{item.ggxh,jdbcType=VARCHAR}),trim(#{item.jldw,jdbcType=VARCHAR}),trim(#{item.cksl,jdbcType=VARCHAR}),trim(#{item.ckdj,jdbcType=VARCHAR}),trim(#{item.ckje,jdbcType=VARCHAR}),trim(#{item.kcsl,jdbcType=VARCHAR}),trim(#{item.bz,jdbcType=VARCHAR}))
+        </foreach>
+        ;end;
+    </insert>
+
+    <update id="editBjck" parameterType="com.hdsx.jdwh.entity.Bjck" >
+        update JDWH_BJ_YSRK_CK
+        <set>
+            <if test="id != null" >id=#{id},</if>
+            <if test="djbh != null" >djbh=#{djbh},</if>
+            <if test="ywqj != null" >ywqj=#{ywqj},</if>
+            <if test="cklx != null" >cklx=#{cklx},</if>
+            <if test="ckmc != null" >ckmc=#{ckmc},</if>
+            <if test="sqdh != null" >sqdh=#{sqdh},</if>
+            <if test="lyr != null" >lyr=#{lyr},</if>
+            <if test="ckjehj != null" >ckjehj=#{ckjehj},</if>
+            <if test="bz != null" >bz=#{bz},</if>
+            <if test="tbr != null" >tbr=#{tbr},</if>
+            <if test="tbsj != null" >tbsj=#{tbsj},</if>
+            <if test="tbdwdm != null" >tbdwdm=#{tbdwdm},</if>
+            <if test="tbdw != null" >tbdw=#{tbdw},</if>
+            <if test="tbbm != null" >tbbm=#{tbbm},</if>
+        </set>
+        where 1=1 and djbh=#{djbh}
+    </update>
+    <delete id="delBjckMx" parameterType="com.hdsx.jdwh.entity.Bjck">
+        delete from JDWX_BJ_CKMX where ckdjbh=#{djbh}
+    </delete>
+
+    <delete id="delBjckBydjbhs" parameterType="java.util.List" >
+        delete from JDWH_BJ_YSRK_CK
+        where djbh in
+        <foreach collection="list" item="id"  open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <delete id="delBjckMxBydjbhs" parameterType="java.util.List" >
+        delete from JDWX_BJ_CKMX
+        where ckdjbh in
+        <foreach collection="list" item="id"  open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <select id="getBjckInfoByDjbh" parameterType="string" resultMap="bjck">
+        select * from JDWH_BJ_YSRK_CK zb
+        where zb.djbh=#{value}
+    </select>
+
+    <select id="getBjckList" parameterType="hashmap" resultMap="bjck">
+        select * from JDWH_BJ_YSRK_CK zb
+        where 1=1
+        <if test="tbdwdm !=null and tbdwdm !=''">and zb.tbdwdm like #{tbdwdm}||'%'</if>
+    </select>
+
+
+</mapper>
