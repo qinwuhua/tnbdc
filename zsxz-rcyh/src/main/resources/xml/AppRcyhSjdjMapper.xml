@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hdsx.rcyh.mapper.AppRcyhSjdjMapper">
+
+    <!-- 日常养护 - 事件登记 -->
+    <insert id="insertSj" parameterType="com.hdsx.rcyh.entity.RcyhSjdj">
+        INSERT INTO RCYH_XCSB (
+            <if test="id != null and id !=''">RWMX_ID</if>
+            <if test="mid != null and mid !=''">,RWMX_MID</if>
+            <if test="dwmc != null and dwmc !=''">,RWMX_DWMC</if>
+            <if test="dwbh != null and dwbh !=''">,RWMX_DWBH</if>
+            <if test="dwid != null and dwid !=''">,RWMX_DWID</if>
+            <if test="bmmc != null and bmmc !=''">,RWMX_BMMC</if>
+            <if test="bmbh != null and bmbh !=''">,RWMX_BMBH</if>
+            <if test="bmid != null and bmid !=''">,RWMX_BMID</if>
+            <if test="tbr != null and tbr !=''">,RWMX_TBR</if>
+            <if test="tbrid != null and tbrid !=''">,RWMX_TBRID</if>
+            <if test="tbrq != null and tbrq !=''">,RWMX_TBRQ</if>
+            <if test="note != null and note !=''">,RWMX_NOTE</if>
+            <if test="sjdh != null and sjdh !=''">,RWMX_SJDH</if>
+            <if test="gps != null and gps !=''">,RWMX_GPS</if>
+            <if test="sjlx != null and sjlx !=''">,RWMX_SJLX</if>
+            <if test="sjsm != null and sjsm !=''">,RWMX_SJSM</if>
+            <if test="jjd != null and jjd !=''">,RWMX_JJD</if>
+            <if test="tp != null and tp !=''">,RWMX_TP</if>
+            <if test="sp != null and sp !=''">,RWMX_SP</if>
+            <if test="zh != null and zh !=''">,RWMX_ZH</if>
+            <if test="fxsj != null and fxsj !=''">,RWMX_FXSJ</if>
+            <if test="shlx != null and shlx !=''">,RWMX_SHLX</if>
+            <if test="bhlx != null and bhlx !=''">,RWMX_BHLX</if>
+            <if test="bhsl != null and bhsl !=''">,RWMX_BHSL</if>
+            <if test="khnr != null and khnr !=''">,RWMX_KHNR</if>
+            <if test="cd != null and cd !=''">,RWMX_CD</if>
+            <if test="czfs != null and czfs !=''">,RWMX_CZFS</if>
+            <if test="xcfx != null and xcfx !=''">,RWMX_XCFX</if>
+            <if test="bhsm != null and bhsm !=''">,RWMX_BHSM</if>
+            <if test="gcllx != null and gcllx !=''">,RWMX_GCLLX</if>
+            <if test="dwgc != null and dwgc !=''">,RWMX_DWGC</if>
+            <if test="xxly != null and xxly !=''">,RWMX_XXLY</if>
+            <if test="lxr != null and lxr !=''">,RWMX_LXR</if>
+            <if test="lxdh != null and lxdh !=''">,RWMX_LXDH</if>
+            <if test="sjdd != null and sjdd !=''">,RWMX_SJDD</if>
+            <if test="sjld != null and sjld !=''">,RWMX_SJLD</if>
+            <if test="cph != null and cph !=''">,RWMX_CPH</if>
+            <if test="cllx != null and cllx !=''">,RWMX_CLLX</if>
+            <if test="zmh != null and zmh !=''">,RWMX_ZMH</if>
+            <if test="zmmc != null and zmmc !=''">,RWMX_ZMMC</if>
+        ) VALUES (
+            <if test="id != null and id !=''">#{id}</if>
+            <if test="mid != null and mid !=''">,#{mid}</if>
+            <if test="dwmc != null and dwmc !=''">,#{dwmc}</if>
+            <if test="dwbh != null and dwbh !=''">,#{dwbh}</if>
+            <if test="dwid != null and dwid !=''">,#{dwid}</if>
+            <if test="bmmc != null and bmmc !=''">,#{bmmc}</if>
+            <if test="bmbh != null and bmbh !=''">,#{bmbh}</if>
+            <if test="bmid != null and bmid !=''">,#{bmid}</if>
+            <if test="tbr != null and tbr !=''">,#{tbr}</if>
+            <if test="tbrid != null and tbrid !=''">,#{tbrid}</if>
+            <if test="tbrq != null and tbrq !=''">,TO_DATE(#{tbrq}, 'yyyy-MM-dd hh24:mi:ss')</if>
+            <if test="note != null and note !=''">,#{note}</if>
+            <if test="sjdh != null and sjdh !=''">,#{sjdh}</if>
+            <if test="gps != null and gps !=''">,#{gps}</if>
+            <if test="sjlx != null and sjlx !=''">,#{sjlx}</if>
+            <if test="sjsm != null and sjsm !=''">,#{sjsm}</if>
+            <if test="jjd != null and jjd !=''">,#{jjd}</if>
+            <if test="tp != null and tp !=''">,#{tp}</if>
+            <if test="sp != null and sp !=''">,#{sp}</if>
+            <if test="zh != null and zh !=''">,#{zh}</if>
+            <if test="fxsj != null and fxsj !=''">,TO_DATE(#{fxsj}, 'yyyy-MM-dd hh24:mi:ss')</if>
+            <if test="shlx != null and shlx !=''">,#{shlx}</if>
+            <if test="bhlx != null and bhlx !=''">,#{bhlx}</if>
+            <if test="bhsl != null and bhsl !=''">,#{bhsl}</if>
+            <if test="khnr != null and khnr !=''">,#{khnr}</if>
+            <if test="cd != null and cd !=''">,#{cd}</if>
+            <if test="czfs != null and czfs !=''">,#{czfs}</if>
+            <if test="xcfx != null and xcfx !=''">,#{xcfx}</if>
+            <if test="bhsm != null and bhsm !=''">,#{bhsm}</if>
+            <if test="gcllx != null and gcllx !=''">,#{gcllx}</if>
+            <if test="dwgc != null and dwgc !=''">,#{dwgc}</if>
+            <if test="xxly != null and xxly !=''">,#{xxly}</if>
+            <if test="lxr != null and lxr !=''">,#{lxr}</if>
+            <if test="lxdh != null and lxdh !=''">,#{lxdh}</if>
+            <if test="sjdd != null and sjdd !=''">,#{sjdd}</if>
+            <if test="sjld != null and sjld !=''">,#{sjld}</if>
+            <if test="cph != null and cph !=''">,#{cph}</if>
+            <if test="cllx != null and cllx !=''">,#{cllx}</if>
+            <if test="zmh != null and zmh !=''">,#{zmh}</if>
+            <if test="zmmc != null and zmmc !=''">,#{zmmc}</if>
+        )
+    </insert>
+
+</mapper>

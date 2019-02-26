@@ -184,7 +184,7 @@ public class RcyhXxrwController {
      * @return
      */
     @PostMapping("insertXxrwYhrwd")
-    @ApiOperation("（未测试）添加“小修任务 - 养护任务单”数据。在添加“小修任务 - 养护任务单”时，还需要对病害增加任务单ID（YHRWD_DJBH）")
+    @ApiOperation("添加“小修任务 - 养护任务单”数据。在添加“小修任务 - 养护任务单”时，还需要对病害增加任务单ID（YHRWD_DJBH）")
     public Msg insertXxrwYhrwd(@RequestBody YhrwdInsert yhrwd){
         try {
             if(yhrwd.getRwmxIdArr() != null && !"".equals(yhrwd.getRwmxIdArr())) {
@@ -269,7 +269,7 @@ public class RcyhXxrwController {
      * @return
      */
     @PostMapping("insertXxrwQsrwd")
-    @ApiOperation("（未测试）添加“小修任务 - 清扫任务单”数据，需要传所关联的“病害/事件/巡查上报”的ID，用于补齐信息")
+    @ApiOperation("添加“小修任务 - 清扫任务单”数据，需要传所关联的“病害/事件/巡查上报”的ID，用于补齐信息")
     public Msg insertXxrwQsrwd(@RequestBody Qsrwd qsrwd){
         try {
             if (service.insertXxrwQsrwd(qsrwd)) {
