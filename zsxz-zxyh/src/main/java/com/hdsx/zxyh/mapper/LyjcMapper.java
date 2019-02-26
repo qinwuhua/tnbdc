@@ -21,4 +21,6 @@ public interface LyjcMapper {
     int deleteLyjcMx(String[] lyjcids);
 
     int updateLyjc(Lyjc lyjc);
+
+    List<Lyjcmx> selectMx(String id);
 }

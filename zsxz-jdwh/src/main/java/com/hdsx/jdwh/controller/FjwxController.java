@@ -116,16 +116,25 @@ public class FjwxController {
 
     @RequestMapping(value = "getFjwxList", method = RequestMethod.GET, produces = "application/json")
     @ApiImplicitParams({
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "djbh", value = "单据编号", required = false),
             @ApiImplicitParam(paramType="query", dataType = "String", name = "tbdwdm", value = "单位代码", required = false),
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "ksrq", value = "开始日期(yyyy/mm/dd)", required = false),
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "jsrq", value = "结束日期(yyyy/mm/dd)", required = false),
             @ApiImplicitParam(paramType="query", dataType = "int", name = "pageNum", value = "页码", required = true),
             @ApiImplicitParam(paramType="query", dataType = "int", name = "pageSize", value = "每页条数", required = true)
     })
     @ApiOperation(value = "查询废件维修列表数据")
-    public Msg getFjwxList(@RequestParam(value = "tbdwdm",required = false) String tbdwdm,
+    public Msg getFjwxList(@RequestParam(value = "djbh",required = false) String djbh,
+                           @RequestParam(value = "tbdwdm",required = false) String tbdwdm,
+                           @RequestParam(value = "ksrq",required = false) String ksrq,
+                           @RequestParam(value = "jsrq",required = false) String jsrq,
                            @RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
                            @RequestParam(value = "pageSize", defaultValue = "10") int pageSize) {
         Map<String, String> param = new HashMap<String, String>();
+        param.put("djbh", djbh);
         param.put("tbdwdm", tbdwdm);
+        param.put("ksrq", ksrq);
+        param.put("jsrq", jsrq);
         List<Fjwx> list = fjwxService.getFjwxList(param, pageNum, pageSize);
         return ResultUtil.success(new PageInfo<Fjwx>(list));
     }

@@ -144,6 +144,7 @@
     <select id="getRcxjList" parameterType="hashmap" resultMap="rcxj2">
         select * from JDWH_RCXJ zb
         where 1=1
+        <if test="id !=null and id !=''">and id like #{id}||'%'</if>
         <if test="tbdwdm !=null and tbdwdm !=''">and tbdwdm like #{tbdwdm}||'%'</if>
         <if test="ksrq != null and ksrq != ''">
             and to_date(jcsj,'yyyy-mm-dd')>=to_date(#{ksrq},'yyyy-mm-dd')

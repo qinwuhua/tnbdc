@@ -152,7 +152,14 @@
     <select id="getFjwxjsList" parameterType="hashmap" resultMap="fjrk">
         select * from JDWH_BJ_WXJS zb
         where 1=1
+        <if test="id !=null and djbh !=''">and zb.id like #{id}||'%'</if>
         <if test="tbdwdm !=null and tbdwdm !=''">and zb.tbdwdm like #{tbdwdm}||'%'</if>
+        <if test="ksrq != null and ksrq != ''">
+            and to_date(zb.tbsj,'yyyy-mm-dd')>=to_date(#{ksrq},'yyyy-mm-dd')
+        </if>
+        <if test="jsrq != null and jsrq != ''">
+            and to_date(zb.tbsj,'yyyy-mm-dd')&lt;=to_date(#{jsrq},'yyyy-mm-dd')
+        </if>
     </select>
 
 

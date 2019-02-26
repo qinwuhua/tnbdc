@@ -110,6 +110,7 @@ public class RcxjController {
 
     @RequestMapping(value = "getRcxjList", method = RequestMethod.GET, produces = "application/json")
     @ApiImplicitParams({
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "id", value = "单据编号", required = false),
             @ApiImplicitParam(paramType="query", dataType = "String", name = "tbdwdm", value = "单位代码", required = false),
             @ApiImplicitParam(paramType="query", dataType = "String", name = "ksrq", value = "巡检开始日期(yyyy/mm/dd)", required = false),
             @ApiImplicitParam(paramType="query", dataType = "String", name = "jsrq", value = "巡检结束日期(yyyy/mm/dd)", required = false),
@@ -117,12 +118,14 @@ public class RcxjController {
             @ApiImplicitParam(paramType="query", dataType = "int", name = "pageSize", value = "每页条数", required = true)
     })
     @ApiOperation(value = "查询日常巡检列表数据")
-    public Msg getRcxjList(@RequestParam(value = "tbdwdm",required = false) String tbdwdm,
+    public Msg getRcxjList(@RequestParam(value = "id",required = false) String id,
+                            @RequestParam(value = "tbdwdm",required = false) String tbdwdm,
                            @RequestParam(value = "ksrq",required = false) String ksrq,
                            @RequestParam(value = "jsrq",required = false) String jsrq,
                            @RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
                            @RequestParam(value = "pageSize", defaultValue = "10") int pageSize) {
         Map<String, String> param = new HashMap<String, String>();
+        param.put("id", id);
         param.put("tbdwdm", tbdwdm);
         param.put("ksrq", ksrq);
         param.put("jsrq", jsrq);

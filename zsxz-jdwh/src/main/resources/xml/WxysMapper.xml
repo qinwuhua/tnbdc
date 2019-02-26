@@ -76,8 +76,15 @@
     <select id="getWxysList" parameterType="string" resultType="com.hdsx.jdwh.entity.Wxys">
         select t.*,t2.sbmc,t2.ggxh,t2.bzrq,t2.bgr,t1.wxrq,t1.xcwxr,t1.gzms,t1.xcqkms,t1.wxjgms from jdwh_wxys t left join jdwh_wxdj t1 on t.bxdh=t1.bxdh left join jdwh_gzbx t2 on t1.bxdh=t2.djbh
         where 1=1
+        <if test="djbh !=null and djbh !=''">and t.djbh like #{djbh}||'%'</if>
         <if test="tbdwdm !=null and tbdwdm !=''">and t.tbdwdm like #{tbdwdm}||'%'</if>
         <if test="bxdh !=null and bxdh !=''">and t.bxdh like #{bxdh}||'%'</if>
+        <if test="ksrq != null and ksrq != ''">
+            and to_date(t.qrsj,'yyyy-mm-dd')>=to_date(#{ksrq},'yyyy-mm-dd')
+        </if>
+        <if test="jsrq != null and jsrq != ''">
+            and to_date(t.qrsj,'yyyy-mm-dd')&lt;=to_date(#{jsrq},'yyyy-mm-dd')
+        </if>
     </select>
 
     <update id="spWxysByDjbh" parameterType="hashmap">

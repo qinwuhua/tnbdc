@@ -142,7 +142,14 @@
     <select id="getBjckList" parameterType="hashmap" resultMap="bjck">
         select * from JDWH_BJ_YSRK_CK zb
         where 1=1
+        <if test="djbh !=null and djbh !=''">and zb.djbh like #{djbh}||'%'</if>
         <if test="tbdwdm !=null and tbdwdm !=''">and zb.tbdwdm like #{tbdwdm}||'%'</if>
+        <if test="ksrq != null and ksrq != ''">
+            and to_date(zb.ywqj,'yyyy-mm-dd')>=to_date(#{ksrq},'yyyy-mm-dd')
+        </if>
+        <if test="jsrq != null and jsrq != ''">
+            and to_date(zb.ywqj,'yyyy-mm-dd')&lt;=to_date(#{jsrq},'yyyy-mm-dd')
+        </if>
     </select>
 
 

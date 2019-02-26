@@ -170,8 +170,15 @@
         left join (select sum(nvl(wx.jsje,0)) zjsje,pdjbh  from jdwh_fksq_jsmx js left join jdwh_wxfy wx on js.wxfydh=wx.djbh group by js.pdjbh) fjs on zb.djbh=fjs.pdjbh
         left join (select sum(nvl(hsje,0)) hsje,pdjbh from jdwh_fksq_fpmx group by pdjbh) fp on zb.djbh=fp.pdjbh
         where 1=1
+        <if test="djbh !=null and djbh !=''">and zb.djbh like #{djbh}||'%'</if>
         <if test="tbdwdm !=null and tbdwdm !=''">and zb.tbdwdm like #{tbdwdm}||'%'</if>
         <if test="htbh !=null and htbh !=''">and zb.sshtbh like #{htbh}||'%'</if>
+        <if test="ksrq != null and ksrq != ''">
+            and to_date(zb.tbsj,'yyyy-mm-dd')>=to_date(#{ksrq},'yyyy-mm-dd')
+        </if>
+        <if test="jsrq != null and jsrq != ''">
+            and to_date(zb.tbsj,'yyyy-mm-dd')&lt;=to_date(#{jsrq},'yyyy-mm-dd')
+        </if>
     </select>
 
     <select id="getWxfyChooseList" parameterType="hashmap" resultType="com.hdsx.jdwh.entity.Wxfkjsmx">
