@@ -23,9 +23,30 @@
         </collection>
 
     </resultMap>
-    <select id="getCbrylwtList" parameterType="hashmap" resultMap="cbrylwt">
 
-        select djbh, gcmc, htbh, cbdw, ramark, bzdw, to_char(bzrq,'yyyy-mm-dd') bzrq, dwbm, spzt,mx.* from ZXYH_CBRYLWT g left join ZXYH_CBRYLWTMX mx on g.djbh=mx.mxdjbh
+    <resultMap type="com.hdsx.zxyh.entity.Gcyscbr" id="cbrylwt2">
+        <result column="djbh" property="djbh"/>
+        <result column="gcmc" property="gcmc"/>
+        <result column="htbh" property="htbh"/>
+        <result column="cbdw" property="cbdw"/>
+        <result column="ramark" property="ramark"/>
+        <result column="bzdw" property="bzdw"/>
+        <result column="bzrq" property="bzrq"/>
+        <result column="dwbm" property="dwbm"/>
+        <result column="spzt" property="spzt"/>
+        <collection property="mx" ofType="com.hdsx.zxyh.entity.Gcyscbrmx" select="getcbrylwtmx" column="djbh">
+
+        </collection>
+
+    </resultMap>
+
+    <select id="getcbrylwtmx" resultType="com.hdsx.zxyh.entity.Gcyscbrmx" parameterType="string">
+        select * from ZXYH_CBRYLWTMX where mxdjbh=#{value}
+    </select>
+
+    <select id="getCbrylwtList" parameterType="hashmap" resultMap="cbrylwt2">
+
+        select djbh, gcmc, htbh, cbdw, ramark, bzdw, to_char(bzrq,'yyyy-mm-dd') bzrq, dwbm, spzt from ZXYH_CBRYLWT g
         where 1=1
         <if test="dwbh != null and dwbh != ''">
             and g.dwbm like '%'||#{dwbh}||'%'

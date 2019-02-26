@@ -43,6 +43,38 @@
 
     </resultMap>
 
+    <resultMap type="com.hdsx.zxyh.entity.Gcysjung" id="jgjs2">
+        <result column="jssbh" property="jssbh"/>
+        <result column="gcmc" property="gcmc"/>
+        <result column="htbh" property="htbh"/>
+        <result column="cbdw" property="cbdw"/>
+        <result column="jldw" property="jldw"/>
+        <result column="gldw" property="gldw"/>
+        <result column="htzje" property="htzje"/>
+        <result column="jiesje" property="jiesje"/>
+        <result column="zbj" property="zbj"/>
+        <result column="zlqxkk" property="zlqxkk"/>
+        <result column="juesje" property="juesje"/>
+        <result column="wcht" property="wcht"/>
+        <result column="jshzf" property="jshzf"/>
+        <result column="gcnr" property="gcnr"/>
+        <result column="ysyj" property="ysyj"/>
+        <result column="remark" property="remark"/>
+        <result column="bzdw" property="bzdw"/>
+        <result column="bzdwbh" property="bzdwbh"/>
+        <result column="bzrq" property="bzrq"/>
+        <result column="spzt" property="spzt"/>
+        <collection property="mx" ofType="com.hdsx.zxyh.entity.Gcysjungmx" select="getjgjsMx" column="jssbh">
+
+
+        </collection>
+
+    </resultMap>
+
+    <select id="getjgjsMx" parameterType="string" resultType="com.hdsx.zxyh.entity.Gcysjungmx">
+        select * from ZXYH_JUNGMX fb where mxjssbh=#{value}
+    </select>
+
     <select id="getHtJungInfoByBm" parameterType="hashmap" resultMap="jgjs">
 
         select gj.htgjxx_cgxmmc gcmc,ht.htxx_htbh htbh,xm.yhhtxx_cbdw cbdw,xm.yhhtxx_jldw jldw,xm.yhhtxx_gldw gldw,gj.htgjxx_htje htzje,
@@ -178,12 +210,11 @@
         </foreach>
     </delete>
 
-    <select id="getJungList" parameterType="hashmap" resultMap="jgjs">
+    <select id="getJungList" parameterType="hashmap" resultMap="jgjs2">
 
-        select zb.*,
-        fb.*
+        select zb.*
         from
-        ZXYH_JUNG zb left join ZXYH_JUNGMX fb on zb.jssbh=fb.mxjssbh
+        ZXYH_JUNG zb
 
         where 1=1
         <if test="dwbh != null and dwbh != ''">

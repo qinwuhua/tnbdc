@@ -60,4 +60,6 @@ public interface BgglGcbgMapper {
     List<Bgglbgdmx> getBgdMx(Map<String, Object> param);
 
     List<Bgglbgd> getHtBgdInfoByBm(Map<String, String> param);
+
+    List<Bgglbgdmx> getBgdMxs(String djbh);
 }

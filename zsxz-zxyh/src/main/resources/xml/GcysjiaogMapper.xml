@@ -61,6 +61,49 @@
 
     </resultMap>
 
+    <resultMap type="com.hdsx.zxyh.entity.Gcysjiaog" id="jgjs2">
+        <result column="pmmtjgjss_id" property="pmmtjgjss_id"/>
+        <result column="pmmtjgjss_dwmc" property="pmmtjgjss_dwmc"/>
+        <result column="pmmtjgjss_dwbh" property="pmmtjgjss_dwbh"/>
+        <result column="pmmtjgjss_dwid" property="pmmtjgjss_dwid"/>
+        <result column="pmmtjgjss_bmmc" property="pmmtjgjss_bmmc"/>
+        <result column="pmmtjgjss_bmbh" property="pmmtjgjss_bmbh"/>
+        <result column="pmmtjgjss_bmid" property="pmmtjgjss_bmid"/>
+        <result column="pmmtjgjss_tbr" property="pmmtjgjss_tbr"/>
+        <result column="pmmtjgjss_spzt" property="pmmtjgjss_spzt"/>
+        <result column="pmmtjgjss_djbh" property="pmmtjgjss_djbh"/>
+        <result column="pmmtjgjss_bzrq" property="pmmtjgjss_bzrq"/>
+        <result column="pmmtjgjss_gcmc" property="pmmtjgjss_gcmc"/>
+        <result column="pmmtjgjss_htbh" property="pmmtjgjss_htbh"/>
+        <result column="pmmtjgjss_cbdw" property="pmmtjgjss_cbdw"/>
+        <result column="pmmtjgjss_gldw" property="pmmtjgjss_gldw"/>
+        <result column="pmmtjgjss_jldw" property="pmmtjgjss_jldw"/>
+        <result column="pmmtjgjss_htje" property="pmmtjgjss_htje"/>
+        <result column="pmmtjgjss_bz" property="pmmtjgjss_bz"/>
+        <result column="pmmtjgjss_gzjhtje" property="pmmtjgjss_gzjhtje"/>
+        <result column="pmmtjgjss_gzjjlje" property="pmmtjgjss_gzjjlje"/>
+        <result column="pmmtjgjss_gzjjsje" property="pmmtjgjss_gzjjsje"/>
+        <result column="pmmtjgjss_htzdje" property="pmmtjgjss_htzdje"/>
+        <result column="pmmtjgjss_jlzdje" property="pmmtjgjss_jlzdje"/>
+        <result column="pmmtjgjss_jgjszdje" property="pmmtjgjss_jgjszdje"/>
+        <result column="pmmtjgjss_spfy" property="pmmtjgjss_spfy"/>
+        <result column="pmmtjgjss_fj" property="pmmtjgjss_fj"/>
+        <result column="pmmtjgjss_zlbzj" property="pmmtjgjss_zlbzj"/>
+        <result column="pmmtjgjss_ljzfgck" property="pmmtjgjss_ljzfgck"/>
+        <result column="pmmtjgjss_yzfkk" property="pmmtjgjss_yzfkk"/>
+        <result column="pmmtjgjss_yzfkkdx" property="pmmtjgjss_yzfkkdx"/>
+        <result column="pmmtjgjss_jssbh" property="pmmtjgjss_jssbh"/>
+
+        <collection property="mx" ofType="com.hdsx.zxyh.entity.Gcysjiaogmx" select="getjgjsMx" column="pmmtjgjss_djbh">
+
+        </collection>
+
+    </resultMap>
+
+    <select id="getjgjsMx" parameterType="string" resultType="com.hdsx.zxyh.entity.Gcysjiaogmx">
+        select * from ZXYH_JGJSSMX fb where PMMTJGJSSMX_JSSBH=#{value}
+    </select>
+
     <select id="getHtJiaogInfoByBm" parameterType="hashmap" resultMap="jgjs">
         select gj.htgjxx_cgxmmc pmmtjgjss_gcmc,ht.htxx_htbh pmmtjgjss_htbh,xm.yhhtxx_cbdw pmmtjgjss_cbdw,xm.yhhtxx_jldw pmmtjgjss_jldw,xm.yhhtxx_gldw pmmtjgjss_gldw,gj.htgjxx_htje pmmtjgjss_htje,
         jl.jlhtje pmmtjgjss_gzjhtje,jl.jlje pmmtjgjss_gzjjlje,jl.jlje pmmtjgjss_gzjjsje,
@@ -246,12 +289,12 @@
 
 
     <!-- 查询交工结算书列表数据 -->
-    <select id="getJiaogList" parameterType="hashmap" resultMap="jgjs">
+    <select id="getJiaogList" parameterType="hashmap" resultMap="jgjs2">
 
-        select zb.pmmtjgjss_id, zb.pmmtjgjss_dwmc, zb.pmmtjgjss_dwbh, zb.pmmtjgjss_dwid, zb.pmmtjgjss_bmmc, zb.pmmtjgjss_bmbh, zb.pmmtjgjss_bmid, zb.pmmtjgjss_tbr, zb.pmmtjgjss_spzt, zb.pmmtjgjss_file, zb.pmmtjgjss_djbh, to_char(zb.pmmtjgjss_bzrq,'yyyy-mm-dd') pmmtjgjss_bzrq, zb.pmmtjgjss_gcmc, zb.pmmtjgjss_htbh, zb.pmmtjgjss_cbdw, zb.pmmtjgjss_gldw, zb.pmmtjgjss_jldw, zb.pmmtjgjss_htje, zb.pmmtjgjss_bz, zb.pmmtjgjss_gzjhtje, zb.pmmtjgjss_gzjjlje, zb.pmmtjgjss_gzjjsje, zb.pmmtjgjss_htzdje, zb.pmmtjgjss_jlzdje, zb.pmmtjgjss_jgjszdje, zb.pmmtjgjss_spfy, zb.pmmtjgjss_fj, zb.pmmtjgjss_zlbzj, zb.pmmtjgjss_ljzfgck, zb.pmmtjgjss_yzfkk, zb.pmmtjgjss_yzfkkdx, zb.pmmtjgjss_jssbh，
-        fb.*
+        select zb.pmmtjgjss_id, zb.pmmtjgjss_dwmc, zb.pmmtjgjss_dwbh, zb.pmmtjgjss_dwid, zb.pmmtjgjss_bmmc, zb.pmmtjgjss_bmbh, zb.pmmtjgjss_bmid, zb.pmmtjgjss_tbr, zb.pmmtjgjss_spzt, zb.pmmtjgjss_file, zb.pmmtjgjss_djbh, to_char(zb.pmmtjgjss_bzrq,'yyyy-mm-dd') pmmtjgjss_bzrq, zb.pmmtjgjss_gcmc, zb.pmmtjgjss_htbh, zb.pmmtjgjss_cbdw, zb.pmmtjgjss_gldw, zb.pmmtjgjss_jldw, zb.pmmtjgjss_htje, zb.pmmtjgjss_bz, zb.pmmtjgjss_gzjhtje, zb.pmmtjgjss_gzjjlje, zb.pmmtjgjss_gzjjsje, zb.pmmtjgjss_htzdje, zb.pmmtjgjss_jlzdje, zb.pmmtjgjss_jgjszdje, zb.pmmtjgjss_spfy, zb.pmmtjgjss_fj, zb.pmmtjgjss_zlbzj, zb.pmmtjgjss_ljzfgck, zb.pmmtjgjss_yzfkk, zb.pmmtjgjss_yzfkkdx, zb.pmmtjgjss_jssbh
+
         from
-        ZXYH_JGJSS zb left join ZXYH_JGJSSMX fb on zb.pmmtjgjss_jssbh=fb.PMMTJGJSSMX_JSSBH
+        ZXYH_JGJSS zb
 
         where 1=1
         <if test="dwbh != null and dwbh != ''">
