@@ -96,9 +96,16 @@
     <select id="getGzbxList" parameterType="string" resultType="com.hdsx.jdwh.entity.Gzbx">
         select * from JDWH_GZBX
         where 1=1
+        <if test="djbh !=null and djbh !=''">and djbh like #{djbh}||'%'</if>
         <if test="tbdwdm !=null and tbdwdm !=''">and tbdwdm like #{tbdwdm}||'%'</if>
         <if test="gzlx !=null and gzlx !=''">and gzlx like #{gzlx}||'%'</if>
         <if test="ggxh !=null and ggxh !=''">and ggxh like #{ggxh}||'%'</if>
+        <if test="ksrq != null and ksrq != ''">
+            and to_date(bzrq,'yyyy-mm-dd')>=to_date(#{ksrq},'yyyy-mm-dd')
+        </if>
+        <if test="jsrq != null and jsrq != ''">
+            and to_date(bzrq,'yyyy-mm-dd')&lt;=to_date(#{jsrq},'yyyy-mm-dd')
+        </if>
     </select>
 
 

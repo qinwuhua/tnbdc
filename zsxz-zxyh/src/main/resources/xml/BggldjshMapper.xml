@@ -32,6 +32,31 @@
         </collection>
 
     </resultMap>
+
+    <resultMap type="com.hdsx.zxyh.entity.Bggldjsh" id="djsh2">
+        <result column="djbh" property="djbh"/>
+        <result column="gcmc" property="gcmc"/>
+        <result column="sqrq" property="sqrq"/>
+        <result column="htmc" property="htmc"/>
+        <result column="cbdw" property="cbdw"/>
+        <result column="gldw" property="gldw"/>
+        <result column="sjsm" property="sjsm"/>
+        <result column="bzdw" property="bzdw"/>
+        <result column="bzdwbh" property="bzdwbh"/>
+        <result column="bzrq" property="bzrq"/>
+        <result column="spzt" property="spzt"/>
+        <result column="htbh" property="htbh"/>
+
+        <collection property="mx" ofType="com.hdsx.zxyh.entity.Bggldjshmx" select="getDjshMX" column="djbh">
+
+        </collection>
+
+    </resultMap>
+
+    <select id="getDjshMX" parameterType="string" resultType="com.hdsx.zxyh.entity.Bggldjshmx">
+        select * from zxyh_djshbmx where mxdjbh=#{value}
+    </select>
+
     <select id="getHtDjshInfoByBm" parameterType="hashmap" resultMap="djsh">
         select gj.HTGJXX_cgxmmc gcmc,ht.HTXX_HTMC htmc,ht.htxx_htbh htbh,xm.yhhtxx_cbdw cbdw,xm.yhhtxx_gldw gldw,
         zm.zmht_zmh zmh,zm.zmht_zmmc zmmc,zm.zmht_jldw dw,zm.zmht_dj htdj,zm.zmht_id zmid,zm.zmht_htbh mxhtbh
@@ -124,12 +149,11 @@
 
 
 
-    <select id="getDjshList" parameterType="hashmap" resultMap="djsh">
+    <select id="getDjshList" parameterType="hashmap" resultMap="djsh2">
 
-        select zb.*,
-        fb.*
+        select zb.*
         from
-        zxyh_djshb zb left join zxyh_djshbmx fb on zb.djbh=fb.mxdjbh
+        zxyh_djshb zb
         where 1=1
         <if test="dwbh != null and dwbh != ''">
             and zb.bzdwbh like '%'||#{dwbh}||'%'
@@ -138,10 +162,10 @@
             and zb.htbh=#{htbh}
         </if>
         <if test="ksrq != null and ksrq != ''">
-            and to_date(sqrq,'yyyy-mm-dd')>=to_date(#{sqrq},'yyyy-mm-dd')
+            and to_date(sqrq,'yyyy-mm-dd')>=to_date(#{ksrq},'yyyy-mm-dd')
         </if>
         <if test="jsrq != null and jsrq != ''">
-            and to_date(sqrq,'yyyy-mm-dd')&lt;=to_date(#{sqrq},'yyyy-mm-dd')
+            and to_date(sqrq,'yyyy-mm-dd')&lt;=to_date(#{jsrq},'yyyy-mm-dd')
         </if>
     </select>
 

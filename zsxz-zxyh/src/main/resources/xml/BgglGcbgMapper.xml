@@ -38,6 +38,33 @@
 
     </resultMap>
 
+    <resultMap type="com.hdsx.zxyh.entity.Bgglbgd" id="bgd2">
+        <result column="djbh" property="djbh"/>
+        <result column="gcmc" property="gcmc"/>
+        <result column="sqrq" property="sqrq"/>
+        <result column="bw" property="bw"/>
+        <result column="cbdw" property="cbdw"/>
+        <result column="gldw" property="gldw"/>
+        <result column="qdzh" property="qdzh"/>
+        <result column="zdzh" property="zdzh"/>
+        <result column="sqbbh" property="sqbbh"/>
+        <result column="bglbh" property="bglbh"/>
+        <result column="bgly" property="bgly"/>
+        <result column="bgnr" property="bgnr"/>
+        <result column="gjzjje" property="gjzjje"/>
+        <result column="cbdwbh" property="cbdwbh"/>
+        <result column="bzrq" property="bzrq"/>
+        <result column="spzt" property="spzt"/>
+        <result column="htbh" property="htbh"/>
+        <collection property="mx" ofType="com.hdsx.zxyh.entity.Bgglbgdmx" select="getBgdMxs" column="djbh">
+
+        </collection>
+
+    </resultMap>
+    <select id="getBgdMxs" resultType="com.hdsx.zxyh.entity.Bgglbgdmx" parameterType="string">
+        select * from  ZXYH_GCBGDMX mx where mxdjbh=#{value}
+    </select>
+
     <insert id="addBgsqbForBggl" parameterType="com.hdsx.zxyh.entity.Bgglbgsqb">
         insert into ZXYH_GCBGSQB
         <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -338,10 +365,10 @@
         order by djbh
     </select>
 
-    <select id="getBgdList" parameterType="hashmap" resultMap="bgd">
+    <select id="getBgdList" parameterType="hashmap" resultMap="bgd2">
 
-        select djbh, gcmc, sqrq, bw, htbh, gldw, qdzh, zdzh, sqbbh, bglbh, bgly, bgnr, zj.gjzjje gjzjje, cbdw, cbdwbh, bzrq, spzt,
-        mx.* from ZXYH_GCBGD g left join ZXYH_GCBGDMX mx on g.djbh=mx.mxdjbh left join (
+        select djbh, gcmc, sqrq, bw, htbh, gldw, qdzh, zdzh, sqbbh, bglbh, bgly, bgnr, zj.gjzjje gjzjje, cbdw, cbdwbh, bzrq, spzt
+         from ZXYH_GCBGD g  left join (
         select mxdjbh,sum(nvl(jebgh,0)-nvl(jebgq,0)) gjzjje from ZXYH_GCBGDMX group by mxdjbh
         ) zj on g.djbh=zj.mxdjbh
         where 1=1

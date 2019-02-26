@@ -86,8 +86,15 @@
     <select id="getWxdjList" parameterType="string" resultType="com.hdsx.jdwh.entity.Wxdj">
         select t.*,t1.wxjgqr,t1.qrr,t1.qrsj,t2.sbmc,t2.ggxh,t2.bzrq,t2.bgr from JDWH_WXDJ t left join JDWH_WXYS t1 on t.bxdh=t1.bxdh left join JDWH_GZBX t2 on t.bxdh=t2.djbh
         where 1=1
+        <if test="djbh !=null and djbh !=''">and t.djbh like #{djbh}||'%'</if>
         <if test="tbdwdm !=null and tbdwdm !=''">and t.tbdwdm like #{tbdwdm}||'%'</if>
         <if test="bxdh !=null and bxdh !=''">and t.bxdh like #{bxdh}||'%'</if>
+        <if test="ksrq != null and ksrq != ''">
+            and to_date(t.wxrq,'yyyy-mm-dd')>=to_date(#{ksrq},'yyyy-mm-dd')
+        </if>
+        <if test="jsrq != null and jsrq != ''">
+            and to_date(t.wxrq,'yyyy-mm-dd')&lt;=to_date(#{jsrq},'yyyy-mm-dd')
+        </if>
     </select>
 
 

@@ -1,6 +1,7 @@
 package com.hdsx.zxyh.mapper;
 
 import com.hdsx.zxyh.entity.Bggldjsh;
+import com.hdsx.zxyh.entity.Bggldjshmx;
 import com.hdsx.zxyh.entity.Gcysjung;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -32,4 +33,6 @@ public interface BggldjshMapper {
     int spDjshForGcys(Map<String, Object> param);
 
     List<Map<String, String>> getHtInfoByZmh(String zmh);
+
+    List<Bggldjshmx> getDjshMX(String djbh);
 }

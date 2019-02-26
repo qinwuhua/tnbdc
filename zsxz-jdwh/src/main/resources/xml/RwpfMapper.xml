@@ -7,9 +7,16 @@
     <select id="getDfprwdList" parameterType="string" resultType="com.hdsx.jdwh.entity.Gzbx">
         select t.*,RYXM, SSDW, SSBM, RYLX,ssdwdm from JDWH_GZBX t left join JDWH_WXRY t2 on t.wxrid=t2.id
         where 1=1
+        <if test="djbh !=null and djbh !=''">and t.djbh like #{djbh}||'%'</if>
         <if test="tbdwdm !=null and tbdwdm !=''">and tbdwdm like #{tbdwdm}||'%'</if>
         <if test="gzlx !=null and gzlx !=''">and gzlx like #{gzlx}||'%'</if>
         <if test="ggxh !=null and ggxh !=''">and ggxh like #{ggxh}||'%'</if>
+        <if test="ksrq != null and ksrq != ''">
+            and to_date(bzrq,'yyyy-mm-dd')>=to_date(#{ksrq},'yyyy-mm-dd')
+        </if>
+        <if test="jsrq != null and jsrq != ''">
+            and to_date(bzrq,'yyyy-mm-dd')&lt;=to_date(#{jsrq},'yyyy-mm-dd')
+        </if>
         order by decode(fpzt,null,0,'待分配',1,2),djbh
     </select>
     <select id="getWxzrrInfo" parameterType="hashmap" resultType="com.hdsx.jdwh.entity.Gzbx">
@@ -23,9 +30,16 @@
     <select id="getWxrwdList" parameterType="string" resultType="com.hdsx.jdwh.entity.Gzbx">
         select t.*,RYXM, SSDW, SSBM, RYLX,ssdwdm from JDWH_GZBX t left join JDWH_WXRY t2 on t.wxrid=t2.id
         where 1=1
+        <if test="djbh !=null and djbh !=''">and t.djbh like #{djbh}||'%'</if>
         <if test="ssdwdm !=null and ssdwdm !=''">and ssdwdm like #{ssdwdm}||'%'</if>
         <if test="gzlx !=null and gzlx !=''">and gzlx like #{gzlx}||'%'</if>
         <if test="ggxh !=null and ggxh !=''">and ggxh like #{ggxh}||'%'</if>
+        <if test="ksrq != null and ksrq != ''">
+            and to_date(bzrq,'yyyy-mm-dd')>=to_date(#{ksrq},'yyyy-mm-dd')
+        </if>
+        <if test="jsrq != null and jsrq != ''">
+            and to_date(bzrq,'yyyy-mm-dd')&lt;=to_date(#{jsrq},'yyyy-mm-dd')
+        </if>
         order by decode(fpzt,null,0,'待分配',1,2),djbh
     </select>
 

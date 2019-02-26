@@ -2,6 +2,7 @@ package com.hdsx.zxyh.mapper;
 
 import com.hdsx.zxyh.entity.Gcysjiaog;
 import com.hdsx.zxyh.entity.Gcysjung;
+import com.hdsx.zxyh.entity.Gcysjungmx;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -11,6 +12,8 @@ import java.util.Map;
 @Mapper
 public interface GcysjungMapper {
     List<Gcysjung> getHtJungInfoByBm(Map<String, String> param);
+
+    List<Gcysjungmx> getjgjsMx(String djbh);
 
     int addJungForGcys(Gcysjung jgjs);
 

@@ -121,19 +121,28 @@ public class WxdjController {
 
     @RequestMapping(value = "getWxdjList", method = RequestMethod.GET, produces = "application/json")
     @ApiImplicitParams({
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "djbh", value = "单据编号", required = false),
             @ApiImplicitParam(paramType="query", dataType = "String", name = "tbdwdm", value = "单位代码", required = false),
             @ApiImplicitParam(paramType="query", dataType = "String", name = "bxdh", value = "报修单号", required = false),
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "ksrq", value = "开始日期(yyyy/mm/dd)", required = false),
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "jsrq", value = "结束日期(yyyy/mm/dd)", required = false),
             @ApiImplicitParam(paramType="query", dataType = "int", name = "pageNum", value = "页码", required = true),
             @ApiImplicitParam(paramType="query", dataType = "int", name = "pageSize", value = "每页条数", required = true)
     })
     @ApiOperation(value = "查询维修登记列表数据")
-    public Msg getWxdjList(@RequestParam(value = "tbdwdm",required = false) String tbdwdm,
+    public Msg getWxdjList(@RequestParam(value = "djbh",required = false) String djbh,
+                           @RequestParam(value = "tbdwdm",required = false) String tbdwdm,
                            @RequestParam(value = "bxdh",required = false) String bxdh,
+                           @RequestParam(value = "ksrq",required = false) String ksrq,
+                           @RequestParam(value = "jsrq",required = false) String jsrq,
                            @RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
                            @RequestParam(value = "pageSize", defaultValue = "10") int pageSize) {
         Map<String, String> param = new HashMap<String, String>();
+        param.put("djbh", djbh);
         param.put("tbdwdm", tbdwdm);
         param.put("bxdh", bxdh);
+        param.put("ksrq", ksrq);
+        param.put("jsrq", jsrq);
         List<Wxdj> list = wxdjService.getWxdjList(param, pageNum, pageSize);
         return ResultUtil.success(new PageInfo<Wxdj>(list));
     }

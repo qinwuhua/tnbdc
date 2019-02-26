@@ -1,7 +1,9 @@
 package com.hdsx.zxyh.mapper;
 
 import com.hdsx.zxyh.entity.Gczfgcjld;
+import com.hdsx.zxyh.entity.Gczfgcjldmx;
 import com.hdsx.zxyh.entity.Gczfzqcwzf;
+import com.hdsx.zxyh.entity.Gczfzqcwzfmx;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -13,6 +15,10 @@ public interface GczfMapper {
 
 
     List<Gczfgcjld> getGcjldList(Map<String, String> param);
+
+    List<Gczfgcjldmx> getgcjldMx(String djbh);
+
+    List<Gczfzqcwzfmx> getZqcwzfMx(String djbh);
 
     List<Gczfgcjld> getHtXxInfoByBm(Map<String, String> param);
 
