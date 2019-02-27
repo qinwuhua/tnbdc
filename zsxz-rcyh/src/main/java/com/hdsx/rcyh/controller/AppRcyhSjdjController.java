@@ -1,28 +1,30 @@
 package com.hdsx.rcyh.controller;
 
+import com.hdsx.rcyh.entity.AppRcyhQdxc;
 import com.hdsx.rcyh.entity.Msg;
 import com.hdsx.rcyh.entity.RcyhSjdj;
+import com.hdsx.rcyh.entity.RwdSubsidiary;
 import com.hdsx.rcyh.service.AppRcyhSjdjService;
 import com.hdsx.rcyh.utils.ResultUtil;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 /**
- * 事件登记
+ * APP - 日常养护接口
  * @author LiRui
  * @created 2019/2/26 0026
  */
 
 @RestController
-@RequestMapping("appRcyhSjdj")
-@Api(value = "APP接口 - 事件登记",description = "APP接口 - 事件登记：2019-02-26")
+@RequestMapping("appRcyh")
+@Api(value = "APP接口 - 日常养护",description = "APP接口 - 日常养护：2019-02-26")
 public class AppRcyhSjdjController {
 
     @Resource
@@ -63,6 +65,78 @@ public class AppRcyhSjdjController {
         }catch (Exception e){
             e.printStackTrace();
             return ResultUtil.error("接口异常！");
+        }
+    }
+
+    /**
+     * 任务单维修（更新“（清扫/日常）任务单子表”的“维修时间/维修状态”）
+     * @param bean
+     * @return
+     */
+    @PostMapping("updateRwdSubsidiaryWx")
+    @ApiOperation("任务单维修（更新“（清扫/日常）任务单子表”的“维修时间/维修状态”）")
+    public Msg updateRwdSubsidiaryWx(@RequestBody RwdSubsidiary bean){
+        try {
+            if (service.updateRwdSubsidiaryWx(bean)){
+                return ResultUtil.success("更新成功！");
+            }
+            return ResultUtil.error("更新失败！");
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResultUtil.error("接口异常！");
+        }
+    }
+
+    /**
+     * 添加/上传“启动巡查”数据
+     * @param bean
+     * @return
+     */
+    @PostMapping("insertQdxc")
+    @ApiOperation("添加/上传“启动巡查”数据")
+    public Msg insertQdxc(@RequestBody AppRcyhQdxc bean){
+        try {
+            if (service.insertQdxc(bean)){
+                return ResultUtil.success("“启动巡查”数据上传成功！");
+            }
+            return ResultUtil.error("“启动巡查”数据上传异常！");
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResultUtil.error("接口异常！");
+        }
+    }
+
+    /**
+     * 根据“人员ID”查询其所应做的养护/清扫任务信息（病害/事件）
+     * @param ryid
+     * @return
+     */
+    @GetMapping("getBhrwByRyid")
+    @ApiOperation("根据“人员ID”查询其所应做的养护/清扫任务信息（病害/事件）")
+    @ApiImplicitParams({@ApiImplicitParam(paramType="query", dataType = "String", name = "ryid", value = "人员ID", required = true)})
+    public Msg getBhrwByRyid(@RequestParam(value = "ryid",required = false) String ryid){
+        try {
+            return ResultUtil.success(service.getBhrwByRyid(ryid));
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResultUtil.error("查询失败！");
+        }
+    }
+
+    /**
+     * 根据“人员ID”查询其所能进行的“月度计划”列表
+     * @param ryid
+     * @return
+     */
+    @GetMapping("getYhjhByRyid")
+    @ApiOperation("根据“人员ID”查询其所能进行的“月度计划”列表")
+    @ApiImplicitParams({@ApiImplicitParam(paramType="query", dataType = "String", name = "ryid", value = "人员ID", required = true)})
+    public Msg getYhjhByRyid(@RequestParam(value = "ryid",required = false) String ryid){
+        try {
+            return ResultUtil.success(service.getYhjhByRyid(ryid));
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResultUtil.error("查询失败！");
         }
     }
 

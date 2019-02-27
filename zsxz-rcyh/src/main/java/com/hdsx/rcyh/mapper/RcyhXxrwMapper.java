@@ -1,6 +1,7 @@
 package com.hdsx.rcyh.mapper;
 
 import com.hdsx.rcyh.entity.Qsrwd;
+import com.hdsx.rcyh.entity.RwdSubsidiary;
 import com.hdsx.rcyh.entity.YhrwdInsert;
 import com.hdsx.rcyh.entity.Yhrwysd;
 import org.apache.ibatis.annotations.Mapper;
@@ -226,5 +227,26 @@ public interface RcyhXxrwMapper {
      * @return
      */
     List<Map> getJlgcMx2ByHtAndYd(Map parMap);
+
+    /**
+     * 添加“养护/清扫任务单子表”数据
+     * @param bean
+     * @return
+     */
+    int insertRwdSubsidiary(RwdSubsidiary bean);
+
+    /**
+     * 根据“任务单ID”删除“养护/清扫任务单子表”数据
+     * @param rwdid
+     * @return
+     */
+    int deleteRwdSubsidiaryByRwdid(String rwdid);
+
+    /**
+     * 根据“月度计划ID”查询其所属合同的子目下拉框。
+     * @param yhijid
+     * @return
+     */
+    List<Map> getZmxxByYdjhID(String yhijid);
 
 }

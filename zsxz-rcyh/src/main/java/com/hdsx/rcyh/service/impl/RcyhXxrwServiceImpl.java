@@ -1,6 +1,7 @@
 package com.hdsx.rcyh.service.impl;
 
 import com.hdsx.rcyh.entity.Qsrwd;
+import com.hdsx.rcyh.entity.RwdSubsidiary;
 import com.hdsx.rcyh.entity.YhrwdInsert;
 import com.hdsx.rcyh.entity.Yhrwysd;
 import com.hdsx.rcyh.mapper.RcyhXxrwMapper;
@@ -271,6 +272,27 @@ public class RcyhXxrwServiceImpl implements RcyhXxrwService {
     @Override
     public List<Map> getJlgcMx2ByHtAndYd(Map parMap) {
         return mapper.getJlgcMx2ByHtAndYd(parMap);
+    }
+
+    @Override
+    public boolean insertRwdSubsidiary(RwdSubsidiary bean) {
+        if(mapper.insertRwdSubsidiary(bean) > 0 ){
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean deleteRwdSubsidiaryByRwdid(String rwdid) {
+        if(mapper.deleteRwdSubsidiaryByRwdid(rwdid) > 0 ){
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public List<Map> getZmxxByYdjhID(String yhijid) {
+        return mapper.getZmxxByYdjhID(yhijid);
     }
 
 }

@@ -1,6 +1,8 @@
 package com.hdsx.rcyh.service.impl;
 
+import com.hdsx.rcyh.entity.AppRcyhQdxc;
 import com.hdsx.rcyh.entity.RcyhSjdj;
+import com.hdsx.rcyh.entity.RwdSubsidiary;
 import com.hdsx.rcyh.mapper.AppRcyhSjdjMapper;
 import com.hdsx.rcyh.service.AppRcyhSjdjService;
 import org.springframework.stereotype.Service;
@@ -8,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 日常养护 - 事件登记
@@ -39,4 +42,31 @@ public class AppRcyhSjdjServiceImpl implements AppRcyhSjdjService {
         }
         return true;
     }
+
+    @Override
+    public boolean updateRwdSubsidiaryWx(RwdSubsidiary bean) {
+        if (mapper.updateRwdSubsidiaryWx(bean) > 0){
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean insertQdxc(AppRcyhQdxc bean) {
+        if (mapper.insertQdxc(bean) > 0){
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public List<Map> getBhrwByRyid(String ryid) {
+        return mapper.getBhrwByRyid(ryid);
+    }
+
+    @Override
+    public List<Map> getYhjhByRyid(String ryid) {
+        return mapper.getYhjhByRyid(ryid);
+    }
+
 }

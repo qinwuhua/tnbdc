@@ -2,6 +2,7 @@ package com.hdsx.rcyh.controller;
 
 import com.hdsx.rcyh.entity.Msg;
 import com.hdsx.rcyh.entity.Qsrwd;
+import com.hdsx.rcyh.entity.RwdSubsidiary;
 import com.hdsx.rcyh.entity.YhrwdInsert;
 import com.hdsx.rcyh.service.RcyhXxrwService;
 import com.hdsx.rcyh.utils.ResultUtil;
@@ -423,6 +424,62 @@ public class RcyhXxrwController {
             map.put("htxxhtmc", htxxhtmc);
             map.put("yd", dealDateStrToString(yd));
             return ResultUtil.success(service.getJlgcMx2ByHtAndYd(map));
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResultUtil.error("查询失败！");
+        }
+    }
+
+    /**
+     * 添加“养护/清扫任务单子表”数据
+     * @param bean
+     * @return
+     */
+    @PostMapping("insertRwdSubsidiary")
+    @ApiOperation("添加“养护/清扫任务单子表”数据")
+    public Msg insertRwdSubsidiary(@RequestBody RwdSubsidiary bean){
+        try {
+            if (service.insertRwdSubsidiary(bean)) {
+                return ResultUtil.success("添加成功！");
+            }
+            return ResultUtil.error("添加失败！");
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResultUtil.error("接口异常！");
+        }
+    }
+
+    /**
+     * 根据“任务单ID”删除“养护/清扫任务单子表”数据
+     * @param rwdid
+     * @return
+     */
+    @ApiOperation(value = "根据“任务单ID”删除“养护/清扫任务单子表”数据")
+    @RequestMapping(value = "deleteRwdSubsidiaryByRwdid", method = RequestMethod.DELETE)
+    @ApiImplicitParam(name = "rwdid", value = "其所属（清扫/养护）任务单ID", dataType = "string", paramType = "query",required = true)
+    public Msg deleteRwdSubsidiaryByRwdid(@RequestParam("rwdid") String rwdid) {
+        try {
+            if (service.deleteRwdSubsidiaryByRwdid(rwdid)) {
+                return ResultUtil.success("删除成功！");
+            }
+            return ResultUtil.error("删除失败！");
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResultUtil.error("接口异常！");
+        }
+    }
+
+    /**
+     * 根据“月度计划ID”查询其所属合同的子目下拉框
+     * @param yhijid
+     * @return
+     */
+    @GetMapping("getZmxxByYdjhID")
+    @ApiOperation("根据“月度计划ID”查询其所属合同的子目下拉框")
+    @ApiImplicitParams({@ApiImplicitParam(paramType="query", dataType = "String", name = "yhijid", value = "月度计划ID，测试ID：'lyjc1551066927707', 'lyjc1551053949129'", required = true)})
+    public Msg getZmxxByYdjhID(@RequestParam(value = "yhijid",required = false) String yhijid){
+        try {
+            return ResultUtil.success(service.getZmxxByYdjhID(yhijid));
         }catch (Exception e){
             e.printStackTrace();
             return ResultUtil.error("查询失败！");

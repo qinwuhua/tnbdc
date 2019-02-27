@@ -809,5 +809,28 @@
         GROUP BY A.PMMTJCZBQKJCB_SGDW,HT.HTXX_HTJEHS
     </select>
 
-</mapper>
+    <!-- 添加“养护/清扫任务单子表”数据 -->
+    <insert id="insertRwdSubsidiary" parameterType="com.hdsx.rcyh.entity.RwdSubsidiary">
+        INSERT INTO RCYH_RWD_SUBSIDIARY (
+            SUB_ID, SUB_RWDID, SUB_SJID, SUB_RYID, SUB_RYMC, SUB_ZPSJ, SUB_WXZT, SUB_SSLX
+            <if test="wxsj != null and wxsj !=''">, SUB_WXSJ</if>
+        )
+        VALUES (
+            #{id}, #{rwdid}, #{sjid}, #{ryid}, #{rymc}, TO_DATE(#{zpsj}, 'yyyy-MM-dd hh24:mi:ss'), '2101', #{sslx}
+            <if test="wxsj != null and wxsj !=''">, TO_DATE(#{wxsj}, 'yyyy-MM-dd hh24:mi:ss')</if>
+        )
+    </insert>
 
+    <!-- 根据“任务单ID”删除“养护/清扫任务单子表”数据 -->
+    <delete id="deleteRwdSubsidiaryByRwdid" parameterType="java.lang.String">
+        DELETE FROM RCYH_RWD_SUBSIDIARY WHERE SUB_RWDID = #{rwdid}
+    </delete>
+
+    <!-- 根据“月度计划ID”查询其所属合同的子目下拉框。 -->
+    <select id="getZmxxByYdjhID" parameterType="String" resultType="java.util.Map">
+        SELECT * FROM DJSJ_HTXX_ZMQD WHERE HTBH = (
+          SELECT YDJH_HTBH FROM RCYH_YDSGJH WHERE YDJH_ID = #{yhijid}
+        )
+    </select>
+
+</mapper>
