@@ -40,7 +40,7 @@
         <if test="jsrq != null and jsrq != ''">
             and to_date(bzrq,'yyyy-mm-dd')&lt;=to_date(#{jsrq},'yyyy-mm-dd')
         </if>
-        order by decode(fpzt,null,0,'待分配',1,2),djbh
+        order by decode(djzt,null,0,'未登记',1,2),djbh
     </select>
 
 

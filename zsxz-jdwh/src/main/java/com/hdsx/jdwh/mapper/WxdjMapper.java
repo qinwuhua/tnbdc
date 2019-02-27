@@ -22,4 +22,10 @@ public interface WxdjMapper {
     Wxdj getWxdjInfoByIDjbh(String djbh);
 
     List<Wxdj> getWxdjList(Map<String, String> param);
+
+    int updateWxdjZt(Wxdj wxdj);
+
+    int updateWxdjZtByList(List<String> l);
+
+    int getWdjCount(Wxdj wxdj);
 }

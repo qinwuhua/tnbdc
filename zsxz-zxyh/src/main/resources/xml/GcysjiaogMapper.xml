@@ -134,7 +134,7 @@
         NVL(gc.gcjlmx_wcsl,0) pmmtjgjssmx_sjjlsl,nvl(gc.gcjlmx_wcsl,0)* nvl(zm.zmht_dj,0) pmmtjgjssmx_sjjlje,
         NVL(zq.zqzfmx_bqsl,0) pmmtjgjssmx_jgjssl,nvl(zq.zqzfmx_bqsl,0)* nvl(zm.zmht_dj,0) pmmtjgjssmx_jgjsje,
         nvl(zq.zqzfmx_bqsl,0)-nvl(gc.gcjlmx_wcsl,0) pmmtjgjssmx_ysjbsl,nvl(zq.zqzfmx_bqsl,0)* nvl(zm.zmht_dj,0)-nvl(gc.gcjlmx_wcsl,0)* nvl(zm.zmht_dj,0) pmmtjgjssmx_ysjbje, '' PMMTJGJSSMX_remark
-        from zm_ht zm left join  (select sum(nvl(t1.gcjlmx_wcsl,0)) gcjlmx_wcsl,gcjlmx_zmid  from zxyh_gcjldmx t1 where 1=1 and gcjlmx_djbh in (select gcjl_djbh from zxyh_gcjld where gcjl_spzt='已下发') <if test="zmid != null and zmid !=''"> and gcjlmx_zmid in (${zmid}) </if> group by t1.gcjlmx_zmid) gc on zm.zmht_id=gc.gcjlmx_zmid
+        from gg_zmht zm left join  (select sum(nvl(t1.gcjlmx_wcsl,0)) gcjlmx_wcsl,gcjlmx_zmid  from zxyh_gcjldmx t1 where 1=1 and gcjlmx_djbh in (select gcjl_djbh from zxyh_gcjld where gcjl_spzt='已下发') <if test="zmid != null and zmid !=''"> and gcjlmx_zmid in (${zmid}) </if> group by t1.gcjlmx_zmid) gc on zm.zmht_id=gc.gcjlmx_zmid
         left join (select t2.zqzfmx_zmid,sum(nvl(t2.zqzfmx_bqsl,0)) zqzfmx_bqsl,sum(nvl(t2.zqzfmx_bqje,0)) zqzfmx_bqje from zxyh_zqcwzfzsmx t2 where 1=1 and zqzfmx_zfqh in (select zqcwzf_zfqh from zxyh_zqcwzfzs where zqcwzf_spzt='已下发') <if test="zmid != null and zmid !=''"> and zqzfmx_zmid in (${zmid}) </if> group by t2.zqzfmx_zmid) zq on zm.zmht_id=zq.zqzfmx_zmid
         <if test="zmid != null and zmid !=''"> where 1=1 and zm.zmht_id in (${zmid}) </if>
         ) zmzb on ht.htxx_htbh=zmzb.pmmtjgjssmx_htbh

@@ -14,5 +14,5 @@ import java.util.List;
 @NoArgsConstructor
 public class Gzbx {
     private String id, djbh, gzlx, sbmc, ggxh, bzrq, bgr, yqxfrq, sbfzr, sbdd, gzms, bz, tbr, tbsj, tbdw, tbbm, fpzt, fpry, tbdwdm;
-    private String wxrid, ryxm, ssdw, ssbm, rylx,ssdwdm;
+    private String wxrid, ryxm, ssdw, ssbm, rylx,ssdwdm,djzt;
 }

@@ -95,5 +95,8 @@
         </foreach>
     </update>
 
+    <select id="getYdjCount" resultType="int" parameterType="com.hdsx.jdwh.entity.Wxys">
+         select count(*) from JDWH_GZBX where djbh=#{bxdh} and DJZT='已登记'
+    </select>
 
 </mapper>

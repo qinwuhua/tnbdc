@@ -20,4 +20,6 @@ public interface WxdjService {
     Wxdj getWxdjInfoByIDjbh(String djbh);
 
     List<Wxdj> getWxdjList(Map<String, String> param, int pageNum, int pageSize);
+
+    int getWdjCount(Wxdj wxdj);
 }
