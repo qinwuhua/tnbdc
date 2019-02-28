@@ -54,5 +54,10 @@ public class WxysServiceImpl implements WxysService {
         return wxysMapper.spWxysByDjbh(param);
     }
 
+    @Override
+    public int getYdjCount(Wxys wxys) {
+        return wxysMapper.getYdjCount(wxys);
+    }
+
 
 }

@@ -53,6 +53,12 @@ public class WxysController {
     @ApiOperation(value = "添加维修验收")
     public Msg addWxys(@RequestBody Wxys wxys){
         try {
+            //判断如果已登记了，则添加失败
+            int k=wxysService.getYdjCount(wxys);
+            if(k==0){
+                return ResultUtil.error("未登记，保存失败");
+            }
+
             int flag=wxysService.addWxys(wxys);
             if(flag>0)
                 return ResultUtil.success("保存成功");

@@ -405,7 +405,7 @@
     <update id="updateHtByBgd" parameterType="java.util.List" useGeneratedKeys="false">
         begin
         <foreach collection="list" item="item" index="index" separator=";">
-            update zm_ht set zmht_sl=trim(#{item.gclbgh}),zmht_je=trim(#{item.jebgh})
+            update gg_zmht set zmht_sl=trim(#{item.gclbgh}),zmht_je=trim(#{item.jebgh})
             where zmht_id=trim(#{item.zmid})
         </foreach>
         ;end;
@@ -417,7 +417,7 @@
         bg.sqbbh sqbbh,bg.bglbh bglbh,sqb.bgyy bgly,bg.bgnr,
         zm.zmht_zmh zmh,zm.zmht_zmmc zmmc,zm.zmht_jldw dw,zm.zmht_sl gclbgq,zm.zmht_dj dj,zm.zmht_je jebgq,zm.zmht_id zmid,zm.zmht_htbh xmhtbh
         from djsj_htxx ht left join djsj_htxx_htgjxx gj on ht.htxx_htbh=gj.HTGJXX_htbh left join djsj_htxx_yhxmxx xm on ht.htxx_htbh=xm.yhhtxx_htbh
-        left join zm_ht zm on ht.htxx_htbh=zm.zmht_htbh
+        left join gg_zmht zm on ht.htxx_htbh=zm.zmht_htbh
         left join zxyh_gcbgl bg on ht.htxx_htbh=bg.htbh
         left join zxyh_gcbgsqb sqb on bg.sqbbh=sqb.djbh
         where 1=1 and bg.spzt='已下发'

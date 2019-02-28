@@ -53,6 +53,11 @@ public class WxdjController {
     @ApiOperation(value = "添加维修登记")
     public Msg addWxdj(@RequestBody Wxdj wxdj){
         try {
+            //判断如果已登记了，则添加失败
+            int k=wxdjService.getWdjCount(wxdj);
+            if(k==0){
+                return ResultUtil.error("已经登记，保存失败");
+            }
             int flag=wxdjService.addWxdj(wxdj);
             if(flag>0)
                 return ResultUtil.success("保存成功");

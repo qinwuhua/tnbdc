@@ -26,7 +26,10 @@ public class WxdjServiceImpl implements WxdjService {
 
     @Override
     public int addWxdj(Wxdj wxdj) {
-        return wxdjMapper.addWxdj(wxdj);
+       int i = wxdjMapper.addWxdj(wxdj);
+        //修改单号为已登记
+        wxdjMapper.updateWxdjZt(wxdj);
+        return i;
     }
 
     @Override
@@ -36,7 +39,10 @@ public class WxdjServiceImpl implements WxdjService {
 
     @Override
     public int delWxdjByDjbhs(List<String> l) {
-        return wxdjMapper.delWxdjByDjbhs(l);
+        wxdjMapper.updateWxdjZtByList(l);
+        int i = wxdjMapper.delWxdjByDjbhs(l);
+
+        return i;
     }
 
     @Override
@@ -50,7 +56,10 @@ public class WxdjServiceImpl implements WxdjService {
         return wxdjMapper.getWxdjList(param);
     }
 
-
+    @Override
+    public int getWdjCount(Wxdj wxdj) {
+        return wxdjMapper.getWdjCount(wxdj);
+    }
 
 
 }

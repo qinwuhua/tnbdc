@@ -21,4 +21,6 @@ public interface WxysService {
     List<Wxys> getWxysList(Map<String, String> param, int pageNum, int pageSize);
 
     int spWxysByDjbh(Map<String, Object> param);
+
+    int getYdjCount(Wxys wxys);
 }

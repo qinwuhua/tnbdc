@@ -180,7 +180,7 @@
         select ht.htxx_htbh gcjl_htbh,ht.HTXX_ID gcjl_htid,ht.HTXX_HTMC gcjl_htmc,xm.yhhtxx_qszh gcjl_qdzh,xm.yhhtxx_zzzh gcjl_zdzh,gj.HTGJXX_cgxmmc gcjl_gcmc,xm.yhhtxx_cbdw GCJL_CBDW,
         zm.zmht_zmh GCJLMX_ZMH,zm.zmht_zmmc GCJLMX_ZMMC,zm.zmht_jldw GCJLMX_JLDW,zm.zmht_sl GCJLMX_HTSL,zm.zmht_dj GCJLMX_HTDJ,zm.zmht_je GCJLMX_HTJE,0 GCJLMX_KKJE,zm.zmht_je GCJLMX_ZJE,zm.zmht_id GCJLMX_ZMID,zm.zmht_htbh GCJLMX_HTBH,0 GCJLMX_WCSL
         from djsj_htxx ht left join djsj_htxx_htgjxx gj on ht.htxx_htbh=gj.HTGJXX_htbh left join djsj_htxx_yhxmxx xm on ht.htxx_htbh=xm.yhhtxx_htbh
-        left join zm_ht zm on ht.htxx_htbh=zm.zmht_htbh
+        left join gg_zmht zm on ht.htxx_htbh=zm.zmht_htbh
         where 1=1
         <if test="htbh != null and htbh != ''">
             and ht.htxx_htbh=#{htbh}
@@ -328,7 +328,7 @@
         100*round(decode(nvl(zm.zmht_je,0),0,0,nvl(ljwc.ljje,0)/sum(nvl(zm.zmht_je,0)) OVER()),4)||'%' ZQZFMX_LJWC,
         nvl(ljwc.ljsl,0) ZQZFMX_BQWCSL,nvl(ljwc.ljje,0) ZQZFMX_BQWCJE,nvl(ljwc.ljsl,0)-nvl(bcwc.bcsl,0) ZQZFMX_SQWCSL,nvl(ljwc.ljje,0)-nvl(bcwc.bcje,0) ZQZFMX_SQWCJE,nvl(bcwc.bcsl,0) ZQZFMX_BQSL,nvl(bcwc.bcje,0) ZQZFMX_BQJE,zm.zmht_id zqzfmx_zmid,zm.zmht_htbh zqzfmx_htbh
         from djsj_htxx ht left join djsj_htxx_htgjxx gj on ht.htxx_htbh=gj.HTGJXX_HTBH left join djsj_htxx_yhxmxx xm on ht.htxx_htbh=xm.yhhtxx_htbh
-        left join zm_ht zm on ht.htxx_htbh=zm.zmht_htbh
+        left join gg_zmht zm on ht.htxx_htbh=zm.zmht_htbh
         left join (select gcjlmx_zmid,sum(nvl(jlmx.gcjlmx_wcsl,0)) ljsl,sum(nvl(jlmx.gcjlmx_wcsl,0)*nvl(jlmx.gcjlmx_htdj,0)) ljje from gcjldmx jlmx group by gcjlmx_zmid) ljwc on zm.zmht_id=ljwc.gcjlmx_zmid
         left join (select gcjlmx_zmid,sum(nvl(jlmx.gcjlmx_wcsl,0)) bcsl,sum(nvl(jlmx.gcjlmx_wcsl,0)*nvl(jlmx.gcjlmx_htdj,0)) bcje from gcjldmx jlmx where jlmx.gcjlmx_djbh in (select jld.gcjl_djbh from gcjld jld where jlmx.gcjlmx_djbh=jld.gcjl_djbh and jld.gcjl_tbrq=(select max(tjl.gcjl_tbrq) from gcjld tjl where tjl.gcjl_djbh=jld.gcjl_djbh)) group by gcjlmx_zmid) bcwc on zm.zmht_id=bcwc.gcjlmx_zmid
         where 1=1

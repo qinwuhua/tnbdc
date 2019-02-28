@@ -61,7 +61,7 @@
         select gj.HTGJXX_cgxmmc gcmc,ht.HTXX_HTMC htmc,ht.htxx_htbh htbh,xm.yhhtxx_cbdw cbdw,xm.yhhtxx_gldw gldw,
         zm.zmht_zmh zmh,zm.zmht_zmmc zmmc,zm.zmht_jldw dw,zm.zmht_dj htdj,zm.zmht_id zmid,zm.zmht_htbh mxhtbh
         from djsj_htxx ht left join djsj_htxx_htgjxx gj on ht.htxx_htbh=gj.HTGJXX_htbh left join djsj_htxx_yhxmxx xm on ht.htxx_htbh=xm.yhhtxx_htbh
-        left join zm_ht zm on ht.htxx_htbh=zm.zmht_htbh
+        left join gg_zmht zm on ht.htxx_htbh=zm.zmht_htbh
         where 1=1
         <if test="htbh != null and htbh != ''">
             and ht.htxx_htbh=#{htbh}
@@ -191,7 +191,7 @@
         select gj.HTGJXX_cgxmmc gcmc,ht.HTXX_HTMC htmc,ht.htxx_htbh htbh,xm.yhhtxx_cbdw cbdw,xm.yhhtxx_gldw gldw,
         zm.zmht_zmh zmh,zm.zmht_zmmc zmmc,zm.zmht_jldw dw,zm.zmht_dj htdj,zm.zmht_id zmid,zm.zmht_htbh mxhtbh
         from djsj_htxx ht left join djsj_htxx_htgjxx gj on ht.htxx_htbh=gj.HTGJXX_htbh left join djsj_htxx_yhxmxx xm on ht.htxx_htbh=xm.yhhtxx_htbh
-        left join zm_ht zm on ht.htxx_htbh=zm.zmht_htbh
+        left join gg_zmht zm on ht.htxx_htbh=zm.zmht_htbh
         where 1=1 and zm.zmht_zmh=#{zmh}
 
         order by htbh,zmh
