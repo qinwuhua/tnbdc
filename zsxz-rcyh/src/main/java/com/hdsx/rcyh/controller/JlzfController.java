@@ -668,5 +668,17 @@ public class JlzfController {
         return ResultUtil.success(list);
     }
 
+    /**
+     * 根据“合同编号”查询《中（终）期支付证书 - 明细》列表，用于添加《交工结算单》时，展示其明细信息
+     * @param htbh
+     * @return
+     */
+    @RequestMapping(value = "getZqzfzsMxList", method = RequestMethod.GET, produces = "application/json")
+    @ApiOperation(value = "根据“合同编号”查询《中（终）期支付证书 - 明细》列表，用于添加《交工结算单》时，展示其明细信息")
+    @ApiImplicitParams({@ApiImplicitParam(paramType="query", dataType = "String", name = "htbh", value = "合同编号", required = true)})
+    public Msg getZqzfzsMxList(@RequestParam(value = "htbh",required = true) String htbh) {
+        List<Jlzf_zqcwzfmx> list = jlzfService.getZqzfzsMxList(htbh);
+        return ResultUtil.success(list);
+    }
 
 }

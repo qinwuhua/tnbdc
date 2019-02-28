@@ -26,4 +26,6 @@ public class Sgjhwcmx implements Serializable {
     private String sjksrq;
     private String sjjsrq;
     private String bz;
+    private String zmh;
+
 }

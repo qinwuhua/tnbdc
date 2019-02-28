@@ -238,5 +238,9 @@ public class JlzfServiceImpl implements JlzfService {
         return jlzfMapper.spZqcwzfForJlzf(param);
     }
 
+    @Override
+    public List<Jlzf_zqcwzfmx> getZqzfzsMxList(String htbh) {
+        return jlzfMapper.getZqzfzsMxList(htbh);
+    }
 
 }

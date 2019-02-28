@@ -103,4 +103,12 @@ public interface JlzfMapper {
     int spGcjldForJlzf(Map<String, Object> param);
 
     int spZqcwzfForJlzf(Map<String, Object> param);
+
+    /**
+     * 根据“合同编号”查询《中（终）期支付证书 - 明细》列表，用于添加《交工结算单》时，展示其明细信息
+     * @param htbh
+     * @return
+     */
+    List<Jlzf_zqcwzfmx> getZqzfzsMxList(String htbh);
+
 }

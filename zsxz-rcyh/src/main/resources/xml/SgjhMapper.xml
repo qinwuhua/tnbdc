@@ -119,7 +119,7 @@
 
     <insert id="addSgjhmx" parameterType="java.util.List">
         INSERT INTO rcyh_ydsgjhsb_mx(YHJHMX2_ID,YHJHMX2_MID,YHJHMX2_XMNR,YHJHMX2_QDZH,YHJHMX2_ZDZH,YHJHMX2_YJGCL,
-                               YHJHMX2_JHKSRQ,YHJHMX2_JHJSRQ,YHJHMX2_BZ)
+                               YHJHMX2_JHKSRQ,YHJHMX2_JHJSRQ,YHJHMX2_BZ, YHJHMX2_ZMH)
         <foreach collection="list" item="item" index="index" open="(" close=")" separator="union">
             SELECT sys_guid(),
                    #{item.mid,jdbcType=VARCHAR},
@@ -129,7 +129,8 @@
                    #{item.yjgcl,jdbcType=NUMERIC},
                    to_date(#{item.jhksrq,jdbcType=TIMESTAMP},'yyyy-MM-dd'),
                    to_date(#{item.jhjsrq,jdbcType=TIMESTAMP},'yyyy-MM-dd'),
-                   #{item.bz,jdbcType=VARCHAR}
+                   #{item.bz,jdbcType=VARCHAR},
+                   #{item.zmh,jdbcType=VARCHAR}
             FROM DUAL
         </foreach>
 
@@ -225,12 +226,13 @@
     </insert>
 
     <insert id="addWcsgjhmx" parameterType="java.util.List">
-        INSERT INTO rcyh_ydsgwc_mx(YHJHWCMX2_ID,YHJHWCMX2_MID,YHJHWCMX2_XMNR,YHJHWCMX2_QDZH,YHJHWCMX2_ZDZH,YHJHWCMX2_YJGCL,YHJHWCMX2_WCGCL,
-                             YHJHWCMX2_JHKSRQ,YHJHWCMX2_JHJSRQ,YHJHWCMX2_SJKSRQ,YHJHWCMX2_SJJSRQ,YHJHWCMX2_BZ)
+        INSERT INTO RCYH_YDSGWC_MX(YHJHWCMX2_ID,YHJHWCMX2_MID,YHJHWCMX2_XMNR,YHJHWCMX2_QDZH,YHJHWCMX2_ZDZH,YHJHWCMX2_YJGCL,YHJHWCMX2_WCGCL,
+                             YHJHWCMX2_JHKSRQ,YHJHWCMX2_JHJSRQ,YHJHWCMX2_SJKSRQ,YHJHWCMX2_SJJSRQ,YHJHWCMX2_BZ,)
         <foreach collection="list" item="item" index="index" open="(" close=")" separator="union">
                 SELECT sys_guid(),#{item.mid,jdbcType=VARCHAR},#{item.xmnr,jdbcType=VARCHAR},
             #{item.qdzh,jdbcType=VARCHAR},#{item.zdzh,jdbcType=VARCHAR},#{item.yjgcl,jdbcType=NUMERIC},#{item.wcgcl,jdbcType=NUMERIC},
-            to_date(#{item.jhksrq,jdbcType=TIMESTAMP},'yyyy-MM-dd'),to_date(#{item.jhjsrq,jdbcType=TIMESTAMP},'yyyy-MM-dd'),to_date(#{item.sjksrq,jdbcType=TIMESTAMP},'yyyy-MM-dd'),to_date(#{item.sjjsrq,jdbcType=TIMESTAMP},'yyyy-MM-dd'),#{item.bz,jdbcType=VARCHAR}
+            to_date(#{item.jhksrq,jdbcType=TIMESTAMP},'yyyy-MM-dd'),to_date(#{item.jhjsrq,jdbcType=TIMESTAMP},'yyyy-MM-dd'),to_date(#{item.sjksrq,jdbcType=TIMESTAMP},'yyyy-MM-dd'),to_date(#{item.sjjsrq,jdbcType=TIMESTAMP},'yyyy-MM-dd'),
+            #{item.bz,jdbcType=VARCHAR},#{item.zmh,jdbcType=VARCHAR}
             FROM DUAL
         </foreach>
     </insert>

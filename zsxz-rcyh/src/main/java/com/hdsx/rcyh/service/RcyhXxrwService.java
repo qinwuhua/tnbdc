@@ -164,4 +164,11 @@ public interface RcyhXxrwService {
      */
     List<Map> getZmxxByYdjhID(String yhijid);
 
+    /**
+     * 根据“月份”和“合同编号”构建用于“养护施工计划完成明细表”的数据
+     * @param map
+     * @return
+     */
+    List<Map> getCreateYhjdwcmxByYfAndHtbh(Map map);
+
 }

@@ -21,4 +21,5 @@ public class Sgjhsbmx implements Serializable {
     private String jhksrq;
     private String jhjsrq;
     private String bz;
+    private String zmh;
 }

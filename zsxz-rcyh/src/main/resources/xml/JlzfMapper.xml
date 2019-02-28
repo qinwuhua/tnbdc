@@ -295,8 +295,8 @@
     <insert id="addGcjldFbForJlzf" parameterType="com.hdsx.rcyh.entity.Jlzf">
         begin
             <foreach collection="zmbs" item="item" index="index" separator=";">
-                insert into rcyh_gcjld_mx(GCJL_ID, GCJLMX_DJBH,GCJLMX_ZMID, GCJLMX_ZMH, GCJLMX_ZMMC, GCJLMX_HTSL, GCJLMX_JlDW, GCJLMX_HTDJ, GCJLMX_KKJE, GCJLMX_HTJE, GCJLMX_ZJE,GCJLMX_HTBH,GCJLMX_WCSL)  values
-                (sys_guid(),trim(#{gcjl_djbh}),trim(#{item.gcjlmx_zmid}),trim(#{item.gcjlmx_zmh}),trim(#{item.gcjlmx_zmmc}),trim(#{item.gcjlmx_htsl}),trim(#{item.gcjlmx_jldw}),trim(#{item.gcjlmx_htdj}),trim(#{item.gcjlmx_kkje}),trim(#{item.gcjlmx_htje}),trim(#{item.gcjlmx_htje})-trim(#{item.gcjlmx_kkje}),trim(#{item.gcjlmx_htbh}),trim(#{item.gcjlmx_wcsl}))
+                insert into rcyh_gcjld_mx(GCJL_ID, GCJLMX_DJBH,GCJLMX_ZMID, GCJLMX_ZMH, GCJLMX_ZMMC, GCJLMX_HTSL, GCJLMX_JlDW, GCJLMX_HTDJ, GCJLMX_KKJE, GCJLMX_HTJE, GCJLMX_ZJE,GCJLMX_HTBH,GCJLMX_WCSL, GCJLMX_BLX)  values
+                (sys_guid(),trim(#{gcjl_djbh}),trim(#{item.gcjlmx_zmid}),trim(#{item.gcjlmx_zmh}),trim(#{item.gcjlmx_zmmc}),trim(#{item.gcjlmx_htsl}),trim(#{item.gcjlmx_jldw}),trim(#{item.gcjlmx_htdj}),trim(#{item.gcjlmx_kkje}),trim(#{item.gcjlmx_htje}),trim(#{item.gcjlmx_htje})-trim(#{item.gcjlmx_kkje}),trim(#{item.gcjlmx_htbh}),trim(#{item.gcjlmx_wcsl},trim(#{item.gcjlmx_blx}))
             </foreach>
         ;end;
     </insert>
@@ -642,7 +642,8 @@
         order by ZQCWZF_HTBH,ZQZFMX_ZMBH
     </select>
 
-    <!--  添加工程计量单  -->
+    <!--  添加《中（终）期财务支付证书》  -->
+    <!-- 此SQL可能有Bug，逗号的位置不对 ： LR - 2019-02-28 -->
     <insert id="addZqcwzfForJlzf" parameterType="com.hdsx.rcyh.entity.Jlzf_zqcwzf">
         insert into rcyh_zqcwzfzs
         <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -675,6 +676,8 @@
             <if test="zqcwzf_flag != null" >zqcwzf_flag,</if>
             <if test="zqcwzf_gldw != null" >zqcwzf_gldw,</if>
             <if test="zqcwzf_jldw != null" >zqcwzf_jldw,</if>
+            <if test="zqcwzf_spfy != null" >ZQCWZF_SPFY,</if>
+            <if test="zqcwzf_fj != null" >ZQCWZF_FJ,</if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides="," >
             <if test="zqcwzf_gcmc != null" >#{zqcwzf_gcmc},</if>
@@ -706,6 +709,8 @@
             <if test="zqcwzf_flag != null" >#{zqcwzf_flag},</if>
             <if test="zqcwzf_gldw != null" >#{zqcwzf_gldw},</if>
             <if test="zqcwzf_jldw != null" >#{zqcwzf_jldw},</if>
+            <if test="zqcwzf_spfy != null" >#{zqcwzf_spfy},</if>
+            <if test="zqcwzf_fj != null" >#{zqcwzf_fj},</if>
         </trim>
     </insert>
     <!--  添加中期财务支付证书子表  -->
@@ -862,6 +867,38 @@
         </if>
 
         order by ZQZFMX_zfqh,zmbh
+    </select>
+
+    <!-- 中（终）期支付证书 - 明细列表，用于添加《交工结算单》时，展示其明细信息 -->
+    <resultMap type="com.hdsx.rcyh.entity.Jlzf_zqcwzfmx" id="zqcwzfzsmx">
+        <result column="zqzfmx_id" property="zqzfmx_id"/>
+        <result column="zqzfmx_mid" property="zqzfmx_mid"/>
+        <result column="zqzfmx_zmbh" property="zqzfmx_zmbh"/>
+        <result column="zqzfmx_zmmc" property="zqzfmx_zmmc"/>
+        <result column="zqzfmx_jldw" property="zqzfmx_jldw"/>
+        <result column="zqzfmx_jldwid" property="zqzfmx_jldwid"/>
+        <result column="zqzfmx_htsl" property="zqzfmx_htsl"/>
+        <result column="zqzfmx_htdj" property="zqzfmx_htdj"/>
+        <result column="zqzfmx_htje" property="zqzfmx_htje"/>
+        <result column="zqzfmx_ljwc" property="zqzfmx_ljwc"/>
+        <result column="zqzfmx_bqwcsl" property="zqzfmx_bqwcsl"/>
+        <result column="zqzfmx_bqwcje" property="zqzfmx_bqwcje"/>
+        <result column="zqzfmx_sqwcsl" property="zqzfmx_sqwcsl"/>
+        <result column="zqzfmx_sqwcje" property="zqzfmx_sqwcje"/>
+        <result column="zqzfmx_bqsl" property="zqzfmx_bqsl"/>
+        <result column="zqzfmx_bqje" property="zqzfmx_bqje"/>
+        <result column="zqzfmx_zmid" property="zqzfmx_zmid"/>
+        <result column="zqzfmx_htbh" property="zqzfmx_htbh"/>
+    </resultMap>
+
+    <!-- 根据“合同编号”查询《中（终）期支付证书 - 明细》列表，用于添加《交工结算单》时，展示其明细信息 -->
+    <select id="getZqzfzsMxList" parameterType="String" resultMap="zqcwzfzsmx">
+        SELECT * FROM RCYH_ZQCWZFZS_JLMX WHERE ZQZFMX_ZFQH = (
+          SELECT T.ZQCWZF_ZFQH FROM (
+            SELECT ROW_NUMBER()OVER(ORDER BY ZQCWZF_TBRQ DESC) AS RN,ZQCWZF_ZFQH FROM RCYH_ZQCWZFZS
+            WHERE ZQCWZF_HTBH = #{htbh}
+          ) T WHERE T.RN = 1
+        )
     </select>
 
 </mapper>

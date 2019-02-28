@@ -186,6 +186,18 @@
         <result column="HYQD_DW" property="hyqddw"/>
     </resultMap>
 
+    <!-- 根据“月份”和“合同编号”构建用于“养护施工计划完成明细表”的数据 -->
+    <resultMap id="createYhjdwcmxMap" type="java.util.Map">
+        <result column="ZMH" property="zmh"/>
+        <result column="XMNR" property="xmnr"/>
+        <result column="QDZH" property="qdzh"/>
+        <result column="ZDZH" property="zdzh"/>
+        <result column="YJGCL" property="yjgcl"/>
+        <result column="JHKSRQ" property="jhksrq"/>
+        <result column="JHJSRQ" property="jhjsrq"/>
+        <result column="WCGCL" property="wcgcl"/>
+    </resultMap>
+
     <!-- 根据养护巡查ID查询病害List -->
     <select id="getBhListByYhxcID" parameterType="String" resultMap="bhList">
         SELECT * FROM RCYH_XCSB WHERE RWMX_MID = #{id}
@@ -769,14 +781,14 @@
     <!-- 查询维修施工照片记录列表（用于计量工程单查询明细） -->
     <select id="getWxsgzpjlByHtAndYd" parameterType="java.util.Map" resultMap="wxsgzpjlList">
         SELECT ROW_NUMBER()OVER(ORDER BY RWMX_TBRQ) AS RN,SHMJ.MEIJUMC AS SHLXNAME,BHMJ.MEIJUMC AS BHLXNAME,
-        YHQD.HYQD_ZMH,YHQD.HYQD_ZMMC,YHQD.HYQD_DW,
-        'http://192.168.10.234:8080/uploadFiles/20190110/hdsx_154712995422_1.jpg' AS ysqtp,
-        'http://192.168.10.234:8080/uploadFiles/20190110/hdsx_154712995422_2.jpg' AS yshzp,
-        SJMJ.MEIJUMC AS SJLXNAME,A.* FROM RCYH_XCSB A
-        LEFT JOIN HTGL_ENUMERATE SHMJ ON A.RWMX_SHLX = SHMJ.MEIJUBM
-        LEFT JOIN HTGL_ENUMERATE BHMJ ON A.RWMX_BHLX = BHMJ.MEIJUBM
-        LEFT JOIN HTGL_ENUMERATE SJMJ ON A.RWMX_SJLX = SJMJ.MEIJUBM
-        LEFT JOIN DJSJ_YHQD YHQD ON BHMJ.MEIJUMC = YHQD.HYQD_ZMMC
+           A.RWMX_ZMH AS HYQD_ZMH,A.RWMX_ZMMC AS HYQD_ZMMC,ZM.ZMHT_JLDW AS HYQD_DW,
+           'http://192.168.10.234:8080/uploadFiles/20190110/hdsx_154712995422_1.jpg' AS ysqtp,
+           'http://192.168.10.234:8080/uploadFiles/20190110/hdsx_154712995422_2.jpg' AS yshzp,
+           SJMJ.MEIJUMC AS SJLXNAME,A.* FROM RCYH_XCSB A
+           LEFT JOIN HTGL_ENUMERATE SHMJ ON A.RWMX_SHLX = SHMJ.MEIJUBM
+           LEFT JOIN HTGL_ENUMERATE BHMJ ON A.RWMX_BHLX = BHMJ.MEIJUBM
+           LEFT JOIN HTGL_ENUMERATE SJMJ ON A.RWMX_SJLX = SJMJ.MEIJUBM
+           LEFT JOIN GG_ZMHT ZM ON A.RWMX_ZMH = ZM.ZMHT_ZMH
         WHERE YHRWD_DJBH IN (SELECT YHRWD_DJBH FROM RCYH_XXRW_YHRWD WHERE YHRWD_YSZT = '1502')
         AND RWMX_DWMC = (SELECT HTXX_XMSGLX FROM DJSJ_HTXX WHERE HTXX_HTBH = #{htxxhtbh})
         AND TO_NUMBER(TO_CHAR(RWMX_TBRQ, 'yyyyMM')) = #{yd}
@@ -784,14 +796,14 @@
 
     <!-- 计量工程明细，表2（用于计量工程单查询明细） -->
     <select id="getJlgcMx2ByHtAndYd" parameterType="java.util.Map" resultMap="wxsgzpjlList">
-        SELECT '1002-8' AS HYQD_ZMH,'施工单位履约检查' AS HYQD_ZMMC,A.PMMTLYJCB_SGDW,
+        <!-- SELECT '1002-8' AS HYQD_ZMH,'施工单位履约检查' AS HYQD_ZMMC,A.PMMTLYJCB_SGDW,
             COUNT(*) AS HTNUM,ROUND((HT.HTXX_HTJEHS/COUNT(*)), 2) AS HTDJ,HT.HTXX_HTJEHS AS HTJE,SUM(A.PMMTLYJCB_FJHJ) AS PMMTLYJCB_FJHJ,
             (HT.HTXX_HTJEHS - SUM(A.PMMTLYJCB_FJHJ)) AS JE
             FROM RCYH_SGDWLYJCB A
             LEFT JOIN DJSJ_HTXX HT ON HT.HTXX_HTBH = A.PMMTLYJCB_HTBH
             WHERE A.PMMTLYJCB_HTBH = #{htxxhtbh} AND TO_CHAR(A.PMMTLYJCB_JCRQ, 'yyyyMM') = #{yd}
         GROUP BY A.PMMTLYJCB_SGDW,HT.HTXX_HTJEHS
-        UNION ALL
+        UNION ALL -->
         SELECT '1002-2' AS HYQD_ZMH,'路况日常巡查' AS HYQD_ZMMC,A.RCYHXCKHB_SGDW,
             COUNT(*) AS HTNUM,ROUND((HT.HTXX_HTJEHS/COUNT(*)), 2) AS HTDJ,HT.HTXX_HTJEHS AS HTJE,SUM(A.RCYHXCKHB_BYKKHJ) AS PMMTLYJCB_FJHJ,
             (HT.HTXX_HTJEHS - SUM(A.RCYHXCKHB_BYKKHJ)) AS JE
@@ -799,14 +811,14 @@
             LEFT JOIN DJSJ_HTXX HT ON HT.HTXX_HTMC = A.RCYHXCKHB_GCMC
             WHERE A.RCYHXCKHB_GCMC = #{htxxhtmc} AND TO_CHAR(A.RCYHXCKHB_YD, 'yyyyMM') =#{yd}
         GROUP BY A.RCYHXCKHB_SGDW,HT.HTXX_HTJEHS
-        UNION ALL
+        <!-- UNION ALL
         SELECT '1002-9' AS HYQD_ZMH,'进场准备情况检查' AS HYQD_ZMMC,A.PMMTJCZBQKJCB_SGDW,
             COUNT(*) AS HTNUM,ROUND((HT.HTXX_HTJEHS/COUNT(*)), 2) AS HTDJ,HT.HTXX_HTJEHS AS HTJE,SUM(A.PMMTJCZBQKJCB_WYFJ) AS PMMTLYJCB_FJHJ,
             (HT.HTXX_HTJEHS - SUM(A.PMMTJCZBQKJCB_WYFJ)) AS JE
             FROM RCYH_JCZBQKJCB A
             LEFT JOIN DJSJ_HTXX HT ON HT.HTXX_HTBH = A.PMMTJCZBQKJCB_HTBH
             WHERE A.PMMTJCZBQKJCB_HTBH = #{htxxhtbh} AND TO_CHAR(A.PMMTJCZBQKJCB_JCRQ, 'yyyyMM') = #{yd}
-        GROUP BY A.PMMTJCZBQKJCB_SGDW,HT.HTXX_HTJEHS
+        GROUP BY A.PMMTJCZBQKJCB_SGDW,HT.HTXX_HTJEHS -->
     </select>
 
     <!-- 添加“养护/清扫任务单子表”数据 -->
@@ -828,9 +840,37 @@
 
     <!-- 根据“月度计划ID”查询其所属合同的子目下拉框。 -->
     <select id="getZmxxByYdjhID" parameterType="String" resultType="java.util.Map">
-        SELECT * FROM DJSJ_HTXX_ZMQD WHERE HTBH = (
+        SELECT * FROM GG_ZMHT WHERE ZMHT_HTBH = (
           SELECT YDJH_HTBH FROM RCYH_YDSGJH WHERE YDJH_ID = #{yhijid}
         )
+    </select>
+
+    <!-- 根据“月份”和“合同编号”构建用于“养护施工计划完成明细表”的数据 -->
+    <select id="getCreateYhjdwcmxByYfAndHtbh" parameterType="java.util.Map" resultMap="createYhjdwcmxMap">
+        SELECT A.ZMH, A.XMNR,YHJH.QDZH, YHJH.ZDZH, YHJH.YJGCL, YHJH.JHKSRQ, YHJH.JHJSRQ, BH.WCGCL FROM (
+          SELECT YHJHMX2_ZMH AS zmh, YHJHMX2_XMNR AS xmnr FROM RCYH_YDSGJHSB_MX WHERE YHJHMX2_MID IN (
+            SELECT YDJH_ID FROM RCYH_YDSGJH WHERE TO_CHAR(YDJH_YF, 'yyyy-MM') = #{yf} AND YDJH_HTBH = #{htbh}
+          )
+          UNION
+          SELECT DISTINCT RWMX_ZMH AS zmh,RWMX_ZMMC AS xmnr FROM RCYH_XCSB WHERE RWMX_MID IN (
+            SELECT XCRW_ID FROM RCYH_QDXC WHERE XCRW_YDJHID IN (
+              SELECT YDJH_ID FROM RCYH_YDSGJH WHERE TO_CHAR(YDJH_YF, 'yyyy-MM') = #{yf} AND YDJH_HTBH = #{htbh}
+            )
+          )
+        ) A LEFT JOIN (
+          SELECT YHJHMX2_ZMH AS zmh, YHJHMX2_QDZH AS qdzh, YHJHMX2_ZDZH AS zdzh,
+            YHJHMX2_YJGCL AS yjgcl, YHJHMX2_JHKSRQ AS jhksrq, YHJHMX2_JHJSRQ AS jhjsrq
+          FROM RCYH_YDSGJHSB_MX WHERE YHJHMX2_MID IN (
+            SELECT YDJH_ID FROM RCYH_YDSGJH WHERE TO_CHAR(YDJH_YF, 'yyyy-MM') = #{yf} AND YDJH_HTBH = #{htbh}
+          )
+        ) YHJH ON YHJH.ZMH = A.ZMH LEFT JOIN (
+          SELECT DISTINCT RWMX_ZMH AS zmh,RWMX_ZMMC AS xmnr,SUM(RWMX_BHSL) AS wcgcl FROM RCYH_XCSB WHERE RWMX_MID IN (
+            SELECT XCRW_ID FROM RCYH_QDXC WHERE XCRW_YDJHID IN (
+              SELECT YDJH_ID FROM RCYH_YDSGJH WHERE TO_CHAR(YDJH_YF, 'yyyy-MM') = #{yf} AND YDJH_HTBH = #{htbh}
+            )
+          ) GROUP BY RWMX_ZMH ,RWMX_ZMMC
+        ) BH ON BH.ZMH = A.ZMH
+        WHERE A.ZMH IS NOT NULL
     </select>
 
 </mapper>

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -388,7 +389,7 @@ public class RcyhXxrwController {
     }
 
     @GetMapping("getWxsgzpjlByHtAndYd")
-    @ApiOperation("查询维修施工照片记录列表（用于计量工程单查询明细）HT-CS-20180000009 + 2018-12")
+    @ApiOperation("查询维修施工照片记录列表（用于计量工程单查询明细）HT-CS-20180000009 + 2019-02")
     @ApiImplicitParams({
             @ApiImplicitParam(paramType="query", dataType = "String", name = "htxxhtbh", value = "合同编号", required = true),
             @ApiImplicitParam(paramType="query", dataType = "String", name = "yd", value = "月度（yyyy-MM）", required = true)
@@ -480,6 +481,32 @@ public class RcyhXxrwController {
     public Msg getZmxxByYdjhID(@RequestParam(value = "yhijid",required = false) String yhijid){
         try {
             return ResultUtil.success(service.getZmxxByYdjhID(yhijid));
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResultUtil.error("查询失败！");
+        }
+    }
+
+    /**
+     * 根据“月份”和“合同编号”构建用于“养护施工计划完成明细表”的数据
+     * @param yf
+     * @param htbh
+     * @return
+     */
+    @GetMapping("getCreateYhjdwcmxByYfAndHtbh")
+    @ApiOperation("根据“月份”和“合同编号”构建用于“养护施工计划完成明细表”的数据（yf：2019-02、htbh：HT-CS-20180000002）")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "yf", value = "月份（yyyy-MM）", required = true),
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "htbh", value = "合同编号", required = true)
+    })
+    public Msg getCreateYhjdwcmxByYfAndHtbh(
+            @RequestParam(value = "yf",required = false)String yf,
+            @RequestParam(value = "htbh",required = false)String htbh){
+        try {
+            Map map = new HashMap();
+            map.put("yf", yf);
+            map.put("htbh", htbh);
+            return ResultUtil.success(service.getCreateYhjdwcmxByYfAndHtbh(map));
         }catch (Exception e){
             e.printStackTrace();
             return ResultUtil.error("查询失败！");
