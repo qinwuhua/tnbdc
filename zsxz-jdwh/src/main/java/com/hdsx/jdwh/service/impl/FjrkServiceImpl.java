@@ -59,4 +59,9 @@ public class FjrkServiceImpl implements FjrkService {
         return list;
     }
 
+    @Override
+    public int getRkCount(Fjrk fjrk) {
+        return fjrkMapper.getRkCount(fjrk);
+    }
+
 }

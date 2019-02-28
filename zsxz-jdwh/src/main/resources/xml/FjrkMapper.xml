@@ -30,10 +30,15 @@
         and TKDJBH=#{value}
     </select>
 
+    <select id="getRkCount" parameterType="com.hdsx.jdwh.entity.Fjrk" resultType="int">
+        select count(*) from JDWH_BJ_FJRK where wxdh=#{wxdh}
+    </select>
+
     <select id="getWxdhInfByDw" parameterType="hashmap" resultType="hashmap">
         select djbh as "wxdh",t.sbmc as "bjmc",ggxh as "ggxh",1 "tksl" from jdwh_gzbx t where 1=1
         <if test="djbh != null">and djbh=#{djbh}</if>
         <if test="tbdwdm != null">and tbdwdm like #{tbdwdm}||'%'</if>
+        and djbh not in (select wxdh from JDWH_BJ_FJRK)
     </select>
 
     <insert id="addFjrk" parameterType="com.hdsx.jdwh.entity.Fjrk">

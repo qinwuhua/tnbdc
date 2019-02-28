@@ -31,4 +31,6 @@ public interface FjrkMapper {
     List<Fjrk> getFjrkList(Map<String, String> param);
 
     List<Fjrkmx> getFjrkmxByPdjbh(String djbh);
+
+    int getRkCount(Fjrk fjrk);
 }

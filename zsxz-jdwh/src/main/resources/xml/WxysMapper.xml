@@ -9,6 +9,7 @@
         where 1=1
         <if test="tbdwdm !=null and tbdwdm !=''">and t1.tbdwdm like #{tbdwdm}||'%'</if>
         <if test="bxdh !=null and bxdh !=''">and t2.djbh like #{bxdh}||'%'</if>
+        and t1.bxdh not in (select bxdh from JDWH_WXYS)
     </select>
 
     <insert id="addWxys" parameterType="com.hdsx.jdwh.entity.Wxys">
@@ -97,6 +98,10 @@
 
     <select id="getYdjCount" resultType="int" parameterType="com.hdsx.jdwh.entity.Wxys">
          select count(*) from JDWH_GZBX where djbh=#{bxdh} and DJZT='已登记'
+    </select>
+
+    <select id="getYysCount" resultType="int" parameterType="com.hdsx.jdwh.entity.Wxys">
+         select count(*) from jdwh_wxys where bxdh=#{bxdh}
     </select>
 
 </mapper>

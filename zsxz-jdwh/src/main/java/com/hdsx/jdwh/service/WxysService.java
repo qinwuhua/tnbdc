@@ -23,4 +23,6 @@ public interface WxysService {
     int spWxysByDjbh(Map<String, Object> param);
 
     int getYdjCount(Wxys wxys);
+
+    int getYysCount(Wxys wxys);
 }
