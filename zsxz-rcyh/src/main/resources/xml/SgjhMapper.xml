@@ -227,7 +227,7 @@
 
     <insert id="addWcsgjhmx" parameterType="java.util.List">
         INSERT INTO RCYH_YDSGWC_MX(YHJHWCMX2_ID,YHJHWCMX2_MID,YHJHWCMX2_XMNR,YHJHWCMX2_QDZH,YHJHWCMX2_ZDZH,YHJHWCMX2_YJGCL,YHJHWCMX2_WCGCL,
-                             YHJHWCMX2_JHKSRQ,YHJHWCMX2_JHJSRQ,YHJHWCMX2_SJKSRQ,YHJHWCMX2_SJJSRQ,YHJHWCMX2_BZ,)
+                             YHJHWCMX2_JHKSRQ,YHJHWCMX2_JHJSRQ,YHJHWCMX2_SJKSRQ,YHJHWCMX2_SJJSRQ,YHJHWCMX2_BZ,YHJHMX2_ZMH)
         <foreach collection="list" item="item" index="index" open="(" close=")" separator="union">
                 SELECT sys_guid(),#{item.mid,jdbcType=VARCHAR},#{item.xmnr,jdbcType=VARCHAR},
             #{item.qdzh,jdbcType=VARCHAR},#{item.zdzh,jdbcType=VARCHAR},#{item.yjgcl,jdbcType=NUMERIC},#{item.wcgcl,jdbcType=NUMERIC},
