@@ -20,4 +20,6 @@ public interface FjrkService {
     Fjrk getFjrkInfoByDjbh(String djbh);
 
     List<Fjrk> getFjrkList(Map<String, String> param, int pageNum, int pageSize);
+
+    int getRkCount(Fjrk fjrk);
 }

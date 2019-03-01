@@ -58,6 +58,11 @@ public class WxysController {
             if(k==0){
                 return ResultUtil.error("未登记，保存失败");
             }
+            //如果已经填过了，就不让验收了
+            int j=wxysService.getYysCount(wxys);
+            if(j>0){
+                return ResultUtil.error("已经录入过验收，保存失败");
+            }
 
             int flag=wxysService.addWxys(wxys);
             if(flag>0)

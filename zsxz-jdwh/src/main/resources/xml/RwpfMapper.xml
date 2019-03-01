@@ -28,7 +28,9 @@
     </update>
 
     <select id="getWxrwdList" parameterType="string" resultType="com.hdsx.jdwh.entity.Gzbx">
-        select t.*,RYXM, SSDW, SSBM, RYLX,ssdwdm from JDWH_GZBX t left join JDWH_WXRY t2 on t.wxrid=t2.id
+        select t.*,RYXM, SSDW, SSBM, RYLX,ssdwdm,nvl(ys.spzt,'未录入') yszt,decode(rk.wxdh,null,'未入库','已入库') fjkzt from JDWH_GZBX t left join JDWH_WXRY t2 on t.wxrid=t2.id
+        left join (select bxdh,spzt from jdwh_wxys) ys on t.djbh=ys.bxdh
+        left join (select wxdh from JDWH_BJ_FJRK) rk on t.djbh=rk.wxdh
         where 1=1
         <if test="djbh !=null and djbh !=''">and t.djbh like #{djbh}||'%'</if>
         <if test="ssdwdm !=null and ssdwdm !=''">and ssdwdm like #{ssdwdm}||'%'</if>

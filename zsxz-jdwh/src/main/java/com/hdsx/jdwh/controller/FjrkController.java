@@ -54,6 +54,10 @@ public class FjrkController {
     public Msg addFjrk(@RequestBody Fjrk fjrk){
         try {
             //判断是否大于数量
+            //如果已经入库了则不能再入库
+            int i=fjrkService.getRkCount(fjrk);
+            if(i>0)
+                return ResultUtil.error("已经入库,保存失败");
             int flag=fjrkService.addFjrk(fjrk);
             if(flag>0)
                 return ResultUtil.success("保存成功");

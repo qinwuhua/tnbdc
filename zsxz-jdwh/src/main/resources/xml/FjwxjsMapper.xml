@@ -31,12 +31,12 @@
     </select>
 
     <select id="getFjwxdInfByDw" parameterType="hashmap" resultType="hashmap">
-        select * from jdwh_bj_fjwx where 1=1
+        select * from jdwh_bj_fjwx where 1=1 <!--  and djbh not in (select wxdh from JDWH_BJ_WXJS) -->
         <if test="tbdwdm != null"> and tbdwdm like #{tbdwdm}||'%'</if>
     </select>
 
     <select id="getFjwxdBjInfByDw" parameterType="hashmap" resultType="hashmap">
-        select * from jdwx_bj_wxmx where 1=1
+        select XH "xh", BJMC "wxbj", WXBJBH "wxbjbh", GGXH "ggxh", CCWZ "ccwz", YJWXFY "yjwxfy", BZ "bz", FJID "fjid" from jdwx_bj_wxmx where 1=1
         <if test="djbh != null"> and pdjbh like #{djbh}</if>
     </select>
 
