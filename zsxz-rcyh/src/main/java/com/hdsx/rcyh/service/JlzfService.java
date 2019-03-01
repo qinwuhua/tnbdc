@@ -85,4 +85,11 @@ public interface JlzfService {
      */
     List<Jlzf_zqcwzfmx> getZqzfzsMxList(String htbh);
 
+    /**
+     * 根据“合同编号”查询《工程计量单 - 明细》列表，用于添加《中（终）期支付证书 - 明细》时，展示其明细信息
+     * @param htbh
+     * @return
+     */
+    List<Jlzf_zqcwzfmx> createZqzfzsMxList(String htbh);
+
 }

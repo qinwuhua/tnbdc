@@ -901,4 +901,29 @@
         )
     </select>
 
+    <!-- 根据“合同编号”查询《工程计量单 - 明细》列表，用于添加《中（终）期支付证书 - 明细》时，展示其明细信息 -->
+    <select id="createZqzfzsMxList" parameterType="String" resultMap="zqcwzfzsmx">
+        SELECT GCLQD.HTBH AS zqzfmx_htbh, GCLQD.ZMH AS zqzfmx_zmbh, GCLQD.ZMMC AS zqzfmx_zmmc, GCLQD.JLDW AS zqzfmx_jldw,
+            GCLQD.JLDWID AS zqzfmx_jldwid, GCLQD.HTSL AS zqzfmx_htsl, GCLQD.HTDJ AS zqzfmx_htdj, GCLQD.HTJE AS zqzfmx_htje,
+            GCLQD.LJWC AS zqzfmx_ljwc, GCLQD.BQWCSL AS zqzfmx_bqwcsl, GCLQD.BQWCJE AS zqzfmx_bqwcje,
+            CWZF.SQWCSL AS zqzfmx_sqwcsl, CWZF.SQWCJE AS zqzfmx_sqwcje
+        FROM (
+          SELECT GCJLMX_HTBH AS HTBH, GCJLMX_ZMH AS ZMH, GCJLMX_ZMMC AS ZMMC,
+            GCJLMX_JLDW AS JLDW, GCJLMX_JLDWID AS JLDWID, SUM(GCJLMX_HTSL) AS HTSL,
+            SUM(GCJLMX_HTDJ) AS HTDJ, SUM(GCJLMX_HTJE) AS HTJE,
+            ROUND(((SUM(GCJLMX_WCSL) / SUM(GCJLMX_HTSL)) * 100), 2)||'%' AS LJWC,
+            SUM(GCJLMX_WCSL) AS BQWCSL, SUM(GCJLMX_ZJE) AS BQWCJE
+          FROM RCYH_GCJLD_MX WHERE GCJLMX_DJBH IN (
+            SELECT GCJL_DJBH FROM RCYH_GCJLD WHERE GCJL_HTBH = #{htbh}
+          ) GROUP BY GCJLMX_ZMH, GCJLMX_ZMMC, GCJLMX_JLDW, GCJLMX_JLDWID, GCJLMX_HTBH
+        ) GCLQD LEFT JOIN (
+          SELECT ZQZFMX_ZMBH AS ZMH, ZQZFMX_BQWCSL AS SQWCSL, ZQZFMX_BQWCJE AS SQWCJE FROM RCYH_ZQCWZFZS_JLMX
+          WHERE ZQZFMX_HTBH = #{htbh} AND ZQZFMX_ZFQH = (
+            SELECT ZQCWZF_ZFQH FROM (
+              SELECT ROW_NUMBER()OVER(ORDER BY ZQCWZF_TBRQ DESC) AS RN, ZQCWZF_ZFQH FROM RCYH_ZQCWZFZS WHERE ZQCWZF_TBRQ IS NOT NULL AND ZQCWZF_HTBH = 'HT-CS-20180000005'
+            ) WHERE RN = 1
+          )
+        ) CWZF ON GCLQD.ZMH = CWZF.ZMH
+    </select>
+
 </mapper>
