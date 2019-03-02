@@ -276,8 +276,24 @@ public class RcyhXxrwServiceImpl implements RcyhXxrwService {
 
     @Override
     public boolean insertRwdSubsidiary(RwdSubsidiary bean) {
+        String idStr = UUID.randomUUID().toString();
+        bean.setId(idStr);
         if(mapper.insertRwdSubsidiary(bean) > 0 ){
-            return true;
+            Map parMap = new HashMap();
+            parMap.put("value", "1403");
+            if("qs".equals(bean.getSslx())){
+                parMap.put("rowname", "QSRWD_SHZT");
+                parMap.put("qsrwdid", bean.getRwdid());
+                if(mapper.updateXxrwQsrwdShQszt(parMap) > 0 ){
+                    return true;
+                }
+            }else if("yh".equals(bean.getSslx())){
+                parMap.put("rowname", "YHRWD_RWDSHZT");
+                parMap.put("yhrwddjbh", bean.getRwdid());
+                if(mapper.updateXxrwYhrwd(parMap) > 0 ){
+                    return true;
+                }
+            }
         }
         return false;
     }

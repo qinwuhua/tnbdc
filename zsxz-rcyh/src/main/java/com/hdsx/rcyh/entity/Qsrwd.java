@@ -26,8 +26,9 @@ public class Qsrwd implements Serializable {
     private String qsrwdlxr;
     private String qsrwdlxdh;
     private String qsrwdlmjbsy;
+    private String qsrwdlxjbsy;//“路面结冰撒盐”，PDM中的字段为上面那个，但是数据库是现在这个
     private String qsrwdsjsm;
-    private String qsrwdstbr;
+    private String qsrwdtbr;
     private String qsrwdtbsj;
     private String qsrwdtbdw;
     private String qsrwdtbbm;

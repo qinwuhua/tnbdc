@@ -487,14 +487,44 @@
     <!-- 添加“小修任务 - 清扫任务单”数据 -->
     <insert id="insertXxrwQsrwd" parameterType="com.hdsx.rcyh.entity.Qsrwd">
         INSERT INTO RCYH_XXRW_QSRWD (
-            QSRWD_ID,QSRWD_DJBH,QSRWD_XXLY,QSRWD_SJLX,QSRWD_SJSJ,QSRWD_SJDD,
-            QSRWD_SJLD,QSRWD_FX,QSRWD_ZH,QSRWD_LXR,QSRWD_LXDH,QSRWD_LXJBSY,
-            QSRWD_SJSM,QSRWD_TBR,QSRWD_TBSJ,QSRWD_TBDW,QSRWD_TBBM,QSRWD_BZ,
+            <if test="qsrwdid != null and qsrwdid !=''">QSRWD_ID,</if>
+            <if test="qsrwddjbh != null and qsrwddjbh !=''">QSRWD_DJBH,</if>
+            <if test="qsrwdxxly != null and qsrwdxxly !=''">QSRWD_XXLY,</if>
+            <if test="qsrwdsjlx != null and qsrwdsjlx !=''">QSRWD_SJLX,</if>
+            <if test="qsrwdsjsj != null and qsrwdsjsj !=''">QSRWD_SJSJ,</if>
+            <if test="qsrwdsjdd != null and qsrwdsjdd !=''">QSRWD_SJDD,</if>
+            <if test="qsrwdsjld != null and qsrwdsjld !=''">QSRWD_SJLD,</if>
+            <if test="qsrwdfx != null and qsrwdfx !=''">QSRWD_FX,</if>
+            <if test="qsrwdzh != null and qsrwdzh !=''">QSRWD_ZH,</if>
+            <if test="qsrwdlxr != null and qsrwdlxr !=''">QSRWD_LXR,</if>
+            <if test="qsrwdlxdh != null and qsrwdlxdh !=''">QSRWD_LXDH,</if>
+            <if test="qsrwdlxjbsy != null and qsrwdlxjbsy !=''">QSRWD_LXJBSY,</if>
+            <if test="qsrwdsjsm != null and qsrwdsjsm !=''">QSRWD_SJSM,</if>
+            <if test="qsrwdtbr != null and qsrwdtbr !=''">QSRWD_TBR,</if>
+            <if test="qsrwdtbsj != null and qsrwdtbsj !=''">QSRWD_TBSJ,</if>
+            <if test="qsrwdtbdw != null and qsrwdtbdw !=''">QSRWD_TBDW,</if>
+            <if test="qsrwdtbbm != null and qsrwdtbbm !=''">QSRWD_TBBM,</if>
+            <if test="qsrwdbz != null and qsrwdbz !=''">QSRWD_BZ,</if>
             QSRWD_SHZT,QSRWD_QSZT
         ) VALUES (
-            #{qsrwdid}, #{qsrwddjbh}, #{qsrwdxxly}, #{qsrwdsjlx}, #{qsrwdsjsj}, #{qsrwdsjdd},
-            #{qsrwdsjld}, #{qsrwdfx}, #{qsrwdzh}, #{qsrwdlxr}, #{qsrwdlxdh}, #{qsrwdlxjbsy},
-            #{qsrwdsjsm}, #{qsrwdtbr}, #{qsrwdtbsj}, #{qsrwdtbdw}, #{qsrwdtbbm}, #{qsrwdbz},
+            <if test="qsrwdid != null and qsrwdid !=''">#{qsrwdid},</if>
+            <if test="qsrwddjbh != null and qsrwddjbh !=''">#{qsrwddjbh},</if>
+            <if test="qsrwdxxly != null and qsrwdxxly !=''">#{qsrwdxxly},</if>
+            <if test="qsrwdsjlx != null and qsrwdsjlx !=''">#{qsrwdsjlx},</if>
+            <if test="qsrwdsjsj != null and qsrwdsjsj !=''">TO_DATE(#{qsrwdsjsj}, 'yyyy-MM-dd'),</if>
+            <if test="qsrwdsjdd != null and qsrwdsjdd !=''">#{qsrwdsjdd},</if>
+            <if test="qsrwdsjld != null and qsrwdsjld !=''">#{qsrwdsjld},</if>
+            <if test="qsrwdfx != null and qsrwdfx !=''">#{qsrwdfx},</if>
+            <if test="qsrwdzh != null and qsrwdzh !=''">#{qsrwdzh},</if>
+            <if test="qsrwdlxr != null and qsrwdlxr !=''">#{qsrwdlxr},</if>
+            <if test="qsrwdlxdh != null and qsrwdlxdh !=''">#{qsrwdlxdh},</if>
+            <if test="qsrwdlxjbsy != null and qsrwdlxjbsy !=''">#{qsrwdlxjbsy},</if>
+            <if test="qsrwdsjsm != null and qsrwdsjsm !=''">#{qsrwdsjsm},</if>
+            <if test="qsrwdtbr != null and qsrwdtbr !=''">#{qsrwdtbr},</if>
+            <if test="qsrwdtbsj != null and qsrwdtbsj !=''">TO_DATE(#{qsrwdtbsj}, 'yyyy-MM-dd'),</if>
+            <if test="qsrwdtbdw != null and qsrwdtbdw !=''">#{qsrwdtbdw},</if>
+            <if test="qsrwdtbbm != null and qsrwdtbbm !=''">#{qsrwdtbbm},</if>
+            <if test="qsrwdbz != null and qsrwdbz !=''">#{qsrwdbz},</if>
             '1401', '1601'
         )
     </insert>
@@ -502,7 +532,7 @@
     <!-- 根据病害ID查询病害的详细信息：用于添加清扫任务单 -->
     <select id="getBhByRwmxdwid" parameterType="String" resultMap="bhList">
         SELECT A.RWMX_SJLX,A.RWMX_FXSJ,A.RWMX_GPS,B.XCRW_XCLX AS XCLX,B.XCRW_XCFX AS XCFX,A.RWMX_ZH,A.RWMX_SJSM
-        FROM RCYH_XCSB A LEFT JOIN RCYH_QDXC B ON A.RWMX_ID = B.XCRW_ID WHERE A.RWMX_DWID = #{rwmxid}
+        FROM RCYH_XCSB A LEFT JOIN RCYH_QDXC B ON A.RWMX_ID = B.XCRW_ID WHERE A.RWMX_ID = #{rwmxid}
     </select>
 
     <!-- 修改“小修任务 - 清扫任务单”的审核/清扫状态 -->
@@ -826,9 +856,8 @@
         INSERT INTO RCYH_RWD_SUBSIDIARY (
             SUB_ID, SUB_RWDID, SUB_SJID, SUB_RYID, SUB_RYMC, SUB_ZPSJ, SUB_WXZT, SUB_SSLX
             <if test="wxsj != null and wxsj !=''">, SUB_WXSJ</if>
-        )
-        VALUES (
-            #{id}, #{rwdid}, #{sjid}, #{ryid}, #{rymc}, TO_DATE(#{zpsj}, 'yyyy-MM-dd hh24:mi:ss'), '2101', #{sslx}
+        ) VALUES (
+            #{id}, #{rwdid}, #{sjid}, #{ryid}, #{rymc}, TO_DATE(#{zpsj}, 'yyyy-MM-dd'), '2101', #{sslx}
             <if test="wxsj != null and wxsj !=''">, TO_DATE(#{wxsj}, 'yyyy-MM-dd hh24:mi:ss')</if>
         )
     </insert>
