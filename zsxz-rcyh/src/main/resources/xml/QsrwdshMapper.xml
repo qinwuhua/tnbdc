@@ -47,8 +47,10 @@
         T.QSRWD_BZ qsrwdbz,
         T.QSRWD_SHZT qsrwdshzt,
         to_char(T.QSRWD_SJSJ,'yyyy/mm/dd')  qsrwdsjsj,
-        to_char(T.QSRWD_TBSJ,'yyyy/mm/dd')  qsrwdtbsj
+        to_char(T.QSRWD_TBSJ,'yyyy/mm/dd')  qsrwdtbsj,
+        BH.RWMX_ID AS BHID
         FROM rcyh_xxrw_qsrwd T
+        LEFT JOIN RCYH_XCSB BH ON BH.YHRWD_DJBH = T.QSRWD_ID
         where 1=1
         <if test="qsrwdsjlx != null and qsrwdsjlx != ''">
             and T.QSRWD_SJLX=#{qsrwdsjlx}

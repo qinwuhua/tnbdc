@@ -112,6 +112,7 @@
         <result column="QSRWD_BZ" property="qsrwdbz"/>
         <result column="QSRWD_SHZT" property="qsrwdshzt"/>
         <result column="QSRWD_QSZT" property="qsrwdqszt"/>
+        <result column="RWMX_ID" property="bhid"/>
     </resultMap>
 
     <!-- 合同信息（工程项目） -->
@@ -544,12 +545,13 @@
     <select id="getQsrwdList" parameterType="java.util.Map" resultMap="qsrwdList">
         SELECT * FROM (
             SELECT ROW_NUMBER()OVER(ORDER BY QSRWD_TBSJ DESC) AS RN,SJLXMJ.MEIJUMC AS SJLXNAME,
-              LX.LXNAME,SHMJ.MEIJUMC AS SHZTNAME,QSMJ.MEIJUMC AS SQZTNAME,A.*
+              LX.LXNAME,SHMJ.MEIJUMC AS SHZTNAME,QSMJ.MEIJUMC AS SQZTNAME,BH.RWMX_ID,A.*
             FROM RCYH_XXRW_QSRWD A
                 LEFT JOIN HTGL_ENUMERATE SJLXMJ ON A.QSRWD_SJLX = SJLXMJ.MEIJUBM
                 LEFT JOIN HTGL_ENUMERATE SHMJ ON A.QSRWD_SHZT = SHMJ.MEIJUBM
                 LEFT JOIN HTGL_ENUMERATE QSMJ ON A.QSRWD_QSZT = QSMJ.MEIJUBM
                 LEFT JOIN HTGL_LXB LX ON A.QSRWD_SJLD = LX.ID
+                LEFT JOIN RCYH_XCSB BH ON BH.YHRWD_DJBH = A.QSRWD_ID
             WHERE 1=1
             <if test="stime != null and stime !=''">
                 <!-- 填报日期 -->
