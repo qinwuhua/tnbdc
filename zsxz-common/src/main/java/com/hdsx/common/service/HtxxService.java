@@ -17,4 +17,5 @@ public interface HtxxService {
 
     List<Htxx> getHtxxRelatedAll(HashMap<String,String> paramMap);
 
+    List<Htxx> getZjHtxxRelatedAll(HashMap<String, String> paramMap);
 }

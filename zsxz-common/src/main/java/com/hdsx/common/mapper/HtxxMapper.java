@@ -18,4 +18,6 @@ public interface HtxxMapper {
     List<HashMap<String, Object>> getHtxxYhAll();
 
     List<Htxx> getHtxxRelateAll(HashMap<String, String> paramMap);
+
+    List<Htxx> getZjHtxxRelatedAll(HashMap<String, String> paramMap);
 }

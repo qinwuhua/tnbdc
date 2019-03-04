@@ -111,4 +111,18 @@
             <if test="htbh != null and htbh != ''"> AND jc.htxx_htbh LIKE '%'||trim(#{htbh})||'%'</if>
         </where>
     </select>
+
+    <select id="getZjHtxxRelatedAll" parameterType="hashmap" resultMap="htxxBean">
+        SELECT jc.*,gj.*,
+        ly.*,yh.*,
+        yh.*,zm.*
+        FROM DJSJ_HTXX jc
+        LEFT JOIN DJSJ_HTXX_HTGJXX gj ON jc.htxx_htbh = gj.htgjxx_htbh
+        LEFT JOIN DJSJ_HTXX_LYJCMX ly on jc.htxx_htbh = ly.mid
+        LEFT JOIN DJSJ_HTXX_YHXMXX yh on jc.htxx_htbh = yh.yhhtxx_htbh
+        LeFT JOIN gg_zmht zm on jc.htxx_htbh = zm.zmht_htbh
+        where 1=1 and jc.htxx_htbh in (select htbh from zxyh_kgsqd where zt='在建')
+        <if test="htbh != null and htbh != ''"> AND jc.htxx_htbh LIKE '%'||trim(#{htbh})||'%'</if>
+    </select>
+
 </mapper>

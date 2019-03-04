@@ -74,4 +74,18 @@ public class HtxxController {
             return ResultUtil.error("查询失败！");
         }
     }
+
+    @GetMapping("getZjHtxxRelatedAll")
+    @ApiOperation(value = "查询在建合同全部相关信息")
+    @ApiImplicitParam(paramType="query", dataType = "String", name = "htbh", value = "合同编号")
+    private Msg getZjHtxxRelatedAll(@RequestParam(value = "htbh",required = false)String htbh){
+        try {
+            HashMap<String,String> paramMap = new HashMap<>();
+            paramMap.put("htbh",htbh);
+            return ResultUtil.success(htxxService.getZjHtxxRelatedAll(paramMap));
+        }catch (Exception e){
+            return ResultUtil.error("查询失败！");
+        }
+    }
+
 }

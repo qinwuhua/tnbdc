@@ -40,4 +40,9 @@ public class HtxxServiceImpl implements HtxxService {
     public List<Htxx> getHtxxRelatedAll(HashMap<String,String> paramMap) {
         return htxxMapper.getHtxxRelateAll(paramMap);
     }
+
+    @Override
+    public List<Htxx> getZjHtxxRelatedAll(HashMap<String, String> paramMap) {
+        return htxxMapper.getZjHtxxRelatedAll(paramMap);
+    }
 }
