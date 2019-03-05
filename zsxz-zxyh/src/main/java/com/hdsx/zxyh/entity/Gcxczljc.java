@@ -48,4 +48,6 @@ public class Gcxczljc {
     private String bzdw;
     // 编制日期
     private Date bzrq;
+
+    private String spzt;
 }

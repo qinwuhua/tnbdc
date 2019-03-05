@@ -131,6 +131,27 @@
         </collection>
 
     </resultMap>
+    <resultMap  type="com.hdsx.zxyh.entity.Gczfzqcwzfmx" id="zqcwzfmx">
+        <result column="zqzfmx_id" property="zqzfmx_id"/>
+        <result column="zqzfmx_mid" property="zqzfmx_mid"/>
+        <result column="zqzfmx_zmbh" property="zqzfmx_zmbh"/>
+        <result column="zqzfmx_zmmc" property="zqzfmx_zmmc"/>
+        <result column="zqzfmx_jldw" property="zqzfmx_jldw"/>
+        <result column="zqzfmx_jldwid" property="zqzfmx_jldwid"/>
+        <result column="zqzfmx_htsl" property="zqzfmx_htsl"/>
+        <result column="zqzfmx_htdj" property="zqzfmx_htdj"/>
+        <result column="zqzfmx_htje" property="zqzfmx_htje"/>
+        <result column="zqzfmx_ljwc" property="zqzfmx_ljwc"/>
+        <result column="zqzfmx_bqwcsl" property="zqzfmx_bqwcsl"/>
+        <result column="zqzfmx_bqwcje" property="zqzfmx_bqwcje"/>
+        <result column="zqzfmx_sqwcsl" property="zqzfmx_sqwcsl"/>
+        <result column="zqzfmx_sqwcje" property="zqzfmx_sqwcje"/>
+        <result column="zqzfmx_bqsl" property="zqzfmx_bqsl"/>
+        <result column="zqzfmx_bqje" property="zqzfmx_bqje"/>
+        <result column="zqzfmx_zmid" property="zqzfmx_zmid"/>
+        <result column="zqzfmx_htbh" property="zqzfmx_htbh"/>
+    </resultMap>
+
 
     <resultMap type="com.hdsx.zxyh.entity.Gczfzqcwzf" id="zqcwzf2">
         <result column="zqcwzf_id" property="zqcwzf_id"/>
@@ -329,8 +350,8 @@
         nvl(ljwc.ljsl,0) ZQZFMX_BQWCSL,nvl(ljwc.ljje,0) ZQZFMX_BQWCJE,nvl(ljwc.ljsl,0)-nvl(bcwc.bcsl,0) ZQZFMX_SQWCSL,nvl(ljwc.ljje,0)-nvl(bcwc.bcje,0) ZQZFMX_SQWCJE,nvl(bcwc.bcsl,0) ZQZFMX_BQSL,nvl(bcwc.bcje,0) ZQZFMX_BQJE,zm.zmht_id zqzfmx_zmid,zm.zmht_htbh zqzfmx_htbh
         from djsj_htxx ht left join djsj_htxx_htgjxx gj on ht.htxx_htbh=gj.HTGJXX_HTBH left join djsj_htxx_yhxmxx xm on ht.htxx_htbh=xm.yhhtxx_htbh
         left join gg_zmht zm on ht.htxx_htbh=zm.zmht_htbh
-        left join (select gcjlmx_zmid,sum(nvl(jlmx.gcjlmx_wcsl,0)) ljsl,sum(nvl(jlmx.gcjlmx_wcsl,0)*nvl(jlmx.gcjlmx_htdj,0)) ljje from gcjldmx jlmx group by gcjlmx_zmid) ljwc on zm.zmht_id=ljwc.gcjlmx_zmid
-        left join (select gcjlmx_zmid,sum(nvl(jlmx.gcjlmx_wcsl,0)) bcsl,sum(nvl(jlmx.gcjlmx_wcsl,0)*nvl(jlmx.gcjlmx_htdj,0)) bcje from gcjldmx jlmx where jlmx.gcjlmx_djbh in (select jld.gcjl_djbh from gcjld jld where jlmx.gcjlmx_djbh=jld.gcjl_djbh and jld.gcjl_tbrq=(select max(tjl.gcjl_tbrq) from gcjld tjl where tjl.gcjl_djbh=jld.gcjl_djbh)) group by gcjlmx_zmid) bcwc on zm.zmht_id=bcwc.gcjlmx_zmid
+        left join (select gcjlmx_zmid,sum(nvl(jlmx.gcjlmx_wcsl,0)) ljsl,sum(nvl(jlmx.gcjlmx_wcsl,0)*nvl(jlmx.gcjlmx_htdj,0)) ljje from zxyh_gcjldmx jlmx group by gcjlmx_zmid) ljwc on zm.zmht_id=ljwc.gcjlmx_zmid
+        left join (select gcjlmx_zmid,sum(nvl(jlmx.gcjlmx_wcsl,0)) bcsl,sum(nvl(jlmx.gcjlmx_wcsl,0)*nvl(jlmx.gcjlmx_htdj,0)) bcje from zxyh_gcjldmx jlmx where jlmx.gcjlmx_djbh in (select jld.gcjl_djbh from zxyh_gcjld jld where jlmx.gcjlmx_djbh=jld.gcjl_djbh and jld.gcjl_tbrq=(select max(tjl.gcjl_tbrq) from zxyh_gcjld tjl where tjl.gcjl_djbh=jld.gcjl_djbh)) group by gcjlmx_zmid) bcwc on zm.zmht_id=bcwc.gcjlmx_zmid
         where 1=1
         <if test="htbh != null and htbh != ''">
             and ht.htxx_htbh=#{htbh}
@@ -514,4 +535,95 @@
     </update>
 
 
+
+    <!-- 根据“合同编号”查询《工程计量单 - 明细》列表，用于添加《中（终）期支付证书 - 明细》时，展示其明细信息 -->
+    <select id="createZqzfzsMxList" parameterType="String" resultMap="zqcwzfmx">
+        SELECT GCLQD.HTBH AS zqzfmx_htbh, GCLQD.ZMH AS zqzfmx_zmbh, GCLQD.ZMMC AS zqzfmx_zmmc, GCLQD.JLDW AS zqzfmx_jldw,
+            GCLQD.JLDWID AS zqzfmx_jldwid, GCLQD.HTSL AS zqzfmx_htsl, GCLQD.HTDJ AS zqzfmx_htdj, GCLQD.HTJE AS zqzfmx_htje,
+            GCLQD.LJWC AS zqzfmx_ljwc, GCLQD.BQWCSL AS zqzfmx_bqwcsl, GCLQD.BQWCJE AS zqzfmx_bqwcje,
+            CWZF.SQWCSL AS zqzfmx_sqwcsl, CWZF.SQWCJE AS zqzfmx_sqwcje
+        FROM (
+          SELECT GCJLMX_HTBH AS HTBH, GCJLMX_ZMH AS ZMH, GCJLMX_ZMMC AS ZMMC,
+            GCJLMX_JLDW AS JLDW, GCJLMX_JLDWID AS JLDWID, SUM(GCJLMX_HTSL) AS HTSL,
+            SUM(GCJLMX_HTDJ) AS HTDJ, SUM(GCJLMX_HTJE) AS HTJE,
+            ROUND(((SUM(GCJLMX_WCSL) / SUM(GCJLMX_HTSL)) * 100), 2)||'%' AS LJWC,
+            SUM(GCJLMX_WCSL) AS BQWCSL, SUM(GCJLMX_ZJE) AS BQWCJE
+          FROM ZXYH_GCJLDMX WHERE GCJLMX_DJBH IN (
+            SELECT GCJL_DJBH FROM ZXYH_GCJLD WHERE GCJL_HTBH = #{htbh}
+          ) GROUP BY GCJLMX_ZMH, GCJLMX_ZMMC, GCJLMX_JLDW, GCJLMX_JLDWID, GCJLMX_HTBH
+        ) GCLQD LEFT JOIN (
+          SELECT ZQZFMX_ZMBH AS ZMH, ZQZFMX_BQWCSL AS SQWCSL, ZQZFMX_BQWCJE AS SQWCJE FROM ZXYH_ZQCWZFZSMX
+          WHERE ZQZFMX_HTBH = #{htbh} AND ZQZFMX_ZFQH = (
+            SELECT ZQCWZF_ZFQH FROM (
+              SELECT ROW_NUMBER()OVER(ORDER BY ZQCWZF_TBRQ DESC) AS RN, ZQCWZF_ZFQH FROM ZXYH_ZQCWZFZS WHERE ZQCWZF_TBRQ IS NOT NULL AND ZQCWZF_HTBH = 'HT-CS-20180000005'
+            ) WHERE RN = 1
+          )
+        ) CWZF ON GCLQD.ZMH = CWZF.ZMH
+    </select>
+
+    <!-- 根据“合同编号”查询《中（终）期支付证书 - 明细》列表，用于添加《交工结算单》时，展示其明细信息 -->
+    <select id="getZqzfzsMxList" parameterType="String" resultMap="zqcwzfmx">
+        SELECT * FROM Zxyh_ZQCWZFZSMX WHERE ZQZFMX_ZFQH = (
+          SELECT T.ZQCWZF_ZFQH FROM (
+            SELECT ROW_NUMBER()OVER(ORDER BY ZQCWZF_TBRQ DESC) AS RN,ZQCWZF_ZFQH FROM Zxyh_ZQCWZFZS
+            WHERE ZQCWZF_HTBH = #{htbh}
+          ) T WHERE T.RN = 1
+        )
+    </select>
+
+
+    <!-- 查询中(终)期财务支付证书列表数据 -->
+    <select id="getZqcwzfReport" parameterType="hashmap" resultType="com.hdsx.zxyh.entity.Gczfzqcwzfmx">
+        select
+        fb.ZQZFMX_ID, fb.ZQZFMX_MID, fb.ZQZFMX_ZMBH, fb.ZQZFMX_ZMMC, fb.ZQZFMX_JLDW, fb.ZQZFMX_JLDWID, fb.ZQZFMX_HTSL, fb.ZQZFMX_HTDJ, fb.ZQZFMX_HTJE, fb.ZQZFMX_LJWC, fb.ZQZFMX_BQWCSL, fb.ZQZFMX_BQWCJE, fb.ZQZFMX_SQWCSL, fb.ZQZFMX_SQWCJE, fb.ZQZFMX_BQSL, fb.ZQZFMX_BQJE, fb.ZQZFMX_ZFQH
+        from zxyh_zqcwzfzs zb left join zxyh_zqcwzfzsmx fb on zb.ZQCWZF_zfqh=fb.ZQZFMX_zfqh
+        where 1=1
+        <if test="htbh != null and htbh != ''">
+            and zb.ZQCWZF_HTBH=#{htbh}
+        </if>
+        <if test="zfqh != null and zfqh != ''">
+            and zb.ZQCWZF_ZFQH=#{zfqh}
+        </if>
+        <if test="ksrq != null and ksrq != ''">
+            and to_date(to_char(zb.ZQCWZF_TBRQ,'yyyy-mm-dd'),'yyyy-mm-dd')>=to_date(#{ksrq},'yyyy-mm-dd')
+        </if>
+        <if test="jsrq != null and jsrq != ''">
+            and to_date(to_char(zb.ZQCWZF_TBRQ,'yyyy-mm-dd'),'yyyy-mm-dd')&lt;=to_date(#{jsrq},'yyyy-mm-dd')
+        </if>
+        order by ZQZFMX_zfqh,ZQZFMX_ZMBH
+    </select>
+
+    <select id="getZqcwzfHzbReport" parameterType="hashmap" resultType="hashmap">
+        select
+        fb.ZQZFMX_ZMBH zmbh, fb.ZQZFMX_ZMMC zmmc, fb.ZQZFMX_JLDW jldw, fb.ZQZFMX_HTDJ dj, fb.ZQZFMX_HTSL sl, fb.ZQZFMX_HTJE, fb.ZQZFMX_ZFQH
+        from zxyh_zqcwzfzs zb left join zxyh_zqcwzfzsmx fb on zb.ZQCWZF_zfqh=fb.ZQZFMX_zfqh
+        where 1=1
+        <if test="htbh != null and htbh != ''">
+            and zb.ZQCWZF_HTBH=#{htbh}
+        </if>
+        <if test="ksrq != null and ksrq != ''">
+            and to_date(to_char(zb.ZQCWZF_TBRQ,'yyyy-mm-dd'),'yyyy-mm-dd')>=to_date(#{ksrq},'yyyy-mm-dd')
+        </if>
+        <if test="jsrq != null and jsrq != ''">
+            and to_date(to_char(zb.ZQCWZF_TBRQ,'yyyy-mm-dd'),'yyyy-mm-dd')&lt;=to_date(#{jsrq},'yyyy-mm-dd')
+        </if>
+
+        union all
+
+        select
+        '' zmbh, '合计' zmmc, max(fb.ZQZFMX_JLDW) jldw, sum(nvl(fb.ZQZFMX_HTDJ,0)) dj, sum(nvl(fb.ZQZFMX_HTSL,0)) sl, sum(nvl(fb.ZQZFMX_HTJE,0)) je, null ZQZFMX_ZFQH
+        from zxyh_zqcwzfzs zb left join zxyh_zqcwzfzsmx fb on zb.ZQCWZF_zfqh=fb.ZQZFMX_zfqh
+        where 1=1
+        <if test="htbh != null and htbh != ''">
+            and zb.ZQCWZF_HTBH=#{htbh}
+        </if>
+        <if test="ksrq != null and ksrq != ''">
+            and to_date(to_char(zb.ZQCWZF_TBRQ,'yyyy-mm-dd'),'yyyy-mm-dd')>=to_date(#{ksrq},'yyyy-mm-dd')
+        </if>
+        <if test="jsrq != null and jsrq != ''">
+            and to_date(to_char(zb.ZQCWZF_TBRQ,'yyyy-mm-dd'),'yyyy-mm-dd')&lt;=to_date(#{jsrq},'yyyy-mm-dd')
+        </if>
+
+        order by ZQZFMX_zfqh,zmbh
+    </select>
 </mapper>

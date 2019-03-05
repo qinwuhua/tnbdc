@@ -57,4 +57,12 @@ public interface GczfMapper {
     int delZqcwzfForGczf(List<String> l);
 
     int spZqcwzfForGczf(Map<String, Object> param);
+
+    List<Gczfzqcwzfmx> createZqzfzsMxList(String htbh);
+
+    List<Gczfzqcwzfmx> getZqzfzsMxList(String htbh);
+
+    List<Gczfzqcwzfmx> getZqcwzfReport(Map<String, String> param);
+
+    List<Map<String, String>> getZqcwzfHzbReport(Map<String, String> param);
 }

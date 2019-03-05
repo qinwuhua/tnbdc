@@ -29,4 +29,6 @@ public interface YdwcMapper {
     List<Map<String, String>> getYdjhHtInfo(String tbdwdm);
 
     int spYdwc(Map<String, Object> param);
+
+    List<Ydwcmx> selectMx(String id);
 }

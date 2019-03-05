@@ -10,6 +10,10 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 工程现场质量检查控制器
@@ -78,4 +82,30 @@ public class GcxczljcController {
             return ResultUtil.error("接口异常");
         }
     }
+
+
+    @RequestMapping(value = "spGcxczljc", method = RequestMethod.PUT, produces = "application/json")
+    @ApiOperation(value = "审批工程现场质量检查")
+    public Msg spGcxczljc(@RequestParam(value = "ids",required = true) String ids,
+                      @RequestParam(value = "spzt",required = true) String spzt){
+        try {
+            String[] idss=ids.split(",");
+            List<String> l = new ArrayList<String>();
+            for (int i=0;i<idss.length;i++){
+                l.add(idss[i]);
+            }
+            Map<String,Object> param=new HashMap<String,Object>();
+            param.put("spzt",spzt);param.put("djbhs",l);
+            int flag=gcxczljcService.spGcxczljc(param);
+            if(flag>0)
+                return ResultUtil.success("审批成功");
+            else
+                return ResultUtil.error("审批失败");
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResultUtil.error("审批失败，接口异常");
+        }
+
+    }
+
 }

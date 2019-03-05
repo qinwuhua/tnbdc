@@ -29,4 +29,6 @@ public interface YdjhMapper {
     int spYdjh(Map<String, Object> param);
 
     List<Map<String, String>> getZjdHtCzfs(String htbh);
+
+    List<Ydjhmx> selectMx(String id);
 }

@@ -44,4 +44,10 @@ public interface LyjcMapper {
     int deleteLyjcmxbByIds(String[] ids);
 
     int deleteJczbmxByIds(String[] ids);
+
+
+    List<Lyjcmxb> getLyjcmx(String id);
+
+
+    List<Jczbmxb> getJczbmx(String id);
 }

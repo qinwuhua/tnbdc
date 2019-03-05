@@ -3,6 +3,7 @@ package com.hdsx.zxyh.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.hdsx.zxyh.entity.Gczfgcjld;
 import com.hdsx.zxyh.entity.Gczfzqcwzf;
+import com.hdsx.zxyh.entity.Gczfzqcwzfmx;
 import com.hdsx.zxyh.mapper.GczfMapper;
 import com.hdsx.zxyh.service.GczfService;
 import org.springframework.stereotype.Service;
@@ -106,5 +107,25 @@ public class GczfServiceImpl implements GczfService {
     @Override
     public int spZqcwzfForGczf(Map<String, Object> param) {
         return gczfMapper.spZqcwzfForGczf(param);
+    }
+
+    @Override
+    public List<Gczfzqcwzfmx> createZqzfzsMxList(String htbh) {
+        return gczfMapper.createZqzfzsMxList(htbh);
+    }
+
+    @Override
+    public List<Gczfzqcwzfmx> getZqzfzsMxList(String htbh) {
+        return gczfMapper.getZqzfzsMxList(htbh);
+    }
+
+    @Override
+    public List<Gczfzqcwzfmx> getZqcwzfReport(Map<String, String> param) {
+        return gczfMapper.getZqcwzfReport(param);
+    }
+
+    @Override
+    public List<Map<String, String>> getZqcwzfHzbReport(Map<String, String> param) {
+        return gczfMapper.getZqcwzfHzbReport(param);
     }
 }

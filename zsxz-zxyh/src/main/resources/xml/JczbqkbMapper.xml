@@ -28,7 +28,7 @@
         <result column="htlynr" property="htlynr"/>
         <result column="fj" property="fj"/>
     </resultMap>
-    <select id="selectMx" resultMap="jczbqkbmxBean">
+    <select id="selectMx" parameterType="string" resultMap="jczbqkbmxBean">
       select * from ZXYH_JCZBQKB_MX where jcid=#{id}
     </select>
     <select id="getJczbqkb" parameterType="hashmap" resultMap="jczbqkbBean">

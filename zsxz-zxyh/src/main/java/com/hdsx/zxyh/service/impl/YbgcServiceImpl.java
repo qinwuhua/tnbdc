@@ -11,6 +11,7 @@ import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class YbgcServiceImpl implements YbgcService {
@@ -59,5 +60,10 @@ public class YbgcServiceImpl implements YbgcService {
         ybgcMapper.addYbgcmx(ybgc.getYbgcmxList());
         //更新主表
         return ybgcMapper.updateYbgc(ybgc);
+    }
+
+    @Override
+    public int spYbgc(Map<String, Object> param) {
+        return ybgcMapper.spYbgc(param);
     }
 }

@@ -115,9 +115,9 @@
         from djsj_htxx ht left join djsj_htxx_htgjxx gj on ht.htxx_htbh=gj.HTGJXX_HTBH
         left join djsj_htxx_yhxmxx xm on ht.htxx_htbh=xm.yhhtxx_htbh
         left join (select htbh,sum(nvl(fj,0)) fj from (
-        select htbh,sum(nvl(t2.fj,0)) fj from ZXYH_LYJC t1 left join ZXYH_LYJC_MX t2 on t1.id=t2.lyjcid group by t1.htbh
+        select pmmtlyjcb_htbh htbh,sum(nvl(t2.pmmtlyjcbmx_fj,0)) fj from zxyh_sgdwlyjcb t1 left join zxyh_sgdwlyjcb_mx t2 on t1.PMMTLYJCB_ID=t2.PMMTLYJCBMX_MID group by t1.pmmtlyjcb_htbh
         union all
-        select htbh,sum(nvl(t2.fj,0)) fj from ZXYH_JCZBQKB t1 left join ZXYH_JCZBQKB_MX t2 on t1.id=t2.jcid group by t1.htbh
+        select pmmtjczbqkjcb_htbh htbh,sum(nvl(t2.pmmtjczbqkjcbmx_fj,0)) fj from zxyh_jczbqkjcb t1 left join zxyh_jczbqkjcb_mx t2 on t1.PMMTJCZBQKJCB_ID=t2.PMMTJCZBQKJCBMX_MID group by t1.pmmtjczbqkjcb_htbh
         ) group by htbh) fj on ht.htxx_htbh=fj.htbh
         left join (select sum(nvl(gcjlmx_htdj,0)*nvl(gcjlmx_htsl,0)) jlhtje,sum(nvl(gcjlmx_htdj,0)*nvl(gcjlmx_wcsl,0)) jlje,sum(nvl(gcjlmx_kkje,0)) fj,gcjlmx_htbh from zxyh_gcjldmx
         where 1=1 and gcjlmx_djbh in (select gcjl_djbh from zxyh_gcjld where gcjl_spzt='已下发')

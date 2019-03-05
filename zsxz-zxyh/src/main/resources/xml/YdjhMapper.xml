@@ -40,7 +40,7 @@
         <result column="jhwcrq" property="jhwcrq"/>
     </resultMap>
 
-    <select id="selectMx" resultMap="ydjhmxBean">
+    <select id="selectMx" parameterType="string" resultMap="ydjhmxBean">
         select * from ZXYH_YDJH_MX where ydid in #{id}
     </select>
 

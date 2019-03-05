@@ -4,6 +4,7 @@ package com.hdsx.zxyh.controller;
 import com.github.pagehelper.PageInfo;
 import com.hdsx.zxyh.entity.Gczfgcjld;
 import com.hdsx.zxyh.entity.Gczfzqcwzf;
+import com.hdsx.zxyh.entity.Gczfzqcwzfmx;
 import com.hdsx.zxyh.entity.Msg;
 import com.hdsx.zxyh.service.GczfService;
 import com.hdsx.zxyh.utils.ResultUtil;
@@ -307,6 +308,77 @@ public class GczfController {
             return ResultUtil.error("审批失败，接口异常");
         }
 
+    }
+
+
+    /**
+     * 根据“合同编号”查询《工程计量单 - 明细》列表，用于添加《中（终）期支付证书 - 明细》时，展示其明细信息，测试：HT-CS-20180000005
+     * @param htbh
+     * @return
+     */
+    @RequestMapping(value = "createZqzfzsMxList", method = RequestMethod.GET, produces = "application/json")
+    @ApiOperation(value = "根据“合同编号”查询《工程计量单 - 明细》列表，用于添加《中（终）期支付证书 - 明细》时，展示其明细信息")
+    @ApiImplicitParams({@ApiImplicitParam(paramType="query", dataType = "String", name = "htbh", value = "合同编号", required = true)})
+    public Msg createZqzfzsMxList(@RequestParam(value = "htbh",required = true) String htbh) {
+        List<Gczfzqcwzfmx> list = gczfService.createZqzfzsMxList(htbh);
+        return ResultUtil.success(list);
+    }
+
+    /**
+     * 根据“合同编号”查询《中（终）期支付证书 - 明细》列表，用于添加《交工结算单》时，展示其明细信息
+     * @param htbh
+     * @return
+     */
+    @RequestMapping(value = "getZqzfzsMxList", method = RequestMethod.GET, produces = "application/json")
+    @ApiOperation(value = "根据“合同编号”查询《中（终）期支付证书 - 明细》列表，用于添加《交工结算单》时，展示其明细信息")
+    @ApiImplicitParams({@ApiImplicitParam(paramType="query", dataType = "String", name = "htbh", value = "合同编号", required = true)})
+    public Msg getZqzfzsMxList(@RequestParam(value = "htbh",required = true) String htbh) {
+        List<Gczfzqcwzfmx> list = gczfService.getZqzfzsMxList(htbh);
+        return ResultUtil.success(list);
+    }
+
+
+    //清单期中（终）支付报表
+
+    @RequestMapping(value = "getZqcwzfReport", method = RequestMethod.GET, produces = "application/json")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "htbh", value = "合同编号", required = false),
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "zfqh", value = "支付期号", required = false),
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "ksrq", value = "申请开始日期(yyyy/mm/dd)", required = false),
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "jsrq", value = "申请结束日期(yyyy/mm/dd)", required = false)
+    })
+    @ApiOperation(value = "查询计量支付-清单期中（终）支付报表")
+    public Msg getZqcwzfReport(@RequestParam(value = "htbh",required = false) String htbh,
+                               @RequestParam(value = "zfqh",required = false) String zfqh,
+                               @RequestParam(value = "ksrq",required = false) String ksrq,
+                               @RequestParam(value = "jsrq",required = false) String jsrq
+    ) {
+        Map<String, String> param = new HashMap<String, String>();
+        param.put("htbh", htbh);
+        param.put("ksrq", ksrq);
+        param.put("jsrq", jsrq);
+        param.put("zfqh", zfqh);
+        List<Gczfzqcwzfmx> list = gczfService.getZqcwzfReport(param);
+        return ResultUtil.success(list);
+    }
+
+    //计量支付汇总表
+    @RequestMapping(value = "getZqcwzfHzbReport", method = RequestMethod.GET, produces = "application/json")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "htbh", value = "合同编号", required = false),
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "ksrq", value = "申请开始日期(yyyy/mm/dd)", required = false),
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "jsrq", value = "申请结束日期(yyyy/mm/dd)", required = false)
+    })
+    @ApiOperation(value = "查询计量支付-计量支付汇总表")
+    public Msg getZqcwzfHzbReport(@RequestParam(value = "htbh",required = false) String htbh,
+                                  @RequestParam(value = "ksrq",required = false) String ksrq,
+                                  @RequestParam(value = "jsrq",required = false) String jsrq) {
+        Map<String, String> param = new HashMap<String, String>();
+        param.put("htbh", htbh);
+        param.put("ksrq", ksrq);
+        param.put("jsrq", jsrq);
+        List<Map<String,String>> list = gczfService.getZqcwzfHzbReport(param);
+        return ResultUtil.success(list);
     }
 
 

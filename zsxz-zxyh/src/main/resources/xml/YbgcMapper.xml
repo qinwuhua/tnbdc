@@ -35,7 +35,7 @@
         <result property="sl" column="sl"/>
     </resultMap>
 
-    <select id="selectMx" resultMap="ybgcmxBean">
+    <select id="selectMx" parameterType="string" resultMap="ybgcmxBean">
         select * from ZXYH_YBGC_MX WHERE ybid = #{id}
     </select>
 
@@ -213,4 +213,14 @@
         </set>
         where id=#{id}
     </update>
+
+    <update id="spYbgc" parameterType="hashmap">
+        update ZXYH_YbgC set spZT=#{spzt}
+        where id in
+        <foreach collection="djbhs" item="id"  open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </update>
+
+
 </mapper>

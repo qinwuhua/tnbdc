@@ -39,6 +39,51 @@
         </collection>
     </resultMap>
 
+
+    <resultMap id="lyjcBean2" type="com.hdsx.zxyh.entity.Lyjc">
+        <id column="PMMTLYJCB_ID" property="id"/>
+        <result column="PMMTLYJCB_DWMC" property="dwmc"/>
+        <result column="PMMTLYJCB_DWBH" property="dwbh"/>
+        <result column="PMMTLYJCB_DWID" property="dwid"/>
+        <result column="PMMTLYJCB_BMMC" property="bmmc"/>
+        <result column="PMMTLYJCB_BMBH" property="bmbh"/>
+        <result column="PMMTLYJCB_BMID" property="bmid"/>
+        <result column="PMMTLYJCB_TBR" property="tbr"/>
+        <result column="PMMTLYJCB_TBRID" property="tbrid"/>
+        <result column="PMMTLYJCB_TBRQ" property="tbrq"/>
+        <result column="PMMTLYJCB_SPZT" property="spzt"/>
+        <result column="PMMTLYJCB_WFID" property="wfid"/>
+        <result column="PMMTLYJCB_HTBH" property="htbh"/>
+        <result column="PMMTLYJCB_JCRQ" property="jcrq"/>
+        <result column="PMMTLYJCB_SGDW" property="sgdw"/>
+        <result column="PMMTLYJCB_FJHJ" property="fjhj"/>
+        <result column="PMMTLYJCB_GLDW" property="gldw"/>
+        <result column="PMMTLYJCB_JCR" property="jcr"/>
+        <result column="PMMTLYJCB_HTJE" property="htje"/>
+        <result column="PMMTLYJCB_BZ" property="bz"/>
+        <result column="PMMTLYJCB_HTMC" property="htmc"/>
+        <!-- 一对多的关系 -->
+        <!-- property: 指的是集合属性的值, ofType：指的是集合中元素的类型 -->
+        <collection property="lyjcmxb" select="getLyjcmx" column="PMMTLYJCB_ID" ofType="com.hdsx.zxyh.entity.Lyjcmxb">
+
+        </collection>
+    </resultMap>
+
+    <resultMap id="lyjcmxb" type="com.hdsx.zxyh.entity.Lyjcmxb">
+        <id column="PMMTLYJCBMX_ID" property="id"/>
+        <result column="PMMTLYJCBMX_MID" property="mid"/>
+        <result column="PMMTLYJCBMX_JCNR" property="jcnr"/>
+        <result column="PMMTLYJCBMX_FJ" property="fj"/>
+        <result column="PMMTLYJCBMX_MEMO" property="memo"/>
+        <result column="PMMTLYJCBMX_BH" property="bh"/>
+    </resultMap>
+
+    <select id="getLyjcmx" parameterType="string" resultMap="lyjcmxb">
+        select * from zxyh_sgdwlyjcb_mx where PMMTLYJCBMX_MID=#{value}
+    </select>
+
+
+
     <resultMap id="jczbBean" type="com.hdsx.zxyh.entity.Jczb">
         <id column="PMMTJCZBQKJCB_ID" property="id"/>
         <result column="PMMTJCZBQKJCB_DWMC" property="dwmc"/>
@@ -74,12 +119,54 @@
         </collection>
     </resultMap>
 
-    <select id="getLyjcAll" parameterType="hashmap" resultMap="lyjcBean">
+
+    <resultMap id="jczbBean2" type="com.hdsx.zxyh.entity.Jczb">
+        <id column="PMMTJCZBQKJCB_ID" property="id"/>
+        <result column="PMMTJCZBQKJCB_DWMC" property="dwmc"/>
+        <result column="PMMTJCZBQKJCB_DWBH" property="dwbh"/>
+        <result column="PMMTJCZBQKJCB_DWID" property="dwid"/>
+        <result column="PMMTJCZBQKJCB_BMMC" property="bmmc"/>
+        <result column="PMMTJCZBQKJCB_BMBH" property="bmbh"/>
+        <result column="PMMTJCZBQKJCB_BMID" property="bmid"/>
+        <result column="PMMTJCZBQKJCB_TBR" property="tbr"/>
+        <result column="PMMTJCZBQKJCB_TBRID" property="tbrid"/>
+        <result column="PMMTJCZBQKJCB_TBRQ" property="tbrq"/>
+        <result column="PMMTJCZBQKJCB_SPZT" property="spzt"/>
+        <result column="PMMTJCZBQKJCB_WFID" property="wfid"/>
+        <result column="PMMTJCZBQKJCB_HTBH" property="htbh"/>
+        <result column="PMMTJCZBQKJCB_JCRQ" property="jcrq"/>
+        <result column="PMMTJCZBQKJCB_SGDW" property="sgdw"/>
+        <result column="PMMTJCZBQKJCB_XMMC" property="xmmc"/>
+        <result column="PMMTJCZBQKJCB_GLDW" property="gldw"/>
+        <result column="PMMTJCZBQKJCB_HTJE" property="htje"/>
+        <result column="PMMTJCZBQKJCB_WYFJ" property="wyfj"/>
+        <result column="PMMTJCZBQKJCB_HTMC" property="htmc"/>
+        <result column="PMMTJCZBQKJCB_BZ" property="bz"/>
+        <result column="PMMTJCZBQKJCB_JCR" property="jcr"/>
+        <!-- 一对多的关系 -->
+        <!-- property: 指的是集合属性的值, ofType：指的是集合中元素的类型 -->
+        <collection property="jczbmxb" select="getJczbmx" column="PMMTJCZBQKJCB_ID" ofType="com.hdsx.zxyh.entity.Jczbmxb">
+        </collection>
+    </resultMap>
+
+    <resultMap id="jczbmxb" type="com.hdsx.zxyh.entity.Jczbmxb">
+        <id column="PMMTLYJCBMX_ID" property="id"/>
+        <result column="PMMTLYJCBMX_MID" property="mid"/>
+        <result column="PMMTLYJCBMX_JCNR" property="jcnr"/>
+        <result column="PMMTLYJCBMX_FJ" property="fj"/>
+        <result column="PMMTLYJCBMX_MEMO" property="memo"/>
+        <result column="PMMTLYJCBMX_BH" property="bh"/>
+    </resultMap>
+
+    <select id="getJczbmx" parameterType="string" resultMap="jczbmxb">
+        select * from zxyh_jczbqkjcb_mx where PMMTJCZBQKJCBMX_MID=#{value}
+    </select>
+
+
+    <select id="getLyjcAll" parameterType="hashmap" resultMap="lyjcBean2">
         SELECT
-        PMMTLYJCB_ID, PMMTLYJCB_DWMC, PMMTLYJCB_DWBH, PMMTLYJCB_DWID, PMMTLYJCB_BMMC, PMMTLYJCB_BMBH, PMMTLYJCB_BMID, PMMTLYJCB_TBR, PMMTLYJCB_TBRID, to_char(PMMTLYJCB_TBRQ,'yyyy-MM-dd')PMMTLYJCB_TBRQ, PMMTLYJCB_SPZT, PMMTLYJCB_WFID, PMMTLYJCB_HTBH, to_char(PMMTLYJCB_JCRQ,'yyyy-MM-dd')PMMTLYJCB_JCRQ, PMMTLYJCB_SGDW, PMMTLYJCB_FJHJ, PMMTLYJCB_GLDW, PMMTLYJCB_JCR, PMMTLYJCB_HTJE, PMMTLYJCB_BZ, PMMTLYJCB_HTMC,
-        PMMTLYJCBMX_ID, PMMTLYJCBMX_MID, PMMTLYJCBMX_JCNR, PMMTLYJCBMX_FJ, PMMTLYJCBMX_MEMO, PMMTLYJCBMX_BH
+        PMMTLYJCB_ID, PMMTLYJCB_DWMC, PMMTLYJCB_DWBH, PMMTLYJCB_DWID, PMMTLYJCB_BMMC, PMMTLYJCB_BMBH, PMMTLYJCB_BMID, PMMTLYJCB_TBR, PMMTLYJCB_TBRID, to_char(PMMTLYJCB_TBRQ,'yyyy-MM-dd')PMMTLYJCB_TBRQ, PMMTLYJCB_SPZT, PMMTLYJCB_WFID, PMMTLYJCB_HTBH, to_char(PMMTLYJCB_JCRQ,'yyyy-MM-dd')PMMTLYJCB_JCRQ, PMMTLYJCB_SGDW, PMMTLYJCB_FJHJ, PMMTLYJCB_GLDW, PMMTLYJCB_JCR, PMMTLYJCB_HTJE, PMMTLYJCB_BZ, PMMTLYJCB_HTMC
         FROM zxyh_sgdwlyjcb jh
-        LEFT JOIN zxyh_sgdwlyjcb_mx mx ON mx.PMMTLYJCBMX_MID = PMMTLYJCB_ID
         <where>
             <trim suffixOverrides=",">
                 <if test="id != null and id != ''"> AND PMMTLYJCB_ID LIKE '%'||trim(#{id})||'%'</if>
@@ -169,11 +256,9 @@
         WHERE PMMTLYJCBMX_ID = #{id}
     </update>
 
-    <select id="getJczbAll" parameterType="hashmap" resultMap="jczbBean">
-        SELECT PMMTJCZBQKJCB_ID, PMMTJCZBQKJCB_DWMC, PMMTJCZBQKJCB_DWBH, PMMTJCZBQKJCB_DWID, PMMTJCZBQKJCB_BMMC, PMMTJCZBQKJCB_BMBH, PMMTJCZBQKJCB_BMID, PMMTJCZBQKJCB_TBR, PMMTJCZBQKJCB_TBRID, to_char(PMMTJCZBQKJCB_TBRQ,'yyyy-MM-dd')PMMTJCZBQKJCB_TBRQ, PMMTJCZBQKJCB_SPZT, PMMTJCZBQKJCB_WFID, PMMTJCZBQKJCB_HTBH, to_char(PMMTJCZBQKJCB_JCRQ,'yyyy-MM-dd')PMMTJCZBQKJCB_JCRQ, PMMTJCZBQKJCB_SGDW, PMMTJCZBQKJCB_XMMC, PMMTJCZBQKJCB_GLDW, PMMTJCZBQKJCB_HTJE, PMMTJCZBQKJCB_WYFJ, PMMTJCZBQKJCB_HTMC, PMMTJCZBQKJCB_BZ, PMMTJCZBQKJCB_JCR,
-        PMMTJCZBQKJCBMX_ID, PMMTJCZBQKJCBMX_MID, PMMTJCZBQKJCBMX_JCNR, PMMTJCZBQKJCBMX_FJ, PMMTJCZBQKJCBMX_MEMO, PMMTJCZBQKJCBMX_BH
+    <select id="getJczbAll" parameterType="hashmap" resultMap="jczbBean2">
+        SELECT PMMTJCZBQKJCB_ID, PMMTJCZBQKJCB_DWMC, PMMTJCZBQKJCB_DWBH, PMMTJCZBQKJCB_DWID, PMMTJCZBQKJCB_BMMC, PMMTJCZBQKJCB_BMBH, PMMTJCZBQKJCB_BMID, PMMTJCZBQKJCB_TBR, PMMTJCZBQKJCB_TBRID, to_char(PMMTJCZBQKJCB_TBRQ,'yyyy-MM-dd')PMMTJCZBQKJCB_TBRQ, PMMTJCZBQKJCB_SPZT, PMMTJCZBQKJCB_WFID, PMMTJCZBQKJCB_HTBH, to_char(PMMTJCZBQKJCB_JCRQ,'yyyy-MM-dd')PMMTJCZBQKJCB_JCRQ, PMMTJCZBQKJCB_SGDW, PMMTJCZBQKJCB_XMMC, PMMTJCZBQKJCB_GLDW, PMMTJCZBQKJCB_HTJE, PMMTJCZBQKJCB_WYFJ, PMMTJCZBQKJCB_HTMC, PMMTJCZBQKJCB_BZ, PMMTJCZBQKJCB_JCR
         FROM zxyh_jczbqkjcb jh
-        LEFT JOIN zxyh_jczbqkjcb_mx mx on mx.PMMTJCZBQKJCBMX_MID = jh.PMMTJCZBQKJCB_ID
         <where>
             <trim suffixOverrides=",">
                 <if test="id != null and id != ''"> AND PMMTJCZBQKJCB_ID LIKE '%'||trim(#{id})||'%'</if>

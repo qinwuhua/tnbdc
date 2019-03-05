@@ -5,6 +5,7 @@ import com.hdsx.zxyh.entity.Ybgcmx;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface YbgcMapper {
@@ -20,4 +21,8 @@ public interface YbgcMapper {
     int deleteYbgcmx(String[] ybids);
 
     int updateYbgc(Ybgc ybgc);
+
+    List<Ybgcmx> selectMx(String id);
+
+    int spYbgc(Map<String, Object> param);
 }

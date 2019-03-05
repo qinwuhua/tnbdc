@@ -3,6 +3,7 @@ package com.hdsx.zxyh.service;
 import com.hdsx.zxyh.entity.Ybgc;
 
 import java.util.List;
+import java.util.Map;
 
 public interface YbgcService {
 
@@ -13,4 +14,6 @@ public interface YbgcService {
     int deleteYbgc(String[] ids);
 
     int updateYbgc(Ybgc ybgc);
+
+    int spYbgc(Map<String, Object> param);
 }

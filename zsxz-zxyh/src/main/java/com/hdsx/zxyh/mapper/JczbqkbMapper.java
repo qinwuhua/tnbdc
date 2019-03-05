@@ -21,4 +21,6 @@ public interface JczbqkbMapper {
     int deleteJczbqkbMx(String[] jczbids);
 
     int updateJczbqkb(Jczbqkb jczbqkb);
+
+    List<Jczbqkbmx> selectMx(String id);
 }

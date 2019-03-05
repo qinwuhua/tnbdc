@@ -10,6 +10,10 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 隐蔽工程控制器
@@ -79,4 +83,30 @@ public class YbgcController {
             return ResultUtil.error("接口异常");
         }
     }
+
+    @RequestMapping(value = "spYbgc", method = RequestMethod.PUT, produces = "application/json")
+    @ApiOperation(value = "审批隐蔽工程")
+    public Msg spYbgc(@RequestParam(value = "ids",required = true) String ids,
+                      @RequestParam(value = "spzt",required = true) String spzt){
+        try {
+            String[] idss=ids.split(",");
+            List<String> l = new ArrayList<String>();
+            for (int i=0;i<idss.length;i++){
+                l.add(idss[i]);
+            }
+            Map<String,Object> param=new HashMap<String,Object>();
+            param.put("spzt",spzt);param.put("djbhs",l);
+            int flag=ybgcService.spYbgc(param);
+            if(flag>0)
+                return ResultUtil.success("审批成功");
+            else
+                return ResultUtil.error("审批失败");
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResultUtil.error("审批失败，接口异常");
+        }
+
+    }
+
+
 }

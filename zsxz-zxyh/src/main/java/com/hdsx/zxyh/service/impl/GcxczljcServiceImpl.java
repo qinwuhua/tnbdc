@@ -10,6 +10,7 @@ import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class GcxczljcServiceImpl implements GcxczljcService {
@@ -39,5 +40,10 @@ public class GcxczljcServiceImpl implements GcxczljcService {
     @Override
     public int deleteGcxczljc(String[] ids) {
         return gcxczljcMapper.deleteGcxczljc(ids);
+    }
+
+    @Override
+    public int spGcxczljc(Map<String, Object> param) {
+        return gcxczljcMapper.spGcxczljc(param);
     }
 }

@@ -41,6 +41,8 @@ public class Ybgc {
     private String zlwt;
     //编制单位
     private String bzdw;
+
+    private String spzt;
     //编制日期
     private Date bzrq;
     // 子目合同信息
