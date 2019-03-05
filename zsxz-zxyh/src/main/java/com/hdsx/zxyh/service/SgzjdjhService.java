@@ -3,6 +3,7 @@ package com.hdsx.zxyh.service;
 import com.hdsx.zxyh.entity.Sgzjdjh;
 
 import java.util.List;
+import java.util.Map;
 
 public interface SgzjdjhService {
 
@@ -12,5 +13,7 @@ public interface SgzjdjhService {
 
     int updateSgzjdjh(Sgzjdjh sgzjdjh);
 
-    int deleteSgzjdjh(String[] ids);
+    int deleteSgzjdjh(List ids);
+
+    int spSgzjdjh(Map<String, Object> param);
 }

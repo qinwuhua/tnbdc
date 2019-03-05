@@ -14,6 +14,7 @@ import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class YdwcServiceImpl implements YdwcService {
@@ -66,5 +67,20 @@ public class YdwcServiceImpl implements YdwcService {
         ydwcMapper.addYdwcmx(ydwc.getList());
         //更新主表
         return ydwcMapper.updateYdwc(ydwc);
+    }
+
+    @Override
+    public List<Map<String, String>> getZbInfoByHtAndYd(Map<String, String> param) {
+        return ydwcMapper.getZbInfoByHtAndYd(param);
+    }
+
+    @Override
+    public List<Map<String, String>> getYdjhHtInfo(String tbdwdm) {
+        return ydwcMapper.getYdjhHtInfo(tbdwdm);
+    }
+
+    @Override
+    public int spYdwc(Map<String, Object> param) {
+        return ydwcMapper.spYdwc(param);
     }
 }

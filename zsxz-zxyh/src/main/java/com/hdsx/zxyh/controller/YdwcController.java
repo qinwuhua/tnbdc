@@ -12,6 +12,10 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("ydwc")
@@ -20,6 +24,36 @@ public class YdwcController {
 
     @Resource
     private YdwcService ydwcService;
+
+    @GetMapping("getYdjhHtInfo")
+    @ApiOperation("获取月度计划已下发合同信息")
+    public Msg getYdjhHtInfo(
+            @RequestParam(value = "tbdwdm",required = false) String tbdwdm
+    ){
+        try {
+            return ResultUtil.success(ydwcService.getYdjhHtInfo(tbdwdm));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResultUtil.error("接口异常");
+        }
+    }
+
+
+    @GetMapping("getZbInfoByHtAndYd")
+    @ApiOperation("获取子表信息通过合同编号和月度")
+    public Msg getZbInfoByHtAndYd(
+            @RequestParam(value = "htbh",required = true) String htbh,
+            @RequestParam(value = "yd",required = true) String yd
+    ){
+        try {
+            Map<String, String> param = new HashMap<String, String>();
+            param.put("htbh",htbh);param.put("yd",yd);
+            return ResultUtil.success(ydwcService.getZbInfoByHtAndYd(param));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResultUtil.error("接口异常");
+        }
+    }
 
     @GetMapping("getYdwc")
     @ApiOperation("获取月度完成")
@@ -77,6 +111,31 @@ public class YdwcController {
             e.printStackTrace();
             return ResultUtil.error("接口异常");
         }
+    }
+
+
+    @RequestMapping(value = "spYdwc", method = RequestMethod.PUT, produces = "application/json")
+    @ApiOperation(value = "审批月度完成")
+    public Msg spYdwc(@RequestParam(value = "ids",required = true) String ids,
+                      @RequestParam(value = "zt",required = true) String zt){
+        try {
+            String[] idss=ids.split(",");
+            List<String> l = new ArrayList<String>();
+            for (int i=0;i<idss.length;i++){
+                l.add(idss[i]);
+            }
+            Map<String,Object> param=new HashMap<String,Object>();
+            param.put("spzt",zt);param.put("djbhs",l);
+            int flag=ydwcService.spYdwc(param);
+            if(flag>0)
+                return ResultUtil.success("审批成功");
+            else
+                return ResultUtil.error("审批失败");
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResultUtil.error("审批失败，接口异常");
+        }
+
     }
 
 }

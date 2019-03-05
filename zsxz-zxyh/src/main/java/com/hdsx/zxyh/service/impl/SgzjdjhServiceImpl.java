@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class SgzjdjhServiceImpl implements SgzjdjhService {
@@ -28,16 +29,28 @@ public class SgzjdjhServiceImpl implements SgzjdjhService {
         if (sgzjdjh.getId() == null || sgzjdjh.getId() == "") {
             sgzjdjh.setId(UuidUtil.getUUID());
         }
-        return sgzjdjhMapper.addSgzjdjh(sgzjdjh);
+        int i=sgzjdjhMapper.addSgzjdjh(sgzjdjh);
+        int j=sgzjdjhMapper.addSgzjdjhMx(sgzjdjh);
+        return i;
     }
 
     @Override
     public int updateSgzjdjh(Sgzjdjh sgzjdjh) {
-        return sgzjdjhMapper.updateSgzjdjh(sgzjdjh);
+        int i=sgzjdjhMapper.updateSgzjdjh(sgzjdjh);
+        int j=sgzjdjhMapper.delSgzjdjhMx(sgzjdjh.getDjbh());
+        int k=sgzjdjhMapper.addSgzjdjhMx(sgzjdjh);
+        return i;
     }
 
     @Override
-    public int deleteSgzjdjh(String[] ids) {
-        return sgzjdjhMapper.deleteSgzjdjh(ids);
+    public int deleteSgzjdjh(List ids) {
+        int j=sgzjdjhMapper.deleteSgzjdjhiMx(ids);
+        int i=sgzjdjhMapper.deleteSgzjdjh(ids);
+        return j;
+    }
+
+    @Override
+    public int spSgzjdjh(Map<String, Object> param) {
+        return sgzjdjhMapper.spSgzjdjh(param);
     }
 }

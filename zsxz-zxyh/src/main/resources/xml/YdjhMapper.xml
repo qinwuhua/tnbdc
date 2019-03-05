@@ -311,4 +311,29 @@
       </set>
       where id=#{id}
     </update>
+
+    <select id="getZjdHtInfo" parameterType="string" resultType="hashmap">
+        select to_char(sysdate,'yyyy-mm') "yd",gcmc "gcmc",htbh "htbh",gldw "gldw",cbdw "cbdw" from ZXYH_SGZJDJH
+        where 1=1 and spzt='已下发'
+        <!-- and tbdwdm like #{value}||'%' -->
+    </select>
+
+    <select id="getZjdHtCzfs" parameterType="string" resultType="hashmap">
+        select zmmc "czfs",kssj "jhkssj",jssj "jhjssj" from ZXYH_SGZJDJHmx
+        where 1=1 and pdjbh=(select djbh from ZXYH_SGZJDJH where htbh=#{value})
+        <!-- and tbdwdm like #{value}||'%' -->
+    </select>
+
+    <select id="getSfYczYd" parameterType="com.hdsx.zxyh.entity.Ydjh" resultType="int">
+        select count(*) from ZXYH_YDJH where htbh=#{htbh} and yd=#{yd}
+    </select>
+
+    <update id="spYdjh" parameterType="hashmap">
+        update ZXYH_YDJH set ZT=#{spzt}
+        where id in
+        <foreach collection="djbhs" item="id"  open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </update>
+
 </mapper>

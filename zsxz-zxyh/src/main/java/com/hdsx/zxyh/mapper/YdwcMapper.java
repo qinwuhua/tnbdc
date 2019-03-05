@@ -7,6 +7,7 @@ import com.hdsx.zxyh.entity.Ydwcmx;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface YdwcMapper {
@@ -23,4 +24,9 @@ public interface YdwcMapper {
 
     int updateYdwc(Ydwc ydwc);
 
+    List<Map<String, String>> getZbInfoByHtAndYd(Map<String, String> param);
+
+    List<Map<String, String>> getYdjhHtInfo(String tbdwdm);
+
+    int spYdwc(Map<String, Object> param);
 }

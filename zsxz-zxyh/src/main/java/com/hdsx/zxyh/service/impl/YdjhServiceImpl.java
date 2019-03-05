@@ -11,6 +11,7 @@ import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class YdjhServiceImpl implements YdjhService {
@@ -63,5 +64,25 @@ public class YdjhServiceImpl implements YdjhService {
         ydjhMapper.addYdjhmx(ydjh.getList());
         //更新主表
         return ydjhMapper.updateYdjh(ydjh);
+    }
+
+    @Override
+    public List<Map<String, String>> getZjdHtInfo(String tbdwdm) {
+        return ydjhMapper.getZjdHtInfo(tbdwdm);
+    }
+
+    @Override
+    public int getSfYczYd(Ydjh ydjh) {
+        return ydjhMapper.getSfYczYd(ydjh);
+    }
+
+    @Override
+    public int spYdjh(Map<String, Object> param) {
+        return ydjhMapper.spYdjh(param);
+    }
+
+    @Override
+    public List<Map<String, String>> getZjdHtCzfs(String htbh) {
+        return ydjhMapper.getZjdHtCzfs(htbh);
     }
 }

@@ -311,4 +311,24 @@
       </set>
       where id=#{id}
     </update>
+
+    <select id="getZbInfoByHtAndYd" parameterType="hashmap" resultType="hashmap">
+        select qdzh "qdzh",zdzh "zdzh",jggc "dwgc",fx "fx",czfs "czfs",czcd "czcd",jhgcl "jhgcl",jhksrq "jhksrq",jhwcrq "jhwcrq" from zxyh_ydjh_mx mx left join zxyh_ydjh zb on zb.id=mx.ydid
+        where htbh=#{htbh} and yd=#{yd}
+    </select>
+
+    <select id="getYdjhHtInfo" parameterType="string" resultType="hashmap">
+        select yd "yd",gcmc "gcmc",htbh "htbh",gldw "gldw",cbdw "cbdw" from zxyh_ydjh
+        where 1=1 and zt='已下发'
+        <!-- and tbdwdm like #{value}||'%' -->
+    </select>
+
+    <update id="spYdwc" parameterType="hashmap">
+        update ZXYH_YDWC set ZT=#{spzt}
+        where id in
+        <foreach collection="djbhs" item="id"  open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </update>
+
 </mapper>

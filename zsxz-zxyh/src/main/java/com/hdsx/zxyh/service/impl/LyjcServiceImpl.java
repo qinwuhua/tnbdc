@@ -1,11 +1,13 @@
 package com.hdsx.zxyh.service.impl;
 
 import com.github.pagehelper.PageHelper;
+
+import com.hdsx.zxyh.entity.Jczb;
+import com.hdsx.zxyh.entity.Jczbmxb;
 import com.hdsx.zxyh.entity.Lyjc;
-import com.hdsx.zxyh.entity.Lyjcmx;
+import com.hdsx.zxyh.entity.Lyjcmxb;
 import com.hdsx.zxyh.mapper.LyjcMapper;
 import com.hdsx.zxyh.service.LyjcService;
-import com.hdsx.zxyh.utils.UuidUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -19,52 +21,83 @@ public class LyjcServiceImpl implements LyjcService {
     private LyjcMapper lyjcMapper;
 
     @Override
-    public List<Lyjc> getLyjc(String htbh, String gldw, int pageNum, int pageSize) {
-        HashMap<String, Object> param = new HashMap<>();
-        param.put("htbh", htbh);
-        param.put("gldw", gldw);
+    public List<Lyjc> getLyjcAll(HashMap<String,String> paramMap, int pageNum, int pageSize) {
         PageHelper.startPage(pageNum, pageSize);
-        return lyjcMapper.getLyjc(param);
+        List<Lyjc> list = lyjcMapper.getLyjcAll(paramMap);
+        return list;
     }
 
     @Override
     public int addLyjc(Lyjc lyjc) {
-        if (lyjc.getId() == null || lyjc.getId() == ""){
-            lyjc.setId(UuidUtil.getUUID());
+        if (lyjc.getLyjcmxb() != null && lyjc.getLyjcmxb().size() > 0){
+            lyjcMapper.addLyjcmxb(lyjc.getLyjcmxb());
         }
-        // 增加履约检查明细表
-        if (lyjc.getList().size()>0){
-            for (Lyjcmx lyjcmx:lyjc.getList()) {
-                lyjcmx.setMxid(UuidUtil.getUUID());
-                lyjcmx.setLyjcid(lyjc.getId());
-            }
-            lyjcMapper.addLyjcMx(lyjc.getList());
-        }
-        // 增加专项履约检查表
         return lyjcMapper.addLyjc(lyjc);
     }
 
     @Override
     public int deleteLyjc(String[] ids) {
-        // 先删除子表
-        lyjcMapper.deleteLyjcMx(ids);
-        // 先删除主表
-        return lyjcMapper.deleteLyjc(ids);
+        lyjcMapper.deleteLyjcmxbByMid(ids);
+        return lyjcMapper.deleteLyjcById(ids);
     }
 
     @Override
     public int updateLyjc(Lyjc lyjc) {
-        // 删除明细表
-        lyjcMapper.deleteLyjcMx(new String[]{lyjc.getId()});
-        // 增加明细表
-        if (lyjc.getList().size()>0){
-            for (Lyjcmx lyjcmx:lyjc.getList()) {
-                lyjcmx.setMxid(UuidUtil.getUUID());
-                lyjcmx.setLyjcid(lyjc.getId());
-            }
-            lyjcMapper.addLyjcMx(lyjc.getList());
+        lyjcMapper.deleteLyjcmxbByMid(new String[]{lyjc.getId()});
+        if (lyjc.getLyjcmxb() != null && lyjc.getLyjcmxb().size() > 0){
+            lyjcMapper.addLyjcmxb(lyjc.getLyjcmxb());
         }
-        // 更新主表
         return lyjcMapper.updateLyjc(lyjc);
+    }
+
+    @Override
+    public List<Lyjcmxb> getLyjcbmxByMid(String id) {
+        return lyjcMapper.getLyjcbmxByMid(id);
+    }
+
+    @Override
+    public List<Jczb> getJczbAll(HashMap<String, String> paramMap, int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<Jczb> list = lyjcMapper.getJczbAll(paramMap);
+        return list;
+    }
+
+    @Override
+    public int addJczb(Jczb jczb) {
+        if (jczb.getJczbmxb() != null && jczb.getJczbmxb().size() > 0){
+            lyjcMapper.addJczbmxb(jczb.getJczbmxb());
+        }
+        return lyjcMapper.addJczb(jczb);
+    }
+
+
+    @Override
+    public int deleteJczb(String[] ids) {
+        lyjcMapper.deleteJczbmxbByMid(ids);
+        return lyjcMapper.deleteJczbByIds(ids);
+    }
+
+    @Override
+    public int updateJczb(Jczb jczb) {
+        lyjcMapper.deleteJczbmxbByMid(new String[]{jczb.getId()});
+        if (jczb.getJczbmxb() != null && jczb.getJczbmxb().size() > 0){
+            lyjcMapper.addJczbmxb(jczb.getJczbmxb());
+        }
+        return lyjcMapper.updateJczb(jczb);
+    }
+
+    @Override
+    public List<Jczbmxb> getJczbmxById(String id) {
+        return lyjcMapper.getJczbmxById(id);
+    }
+
+    @Override
+    public int deleteLyjcmxbByIds(String[] ids) {
+        return lyjcMapper.deleteLyjcmxbByIds(ids);
+    }
+
+    @Override
+    public int deleteJczbmxByIds(String[] ids) {
+        return lyjcMapper.deleteJczbmxByIds(ids);
     }
 }

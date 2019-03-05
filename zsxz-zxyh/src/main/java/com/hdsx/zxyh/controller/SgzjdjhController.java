@@ -6,10 +6,15 @@ import com.hdsx.zxyh.entity.Sgzjdjh;
 import com.hdsx.zxyh.service.SgzjdjhService;
 import com.hdsx.zxyh.utils.ResultUtil;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("sgzjdjh")
@@ -65,9 +70,14 @@ public class SgzjdjhController {
 
     @DeleteMapping("deleteSgzjdjh")
     @ApiOperation("删除施工总进度计划")
-    public Msg deleteSgzjdjh(String[] ids) {
+    public Msg deleteSgzjdjh(String ids) {
         try {
-            if (sgzjdjhService.deleteSgzjdjh(ids)>0) {
+            String[] djbh=ids.split(",");
+            List<String> l = new ArrayList<String>();
+            for (int i=0;i<djbh.length;i++){
+                l.add(djbh[i]);
+            }
+            if (sgzjdjhService.deleteSgzjdjh(l)>0) {
                 return ResultUtil.success("删除施工总进度计划成功");
             } else {
                 return ResultUtil.error("删除施工总进度计划失败");
@@ -77,4 +87,30 @@ public class SgzjdjhController {
             return ResultUtil.error("接口异常");
         }
     }
+
+
+    @RequestMapping(value = "spSgzjdjh", method = RequestMethod.PUT, produces = "application/json")
+    @ApiOperation(value = "审批施工总进度计划")
+    public Msg spSgzjdjh(@RequestParam(value = "ids",required = true) String ids,
+                             @RequestParam(value = "spzt",required = true) String spzt){
+        try {
+            String[] idss=ids.split(",");
+            List<String> l = new ArrayList<String>();
+            for (int i=0;i<idss.length;i++){
+                l.add(idss[i]);
+            }
+            Map<String,Object> param=new HashMap<String,Object>();
+            param.put("spzt",spzt);param.put("djbhs",l);
+            int flag=sgzjdjhService.spSgzjdjh(param);
+            if(flag>0)
+                return ResultUtil.success("审批成功");
+            else
+                return ResultUtil.error("审批失败");
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResultUtil.error("审批失败，接口异常");
+        }
+
+    }
+
 }

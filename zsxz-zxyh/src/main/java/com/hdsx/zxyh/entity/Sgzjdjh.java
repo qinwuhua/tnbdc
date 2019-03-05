@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * 施工总进度的计划实体
@@ -41,4 +42,10 @@ public class Sgzjdjh {
     private String bzdw;
     // 编制部门
     private String bzbm;
+
+    private String htbh;
+
+    private String spzt;
+
+    List<Sgzjdjhmx> mx;
 }

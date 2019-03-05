@@ -46,4 +46,5 @@ public class Ydjh {
     private List<Ydjhmx> list;
     // 状态
     private String zt;
+
 }

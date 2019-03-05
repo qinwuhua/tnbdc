@@ -14,7 +14,7 @@ import javax.annotation.Resource;
 
 @RestController
 @RequestMapping("jczb")
-@Api(value = "进场准备情况控制器", description = "进场准备情况控制器")
+@Api(value = "进场准备情况控制器", description = "进场准备情况控制器(不用了，全部在LyjcController里)")
 public class JczbqkbController {
 
     @Resource
