@@ -319,7 +319,7 @@
     </select>
 
     <select id="getZjdHtCzfs" parameterType="string" resultType="hashmap">
-        select zmmc "czfs",kssj "jhkssj",jssj "jhjssj" from ZXYH_SGZJDJHmx
+        select zmmc "czfs",kssj "jhksrq",jssj "jhwcrq" from ZXYH_SGZJDJHmx
         where 1=1 and pdjbh=(select djbh from ZXYH_SGZJDJH where htbh=#{value})
         <!-- and tbdwdm like #{value}||'%' -->
     </select>

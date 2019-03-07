@@ -60,7 +60,7 @@
         <if test="jsrq != null and jsrq != ''">
             and to_date(bzrq,'yyyy-mm-dd')&lt;=to_date(#{jsrq},'yyyy-mm-dd')
         </if>
-        order by djbh,xh
+        order by djbh
     </select>
 
 
@@ -70,7 +70,7 @@
         <if test="djbh != null and djbh != ''">
             and g.djbh=#{djbh}
         </if>
-        order by djbh,xh
+        order by djbh
     </select>
 
     <insert id="addCbrylwtForGcys" parameterType="com.hdsx.zxyh.entity.Gcyscbr">

@@ -256,7 +256,7 @@
         </foreach>
     </update>
 
-    <insert id="addBgdMxForBggl" parameterType="com.hdsx.zxyh.entity.Bgglbgd">
+    <insert id="addBgdForBggl" parameterType="com.hdsx.zxyh.entity.Bgglbgd">
         insert into ZXYH_GCBGD
         <trim prefix="(" suffix=")" suffixOverrides="," >
             <if test="djbh != null" >djbh,</if>
@@ -297,7 +297,7 @@
         </trim>
     </insert>
 
-    <insert id="addBgdForBggl" parameterType="com.hdsx.zxyh.entity.Bgglbgd">
+    <insert id="addBgdMxForBggl" parameterType="com.hdsx.zxyh.entity.Bgglbgd">
         begin
         <foreach collection="mx" item="item" index="index" separator=";">
             insert into ZXYH_GCBGDMX(mxdjbh, zmh, zmmc, dw, dj, gclbgq, gclbgh, jebgq, jebgh, zmid, mxhtbh)  values
