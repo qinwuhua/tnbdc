@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hdsx.common.mapper.ZlglkhxzMapper">
+
+    <!-- 查询全部-->
+    <select id = "getAll" resultType="hashmap">
+        SELECT * FROM RCYH_ZLGLKH
+    </select>
+    <!-- 根据工程项目查询信息-->
+    <select id="GetAllByGcxm" resultType="hashmap">
+        SELECT * FROM RCYH_ZLGLKH where  GCXM=#{gcxm}
+    </select>
+
+
+</mapper>
