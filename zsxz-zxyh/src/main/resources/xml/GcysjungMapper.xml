@@ -111,8 +111,38 @@
     <insert id="addJungMxForGcys" parameterType="com.hdsx.zxyh.entity.Gcysjung">
         begin
         <foreach collection="mx" item="item" index="index" separator=";">
-            insert into ZXYH_JUNGMX(mxjssbh, zmh, zmnr, dw, htdj, htsl, htje, wcsl, wcje, ljwczb, zmid, mxhtbh )  values
-            (trim(#{jssbh}),trim(#{item.zmh}),trim(#{item.zmnr}),trim(#{item.dw}),trim(#{item.htdj}),trim(#{item.htsl}),trim(#{item.htje}),trim(#{item.wcsl}),trim(#{item.wcje}),trim(#{item.ljwczb}),trim(#{item.zmid}),trim(#{item.mxhtbh}))
+            insert into ZXYH_JUNGMX
+
+
+            <trim prefix="(" suffix=")" suffixOverrides="," >
+                <if test="jssbh != null" >mxjssbh,</if>
+                <if test="item.zmh != null" >zmh,</if>
+                <if test="item.zmnr != null" >zmnr,</if>
+                <if test="item.dw != null" >dw,</if>
+                <if test="item.htdj != null" >htdj,</if>
+                <if test="item.htsl != null" >htsl,</if>
+                <if test="item.htje != null" >htje,</if>
+                <if test="item.wcsl != null" >wcsl,</if>
+                <if test="item.wcje != null" >wcje,</if>
+                <if test="item.ljwczb != null" >ljwczb,</if>
+                <if test="item.zmid != null" >zmid,</if>
+                <if test="item.mxhtbh != null" >mxhtbh,</if>
+
+            </trim>
+            <trim prefix="values (" suffix=")" suffixOverrides="," >
+                <if test="jssbh != null" >trim(#{jssbh}),</if>
+                <if test="item.zmh != null" >trim(#{item.zmh}),</if>
+                <if test="item.zmnr != null" >trim(#{item.zmnr}),</if>
+                <if test="item.dw != null" >trim(#{item.dw}),</if>
+                <if test="item.htdj != null" >trim(#{item.htdj}),</if>
+                <if test="item.htsl != null" >trim(#{item.htsl}),</if>
+                <if test="item.htje != null" >trim(#{item.htje}),</if>
+                <if test="item.wcsl != null" >trim(#{item.wcsl}),</if>
+                <if test="item.wcje != null" >trim(#{item.wcje}),</if>
+                <if test="item.ljwczb != null" >trim(#{item.ljwczb}),</if>
+                <if test="item.zmid != null" >trim(#{item.zmid}),</if>
+                <if test="item.mxhtbh != null" >trim(#{item.mxhtbh}),</if>
+            </trim>
         </foreach>
         ;end;
     </insert>

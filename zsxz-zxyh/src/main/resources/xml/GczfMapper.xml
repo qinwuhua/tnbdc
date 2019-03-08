@@ -284,8 +284,39 @@
     <insert id="addGcjldMxForGczf" parameterType="com.hdsx.zxyh.entity.Gczfgcjld">
         begin
         <foreach collection="mx" item="item" index="index" separator=";">
-            insert into ZXYH_GCJLDMX(GCJL_ID, GCJLMX_DJBH,GCJLMX_ZMID, GCJLMX_ZMH, GCJLMX_ZMMC, GCJLMX_HTSL, GCJLMX_JlDW, GCJLMX_HTDJ, GCJLMX_KKJE, GCJLMX_HTJE, GCJLMX_ZJE,GCJLMX_HTBH,GCJLMX_WCSL)  values
-            (sys_guid(),trim(#{gcjl_djbh}),trim(#{item.gcjlmx_zmid}),trim(#{item.gcjlmx_zmh}),trim(#{item.gcjlmx_zmmc}),trim(#{item.gcjlmx_htsl}),trim(#{item.gcjlmx_jldw}),trim(#{item.gcjlmx_htdj}),trim(#{item.gcjlmx_kkje}),trim(#{item.gcjlmx_htje}),trim(#{item.gcjlmx_htje})-trim(#{item.gcjlmx_kkje}),trim(#{item.gcjlmx_htbh}),trim(#{item.gcjlmx_wcsl}))
+
+            insert into ZXYH_GCJLDMX
+            <trim prefix="(" suffix=")" suffixOverrides="," >
+                <if test="1 != 2" >GCJL_ID,</if>
+                <if test="gcjl_djbh != null" >GCJLMX_DJBH,</if>
+                <if test="item.gcjlmx_zmid != null" >GCJLMX_ZMID,</if>
+                <if test="item.gcjlmx_zmh != null" >GCJLMX_ZMH,</if>
+                <if test="item.gcjlmx_zmmc != null" >GCJLMX_ZMMC,</if>
+                <if test="item.gcjlmx_htsl != null" >GCJLMX_HTSL,</if>
+                <if test="item.gcjlmx_jldw != null" >GCJLMX_JlDW,</if>
+                <if test="item.gcjlmx_htdj != null" >GCJLMX_HTDJ,</if>
+                <if test="item.gcjlmx_kkje != null" >GCJLMX_KKJE,</if>
+                <if test="item.gcjlmx_htje != null" >GCJLMX_HTJE,</if>
+                <if test="item.gcjlmx_htje != null" >GCJLMX_ZJE,</if>
+                <if test="item.gcjlmx_htbh != null" >GCJLMX_HTBH,</if>
+                <if test="item.gcjlmx_wcsl != null" >GCJLMX_WCSL,</if>
+            </trim>
+            <trim prefix="values (" suffix=")" suffixOverrides="," >
+                <if test="1 != 2" >sys_guid(),</if>
+                <if test="gcjl_djbh != null" >trim(#{gcjl_djbh}),</if>
+                <if test="item.gcjlmx_zmid != null" >trim(#{item.gcjlmx_zmid}),</if>
+                <if test="item.gcjlmx_zmh != null" >trim(#{item.gcjlmx_zmh}),</if>
+                <if test="item.gcjlmx_zmmc != null" >trim(#{item.gcjlmx_zmmc}),</if>
+                <if test="item.gcjlmx_htsl != null" >trim(#{item.gcjlmx_htsl}),</if>
+                <if test="item.gcjlmx_jldw != null" >trim(#{item.gcjlmx_jldw}),</if>
+                <if test="item.gcjlmx_htdj != null" >trim(#{item.gcjlmx_htdj}),</if>
+                <if test="item.gcjlmx_kkje != null" >trim(#{item.gcjlmx_kkje}),</if>
+                <if test="item.gcjlmx_htje != null" >trim(#{item.gcjlmx_htje}),</if>
+                <if test="item.gcjlmx_htje != null" >trim(#{item.gcjlmx_htje})-trim(#{item.gcjlmx_kkje}),</if>
+                <if test="item.gcjlmx_htbh != null" >trim(#{item.gcjlmx_htbh}),</if>
+                <if test="item.gcjlmx_wcsl != null" >trim(#{item.gcjlmx_wcsl}),</if>
+            </trim>
+
         </foreach>
         ;end;
     </insert>
@@ -380,7 +411,7 @@
         <if test="jsrq != null and jsrq != ''">
             and to_date(to_char(zb.ZQCWZF_TBRQ,'yyyy-mm-dd'),'yyyy-mm-dd')&lt;=to_date(#{jsrq},'yyyy-mm-dd')
         </if>
-        order by ZQCWZF_zfqh,ZQZFMX_ZMBH
+        order by ZQCWZF_zfqh
     </select>
 
     <select id="getZqcwzfInfoByZfqh" parameterType="hashmap" resultMap="zqcwzf">
@@ -463,10 +494,48 @@
     <insert id="addZqcwzfMxForGczf" parameterType="com.hdsx.zxyh.entity.Gczfzqcwzf">
         begin
         <foreach collection="mx" item="item" index="index" separator=";">
-            insert into ZXYH_ZQCWZFZSMX(ZQZFMX_ID, ZQZFMX_MID, ZQZFMX_ZMBH, ZQZFMX_ZMMC, ZQZFMX_JLDW,  ZQZFMX_HTSL, ZQZFMX_HTDJ, ZQZFMX_HTJE, ZQZFMX_LJWC, ZQZFMX_BQWCSL, ZQZFMX_BQWCJE, ZQZFMX_SQWCSL, ZQZFMX_SQWCJE, ZQZFMX_BQSL, ZQZFMX_BQJE, ZQZFMX_ZFQH,ZQZFMX_ZMID,ZQZFMX_HTBH )  values
-            (sys_guid(),trim(#{zqcwzf_zfqh,jdbcType=VARCHAR}),trim(#{item.zqzfmx_zmbh,jdbcType=VARCHAR}),trim(#{item.zqzfmx_zmmc,jdbcType=VARCHAR}),trim(#{item.zqzfmx_jldw,jdbcType=VARCHAR}),trim(#{item.zqzfmx_htsl}),trim(#{item.zqzfmx_htdj}),trim(#{item.zqzfmx_htdj})*trim(#{item.zqzfmx_htsl}),
-            trim(#{item.zqzfmx_ljwc,jdbcType=VARCHAR}),nvl(trim(#{item.zqzfmx_sqwcsl}),0)+nvl(trim(#{item.zqzfmx_bqsl}),0),nvl(trim(#{item.zqzfmx_sqwcje}),0)+nvl(trim(#{item.zqzfmx_bqje}),0),
-            trim(#{item.zqzfmx_sqwcsl}),trim(#{item.zqzfmx_sqwcje}),trim(#{item.zqzfmx_bqsl}),trim(#{item.zqzfmx_bqje}),trim(#{zqcwzf_zfqh,jdbcType=VARCHAR}),trim(#{item.zqzfmx_zmid,jdbcType=VARCHAR}),trim(#{item.zqzfmx_htbh,jdbcType=VARCHAR}))
+            insert into ZXYH_ZQCWZFZSMX
+            <trim prefix="(" suffix=")" suffixOverrides="," >
+                <if test="1 != 2" >ZQZFMX_ID,</if>
+                <if test="zqcwzf_zfqh != null" >ZQZFMX_MID,</if>
+                <if test="item.zqzfmx_zmbh != null" >ZQZFMX_ZMBH,</if>
+                <if test="item.zqzfmx_zmmc != null" >ZQZFMX_ZMMC,</if>
+                <if test="item.zqzfmx_jldw != null" >ZQZFMX_JLDW,</if>
+                <if test="item.zqzfmx_htsl != null" >ZQZFMX_HTSL,</if>
+                <if test="item.zqzfmx_htdj != null" >ZQZFMX_HTDJ,</if>
+                <if test="item.zqzfmx_htje != null" >ZQZFMX_HTJE,</if>
+                <if test="item.zqzfmx_ljwc != null" >ZQZFMX_LJWC,</if>
+                <if test="item.zqzfmx_sqwcsl != null and item.zqzfmx_bqsl != null" >ZQZFMX_BQWCSL,</if>
+                <if test="item.zqzfmx_sqwcje != null and item.zqzfmx_bqje != null" >ZQZFMX_BQWCJE,</if>
+                <if test="item.zqzfmx_sqwcsl != null" >ZQZFMX_SQWCSL,</if>
+                <if test="item.zqzfmx_sqwcje != null" >ZQZFMX_SQWCJE,</if>
+                <if test="item.zqzfmx_bqsl != null" >ZQZFMX_BQSL,</if>
+                <if test="item.zqzfmx_bqje != null" >ZQZFMX_BQJE,</if>
+                <if test="zqcwzf_zfqh != null" >ZQZFMX_ZFQH,</if>
+                <if test="item.zqzfmx_zmid != null" >ZQZFMX_ZMID,</if>
+                <if test="item.zqzfmx_htbh != null" >ZQZFMX_HTBH,</if>
+            </trim>
+            <trim prefix="values (" suffix=")" suffixOverrides="," >
+                <if test="1 != 2" >sys_guid(),</if>
+                <if test="zqcwzf_zfqh != null" >trim(#{zqcwzf_zfqh}),</if>
+                <if test="item.zqzfmx_zmbh != null" >trim(#{item.zqzfmx_zmbh}),</if>
+                <if test="item.zqzfmx_zmmc != null" >trim(#{item.zqzfmx_zmmc}),</if>
+                <if test="item.zqzfmx_jldw != null" >trim(#{item.zqzfmx_jldw}),</if>
+                <if test="item.zqzfmx_htsl != null" >trim(#{item.zqzfmx_htsl}),</if>
+                <if test="item.zqzfmx_htdj != null" >trim(#{item.zqzfmx_htdj}),</if>
+                <if test="item.zqzfmx_htje != null" >trim(#{item.zqzfmx_htje}),</if>
+                <if test="item.zqzfmx_ljwc != null" >trim(#{item.zqzfmx_ljwc}),</if>
+                <if test="item.zqzfmx_sqwcsl != null and item.zqzfmx_bqsl != null" >nvl(trim(#{item.zqzfmx_sqwcsl}),0)+nvl(trim(#{item.zqzfmx_bqsl}),0),</if>
+                <if test="item.zqzfmx_sqwcje != null and item.zqzfmx_bqje != null" >nvl(trim(#{item.zqzfmx_sqwcje}),0)+nvl(trim(#{item.zqzfmx_bqje}),0),</if>
+                <if test="item.zqzfmx_sqwcsl != null" >trim(#{item.zqzfmx_sqwcsl}),</if>
+                <if test="item.zqzfmx_sqwcje != null" >trim(#{item.zqzfmx_sqwcje}),</if>
+                <if test="item.zqzfmx_bqsl != null" >trim(#{item.zqzfmx_bqsl}),</if>
+                <if test="item.zqzfmx_bqje != null" >trim(#{item.zqzfmx_bqje}),</if>
+                <if test="zqcwzf_zfqh != null" >trim(#{zqcwzf_zfqh}),</if>
+                <if test="item.zqzfmx_zmid != null" >trim(#{item.zqzfmx_zmid}),</if>
+                <if test="item.zqzfmx_htbh != null" >trim(#{item.zqzfmx_htbh}),</if>
+            </trim>
+
         </foreach>
         ;end;
     </insert>

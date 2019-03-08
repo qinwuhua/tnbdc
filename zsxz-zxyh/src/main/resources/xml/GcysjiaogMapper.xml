@@ -150,8 +150,49 @@
     <insert id="addJiaogMxForGcys" parameterType="com.hdsx.zxyh.entity.Gcysjiaog">
         begin
         <foreach collection="mx" item="item" index="index" separator=";">
-            insert into ZXYH_JGJSSMX(PMMTJGJSSMX_ID, PMMTJGJSSMX_MID, PMMTJGJSSMX_ZMBH, PMMTJGJSSMX_ZMMC, PMMTJGJSSMX_DW, PMMTJGJSSMX_HTDJ, PMMTJGJSSMX_YHTS, PMMTJGJSSMX_YHTJE, PMMTJGJSSMX_SJJLSL, PMMTJGJSSMX_SJJLJE, PMMTJGJSSMX_JGJSSL, PMMTJGJSSMX_JGJSJE, PMMTJGJSSMX_YSJBSL, PMMTJGJSSMX_YSJBJE, PMMTJGJSSMX_ZMID, PMMTJGJSSMX_HTBH, PMMTJGJSSMX_REMARK,PMMTJGJSSMX_JSSBH )  values
-            (sys_guid(),trim(#{pmmtjgjss_jssbh}),trim(#{item.pmmtjgjssmx_zmbh}),trim(#{item.pmmtjgjssmx_zmmc}),trim(#{item.pmmtjgjssmx_dw}),trim(#{item.pmmtjgjssmx_htdj}),trim(#{item.pmmtjgjssmx_yhts}),trim(#{item.pmmtjgjssmx_yhtje}),trim(#{item.pmmtjgjssmx_sjjlsl}),trim(#{item.pmmtjgjssmx_sjjlje}),trim(#{item.pmmtjgjssmx_jgjssl}),trim(#{item.pmmtjgjssmx_jgjsje}),trim(#{item.pmmtjgjssmx_ysjbsl}),trim(#{item.pmmtjgjssmx_ysjbje}),trim(#{item.pmmtjgjssmx_zmid}),trim(#{item.pmmtjgjssmx_htbh}),trim(#{item.pmmtjgjssmx_remark}),trim(#{pmmtjgjss_jssbh}))
+            insert into ZXYH_JGJSSMX
+
+            <trim prefix="(" suffix=")" suffixOverrides="," >
+                <if test="1 != 2" >PMMTJGJSSMX_ID,</if>
+                <if test="pmmtjgjss_jssbh != null" >PMMTJGJSSMX_MID,</if>
+                <if test="item.pmmtjgjssmx_zmbh != null" >PMMTJGJSSMX_ZMBH,</if>
+                <if test="item.pmmtjgjssmx_zmmc != null" >PMMTJGJSSMX_ZMMC,</if>
+                <if test="item.pmmtjgjssmx_dw != null" >PMMTJGJSSMX_DW,</if>
+                <if test="item.pmmtjgjssmx_htdj != null" >PMMTJGJSSMX_HTDJ,</if>
+                <if test="item.pmmtjgjssmx_yhts != null" >PMMTJGJSSMX_YHTS,</if>
+                <if test="item.pmmtjgjssmx_yhtje != null" >PMMTJGJSSMX_YHTJE,</if>
+                <if test="item.pmmtjgjssmx_jgjssl != null" >PMMTJGJSSMX_JGJSSL,</if>
+                <if test="item.pmmtjgjssmx_sjjlsl != null" >PMMTJGJSSMX_SJJLSL,</if>
+                <if test="item.pmmtjgjssmx_jgjsje != null" >PMMTJGJSSMX_JGJSJE,</if>
+                <if test="item.pmmtjgjssmx_sjjlje != null" >PMMTJGJSSMX_SJJLJE,</if>
+                <if test="item.pmmtjgjssmx_ysjbsl != null" >PMMTJGJSSMX_YSJBSL,</if>
+                <if test="item.pmmtjgjssmx_ysjbje != null" >PMMTJGJSSMX_YSJBJE,</if>
+                <if test="item.pmmtjgjssmx_zmid != null" >PMMTJGJSSMX_ZMID,</if>
+                <if test="item.pmmtjgjssmx_htbh != null" >PMMTJGJSSMX_HTBH,</if>
+                <if test="item.pmmtjgjssmx_remark != null" >PMMTJGJSSMX_REMARK,</if>
+                <if test="pmmtjgjss_jssbh != null" >PMMTJGJSSMX_JSSBH,</if>
+            </trim>
+            <trim prefix="values (" suffix=")" suffixOverrides="," >
+                <if test="1 != 2" >sys_guid(),</if>
+                <if test="pmmtjgjss_jssbh != null" >trim(#{pmmtjgjss_jssbh}),</if>
+                <if test="item.pmmtjgjssmx_zmbh != null" >trim(#{item.pmmtjgjssmx_zmbh}),</if>
+                <if test="item.pmmtjgjssmx_zmmc != null" >trim(#{item.pmmtjgjssmx_zmmc}),</if>
+                <if test="item.pmmtjgjssmx_dw != null" >trim(#{item.pmmtjgjssmx_dw}),</if>
+                <if test="item.pmmtjgjssmx_htdj != null" >trim(#{item.pmmtjgjssmx_htdj}),</if>
+                <if test="item.pmmtjgjssmx_yhts != null" >trim(#{item.pmmtjgjssmx_yhts}),</if>
+                <if test="item.pmmtjgjssmx_yhtje != null" >trim(#{item.pmmtjgjssmx_yhtje}),</if>
+                <if test="item.pmmtjgjssmx_jgjssl != null" >trim(#{item.pmmtjgjssmx_jgjssl}),</if>
+                <if test="item.pmmtjgjssmx_sjjlsl != null" >trim(#{item.pmmtjgjssmx_sjjlsl}),</if>
+                <if test="item.pmmtjgjssmx_jgjsje != null" >trim(#{item.pmmtjgjssmx_jgjsje}),</if>
+                <if test="item.pmmtjgjssmx_sjjlje != null" >trim(#{item.pmmtjgjssmx_sjjlje}),</if>
+                <if test="item.pmmtjgjssmx_ysjbsl != null" >trim(#{item.pmmtjgjssmx_ysjbsl}),</if>
+                <if test="item.pmmtjgjssmx_ysjbje != null" >trim(#{item.pmmtjgjssmx_ysjbje}),</if>
+                <if test="item.pmmtjgjssmx_zmid != null" >trim(#{item.pmmtjgjssmx_zmid}),</if>
+                <if test="item.pmmtjgjssmx_htbh != null" >trim(#{item.pmmtjgjssmx_htbh}),</if>
+                <if test="item.pmmtjgjssmx_remark != null" >trim(#{item.pmmtjgjssmx_remark}),</if>
+                <if test="pmmtjgjss_jssbh != null" >trim(#{pmmtjgjss_jssbh}),</if>
+            </trim>
+
         </foreach>
         ;end;
     </insert>
@@ -159,7 +200,6 @@
     <insert id="addJiaogForGcys" parameterType="com.hdsx.zxyh.entity.Gcysjiaog">
         insert into ZXYH_JGJSS
         <trim prefix="(" suffix=")" suffixOverrides="," >
-            <if test="pmmtjgjss_id != null" >pmmtjgjss_id,</if>
             <if test="pmmtjgjss_dwmc != null" >pmmtjgjss_dwmc,</if>
             <if test="pmmtjgjss_dwbh != null" >pmmtjgjss_dwbh,</if>
             <if test="pmmtjgjss_dwid != null" >pmmtjgjss_dwid,</if>
@@ -193,7 +233,6 @@
 
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides="," >
-            <if test="pmmtjgjss_id != null" >#{pmmtjgjss_id},</if>
             <if test="pmmtjgjss_dwmc != null" >#{pmmtjgjss_dwmc},</if>
             <if test="pmmtjgjss_dwbh != null" >#{pmmtjgjss_dwbh},</if>
             <if test="pmmtjgjss_dwid != null" >#{pmmtjgjss_dwid},</if>

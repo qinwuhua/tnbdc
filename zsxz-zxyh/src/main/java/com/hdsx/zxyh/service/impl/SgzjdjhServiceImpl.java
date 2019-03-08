@@ -46,7 +46,7 @@ public class SgzjdjhServiceImpl implements SgzjdjhService {
     public int deleteSgzjdjh(List ids) {
         int j=sgzjdjhMapper.deleteSgzjdjhiMx(ids);
         int i=sgzjdjhMapper.deleteSgzjdjh(ids);
-        return j;
+        return i;
     }
 
     @Override
