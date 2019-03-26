@@ -43,6 +43,7 @@ public class LysqController {
     @RequestMapping(value = "addLysq", method = RequestMethod.POST, produces = "application/json")
     @ApiOperation(value = "添加领用申请")
     public Msg addLysq(@RequestBody Lysq lysq){
+        System.out.println("11111");
         try {
             //判断是否大于数量
             for(int i=0;i<lysq.getMx().size();i++){
