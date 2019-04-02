@@ -101,10 +101,22 @@ public class LyjcController{
 
     @GetMapping("getLyjcbmxByMid")
     @ApiImplicitParam(paramType="query", dataType = "String", name = "id", value = "主键ID", required = true)
-    @ApiOperation(value = "根据id查询履约检查表信息")
+    @ApiOperation(value = "根据id查询履约检查明细表信息")
     public Msg getLyjcbmxByMid(@RequestParam("id") String id){
         try {
             return ResultUtil.success(lyjcService.getLyjcbmxByMid(id));
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResultUtil.error("接口异常！");
+        }
+    }
+
+    @GetMapping("getLyjcbByid")
+    @ApiImplicitParam(paramType="query", dataType = "String", name = "id", value = "主键ID", required = true)
+    @ApiOperation(value = "根据id查询履约检查表信息")
+    public Msg getLyjcbByMid(@RequestParam("id") String id){
+        try {
+            return ResultUtil.success(lyjcService.getLyjcbByid(id));
         }catch (Exception e){
             e.printStackTrace();
             return ResultUtil.error("接口异常！");
@@ -187,10 +199,22 @@ public class LyjcController{
 
     @GetMapping("getJczbmxById")
     @ApiImplicitParam(paramType="query", dataType = "String", name = "id", value = "主键ID", required = true)
-    @ApiOperation(value = "根据id查询进场准备表信息")
+    @ApiOperation(value = "根据id查询进场准备明细表信息")
     public Msg getJczbmxById(@RequestParam("id") String id){
         try {
             return ResultUtil.success(lyjcService.getJczbmxById(id));
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResultUtil.error("接口异常！！");
+        }
+    }
+
+    @GetMapping("getJczbById")
+    @ApiImplicitParam(paramType="query", dataType = "String", name = "id", value = "主键ID", required = true)
+    @ApiOperation(value = "根据id查询进场准备表信息")
+    public Msg getJczbById(@RequestParam("id") String id){
+        try {
+            return ResultUtil.success(lyjcService.getJczbById(id));
         }catch (Exception e){
             e.printStackTrace();
             return ResultUtil.error("接口异常！！");

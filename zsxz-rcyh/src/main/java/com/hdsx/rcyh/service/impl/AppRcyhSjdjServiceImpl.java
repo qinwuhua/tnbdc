@@ -1,6 +1,7 @@
 package com.hdsx.rcyh.service.impl;
 
 import com.hdsx.rcyh.entity.AppRcyhQdxc;
+import com.hdsx.rcyh.entity.QdxcPzdj;
 import com.hdsx.rcyh.entity.RcyhSjdj;
 import com.hdsx.rcyh.entity.RwdSubsidiary;
 import com.hdsx.rcyh.mapper.AppRcyhSjdjMapper;
@@ -67,6 +68,19 @@ public class AppRcyhSjdjServiceImpl implements AppRcyhSjdjService {
     @Override
     public List<Map> getYhjhByRyid(String ryid) {
         return mapper.getYhjhByRyid(ryid);
+    }
+
+    @Override
+    public boolean insertPZ(QdxcPzdj qdxcPzdj) {
+        if (mapper.insertPZ(qdxcPzdj) > 0) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public List<Map> getQdxcPz(String ry) {
+        return mapper.getQdxcPz(ry);
     }
 
 }

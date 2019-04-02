@@ -316,4 +316,24 @@ public class RcyhXxrwServiceImpl implements RcyhXxrwService {
         return mapper.getCreateYhjdwcmxByYfAndHtbh(map);
     }
 
+    @Override
+    public List<Map> getYICHULIqsList(Map map) {
+        return mapper.getYICHULIqsList(map);
+    }
+
+    @Override
+    public List<Map> getWEICHULIqsList(Map map) {
+        return mapper.getWEICHULIqsList(map);
+    }
+
+    @Override
+    public List<Map> getYICHULIyhList(Map map) {
+        return mapper.getYICHULIyhList(map);
+    }
+
+    @Override
+    public List<Map> getWEICHULIyhList(Map map) {
+        return mapper.getWEICHULIyhList(map);
+    }
+
 }

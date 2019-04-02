@@ -1,6 +1,7 @@
 package com.hdsx.rcyh.mapper;
 
 import com.hdsx.rcyh.entity.Lhyh;
+import com.hdsx.rcyh.entity.LhyhPZ;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -13,4 +14,9 @@ public interface LhyhMapper {
     List<Lhyh> getLhyhrwList(Map<String, String> param);
 
     int insertLhyh(Lhyh lhyh);
+
+    int insertLhyhPZ(LhyhPZ lhyhPZ);
+
+    List<Map> getLhyhPz(String lhry);
+
 }

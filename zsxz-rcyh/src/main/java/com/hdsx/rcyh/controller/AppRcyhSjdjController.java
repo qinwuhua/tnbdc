@@ -1,9 +1,6 @@
 package com.hdsx.rcyh.controller;
 
-import com.hdsx.rcyh.entity.AppRcyhQdxc;
-import com.hdsx.rcyh.entity.Msg;
-import com.hdsx.rcyh.entity.RcyhSjdj;
-import com.hdsx.rcyh.entity.RwdSubsidiary;
+import com.hdsx.rcyh.entity.*;
 import com.hdsx.rcyh.service.AppRcyhSjdjService;
 import com.hdsx.rcyh.utils.ResultUtil;
 import io.swagger.annotations.Api;
@@ -140,4 +137,35 @@ public class AppRcyhSjdjController {
         }
     }
 
+
+    /**
+     * （单条）事件登记
+     * @param qdxcPzdj
+     * @return
+     */
+    @PostMapping("insertPZ")
+    @ApiOperation("配置登记")
+    public Msg insertPZ(@RequestBody QdxcPzdj qdxcPzdj){
+        try {
+            if (qdxcPzdj.getKssj()!= null && qdxcPzdj.getQqzh()!= null && qdxcPzdj.getXccl()!= null && qdxcPzdj.getId()!= null && qdxcPzdj.getXcfx()!= null && qdxcPzdj.getLx()!= null && qdxcPzdj.getXclx()!= null && qdxcPzdj.getXcry()!= null){
+                return ResultUtil.success(service.insertPZ(qdxcPzdj));
+            }
+            return ResultUtil.error("（配置登记异常！");
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResultUtil.error("接口异常！");
+        }
+    }
+
+    @GetMapping("getQdxcPz")
+    @ApiOperation("根据“人员”查询配置信息”列表")
+    @ApiImplicitParams({@ApiImplicitParam(paramType="query", dataType = "String", name = "xcry", value = "人员", required = true)})
+    public Msg getQdxcPz(@RequestParam(value = "xcry",required = false) String ry){
+        try {
+            return ResultUtil.success(service.getQdxcPz(ry));
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResultUtil.error("查询失败！");
+        }
+    }
 }

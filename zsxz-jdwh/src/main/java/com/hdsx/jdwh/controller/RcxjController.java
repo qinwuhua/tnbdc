@@ -29,6 +29,7 @@ public class RcxjController {
 
    @RequestMapping(value = "getXjType", method = RequestMethod.GET, produces = "application/json")
    @ApiOperation(value = "获取巡检类型")
+   @ResponseBody
     public Msg getXjType(){
         try {
             Map<String, String> param = new HashMap<String, String>();
@@ -58,6 +59,7 @@ public class RcxjController {
 
     @RequestMapping(value = "editRcxj", method = RequestMethod.PUT, produces = "application/json")
     @ApiOperation(value = "编辑日常巡检")
+    @ResponseBody
     public Msg editRcxj(@RequestBody Rcxj rcxj){
         try {
             int flag=rcxjService.editRcxj(rcxj);
@@ -96,6 +98,7 @@ public class RcxjController {
 
     @RequestMapping(value = "getRcxjInfoById", method = RequestMethod.GET, produces = "application/json")
     @ApiOperation(value = "通过单据编号获取日常巡检")
+    @ResponseBody
     @ApiImplicitParam(paramType="query", dataType = "String", name = "id", value = "单据编号", required = true)
     public Msg getRcxjInfoById(@RequestParam(value = "id",required = true) String id){
         try {
@@ -117,6 +120,7 @@ public class RcxjController {
             @ApiImplicitParam(paramType="query", dataType = "int", name = "pageNum", value = "页码", required = true),
             @ApiImplicitParam(paramType="query", dataType = "int", name = "pageSize", value = "每页条数", required = true)
     })
+    @ResponseBody
     @ApiOperation(value = "查询日常巡检列表数据")
     public Msg getRcxjList(@RequestParam(value = "id",required = false) String id,
                             @RequestParam(value = "tbdwdm",required = false) String tbdwdm,

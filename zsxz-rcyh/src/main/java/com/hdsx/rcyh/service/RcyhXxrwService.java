@@ -5,6 +5,7 @@ import com.hdsx.rcyh.entity.RwdSubsidiary;
 import com.hdsx.rcyh.entity.YhrwdInsert;
 import com.hdsx.rcyh.entity.Yhrwysd;
 import com.hdsx.rcyh.utils.RcyhXxrwResultBean;
+import org.apache.ibatis.javassist.bytecode.LineNumberAttribute;
 
 import java.util.List;
 import java.util.Map;
@@ -171,4 +172,12 @@ public interface RcyhXxrwService {
      */
     List<Map> getCreateYhjdwcmxByYfAndHtbh(Map map);
 
+    List<Map> getYICHULIqsList(Map map);
+
+    List<Map> getWEICHULIqsList(Map map);
+
+
+    List<Map> getYICHULIyhList(Map map);
+
+    List<Map> getWEICHULIyhList(Map map);
 }

@@ -256,4 +256,12 @@ public interface RcyhXxrwMapper {
      */
     List<Map> getCreateYhjdwcmxByYfAndHtbh(Map map);
 
+    List<Map> getYICHULIqsList(Map map);
+
+    List<Map> getWEICHULIqsList(Map map);
+
+    List<Map> getYICHULIyhList(Map map);
+
+    List<Map> getWEICHULIyhList(Map map);
+
 }

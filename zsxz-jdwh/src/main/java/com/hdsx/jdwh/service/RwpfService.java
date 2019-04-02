@@ -15,4 +15,9 @@ public interface RwpfService {
     int fpWxrwd(Gzbx gzbx);
 
     List<Gzbx> getWxrwdList(Map<String, String> param, int pageNum, int pageSize);
+
+    List<Gzbx> getDFPrw(Map<String, String> param);
+
+    List<Gzbx> getYFPrw(Map<String, String> param);
+
 }

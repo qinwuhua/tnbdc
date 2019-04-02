@@ -904,4 +904,83 @@
         WHERE A.ZMH IS NOT NULL
     </select>
 
+    <!-- 获取已处理的清扫任务单。 -->
+    <select id="getYICHULIqsList" parameterType="java.util.Map" resultType="java.util.Map">
+        SELECT * FROM ( SELECT ROW_NUMBER()OVER(ORDER BY QSRWD_TBSJ DESC) AS RN,SJLXMJ.MEIJUMC AS SJLXNAME,
+              LX.LXNAME,SHMJ.MEIJUMC AS SHZTNAME,QSMJ.MEIJUMC AS SQZTNAME,BH.RWMX_ID,A.*
+            FROM RCYH_XXRW_QSRWD A
+                LEFT JOIN HTGL_ENUMERATE SJLXMJ ON A.QSRWD_SJLX = SJLXMJ.MEIJUBM
+                LEFT JOIN HTGL_ENUMERATE SHMJ ON A.QSRWD_SHZT = SHMJ.MEIJUBM
+                LEFT JOIN HTGL_ENUMERATE QSMJ ON A.QSRWD_QSZT = QSMJ.MEIJUBM
+                LEFT JOIN HTGL_LXB LX ON A.QSRWD_SJLD = LX.ID
+                LEFT JOIN RCYH_XCSB BH ON BH.YHRWD_DJBH = A.QSRWD_ID
+            WHERE A.QSRWD_SHZT='1403') TEMP
+        <where>
+            <if test="pageNum != null and pageNum != ''">
+                <![CDATA[RN <= (${pageNum} * ${pageSize})]]>
+                AND
+                <![CDATA[RN>((${pageNum} - 1) * ${pageSize})]]>
+            </if>
+        </where>
+    </select>
+
+
+    <!-- 获取未处理的清扫任务单。 -->
+    <select id="getWEICHULIqsList" parameterType="java.util.Map" resultType="java.util.Map">
+         SELECT * FROM (SELECT ROW_NUMBER()OVER(ORDER BY QSRWD_TBSJ DESC) AS RN,SJLXMJ.MEIJUMC AS SJLXNAME,
+        LX.LXNAME,SHMJ.MEIJUMC AS SHZTNAME,QSMJ.MEIJUMC AS SQZTNAME,BH.RWMX_ID,A.*
+        FROM RCYH_XXRW_QSRWD A
+        LEFT JOIN HTGL_ENUMERATE SJLXMJ ON A.QSRWD_SJLX = SJLXMJ.MEIJUBM
+        LEFT JOIN HTGL_ENUMERATE SHMJ ON A.QSRWD_SHZT = SHMJ.MEIJUBM
+        LEFT JOIN HTGL_ENUMERATE QSMJ ON A.QSRWD_QSZT = QSMJ.MEIJUBM
+        LEFT JOIN HTGL_LXB LX ON A.QSRWD_SJLD = LX.ID
+        LEFT JOIN RCYH_XCSB BH ON BH.YHRWD_DJBH = A.QSRWD_ID
+        WHERE A.QSRWD_SHZT IN (1402,1401)) TEMP
+        <where>
+            <if test="pageNum != null and pageNum != ''">
+                <![CDATA[RN <= (${pageNum} * ${pageSize})]]>
+                AND
+                <![CDATA[RN>((${pageNum} - 1) * ${pageSize})]]>
+            </if>
+        </where>
+    </select>
+
+
+    <select id="getYICHULIyhList" parameterType="java.util.Map" resultType="java.util.Map">
+         SELECT * FROM ( SELECT ROW_NUMBER()OVER(ORDER BY YHRWD_RQ DESC) AS RN,A.YHRWD_DJBH,
+    LX.LXNAME,A.YHRWD_LX,A.YHRWD_RQ,A.YHRWD_YD,
+    A.YHRWD_YHDW,A.YHRWD_GYDW,A.YHRWD_RWDSHZT,
+    A.YHRWD_YSZT,SHMJ.MEIJUMC AS SHZT,YSMJ.MEIJUMC AS YSZT
+    FROM RCYH_XXRW_YHRWD A LEFT JOIN HTGL_LXB LX ON A.YHRWD_LX = LX.ID
+    LEFT JOIN HTGL_ENUMERATE SHMJ ON A.YHRWD_RWDSHZT = SHMJ.MEIJUBM
+    LEFT JOIN HTGL_ENUMERATE YSMJ ON A.YHRWD_YSZT = YSMJ.MEIJUBM
+    WHERE A.YHRWD_RWDSHZT='1403') TEMP
+        <where>
+            <if test="pageNum != null and pageNum != ''">
+                <![CDATA[RN <= (${pageNum} * ${pageSize})]]>
+                AND
+                <![CDATA[RN>((${pageNum} - 1) * ${pageSize})]]>
+            </if>
+        </where>
+    </select>
+
+
+    <select id="getWEICHULIyhList" parameterType="java.util.Map" resultType="java.util.Map">
+        SELECT * FROM ( SELECT ROW_NUMBER()OVER(ORDER BY YHRWD_RQ DESC) AS RN,A.YHRWD_DJBH,
+        LX.LXNAME,A.YHRWD_LX,A.YHRWD_RQ,A.YHRWD_YD,
+        A.YHRWD_YHDW,A.YHRWD_GYDW,A.YHRWD_RWDSHZT,
+        A.YHRWD_YSZT,SHMJ.MEIJUMC AS SHZT,YSMJ.MEIJUMC AS YSZT
+        FROM RCYH_XXRW_YHRWD A LEFT JOIN HTGL_LXB LX ON A.YHRWD_LX = LX.ID
+        LEFT JOIN HTGL_ENUMERATE SHMJ ON A.YHRWD_RWDSHZT = SHMJ.MEIJUBM
+        LEFT JOIN HTGL_ENUMERATE YSMJ ON A.YHRWD_YSZT = YSMJ.MEIJUBM
+        WHERE A.YHRWD_RWDSHZT IN (1402,1401)) TEMP
+        <where>
+            <if test="pageNum != null and pageNum != ''">
+                <![CDATA[RN <= (${pageNum} * ${pageSize})]]>
+                AND
+                <![CDATA[RN>((${pageNum} - 1) * ${pageSize})]]>
+            </if>
+        </where>
+    </select>
+
 </mapper>

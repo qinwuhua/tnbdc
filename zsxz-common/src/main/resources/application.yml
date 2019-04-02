@@ -52,4 +52,4 @@ pagehelper:
 #上传文件相关信息
 file:
   fileSavePath: /usr/tomcat/tomcat8.5/webapps/uploadFiles/
-  fileUrl: http://192.168.10.234/uploadFiles/
+  fileUrl: http://192.168.10.234:8080/uploadFiles/

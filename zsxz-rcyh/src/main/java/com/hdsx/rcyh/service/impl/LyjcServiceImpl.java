@@ -100,4 +100,14 @@ public class LyjcServiceImpl implements LyjcService {
         return lyjcMapper.deleteJczbmxByIds(ids);
     }
 
+    @Override
+    public List<Lyjc> getLyjcbByid(String id) {
+        return lyjcMapper.getLyjcbByid(id);
+    }
+
+    @Override
+    public List<Jczb> getJczbById(String id) {
+        return lyjcMapper.getJczbById(id);
+    }
+
 }

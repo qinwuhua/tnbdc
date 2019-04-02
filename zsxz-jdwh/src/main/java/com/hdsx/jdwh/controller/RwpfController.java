@@ -27,6 +27,36 @@ public class RwpfController {
     @Resource
     private RwpfService rwpfService;
 
+    @RequestMapping(value = "getWFPrw", method = RequestMethod.GET, produces = "application/json")
+    @ApiOperation(value = "获取待分配任务单")
+    public Msg getDFPrw(){
+        try {
+            Map<String, String> param = new HashMap<String, String>();
+            List<Gzbx> map=rwpfService.getDFPrw(param);
+            return ResultUtil.success(map);
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResultUtil.error("查询失败，接口异常");
+        }
+
+    }
+
+    @RequestMapping(value = "getYFPrw", method = RequestMethod.GET, produces = "application/json")
+    @ApiOperation(value = "获取已分配任务单")
+    public Msg getYFPrw(){
+        try {
+            Map<String, String> param = new HashMap<String, String>();
+            List<Gzbx> map=rwpfService.getYFPrw(param);
+            return ResultUtil.success(map);
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResultUtil.error("查询失败，接口异常");
+        }
+
+    }
+
+
+
     @RequestMapping(value = "getDfprwdList", method = RequestMethod.GET, produces = "application/json")
     @ApiImplicitParams({
             @ApiImplicitParam(paramType="query", dataType = "String", name = "djbh", value = "单据编号", required = false),
@@ -129,7 +159,12 @@ public class RwpfController {
         List<Gzbx> list = rwpfService.getWxrwdList(param, pageNum, pageSize);
         return ResultUtil.success(new PageInfo<Gzbx>(list));
     }
-
+    public Map dealPageParame(int pageNum, int pageSize){
+        Map map = new HashMap();
+        map.put("pageNum", pageNum);
+        map.put("pageSize", pageSize);
+        return map;
+    }
 
     /*@RequestMapping(value = "getSbInfo", method = RequestMethod.GET, produces = "application/json")
     @ApiOperation(value = "获取设备信息")

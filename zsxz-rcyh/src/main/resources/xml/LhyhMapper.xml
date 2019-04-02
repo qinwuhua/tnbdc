@@ -6,19 +6,19 @@
 	<insert id="insertLhyh" parameterType="com.hdsx.rcyh.entity.Lhyh">
 		insert into rcyh_lhyh(PMMTLHYH_GIS,PMMTLHYH_KSRQ,PMMTLHYH_JSRQ,PMMTLHYH_LHRY,PMMTLHYH_LHRYID,PMMTLHYH_QXXX,
 		PMMTLHYH_SBZT,PMMTLHYH_ID,PMMTLHYH_DWMC,PMMTLHYH_DWBH,PMMTLHYH_DWID,PMMTLHYH_BMMC,PMMTLHYH_BMBH,
-		PMMTLHYH_BMID,PMMTLHYH_TBR,PMMTLHYH_TBRQ,PMMTLHYH_SPZT,PMMTLHYH_FILE,PMMTLHYH_LXCODE,PMMTLHYH_XCFX)
+		PMMTLHYH_BMID,PMMTLHYH_TBR,PMMTLHYH_TBRQ,PMMTLHYH_SPZT,PMMTLHYH_FILE,PMMTLHYH_LXCODE,PMMTLHYH_XCFX,PMMTLHYH_SJDW,PMMTLHYH_GCL)
 		VALUES (#{gis,jdbcType=VARCHAR},to_date(#{ksrq},'yyyy/mm/dd'),to_date(#{jsrq},'yyyy/mm/dd'),
 		#{lhry,jdbcType=VARCHAR},#{lhryid,jdbcType=VARCHAR},#{qxxx,jdbcType=VARCHAR},#{sbzt,jdbcType=VARCHAR},
 		#{id,jdbcType=VARCHAR},#{dwmc,jdbcType=VARCHAR},#{dwbh,jdbcType=VARCHAR},#{dwid,jdbcType=VARCHAR},
 		#{bmmc,jdbcType=VARCHAR},#{bmbh,jdbcType=VARCHAR},#{bmid,jdbcType=VARCHAR},#{tbr,jdbcType=VARCHAR},
 		to_date(#{tbrq},'yyyy/mm/dd'),#{spzt,jdbcType=VARCHAR},#{fileid,jdbcType=VARCHAR},#{lxcode,jdbcType=VARCHAR},
-		#{xcfx,jdbcType=VARCHAR})
+		#{xcfx,jdbcType=VARCHAR},#{sjdw,jdbcType=VARCHAR},#{gcl,jdbcType=VARCHAR})
 	</insert>
 
 	<!-- 查询日常清扫任务列表数据 -->
 	<select id="getLhyhrwList" parameterType="hashmap" resultType="com.hdsx.rcyh.entity.Lhyh">
 		SELECT
-		T.PMMTLHYH_GIS gis,TO_CHAR(T.PMMTLHYH_KSRQ,'yyyy/mm/dd') ksrq,TO_CHAR(T.PMMTLHYH_JSRQ,'yyyy/mm/dd') jsrq,T.PMMTLHYH_LHRY LHRY,T.PMMTLHYH_LHRYID LHRYID,T.PMMTLHYH_QXXX QXXX,T.PMMTLHYH_SBZT sbzt,T.PMMTLHYH_ID id,T.PMMTLHYH_DWMC dwmc,T.PMMTLHYH_DWBH dwbh,T.PMMTLHYH_DWID dwid,T.PMMTLHYH_BMMC bmmc,T.PMMTLHYH_BMBH bmbh,T.PMMTLHYH_BMID bmid,T.PMMTLHYH_TBR tbr,TO_CHAR(T.PMMTLHYH_TBRQ,'yyyy/mm/dd') tbrq,T.PMMTLHYH_SPZT spzt,T.PMMTLHYH_FILE fileid,T.PMMTLHYH_lxcode lxcode,E.MEIJUMC xcfx
+		T.PMMTLHYH_GIS gis,TO_CHAR(T.PMMTLHYH_KSRQ,'yyyy/mm/dd') ksrq,TO_CHAR(T.PMMTLHYH_JSRQ,'yyyy/mm/dd') jsrq,T.PMMTLHYH_LHRY LHRY,T.PMMTLHYH_LHRYID LHRYID,T.PMMTLHYH_QXXX QXXX,T.PMMTLHYH_SBZT sbzt,T.PMMTLHYH_ID id,T.PMMTLHYH_DWMC dwmc,T.PMMTLHYH_DWBH dwbh,T.PMMTLHYH_DWID dwid,T.PMMTLHYH_BMMC bmmc,T.PMMTLHYH_BMBH bmbh,T.PMMTLHYH_BMID bmid,T.PMMTLHYH_TBR tbr,TO_CHAR(T.PMMTLHYH_TBRQ,'yyyy/mm/dd') tbrq,T.PMMTLHYH_SPZT spzt,T.PMMTLHYH_FILE fileid,T.PMMTLHYH_lxcode lxcode,T.PMMTLHYH_SJDW sjdw,T.PMMTLHYH_GCL gcl,E.MEIJUMC xcfx
 		FROM rcyh_lhyh T
 		LEFT JOIN htgl_enumerate E ON T.PMMTLHYH_xcfx=E.MEIJUBM
 		WHERE 1=1
@@ -35,6 +35,29 @@
 			and to_date(to_char(t.rcqs_ksrq,'yyyy/mm/dd'),'yyyy/mm/dd')&lt;to_date(#{jsrq},'yyyy/mm/dd')
 		</if>
 		ORDER BY TO_DATE(KSRQ,'yyyy/mm/dd') DESC
+	</select>
+
+
+	<!--添加绿化养护配置信息-->
+	<insert id="insertLhyhPZ" parameterType="com.hdsx.rcyh.entity.LhyhPZ">
+		INSERT INTO RCYH_LHYHPZ (
+		<if test="id != null and id !=''">PMMTLHYH_ID,</if>
+		<if test="lxcode != null and lxcode !=''">PMMTLHYH_LXCODE,</if>
+		<if test="xcfx != null and xcfx !=''">PMMTLHYH_XCFX,</if>
+		<if test="lhry != null and lhry !=''">PMMTLHYH_LHRY,</if>
+		<if test="qxxx != null and qxxx !=''">PMMTLHYH_QXXX</if>
+		) VALUES (
+		<if test="id != null and id !=''">#{id},</if>
+		<if test="lxcode != null and lxcode !=''">#{lxcode},</if>
+		<if test="xcfx != null and xcfx !=''">#{xcfx},</if>
+		<if test="lhry != null and lhry !=''">#{lhry},</if>
+		<if test="qxxx != null and qxxx !=''"> #{qxxx}</if>
+		)
+	</insert>
+
+	<!-- 根据“人员”查询其所能进行的“绿化养护”信息 -->
+	<select id="getLhyhPz" parameterType="String" resultType="java.util.Map">
+		SELECT * FROM (select * from RCYH_LHYHPZ WHERE PMMTLHYH_LHRY=#{lhry} order by PMMTLHYH_ID DESC)WHERE ROWNUM='1'
 	</select>
 
 </mapper>

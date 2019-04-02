@@ -1,6 +1,7 @@
 package com.hdsx.rcyh.service;
 
 import com.hdsx.rcyh.entity.AppRcyhQdxc;
+import com.hdsx.rcyh.entity.QdxcPzdj;
 import com.hdsx.rcyh.entity.RcyhSjdj;
 import com.hdsx.rcyh.entity.RwdSubsidiary;
 
@@ -56,4 +57,7 @@ public interface AppRcyhSjdjService {
      */
     List<Map> getYhjhByRyid(String ryid);
 
+    boolean insertPZ(QdxcPzdj qdxcPzdj);
+
+    List<Map> getQdxcPz(String ry);
 }
