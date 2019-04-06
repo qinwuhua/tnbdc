@@ -33,6 +33,9 @@
             <if test="tbdw != null" >tbdw,</if>
             <if test="tbbm != null" >tbbm,</if>
             <if test="tbdwdm != null" >tbdwdm,</if>
+            <if test="sgfyj != null" >sgfyj,</if>
+            <if test="fzr != null" >fzr,</if>
+            <if test="txqrr != null" >txqrr,</if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides="," >
             <if test="id != null" >#{id},</if>
@@ -50,6 +53,9 @@
             <if test="tbdw != null" >#{tbdw},</if>
             <if test="tbbm != null" >#{tbbm},</if>
             <if test="tbdwdm != null" >#{tbdwdm},</if>
+            <if test="sgfyj != null" >#{sgfyj},</if>
+            <if test="fzr != null" >#{fzr},</if>
+            <if test="txqrr != null" >#{txqrr},</if>
         </trim>
     </insert>
 
@@ -71,6 +77,9 @@
             <if test="tbdw != null" >tbdw=#{tbdw},</if>
             <if test="tbbm != null" >tbbm=#{tbbm},</if>
             <if test="tbdwdm != null" >tbdwdm=#{tbdwdm},</if>
+            <if test="sgfyj != null" >sgfyj=#{sgfyj},</if>
+            <if test="fzr != null" >fzr=#{fzr},</if>
+            <if test="txqrr != null" >txqrr=#{txqrr},</if>
         </set>
         where 1=1 and djbh=#{djbh}
     </update>

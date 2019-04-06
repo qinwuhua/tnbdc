@@ -27,6 +27,10 @@
         update JDWH_GZBX set fpzt='已分配',FPRY=#{fpry},WXRID=#{wxrid} where djbh=#{djbh}
     </update>
 
+    <update id="czfpWxrwd" parameterType="com.hdsx.jdwh.entity.Gzbx">
+        update JDWH_GZBX set fpzt='待分配',FPRY=null,WXRID=null where djbh=#{djbh}
+    </update>
+
     <select id="getWxrwdList" parameterType="string" resultType="com.hdsx.jdwh.entity.Gzbx">
         select t.*,RYXM, SSDW, SSBM, RYLX,ssdwdm,nvl(ys.spzt,'未录入') yszt,decode(rk.wxdh,null,'未入库','已入库') fjkzt from JDWH_GZBX t left join JDWH_WXRY t2 on t.wxrid=t2.id
         left join (select bxdh,spzt from jdwh_wxys) ys on t.djbh=ys.bxdh

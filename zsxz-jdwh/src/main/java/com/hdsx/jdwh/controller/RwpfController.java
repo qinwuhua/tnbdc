@@ -97,6 +97,28 @@ public class RwpfController {
 
     }
 
+
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "djbh", value = "单据编号", required = true)
+    })
+    @RequestMapping(value = "czfpWxrwd", method = RequestMethod.PUT, produces = "application/json")
+    @ApiOperation(value = "重置维修任务单状态人员")
+    public Msg czfpWxrwd(
+                       @RequestParam(value = "djbh",required = true) String djbh){
+        try {
+            Gzbx gzbx=new Gzbx();gzbx.setDjbh(djbh);
+            int flag=rwpfService.czfpWxrwd(gzbx);
+            if(flag>0)
+                return ResultUtil.success("保存成功");
+            else
+                return ResultUtil.error("保存失败");
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResultUtil.error("保存失败，接口异常");
+        }
+
+    }
+
     //维修任务单列表
 
     @RequestMapping(value = "getWxrwdList", method = RequestMethod.GET, produces = "application/json")

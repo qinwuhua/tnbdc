@@ -30,6 +30,9 @@
             <if test="tbdwdm != null" >tbdwdm,</if>
             <if test="fpzt != null" >fpzt,</if>
             <if test="fpry != null" >fpry,</if>
+            <if test="bxfs != null" >bxfs,</if>
+            <if test="isly != null" >isly,</if>
+            <if test="isww != null" >isww,</if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides="," >
             <if test="id != null" >#{id},</if>
@@ -51,6 +54,9 @@
             <if test="tbdwdm != null" >#{tbdwdm},</if>
             <if test="fpzt != null" >#{fpzt},</if>
             <if test="fpry != null" >#{fpry},</if>
+            <if test="bxfs != null" >#{bxfs},</if>
+            <if test="isly != null" >#{isly},</if>
+            <if test="isww != null" >#{isww},</if>
         </trim>
     </insert>
 
@@ -76,6 +82,9 @@
             <if test="tbdwdm != null" >tbdwdm=#{tbdwdm},</if>
             <if test="fpzt != null" >fpzt=#{fpzt},</if>
             <if test="fpry != null" >fpry=#{fpry},</if>
+            <if test="bxfs != null" >bxfs=#{bxfs},</if>
+            <if test="isly != null" >isly=#{isly},</if>
+            <if test="isww != null" >isww=#{isww},</if>
         </set>
         where 1=1 and djbh=#{djbh}
     </update>
