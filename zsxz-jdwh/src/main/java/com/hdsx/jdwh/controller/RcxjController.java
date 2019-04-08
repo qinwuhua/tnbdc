@@ -30,7 +30,7 @@ public class RcxjController {
 
    @RequestMapping(value = "getXjType", method = RequestMethod.GET, produces = "application/json")
    @ApiOperation(value = "获取巡检类型")
-    public Msg getXjType(){
+    public Msg getXjType(@RequestParam(value = "xjlx",required = true) String xjlx){
         try {
             Map<String, String> param = new HashMap<String, String>();
             param.put("xjlx",xjlx);
