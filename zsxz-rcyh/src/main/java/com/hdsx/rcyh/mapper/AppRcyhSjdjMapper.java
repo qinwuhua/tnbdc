@@ -1,6 +1,7 @@
 package com.hdsx.rcyh.mapper;
 
 import com.hdsx.rcyh.entity.AppRcyhQdxc;
+import com.hdsx.rcyh.entity.QdxcPzdj;
 import com.hdsx.rcyh.entity.RcyhSjdj;
 import com.hdsx.rcyh.entity.RwdSubsidiary;
 import org.apache.ibatis.annotations.Mapper;
@@ -51,4 +52,7 @@ public interface AppRcyhSjdjMapper {
      */
     List<Map> getYhjhByRyid(String ryid);
 
+    int insertPZ(QdxcPzdj qdxcPzdj);
+
+    List<Map> getQdxcPz(String ry);
 }

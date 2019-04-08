@@ -2,6 +2,7 @@ package com.hdsx.rcyh.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.hdsx.rcyh.entity.Lhyh;
+import com.hdsx.rcyh.entity.LhyhPZ;
 import com.hdsx.rcyh.mapper.LhyhMapper;
 import com.hdsx.rcyh.service.LhyhService;
 import org.springframework.stereotype.Service;
@@ -28,4 +29,15 @@ public class LhyhServiceImpl implements LhyhService {
     public int insertLhyh(Lhyh lhyh) {
         return lhyhMapper.insertLhyh(lhyh);
     }
+
+    @Override
+    public int insertLhyhPZ(LhyhPZ lhyhPZ) {
+        return lhyhMapper.insertLhyhPZ(lhyhPZ);
+    }
+
+    @Override
+    public List<Map> getLhyhPz(String lhry) {
+        return lhyhMapper.getLhyhPz(lhry);
+    }
+
 }

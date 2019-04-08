@@ -30,6 +30,7 @@ spring:
   jackson:
       date-format: yyyy-MM-dd
       time-zone: GMT+8
+      default-property-inclusion: non_null
 
 mybatis:
   mapper-locations: classpath:/xml/*.xml

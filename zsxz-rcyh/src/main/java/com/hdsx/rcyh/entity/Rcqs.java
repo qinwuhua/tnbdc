@@ -19,6 +19,6 @@ import java.util.List;
 public class Rcqs implements Serializable{
 
     private static final long serialVersionUID = 3834262618582486202L;
-    private String gis, ksrq, ddrq, jsrq, qsry, qsryid, qsxx, yxzt, id, dwmc, dwbh, dwid, bmmc, bmbh, bhid, tbr, tbrid, tbrq, spzt, fileid, wfid, note,lxcode,xcfx;
+    private String gis, ksrq, ddrq, jsrq, qsry, qsryid, qsxx, yxzt, id, dwmc, dwbh, dwid, bmmc, bmbh, bhid, tbr, tbrid, tbrq, spzt, fileid, wfid, note,lxcode,xcfx,sjdw,gcl,qsdh;
 
 }

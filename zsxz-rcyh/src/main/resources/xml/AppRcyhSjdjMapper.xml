@@ -169,4 +169,34 @@
         AND B.RYXX_ID = #{ryid}
     </select>
 
+    <!--添加道路巡查配置信息-->
+    <insert id="insertPZ" parameterType="com.hdsx.rcyh.entity.QdxcPzdj">
+        INSERT INTO RCYH_QDXCPZ (
+        <if test="id != null and id !=''">CXRW_ID</if>
+        <if test="lx != null and lx !=''">,CXRW_LX</if>
+        <if test="qqzh != null and qqzh !=''">,CXRW_QQZH</if>
+        <if test="xcfx != null and xcfx !=''">,CXRW_XCFX</if>
+        <if test="kssj != null and kssj !=''">,CXRW_KSSJ</if>
+        <if test="xcry != null and xcry !=''">,CXRW_XCRY</if>
+        <if test="xccl != null and xccl !=''">,CXRW_XCCL</if>
+        <if test="xclx != null and xclx !=''">,CXRW_XCLX</if>
+
+        ) VALUES (
+        <if test="id != null and id !=''">#{id}</if>
+        <if test="lx != null and lx !=''">, #{lx}</if>
+        <if test="qqzh != null and qqzh !=''">, #{qqzh}</if>
+        <if test="xcfx != null and xcfx !=''">, #{xcfx}</if>
+        <if test="kssj != null and kssj !=''">,TO_DATE(#{kssj}, 'yyyy-MM-dd hh24:mi:ss')</if>
+        <if test="xcry != null and xcry !=''">, #{xcry}</if>
+        <if test="xccl != null and xccl !=''">, #{xccl}</if>
+        <if test="xclx != null and xclx !=''">, #{xclx}</if>
+
+        )
+    </insert>
+
+    <!-- 根据“人员”查询其所能进行的“道路巡查”信息 -->
+    <select id="getQdxcPz" parameterType="String" resultType="java.util.Map">
+      SELECT * FROM (select * from RCYH_QDXCPZ WHERE CXRW_XCRY=#{xcry} order by CXRW_ID DESC)WHERE ROWNUM='1'
+    </select>
+
 </mapper>

@@ -4,6 +4,21 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.hdsx.jdwh.mapper.RwpfMapper">
+
+    <select id="getDFPrwd" parameterType="hashmap" resultType="com.hdsx.jdwh.entity.Gzbx">
+         select t.*,RYXM, SSDW, SSBM, RYLX,ssdwdm from JDWH_GZBX t left join JDWH_WXRY t2 on t.wxrid=t2.id
+        where t.FPZT='待分配'
+        order by t.bzrq ASC
+    </select>
+
+    <select id="getYFPrwd" parameterType="hashmap" resultType="com.hdsx.jdwh.entity.Gzbx">
+        select t.*,RYXM, SSDW, SSBM, RYLX,ssdwdm from JDWH_GZBX t left join JDWH_WXRY t2 on t.wxrid=t2.id
+        where t.FPZT='已分配'
+        order by t.bzrq ASC
+    </select>
+
+
+
     <select id="getDfprwdList" parameterType="string" resultType="com.hdsx.jdwh.entity.Gzbx">
         select t.*,RYXM, SSDW, SSBM, RYLX,ssdwdm from JDWH_GZBX t left join JDWH_WXRY t2 on t.wxrid=t2.id
         where 1=1

@@ -2,6 +2,7 @@ package com.hdsx.rcyh.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.hdsx.rcyh.entity.Rcqs;
+import com.hdsx.rcyh.entity.RcqsPZ;
 import com.hdsx.rcyh.mapper.RcqsMapper;
 import com.hdsx.rcyh.service.RcqsService;
 import org.springframework.stereotype.Service;
@@ -27,6 +28,16 @@ public class RcqsServiceImpl implements RcqsService {
     public int insertRcqs(Rcqs rcqs) {
 
         return rcqsMapper.insertRcqs(rcqs);
+    }
+
+    @Override
+    public int insertRcqsPZ(RcqsPZ rcqsPZ) {
+        return rcqsMapper.insertRcqsPZ(rcqsPZ);
+    }
+
+    @Override
+    public List<Map> getRcqsPz(String qsry) {
+        return rcqsMapper.getRcqsPz(qsry);
     }
 
 }

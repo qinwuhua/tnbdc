@@ -29,9 +29,8 @@ public class RcxjController {
     private RcxjService rcxjService;
 
    @RequestMapping(value = "getXjType", method = RequestMethod.GET, produces = "application/json")
-   @ApiImplicitParam(paramType="query", dataType = "String", name = "xjlx", value = "巡检类型", required = true)
-   @ApiOperation(value = "获取巡检类型的检查项")
-    public Msg getXjType(@RequestParam(value = "xjlx",required = true) String xjlx){
+   @ApiOperation(value = "获取巡检类型")
+    public Msg getXjType(){
         try {
             Map<String, String> param = new HashMap<String, String>();
             param.put("xjlx",xjlx);

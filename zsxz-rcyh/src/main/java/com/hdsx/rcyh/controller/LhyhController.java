@@ -3,6 +3,7 @@ package com.hdsx.rcyh.controller;
 
 import com.github.pagehelper.PageInfo;
 import com.hdsx.rcyh.entity.Lhyh;
+import com.hdsx.rcyh.entity.LhyhPZ;
 import com.hdsx.rcyh.entity.Msg;
 import com.hdsx.rcyh.entity.Rcqs;
 import com.hdsx.rcyh.service.LhyhService;
@@ -65,4 +66,29 @@ public class LhyhController {
         }
     }
 
+    @ApiOperation(value = "添加绿化养护配置信息")
+    @RequestMapping(value = "insertLhyhPZ", method = RequestMethod.POST)
+    public Msg insertLhyhPZ(@RequestBody LhyhPZ lhyhPZ) {
+        try {
+            if (lhyhPZ.getId()!= null && lhyhPZ.getLhry()!= null && lhyhPZ.getLxcode()!= null && lhyhPZ.getQxxx()!= null && lhyhPZ.getXcfx()!= null) {
+                return ResultUtil.success(lhyhService.insertLhyhPZ(lhyhPZ));
+            } else {
+                return ResultUtil.error("添加信息失败！");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResultUtil.error("接口异常！");
+        }
+    }
+    @GetMapping("getLhyhPz")
+    @ApiOperation("根据“人员”查询配置信息”列表")
+    @ApiImplicitParams({@ApiImplicitParam(paramType="query", dataType = "String", name = "lhry", value = "人员", required = true)})
+    public Msg getLhyhPz(@RequestParam(value = "lhry",required = false) String lhry){
+        try {
+            return ResultUtil.success(lhyhService.getLhyhPz(lhry));
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResultUtil.error("查询失败！");
+        }
+    }
 }

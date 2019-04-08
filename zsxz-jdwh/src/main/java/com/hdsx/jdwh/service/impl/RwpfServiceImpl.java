@@ -36,13 +36,20 @@ public class RwpfServiceImpl implements RwpfService {
     }
 
     @Override
-    public int czfpWxrwd(Gzbx gzbx) {
-        return rwpfMapper.czfpWxrwd(gzbx);
-    }
-
-    @Override
     public List<Gzbx> getWxrwdList(Map<String, String> param, int pageNum, int pageSize) {
         PageHelper.startPage(pageNum, pageSize);
         return rwpfMapper.getWxrwdList(param);
     }
+
+    @Override
+    public List<Gzbx> getDFPrw(Map<String, String> param) {
+        return rwpfMapper.getDFPrw(param);
+    }
+
+    @Override
+    public List<Gzbx> getYFPrw(Map<String, String> param) {
+        return rwpfMapper.getYFPrw(param);
+    }
+
+
 }

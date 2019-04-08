@@ -513,4 +513,74 @@ public class RcyhXxrwController {
         }
     }
 
+    @GetMapping("getYICHULIqsList")
+    @ApiOperation("获取已处理的清扫任务单")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType="query", dataType = "int", name = "pageNum", value = "页码", required = true),
+            @ApiImplicitParam(paramType="query", dataType = "int", name = "pageSize", value = "每页条数", required = true)
+    })
+    public Msg getYICHULIqsList( @RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
+                                 @RequestParam(value = "pageSize", defaultValue = "10") int pageSize){
+        try {
+            Map map = dealPageParame(pageNum, pageSize);
+            return ResultUtil.success(service.getYICHULIqsList(map));
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResultUtil.error("查询失败！");
+        }
+    }
+
+
+    @GetMapping("getWEICHULIqsList")
+    @ApiOperation("获取未处理的清扫任务单")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType="query", dataType = "int", name = "pageNum", value = "页码", required = true),
+            @ApiImplicitParam(paramType="query", dataType = "int", name = "pageSize", value = "每页条数", required = true)
+    })
+    public Msg getWEICHULIqsList(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
+                                 @RequestParam(value = "pageSize", defaultValue = "10") int pageSize){
+        try {
+            Map map = dealPageParame(pageNum, pageSize);
+            return ResultUtil.success(service.getWEICHULIqsList(map));
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResultUtil.error("查询失败！");
+        }
+    }
+
+    @GetMapping("getYICHULIyhList")
+    @ApiOperation("获取已处理的养护任务单")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType="query", dataType = "int", name = "pageNum", value = "页码", required = true),
+            @ApiImplicitParam(paramType="query", dataType = "int", name = "pageSize", value = "每页条数", required = true)
+    })
+    public Msg getYICHULIyhList(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
+                                @RequestParam(value = "pageSize", defaultValue = "10") int pageSize){
+        try {
+            Map map = dealPageParame(pageNum, pageSize);
+            return ResultUtil.success(service.getYICHULIyhList(map));
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResultUtil.error("查询失败！");
+        }
+    }
+
+
+    @GetMapping("getWEICHULIyhList")
+    @ApiOperation("获取未处理的养护任务单")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType="query", dataType = "int", name = "pageNum", value = "页码", required = true),
+            @ApiImplicitParam(paramType="query", dataType = "int", name = "pageSize", value = "每页条数", required = true)
+    })
+    public Msg getWEICHULIyhList(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
+                                 @RequestParam(value = "pageSize", defaultValue = "10") int pageSize){
+        try {
+            Map map = dealPageParame(pageNum, pageSize);
+            return ResultUtil.success(service.getWEICHULIyhList(map));
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResultUtil.error("查询失败！");
+        }
+    }
+
 }

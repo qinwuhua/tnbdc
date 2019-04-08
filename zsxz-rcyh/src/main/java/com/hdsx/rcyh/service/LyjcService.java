@@ -33,4 +33,8 @@ public interface LyjcService {
     int deleteLyjcmxbByIds(String[] ids);
 
     int deleteJczbmxByIds(String[] ids);
+
+    List<Lyjc> getLyjcbByid(String id);
+
+    List<Jczb> getJczbById(String id);
 }
