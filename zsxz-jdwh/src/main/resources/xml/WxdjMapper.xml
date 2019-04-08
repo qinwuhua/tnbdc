@@ -33,6 +33,9 @@
             <if test="tbdw != null" >tbdw,</if>
             <if test="tbbm != null" >tbbm,</if>
             <if test="tbdwdm != null" >tbdwdm,</if>
+            <if test="sgfyj != null" >sgfyj,</if>
+            <if test="fzr != null" >fzr,</if>
+            <if test="txqrr != null" >txqrr,</if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides="," >
             <if test="id != null" >#{id},</if>
@@ -50,6 +53,9 @@
             <if test="tbdw != null" >#{tbdw},</if>
             <if test="tbbm != null" >#{tbbm},</if>
             <if test="tbdwdm != null" >#{tbdwdm},</if>
+            <if test="sgfyj != null" >#{sgfyj},</if>
+            <if test="fzr != null" >#{fzr},</if>
+            <if test="txqrr != null" >#{txqrr},</if>
         </trim>
     </insert>
 
@@ -71,6 +77,9 @@
             <if test="tbdw != null" >tbdw=#{tbdw},</if>
             <if test="tbbm != null" >tbbm=#{tbbm},</if>
             <if test="tbdwdm != null" >tbdwdm=#{tbdwdm},</if>
+            <if test="sgfyj != null" >sgfyj=#{sgfyj},</if>
+            <if test="fzr != null" >fzr=#{fzr},</if>
+            <if test="txqrr != null" >txqrr=#{txqrr},</if>
         </set>
         where 1=1 and djbh=#{djbh}
     </update>
@@ -93,8 +102,8 @@
     </delete>
 
     <select id="getWxdjInfoByIDjbh" parameterType="string" resultType="com.hdsx.jdwh.entity.Wxdj">
-        select t.*,t1.wxjgqr,t1.qrr,t1.qrsj,t2.sbmc,t2.ggxh,t2.bzrq,t2.bgr from JDWH_WXDJ t left join JDWH_WXYS t1 on t.bxdh=t1.bxdh left join JDWH_GZBX t2 on t.bxdh=t2.djbh
-        where t.djbh=#{value}
+        select t.*,t1.wxjgqr,t1.qrr,t1.qrsj,t2.sbmc,t2.ggxh,t2.bzrq,t2.bgr,t2.isww,t2.isly from JDWH_GZBX t2 left join JDWH_WXDJ t on t.bxdh=t2.djbh  left join JDWH_WXYS t1 on t.bxdh=t1.bxdh
+        where t2.djbh=#{value}
     </select>
 
     <select id="getWxdjList" parameterType="string" resultType="com.hdsx.jdwh.entity.Wxdj">

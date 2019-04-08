@@ -30,7 +30,10 @@ public class SgzjdjhServiceImpl implements SgzjdjhService {
             sgzjdjh.setId(UuidUtil.getUUID());
         }
         int i=sgzjdjhMapper.addSgzjdjh(sgzjdjh);
-        int j=sgzjdjhMapper.addSgzjdjhMx(sgzjdjh);
+        if(sgzjdjh.getMx().size()>0){
+            int j=sgzjdjhMapper.addSgzjdjhMx(sgzjdjh);
+        }
+
         return i;
     }
 

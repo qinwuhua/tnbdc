@@ -414,7 +414,7 @@
     <!--  通过部门查询合同信息  -->
     <select id="getHtBgdInfoByBm" parameterType="hashmap" resultMap="bgd">
         select gj.HTGJXX_cgxmmc gcmc,ht.htxx_htbh htbh,xm.yhhtxx_gldw gldw,ht.HTXX_HTMC htmc,xm.yhhtxx_qszh qdzh,xm.yhhtxx_zzzh zdzh,xm.yhhtxx_cbdw cbdw,
-        bg.sqbbh sqbbh,bg.bglbh bglbh,sqb.bgyy bgly,bg.bgnr,
+        bg.sqbbh sqbbh,bg.bglbh bglbh,sqb.bgyy bgly,bg.bgnr,bg.bw,sqb.bzrq sqrq,
         zm.zmht_zmh zmh,zm.zmht_zmmc zmmc,zm.zmht_jldw dw,zm.zmht_sl gclbgq,zm.zmht_dj dj,zm.zmht_je jebgq,zm.zmht_id zmid,zm.zmht_htbh xmhtbh
         from djsj_htxx ht left join djsj_htxx_htgjxx gj on ht.htxx_htbh=gj.HTGJXX_htbh left join djsj_htxx_yhxmxx xm on ht.htxx_htbh=xm.yhhtxx_htbh
         left join gg_zmht zm on ht.htxx_htbh=zm.zmht_htbh

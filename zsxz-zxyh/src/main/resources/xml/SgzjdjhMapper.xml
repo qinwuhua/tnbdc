@@ -134,8 +134,23 @@
     <insert id="addSgzjdjhMx" parameterType="com.hdsx.zxyh.entity.Sgzjdjh">
         begin
         <foreach collection="mx" item="item" index="index" separator=";">
-            insert into ZXYH_SGZJDJHMX(id, pdjbh, zmmc, kssj, jssj)  values
-            (sys_guid(),trim(#{djbh}),trim(#{item.zmmc}),trim(#{item.kssj}),trim(#{item.jssj}))
+            insert into ZXYH_SGZJDJHMX
+            <trim prefix="(" suffix=")" suffixOverrides="," >
+                <if test="1 != 2" >id,</if>
+                <if test="djbh != null" >pdjbh,</if>
+                <if test="item.zmmc != null" >zmmc,</if>
+                <if test="item.kssj != null" >kssj,</if>
+                <if test="item.jssj != null" >jssj,</if>
+            </trim>
+            <trim prefix="values (" suffix=")" suffixOverrides="," >
+                <if test="1 != 2" >sys_guid(),</if>
+                <if test="djbh != null" >trim(#{djbh}),</if>
+                <if test="item.zmmc != null" >trim(#{item.zmmc}),</if>
+                <if test="item.kssj != null" >trim(#{item.kssj}),</if>
+                <if test="item.jssj != null" >trim(#{item.jssj}),</if>
+            </trim>
+
+
         </foreach>
         ;end;
     </insert>

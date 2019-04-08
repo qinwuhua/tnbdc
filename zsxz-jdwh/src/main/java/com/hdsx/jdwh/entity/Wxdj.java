@@ -12,5 +12,5 @@ import lombok.experimental.Accessors;
 @NoArgsConstructor
 public class Wxdj {
     private String id, djbh, bxdh, wxrq, xcwxr, gzms, xcqkms, wxjgms, wxjgqr, qrr, qrsj, bz, tbr, tbsj, tbdw, tbbm, tbdwdm;
-    private String sbmc,ggxh,bzrq,bgr;
+    private String sbmc,ggxh,bzrq,bgr,sgfyj,fzr,txqrr,isww,isly;
 }

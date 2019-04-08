@@ -51,7 +51,7 @@ public class WxfkServiceImpl implements WxfkService {
         int i=wxfkMapper.delWxfkByDjbhs(l);
         int j=wxfkMapper.delWxfkJsmxByDjbhs(l);
         int k=wxfkMapper.delWxfkFpmxByDjbhs(l);
-        return 0;
+        return i;
     }
 
     @Override

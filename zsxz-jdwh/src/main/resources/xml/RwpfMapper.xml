@@ -5,13 +5,13 @@
 
 <mapper namespace="com.hdsx.jdwh.mapper.RwpfMapper">
 
-    <select id="getDFPrw" parameterType="hashmap" resultType="com.hdsx.jdwh.entity.Gzbx">
+    <select id="getDFPrwd" parameterType="hashmap" resultType="com.hdsx.jdwh.entity.Gzbx">
          select t.*,RYXM, SSDW, SSBM, RYLX,ssdwdm from JDWH_GZBX t left join JDWH_WXRY t2 on t.wxrid=t2.id
         where t.FPZT='待分配'
         order by t.bzrq ASC
     </select>
 
-    <select id="getYFPrw" parameterType="hashmap" resultType="com.hdsx.jdwh.entity.Gzbx">
+    <select id="getYFPrwd" parameterType="hashmap" resultType="com.hdsx.jdwh.entity.Gzbx">
         select t.*,RYXM, SSDW, SSBM, RYLX,ssdwdm from JDWH_GZBX t left join JDWH_WXRY t2 on t.wxrid=t2.id
         where t.FPZT='已分配'
         order by t.bzrq ASC
@@ -40,6 +40,10 @@
 
     <update id="fpWxrwd" parameterType="com.hdsx.jdwh.entity.Gzbx">
         update JDWH_GZBX set fpzt='已分配',FPRY=#{fpry},WXRID=#{wxrid} where djbh=#{djbh}
+    </update>
+
+    <update id="czfpWxrwd" parameterType="com.hdsx.jdwh.entity.Gzbx">
+        update JDWH_GZBX set fpzt='待分配',FPRY=null,WXRID=null where djbh=#{djbh}
     </update>
 
     <select id="getWxrwdList" parameterType="string" resultType="com.hdsx.jdwh.entity.Gzbx">
