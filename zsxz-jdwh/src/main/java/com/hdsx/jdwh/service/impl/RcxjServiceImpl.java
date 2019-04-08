@@ -2,6 +2,7 @@ package com.hdsx.jdwh.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.hdsx.jdwh.entity.Rcxj;
+import com.hdsx.jdwh.entity.Rcxjmx;
 import com.hdsx.jdwh.mapper.RcxjMapper;
 import com.hdsx.jdwh.service.RcxjService;
 import org.springframework.stereotype.Service;
@@ -18,7 +19,7 @@ public class RcxjServiceImpl implements RcxjService {
     private RcxjMapper rcxjMapper;
 
     @Override
-    public List<Rcxj> getXjType(Map<String, String> param) {
+    public List<Rcxjmx> getXjType(Map<String, String> param) {
         return rcxjMapper.getXjType(param);
     }
 

@@ -106,6 +106,12 @@
         where t2.djbh=#{value}
     </select>
 
+    <select id="getWxdjInfoByWxdh" parameterType="string" resultType="com.hdsx.jdwh.entity.Wxdj">
+        select * from JDWH_GZBX t2
+        where t2.djbh=#{value}
+    </select>
+
+
     <select id="getWxdjList" parameterType="string" resultType="com.hdsx.jdwh.entity.Wxdj">
         select t.*,decode(t1.spzt,'已验收',t1.wxjgqr,'') wxjgqr,decode(t1.spzt,'已验收',t1.qrr,'') qrr,decode(t1.spzt,'已验收',t1.qrsj,'') qrsj,t2.sbmc,t2.ggxh,t2.bzrq,t2.bgr from JDWH_WXDJ t left join JDWH_WXYS t1 on t.bxdh=t1.bxdh left join JDWH_GZBX t2 on t.bxdh=t2.djbh
         where 1=1

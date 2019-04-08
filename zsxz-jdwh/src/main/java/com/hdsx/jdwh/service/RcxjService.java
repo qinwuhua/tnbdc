@@ -1,6 +1,7 @@
 package com.hdsx.jdwh.service;
 
 import com.hdsx.jdwh.entity.Rcxj;
+import com.hdsx.jdwh.entity.Rcxjmx;
 import com.hdsx.jdwh.entity.Wxfk;
 
 import java.util.HashMap;
@@ -10,7 +11,7 @@ import java.util.Map;
 public interface RcxjService {
 
 
-    List<Rcxj> getXjType(Map<String, String> param);
+    List<Rcxjmx> getXjType(Map<String, String> param);
 
     int addRcxj(Rcxj rcxj);
 

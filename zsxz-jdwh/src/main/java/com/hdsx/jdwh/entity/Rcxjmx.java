@@ -13,5 +13,5 @@ import java.util.List;
 @Accessors(chain = true)
 @NoArgsConstructor
 public class Rcxjmx {
-    private String mx_id, mx_xh, mx_jcx, mx_jcjg, mx_bz, mx_pid;
+    private String mx_id, mx_xh, mx_jcx, mx_jcjg, mx_bz, mx_pid,jclx;
 }

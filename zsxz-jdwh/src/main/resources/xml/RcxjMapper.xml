@@ -52,9 +52,8 @@
     </resultMap>
 
 
-    <select id="getXjType" parameterType="hashmap" resultMap="rcxj">
-        select xclx xjlx,xczq xjzq,mx.id mx_id,jcx mx_jcx,mrjcjg mx_jcjg from jdwh_xclx zb
-        left join JDWH_XCLX_JCMX mx on zb.id=mx.xclxid
+    <select id="getXjType" parameterType="hashmap" resultType="com.hdsx.jdwh.entity.Rcxjmx">
+        select jcx mx_jcx from JDWH_XCLX_JCMX mx where XCLXID=#{xjlx}
     </select>
 
     <insert id="addRcxj" parameterType="com.hdsx.jdwh.entity.Rcxj">

@@ -123,6 +123,20 @@ public class WxdjController {
 
     }
 
+    @RequestMapping(value = "getWxdjInfoByWxdh", method = RequestMethod.GET, produces = "application/json")
+    @ApiOperation(value = "通过故障报修单据编号获取维修登记")
+    @ApiImplicitParam(paramType="query", dataType = "String", name = "djbh", value = "单据编号", required = true)
+    public Msg getWxdjInfoByWxdh(@RequestParam(value = "djbh",required = true) String djbh){
+        try {
+            Wxdj wxdj=wxdjService.getWxdjInfoByWxdh(djbh);
+            return ResultUtil.success(wxdj);
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResultUtil.error("查询失败，接口异常");
+        }
+
+    }
+
 
     @RequestMapping(value = "getWxdjList", method = RequestMethod.GET, produces = "application/json")
     @ApiImplicitParams({

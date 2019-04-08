@@ -28,4 +28,6 @@ public interface WxdjMapper {
     int updateWxdjZtByList(List<String> l);
 
     int getWdjCount(Wxdj wxdj);
+
+    Wxdj getWxdjInfoByWxdh(String djbh);
 }

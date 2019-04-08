@@ -4,6 +4,7 @@ package com.hdsx.jdwh.controller;
 import com.github.pagehelper.PageInfo;
 import com.hdsx.jdwh.entity.Msg;
 import com.hdsx.jdwh.entity.Rcxj;
+import com.hdsx.jdwh.entity.Rcxjmx;
 import com.hdsx.jdwh.service.RcxjService;
 import com.hdsx.jdwh.utils.ResultUtil;
 import io.swagger.annotations.Api;
@@ -28,11 +29,13 @@ public class RcxjController {
     private RcxjService rcxjService;
 
    @RequestMapping(value = "getXjType", method = RequestMethod.GET, produces = "application/json")
-   @ApiOperation(value = "获取巡检类型")
-    public Msg getXjType(){
+   @ApiImplicitParam(paramType="query", dataType = "String", name = "xjlx", value = "巡检类型", required = true)
+   @ApiOperation(value = "获取巡检类型的检查项")
+    public Msg getXjType(@RequestParam(value = "xjlx",required = true) String xjlx){
         try {
             Map<String, String> param = new HashMap<String, String>();
-            List<Rcxj> map=rcxjService.getXjType(param);
+            param.put("xjlx",xjlx);
+            List<Rcxjmx> map=rcxjService.getXjType(param);
             return ResultUtil.success(map);
         }catch (Exception e){
             e.printStackTrace();

@@ -61,5 +61,10 @@ public class WxdjServiceImpl implements WxdjService {
         return wxdjMapper.getWdjCount(wxdj);
     }
 
+    @Override
+    public Wxdj getWxdjInfoByWxdh(String djbh) {
+        return wxdjMapper.getWxdjInfoByWxdh(djbh);
+    }
+
 
 }

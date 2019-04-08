@@ -11,7 +11,7 @@ import java.util.Map;
 @Mapper
 public interface RcxjMapper {
 
-    List<Rcxj> getXjType(Map<String, String> param);
+    List<Rcxjmx> getXjType(Map<String, String> param);
 
     int addRcxj(Rcxj rcxj);
 
