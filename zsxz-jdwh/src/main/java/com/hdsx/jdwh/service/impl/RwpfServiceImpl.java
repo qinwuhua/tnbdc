@@ -43,12 +43,17 @@ public class RwpfServiceImpl implements RwpfService {
 
     @Override
     public List<Gzbx> getDFPrw(Map<String, String> param) {
-        return rwpfMapper.getDFPrw(param);
+        return rwpfMapper.getDFPrwd(param);
     }
 
     @Override
     public List<Gzbx> getYFPrw(Map<String, String> param) {
-        return rwpfMapper.getYFPrw(param);
+        return rwpfMapper.getYFPrwd(param);
+    }
+
+    @Override
+    public int czfpWxrwd(Gzbx gzbx) {
+        return rwpfMapper.czfpWxrwd(gzbx);
     }
 
 

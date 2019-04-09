@@ -127,6 +127,28 @@ public class RwpfController {
 
     }
 
+
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "djbh", value = "单据编号", required = true)
+    })
+    @RequestMapping(value = "czfpWxrwd", method = RequestMethod.PUT, produces = "application/json")
+    @ApiOperation(value = "重置维修任务单状态人员")
+    public Msg czfpWxrwd(
+            @RequestParam(value = "djbh",required = true) String djbh){
+        try {
+            Gzbx gzbx=new Gzbx();gzbx.setDjbh(djbh);
+            int flag=rwpfService.czfpWxrwd(gzbx);
+            if(flag>0)
+                return ResultUtil.success("保存成功");
+            else
+                return ResultUtil.error("保存失败");
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResultUtil.error("保存失败，接口异常");
+        }
+
+    }
+
     //维修任务单列表
 
     @RequestMapping(value = "getWxrwdList", method = RequestMethod.GET, produces = "application/json")
@@ -137,6 +159,9 @@ public class RwpfController {
             @ApiImplicitParam(paramType="query", dataType = "String", name = "ggxh", value = "规格型号", required = false),
             @ApiImplicitParam(paramType="query", dataType = "String", name = "ksrq", value = "开始日期(yyyy/mm/dd)", required = false),
             @ApiImplicitParam(paramType="query", dataType = "String", name = "jsrq", value = "结束日期(yyyy/mm/dd)", required = false),
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "fpzt", value = "分配状态", required = false),
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "djzt", value = "登记状态", required = false),
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "yszt", value = "验收状态", required = false),
             @ApiImplicitParam(paramType="query", dataType = "int", name = "pageNum", value = "页码", required = true),
             @ApiImplicitParam(paramType="query", dataType = "int", name = "pageSize", value = "每页条数", required = true)
     })
@@ -147,6 +172,9 @@ public class RwpfController {
                              @RequestParam(value = "ggxh",required = false) String ggxh,
                             @RequestParam(value = "ksrq",required = false) String ksrq,
                             @RequestParam(value = "jsrq",required = false) String jsrq,
+                            @RequestParam(value = "fpzt",required = false) String fpzt,
+                            @RequestParam(value = "djzt",required = false) String djzt,
+                            @RequestParam(value = "yszt",required = false) String yszt,
                             @RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
                              @RequestParam(value = "pageSize", defaultValue = "10") int pageSize) {
         Map<String, String> param = new HashMap<String, String>();
@@ -155,10 +183,15 @@ public class RwpfController {
         param.put("gzlx", gzlx);
         param.put("ggxh", ggxh);
         param.put("ksrq", ksrq);
-        param.put("jsrq", jsrq);
+        param.put("jsrq", jsrq);param.put("fpzt", fpzt);param.put("djzt", djzt);param.put("yszt", yszt);
         List<Gzbx> list = rwpfService.getWxrwdList(param, pageNum, pageSize);
         return ResultUtil.success(new PageInfo<Gzbx>(list));
     }
+
+
+
+
+
     public Map dealPageParame(int pageNum, int pageSize){
         Map map = new HashMap();
         map.put("pageNum", pageNum);

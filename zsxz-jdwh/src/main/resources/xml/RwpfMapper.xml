@@ -47,7 +47,7 @@
     </update>
 
     <select id="getWxrwdList" parameterType="string" resultType="com.hdsx.jdwh.entity.Gzbx">
-        select t.*,RYXM, SSDW, SSBM, RYLX,ssdwdm,nvl(ys.spzt,'未录入') yszt,decode(rk.wxdh,null,'未入库','已入库') fjkzt from JDWH_GZBX t left join JDWH_WXRY t2 on t.wxrid=t2.id
+        select t.*,RYXM, SSDW, SSBM, RYLX,ssdwdm,nvl(ys.spzt,'未验收') yszt,decode(rk.wxdh,null,'未入库','已入库') fjkzt from JDWH_GZBX t left join JDWH_WXRY t2 on t.wxrid=t2.id
         left join (select bxdh,spzt from jdwh_wxys) ys on t.djbh=ys.bxdh
         left join (select wxdh from JDWH_BJ_FJRK) rk on t.djbh=rk.wxdh
         where 1=1
@@ -55,6 +55,9 @@
         <if test="ssdwdm !=null and ssdwdm !=''">and ssdwdm like #{ssdwdm}||'%'</if>
         <if test="gzlx !=null and gzlx !=''">and gzlx like #{gzlx}||'%'</if>
         <if test="ggxh !=null and ggxh !=''">and ggxh like #{ggxh}||'%'</if>
+        <if test="fpzt !=null and fpzt !=''">and nvl(fpzt,'未分配') like #{fpzt}||'%'</if>
+        <if test="djzt !=null and djzt !=''">and nvl(djzt,'未登记') like #{djzt}||'%'</if>
+        <if test="yszt !=null and yszt !=''">and nvl(ys.spzt,'未验收') like #{yszt}||'%'</if>
         <if test="ksrq != null and ksrq != ''">
             and to_date(bzrq,'yyyy-mm-dd')>=to_date(#{ksrq},'yyyy-mm-dd')
         </if>

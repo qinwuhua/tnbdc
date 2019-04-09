@@ -18,9 +18,10 @@ public interface RwpfMapper {
 
     List<Gzbx> getWxrwdList(Map<String, String> param);
 
-    List<Gzbx> getDFPrw(Map<String, String> param);
+    List<Gzbx> getDFPrwd(Map<String, String> param);
 
-    List<Gzbx> getYFPrw(Map<String, String> param);
+    List<Gzbx> getYFPrwd(Map<String, String> param);
 
 
+    int czfpWxrwd(Gzbx gzbx);
 }

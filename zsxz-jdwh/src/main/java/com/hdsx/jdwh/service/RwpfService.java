@@ -20,4 +20,5 @@ public interface RwpfService {
 
     List<Gzbx> getYFPrw(Map<String, String> param);
 
+    int czfpWxrwd(Gzbx gzbx);
 }
