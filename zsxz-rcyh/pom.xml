@@ -41,6 +41,14 @@
             <artifactId>ojdbc</artifactId>
             <version>6</version>
         </dependency>
+
+        <!-- LR专用 -->
+        <!-- <dependency>
+            <groupId>com.oracle</groupId>
+            <artifactId>ojdbc6</artifactId>
+            <version>11.2.0.4</version>
+        </dependency> -->
+
         <!--swagger-->
         <dependency>
             <groupId>io.springfox</groupId>
