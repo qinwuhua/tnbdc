@@ -26,6 +26,10 @@
             <if test="wxjgqr != null" >wxjgqr,</if>
             <if test="qrr != null" >qrr,</if>
             <if test="qrsj != null" >qrsj,</if>
+            <if test="sgfyj != null" >sgfyj,</if>
+            <if test="fzr != null" >fzr,</if>
+            <if test="txqrr != null" >txqrr,</if>
+
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides="," >
             <if test="id != null" >#{id},</if>
@@ -39,6 +43,9 @@
             <if test="wxjgqr != null" >#{wxjgqr},</if>
             <if test="qrr != null" >#{qrr},</if>
             <if test="qrsj != null" >#{qrsj},</if>
+            <if test="sgfyj != null" >#{sgfyj},</if>
+            <if test="fzr != null" >#{fzr},</if>
+            <if test="txqrr != null" >#{txqrr},</if>
         </trim>
     </insert>
 
@@ -56,6 +63,9 @@
             <if test="wxjgqr != null" >wxjgqr=#{wxjgqr},</if>
             <if test="qrr != null" >qrr=#{qrr},</if>
             <if test="qrsj != null" >qrsj=#{qrsj},</if>
+            <if test="sgfyj != null" >sgfyj=#{sgfyj},</if>
+            <if test="fzr != null" >fzr=#{fzr},</if>
+            <if test="txqrr != null" >txqrr=#{txqrr},</if>
         </set>
         where 1=1 and djbh=#{djbh}
     </update>

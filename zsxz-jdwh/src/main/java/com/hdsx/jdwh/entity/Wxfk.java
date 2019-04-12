@@ -14,7 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 public class Wxfk {
     private String id, djbh, jsje, ssht, dfdw, fysm, bz, tbr, tbsj, tbdw, tbbm, tbdwdm,dfdwid,sshtbh;
-    private String ssyh,zhm,yhzh,htje,ljjsje,ljzfje;
+    private String ssyh,zhm,yhzh,htje,ljjsje,ljzfje,bcsqje;
     private List<Wxfkjsmx> jsmx;
     private List<Wxfkfpmx> fpmx;
 }

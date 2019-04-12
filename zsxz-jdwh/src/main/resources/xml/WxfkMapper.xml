@@ -60,6 +60,9 @@
             <if test="ssyh != null" >ssyh,</if>
             <if test="zhm != null" >zhm,</if>
             <if test="yhzh != null" >yhzh,</if>
+            <if test="htje != null" >htje,</if>
+            <if test="bcsqje != null" >bcsqje,</if>
+            <if test="ljjsje != null" >ljjsje,</if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides="," >
             <if test="id != null" >#{id},</if>
@@ -78,6 +81,10 @@
             <if test="ssyh != null" >#{ssyh},</if>
             <if test="zhm != null" >#{zhm},</if>
             <if test="yhzh != null" >#{yhzh},</if>
+            <if test="htje != null" >#{htje},</if>
+            <if test="bcsqje != null" >#{bcsqje},</if>
+            <if test="ljjsje != null" >#{ljjsje},</if>
+
         </trim>
     </insert>
 
@@ -118,6 +125,9 @@
             <if test="ssyh != null" >ssyh=#{ssyh},</if>
             <if test="zhm != null" >zhm=#{zhm},</if>
             <if test="yhzh != null" >yhzh=#{yhzh},</if>
+            <if test="htje != null" >htje=#{htje},</if>
+            <if test="bcsqje != null" >bcsqje=#{bcsqje},</if>
+            <if test="ljjsje != null" >ljjsje=#{ljjsje},</if>
         </set>
         where 1=1 and djbh=#{djbh}
     </update>
@@ -155,7 +165,10 @@
     </delete>
 
     <select id="getWxfkInfoByDjbh" parameterType="string" resultMap="wxfk">
-        select zb.*,zjs.zjsje ljjsje,ht.htxx_htjehs htje,fjs.zjsje jsje,fp.hsje ljzfje from JDWH_WXFKSQ zb
+        select zb.*,
+        <!-- zjs.zjsje ljjsje,ht.htxx_htjehs htje, -->
+        fjs.zjsje jsje,
+        fp.hsje ljzfje from JDWH_WXFKSQ zb
         left join (select sum(nvl(wx.jsje,0)) zjsje,sshtbh  from jdwh_fksq_jsmx js left join jdwh_wxfy wx on js.wxfydh=wx.djbh left join JDWH_WXFKSQ sq on js.pdjbh=sq.djbh group by sq.sshtbh) zjs on zb.sshtbh=zjs.sshtbh
         left join djsj_htxx ht on zb.sshtbh=ht.htxx_htbh
         left join (select sum(nvl(wx.jsje,0)) zjsje,pdjbh  from jdwh_fksq_jsmx js left join jdwh_wxfy wx on js.wxfydh=wx.djbh group by js.pdjbh) fjs on zb.djbh=fjs.pdjbh
@@ -164,7 +177,9 @@
     </select>
 
     <select id="getWxfkList" parameterType="hashmap" resultMap="wxfk">
-        select zb.*,zjs.zjsje ljjsje,ht.htxx_htjehs htje,fjs.zjsje jsje,fp.hsje ljzfje from JDWH_WXFKSQ zb
+        select zb.*,
+        <!-- zjs.zjsje ljjsje,ht.htxx_htjehs htje, -->
+        fjs.zjsje jsje,fp.hsje ljzfje from JDWH_WXFKSQ zb
         left join (select sum(nvl(wx.jsje,0)) zjsje,sshtbh  from jdwh_fksq_jsmx js left join jdwh_wxfy wx on js.wxfydh=wx.djbh left join JDWH_WXFKSQ sq on js.pdjbh=sq.djbh group by sq.sshtbh) zjs on zb.sshtbh=zjs.sshtbh
         left join djsj_htxx ht on zb.sshtbh=ht.htxx_htbh
         left join (select sum(nvl(wx.jsje,0)) zjsje,pdjbh  from jdwh_fksq_jsmx js left join jdwh_wxfy wx on js.wxfydh=wx.djbh group by js.pdjbh) fjs on zb.djbh=fjs.pdjbh
