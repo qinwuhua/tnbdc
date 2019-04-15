@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tnbdc.mapper.DemoMapper">
+<!--
+	<select id="selectDemoById" resultType="com.tnbdc.entities.Demo" parameterType="String">
+		select id,name from demo where id=#{id}
+	</select>
+	<select id="selectDemoAll" resultType="com.tnbdc.entities.Demo">
+		select * from xmjbxx
+	</select>
+	<insert id="insertDemo" parameterType="com.tnbdc.entities.Demo">
+		INSERT INTO demo(id,name) VALUES(sys_guid(),#{name})
+	</insert>-->
+
+	<select id="getUsersByUsername" parameterType="com.tnbdc.entities.Users" resultType="com.tnbdc.entities.Users">
+		select ID, USERNAME, NAME, PASSWORD, SAT, SEX, CSRQ, ZDRQ, ZD1XTNB, SJYCD, LXDH, EMAIL, USERLV from users where username=#{username}
+	</select>
+
+	<select id="getUserByUsername" parameterType="String" resultType="com.tnbdc.entities.Users">
+		select ID, USERNAME, NAME,PASSWORD, SAT, SEX, CSRQ, ZDRQ, ZD1XTNB, SJYCD, LXDH, EMAIL, USERLV from users where username=#{value}
+	</select>
+
+
+	<insert id="userRegister" parameterType="com.tnbdc.entities.Users">
+		insert into users
+		<trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="sat != null" >id,</if>
+			<if test="username != null" >username,</if>
+			<if test="password != null" >password,</if>
+			<if test="sat != null" >sat,</if>
+			<if test="sex != null" >sex,</if>
+			<if test="csrq != null" >csrq,</if>
+			<if test="zdrq != null" >zdrq,</if>
+			<if test="zd1xtnb != null" >zd1xtnb,</if>
+			<if test="sjycd != null" >sjycd,</if>
+			<if test="lxdh != null" >lxdh,</if>
+			<if test="email != null" >email,</if>
+			<if test="userlv != null" >userlv,</if>
+
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides="," >
+			<if test="sat != null" >sys_guid(),</if>
+			<if test="username != null" >#{username},</if>
+			<if test="password != null" >#{password},</if>
+			<if test="sat != null" >#{sat},</if>
+			<if test="sex != null" >#{sex},</if>
+			<if test="csrq != null" >#{csrq},</if>
+			<if test="zdrq != null" >#{zdrq},</if>
+			<if test="zd1xtnb != null" >#{zd1xtnb},</if>
+			<if test="sjycd != null" >#{sjycd},</if>
+			<if test="lxdh != null" >#{lxdh},</if>
+			<if test="email != null" >#{email},</if>
+			<if test="userlv != null" >#{userlv},</if>
+
+		</trim>
+	</insert>
+
+	<update id="restPassword" parameterType="hashmap">
+		update users set sat=#{sat},password=#{password} where username=#{username}
+	</update>
+
+
+	<insert id="addDcwjda" parameterType="com.tnbdc.entities.Dcwj">
+		begin
+		<foreach collection="dcwjda" item="item" index="index" separator=";">
+			insert into DCWJDA
+			<trim prefix="(" suffix=")" suffixOverrides="," >
+				<if test="item.username != null" >username,</if>
+				<if test="item.wzid != null" >wzid,</if>
+				<if test="item.mkid != null" >mkid,</if>
+				<if test="item.th != null" >th,</if>
+				<if test="item.da != null" >da,</if>
+			</trim>
+			<trim prefix="values (" suffix=")" suffixOverrides="," >
+				<if test="item.username != null" >#{item.username},</if>
+				<if test="item.wzid != null" >#{item.wzid},</if>
+				<if test="item.mkid != null" >#{item.mkid},</if>
+				<if test="item.th != null" >#{item.th},</if>
+				<if test="item.da != null" >#{item.da},</if>
+			</trim>
+		</foreach>
+		;end;
+	</insert>
+
+	<select id="getDcwjda" parameterType="com.tnbdc.entities.Dcwj" resultType="com.tnbdc.entities.Dcwjda">
+		select * from DCWJDA
+		where username||wzid||mkid||th in
+		<foreach collection="dcwjda" item="item"  open="(" separator="," close=")">
+			#{item.username}||#{item.wzid}||#{item.mkid}||#{item.th}
+		</foreach>
+		order by th
+	</select>
+
+	<delete id="delDcwjda" parameterType="com.tnbdc.entities.Dcwj">
+		delete from DCWJDA
+		where username||wzid||mkid||th in
+		<foreach collection="dcwjda" item="item"  open="(" separator="," close=")">
+			#{item.username}||#{item.wzid}||#{item.mkid}||#{item.th}
+		</foreach>
+	</delete>
+
+	<select id="getDcwjdas" resultType="com.tnbdc.entities.Dcwjda" parameterType="hashmap">
+		select * from DCWJDA
+		where 1=1
+		<if test="username != null" >and username=#{username}</if>
+		<if test="wzid != null" >and wzid=#{wzid}</if>
+		<if test="mkid != null" >and mkid=#{mkid}</if>
+		<if test="th != null" >and th=#{th}</if>
+		order by to_number(th)
+	</select>
+	
+
+</mapper>
+ 
+

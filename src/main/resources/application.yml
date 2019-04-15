@@ -1,0 +1,67 @@
+spring:
+  application:
+    name: tnbdc
+  datasource:
+    url: jdbc:oracle:thin:@120.78.138.33:1521/orcl
+    #url: jdbc:oracle:thin:@127.0.0.1:1521/orcl
+    username: tnbdc
+    password: tnbdc
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      filters: stat,logging
+      initial-size: 8
+      min-idle: 3
+      max-active: 10
+      query-timeout: 6000
+      transaction-query-timeout: 6000
+      remove-abandoned-timeout: 1800
+      max-wait: 60000
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 300000
+      test-while-idle:  true
+      test-on-borrow: false
+      test-on-return: false
+  http:
+    encoding:
+      charset: utf-8
+      enabled: true
+  
+
+server:
+  port: 8001
+  tomcat:
+    uri-encoding: UTF-8
+#eureka:
+#  client:
+#    serviceUrl:
+#      defaultZone: http://10.228.2.135:8761/eureka/
+#  instance:
+#      statusPageUrlPath: ${management.context-path}/info
+#      healthCheckUrlPath: ${management.context-path}/health
+
+mybatis:
+  mapperLocations: classpath:/mybatis/*.xml
+  typeAliasesPackage: com.tnbdc.entities
+  config-location: classpath:mybatis-config.xml
+
+
+hystrix:
+  threadpool:
+    default:
+      coreSize: 1000 ##并发执行的最大线程数，默认10
+      maxQueueSize: 1000 ##BlockingQueue的最大队列数
+      queueSizeRejectionThreshold: 500 ##即使maxQueueSize没有达到，达到queueSizeRejectionThreshold该值后，请求也会被拒绝
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 50000
+
+
+debug: true
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false
