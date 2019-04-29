@@ -1,9 +1,6 @@
 package com.tnbdc.service.impl;
 
-import com.tnbdc.entities.Dcwj;
-import com.tnbdc.entities.Dcwjda;
-import com.tnbdc.entities.Demo;
-import com.tnbdc.entities.Users;
+import com.tnbdc.entities.*;
 import com.tnbdc.mapper.DemoMapper;
 import com.tnbdc.service.DemoService;
 import org.springframework.stereotype.Service;
@@ -55,6 +52,18 @@ public class DemoServiceImpl implements DemoService {
     public List<Dcwjda> getDcwjdas(Map<String, String> param) {
         return demoMapper.getDcwjdas(param);
     }
+
+    @Override
+    public boolean addFwWzTotle(FwWzTotle fwWzTotle) {
+        return demoMapper.addFwWzTotle(fwWzTotle);
+    }
+
+    @Override
+    public List<FwWzTotle> getFwWzTotle(Map<String, String> param) {
+        return demoMapper.getFwWzTotle(param);
+    }
+
+
 
 
     /*@Override

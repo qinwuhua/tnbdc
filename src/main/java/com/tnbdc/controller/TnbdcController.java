@@ -1,9 +1,6 @@
 package com.tnbdc.controller;
 
-import com.tnbdc.entities.Dcwj;
-import com.tnbdc.entities.Dcwjda;
-import com.tnbdc.entities.Msg;
-import com.tnbdc.entities.Users;
+import com.tnbdc.entities.*;
 import com.tnbdc.service.DemoService;
 import com.tnbdc.utils.CommonUseUtil;
 import com.tnbdc.utils.ResultUtil;
@@ -200,46 +197,48 @@ public class TnbdcController {
                 return ResultUtil.success(list);
         }catch (Exception e){
             e.printStackTrace();
+            return ResultUtil.error("查询失败，接口异常");
+        }
+    }
+
+
+    @RequestMapping(value = "addFwWzTotle", method = RequestMethod.POST, produces = "application/json")
+    @ApiOperation(value = "添加文章访问次数")
+    public Msg addFwWzTotle(@RequestBody FwWzTotle fwWzTotle){
+        try {
+
+            boolean flag=demoService.addFwWzTotle(fwWzTotle);
+            if(flag)
+                return ResultUtil.success("保存成功");
+            else
+                return ResultUtil.error("保存失败");
+        }catch (Exception e){
+            e.printStackTrace();
             return ResultUtil.error("保存失败，接口异常");
         }
     }
 
 
-
-    /*@RequestMapping(value="/add",method=RequestMethod.POST)
-    public boolean insertDept(@RequestBody Demo demo) {
-        return demoService.insertDemo(demo);
+    @RequestMapping(value = "getFwWzTotle", method = RequestMethod.GET, produces = "application/json")
+    @ApiOperation(value = "查询文章访问次数")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "username", value = "用户名", required = true),
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "mkid", value = "模块id", required = false),
+    })
+    public Msg getFwWzTotle(@RequestParam(value = "username",required = true) String username,
+                          @RequestParam(value = "mkid",required = false) String mkid){
+        try {
+            Map<String, String> param = new HashMap<String, String>();
+            param.put("username",username);
+            param.put("mkid",mkid);
+            List<FwWzTotle> list=demoService.getFwWzTotle(param);
+            return ResultUtil.success(list);
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResultUtil.error("查询失败，接口异常");
+        }
     }
-    @RequestMapping(value="/findone/{id}",method=RequestMethod.GET)
-    public Demo findone(@PathVariable("id") String id) {
-        return demoService.selectDemoById(id);
-    }
-//    @CrossOrigin({"http://127.0.0.1:8080", "http://localhost:8082"})//单个方法支持跨域
-    @RequestMapping(value="/findall",method=RequestMethod.POST)
-    public List<Demo> findall() {
-        return demoService.selectDemoAll();
-    }
 
-
-
-    @RequestMapping(value = "/media", method = RequestMethod.GET)
-    public ResponseEntity<InputStreamResource> downloadFile()
-            throws IOException {
-        String filePath = "C:/Users/16659/Desktop/123456/5.png";
-        FileSystemResource file = new FileSystemResource(filePath);
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("Cache-Control", "no-cache, no-store, must-revalidate");
-        headers.add("Content-Disposition", String.format("attachment; filename="+ file.getFilename()));
-        headers.add("Pragma", "no-cache");
-        headers.add("Expires", "0");
-
-        return ResponseEntity
-                .ok()
-                .headers(headers)
-                .contentLength(file.contentLength())
-                .contentType(MediaType.parseMediaType("application/force-download"))
-                .body(new InputStreamResource(file.getInputStream()));
-    }*/
 
 
 }

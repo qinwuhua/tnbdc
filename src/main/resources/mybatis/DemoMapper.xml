@@ -38,6 +38,7 @@
 			<if test="lxdh != null" >lxdh,</if>
 			<if test="email != null" >email,</if>
 			<if test="userlv != null" >userlv,</if>
+			<if test="name != null" >name,</if>
 
 		</trim>
 		<trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -53,7 +54,7 @@
 			<if test="lxdh != null" >#{lxdh},</if>
 			<if test="email != null" >#{email},</if>
 			<if test="userlv != null" >#{userlv},</if>
-
+			<if test="name != null" >#{name},</if>
 		</trim>
 	</insert>
 
@@ -110,8 +111,31 @@
 		<if test="th != null" >and th=#{th}</if>
 		order by to_number(th)
 	</select>
-	
 
+
+	<insert id="addFwWzTotle" parameterType="com.tnbdc.entities.FwWzTotle">
+		insert into WZFWJL
+		<trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="username != null" >username,</if>
+			<if test="mkid != null" >mkid,</if>
+			<if test="wzid != null" >wzid,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides="," >
+			<if test="username != null" >#{username},</if>
+			<if test="mkid != null" >#{mkid},</if>
+			<if test="wzid != null" >#{wzid},</if>
+		</trim>
+	</insert>
+
+
+	<select id="getFwWzTotle" resultType="com.tnbdc.entities.FwWzTotle" parameterType="hashmap">
+		select username,mkid,wzid,count(*) totle from WZFWJL
+		where 1=1
+		<if test="username != null" >and username=#{username}</if>
+		<if test="mkid != null" >and mkid=#{mkid}</if>
+		group by username,mkid,wzid
+		order by mkid,wzid
+	</select>
 </mapper>
  
 

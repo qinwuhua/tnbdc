@@ -1,9 +1,6 @@
 package com.tnbdc.service;
 
-import com.tnbdc.entities.Dcwj;
-import com.tnbdc.entities.Dcwjda;
-import com.tnbdc.entities.Demo;
-import com.tnbdc.entities.Users;
+import com.tnbdc.entities.*;
 
 import java.util.List;
 import java.util.Map;
@@ -20,4 +17,8 @@ public interface DemoService {
     boolean addDcwjda(Dcwj dcwj);
 
     List<Dcwjda> getDcwjdas(Map<String, String> param);
+
+    boolean addFwWzTotle(FwWzTotle fwWzTotle);
+
+    List<FwWzTotle> getFwWzTotle(Map<String, String> param);
 }
