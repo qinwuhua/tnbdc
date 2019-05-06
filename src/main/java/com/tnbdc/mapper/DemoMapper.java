@@ -31,4 +31,6 @@ public interface DemoMapper {
     boolean addFwWzTotle(FwWzTotle fwWzTotle);
 
     List<FwWzTotle> getFwWzTotle(Map<String, String> param);
+
+    List<FwWzTotle> getFwWjTotle(Map<String, String> param);
 }

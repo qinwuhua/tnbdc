@@ -63,6 +63,11 @@ public class DemoServiceImpl implements DemoService {
         return demoMapper.getFwWzTotle(param);
     }
 
+    @Override
+    public List<FwWzTotle> getFwWjTotle(Map<String, String> param) {
+        return demoMapper.getFwWjTotle(param);
+    }
+
 
 
 

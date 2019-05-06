@@ -240,5 +240,25 @@ public class TnbdcController {
     }
 
 
+    @RequestMapping(value = "getFwWjTotle", method = RequestMethod.GET, produces = "application/json")
+    @ApiOperation(value = "查询问卷访问次数")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "username", value = "用户名", required = true),
+            @ApiImplicitParam(paramType="query", dataType = "String", name = "mkid", value = "模块id", required = false),
+    })
+    public Msg getFwWjTotle(@RequestParam(value = "username",required = true) String username,
+                            @RequestParam(value = "mkid",required = false) String mkid){
+        try {
+            Map<String, String> param = new HashMap<String, String>();
+            param.put("username",username);
+            param.put("mkid",mkid);
+            List<FwWzTotle> list=demoService.getFwWjTotle(param);
+            return ResultUtil.success(list);
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResultUtil.error("查询失败，接口异常");
+        }
+    }
+
 
 }
