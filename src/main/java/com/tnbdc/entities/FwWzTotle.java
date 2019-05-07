@@ -15,5 +15,5 @@ public class FwWzTotle implements Serializable {
     private  String wzid;
     private  String mkid;
     private  long totle;
-
+    private  String wctime;
 }

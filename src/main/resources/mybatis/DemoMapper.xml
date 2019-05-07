@@ -138,11 +138,11 @@
 	</select>
 
 	<select id="getFwWjTotle" resultType="com.tnbdc.entities.FwWzTotle" parameterType="hashmap">
-		select  wzid,username,mkid,count(*) totle from dcwjda t
+		select  wzid,username,mkid,count(*) totle,to_char(max(WCTIME),'yyyy-mm-dd hh24:mi:ss') wctime from dcwjda t
 		where 1=1
 		<if test="username != null" >and username=#{username}</if>
 		<if test="mkid != null" >and mkid=#{mkid}</if>
-		group by username,mkid,wzid
+		group by username,mkid,wzid,wctime
 		order by mkid,wzid
 	</select>
 </mapper>
